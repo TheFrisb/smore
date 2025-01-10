@@ -1,0 +1,43 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+staticfiles
+
+# Logging
+logs/
+
+# Backup files #
+*.bak
+
+# Python #
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+
+# IDE #
+.idea/
+.vscode/
+out/
+
+# Node #
+node_modules/
+
+# Tailwind
+#tailwind_output.css
+
+# Bundled JS
+#core_v1.bundle.js

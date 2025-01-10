@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <section
+            class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-radial from-emerald-500/5 via-transparent to-transparent opacity-30"></div>
+            <div class="absolute right-0 top-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full filter blur-3xl"></div>
+            <div class="absolute left-0 bottom-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="max-w-md w-full space-y-8 relative z-10">
+            <div class="text-center"><a class="inline-block mb-8" href="/"><img
+                    src="https://i.ibb.co/LRzvJgr/smore-logo.png" alt="Smore.bet"
+                    class="h-12 mx-auto transform hover:scale-105 transition-transform duration-300"></a>
+                <h2 class="text-4xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-100 to-white">
+                    Welcome back</h2>
+                <p class="text-lg text-primary-300">Sign in to access your account</p></div>
+            <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-primary-700/30 relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/0 via-emerald-500/0 to-emerald-500/5 rounded-2xl"></div>
+                <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+                <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+                <div class="relative">
+                    <form class="space-y-6" method="post" action="{% url 'accounts:login' %}">
+                        {% csrf_token %}
+                        <div><label for="username"
+                                    class="block text-sm font-medium text-primary-300 mb-2">Username</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-mail h-5 w-5 text-primary-500">
+                                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                    </svg>
+                                </div>
+                                <input id="username" name="username" type="text" autocomplete="username" required=""
+                                       class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
+                                       placeholder="Enter your username" value=""></div>
+                        </div>
+                        <div><label for="password"
+                                    class="block text-sm font-medium text-primary-300 mb-2">Password</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-lock h-5 w-5 text-primary-500">
+                                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <input id="password" name="password" type="password" autocomplete="current-password"
+                                       required=""
+                                       class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
+                                       placeholder="••••••••" value="">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="lucide lucide-eye h-5 w-5 text-primary-500 hover:text-primary-400">
+                                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="remember-me" name="remember-me" type="checkbox"
+                                       class="h-4 w-4 rounded border-primary-700/50 bg-primary-900/50 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer"><label
+                                    for="remember-me" class="ml-2 block text-sm text-primary-300 cursor-pointer">Remember
+                                me</label>
+                            </div>
+                            <div class="text-sm">
+                                <a class="font-medium text-emerald-500 hover:text-emerald-400" href="#">Forgot your
+                                    password?</a>
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 font-medium shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 transition-all duration-200 transform hover:scale-[1.02]">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-lock h-5 w-5 text-emerald-300 group-hover:text-emerald-200"><rect
+                                    width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path
+                                    d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>Sign in
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center">
+                <p class="text-primary-300">Don't have an account?
+                    <a class="font-medium text-emerald-500 hover:text-emerald-400 inline-flex items-center group"
+                       href="{% url 'accounts:register' %}">
+                        Register now
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-arrow-right w-4 h-4 ml-1">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

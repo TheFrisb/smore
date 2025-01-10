@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smore</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind_output.css' %}">
+</head>
+<body class="min-h-screen bg-primary-950">
+{% include 'core/includes/header.html' %}
+<main class="pt-20">
+    <div class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-8">
+                {% include 'accounts/includes/sidebar.html' %}
+                <div class="flex-1 min-h-[calc(100vh-8rem)]">
+                    {% block dashboard %}
+                    {% endblock dashboard %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% include 'core/includes/footer.html' %}
+
+<script src="{% static 'js/core_v1.bundle.js' %}"></script>
+</body>
+</html>

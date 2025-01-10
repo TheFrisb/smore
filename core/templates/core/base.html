@@ -1,0 +1,21 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smore</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind_output.css' %}">
+</head>
+<body class="min-h-screen bg-primary-950">
+{% include 'core/includes/header.html' %}
+<main class="pt-20 bg-squares-pattern">
+    {% block content %}{% endblock content %}
+</main>
+{% include 'core/includes/footer.html' %}
+
+<script src="{% static 'js/core_v1.bundle.js' %}"></script>
+</body>
+</html>

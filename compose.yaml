@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redis_data_volume:/data
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data_volume:
+  redis_data_volume:
