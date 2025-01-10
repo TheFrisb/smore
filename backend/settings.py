@@ -63,7 +63,7 @@ if DEBUG:
     INTERNAL_IPS = config("DJANGO_INTERNAL_IPS", cast=Csv())
 
 # Cors Configuration
-CORS_ALLOWED_ORIGINS = config("DJANGO_CORS_ALLOWED_ORIGINS", cast=Csv())
+# CORS_ALLOWED_ORIGINS = config("DJANGO_CORS_ALLOWED_ORIGINS", cast=Csv())
 
 ROOT_URLCONF = "backend.urls"
 
