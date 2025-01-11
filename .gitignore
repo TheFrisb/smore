@@ -43,5 +43,4 @@ node_modules/
 
 # Bundled JS
 #core_v1.bundle.js
-/accounts/migrations/
-/core/migrations/
+**/migrations
