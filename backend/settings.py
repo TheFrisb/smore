@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "drf_standardized_errors",
+    "adminsortable2",
     # Local apps
     "accounts",
     "core",

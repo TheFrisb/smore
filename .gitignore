@@ -36,8 +36,12 @@ out/
 # Node #
 node_modules/
 
+**/migrations/
+
 # Tailwind
 #tailwind_output.css
 
 # Bundled JS
 #core_v1.bundle.js
+/accounts/migrations/
+/core/migrations/
