@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 from accounts.models import User, UserBalance
 
@@ -16,7 +17,7 @@ class UserBalanceInline(admin.TabularInline):
 
 # Register your models here.
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
     """
     Admin model for User model.
     """

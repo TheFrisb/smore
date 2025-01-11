@@ -11,9 +11,9 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </div>
-                <div>
-                    <h3 class="text-white font-medium">{{ request.user.username }}</h3>
-                    <p class="text-primary-300 text-sm">admin@example.com</p>
+                <div class="overflow-hidden">
+                    <h3 class="text-white font-medium truncate">{{ request.user.username }}</h3>
+                    <p class="text-primary-300 text-sm truncate">{{ request.user.email }}</p>
                 </div>
             </div>
         </div>

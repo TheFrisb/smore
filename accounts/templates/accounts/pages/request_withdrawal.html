@@ -2,14 +2,16 @@
 {% block dashboard %}
     <div class="space-y-8">
         <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
-            <div class="flex items-center justify-between mb-8"><h2 class="text-2xl font-bold text-white">Available
-                Balance</h2>
-                <div class="text-right"><p class="text-3xl font-bold text-emerald-400">$1250.50</p>
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-white">Available Balance</h2>
+                <div class="text-right"><p class="text-3xl font-bold text-emerald-400">
+                    ${{ request.user.balance.balance }}</p>
                     <p class="text-primary-300 text-sm">Available for withdrawal</p></div>
             </div>
             <form class="space-y-6">
-                <div><label for="amount" class="block text-sm font-medium text-primary-300 mb-2">Withdrawal
-                    Amount</label>
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-primary-300 mb-2">Withdrawal
+                        Amount</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -21,12 +23,13 @@
                                 <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
                             </svg>
                         </div>
-                        <input type="number" id="amount" min="50" max="1250.5" step="0.01"
+                        <input type="number" id="amount" min="50" max="1250" step="0.01"
                                class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200"
                                placeholder="Enter amount" value=""></div>
                     <p class="mt-2 text-sm text-primary-300">Minimum withdrawal: $50.00</p></div>
-                <div><label for="payment-method" class="block text-sm font-medium text-primary-300 mb-2">Payment
-                    Method</label>
+                <div>
+                    <label for="payment-method" class="block text-sm font-medium text-primary-300 mb-2">Payment
+                        Method</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -61,7 +64,7 @@
                 </button>
             </form>
         </div>
- 
+
     </div>
 
 {% endblock dashboard %}

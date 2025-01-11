@@ -911,6 +911,10 @@ video {
   height: 1px;
 }
 
+.h-3 {
+  height: 0.75rem;
+}
+
 .max-h-0 {
   max-height: 0px;
 }
@@ -989,6 +993,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-3 {
+  width: 0.75rem;
 }
 
 .max-w-2xl {
@@ -1212,6 +1220,12 @@ video {
   overflow-y: auto;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -1375,6 +1389,10 @@ video {
 
 .bg-red-500\/10 {
   background-color: rgb(239 68 68 / 0.1);
+}
+
+.bg-primary-950\/30 {
+  background-color: rgb(11 31 49 / 0.3);
 }
 
 .bg-gradient-dark {
@@ -1739,6 +1757,10 @@ video {
   padding-top: 2rem;
 }
 
+.pl-16 {
+  padding-left: 4rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1749,6 +1771,10 @@ video {
 
 .text-right {
   text-align: right;
+}
+
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .text-2xl {

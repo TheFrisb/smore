@@ -58,7 +58,9 @@ class RegisterUserView(TemplateView):
                     f"User {user.username} referred by {referrer.username}, through referral code {referral_code}."
                 )
             except User.DoesNotExist:
-                logger.error(f"Could not match referral code: {referral_code} to an user.")
+                logger.error(
+                    f"Could not match referral code: {referral_code} to an user."
+                )
                 form.add_error(
                     None, "Invalid referral code. Please enter a valid referral code."
                 )
@@ -132,6 +134,41 @@ class MyAccountView(TemplateView):
 
 class MyNetworkView(TemplateView):
     template_name = "accounts/pages/my_network.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["network"] = self.get_referrals(self.request.user)
+        return context
+
+    def get_referrals(self, user):
+        first_level_referrals = Referral.objects.filter(referrer=user).select_related(
+            "referred"
+        )
+
+        second_level_referrals = Referral.objects.filter(
+            referrer__in=[referral.referred for referral in first_level_referrals]
+        ).select_related("referrer", "referred")
+
+        network = {
+            "first_level": [
+                {
+                    "user": referral.referred,
+                    "second_level": [
+                        second.referred
+                        for second in second_level_referrals
+                        if second.referrer == referral.referred
+                    ],
+                }
+                for referral in first_level_referrals
+            ],
+            "direct_referrals_count": len(first_level_referrals),
+            "indirect_referrals_count": len(second_level_referrals),
+        }
+
+        logger.info(f"Network: {network}")
+
+        return network
 
 
 class ManagePlanView(TemplateView):
