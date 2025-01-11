@@ -1,0 +1,260 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
+        <section class="pt-24 pb-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
+            <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center"><span
+                        class="inline-block px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold mb-4">About Smore.bet</span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Transforming Sports Predictions Through
+                        Data Science</h1>
+                    <p class="text-xl text-primary-200 mb-12 leading-relaxed">We combine advanced analytics, machine
+                        learning, and expert insights to provide the most accurate sports predictions in the
+                        industry.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                            <div class="flex flex-col items-center">
+                                <div class="bg-emerald-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-trophy w-6 h-6 text-emerald-500">
+                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                        <path d="M4 22h16"></path>
+                                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                                    90%+
+                                </div>
+                                <div class="text-sm text-primary-300">Success Rate</div>
+                            </div>
+                        </div>
+                        <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                            <div class="flex flex-col items-center">
+                                <div class="bg-emerald-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-users w-6 h-6 text-emerald-500">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                                    10K+
+                                </div>
+                                <div class="text-sm text-primary-300">Active Users</div>
+                            </div>
+                        </div>
+                        <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                            <div class="flex flex-col items-center">
+                                <div class="bg-emerald-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-target w-6 h-6 text-emerald-500">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <circle cx="12" cy="12" r="6"></circle>
+                                        <circle cx="12" cy="12" r="2"></circle>
+                                    </svg>
+                                </div>
+                                <div class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                                    500+
+                                </div>
+                                <div class="text-sm text-primary-300">Daily Picks</div>
+                            </div>
+                        </div>
+                        <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                            <div class="flex flex-col items-center">
+                                <div class="bg-emerald-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-star w-6 h-6 text-emerald-500">
+                                        <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                </div>
+                                <div class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                                    24/7
+                                </div>
+                                <div class="text-sm text-primary-300">Expert Support</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 relative">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div><span
+                                class="inline-block px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold mb-4">Our Story</span>
+                            <h2 class="text-3xl font-bold text-white mb-6">A Decade of Excellence in Sports
+                                Analytics</h2>
+                            <div class="space-y-6 text-primary-200"><p>Founded in 2014, Smore.bet emerged from a simple
+                                vision: to revolutionize sports predictions through the power of data science and
+                                machine learning.</p>
+                                <p>What started as a small team of sports enthusiasts and data scientists has grown into
+                                    a leading platform trusted by over 10,000 users worldwide.</p>
+                                <p>Our commitment to accuracy, transparency, and user success has earned us a reputation
+                                    as the most reliable sports prediction service in the industry.</p></div>
+                            <button class="mt-8 inline-flex items-center px-6 py-3 rounded-lg bg-emerald-600 text-white hover:bg-emerald-500 transition-colors">
+                                Learn More
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="lucide lucide-chevron-right ml-2 w-5 h-5">
+                                    <path d="m9 18 6-6-6-6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-radial from-emerald-500/10 via-transparent to-transparent opacity-60"></div>
+                            <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+                                 alt="Data Analysis" class="rounded-2xl shadow-xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 relative bg-primary-900/50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16"><span
+                        class="inline-block px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold mb-4">Our Values</span>
+                    <h2 class="text-3xl font-bold text-white mb-6">What Sets Us Apart</h2>
+                    <p class="text-primary-200 max-w-2xl mx-auto">Our core values drive everything we do, from
+                        developing prediction models to supporting our users.</p></div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="bg-emerald-500/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="lucide lucide-brain w-8 h-8 text-emerald-500">
+                                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path>
+                                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path>
+                                <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
+                                <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
+                                <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
+                                <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
+                                <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
+                                <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
+                                <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">
+                            Data-Driven Excellence</h3>
+                        <p class="text-primary-200">Our predictions are powered by advanced algorithms and machine
+                            learning models that analyze vast amounts of sports data.</p></div>
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="bg-emerald-500/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="lucide lucide-shield w-8 h-8 text-emerald-500">
+                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">
+                            Integrity First</h3>
+                        <p class="text-primary-200">We maintain the highest standards of transparency and honesty in all
+                            our predictions and analysis.</p></div>
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="bg-emerald-500/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="lucide lucide-trending-up w-8 h-8 text-emerald-500">
+                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                <polyline points="16 7 22 7 22 13"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">
+                            Continuous Innovation</h3>
+                        <p class="text-primary-200">We constantly refine our prediction models and analysis methods to
+                            maintain our industry-leading accuracy.</p></div>
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="bg-emerald-500/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="lucide lucide-zap w-8 h-8 text-emerald-500">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">
+                            User Success</h3>
+                        <p class="text-primary-200">Your success is our success. We're committed to providing the
+                            insights you need to make informed decisions.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16"><span
+                        class="inline-block px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold mb-4">Our Team</span>
+                    <h2 class="text-3xl font-bold text-white mb-6">Meet the Experts Behind Our Success</h2>
+                    <p class="text-primary-200 max-w-2xl mx-auto">Our team combines decades of experience in sports
+                        analytics, statistical modeling, and professional athletics.</p></div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="relative mb-6">
+                            <div class="aspect-square overflow-hidden rounded-xl"><img
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=300&amp;h=300&amp;q=80"
+                                    alt="Alexander Mitchell"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4"><h3 class="text-xl font-bold text-white mb-1">
+                                Alexander Mitchell</h3>
+                                <p class="text-emerald-400">Chief Analytics Officer</p></div>
+                        </div>
+                        <p class="text-primary-200">15+ years in sports analytics and statistical modeling</p></div>
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="relative mb-6">
+                            <div class="aspect-square overflow-hidden rounded-xl"><img
+                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=300&amp;h=300&amp;q=80"
+                                    alt="Sarah Chen"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4"><h3 class="text-xl font-bold text-white mb-1">Sarah
+                                Chen</h3>
+                                <p class="text-emerald-400">Head of Research</p></div>
+                        </div>
+                        <p class="text-primary-200">PhD in Statistical Analysis, former professional sports
+                            consultant</p></div>
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-xl p-8 border border-primary-700/30 hover:border-emerald-500/30 transition-all duration-300 group">
+                        <div class="relative mb-6">
+                            <div class="aspect-square overflow-hidden rounded-xl"><img
+                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=300&amp;h=300&amp;q=80"
+                                    alt="Marcus Thompson"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4"><h3 class="text-xl font-bold text-white mb-1">Marcus
+                                Thompson</h3>
+                                <p class="text-emerald-400">Lead Sports Analyst</p></div>
+                        </div>
+                        <p class="text-primary-200">Ex-professional athlete turned data analyst</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 relative bg-gradient-to-br from-primary-900 via-emerald-900/20 to-primary-900">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center"><h2 class="text-3xl font-bold text-white mb-6">Ready to
+                    Experience the Future of Sports Predictions?</h2>
+                    <p class="text-xl text-primary-200 mb-8">Join thousands of successful users who trust our expert
+                        predictions and analysis.</p>
+                    <button class="inline-flex items-center px-8 py-4 rounded-lg bg-emerald-600 text-white hover:bg-emerald-500 transition-colors text-lg font-medium">
+                        Get Started Today
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-chevron-right ml-2 w-6 h-6">
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

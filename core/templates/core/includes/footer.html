@@ -31,7 +31,7 @@
                 <ul class="space-y-4">
                     <li>
                         <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/about">
+                           href="{% url 'core:about_us' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
@@ -43,31 +43,19 @@
                     </li>
                     <li>
                         <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/how-it-works">
+                           href="{% url 'core:plans' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
                                  class="lucide lucide-chevron-right w-4 h-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300">
                                 <path d="m9 18 6-6-6-6"></path>
                             </svg>
-                            How It Works
+                            Plans
                         </a>
                     </li>
                     <li>
                         <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/pricing">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 class="lucide lucide-chevron-right w-4 h-4 mr-2 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-300">
-                                <path d="m9 18 6-6-6-6"></path>
-                            </svg>
-                            Pricing
-                        </a>
-                    </li>
-                    <li>
-                        <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/contact">
+                           href="{% url 'core:contact_us' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
@@ -82,7 +70,7 @@
                 <ul class="space-y-4">
                     <li>
                         <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/terms">
+                           href="{% url 'core:terms_of_service' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
@@ -93,7 +81,7 @@
                     </li>
                     <li>
                         <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/privacy">
+                           href="{% url 'core:privacy_policy' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
@@ -104,7 +92,7 @@
                     </li>
                     <li>
                         <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 flex items-center group"
-                           href="/disclaimer">
+                           href="{% url 'core:disclaimer' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round"
@@ -122,13 +110,15 @@
                     reserved.</p>
                 <div class="flex items-center">
                     <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 text-sm px-4"
-                       href="/terms">Terms</a>
-                    <div class="w-1 h-1 rounded-full bg-primary-700"></div>
+                       href="{% url 'core:terms_of_service' %}">Terms</a>
+                    <div class=" w-1 h-1 rounded-full bg-primary-700">
+                    </div>
                     <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 text-sm px-4"
-                       href="/privacy">Privacy</a>
-                    <div class="w-1 h-1 rounded-full bg-primary-700"></div>
+                       href="{% url 'core:privacy_policy' %}">Privacy</a>
+                    <div class=" w-1 h-1 rounded-full bg-primary-700">
+                    </div>
                     <a class="text-primary-400 hover:text-emerald-400 transition-all duration-300 text-sm px-4"
-                       href="/cookies">Cookies</a>
+                       href="{% url 'core:cookies_policy' %}">Cookies</a>
                 </div>
             </div>
         </div>

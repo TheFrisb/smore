@@ -20,3 +20,27 @@ class FaqView(TemplateView):
 
 class HowToJoinView(TemplateView):
     template_name = "core/pages/how_to_join.html"
+
+
+class AboutUsView(TemplateView):
+    template_name = "core/pages/about_us.html"
+
+
+class ContactUsView(TemplateView):
+    template_name = "core/pages/contact_us.html"
+
+
+class TermsOfServiceView(TemplateView):
+    template_name = "core/pages/terms_of_service.html"
+
+
+class PrivacyPolicyView(TemplateView):
+    template_name = "core/pages/privacy_policy.html"
+
+
+class DisclaimerView(TemplateView):
+    template_name = "core/pages/disclaimer.html"
+
+
+class CookiesPolicyView(TemplateView):
+    template_name = "core/pages/cookies_policy.html"
