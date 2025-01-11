@@ -69,12 +69,16 @@ function initProducts() {
 function updateCheckoutSummaryUI() {
   let checkoutSummary = "";
 
+  let total_price = 0;
+
   selectedProducts.forEach((productId) => {
     const productEl = document.querySelector(
       `.product[data-product-id="${productId}"]`,
     );
     const productName = productEl.getAttribute("data-product-name");
     const productPrice = productEl.querySelector(".product__price").textContent;
+
+    total_price += parseFloat(productPrice.replace("$", ""));
 
     checkoutSummary += `
     <div class="space-y-4 mb-8 divide-y divide-primary-700/30">
@@ -101,6 +105,11 @@ function updateCheckoutSummaryUI() {
   } else {
     checkoutButton.disabled = false;
   }
+
+  let totalPriceEl = document.querySelector(
+    ".checkoutSummarySection__totalPrice",
+  );
+  totalPriceEl.textContent = `$${total_price.toFixed(2)}`;
 }
 
 function pushOrRemoveProduct(id) {
