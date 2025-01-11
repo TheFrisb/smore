@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-# noinspection PyUnresolvedReferences 
+# noinspection PyUnresolvedReferences
 class AccountsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "accounts"

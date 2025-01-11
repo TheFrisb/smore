@@ -1,5 +1,7 @@
 from django.views.generic import TemplateView
 
+from core.models import Product, Addon
+
 
 # Create your views here.
 class HomeView(TemplateView):
@@ -12,6 +14,13 @@ class HistoryView(TemplateView):
 
 class PlansView(TemplateView):
     template_name = "core/pages/plans.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["products"] = Product.objects.all()
+        context["addons"] = Addon.objects.all().order_by("order")
+
+        return context
 
 
 class FaqView(TemplateView):

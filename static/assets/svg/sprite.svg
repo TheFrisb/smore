@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+    <!-- Do not store the "width" and "height" attributes of the SVGs, to allow easier scaling through Tailwind. -->
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" id="footballIcon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+    </symbol>
+
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            id="basketballIcon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="1"></circle>
+    </symbol>
+
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            id="nflIcon">
+        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+        <line x1="4" x2="4" y1="22" y2="15"></line>
+    </symbol>
+
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" id="aipredictionassistantIcon">
+        <path d="M12 8V4H8"></path>
+        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+        <path d="M2 14h2"></path>
+        <path d="M20 14h2"></path>
+        <path d="M15 13v2"></path>
+        <path d="M9 13v2"></path>
+    </symbol>
+
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            id="checkboxIcon">
+        <path d="M20 6 9 17l-5-5"></path>
+    </symbol>
+</svg>

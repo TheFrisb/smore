@@ -17,6 +17,10 @@ class BaseProductModel(BaseInternalModel):
     discounted_price = models.DecimalField(max_digits=10, decimal_places=2)
     order = models.PositiveIntegerField(default=0)
 
+    @property
+    def discount(self):
+        return self.price - self.discounted_price
+
     class Meta:
         abstract = True
         ordering = ["order"]
@@ -30,4 +34,4 @@ class Product(BaseProductModel):
 
 
 class Addon(BaseProductModel):
-    pass
+    description = models.TextField()

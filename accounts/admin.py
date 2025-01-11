@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from accounts.models import User, UserBalance
+from accounts.models import User, UserBalance, Referral
 
 
 class UserBalanceInline(admin.TabularInline):
@@ -56,3 +56,6 @@ class UserAdmin(UserAdmin):
     total_balance.short_description = "Total Balance"
     first_level_referrals_count.short_description = "1st-Level Referrals"
     second_level_referrals_count.short_description = "2nd-Level Referrals"
+
+
+admin.site.register(Referral)

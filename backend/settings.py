@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Local apps
     "accounts",
     "core",
+    "payments",
 ]
 
 MIDDLEWARE = [
@@ -189,3 +190,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Custom User Model
 AUTH_USER_MODEL = "accounts.User"
+
+# Stripe configuration
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+STRIPE_WEBHOOK_SECRET_KEY = config("STRIPE_WEBHOOK_SECRET_KEY")
