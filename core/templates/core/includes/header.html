@@ -87,13 +87,28 @@
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:how_to_join' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:how_to_join' %}">How to Join</a>
 
-                <div class="pt-4 space-y-2 border-t border-primary-700/30 mt-4">
-                    <a class="block px-4 py-2 text-primary-300 hover:text-white transition-colors"
-                       href="{% url 'accounts:login' %}">Sign In</a>
 
-                    <a class="block px-4 py-2 text-white bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-lg"
-                       href="{% url 'accounts:register' %}">Sign Up</a>
+                <div class="pt-4 space-y-2 border-t border-primary-700/30 mt-4">
+                    {% if request.user.is_authenticated %}
+                        <a class="block px-4 py-2 rounded-lg transition-colors text-primary-300 hover:bg-primary-800/50 hover:text-white"
+                           href="{% url 'accounts:my_account' %}">My Account</a>
+
+                        <form action="{% url 'accounts:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="block px-4 py-2 rounded-lg transition-colors text-red-400 hover:bg-primary-800/50 hover:text-white">
+                                Sign Out
+                            </button>
+                        </form>
+                    {% else %}
+                        <a class="block px-4 py-2 text-primary-300 hover:text-white transition-colors"
+                           href="{% url 'accounts:login' %}">Sign In</a>
+
+                        <a class="block px-4 py-2 text-white bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-lg"
+                           href="{% url 'accounts:register' %}">Sign Up</a>
+                    {% endif %}
                 </div>
+
             </nav>
         </div>
     </div>

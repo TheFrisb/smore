@@ -1,6 +1,16 @@
+import logging
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import TemplateView
+
+from accounts.forms.register_form import RegisterForm
+from accounts.models import User, Referral
+
+logger = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -19,6 +29,101 @@ class LogoutUserView(LogoutView):
 
 class RegisterUserView(TemplateView):
     template_name = "accounts/pages/register.html"
+
+    def get(self, request, *args, **kwargs):
+        form = RegisterForm()
+        return self.render_to_response({"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = RegisterForm(request.POST)
+        if not form.is_valid():
+            return self.render_to_response({"form": form})
+
+        user = User.objects.create(
+            username=form.cleaned_data["username"],
+            email=form.cleaned_data["email"],
+            password=make_password(form.cleaned_data["password"]),
+            first_name=form.cleaned_data["full_name"].split()[0],
+            last_name=form.cleaned_data["full_name"].split()[1],
+        )
+
+        logger.info(f"User {user.username} created.")
+
+        referral_code = form.cleaned_data.get("referral_code", None)
+        if referral_code:
+            try:
+                referrer = User.objects.get(referral_code=referral_code)
+                Referral.objects.create(referrer=referrer, referred=user)
+                logger.info(
+                    f"User {user.username} referred by {referrer.username}, through referral code {referral_code}."
+                )
+            except User.DoesNotExist:
+                logger.error(f"Could not match referral code: {referral_code} to an user.")
+                form.add_error(
+                    None, "Invalid referral code. Please enter a valid referral code."
+                )
+                return self.render_to_response({"form": form})
+
+        authenticated_user = authenticate(
+            request,
+            username=form.cleaned_data["username"],
+            password=form.cleaned_data["password"],
+        )
+
+        if authenticated_user is not None:
+            login(request, authenticated_user)
+            logger.info(f"User {user.username} registered successfully.")
+            return redirect("accounts:my_account")
+        else:
+
+            form.add_error(
+                None,
+                "An unexpected error has occured. Please try again or contact support.",
+            )
+
+        return self.render_to_response({"form": form})
+
+    def create_user(self, form):
+        """
+        Create a new user from the form data.
+        """
+        return User.objects.create(
+            username=form.cleaned_data["username"],
+            email=form.cleaned_data["email"],
+            password=make_password(form.cleaned_data["password"]),
+            first_name=form.cleaned_data["full_name"].split()[0],
+            last_name=form.cleaned_data["full_name"].split()[1],
+        )
+
+    def handle_referral(self, form, user):
+        """
+        Handle referral logic if a referral code is provided.
+        """
+        referral_code = form.cleaned_data.get("referral_code", None)
+        if referral_code:
+            try:
+                referrer = User.objects.get(referral_code=referral_code)
+                Referral.objects.create(referrer=referrer, referred=user)
+            except User.DoesNotExist:
+                form.add_error(
+                    None, "Invalid referral code. Please enter a valid referral code."
+                )
+                return False
+        return True
+
+    def login_user(self, request, form):
+        """
+        Authenticate and log in the user.
+        """
+        authenticated_user = authenticate(
+            request,
+            username=form.cleaned_data["username"],
+            password=form.cleaned_data["password"],
+        )
+        if authenticated_user is not None:
+            login(request, authenticated_user)
+            return True
+        return False
 
 
 class MyAccountView(TemplateView):

@@ -20,8 +20,32 @@
                 <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
                 <div class="relative">
-                    <form class="space-y-6">
-                        <div><label for="name" class="block text-sm font-medium text-primary-300 mb-2">Full Name</label>
+                    {% if form.errors %}
+                        <div class="bg-red-500/10 backdrop-blur-sm rounded-2xl p-6 border border-red-500/20 mb-12">
+                            <div class="flex items-center space-x-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="lucide lucide-alert-triangle w-6 h-6 text-red-400 flex-shrink-0 mt-1">
+                                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                                    <path d="M12 9v4"></path>
+                                    <path d="M12 17h.01"></path>
+                                </svg>
+                                <div>
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                            <p class="text-primary-200">{{ error }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <form class="space-y-6" method="post" action="{% url 'accounts:register' %}">
+                        {% csrf_token %}
+                        <div><label for="username"
+                                    class="block text-sm font-medium text-primary-300 mb-2">Username</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -31,12 +55,29 @@
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                 </div>
-                                <input id="name" name="name" type="text" required=""
+                                <input id="username" name="username" type="text" required=""
+                                       class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
+                                       placeholder="Choose a username" value=""></div>
+                        </div>
+                        <div>
+                            <label for="full_name" class="block text-sm font-medium text-primary-300 mb-2">Full
+                                Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-user h-5 w-5 text-primary-500">
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </div>
+                                <input id="full_name" name="full_name" type="text" required=""
                                        class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
                                        placeholder="John Doe" value=""></div>
                         </div>
-                        <div><label for="email" class="block text-sm font-medium text-primary-300 mb-2">Email
-                            address</label>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-primary-300 mb-2">Email
+                                address</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -50,8 +91,9 @@
                                        class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
                                        placeholder="name@example.com" value=""></div>
                         </div>
-                        <div><label for="password"
-                                    class="block text-sm font-medium text-primary-300 mb-2">Password</label>
+                        <div>
+                            <label for="password"
+                                   class="block text-sm font-medium text-primary-300 mb-2">Password</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -75,8 +117,9 @@
                                 </button>
                             </div>
                         </div>
-                        <div><label for="confirmPassword" class="block text-sm font-medium text-primary-300 mb-2">Confirm
-                            Password</label>
+                        <div>
+                            <label for="confirm_password" class="block text-sm font-medium text-primary-300 mb-2">Confirm
+                                Password</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -85,7 +128,7 @@
                                         <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                                     </svg>
                                 </div>
-                                <input id="confirmPassword" name="confirmPassword" type="password" required=""
+                                <input id="confirm_password" name="confirm_password" type="password" required=""
                                        class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
                                        placeholder="••••••••" value="">
                                 <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -99,8 +142,10 @@
                                 </button>
                             </div>
                         </div>
-                        <div><label for="referralCode" class="block text-sm font-medium text-primary-300 mb-2">Referral
-                            Code <span class="text-primary-400">(Optional)</span></label>
+                        <div>
+                            <label for="referral_code" class="block text-sm font-medium text-primary-300 mb-2">Referral
+                                Code <span class="text-primary-400">(Optional)</span>
+                            </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -112,17 +157,30 @@
                                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                     </svg>
                                 </div>
-                                <input id="referralCode" name="referralCode" type="text"
+                                <input id="referral_code" name="referral_code" type="text"
                                        class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-200 hover:border-emerald-500/30"
-                                       placeholder="Enter referral code" value=""></div>
-                            <p class="mt-2 text-sm text-primary-400">Have a referral code? Enter it here to claim your
-                                bonus</p></div>
-                        <div class="flex items-center"><input id="terms" name="terms" type="checkbox" required=""
-                                                              class="h-4 w-4 rounded border-primary-700/50 bg-primary-900/50 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer"><label
-                                for="terms" class="ml-2 block text-sm text-primary-300 cursor-pointer">I agree to the <a
-                                class="text-emerald-500 hover:text-emerald-400" href="/terms">Terms of Service</a> and
-                            <a class="text-emerald-500 hover:text-emerald-400" href="/privacy">Privacy
-                                Policy</a></label></div>
+                                       placeholder="Enter referral code" value="">
+                            </div>
+                            <p class="mt-2 text-sm text-primary-400">Have a referral code? Enter it here.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="terms" name="terms" type="checkbox" required=""
+                                   class="h-4 w-4 rounded border-primary-700/50 bg-primary-900/50 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer">
+                            <label for="terms" class="ml-2 block text-sm text-primary-300 cursor-pointer">I agree to the
+                                <a
+                                        class="text-emerald-500 hover:text-emerald-400"
+                                        href="{% url 'core:terms_of_service' %}">Terms of Service</a> and
+                                <a class="text-emerald-500 hover:text-emerald-400"
+                                   href="{% url 'core:privacy_policy' %}">Privacy
+                                    Policy</a></label>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input id="age_consent" name="age_consent" type="checkbox" required=""
+                                   class="h-4 w-4 rounded border-primary-700/50 bg-primary-900/50 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer">
+                            <label for="age_consent" class="ml-2 block text-sm text-primary-300 cursor-pointer">I am 18+
+                                years old.
+                        </div>
                         <button type="submit"
                                 class="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 font-medium shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 transition-all duration-200 transform hover:scale-[1.02]">
                             Create Account
