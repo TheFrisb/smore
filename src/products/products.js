@@ -5,7 +5,7 @@ const checkoutSummarySection = document.querySelector(
   ".checkoutSummarySection",
 );
 
-const checkoutSummaryItemsSection = checkoutSummarySection.querySelector(
+const checkoutSummaryItemsSection = document.querySelector(
   ".checkoutSummary__items",
 );
 
@@ -14,6 +14,10 @@ const checkoutButton = document.querySelector("#checkoutButton");
 let selectedProducts = [];
 
 function initProducts() {
+  if (!products || !checkoutSummarySection) {
+    return;
+  }
+
   products.forEach((product) => {
     product.addEventListener("click", () => {
       const productId = product.getAttribute("data-product-id");
@@ -92,7 +96,7 @@ function updateCheckoutSummaryUI() {
 
   if (selectedProducts.length > 1) {
     checkoutSummary += `
-    <div class="flex justify-between items-center text-emerald-500 py-3">
+    <div class="flex justify-between items-center text-secondary-500 py-3">
     <span>Multi-sport Discount</span>
     <span>-$${(selectedProducts.length - 1) * 20}</span> 
     </div>
@@ -157,34 +161,37 @@ function updateClickedProductUI(
   if (productElement.classList.contains("selected")) {
     productElement.classList.remove("selected");
     productElement.classList.remove(
-      "bg-emerald-500/20",
-      "border-emerald-500/50",
+      "bg-secondary-500/20",
+      "border-secondary-500/50",
     );
     productElement.classList.add(
-      "hover:border-emerald-500/30",
+      "hover:border-primary-500/30",
       "hover:shadow-lg",
-      "hover:shadow-emerald-500/10",
+      "hover:shadow-primary-500/10",
       "bg-primary-800/50",
     );
 
     productCheckboxContainer.classList.remove(
-      "bg-emerald-500",
-      "border-emerald-500",
+      "bg-primary-500",
+      "border-primary-500",
     );
     productCheckboxEl.classList.add("hidden");
   } else {
     productElement.classList.add("selected");
-    productElement.classList.add("bg-emerald-500/20", "border-emerald-500/50");
+    productElement.classList.add(
+      "bg-secondary-500/20",
+      "border-secondary-500/50",
+    );
     productElement.classList.remove(
-      "hover:border-emerald-500/30",
+      "hover:border-primary-500/30",
       "hover:shadow-lg",
-      "hover:shadow-emerald-500/10",
+      "hover:shadow-primary-500/10",
       "bg-primary-800/50",
     );
 
     productCheckboxContainer.classList.add(
-      "bg-emerald-500",
-      "border-emerald-500",
+      "bg-primary-500",
+      "border-primary-500",
     );
     productCheckboxEl.classList.remove("hidden");
   }

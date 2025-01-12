@@ -3,10 +3,10 @@
     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-6 border border-primary-700/30 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
         <div class="mb-6 pb-6 border-b border-primary-700/30">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-emerald-500/10 rounded-full flex items-center justify-center">
+                <div class="w-12 h-12 bg-primary-500/10 rounded-full flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                         stroke-linejoin="round" class="lucide lucide-user w-6 h-6 text-emerald-500">
+                         stroke-linejoin="round" class="lucide lucide-user w-6 h-6 text-secondary-500">
                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
@@ -19,7 +19,7 @@
         </div>
         <nav class="space-y-2">
             <a class="flex items-center justify-between w-full p-3 rounded-lg transition-colors
-            {% if request|is_link_active:'accounts:my_account' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
+            {% if request|is_link_active:'accounts:my_account' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
                href="{% url 'accounts:my_account' %}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -37,7 +37,7 @@
                 </svg>
             </a>
             <a class="flex items-center justify-between w-full p-3 rounded-lg transition-colors
-                     {% if request|is_link_active:'accounts:my_network' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
+                     {% if request|is_link_active:'accounts:my_network' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
                href="{% url 'accounts:my_network' %}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -57,7 +57,7 @@
                 </svg>
             </a>
             <a class="flex items-center justify-between w-full p-3 rounded-lg transition-colors text-primary-300 hover:bg-primary-700/50 hover:text-white
-            {% if request|is_link_active:'accounts:manage_plan' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
+            {% if request|is_link_active:'accounts:manage_plan' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
                href="{% url 'accounts:manage_plan' %}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -74,7 +74,7 @@
                 </svg>
             </a>
             <a class="flex items-center justify-between w-full p-3 rounded-lg transition-colors text-primary-300 hover:bg-primary-700/50 hover:text-white
-            {% if request|is_link_active:'accounts:request_withdrawal' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
+            {% if request|is_link_active:'accounts:request_withdrawal' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
                href="{% url 'accounts:request_withdrawal' %}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -92,7 +92,7 @@
                 </svg>
             </a>
             <a class="flex items-center justify-between w-full p-3 rounded-lg transition-colors text-primary-300 hover:bg-primary-700/50 hover:text-white
-            {% if request|is_link_active:'accounts:contact_us' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
+            {% if request|is_link_active:'accounts:contact_us' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
                href="{% url 'accounts:contact_us' %}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -108,7 +108,7 @@
                 </svg>
             </a>
             <a class="flex items-center justify-between w-full p-3 rounded-lg transition-colors text-primary-300 hover:bg-primary-700/50 hover:text-white
-            {% if request|is_link_active:'accounts:faq' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
+            {% if request|is_link_active:'accounts:faq' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50 hover:text-white{% endif %}"
                href="{% url 'accounts:faq' %}">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

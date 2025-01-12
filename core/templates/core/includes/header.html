@@ -1,37 +1,34 @@
 {% load util_tags %}
 <header class="fixed top-0 w-full bg-gradient-to-r from-primary-950/95 via-primary-900/95 to-primary-950/95 backdrop-blur-md shadow-dark-lg z-50">
-    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
     <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-20">
-            <div class="flex items-center space-x-8">
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-secondary-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
-                    <a href="{% url 'core:home' %}"><img src="https://i.ibb.co/LRzvJgr/smore-logo.png" alt="Smore.bet"
-                                                         class="h-12 relative"></a>
-                </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a class="relative group {% if request|is_link_active:'core:home' %}text-white{% else %}text-primary-300{% endif %}"
-                       href="{% url 'core:home' %}"><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
-                        Home</a>
-                    <a class="relative group {% if request|is_link_active:'core:history' %}text-white{% else %}text-primary-300{% endif %}"
-                       href="{% url 'core:history' %}">
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
-                        History</a>
-                    <a class="relative group {% if request|is_link_active:'core:plans' %}text-white{% else %}text-primary-300{% endif %}"
-                       href="{% url 'core:plans' %}"><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
-                        Plans</a>
-                    <a class="relative group {% if request|is_link_active:'core:faq' %}text-white{% else %}text-primary-300{% endif %}"
-                       href="{% url 'core:faq' %}"><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
-                        FAQ</a>
-                    <a class="relative group {% if request|is_link_active:'core:how_to_join' %}text-white{% else %}text-primary-300{% endif %}"
-                       href="{% url 'core:how_to_join' %}"><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
-                        How to Join</a>
-                </nav>
-            </div>
+        <div class="flex items-center h-20 justify-between">
+            <a class="relative group flex-shrink-0" href="{% url 'core:home' %}">
+                <div class="absolute -inset-2 bg-gradient-to-r from-secondary-500 to-secondary-500 rounded-full blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+                <img src="https://i.ibb.co/LRzvJgr/smore-logo.png" alt="Smore.bet" class="h-12 relative">
+            </a>
+            <nav class="hidden md:flex justify-center flex-1 space-x-12">
+                <a class="relative group {% if request|is_link_active:'core:home' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'core:home' %}"><span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    Home</a>
+                <a class="relative group {% if request|is_link_active:'core:history' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'core:history' %}">
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    History</a>
+                <a class="relative group {% if request|is_link_active:'core:plans' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'core:plans' %}"><span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    Plans</a>
+                <a class="relative group {% if request|is_link_active:'core:faq' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'core:faq' %}"><span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    FAQ</a>
+                <a class="relative group {% if request|is_link_active:'core:how_to_join' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'core:how_to_join' %}"><span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    How to Join</a>
+            </nav>
             <div class="flex items-center space-x-4 md:space-x-6">
                 {% if request.user.is_authenticated %}
                     <a class="flex items-center space-x-2 text-primary-300 hover:text-white transition-colors"
@@ -47,9 +44,9 @@
                 {% else %}
                     <a class="hidden md:inline-flex text-primary-300 hover:text-white transition-colors relative group"
                        href="{% url 'accounts:login' %}">
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                         Sign In</a>
-                    <a class="relative hidden md:inline-flex items-center justify-center px-6 py-2.5 font-medium text-white bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-lg shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-primary-950"
+                    <a class="relative hidden md:inline-flex items-center justify-center px-6 py-2.5 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-950"
                        href="{% url 'accounts:register' %}">Sign Up</a>
                 {% endif %}
                 <button class="md:hidden p-2 text-primary-300 hover:text-white transition-colors" id="mobileMenuButton">
@@ -72,19 +69,19 @@
         <div class="md:hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden"
              id="mobileMenuDropdownContainer">
             <nav class="py-4 space-y-2 border-t border-primary-700/30">
-                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:home' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:home' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:home' %}">Home</a>
 
-                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:history' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:history' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:history' %}">History</a>
 
-                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:plans' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:plans' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:plans' %}">Plans</a>
 
-                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:faq' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:faq' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:faq' %}">FAQ</a>
 
-                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:how_to_join' %}bg-emerald-500/10 text-emerald-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:how_to_join' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:how_to_join' %}">How to Join</a>
 
 
@@ -104,7 +101,7 @@
                         <a class="block px-4 py-2 text-primary-300 hover:text-white transition-colors"
                            href="{% url 'accounts:login' %}">Sign In</a>
 
-                        <a class="block px-4 py-2 text-white bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-lg"
+                        <a class="block px-4 py-2 text-white bg-gradient-to-r from-secondary-600 to-primary-500 rounded-lg"
                            href="{% url 'accounts:register' %}">Sign Up</a>
                     {% endif %}
                 </div>

@@ -1,8 +1,9 @@
 import { initMobileMenu } from "./menu/main";
 import initProducts from "./products/products";
+import Aos from "aos/src/js/aos";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Hello World");
+  Aos.init();
   initMobileMenu();
   initProducts();
 });
