@@ -4,8 +4,12 @@
     <div class="container mx-auto px-4">
         <div class="flex items-center h-20 justify-between">
             <a class="relative group flex-shrink-0" href="{% url 'core:home' %}">
-                <div class="absolute -inset-2 bg-gradient-to-r from-secondary-500 to-secondary-500 rounded-full blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
-                <img src="https://i.ibb.co/LRzvJgr/smore-logo.png" alt="Smore.bet" class="h-12 relative">
+                <div class="relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-secondary-500 to-secondary-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative flex items-center"><span
+                            class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary-200">Smart<span
+                            class="text-secondary-400">Score</span></span></div>
+                </div>
             </a>
             <nav class="hidden md:flex justify-center flex-1 space-x-12">
                 <a class="relative group {% if request|is_link_active:'core:home' %}text-white{% else %}text-primary-300{% endif %}"
