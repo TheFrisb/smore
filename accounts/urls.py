@@ -10,6 +10,7 @@ from .views import (
     RequestWithdrawalView,
     ContactUsView,
     FaqView,
+    ReferralProgram,
 )
 
 app_name = "accounts"
@@ -27,4 +28,5 @@ urlpatterns = [
     ),
     path("contact-us/", ContactUsView.as_view(), name="contact_us"),
     path("faq/", FaqView.as_view(), name="faq"),
+    path("referral-program/", ReferralProgram.as_view(), name="referral_program"),
 ]

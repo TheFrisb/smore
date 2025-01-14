@@ -1,0 +1,16 @@
+Functionality: 14.01.2025
+2. Withdrawal requests
+3. Withdrawal history
+4. Affiliate program link
+5. Referral link
+6. Subscription management
+
+---
+Functionality: 15.01.2025
+1. Predictions backend
+2. Render predictions in UI
+3. Upcoming matches predictions
+4. Subscription bonuses:
+- 0-10: 100$
+- 11-20: 200$
+- 21-30: 300$

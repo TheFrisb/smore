@@ -2,9 +2,10 @@ import logging
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
 
 from accounts.forms.register_form import RegisterForm
@@ -13,7 +14,10 @@ from accounts.models import User, Referral
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
+class BaseAccountView(LoginRequiredMixin):
+    login_url = reverse_lazy("accounts:login")
+
+
 class LoginUserView(LoginView):
     template_name = "accounts/pages/login.html"
     page_title = "Login"
@@ -128,11 +132,11 @@ class RegisterUserView(TemplateView):
         return False
 
 
-class MyAccountView(TemplateView):
+class MyAccountView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/my_account.html"
 
 
-class MyNetworkView(TemplateView):
+class MyNetworkView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/my_network.html"
 
     def get_context_data(self, **kwargs):
@@ -171,17 +175,21 @@ class MyNetworkView(TemplateView):
         return network
 
 
-class ManagePlanView(TemplateView):
+class ManagePlanView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/manage_plan.html"
 
 
-class RequestWithdrawalView(TemplateView):
+class RequestWithdrawalView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/request_withdrawal.html"
 
 
-class ContactUsView(TemplateView):
+class ContactUsView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/contact_us.html"
 
 
-class FaqView(TemplateView):
+class FaqView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/faq.html"
+
+
+class ReferralProgram(BaseAccountView, TemplateView):
+    template_name = "accounts/pages/referral_program.html"
