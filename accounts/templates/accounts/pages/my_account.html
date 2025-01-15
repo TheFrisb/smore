@@ -41,13 +41,20 @@
                         Referral Code</label>
                         <div class="flex items-center space-x-3">
                             <div class="flex-1 bg-primary-900/50 px-4 py-2 rounded-lg border border-primary-700/30">
-                                <code class="text-secondary-400 font-mono">{{ request.user.referral_code }}</code></div>
-                            <button class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-500/10 text-secondary-400 hover:bg-secondary-500/20 transition-colors">
+                                <code class="text-secondary-400 font-mono">{{ request.user.referral_link }}</code>
+                            </div>
+                            <button class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-500/10 text-secondary-400 hover:bg-secondary-500/20 transition-colors copyButton"
+                                    data-value="{{ request.user.referral_link }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-copy w-5 h-5">
+                                     stroke-linejoin="round" class="lucide lucide-copy w-5 h-5 copyIcon">
                                     <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
                                     <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="w-5 h-5 checkmarkIcon hidden">
+                                    <path d="M20 6 9 17l-5-5"></path>
                                 </svg>
                             </button>
                         </div>

@@ -1,15 +1,18 @@
 import logging
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 from accounts.forms.register_form import RegisterForm
-from accounts.models import User, Referral
+from accounts.forms.withdrawal_request_form import WithdrawalRequestForm
+from accounts.models import User, Referral, WithdrawalRequest
+from payments.services.internal_stripe_service import InternalStripeService
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +35,10 @@ class LogoutUserView(LogoutView):
 
 
 class RegisterUserView(TemplateView):
+    def __init__(self):
+        super().__init__()
+        self.stripe_service = InternalStripeService()
+
     template_name = "accounts/pages/register.html"
 
     def get(self, request, *args, **kwargs):
@@ -53,7 +60,7 @@ class RegisterUserView(TemplateView):
 
         logger.info(f"User {user.username} created.")
 
-        referral_code = form.cleaned_data.get("referral_code", None)
+        referral_code = request.session.get("referral_code", None)
         if referral_code:
             try:
                 referrer = User.objects.get(referral_code=referral_code)
@@ -70,6 +77,8 @@ class RegisterUserView(TemplateView):
                 )
                 return self.render_to_response({"form": form})
 
+        self.stripe_service.create_stripe_customer(user)
+
         authenticated_user = authenticate(
             request,
             username=form.cleaned_data["username"],
@@ -78,6 +87,7 @@ class RegisterUserView(TemplateView):
 
         if authenticated_user is not None:
             login(request, authenticated_user)
+            request.session.pop("referral_code", None)
             logger.info(f"User {user.username} registered successfully.")
             return redirect("accounts:my_account")
         else:
@@ -179,8 +189,25 @@ class ManagePlanView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/manage_plan.html"
 
 
-class RequestWithdrawalView(BaseAccountView, TemplateView):
+class RequestWithdrawalView(BaseAccountView, FormView):
     template_name = "accounts/pages/request_withdrawal.html"
+    form_class = WithdrawalRequestForm
+
+    def form_valid(self, form):
+        WithdrawalRequest.objects.create(
+            user=self.request.user,
+            amount=form.cleaned_data["amount"],
+            payout_destination=form.cleaned_data["payout_destination"],
+            payout_type=WithdrawalRequest.PayoutType.CRYPTO,
+        )
+        messages.success(
+            self.request,
+            "Your withdrawal request has been submitted successfully. You will receive a confirmation email shortly.",
+        )
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("accounts:my_account")
 
 
 class ContactUsView(BaseAccountView, TemplateView):

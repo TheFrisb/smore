@@ -7,7 +7,7 @@ from django.db.models import F
 
 from accounts.models import UserBalance, User
 
-log = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class StripeWebhookEvent(Enum):
@@ -20,12 +20,20 @@ class InternalStripeService:
         self.api_key = settings.STRIPE_SECRET_KEY
         self.webhook_secret = settings.STRIPE_WEBHOOK_SECRET_KEY
 
+    def create_stripe_customer(self, user):
+        stripe.api_key = self.api_key
+        customer = stripe.Customer.create(email=user.email)
+        user.stripe_customer_id = customer["id"]
+        user.save()
+
     def process_stripe_event(self, payload, sig_header):
         event = stripe.Webhook.construct_event(payload, sig_header, self.webhook_secret)
         event_type = event["type"]
 
+        logger.info(f"Processing Stripe event: {event_type}")
+
         if event_type != StripeWebhookEvent.CHECKOUT_SESSION_COMPLETED.value:
-            log.info("Not implemented")
+            logger.info("Not implemented")
             return
 
         self.process_checkout_session_completed(event["data"]["object"])

@@ -26,13 +26,6 @@ class RegisterForm(forms.ModelForm):
         ),
         required=True,
     )
-    referral_code = forms.CharField(
-        max_length=50,
-        required=False,
-        widget=forms.TextInput(
-            attrs={"placeholder": "Referral Code (optional)", "class": "form-control"}
-        ),
-    )
 
     class Meta:
         model = User

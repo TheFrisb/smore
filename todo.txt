@@ -1,8 +1,7 @@
 Functionality: 14.01.2025
 2. Withdrawal requests
-3. Withdrawal history
-4. Affiliate program link
 5. Referral link
+
 6. Subscription management
 
 ---

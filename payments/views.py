@@ -39,10 +39,6 @@ class CreateCheckoutUrlView(APIView):
         if len(products) != len(serializer.validated_data["products"]):
             raise serializers.ValidationError("Some products not found.")
 
-        # Calculate total price (optional; Stripe handles per-item pricing)
-        total_price = self.calculate_total_price(products)
-
-        # Create the Stripe Checkout session
         try:
             checkout_session = self.create_stripe_checkout_session(
                 products, request.user
@@ -83,26 +79,26 @@ class CreateCheckoutUrlView(APIView):
                         "product_data": {
                             "name": product.name,
                         },
-                        "unit_amount": int(price * 100),  # Stripe uses cents
+                        "unit_amount": int(price * 100),
                         "recurring": {
-                            "interval": "month",  # or "year" based on your requirement
+                            "interval": "month",
                         },
                     },
-                    "quantity": 1,  # Quantity of each item
+                    "quantity": 1,
                 }
             )
 
             i += 1
 
-        # Create the Stripe Checkout session
         session = stripe.checkout.Session.create(
             api_key=self.stripe_secret_key,
             payment_method_types=["card"],
-            mode="subscription",  # Subscriptions mode
+            mode="subscription",
             line_items=line_items,
             success_url="https://www.smore.bet/plans/",
             cancel_url="https://www.smore.bet/plans/",
             metadata={"user_id": user.id},
+            customer=user.stripe_customer_id,
         )
 
         return session

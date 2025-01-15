@@ -1,11 +1,22 @@
+import logging
+
 from django.views.generic import TemplateView
 
 from core.models import Product, Addon
 
+logger = logging.getLogger(__name__)
 
-# Create your views here.
+
 class HomeView(TemplateView):
     template_name = "core/pages/home.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        referral_code = request.GET.get("ref", None)
+        if referral_code:
+            logger.info(f"Home page visited with referral code: {referral_code}")
+            request.session["referral_code"] = referral_code
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class HistoryView(TemplateView):

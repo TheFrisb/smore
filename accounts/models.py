@@ -1,6 +1,7 @@
 import secrets
 import string
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -14,9 +15,17 @@ class User(BaseInternalModel, AbstractUser):
     """
 
     referral_code = models.CharField(max_length=12, unique=True, blank=True, null=True)
+    stripe_customer_id = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.username
+
+    @property
+    def referral_link(self):
+        """
+        Generate a referral link for the user
+        """
+        return f"{settings.BASE_URL}/?ref={self.referral_code}"
 
     def generate_referral_code(self):
         """
@@ -74,3 +83,25 @@ class Referral(BaseInternalModel):
                 name="referrer_not_referred",
             ),
         ]
+
+
+class WithdrawalRequest(BaseInternalModel):
+    class Status(models.TextChoices):
+        PENDING = "pending", "Pending"
+        APPROVED = "approved", "Approved"
+        PROCESSING = "processing", "Processing"
+        COMPLETED = "completed", "Completed"
+        REJECTED = "rejected", "Rejected"
+
+    class PayoutType(models.TextChoices):
+        BANK = "bank", "Bank"
+        CRYPTO = "crypto", "Crypto"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="withdrawals")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=10, choices=Status, default=Status.PENDING)
+    payout_type = models.CharField(max_length=10, choices=PayoutType)
+    payout_destination = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.amount} - {self.status}"

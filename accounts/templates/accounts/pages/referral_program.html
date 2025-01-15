@@ -102,7 +102,9 @@
                         <div class="text-center">
                             <div class="text-secondary-400 mb-2">Total Monthly Earnings</div>
                             <div class="text-3xl font-bold text-white">€1,034.70</div>
-                            <div class="text-primary-300 text-sm">including €300 bonus</div>
+                            <div class="text-primary-300 text-sm">including <span class="font-bold">€300</span>
+                                <span class="text-secondary-400 font-bold">bonus</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,7 +208,7 @@
                                 <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-2">Access Your Unique Referral Link</h3>
+                        <h3 class="text-lg font-semibold text-white mb-2">Share Your Unique Referral Link</h3>
                         <p class="text-primary-200">Get your personalized referral link to share with your network</p>
                     </div>
                 </div>
@@ -228,16 +230,23 @@
         </div>
         <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
             <div class="text-center"><h2 class="text-2xl font-bold text-white mb-6">Your Referral Code</h2>
-                <div class="max-w-md mx-auto">
+                <div class="max-w-3xl mx-auto">
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="flex-1 bg-primary-900/50 px-6 py-4 rounded-lg border border-primary-700/30"><code
-                                class="text-secondary-400 font-mono text-xl">SMORE123</code></div>
-                        <button class="flex items-center justify-center w-14 h-14 rounded-lg bg-secondary-500/10 text-secondary-400 hover:bg-secondary-500/20 transition-colors">
+                        <div class="flex-1 bg-primary-900/50 px-4 py-2 md:px-6 md:py-4 rounded-lg border border-primary-700/30">
+                            <code class="text-secondary-400 font-mono">http://localhost:8000/?ref=WEEQcEklDqTb</code>
+                        </div>
+                        <button class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-500/10 text-secondary-400 hover:bg-secondary-500/20 transition-colors copyButton"
+                                data-value="http://localhost:8000/?ref=WEEQcEklDqTb">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="lucide lucide-copy w-6 h-6">
+                                 stroke-linejoin="round" class="lucide lucide-copy w-5 h-5 copyIcon">
                                 <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
                                 <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="w-5 h-5 checkmarkIcon hidden">
+                                <path d="M20 6 9 17l-5-5"></path>
                             </svg>
                         </button>
                     </div>
