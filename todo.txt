@@ -1,6 +1,4 @@
 Functionality: 14.01.2025
-2. Withdrawal requests
-5. Referral link
 
 6. Subscription management
 

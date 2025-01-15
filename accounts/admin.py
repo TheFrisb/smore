@@ -60,11 +60,19 @@ class UserAdmin(UserAdmin):
 
 @admin.register(WithdrawalRequest)
 class WithdrawalRequestAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'status', 'payout_type', 'payout_destination', 'created_at', 'updated_at')
-    list_filter = ('status', 'payout_type', 'created_at')
-    search_fields = ('user__username', 'payout_destination')
-    ordering = ('-created_at',)
-    readonly_fields = ('created_at', 'updated_at')
+    list_display = (
+        "user",
+        "amount",
+        "status",
+        "payout_type",
+        "payout_destination",
+        "created_at",
+        "updated_at",
+    )
+    list_filter = ("status", "payout_type", "created_at")
+    search_fields = ("user__username", "payout_destination")
+    ordering = ("-created_at",)
+    readonly_fields = ("created_at", "updated_at")
 
 
 admin.site.register(Referral)

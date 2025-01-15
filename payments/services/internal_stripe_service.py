@@ -13,6 +13,10 @@ logger = logging.getLogger(__name__)
 class StripeWebhookEvent(Enum):
     CHECKOUT_SESSION_COMPLETED = "checkout.session.completed"
     CHECKOUT_SESSION_EXPIRED = "checkout.session.expired"
+    SUBSCRIPTION_CREATED = "customer.subscription.created"
+    SUBSCRIPTION_UPDATED = "customer.subscription.updated" #
+    SUBSCRIPTION_DELETED = "customer.subscription.deleted" # Subscription cancelled
+    INVOICE_PAID = "invoice.paid"
 
 
 class InternalStripeService:
@@ -56,8 +60,8 @@ class InternalStripeService:
             # Check if the direct referrer has their own referrer
             direct_referrer = user.referral.referrer
             if (
-                    hasattr(direct_referrer, "referral")
-                    and direct_referrer.referral.referrer
+                hasattr(direct_referrer, "referral")
+                and direct_referrer.referral.referrer
             ):
                 UserBalance.objects.filter(
                     user=direct_referrer.referral.referrer

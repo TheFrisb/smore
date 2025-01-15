@@ -64,3 +64,7 @@ class DisclaimerView(TemplateView):
 
 class CookiesPolicyView(TemplateView):
     template_name = "core/pages/cookies_policy.html"
+
+
+class UpcomingMatchesView(TemplateView):
+    template_name = "core/pages/home.html"

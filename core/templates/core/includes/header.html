@@ -11,15 +11,25 @@
                             class="text-secondary-400">Score</span></span></div>
                 </div>
             </a>
-            <nav class="hidden md:flex justify-center flex-1 space-x-12">
+            <nav class="hidden lg:flex justify-center flex-1 space-x-6 xl:space-x-12">
                 <a class="relative group {% if request|is_link_active:'core:home' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:home' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                     Home</a>
+                <a class="relative group {% if request|is_link_active:'core:upcoming_matches' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'core:upcoming_matches' %}"><span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    Upcoming Matches</a>
                 <a class="relative group {% if request|is_link_active:'core:history' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:history' %}">
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                     History</a>
+                {% if request.user.is_authenticated %}
+                    <a class="relative group {% if request|is_link_active:'accounts:referral_program' %}text-white{% else %}text-primary-300{% endif %}"
+                       href="{% url 'accounts:referral_program' %}"><span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                        Referral Program</a>
+                {% endif %}
                 <a class="relative group {% if request|is_link_active:'core:plans' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:plans' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
@@ -33,7 +43,7 @@
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                     How to Join</a>
             </nav>
-            <div class="flex items-center space-x-4 md:space-x-6">
+            <div class="flex items-center space-x-4 lg:space-x-6">
                 {% if request.user.is_authenticated %}
                     <a class="flex items-center space-x-2 text-primary-300 hover:text-white transition-colors"
                        href="{% url 'accounts:my_account' %}">
@@ -46,14 +56,14 @@
                         <span>{{ request.user.username }}</span>
                     </a>
                 {% else %}
-                    <a class="hidden md:inline-flex text-primary-300 hover:text-white transition-colors relative group"
+                    <a class="hidden lg:inline-flex text-primary-300 hover:text-white transition-colors relative group"
                        href="{% url 'accounts:login' %}">
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                         Sign In</a>
-                    <a class="relative hidden md:inline-flex items-center justify-center px-6 py-2.5 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-950"
+                    <a class="relative hidden lg:inline-flex items-center justify-center px-6 py-2.5 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-950"
                        href="{% url 'accounts:register' %}">Sign Up</a>
                 {% endif %}
-                <button class="md:hidden p-2 text-primary-300 hover:text-white transition-colors" id="mobileMenuButton">
+                <button class="lg:hidden p-2 text-primary-300 hover:text-white transition-colors" id="mobileMenuButton">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="hamburgerIcon w-6 h-6">
@@ -70,17 +80,23 @@
                 </button>
             </div>
         </div>
-        <div class="md:hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden"
+        <div class="lg:hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden"
              id="mobileMenuDropdownContainer">
             <nav class="py-4 space-y-2 border-t border-primary-700/30">
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:home' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:home' %}">Home</a>
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:upcoming_matches' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                   href="{% url 'core:upcoming_matches' %}">Upcoming Matches</a>
 
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:history' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:history' %}">History</a>
 
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:plans' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:plans' %}">Plans</a>
+                {% if request.user.is_authenticated %}
+                    <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'accounts:referral_program' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                       href="{% url 'accounts:referral_program' %}">Referral Program</a>
+                {% endif %}
 
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:faq' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:faq' %}">FAQ</a>
