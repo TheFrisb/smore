@@ -28,6 +28,5 @@ urlpatterns = [
     path("terms-of-service/", TermsOfServiceView.as_view(), name="terms_of_service"),
     path("privacy-policy/", PrivacyPolicyView.as_view(), name="privacy_policy"),
     path("cookies-policy/", CookiesPolicyView.as_view(), name="cookies_policy"),
-
     path("upcoming-matches/", UpcomingMatchesView.as_view(), name="upcoming_matches"),
 ]
