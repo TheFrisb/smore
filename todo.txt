@@ -1,13 +1,18 @@
 Functionality: 14.01.2025
 
-6. Subscription management
 
----
-Functionality: 15.01.2025
-1. Predictions backend
-2. Render predictions in UI
-3. Upcoming matches predictions
-4. Subscription bonuses:
+8. Coming soon na kosarka, nfl, ai
+
+
+
+10. Subscription management
+
+14. Withdrawal
+15. Subscription bonuses:
 - 0-10: 100$
 - 11-20: 200$
 - 21-30: 300$
+
+
+6. Upcoming matches samo za logged in
+- Ako nemas plan, katanec

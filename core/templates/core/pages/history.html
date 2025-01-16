@@ -72,263 +72,109 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-8">
                 <div class="flex flex-wrap gap-3">
-                    <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-trophy w-4 h-4">
-                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                            <path d="M4 22h16"></path>
-                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                        </svg>
-                        <span>All Sports</span></button>
-                    <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 text-primary-300 border-primary-700/30 hover:bg-primary-700/50 hover:text-white hover:border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-target w-4 h-4">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <circle cx="12" cy="12" r="6"></circle>
-                            <circle cx="12" cy="12" r="2"></circle>
-                        </svg>
-                        <span>Football</span></button>
-                    <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 text-primary-300 border-primary-700/30 hover:bg-primary-700/50 hover:text-white hover:border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-circle-dot w-4 h-4">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <circle cx="12" cy="12" r="1"></circle>
-                        </svg>
-                        <span>Basketball</span></button>
-                    <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 text-primary-300 border-primary-700/30 hover:bg-primary-700/50 hover:text-white hover:border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-flag w-4 h-4">
-                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                            <line x1="4" x2="4" y1="22" y2="15"></line>
-                        </svg>
-                        <span>NFL</span></button>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div class="relative"><select
-                            class="appearance-none bg-primary-800/50 backdrop-blur-sm text-white px-4 py-2.5 pr-10 rounded-lg cursor-pointer border border-primary-700/30 hover:border-secondary-500/20 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50">
-                        <option value="date">Latest First</option>
-                        <option value="accuracy">Highest Accuracy</option>
-                        <option value="odds">Highest Odds</option>
-                    </select>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-arrow-up-down absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-secondary-500 pointer-events-none">
-                            <path d="m21 16-4 4-4-4"></path>
-                            <path d="M17 20V4"></path>
-                            <path d="m3 8 4-4 4 4"></path>
-                            <path d="M7 4v16"></path>
-                        </svg>
+
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
+                            {% svg_icon icon_name="soccerIcon" css_classes="w-4 h-4" %}
+
+                            <span>Soccer</span></button>
                     </div>
-                    <div class="relative inline-block">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 class="lucide lucide-info w-5 h-5 text-primary-300 hover:text-white transition-colors cursor-help">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M12 16v-4"></path>
-                                <path d="M12 8h.01"></path>
-                            </svg>
-                        </div>
+                    <div class="relative">
+                        <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
+                            <span class="text-xs text-secondary-400">Soon</span></div>
+                        <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
+                                disabled="">
+                            {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4" %}
+                            <span>Basketball</span>
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
+                            <span class="text-xs text-secondary-400">Soon</span></div>
+                        <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
+                                disabled="">
+                            {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4" %}
+
+                            <span>NFL</span></button>
                     </div>
                 </div>
             </div>
             <div class="grid gap-4 mt-8 max-w-6xl mx-auto">
-                <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-primary-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">
-                    <div class="flex flex-col space-y-4 mb-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2 text-primary-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4">
-                                    <path d="M8 2v4"></path>
-                                    <path d="M16 2v4"></path>
-                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                                    <path d="M3 10h18"></path>
-                                </svg>
-                                <span class="text-sm">10/03/2024, 19:45 (GMT+1)</span></div>
-                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-secondary-500/10 text-secondary-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-check w-5 h-5">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span class="font-medium">Success</span></div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center space-x-2 text-primary-300">
-                                <div class="bg-primary-900/50 p-2 rounded-lg">
+                {% for prediction in predictions %}
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-primary-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">
+                        <div class="flex flex-col space-y-4 mb-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-primary-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4">
+                                        <path d="M8 2v4"></path>
+                                        <path d="M16 2v4"></path>
+                                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                        <path d="M3 10h18"></path>
+                                    </svg>
+                                    <span class="text-sm">{{ prediction.kickoff_datetime }}</span></div>
+                                <div class="flex items-center space-x-2 px-4 py-2 rounded-lg
+                                    {% if prediction.status == "WON" %} bg-secondary-500/10 text-secondary-400 {% else %} bg-red-500/30 text-primary-200 {% endif %}">
 
+                                    {% if prediction.status == "WON" %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="lucide lucide-check w-5 h-5">
+                                            <path d="M20 6 9 17l-5-5"></path>
+                                        </svg>
+                                    {% else %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="lucide lucide-x w-5 h-5">
+                                            <path d="M18 6L6 18"></path>
+                                            <path d="M6 6L18 18"></path>
+                                        </svg>
+                                    {% endif %}
 
-                                    {% svg_icon icon_name="soccerIcon" css_classes="w-4 h-4 text-white" %}
-
-                                </div>
-                                <span class="text-sm">Soccer</span><span
-                                    class="text-sm text-secondary-400">•</span><span
-                                    class="text-sm">Premier League</span></div>
-                        </div>
-                    </div>
-                    <div class="bg-primary-900/50 p-4 rounded-lg">
-                        <div class="flex items-center justify-between mb-4">
-                            <div><span class="font-semibold text-white">Manchester City</span></div>
-                            <span class="text-primary-300 font-medium px-4">vs</span>
-                            <div><span class="font-semibold text-white">Liverpool</span></div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="text-sm text-primary-300">Prediction</div>
-                                <div class="font-semibold text-lg text-white">Over 2.5 Goals</div>
+                                    <span class="font-medium">{{ prediction.get_status_display }}</span></div>
                             </div>
-                            <div class="text-right">
-                                <div class="text-sm text-primary-300">Result</div>
-                                <div class="font-semibold text-lg text-secondary-400">Over 2.5 Goals</div>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-primary-700/30 flex justify-between items-center">
-                            <div class="text-sm text-primary-300"><span>Odds:</span><span
-                                    class="ml-2 text-white font-medium">1.95</span></div>
-                            <div class="text-sm text-primary-300"><span>Confidence:</span><span
-                                    class="ml-2 text-white font-medium">87%</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-primary-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">
-                    <div class="flex flex-col space-y-4 mb-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2 text-primary-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4">
-                                    <path d="M8 2v4"></path>
-                                    <path d="M16 2v4"></path>
-                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                                    <path d="M3 10h18"></path>
-                                </svg>
-                                <span class="text-sm">09/03/2024, 18:30 (GMT+1)</span></div>
-                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-secondary-500/10 text-secondary-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-check w-5 h-5">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span class="font-medium">Success</span></div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center space-x-2 text-primary-300">
-                                <div class="bg-primary-900/50 p-2 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-2 text-primary-300">
+                                    <div class="bg-primary-900/50 p-2 rounded-lg">
 
 
-                                    {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4 text-white" %}
+                                        {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-4 h-4 text-white" %}
 
-                                </div>
-                                <span class="text-sm">Basketball</span><span class="text-sm text-secondary-400">•</span><span
-                                    class="text-sm">NBA</span></div>
-                        </div>
-                    </div>
-                    <div class="bg-primary-900/50 p-4 rounded-lg">
-                        <div class="flex items-center justify-between mb-4">
-                            <div><span class="font-semibold text-white">Lakers</span></div>
-                            <span class="text-primary-300 font-medium px-4">vs</span>
-                            <div><span class="font-semibold text-white">Warriors</span></div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="text-sm text-primary-300">Prediction</div>
-                                <div class="font-semibold text-lg text-white">Lakers +5.5</div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-sm text-primary-300">Result</div>
-                                <div class="font-semibold text-lg text-secondary-400">Lakers Win</div>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-primary-700/30 flex justify-between items-center">
-                            <div class="text-sm text-primary-300"><span>Odds:</span><span
-                                    class="ml-2 text-white font-medium">2.1</span></div>
-                            <div class="text-sm text-primary-300"><span>Confidence:</span><span
-                                    class="ml-2 text-white font-medium">92%</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-primary-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">
-                    <div class="flex flex-col space-y-4 mb-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2 text-primary-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4">
-                                    <path d="M8 2v4"></path>
-                                    <path d="M16 2v4"></path>
-                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                                    <path d="M3 10h18"></path>
-                                </svg>
-                                <span class="text-sm">08/03/2024, 22:00 (GMT+1)</span></div>
-                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-secondary-500/10 text-secondary-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-check w-5 h-5">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span class="font-medium">Success</span></div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center space-x-2 text-primary-300">
-                                <div class="bg-primary-900/50 p-2 rounded-lg">
-
-
-                                    {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4 text-white" %}
-
-                                </div>
-                                <span class="text-sm">NFL</span>
+                                    </div>
+                                    <span class="text-sm">{{ prediction.product.name }}</span>
+                                    <span class="text-sm text-secondary-400">•</span><span
+                                        class="text-sm">{{ prediction.league }}</span></div>
                             </div>
                         </div>
                         <div class="bg-primary-900/50 p-4 rounded-lg">
                             <div class="flex items-center justify-between mb-4">
-                                <div><span class="font-semibold text-white">Chiefs</span></div>
+                                <div><span class="font-semibold text-white">{{ prediction.home_team }}</span></div>
                                 <span class="text-primary-300 font-medium px-4">vs</span>
-                                <div><span class="font-semibold text-white">Bills</span></div>
+                                <div><span class="font-semibold text-white">{{ prediction.away_team }}</span></div>
                             </div>
                             <div class="flex justify-between items-center">
                                 <div>
                                     <div class="text-sm text-primary-300">Prediction</div>
-                                    <div class="font-semibold text-lg text-white">Chiefs -3.5</div>
+                                    <div class="font-semibold text-lg text-white">{{ prediction.prediction }}</div>
                                 </div>
                                 <div class="text-right">
                                     <div class="text-sm text-primary-300">Result</div>
-                                    <div class="font-semibold text-lg text-secondary-400">Chiefs -7</div>
+                                    <div class="font-semibold text-lg text-secondary-400">{{ prediction.result }}</div>
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-primary-700/30 flex justify-between items-center">
                                 <div class="text-sm text-primary-300"><span>Odds:</span><span
-                                        class="ml-2 text-white font-medium">1.85</span></div>
-                                <div class="text-sm text-primary-300"><span>Confidence:</span><span
-                                        class="ml-2 text-white font-medium">89%</span></div>
+                                        class="ml-2 text-white font-medium">1.95</span></div>
+
                             </div>
                         </div>
                     </div>
 
-
-                </div>
-                <div class="mt-12 text-center">
-                    <button class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
-                        <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                        <div class="relative flex items-center"><span class="text-lg">Load More Predictions</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                 class="lucide lucide-chevron-down w-5 h-5 ml-2 transform group-hover:translate-y-0.5 transition-transform duration-300">
-                                <path d="m6 9 6 6 6-6"></path>
-                            </svg>
-                        </div>
-                    </button>
-                </div>
+                {% endfor %}
             </div>
     </section>{% endblock content %}

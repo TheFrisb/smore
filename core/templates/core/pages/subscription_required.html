@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+        <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+        <div class="container mx-auto px-4 min-h-[60vh] flex items-center justify-center">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">
+                    <div class="w-20 h-20 bg-secondary-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-lock w-10 h-10 text-secondary-400">
+                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Premium Content</h2>
+                    <p class="text-xl text-primary-200 mb-8">Subscribe to access our expert predictions for upcoming
+                        matches, featuring detailed analysis and insights.</p>
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-center justify-center space-x-2 text-primary-200">
+                            <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                            <span>92%+ Success Rate</span></div>
+                        <div class="flex items-center justify-center space-x-2 text-primary-200">
+                            <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                            <span>Daily Expert Predictions</span></div>
+                        <div class="flex items-center justify-center space-x-2 text-primary-200">
+                            <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                            <span>Detailed Match Analysis</span></div>
+                    </div>
+                    <a class="inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200"
+                       href="{% url 'core:plans' %}">View Plans
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-chevron-right ml-2 w-5 h-5">
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </a></div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -105,3 +105,40 @@ class WithdrawalRequest(BaseInternalModel):
 
     def __str__(self):
         return f"{self.user.username} - {self.amount} - {self.status}"
+
+
+class UserSubscription(BaseInternalModel):
+    class Status(models.TextChoices):
+        ACTIVE = "active", "Active"
+        INACTIVE = "inactive", "Inactive"
+
+    class Frequency(models.TextChoices):
+        MONTHLY = "monthly", "Monthly"
+        YEARLY = "yearly", "Yearly"
+
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="subscription"
+    )
+    status = models.CharField(max_length=10, choices=Status, default=Status.INACTIVE)
+    frequency = models.CharField(max_length=10, choices=Frequency)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    stripe_subscription_id = models.CharField(max_length=255)
+
+    products = models.ManyToManyField("core.Product", related_name="subscriptions")
+
+    @property
+    def is_active(self):
+        return self.status == self.Status.ACTIVE
+
+    @property
+    def is_monthly(self):
+        return self.frequency == self.Frequency.MONTHLY
+
+    @property
+    def next_billing_date(self):
+        return self.end_date
+
+    def __str__(self):
+        return f"{self.user.username} - {self.status} - {self.frequency}"

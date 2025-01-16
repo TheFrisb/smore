@@ -10,22 +10,73 @@ const checkoutSummaryItemsSection = document.querySelector(
 );
 
 const checkoutButton = document.querySelector("#checkoutButton");
+const chooseSubscriptionFrequencyButton = document.querySelector(
+  "#chooseSubscriptionFrequencyButton",
+);
 
 let selectedProducts = [];
+let frequencyType = "month";
+
+function initChooseSubscriptionFrequencyButton() {
+  if (!chooseSubscriptionFrequencyButton) {
+    return;
+  }
+
+  chooseSubscriptionFrequencyButton.addEventListener("click", () => {
+    const toggleButton =
+      chooseSubscriptionFrequencyButton.querySelector(".toggleButton");
+    const annualLabelEl = document.querySelector(".annualLabel");
+    const monthlyLabelEl = document.querySelector(".monthlyLabel");
+    if (toggleButton.classList.contains("left-1")) {
+      toggleButton.classList.remove("left-1");
+      toggleButton.classList.add("right-1");
+      frequencyType = "year";
+
+      annualLabelEl.classList.remove("text-primary-300");
+      annualLabelEl.classList.add("text-white");
+      monthlyLabelEl.classList.add("text-primary-300");
+      monthlyLabelEl.classList.remove("text-white");
+    } else {
+      toggleButton.classList.remove("right-1");
+      toggleButton.classList.add("left-1");
+      frequencyType = "month";
+
+      monthlyLabelEl.classList.remove("text-primary-300");
+      monthlyLabelEl.classList.add("text-white");
+      annualLabelEl.classList.add("text-primary-300");
+      annualLabelEl.classList.remove("text-white");
+    }
+
+    updatePrices();
+  });
+}
+
+function updatePrices() {
+  const products = document.querySelectorAll(".product");
+
+  products.forEach((product) => {
+    const priceEl = product.querySelector(".product__price");
+
+    let monthlyPrice = product.getAttribute("data-product-monthly-price");
+    let yearlyPrice = product.getAttribute("data-product-annual-price");
+
+    let price = frequencyType === "monthly" ? monthlyPrice : yearlyPrice;
+
+    priceEl.textContent = `$${price}`;
+  });
+
+  updateCheckoutSummaryUI();
+}
 
 function initProducts() {
   if (!products || !checkoutSummarySection) {
     return;
   }
+  initChooseSubscriptionFrequencyButton();
 
   products.forEach((product) => {
     product.addEventListener("click", () => {
       const productId = product.getAttribute("data-product-id");
-      const productPrice = product.getAttribute("data-product-price");
-      const discountedProductPrice = product.getAttribute(
-        "data-discounted-product-price",
-      );
-      const productName = product.getAttribute("data-product-name");
 
       const productCheckboxContainer = product.querySelector(
         ".product__checkboxContainer",
@@ -39,8 +90,6 @@ function initProducts() {
       );
 
       pushOrRemoveProduct(productId);
-      updateProductDiscountUI();
-
       updateCheckoutSummaryUI();
     });
   });
@@ -58,7 +107,10 @@ function initProducts() {
         "Content-Type": "application/json",
         "X-CSRFToken": csrfToken,
       },
-      body: JSON.stringify({ products: selectedProducts.map(Number) }),
+      body: JSON.stringify({
+        products: selectedProducts.map(Number),
+        frequency: frequencyType,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -124,33 +176,6 @@ function pushOrRemoveProduct(id) {
   } else {
     selectedProducts.splice(productIndex, 1);
   }
-}
-
-function updateProductDiscountUI() {
-  const products = document.querySelectorAll(".product");
-
-  products.forEach((product) => {
-    const productPriceElement = product.querySelector(".product__price");
-    const productDiscountedPriceElement = product.querySelector(
-      ".product__discountSection",
-    );
-    console.log(productPriceElement);
-    console.log(productDiscountedPriceElement);
-
-    if (selectedProducts.length === 0) {
-      productPriceElement.textContent =
-        product.getAttribute("data-product-price");
-      productDiscountedPriceElement.classList.add("hidden");
-    } else {
-      if (selectedProducts[0] === product.getAttribute("data-product-id")) {
-        return;
-      }
-      productPriceElement.textContent = product.getAttribute(
-        "data-discounted-product-price",
-      );
-      productDiscountedPriceElement.classList.remove("hidden");
-    }
-  });
 }
 
 function updateClickedProductUI(

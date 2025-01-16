@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_standardized_errors",
     "adminsortable2",
+    "solo",
     # Local apps
     "accounts",
     "core",

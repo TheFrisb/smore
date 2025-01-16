@@ -23,6 +23,7 @@ class CreateCheckoutUrlView(APIView):
 
     class InputSerializer(serializers.Serializer):
         products = serializers.ListField(child=serializers.IntegerField())
+        frequency = serializers.ChoiceField(choices=["month", "year"])
 
     class OutputSerializer(serializers.Serializer):
         checkout_url = serializers.CharField()
@@ -41,7 +42,7 @@ class CreateCheckoutUrlView(APIView):
 
         try:
             checkout_session = self.create_stripe_checkout_session(
-                products, request.user
+                products, request.user, serializer.validated_data["frequency"]
             )
         except StripeError as e:
             raise serializers.ValidationError(f"Stripe error: {e.error.message}")
@@ -52,26 +53,25 @@ class CreateCheckoutUrlView(APIView):
         output_serializer.is_valid(raise_exception=True)
         return Response(output_serializer.data)
 
-    def calculate_total_price(self, products):
+    def calculate_total_price(self, products, frequency):
         total_price = 0
-        i = 1
         for product in products:
-            if i > 1:
-                total_price += product.discounted_price
+            if frequency == "month":
+                total_price += product.monthly_price
             else:
-                total_price += product.price
-            i += 1
+                total_price += product.annual_price
+
         return total_price
 
-    def create_stripe_checkout_session(self, products, user):
+    def create_stripe_checkout_session(self, products, user, frequency):
         # Create a line item for each product
         line_items = []
         i = 1
         for product in products:
-            if i > 1:
-                price = product.discounted_price
+            if frequency == "month":
+                price = product.monthly_price
             else:
-                price = product.price
+                price = product.annual_price
             line_items.append(
                 {
                     "price_data": {
@@ -81,7 +81,7 @@ class CreateCheckoutUrlView(APIView):
                         },
                         "unit_amount": int(price * 100),
                         "recurring": {
-                            "interval": "month",
+                            "interval": frequency,
                         },
                     },
                     "quantity": 1,
@@ -97,7 +97,12 @@ class CreateCheckoutUrlView(APIView):
             line_items=line_items,
             success_url="https://www.smore.bet/plans/",
             cancel_url="https://www.smore.bet/plans/",
-            metadata={"user_id": user.id},
+            metadata={
+                "user_id": user.id,
+                "frequency": frequency,
+                "products": products,
+                "total_price": self.calculate_total_price(products, frequency),
+            },
             customer=user.stripe_customer_id,
         )
 

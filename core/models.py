@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from solo.models import SingletonModel
 
 
 # Create your models here.
@@ -13,13 +14,19 @@ class BaseInternalModel(models.Model):
 
 class BaseProductModel(BaseInternalModel):
     name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    discounted_price = models.DecimalField(max_digits=10, decimal_places=2)
+    monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
+    annual_price = models.DecimalField(max_digits=10, decimal_places=2)
+    discounted_monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
+    discounted_annual_price = models.DecimalField(max_digits=10, decimal_places=2)
     order = models.PositiveIntegerField(default=0)
 
     @property
-    def discount(self):
-        return self.price - self.discounted_price
+    def monthly_discount(self):
+        return self.monthly_price - self.discounted_monthly_price
+
+    @property
+    def annual_discount(self):
+        return self.annual_price - self.discounted_annual_price
 
     class Meta:
         abstract = True
@@ -35,3 +42,49 @@ class Product(BaseProductModel):
 
 class Addon(BaseProductModel):
     description = models.TextField()
+
+
+class Prediction(BaseInternalModel):
+    class Status(models.TextChoices):
+        WON = "WON", "Won"
+        LOST = "LOST", "Lost"
+        PENDING = "PENDING", "Pending"
+
+    class Visibility(models.TextChoices):
+        PUBLIC = "PUBLIC", "Public"
+        PRIVATE = "PRIVATE", "Private"
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    visibility = models.CharField(
+        max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
+    )
+    home_team = models.CharField(max_length=255)
+    away_team = models.CharField(max_length=255)
+    prediction = models.CharField(max_length=255)
+    odds = models.DecimalField(max_digits=10, decimal_places=2)
+    result = models.CharField(max_length=255, blank=True)
+    kickoff_date = models.DateField()
+    kickoff_time = models.TimeField()
+    league = models.CharField(max_length=255)
+    status = models.CharField(
+        max_length=10, choices=Status, default=Status.PENDING, db_index=True
+    )
+
+    def __str__(self):
+        return f"{self.product.name} prediction for {self.home_team} vs {self.away_team}, {self.kickoff_time} ({self.league})"
+
+    @property
+    def kickoff_datetime(self):
+        # return date and time in a single string without time having seconds
+        return f"{self.kickoff_date} {self.kickoff_time.strftime('%H:%M')} (GMT+1)"
+
+    class Meta:
+        verbose_name = "Prediction"
+        verbose_name_plural = "Predictions"
+
+
+class PickOfTheDay(BaseInternalModel, SingletonModel):
+    prediction = models.OneToOneField(Prediction, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"Pick of the Day: {self.prediction}"

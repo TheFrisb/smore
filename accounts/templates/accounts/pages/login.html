@@ -36,7 +36,7 @@
                                 <div>
                                     {% for field, errors in form.errors.items %}
                                         {% for error in errors %}
-                                            <p class="text-primary-200">• {{ error }}</p>
+                                            <p class="text-primary-200">{{ error }}</p>
                                         {% endfor %}
                                     {% endfor %}
                                 </div>

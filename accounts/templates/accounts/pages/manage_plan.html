@@ -6,67 +6,73 @@
             <div class="flex justify-between items-start mb-8">
                 <div><h2 class="text-2xl font-bold text-white">Current Plan</h2>
                     <p class="text-primary-300 mt-1">Your active subscriptions and add-ons</p></div>
-                <div class="text-right">
-                    <div class="text-sm text-primary-300">Monthly Cost</div>
-                    <div class="text-3xl font-bold text-secondary-400">$99.98</div>
-                </div>
+                {% if request.user.subscription and request.user.subscription.is_active %}
+                    <div class="text-right">
+                        <div class="text-sm text-primary-300">{{ request.user.subscription.get_frequency_display }}
+                            Cost
+                        </div>
+                        <div class="text-3xl font-bold text-secondary-400">${{ request.user.subscription.price }}</div>
+                    </div>
+                {% endif %}
             </div>
             <div class="grid gap-6 mb-8">
-                <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-secondary-500/10 p-3 rounded-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-target w-6 h-6 text-secondary-400">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <circle cx="12" cy="12" r="6"></circle>
-                                    <circle cx="12" cy="12" r="2"></circle>
-                                </svg>
+                {% if request.user.subscription and request.user.subscription.is_active %}
+                    {% for product in request.user.subscription.products.all %}
+                        <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-secondary-500/10 p-3 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round"
+                                             class="lucide lucide-target w-6 h-6 text-secondary-400">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="6"></circle>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">{{ product.name }}</h3>
+                                        <p class="text-primary-300">{{ product }} analysis per month</p>
+                                    </div>
+                                </div>
+                                {% if request.user.subscription.is_monthly %}
+                                    <div class="text-right">
+                                        <div class="text-xl font-bold text-secondary-400">
+                                            ${{ product.monthly_price }}</div>
+                                        <div class="text-sm text-primary-300">per month</div>
+                                    </div>
+                                {% else %}
+                                    <div class="text-right">
+                                        <div class="text-xl font-bold text-secondary-400">
+                                            ${{ product.annual_price }}</div>
+                                        <div class="text-sm text-primary-300">per month</div>
+                                    </div>
+                                {% endif %}
                             </div>
-                            <div><h3 class="text-xl font-bold text-white">Soccer</h3>
-                                <p class="text-primary-300">60-90 analysis per month</p></div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-xl font-bold text-secondary-400">$69.99</div>
-                            <div class="text-sm text-primary-300">per month</div>
-                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-primary-200">You don't have an active subscription.</p>
+                {% endif %}
+            </div>
+
+            {% if request.user.subscription and request.user.subscription.is_active %}
+                <div class="border-t border-primary-700/30 pt-6 mt-6">
+                    <div class="flex items-center space-x-3 text-primary-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-calendar w-5 h-5">
+                            <path d="M8 2v4"></path>
+                            <path d="M16 2v4"></path>
+                            <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                            <path d="M3 10h18"></path>
+                        </svg>
+                        <span>Next billing date: {{ request.user.subscription.next_billing_date|date:"l j F Y" }}</span>
                     </div>
                 </div>
-                <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-secondary-500/10 p-3 rounded-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="lucide lucide-circle-dot w-6 h-6 text-secondary-400">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <circle cx="12" cy="12" r="1"></circle>
-                                </svg>
-                            </div>
-                            <div><h3 class="text-xl font-bold text-white">Basketball</h3>
-                                <p class="text-primary-300">20-40 analysis per month</p></div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-xl font-bold text-secondary-400">$49.99</div>
-                            <div class="text-sm text-primary-300">per month</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-primary-700/30 pt-6 mt-6">
-                <div class="flex items-center space-x-3 text-primary-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="lucide lucide-calendar w-5 h-5">
-                        <path d="M8 2v4"></path>
-                        <path d="M16 2v4"></path>
-                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                        <path d="M3 10h18"></path>
-                    </svg>
-                    <span>Next billing date: February 15, 2025</span></div>
-            </div>
+            {% endif %}
         </div>
         <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
                 class="text-2xl font-bold text-white mb-4">Update Subscription</h2>
@@ -81,13 +87,18 @@
                     <path d="m12 5 7 7-7 7"></path>
                 </svg>
             </a></div>
-        <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
-                class="text-2xl font-bold text-white mb-4">Cancel Subscription</h2>
-            <p class="text-primary-300 mb-6">We're sorry to see you go. If you cancel your subscription, you'll continue
-                to have access until the end of your current billing period.</p>
-            <button class="px-6 py-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors">Cancel Subscription
-            </button>
-        </div>
+        {% if request.user.subscription and request.user.subscription.is_active %}
+            <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
+                    class="text-2xl font-bold text-white mb-4">Cancel Subscription</h2>
+                <p class="text-primary-300 mb-6">We're sorry to see you go. If you cancel your subscription, you'll
+                    continue
+                    to have access until the end of your current billing period.</p>
+                <button class="px-6 py-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors">
+                    Cancel
+                    Subscription
+                </button>
+            </div>
+        {% endif %}
     </div>
 
 {% endblock dashboard %}

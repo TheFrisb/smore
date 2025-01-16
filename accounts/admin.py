@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from accounts.models import User, UserBalance, Referral, WithdrawalRequest
+from accounts.models import User, UserBalance, Referral, WithdrawalRequest, UserSubscription
 
 
 class UserBalanceInline(admin.TabularInline):
@@ -76,3 +76,4 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Referral)
+admin.site.register(UserSubscription)
