@@ -60,7 +60,7 @@ function updatePrices() {
     let monthlyPrice = product.getAttribute("data-product-monthly-price");
     let yearlyPrice = product.getAttribute("data-product-annual-price");
 
-    let price = frequencyType === "monthly" ? monthlyPrice : yearlyPrice;
+    let price = frequencyType === "month" ? monthlyPrice : yearlyPrice;
 
     priceEl.textContent = `$${price}`;
   });
