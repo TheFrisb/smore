@@ -13,20 +13,15 @@ class BaseInternalModel(models.Model):
 
 
 class BaseProductModel(BaseInternalModel):
+    stripe_product_id = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
-    annual_price = models.DecimalField(max_digits=10, decimal_places=2)
-    discounted_monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
-    discounted_annual_price = models.DecimalField(max_digits=10, decimal_places=2)
+    monthly_price_stripe_id = models.CharField(max_length=255)
+
+    yearly_price = models.DecimalField(max_digits=10, decimal_places=2)
+    yearly_price_stripe_id = models.CharField(max_length=255)
+
     order = models.PositiveIntegerField(default=0)
-
-    @property
-    def monthly_discount(self):
-        return self.monthly_price - self.discounted_monthly_price
-
-    @property
-    def annual_discount(self):
-        return self.annual_price - self.discounted_annual_price
 
     class Meta:
         abstract = True

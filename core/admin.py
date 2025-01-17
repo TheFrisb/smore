@@ -2,19 +2,45 @@ from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
-from core.models import Product, Addon, Prediction, PickOfTheDay
+from core.models import Prediction, PickOfTheDay, Product, Addon
 
 
 # Register your models here.
 @admin.register(Product)
-class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ["name", "monthly_price", "annual_price", "order"]
-    search_fields = ["name"]
+class ProductAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (
+            "Basic Information",
+            {
+                "fields": ("name", "analysis_per_month", "stripe_product_id"),
+            },
+        ),
+        (
+            "Monthly Pricing",
+            {
+                "fields": ("monthly_price", "monthly_price_stripe_id"),
+            },
+        ),
+        (
+            "Yearly Pricing",
+            {
+                "fields": ("yearly_price", "yearly_price_stripe_id"),
+            },
+        ),
+    )
+    list_display = (
+        "name",
+        "analysis_per_month",
+        "monthly_price",
+        "yearly_price",
+        "order",
+    )
+    ordering = ["order"]
 
 
 @admin.register(Addon)
 class AddonAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ["name", "monthly_price", "annual_price", "order"]
+    list_display = ["name", "monthly_price", "yearly_price", "order"]
     search_fields = ["name"]
 
 
@@ -31,7 +57,6 @@ class PredictionAdmin(admin.ModelAdmin):
     ]
     search_fields = ("home_team", "away_team", "league", "product__name", "prediction")
     list_filter = ["product", "status", "visibility"]
-    autocomplete_fields = ["product"]
     ordering = ["-created_at"]
     readonly_fields = ["created_at", "updated_at"]
 

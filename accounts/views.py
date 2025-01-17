@@ -12,7 +12,6 @@ from django.views.generic import TemplateView, FormView
 from accounts.forms.register_form import RegisterForm
 from accounts.forms.withdrawal_request_form import WithdrawalRequestForm
 from accounts.models import User, Referral, WithdrawalRequest
-from payments.services.internal_stripe_service import InternalStripeService
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +36,6 @@ class LogoutUserView(LogoutView):
 class RegisterUserView(TemplateView):
     def __init__(self):
         super().__init__()
-        self.stripe_service = InternalStripeService()
 
     template_name = "accounts/pages/register.html"
 
@@ -76,8 +74,6 @@ class RegisterUserView(TemplateView):
                     None, "Invalid referral code. Please enter a valid referral code."
                 )
                 return self.render_to_response({"form": form})
-
-        self.stripe_service.create_stripe_customer(user)
 
         authenticated_user = authenticate(
             request,

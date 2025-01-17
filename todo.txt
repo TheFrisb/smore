@@ -1,16 +1,37 @@
-Functionality: 14.01.2025
-
-10. Subscription management
-
-14. Withdrawal
-15. Subscription bonuses:
-- 0-10: 100$
-- 11-20: 200$
-- 21-30: 300$
-
-
-
-
-2. Replace smore.bet so SMORE
-
-5.
+--------------------------------
+3. Render correct subscription details in plan dashboard
+4. Render correct subscription details in user dashboard
+5. Update subscription redirect to portal session with correct plan
+--------------------------------
+1. Withdrawals
+- Payoneer Withdrawal
+- Crypto Withdrawal
+- Bank Withdrawal
+2. Show withdrawals in admin
+--------------------------------
+3. Emails
+- Send email on withdrawal request to admin
+- Send email on withdrawal request to user
+- Send subscription invoices to users
+- Send join Telegram link to users
+--------------------------------
+4. Password reset
+- Make password reset view
+- Send password reset email
+--------------------------------
+5. Subscription earnings
+- On subscription payment, update direct and indirect earnings
+- Show earnings in the user dashboard
+--------------------------------
+6. Subscription bonuses
+- Every 1st of the month, give bonuses to users:
+-- 5-10: 100$
+-- 11-20: 200$
+-- 21-30: 300$
+--------------------------------
+7. Faq section
+-- Admin
+-- Content
+--------------------------------
+8. Add icon to UI
+- Home Page soccer player icon

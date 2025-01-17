@@ -34,6 +34,7 @@ class UserAdmin(UserAdmin):
         "total_balance",
         "first_level_referrals_count",
         "second_level_referrals_count",
+        "stripe_customer_id",
         "created_at",
     ]
     list_filter = ["created_at"]

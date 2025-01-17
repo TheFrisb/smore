@@ -1,3 +1,4 @@
+import logging
 import secrets
 import string
 
@@ -6,6 +7,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from core.models import BaseInternalModel
+
+logger = logging.getLogger(__name__)
 
 
 # Create your models here.
