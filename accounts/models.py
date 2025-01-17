@@ -27,6 +27,17 @@ class User(BaseInternalModel, AbstractUser):
         """
         return f"{settings.BASE_URL}/?ref={self.referral_code}"
 
+    @property
+    def subscription_is_active(self):
+        """
+        Check if the user has an active subscription.
+        """
+        user_subscription = getattr(self, "subscription", None)
+        if not user_subscription:
+            return False
+
+        return user_subscription.is_active
+
     def generate_referral_code(self):
         """
         Generate a random referral code for the user

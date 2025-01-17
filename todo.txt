@@ -1,10 +1,5 @@
 Functionality: 14.01.2025
 
-
-8. Coming soon na kosarka, nfl, ai
-
-
-
 10. Subscription management
 
 14. Withdrawal
@@ -14,5 +9,4 @@ Functionality: 14.01.2025
 - 21-30: 300$
 
 
-6. Upcoming matches samo za logged in
-- Ako nemas plan, katanec
+

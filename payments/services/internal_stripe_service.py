@@ -5,7 +5,8 @@ import stripe
 from django.conf import settings
 from django.db.models import F
 
-from accounts.models import UserBalance, User
+from accounts.models import UserBalance, User, UserSubscription
+from core.models import Product
 
 logger = logging.getLogger(__name__)
 
@@ -44,25 +45,21 @@ class InternalStripeService:
 
     def process_checkout_session_completed(self, event_data):
         user_id = int(event_data["metadata"]["user_id"])
+        frequency = event_data["metadata"]["frequency"]
+        products = event_data["metadata"]["products"]
+        total_price = event_data["metadata"]["total_price"]
+
+        subscription = event_data["subscription"]
+
+        products = Product.objects.filter(id__in=products)
 
         user = User.objects.get(id=user_id)
-        total_amount = int(event_data["amount_total"]) / 100
 
-        five_percent = total_amount * 0.05
-        twenty_percent = total_amount * 0.20
-
-        if hasattr(user, "referral") and user.referral.referrer:
-
-            UserBalance.objects.filter(user=user.referral.referrer).update(
-                balance=F("balance") + twenty_percent
-            )
-
-            # Check if the direct referrer has their own referrer
-            direct_referrer = user.referral.referrer
-            if (
-                    hasattr(direct_referrer, "referral")
-                    and direct_referrer.referral.referrer
-            ):
-                UserBalance.objects.filter(
-                    user=direct_referrer.referral.referrer
-                ).update(balance=F("balance") + five_percent)
+        logger.info(f"Processing checkout session completed for user: {user_id}, subscription: {subscription}")
+        user_subscription = UserSubscription(
+            user=user,
+            status=UserSubscription.Status.ACTIVE,
+            frequency=frequency,
+            price=total_price,
+            start_date=event_data["created"],
+        )

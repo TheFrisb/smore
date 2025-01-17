@@ -1,7 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from accounts.models import User, UserBalance, Referral, WithdrawalRequest, UserSubscription
+from accounts.models import (
+    User,
+    UserBalance,
+    Referral,
+    WithdrawalRequest,
+    UserSubscription,
+)
 
 
 class UserBalanceInline(admin.TabularInline):

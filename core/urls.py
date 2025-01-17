@@ -13,7 +13,7 @@ from .views import (
     PrivacyPolicyView,
     CookiesPolicyView,
     UpcomingMatchesView,
-    SubscriptionRequiredView
+    SubscriptionRequiredView,
 )
 
 app_name = "core"
@@ -30,5 +30,9 @@ urlpatterns = [
     path("privacy-policy/", PrivacyPolicyView.as_view(), name="privacy_policy"),
     path("cookies-policy/", CookiesPolicyView.as_view(), name="cookies_policy"),
     path("upcoming-matches/", UpcomingMatchesView.as_view(), name="upcoming_matches"),
-    path("subscription-required/", SubscriptionRequiredView.as_view(), name="subscription_required"),
+    path(
+        "subscription-required/",
+        SubscriptionRequiredView.as_view(),
+        name="subscription_required",
+    ),
 ]

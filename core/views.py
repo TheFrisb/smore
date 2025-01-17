@@ -2,7 +2,6 @@ import logging
 from datetime import date
 from itertools import groupby
 
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import TemplateView
 
@@ -18,8 +17,32 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
+        context.update(self.get_button_context())
 
         return context
+
+    def get_button_context(self):
+        """
+        Determine button text and URL based on user's login and subscription status.
+        """
+        user = self.request.user
+        if not user.is_authenticated:
+            return {
+                "primary_button_text": "Get Started",
+                "primary_button_url": reverse("accounts:register"),
+            }
+
+        user_subscription = getattr(user, "subscription", None)
+        if user_subscription and user_subscription.is_active:
+            return {
+                "primary_button_text": "What's New",
+                "primary_button_url": reverse("core:upcoming_matches"),
+            }
+
+        return {
+            "primary_button_text": "View Plans",
+            "primary_button_url": reverse("core:plans"),
+        }
 
     def dispatch(self, request, *args, **kwargs):
         referral_code = request.GET.get("ref", None)
@@ -97,16 +120,8 @@ class UpcomingMatchesView(BaseAccountView, TemplateView):
     def get_context_data(self, **kwargs):
         super().get_context_data(**kwargs)
         context = {"grouped_predictions": self.get_grouped_predictions()}
+        context["pick_of_the_day"] = PickOfTheDay.get_solo()
         return context
-
-    def dispatch(self, request, *args, **kwargs):
-        if (
-                not hasattr(request.user, "subscription")
-                or not request.user.subscription.is_active
-        ):
-            return redirect(reverse("core:subscription_required"))
-
-        return super().dispatch(request, *args, **kwargs)
 
     def get_grouped_predictions(self):
         predictions = Prediction.objects.filter(
