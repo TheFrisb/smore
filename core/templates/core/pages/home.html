@@ -71,21 +71,16 @@
                     <div class="absolute top-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full filter blur-3xl"></div>
                     <div class="relative flex flex-col lg:flex-row items-center justify-center gap-6">
                         <div data-aos="flip-right" data-aos-duration="1000"
-                             class="relative w-64 h-[500px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
-                            <div class="flex items-start justify-center w-full h-full inset-0 bg-[url('https://picsum.photos/1080/1920')] bg-cover">
-                                <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">Coming Soon</span>
+                             class="relative z-20 w-56 h-[420px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
+                            <div class="flex items-start justify-center w-full h-full inset-0 bg-contain" style="background-image: url('{% static "assets/images/telegram.png" %}')">
+{#                                <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">Coming Soon</span>#}
                             </div>
                         </div>
-                        <div data-aos="flip-left" data-aos-duration="600"
-                             class="mt-12 lg:mt-0 relative w-full hidden md:block md:w-[600px] h-[450px] rounded-2xl border border-primary-700/50 overflow-hidden shadow-2xl transform hover:-rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950 ">
-                            <div class="absolute inset-0 bg-[url('https://images.klipfolio.com/website/public/bf9c6fbb-06bf-4f1d-88a7-d02b70902bd1/data-dashboard.png')] bg-cover p-4">
-                                <div class="flex items-center justify-end mb-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="text-secondary-400 text-sm">Dashboard</div>
-                                    </div>
-                                </div>
+                        <div data-aos="flip-right" data-aos-duration="1000"
+                             class=" absolute right-8 bottom-0 z-10 w-64 h-[500px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
+                            <div class="flex items-start justify-center w-full h-full inset-0  bg-contain" style="background-image: url('{% static "assets/images/matches.png" %}')">
+{#                                <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">Coming Soon</span>#}
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -452,7 +447,8 @@
             <div class="max-w-3xl mx-auto text-center mt-8" data-aos-offset="150" data-aos="zoom-out-down">
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-primary-700/30 shadow-lg shadow-secondary-500/5">
                     <h3 class="text-2xl font-bold text-white mb-4">Ready to Start Winning?</h3>
-                    <p class="text-primary-200 mb-8">Join now and get instant access to expert predictions</p>
+                    <p class="text-primary-200 mb-8">Join now and get instant access to expert predictions with our
+                        7-day money-back guarantee.</p>
                     <a href="{% url 'accounts:register' %}"
                        class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
                         <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
