@@ -5,11 +5,11 @@
     <section
             class="min-h-screen flex items-center bg-gradient-dark from-primary-950 via-primary-900 to-primary-800 relative overflow-hidden py-20 xl:py-0">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-5"></div>
-        <div class="absolute inset-0 flex items-start lg:items-center justify-center opacity-5 pointer-events-none top-5 lg:top-0">
+        <div class="absolute inset-0 flex items-start lg:items-center justify-center opacity-5 pointer-events-none top-5 lg:top-[-240px]">
             <img
                     src="https://i.ibb.co/LRzvJgr/smore-dashboard.png"
                     alt="Background Logo"
-                    class="w-[80%] max-w-[900px] object-contain opacity-30 select-none"
+                    class="w-[80%] max-w-[700px] object-contain opacity-30 select-none"
             />
         </div>
         <div class="absolute inset-0 bg-gradient-radial from-secondary-500/5 via-transparent to-transparent opacity-30"></div>
@@ -73,16 +73,20 @@
                 </div>
                 <div class="xl:w-1/2 mt-16 xl:lg-0 relative In animation-delay-300"
                 >
+                    <div class="absolute top-0  w-full h-full right-[-290px] lg:right-[-310px] !opacity-15 hidden md:block overflow-hidden"
+                         data-aos="fade-left">
+                        {% svg_icon icon_name="chartIcon" css_classes="w-full h-full text-secondary-400" %}
+                    </div>
                     <div class="absolute top-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full filter blur-3xl"></div>
-                    <div class="relative flex flex-col lg:flex-row items-start md:items-center justify-center gap-6 mt-24 lg:mt-0">
+                    <div class="relative flex flex-col lg:flex-row items-end md:items-center lg:items-start justify-center gap-6 mt-24 lg:mt-0">
                         <div data-aos="flip-right" data-aos-duration="1000"
-                             class="relative z-20 w-64 h-[500px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
+                             class="absolute left-0 bottom-0 z-20 w-64 h-[500px] lg:w-[304px] lg:h-[600px]  rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
                             <div class="flex items-start justify-start w-full h-full bg-cover"
                                  style="background-image: url('{% static "assets/images/telegram.png" %}')">
                             </div>
                         </div>
                         <div data-aos="flip-right" data-aos-duration="1000"
-                             class="absolute right-0 md:right-8 bottom-8 z-10  w-72 h-[560px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
+                             class="relative bottom-8 z-10  w-72 h-[560px] lg:w-80 lg:h-[608px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
                             <div class="flex items-start justify-center w-full h-full inset-0  bg-cover"
                                  style="background-image: url('{% static "assets/images/matches-2.png" %}')">
                             </div>
@@ -165,6 +169,14 @@
         </section>
     {% endif %}
     <section class="py-24 bg-gradient-to-b from-primary-900 to-primary-800 relative overflow-hidden">
+        <div class="absolute top-0 left-8 w-9/12 md:w-[640px]"
+             data-aos="fade-left">
+
+            <img class=" w-full h-full object-cover opacity-15"
+                 src="{% static 'assets/images/soccer_player.png' %}"
+                 alt="">
+
+        </div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-5"></div>
         <div class="absolute inset-0">
             <div class="absolute inset-0 bg-gradient-radial from-secondary-500/5 via-transparent to-transparent opacity-30"></div>
