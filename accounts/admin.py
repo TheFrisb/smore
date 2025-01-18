@@ -5,8 +5,9 @@ from accounts.models import (
     User,
     UserBalance,
     Referral,
-    WithdrawalRequest,
     UserSubscription,
+    WithdrawalRequest,
+    ReferralEarning,
 )
 
 
@@ -67,20 +68,52 @@ class UserAdmin(UserAdmin):
 
 @admin.register(WithdrawalRequest)
 class WithdrawalRequestAdmin(admin.ModelAdmin):
-    list_display = (
-        "user",
-        "amount",
-        "status",
-        "payout_type",
-        "payout_destination",
-        "created_at",
-        "updated_at",
-    )
+    list_display = ("user", "amount", "status", "payout_type", "created_at")
     list_filter = ("status", "payout_type", "created_at")
-    search_fields = ("user__username", "payout_destination")
+    search_fields = (
+        "user__username",
+        "full_name",
+        "email",
+        "iban",
+        "cryptocurrency_address",
+    )
     ordering = ("-created_at",)
+
+    fieldsets = (
+        (
+            "General Information",
+            {"fields": ("user", "amount", "status", "payout_type")},
+        ),
+        (
+            "Shared Details",
+            {
+                "fields": ("full_name", "email"),
+            },
+        ),
+        (
+            "Bank Details",
+            {
+                "fields": ("iban",),
+            },
+        ),
+        (
+            "Cryptocurrency Details",
+            {
+                "fields": ("cryptocurrency_address",),
+            },
+        ),
+        (
+            "Timestamps",
+            {
+                "fields": ("created_at", "updated_at"),
+            },
+        ),
+    )
+
     readonly_fields = ("created_at", "updated_at")
 
 
 admin.site.register(Referral)
 admin.site.register(UserSubscription)
+admin.site.register(UserBalance)
+admin.site.register(ReferralEarning)

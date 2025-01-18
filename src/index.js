@@ -3,6 +3,9 @@ import initProducts from "./products/products";
 import Aos from "aos/src/js/aos";
 import { initCopyButtons } from "./referral/copyButton";
 import { initCloseButtons } from "./closeButton";
+import initWithdrawalRequest from "./withdrawals/withdrawals";
+import initFaq from "./faq/faq";
+import { initUserMobileMenu } from "./menu/userMenu";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -10,4 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initProducts();
   initCopyButtons();
   initCloseButtons();
+
+  initWithdrawalRequest();
+  initFaq();
+  initUserMobileMenu();
 });

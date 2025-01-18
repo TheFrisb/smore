@@ -182,55 +182,67 @@
                                 <h3 class="text-xl font-bold text-white">{{ kickoff_date|date:"l j F Y" }}</h3>
                             </div>
                             {% for prediction in predictions %}
-                                <div class="w-full bg-primary-900/50 backdrop-blur-sm rounded-2xl shadow-dark-lg p-8 border border-primary-700/30">
-                                    <div class="relative">
-                                        <div class="space-y-6">
-                                            <div class="text-center  md:hidden"><span
-                                                    class="text-sm text-primary-300">Kickoff Time</span>
-                                                <div class="text-white font-medium">{{ prediction.kickoff_datetime }}</div>
-                                            </div>
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center space-x-3">
-                                                    <div class="bg-secondary-500/10 p-2 rounded-lg">
+                                <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex  justify-start items-center space-x-3 text-primary-300">
+                                            <div class="bg-primary-900/50 p-2 rounded-lg">
 
 
-                                                        {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+                                                {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-4 h-4 text-white" %}
 
-
-                                                    </div>
-                                                    <div><span class="text-sm text-primary-300">League</span>
-                                                        <h3 class="text-lg font-semibold text-white">{{ prediction.league }}</h3>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right hidden md:block"><span
-                                                        class="text-sm text-primary-300">Kickoff Time</span>
-                                                    <div class="text-white font-medium">{{ prediction.kickoff_datetime }}</div>
-                                                </div>
-                                            </div>
-                                            <div class="bg-primary-800/50 p-6 rounded-xl border border-primary-700/50">
-
-                                                <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 relative">
-                                                    <div class="flex items-center space-x-4 w-full md:w-auto justify-center"><span
-                                                            class="text-2xl font-bold text-white">{{ prediction.home_team }}</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-center w-full md:absolute md:left-1/2 md:transform md:-translate-x-1/2 my-2 md:my-0">
-                                                        <span class="text-primary-300 font-medium">vs</span></div>
-                                                    <div class="flex items-center space-x-4 w-full md:w-auto justify-center"><span
-                                                            class="text-2xl font-bold text-white">{{ prediction.away_team }}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="bg-secondary-500/5 p-4 rounded-xl border border-secondary-500/20 flex items-center justify-between">
-                                                <div class="flex items-start justify-start flex-col">
-                                                    <p class="text-sm text-primary-300 mb-2">Our Prediction</p>
-                                                    <p class="text-lg font-semibold text-white">{{ prediction.prediction }}</p>
-                                                </div>
-                                                <div class="flex items-start justify-start flex-col">
-                                                    <p class="text-sm text-primary-300 mb-2">Odds</p>
-                                                    <p class="text-lg font-semibold text-secondary-500">{{ prediction.odds }}</p>
-                                                </div>
                                             </div>
 
+                                            <span class="text-sm text-primary-100">Soccer</span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-6">
+                                        <div class="text-sm text-primary-300 mb-2">Match:</div>
+                                        <div class="bg-gradient-to-br from-primary-900/20 to-primary-800/90 border-primary-700/50 rounded-lg border p-6 py-10 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300">
+                                            <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/0 via-secondary-500/5 to-secondary-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg pointer-events-none"></div>
+                                            <div
+                                                    class="absolute top-0 left-1/2 -translate-x-1/2  p-2 rounded-lg text-nowrap"
+                                            >
+                                                <p class="text-sm text-secondary-400 font-bold w-full">{{ prediction.league }}</p>
+                                            </div>
+
+                                            <div class="flex flex-col md:flex-row flex-wrap items-center justify-center md:justify-between gap-x-12 gap-y-4">
+                                                <span class="text-xl font-bold text-white whitespace-normal  flex-shrink md:text-left md:w-4/12">{{ prediction.home_team }}</span>
+                                                <span class="text-secondary-400 font-medium text-lg px-4 py-2 rounded-full bg-secondary-500/10 border border-secondary-500/20">vs</span>
+                                                <span class="text-xl font-bold text-white whitespace-normal flex-shrink md:text-right md:w-4/12">{{ prediction.away_team }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 mb-6">
+                                        <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
+                                            <div class="text-sm text-primary-300 mb-1">Kick-off Date</div>
+                                            <div class="font-medium text-white">{{ prediction.kickoff_date|date:"d/m/Y" }}</div>
+                                        </div>
+                                        <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
+                                            <div class="text-sm text-primary-300 mb-1">Kick-off Time</div>
+                                            <div class="font-medium text-white">{{ prediction.kickoff_time|time:"H:i" }}
+                                                (GMT+1)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="text-sm text-primary-300">Prediction</div>
+                                            <div class="font-semibold text-lg text-white">{{ prediction.prediction }}</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-right">
+                                                <div class="text-sm text-primary-300">Result</div>
+                                                <div class="font-semibold text-lg text-secondary-400">{{ prediction.result }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-4 border-t border-primary-700/30">
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-sm text-primary-300">Odds</div>
+                                            <div class="font-medium text-secondary-400">{{ prediction.odds }}</div>
                                         </div>
                                     </div>
                                 </div>

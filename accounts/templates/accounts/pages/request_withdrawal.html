@@ -9,30 +9,8 @@
                     ${{ request.user.balance.balance }}</p>
                     <p class="text-primary-300 text-sm">Available for withdrawal</p></div>
             </div>
-            {% if form.errors %}
-                <div class="bg-red-500/10 backdrop-blur-sm rounded-2xl p-6 border border-red-500/20 mb-12">
-                    <div class="flex items-center space-x-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round"
-                             class="lucide lucide-alert-triangle w-6 h-6 text-red-400 flex-shrink-0 mt-1">
-                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
-                            <path d="M12 9v4"></path>
-                            <path d="M12 17h.01"></path>
-                        </svg>
-                        <div>
-                            {% for field, errors in form.errors.items %}
-                                {% for error in errors %}
-                                    <p class="text-primary-200">    {{ error }}</p>
-                                {% endfor %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-            <form class="space-y-6" method="post" action="{% url 'accounts:request_withdrawal' %}">
-                {% csrf_token %}
+
+            <div class="space-y-6">
                 <div>
                     <label for="amount" class="block text-sm font-medium text-primary-300 mb-2">Withdrawal
                         Amount</label>
@@ -46,51 +24,122 @@
                                 <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
                             </svg>
                         </div>
-                        <input required type="number" id="amount" name="amount" max="{{ request.user.balance.balance }}"
-                               step="0.01"
+                        <input type="number" id="withdrawalRequest__amount" min="0.01"
+                               max="{{ request.user.balance.balance }}" step="0.01"
                                class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter amount" value="">
                     </div>
                 </div>
                 <div>
-                    <label for="payment-method" class="block text-sm font-medium text-primary-300 mb-2">Payment
-                        Method</label>
+                    <label for="payment-method" class="block text-sm font-medium text-primary-300 mb-2">Choose a payout
+                        method:</label>
                     <div class="relative">
 
                         <div class="space-y-3">
                             <div class="relative flex items-center">
-                                <div class="flex-1 bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-400 flex items-center justify-between">
-                                    <span>Bank Transfer</span><span
-                                        class="text-xs bg-secondary-500/10 text-secondary-400 px-2 py-1 rounded-full">Coming Soon</span>
+                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full  withdrawalPayoutMethod"
+                                     data-method-type="bank"
+                                     data-section-selector="#requestWithdrawal__bankMethod">
+                                    <span>Bank Transfer</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
-                                <div class="flex-1 bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-400 flex items-center justify-between">
-                                    <span>Payoneer</span><span
-                                        class="text-xs bg-secondary-500/10 text-secondary-400 px-2 py-1 rounded-full">Coming Soon</span>
+                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
+                                     data-method-type="payoneer"
+                                     data-section-selector="#requestWithdrawal__payoneerMethod">
+                                    <span>Payoneer</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
-                                <label class="flex-1 cursor-pointer">
-                                    <input type="radio" name="payment-method" class="hidden" value="crypto" checked="">
-                                    <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-secondary-500/30 text-white flex items-center justify-between hover:border-secondary-500/50 transition-colors">
-                                        <span>Cryptocurrency</span><span
-                                            class="text-xs bg-secondary-500/10 text-secondary-400 px-2 py-1 rounded-full">Available</span>
-                                    </div>
-                                </label></div>
+                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
+                                     data-section-selector="#requestWithdrawal__cryptoMethod"
+                                     data-method-type="cryptocurrency">
+                                    <span>Cryptocurrency</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label for="payout_destination" class="block text-sm font-medium text-primary-300 mb-2">Bitcoin
+                <div class="space-y-4 requestWithdrawal__formSection hidden" id="requestWithdrawal__bankMethod">
+                    <div>
+                        <label for="requestWithdrawal__bankMethod__fullName"
+                               class="block text-sm font-medium text-primary-300 mb-2">Full Name (as on
+                            bank account)</label>
+                        <input type="text" id="requestWithdrawal__bankMethod__fullName"
+                               class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
+                               placeholder="Enter full name" value="">
+                    </div>
+                    <div>
+                        <label for="requestWithdrawal__bankMethod__iban"
+                               class="block text-sm font-medium text-primary-300 mb-2">IBAN Code</label>
+                        <input type="text" id="requestWithdrawal__bankMethod__iban"
+                               class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
+                               placeholder="Enter IBAN" value="">
+                    </div>
+                    <div class="bg-primary-900/50 rounded-lg p-4 flex items-start space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-alert-circle w-5 h-5 text-primary-300 flex-shrink-0 mt-0.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" x2="12" y1="8" y2="12"></line>
+                            <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                        </svg>
+                        <p class="text-sm text-primary-300">Please ensure your full name matches exactly as it appears
+                            on your bank account. Incorrect details may result in failed transfers that cannot be
+                            refunded.</p>
+                    </div>
+                </div>
+                <div class="space-y-4 requestWithdrawal__formSection hidden" id="requestWithdrawal__payoneerMethod">
+                    <div>
+                        <label for="payoneer-name" class="block text-sm font-medium text-primary-300 mb-2">Full
+                            Name</label>
+                        <input type="text" id="requestWithdrawal__payoneerMethod__fullName"
+                               class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
+                               placeholder="Enter full name" value="">
+                    </div>
+                    <div>
+                        <label for="payoneer-email" class="block text-sm font-medium text-primary-300 mb-2">Payoneer
+                            Email Address</label>
+                        <input type="email" id="requestWithdrawal__payoneerMethod__email"
+                               class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
+                               placeholder="Enter Payoneer email" value="">
+                    </div>
+                    <div class="bg-primary-900/50 rounded-lg p-4 flex items-start space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-alert-circle w-5 h-5 text-primary-300 flex-shrink-0 mt-0.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" x2="12" y1="8" y2="12"></line>
+                            <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                        </svg>
+                        <p class="text-sm text-primary-300">Please verify your Payoneer email address carefully. Funds
+                            sent to incorrect Payoneer accounts cannot be recovered.</p>
+                    </div>
+                </div>
+                <div class="space-y-4 requestWithdrawal__formSection hidden" id="requestWithdrawal__cryptoMethod">
+                    <label for="btc-address" class="block text-sm font-medium text-primary-300 mb-2">Bitcoin
                         Address</label>
                     <div class="relative">
-                        <input type="text" name="payout_destination" id="payout_destination"
+                        <input type="text" id="requestWithdrawal__cryptoMethod__address"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
-                               placeholder="Enter your Bitcoin address" required="">
+                               placeholder="Enter your Bitcoin address" value="">
                     </div>
-                    <p class="mt-2 text-sm text-primary-300">Double-check your Bitcoin address before submitting</p>
+                    <div class="mt-4 bg-primary-900/50 rounded-lg p-4 flex items-start space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-alert-circle w-5 h-5 text-primary-300 flex-shrink-0 mt-0.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" x2="12" y1="8" y2="12"></line>
+                            <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                        </svg>
+                        <p class="text-sm text-primary-300">Please carefully verify your Bitcoin address before
+                            submitting. We cannot refund or resend funds if sent to an incorrect address.</p></div>
                 </div>
+                <button
+                        class="w-full py-3 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800"
+                        id="requestWithdrawalButton">
+                    Request Withdrawal
+                </button>
                 <div class="bg-primary-900/50 rounded-lg p-4 flex items-start space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -99,14 +148,10 @@
                         <line x1="12" x2="12" y1="8" y2="12"></line>
                         <line x1="12" x2="12.01" y1="16" y2="16"></line>
                     </svg>
-                    <p class="text-sm text-primary-300">Cryptocurrency withdrawals are processed within 24 hours. Bank
-                        Transfer and PayPal options will be available soon.</p>
-                </div>
-                <button type="submit"
-                        class="w-full py-3 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800">
-                    Request Withdrawal
-                </button>
-            </form>
+                    <p class="text-sm text-primary-300">All withdrawals are processed within 24 hours during business
+                        days. Please review your withdrawal details carefully as we cannot modify or cancel the
+                        transaction once it's processed.</p></div>
+            </div>
         </div>
     </div>
 {% endblock dashboard %}

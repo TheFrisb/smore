@@ -2,7 +2,13 @@ from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
-from core.models import Prediction, PickOfTheDay, Product, Addon
+from core.models import (
+    Prediction,
+    PickOfTheDay,
+    Product,
+    Addon,
+    FrequentlyAskedQuestion,
+)
 
 
 # Register your models here.
@@ -83,3 +89,8 @@ class PredictionAdmin(admin.ModelAdmin):
 @admin.register(PickOfTheDay)
 class PickOfTheDayAdmin(SingletonModelAdmin):
     autocomplete_fields = ["prediction"]
+
+
+@admin.register(FrequentlyAskedQuestion)
+class FrequentlyAskedQuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ["question", "order"]

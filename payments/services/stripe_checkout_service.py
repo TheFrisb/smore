@@ -24,7 +24,7 @@ class StripeCheckoutService(BaseStripeService):
             self, user: User | AbstractBaseUser, price_ids: List[str]
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
-            success_url=f"{settings.BASE_URL}{reverse('accounts:manage_plan')}",
+            success_url=f"{settings.BASE_URL}{reverse('payments:payment_success')}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:plans')}",
             mode="subscription",
             customer=user.stripe_customer_id,
@@ -52,7 +52,7 @@ class StripeCheckoutService(BaseStripeService):
                 "type": "subscription_update",
                 "subscription_update": {
                     "subscription": user.subscription.stripe_subscription_id,
-                }
+                },
             }
 
         portal_session = self.stripe_client.billing_portal.Session.create(

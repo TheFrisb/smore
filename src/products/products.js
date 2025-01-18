@@ -94,32 +94,39 @@ function initProducts() {
     });
   });
 
-  checkoutButton.addEventListener("click", () => {
-    if (checkoutButton.disabled) {
-      return;
-    }
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", () => {
+      if (checkoutButton.disabled) {
+        return;
+      }
 
-    const csrfToken = getCsrfToken();
+      checkoutButton.disabled = true;
 
-    fetch("/api/payments/checkout/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken,
-      },
-      body: JSON.stringify({
-        products: selectedProducts.map(Number),
-        frequency: frequencyType,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        window.location.href = data.checkout_url;
+      const csrfToken = getCsrfToken();
+
+      fetch("/api/payments/checkout/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify({
+          products: selectedProducts.map(Number),
+          frequency: frequencyType,
+        }),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+        .then((response) => response.json())
+        .then((data) => {
+          window.location.href = data.url;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        })
+        .finally(() => {
+          checkoutButton.disabled = false;
+        });
+    });
+  }
 }
 
 function updateCheckoutSummaryUI() {
@@ -156,12 +163,13 @@ function updateCheckoutSummaryUI() {
   }
   checkoutSummaryItemsSection.innerHTML = checkoutSummary;
 
-  if (selectedProducts.length === 0) {
-    checkoutButton.disabled = true;
-  } else {
-    checkoutButton.disabled = false;
+  if (checkoutButton) {
+    if (selectedProducts.length === 0) {
+      checkoutButton.disabled = true;
+    } else {
+      checkoutButton.disabled = false;
+    }
   }
-
   let totalPriceEl = document.querySelector(
     ".checkoutSummarySection__totalPrice",
   );

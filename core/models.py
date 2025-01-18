@@ -32,7 +32,7 @@ class BaseProductModel(BaseInternalModel):
 
 
 class Product(BaseProductModel):
-    analysis_per_month = models.CharField(max_length=7)
+    analysis_per_month = models.CharField(max_length=12)
 
 
 class Addon(BaseProductModel):
@@ -83,3 +83,15 @@ class PickOfTheDay(BaseInternalModel, SingletonModel):
 
     def __str__(self):
         return f"Pick of the Day: {self.prediction}"
+
+
+class FrequentlyAskedQuestion(BaseInternalModel):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        ordering = ["order"]

@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% load util_tags %}
 {% block content %}
     <section
@@ -492,7 +493,7 @@
                             <div class="w-full lg:w-1/2">
                                 <div class="relative group">
                                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                                    <img src="https://picsum.photos/800/500"
+                                    <img src="{% static 'assets/images/match_analysis.png' %}"
                                          alt="Match Analysis"
                                          class="w-full h-[300px] object-cover rounded-2xl shadow-lg transform group-hover:scale-[1.02] transition-transform duration-300">
                                 </div>
@@ -529,7 +530,7 @@
                             <div class="w-full lg:w-1/2">
                                 <div class="relative group">
                                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                                    <img src="https://picsum.photos/800/500"
+                                    <img src="{% static 'assets/images/odds_optimization.png' %}"
                                          alt="Odds optimization"
                                          class="w-full h-[300px] object-cover rounded-2xl shadow-lg transform group-hover:scale-[1.02] transition-transform duration-300">
                                 </div>
@@ -567,7 +568,7 @@
                             <div class="w-full lg:w-1/2">
                                 <div class="relative group">
                                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                                    <img src="https://picsum.photos/800/500"
+                                    <img src="{% static 'assets/images/risk_management.png' %}"
                                          alt="Risk Management"
                                          class="w-full h-[300px] object-cover rounded-2xl shadow-lg transform group-hover:scale-[1.02] transition-transform duration-300">
                                 </div>
@@ -605,7 +606,7 @@
                             <div class="w-full lg:w-1/2">
                                 <div class="relative group">
                                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                                    <img src="https://picsum.photos/800/500" alt="Detailed Report"
+                                    <img src="{% static 'assets/images/detailed_report.png' %}"
                                          class="w-full h-[300px] object-cover rounded-2xl shadow-lg transform group-hover:scale-[1.02] transition-transform duration-300">
                                 </div>
                             </div>

@@ -1,11 +1,13 @@
 import logging
 from datetime import datetime
+from decimal import Decimal
 from enum import Enum
 
 from django.db import models
 from django.utils import timezone
 
 from accounts.models import User, UserSubscription
+from accounts.services.referral_service import ReferralService
 from core.models import Product
 from payments.services.base_stripe_service import BaseStripeService
 
@@ -39,6 +41,7 @@ class StripeWebhookService(BaseStripeService):
     def process_invoice_paid(self, event_data):
         stripe_customer_id = event_data["customer"]
         stripe_subscription_id = event_data["subscription"]
+        amount_paid_cents = event_data.get("amount_paid", 0)
         logger.info(
             f"Received invoice paid event for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"
         )
@@ -51,6 +54,7 @@ class StripeWebhookService(BaseStripeService):
 
         logger.info(f"Matched invoice paid event to user: {user.username}")
 
+        amount_paid = Decimal(amount_paid_cents) / Decimal("100")
         stripe_subscription = self.get_stripe_subscription_by_id(stripe_subscription_id)
 
         stripe_subscription_items = stripe_subscription["items"]["data"]
@@ -103,7 +107,7 @@ class StripeWebhookService(BaseStripeService):
                 user=user,
                 status=internal_subscription_status,
                 frequency=internal_frequency_status,
-                price=first_item["plan"]["amount"] / 100,
+                price=amount_paid,
                 start_date=subscription_start_time,
                 end_date=subscription_end_time,
                 stripe_subscription_id=stripe_subscription_id,
@@ -117,10 +121,13 @@ class StripeWebhookService(BaseStripeService):
             user_subscription.start_date = subscription_start_time
             user_subscription.end_date = subscription_end_time
             user_subscription.frequency = internal_frequency_status
-            user_subscription.price = first_item["plan"]["amount"] / 100
+            user_subscription.price = amount_paid
             user_subscription.save()
 
         user_subscription.products.set(internal_products)
+
+        referral_service = ReferralService()
+        referral_service.award_commissions_for_invoice(user, amount_paid)
 
     def process_subscription_updated(self, event_data):
         logger.info(f"Received subscription updated event: {event_data}")

@@ -1,10 +1,6 @@
 import re
 
 from bech32 import bech32_decode
-from django import forms
-from django.core.exceptions import ValidationError
-
-from accounts.models import WithdrawalRequest
 
 
 def is_valid_btc_address(address):
@@ -25,15 +21,3 @@ def is_valid_btc_address(address):
         pass
 
     return False
-
-
-class WithdrawalRequestForm(forms.ModelForm):
-    class Meta:
-        model = WithdrawalRequest
-        fields = ["amount", "payout_destination"]
-
-    def clean_payout_destination(self):
-        payout_destination = self.cleaned_data["payout_destination"]
-        if not is_valid_btc_address(payout_destination):
-            raise ValidationError("Invalid Bitcoin address.")
-        return payout_destination

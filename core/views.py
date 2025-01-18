@@ -6,7 +6,13 @@ from django.urls import reverse
 from django.views.generic import TemplateView
 
 from accounts.views import BaseAccountView
-from core.models import Product, Addon, PickOfTheDay, Prediction
+from core.models import (
+    Product,
+    Addon,
+    PickOfTheDay,
+    Prediction,
+    FrequentlyAskedQuestion,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +23,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
+        context["page_title"] = "Home"
         context.update(self.get_button_context())
 
         return context
@@ -59,6 +66,7 @@ class HistoryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["predictions"] = self.get_history_predictions()
+        context["page_title"] = "History"
         return context
 
     def get_history_predictions(self):
@@ -66,7 +74,7 @@ class HistoryView(TemplateView):
             kickoff_date__lt=date.today(),
             visibility=Prediction.Visibility.PUBLIC,
             status__in=[Prediction.Status.WON, Prediction.Status.LOST],
-        ).order_by("kickoff_date", "kickoff_time")
+        ).order_by("-kickoff_date", "-kickoff_time")
 
         return predictions
 
@@ -78,6 +86,7 @@ class PlansView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["products"] = Product.objects.all()
         context["addons"] = Addon.objects.all().order_by("order")
+        context["page_title"] = "Plans"
 
         return context
 
@@ -85,33 +94,76 @@ class PlansView(TemplateView):
 class FaqView(TemplateView):
     template_name = "core/pages/faq.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["faq"] = FrequentlyAskedQuestion.objects.all().order_by("order")
+        context["page_title"] = "FAQ"
+
+        return context
+
 
 class HowToJoinView(TemplateView):
     template_name = "core/pages/how_to_join.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "How to Join"
+        return context
 
 
 class AboutUsView(TemplateView):
     template_name = "core/pages/about_us.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "About Us"
+        return context
+
 
 class ContactUsView(TemplateView):
     template_name = "core/pages/contact_us.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Support"
+        return context
 
 
 class TermsOfServiceView(TemplateView):
     template_name = "core/pages/terms_of_service.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Terms of Service"
+        return context
+
 
 class PrivacyPolicyView(TemplateView):
     template_name = "core/pages/privacy_policy.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Privacy Policy"
+        return context
 
 
 class DisclaimerView(TemplateView):
     template_name = "core/pages/disclaimer.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Disclaimer"
+        return context
+
 
 class CookiesPolicyView(TemplateView):
     template_name = "core/pages/cookies_policy.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Cookies Policy"
+        return context
 
 
 class UpcomingMatchesView(BaseAccountView, TemplateView):
@@ -121,6 +173,7 @@ class UpcomingMatchesView(BaseAccountView, TemplateView):
         super().get_context_data(**kwargs)
         context = {"grouped_predictions": self.get_grouped_predictions()}
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
+        context["page_title"] = "Upcoming Matches"
         return context
 
     def get_grouped_predictions(self):
@@ -142,3 +195,8 @@ class UpcomingMatchesView(BaseAccountView, TemplateView):
 
 class SubscriptionRequiredView(TemplateView):
     template_name = "core/pages/subscription_required.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Subscription Required"
+        return context

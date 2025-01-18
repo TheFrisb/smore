@@ -4,7 +4,7 @@
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
         <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
-        <div class="absolute inset-0">
+        <div class="absolute inset-0 pointer-events-none">
             <div class="absolute inset-0 bg-gradient-radial from-secondary-500/5 via-transparent to-transparent opacity-30"></div>
             <div class="absolute right-0 top-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
             <div class="absolute left-0 bottom-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
@@ -36,9 +36,9 @@
                         {% if product.name != "Soccer" %}
                             <div class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
                             </div>
-                            <div class="absolute w-full h-full top-0 left-0 z-50 flex items-center justify-center">
+                            <div class="absolute w-full h-full top-0 left-0 z-20 flex items-center justify-center">
                                 <p data-aos="zoom-in" data-aos-duration="500" data-aos-delay="100"
-                                   class="inline-block px-4 py-2 rounded-full bg-secondary-500/40 text-secondary-400 text-sm font-semibold mb-4 z-50">
+                                   class="inline-block px-4 py-2 rounded-full bg-secondary-500/40 text-secondary-400 text-sm font-semibold mb-4 z-20">
                                     Coming Soon</p>
                             </div>
                         {% endif %}
@@ -125,9 +125,9 @@
                          data-addon-price="{{ addon.price }}">
                         <div class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
                         </div>
-                        <div class="absolute w-full h-full top-0 left-0 z-50 flex items-center justify-center">
+                        <div class="absolute w-full h-full top-0 left-0 z-20 flex items-center justify-center">
                             <p data-aos="zoom-in" data-aos-duration="500" data-aos-delay="100"
-                               class="inline-block px-4 py-2 rounded-full bg-secondary-500/40 text-secondary-400 text-sm font-semibold mb-4 z-50">
+                               class="inline-block px-4 py-2 rounded-full bg-secondary-500/40 text-secondary-400 text-sm font-semibold mb-4 z-20">
                                 Coming Soon</p>
                         </div>
                         <div class="relative">
@@ -172,7 +172,7 @@
                                 $0.00</p></div>
                     </div>
                     <div class="space-y-4 mb-8 divide-y divide-primary-700/30 checkoutSummary__items"></div>
-                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_authenticated and not request.user.subscription_is_active %}
                         <button class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
                                 id="checkoutButton"
                                 disabled="">
@@ -186,9 +186,24 @@
                                 </svg>
                             </div>
                         </button>
+                    {% elif request.user.is_authenticated and request.user.subscription_is_active %}
+                        <a href="{% url 'payments:update_subscription' %}"
+                           class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+
+                           disabled="">
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                            <div class="relative flex items-center"><span class="text-lg">Update Subscription</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="lucide lucide-chevron-right w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
+                                    <path d="m9 18 6-6-6-6"></path>
+                                </svg>
+                            </div>
+                        </a>
                     {% else %}
                         <a href="{% url 'accounts:register' %}"
-                           class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-primary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+                           class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
                            disabled="">
                             <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                             <div class="relative flex items-center"><span class="text-lg">Get Started</span>
@@ -201,12 +216,14 @@
                             </div>
                         </a>
                     {% endif %}
-                    <p class="text-primary-300 text-sm text-center mt-4 animate-pulse">Please select at least one sport
-                        to continue</p></div>
+                    {#                    <p class="text-primary-300 text-sm text-center mt-4 animate-pulse">Please select at least one sport#}
+                    {#                        to continue</p>#}
+                </div>
                 <div class="text-center mt-8">
                     <p class="text-primary-300 text-sm">Need help choosing?
-                        <button class="text-secondary-400 hover:text-primary-300 transition-colors">Contact our team
-                        </button>
+                        <a href="{% url 'core:contact_us' %}"
+                           class="text-secondary-400 hover:text-primary-300 transition-colors">Contact our team
+                        </a>
                     </p>
                 </div>
             </div>

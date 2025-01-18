@@ -41,6 +41,17 @@ class User(BaseInternalModel, AbstractUser):
 
         return user_subscription.is_active
 
+    @property
+    def available_balance(self):
+        """
+        Get the available balance for the user.
+        """
+        user_balance = getattr(self, "balance", None)
+        if not user_balance:
+            return 0
+
+        return user_balance.balance
+
     def generate_referral_code(self):
         """
         Generate a random referral code for the user
@@ -63,16 +74,17 @@ class UserBalance(BaseInternalModel):
 
 
 class Referral(BaseInternalModel):
-    """
-    Referral model to track who referred whom.
-    """
+    class Level(models.IntegerChoices):
+        DIRECT = 1, "Direct"
+        INDIRECT = 2, "Indirect"
 
     referrer = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="referrals"
     )
-    referred = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name="referral"
+    referred = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="referred_by"
     )
+    level = models.PositiveSmallIntegerField(choices=Level)
 
     def __str__(self):
         return f"{self.referrer.username} referred {self.referred.username}"
@@ -109,13 +121,17 @@ class WithdrawalRequest(BaseInternalModel):
 
     class PayoutType(models.TextChoices):
         BANK = "bank", "Bank"
-        CRYPTO = "crypto", "Crypto"
+        PAYONEER = "payoneer", "Payoneer"
+        CRYPTOCURRENCY = "cryptocurrency", "Cryptocurrency"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="withdrawals")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=10, choices=Status, default=Status.PENDING)
-    payout_type = models.CharField(max_length=10, choices=PayoutType)
-    payout_destination = models.CharField(max_length=255)
+    payout_type = models.CharField(max_length=20, choices=PayoutType)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    iban = models.CharField(max_length=255, blank=True, null=True)
+    cryptocurrency_address = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.amount} - {self.status}"
@@ -156,3 +172,21 @@ class UserSubscription(BaseInternalModel):
 
     def __str__(self):
         return f"{self.user.username} - {self.status} - {self.frequency}"
+
+
+class ReferralEarning(BaseInternalModel):
+    """
+    Tracks each commission earned (e.g., 20% direct, 5% indirect, etc.)
+    """
+
+    referral = models.ForeignKey(
+        Referral, on_delete=models.CASCADE, related_name="earnings"
+    )
+    # The user who *receives* the commission
+    receiver = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="referral_earnings"
+    )
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def __str__(self):
+        return f"{self.receiver.username} - {self.amount}"
