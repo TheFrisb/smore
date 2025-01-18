@@ -79,7 +79,9 @@ class Prediction(BaseInternalModel):
 
 
 class PickOfTheDay(BaseInternalModel, SingletonModel):
-    prediction = models.OneToOneField(Prediction, on_delete=models.CASCADE, null=True)
+    prediction = models.OneToOneField(
+        Prediction, on_delete=models.CASCADE, null=True, blank=True
+    )
 
     def __str__(self):
         return f"Pick of the Day: {self.prediction}"
@@ -95,3 +97,17 @@ class FrequentlyAskedQuestion(BaseInternalModel):
 
     class Meta:
         ordering = ["order"]
+
+
+class SiteSettings(BaseInternalModel, SingletonModel):
+    customer_withdrawal_request_template_id = models.IntegerField(blank=True, null=True)
+    email_confirmation_template_id = models.IntegerField(blank=True, null=True)
+    password_reset_template_id = models.IntegerField(blank=True, null=True)
+    notification_email = models.EmailField()
+
+    def __str__(self):
+        return "Site Settings"
+
+    class Meta:
+        verbose_name = "Site Settings"
+        verbose_name_plural = "Site Settings"

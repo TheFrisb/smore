@@ -7,11 +7,11 @@ export function initUserMobileMenu() {
   }
 
   // if screen is larger than 768px, do not show the mobile menu
-  if (window.innerWidth > 1020) {
-    return;
-  }
 
   menuButton.addEventListener("click", () => {
+    if (window.innerWidth > 1020) {
+      return;
+    }
     if (menu.classList.contains("active")) {
       menuButton.classList.remove(
         "mb-6",

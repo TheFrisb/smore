@@ -11,6 +11,10 @@ from .views import (
     ContactUsView,
     FaqView,
     ReferralProgram,
+    PasswordResetRequestView,
+    PasswordResetConfirmView,
+    PasswordResetRequestSuccessView,
+    VerifyEmailView,
 )
 
 app_name = "accounts"
@@ -29,5 +33,18 @@ urlpatterns = [
     path("contact-us/", ContactUsView.as_view(), name="contact_us"),
     path("faq/", FaqView.as_view(), name="faq"),
     path("referral-program/", ReferralProgram.as_view(), name="referral_program"),
-
+    path("password-reset/", PasswordResetRequestView.as_view(), name="password_reset"),
+    path(
+        "password-reset-confirm/<uidb64>/<token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "password-reset-request-success/",
+        PasswordResetRequestSuccessView.as_view(),
+        name="password_reset_request_success",
+    ),
+    path(
+        "verify-email/<uidb64>/<token>/", VerifyEmailView.as_view(), name="verify_email"
+    ),
 ]

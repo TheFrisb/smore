@@ -1,16 +1,22 @@
 import logging
 
-from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.views.generic import TemplateView, FormView, RedirectView
 
 from accounts.forms.register_form import RegisterForm
+from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswordForm
 from accounts.models import User, Referral
 from accounts.services.referral_service import ReferralService
+from core.mailer.mailjet_service import MailjetService
 from core.models import FrequentlyAskedQuestion
 
 logger = logging.getLogger(__name__)
@@ -18,6 +24,16 @@ logger = logging.getLogger(__name__)
 
 class BaseAccountView(LoginRequiredMixin):
     login_url = reverse_lazy("accounts:login")
+
+    def dispatch(self, request, *args, **kwargs):
+        # if email is not verified, add message and continue dispatch as normal
+        if request.user.is_authenticated and not request.user.is_email_verified:
+            messages.warning(
+                request,
+                "Please verify your email address.",
+            )
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class LoginUserView(LoginView):
@@ -312,3 +328,148 @@ class ReferralProgram(BaseAccountView, TemplateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = "Referral Program"
         return context
+
+
+class PasswordResetRequestSuccessView(TemplateView):
+    template_name = "accounts/password_reset_request_success.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Password Reset Request"
+        return context
+
+
+class PasswordResetRequestView(FormView):
+    def __init__(self):
+        super().__init__()
+        self.mail_service = MailjetService()
+
+    template_name = "accounts/request_reset_password.html"
+    form_class = PasswordResetRequestForm
+    success_url = reverse_lazy("accounts:password_reset_request_success")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Password Reset Request"
+        return context
+
+    def form_valid(self, form):
+        """
+        If the form is valid, generate a token (if user exists) and send the link.
+        We'll show a success message in either case (not revealing existence of user).
+        """
+        email = form.cleaned_data["email"]
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            user = None
+
+        if user:
+            token = default_token_generator.make_token(user)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+
+            # Build the password-reset-confirm URL
+            reset_url = self.request.build_absolute_uri(
+                reverse_lazy(
+                    "accounts:password_reset_confirm",
+                    kwargs={"uidb64": uidb64, "token": token},
+                )
+            )
+
+            logger.info(f"Password reset link for {user.username}: {reset_url}")
+            self.mail_service.send_reset_password_email(user, reset_url)
+
+        messages.success(
+            self.request,
+            "If that email is registered, a password reset link has been sent.",
+        )
+        return super().form_valid(form)
+
+
+class PasswordResetConfirmView(FormView):
+    template_name = "accounts/password_reset_confirm.html"
+    form_class = SetNewPasswordForm
+    success_url = reverse_lazy("accounts:login")
+
+    def dispatch(self, request, uidb64, token, *args, **kwargs):
+        """
+        We override dispatch to decode the user and check the token
+        before doing the usual GET/POST.
+        """
+        self.validlink = False
+        self.user = None
+
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, User.DoesNotExist):
+            user = None
+
+        if user is not None and default_token_generator.check_token(user, token):
+            self.validlink = True
+            self.user = user
+
+        return super().dispatch(request, uidb64, token, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["validlink"] = self.validlink
+        return context
+
+    def form_valid(self, form):
+        """
+        If the token is valid and passwords match,
+        set the new password, logout the user, and redirect.
+        """
+        if not self.validlink or not self.user:
+            messages.error(
+                self.request, "Password reset link is invalid or has expired."
+            )
+            return redirect("password_reset_request")
+
+        new_password = form.cleaned_data["new_password"]
+        self.user.set_password(new_password)
+        self.user.save()
+
+        # Log out if the user was authenticated
+        logout(self.request)
+
+        messages.success(self.request, "Your password has been reset. Please log in.")
+        return super().form_valid(form)
+
+
+class VerifyEmailView(RedirectView):
+    """
+    Verifies the user’s email by decoding uidb64 and validating the token.
+    If valid, the user is activated and redirected to accounts:my_account.
+    Otherwise, we redirect to core:home with an error message.
+    """
+
+    # We won't hardcode pattern_name because we need logic
+    # to decide which URL to return (success vs failure).
+    permanent = False  # HTTP status code 302 (temporary) instead of 301
+
+    def get_redirect_url(self, uidb64=None, token=None, *args, **kwargs):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, User.DoesNotExist):
+            user = None
+
+        if user is not None and default_token_generator.check_token(user, token):
+            user.is_email_verified = True
+            user.save()
+            logger.info(f"User {user.username} email verified.")
+
+            messages.success(
+                self.request, "Your email has been confirmed! Welcome aboard."
+            )
+
+            # log the user in
+            login(self.request, user)
+
+            return reverse("accounts:my_account")
+        else:
+            messages.error(self.request, "Invalid or expired email confirmation link.")
+            logger.error("Invalid or expired email confirmation link.")
+            return reverse("core:home")

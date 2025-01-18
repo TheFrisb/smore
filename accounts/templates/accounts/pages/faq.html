@@ -45,7 +45,8 @@
             </div>
             <div class="mt-12 text-center"><p class="text-primary-200 mb-6">Still have questions? We're here to
                 help.</p>
-                <button class="inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-secondary-600 to-primary-500 rounded-lg shadow-lg shadow-primary-600/20 hover:shadow-primary-600/40 transform hover:-translate-y-0.5 transition-all duration-200">
+                <a href="{% url 'accounts:contact_us' %}"
+                   class="inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-secondary-600 to-primary-500 rounded-lg shadow-lg shadow-primary-600/20 hover:shadow-primary-600/40 transform hover:-translate-y-0.5 transition-all duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="lucide lucide-help-circle w-5 h-5 mr-2">
@@ -53,7 +54,7 @@
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                         <path d="M12 17h.01"></path>
                     </svg>
-                    <span>Contact Support</span></button>
+                    <span>Contact Support</span></a>
             </div>
         </div>
     </section>

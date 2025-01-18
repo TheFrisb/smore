@@ -6,6 +6,11 @@ from django.utils.safestring import mark_safe, SafeString
 register = template.Library()
 
 
+@register.filter(name="multiply")
+def multiply(value, arg):
+    return value * arg
+
+
 @register.filter(name="is_link_active")
 def is_link_active(request, url_name):
     """

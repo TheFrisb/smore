@@ -8,6 +8,7 @@ from core.models import (
     Product,
     Addon,
     FrequentlyAskedQuestion,
+    SiteSettings,
 )
 
 
@@ -94,3 +95,6 @@ class PickOfTheDayAdmin(SingletonModelAdmin):
 @admin.register(FrequentlyAskedQuestion)
 class FrequentlyAskedQuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ["question", "order"]
+
+
+admin.site.register(SiteSettings, SingletonModelAdmin)

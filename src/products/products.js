@@ -27,6 +27,9 @@ function initChooseSubscriptionFrequencyButton() {
       chooseSubscriptionFrequencyButton.querySelector(".toggleButton");
     const annualLabelEl = document.querySelector(".annualLabel");
     const monthlyLabelEl = document.querySelector(".monthlyLabel");
+    const checkoutSummaryMode =
+      checkoutSummarySection.querySelector("#subscriptionMode");
+
     if (toggleButton.classList.contains("left-1")) {
       toggleButton.classList.remove("left-1");
       toggleButton.classList.add("right-1");
@@ -36,6 +39,8 @@ function initChooseSubscriptionFrequencyButton() {
       annualLabelEl.classList.add("text-white");
       monthlyLabelEl.classList.add("text-primary-300");
       monthlyLabelEl.classList.remove("text-white");
+
+      checkoutSummaryMode.textContent = "yearly";
     } else {
       toggleButton.classList.remove("right-1");
       toggleButton.classList.add("left-1");
@@ -45,6 +50,8 @@ function initChooseSubscriptionFrequencyButton() {
       monthlyLabelEl.classList.add("text-white");
       annualLabelEl.classList.add("text-primary-300");
       annualLabelEl.classList.remove("text-white");
+
+      checkoutSummaryMode.textContent = "monthly";
     }
 
     updatePrices();
@@ -56,11 +63,23 @@ function updatePrices() {
 
   products.forEach((product) => {
     const priceEl = product.querySelector(".product__price");
+    const mode = product.querySelector(".product__subscriptionMode");
+    const yearlyNoDiscountPrice = product.querySelector(
+      ".product__yearlyPriceNoDiscount",
+    );
 
     let monthlyPrice = product.getAttribute("data-product-monthly-price");
     let yearlyPrice = product.getAttribute("data-product-annual-price");
 
     let price = frequencyType === "month" ? monthlyPrice : yearlyPrice;
+
+    mode.textContent = frequencyType;
+
+    if (frequencyType === "year") {
+      yearlyNoDiscountPrice.classList.remove("hidden");
+    } else {
+      yearlyNoDiscountPrice.classList.add("hidden");
+    }
 
     priceEl.textContent = `$${price}`;
   });
@@ -76,6 +95,9 @@ function initProducts() {
 
   products.forEach((product) => {
     product.addEventListener("click", () => {
+      if (product.classList.contains("notSelectable")) {
+        return;
+      }
       const productId = product.getAttribute("data-product-id");
 
       const productCheckboxContainer = product.querySelector(

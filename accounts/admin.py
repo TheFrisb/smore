@@ -4,10 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from accounts.models import (
     User,
     UserBalance,
-    Referral,
-    UserSubscription,
     WithdrawalRequest,
-    ReferralEarning,
 )
 
 
@@ -111,9 +108,3 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ("created_at", "updated_at")
-
-
-admin.site.register(Referral)
-admin.site.register(UserSubscription)
-admin.site.register(UserBalance)
-admin.site.register(ReferralEarning)
