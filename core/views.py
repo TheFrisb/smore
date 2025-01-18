@@ -73,7 +73,6 @@ class HistoryView(TemplateView):
 
     def get_history_predictions(self):
         predictions = Prediction.objects.filter(
-            kickoff_date__lt=date.today(),
             visibility=Prediction.Visibility.PUBLIC,
             status__in=[Prediction.Status.WON, Prediction.Status.LOST],
         ).order_by("-kickoff_date", "-kickoff_time")

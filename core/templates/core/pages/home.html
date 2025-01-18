@@ -15,9 +15,13 @@
         <div class="absolute inset-0 bg-gradient-radial from-secondary-500/5 via-transparent to-transparent opacity-30"></div>
         <div class="container mx-auto px-4">
             <div class="flex flex-col xl:flex-row xl:items-center justify-between lg:gap-24">
-                <div class="lg:w-1/2 text-white space-y-8" data-aos="zoom-in" data-aos-duration="500"><h1
-                        class="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">Smart Predictions for Better
-                    Results</h1>
+                <div class="lg:w-1/2 text-white space-y-8" data-aos="zoom-in" data-aos-duration="500">
+                    <div class="mb-8">
+                        <h1
+                                class="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">Smart Predictions for Better
+                            Results</h1>
+                        <h2 class="text-2xl md:text-3xl font-bold text-secondary-400">- The intelligent way to win!</h2>
+                    </div>
                     <p class="text-xl text-primary-200 mb-8">Behind every winning strategy is a team that truly
                         understands the game. Our dedicated professionals dive deep into the action to bring you sharp,
                         insightful sports analyses you can trust.</p>
@@ -70,19 +74,17 @@
                 <div class="xl:w-1/2 mt-16 xl:lg-0 relative In animation-delay-300"
                 >
                     <div class="absolute top-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full filter blur-3xl"></div>
-                    <div class="relative flex flex-col lg:flex-row items-center justify-center gap-6">
+                    <div class="relative flex flex-col lg:flex-row items-start md:items-center justify-center gap-6 mt-24 lg:mt-0">
                         <div data-aos="flip-right" data-aos-duration="1000"
-                             class="relative z-20 w-56 h-[420px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
-                            <div class="flex items-start justify-center w-full h-full inset-0 bg-contain"
+                             class="relative z-20 w-64 h-[500px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
+                            <div class="flex items-start justify-start w-full h-full bg-cover"
                                  style="background-image: url('{% static "assets/images/telegram.png" %}')">
-                                {#                                <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">Coming Soon</span>#}
                             </div>
                         </div>
                         <div data-aos="flip-right" data-aos-duration="1000"
-                             class=" absolute right-8 bottom-0 z-10 w-64 h-[500px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
-                            <div class="flex items-start justify-center w-full h-full inset-0  bg-contain"
-                                 style="background-image: url('{% static "assets/images/matches.png" %}')">
-                                {#                                <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">Coming Soon</span>#}
+                             class="absolute right-0 md:right-8 bottom-8 z-10  w-72 h-[560px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
+                            <div class="flex items-start justify-center w-full h-full inset-0  bg-cover"
+                                 style="background-image: url('{% static "assets/images/matches-2.png" %}')">
                             </div>
                         </div>
                     </div>
