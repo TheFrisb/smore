@@ -44,11 +44,13 @@ class HomeView(TemplateView):
             return {
                 "primary_button_text": "What's New",
                 "primary_button_url": reverse("core:upcoming_matches"),
+                "primary_button_description": "View upcoming matches",
             }
 
         return {
             "primary_button_text": "View Plans",
             "primary_button_url": reverse("core:plans"),
+            "primary_button_description": "Choose a plan and get instant access to expert predictions",
         }
 
     def dispatch(self, request, *args, **kwargs):
