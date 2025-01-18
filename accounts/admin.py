@@ -1,5 +1,7 @@
-g
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
+from accounts.models import *
 
 class UserBalanceInline(admin.TabularInline):
     """
@@ -101,3 +103,7 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ("created_at", "updated_at")
+
+
+
+admin.site.register(UserSubscription)
