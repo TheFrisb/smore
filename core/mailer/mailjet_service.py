@@ -20,15 +20,20 @@ class MailjetService:
             f"Sending withdrawal request email to {withdrawal_request.user.email}"
         )
         site_settings = SiteSettings.get_solo()
-        extra_param_1, extra_param_2 = "", ""
+        extra_param_1, extra_param_2, extra_param_3, extra_param_4 = "", "", "", ""
 
         if withdrawal_request.payout_type == WithdrawalRequest.PayoutType.BANK:
             extra_param_1 = f"Full Name: {withdrawal_request.full_name}"
-            extra_param_2 = f"IBAN Code: {withdrawal_request.iban}"
+            extra_param_2 = f"Email: {withdrawal_request.email}"
+            extra_param_3 = f"Country: {withdrawal_request.country}"
+            extra_param_4 = f"IBAN Code: {withdrawal_request.iban}"
 
         elif withdrawal_request.payout_type == WithdrawalRequest.PayoutType.PAYONEER:
             extra_param_1 = f"Full Name: {withdrawal_request.full_name}"
             extra_param_2 = f"Payoneer Email: {withdrawal_request.email}"
+            extra_param_3 = (
+                f"Payoneer Customer ID: {withdrawal_request.payoneer_customer_id}"
+            )
 
         else:
             extra_param_1 = (
@@ -53,6 +58,8 @@ class MailjetService:
                     "TemplateLanguage": True,
                     "Subject": "Withdrawal Request Received",
                     "Variables": {
+                        "extra_param4": extra_param_4,
+                        "extra_param3": extra_param_3,
                         "extra_param2": extra_param_2,
                         "extra_param1": extra_param_1,
                         "amount": f"${str(withdrawal_request.amount)}",

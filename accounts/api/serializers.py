@@ -44,10 +44,27 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
                     {"iban": "Please provide your IBAN code."}
                 )
 
+            if not data.get("email"):
+                raise serializers.ValidationError(
+                    {"email": "Please provide your email."}
+                )
+
+            if not data.get("country"):
+                raise serializers.ValidationError(
+                    {"country": "Please provide your country."}
+                )
+
         elif payout_type == WithdrawalRequest.PayoutType.PAYONEER:
             if not data.get("full_name"):
                 raise serializers.ValidationError(
                     {"full_name": "Please provide your full name."}
+                )
+
+            if not data.get("payoneer_customer_id"):
+                raise serializers.ValidationError(
+                    {
+                        "payoneer_customer_id": "Please provide your Payoneer customer ID."
+                    }
                 )
 
             # check if full name contains at least 2 words

@@ -83,9 +83,15 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
             },
         ),
         (
+            "Payoneer",
+            {
+                "fields": ("payoneer_customer_id",),
+            }
+        ),
+        (
             "Bank Details",
             {
-                "fields": ("iban",),
+                "fields": ("iban", "country"),
             },
         ),
         (

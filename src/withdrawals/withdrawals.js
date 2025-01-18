@@ -92,6 +92,10 @@ function getData() {
       full_name: document.querySelector(
         "#requestWithdrawal__bankMethod__fullName",
       ).value,
+      email: document.querySelector("#requestWithdrawal__bankMethod__email")
+        .value,
+      country: document.querySelector("#requestWithdrawal__bankMethod__country")
+        .value,
       iban: document.querySelector("#requestWithdrawal__bankMethod__iban")
         .value,
     };
@@ -105,6 +109,9 @@ function getData() {
       payout_type: activeMethod,
       full_name: document.querySelector(
         "#requestWithdrawal__payoneerMethod__fullName",
+      ).value,
+      payoneer_customer_id: document.querySelector(
+        "#requestWithdrawal__payoneerMethod__payoneer_customer_id",
       ).value,
       email: document.querySelector("#requestWithdrawal__payoneerMethod__email")
         .value,

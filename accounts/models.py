@@ -133,6 +133,8 @@ class WithdrawalRequest(BaseInternalModel):
     email = models.EmailField(blank=True, null=True)
     iban = models.CharField(max_length=255, blank=True, null=True)
     cryptocurrency_address = models.CharField(max_length=255, blank=True, null=True)
+    payoneer_customer_id = models.CharField(max_length=255, blank=True, null=True)
+    country = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.amount} - {self.status}"
