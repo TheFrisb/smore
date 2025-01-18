@@ -152,15 +152,40 @@
                                 </div>
                             </div>
                             <div class="flex justify-center">
-                                <a href="{% url 'accounts:register' %}"
-                                   class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
-                                    <span>Get Full Analysis</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4">
-                                        <path d="m9 18 6-6-6-6"></path>
-                                    </svg>
-                                </a>
+                                {% if request.user.is_authenticated and request.user.subscription_is_active %}
+                                    <a href="{% url 'core:upcoming_matches' %}"
+                                       class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
+                                        <span>View more picks</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </a>
+                                {% elif request.user.is_authenticated and not request.user.subscription_is_active %}
+                                    <a href="{% url 'core:plans' %}"
+                                       class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
+                                        <span>Get a plan to see more picks</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'accounts:register' %}"
+                                       class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
+                                        <span>Get Full Analysis</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
