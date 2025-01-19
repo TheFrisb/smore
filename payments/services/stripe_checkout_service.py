@@ -29,6 +29,7 @@ class StripeCheckoutService(BaseStripeService):
             mode="subscription",
             customer=user.stripe_customer_id,
             line_items=self.get_line_items(price_ids),
+            consent_collection={"terms_of_service": "required"},
         )
 
         logger.info(
