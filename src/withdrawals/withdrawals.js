@@ -70,7 +70,7 @@ async function makeRequest() {
   const result = await response.json();
 
   if (response.ok) {
-    window.location.href = redirect;
+    window.location.href = redirectUrl;
   } else {
     if (result.errors && Array.isArray(result.errors)) {
       result.errors.forEach((error) => {
@@ -85,7 +85,7 @@ async function makeRequest() {
 }
 
 function getData() {
-  if (activeMethod === "bank") {
+  if (activeMethod === "BANK") {
     return {
       amount: parseFloat(
         document.querySelector("#withdrawalRequest__amount").value,
@@ -103,7 +103,7 @@ function getData() {
     };
   }
 
-  if (activeMethod === "payoneer") {
+  if (activeMethod === "PAYONEER") {
     return {
       amount: parseFloat(
         document.querySelector("#withdrawalRequest__amount").value,
@@ -120,7 +120,7 @@ function getData() {
     };
   }
 
-  if (activeMethod === "cryptocurrency") {
+  if (activeMethod === "CRYPTOCURRENCY") {
     return {
       amount: parseFloat(
         document.querySelector("#withdrawalRequest__amount").value,

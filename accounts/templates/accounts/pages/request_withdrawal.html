@@ -1,4 +1,5 @@
 {% extends 'accounts/base.html' %}
+{% load util_tags %}
 {% block dashboard %}
 
     <input type="hidden" value="{% url 'accounts:withdrawal_history' %}" id="redirectUrl">
@@ -39,23 +40,31 @@
 
                         <div class="space-y-3">
                             <div class="relative flex items-center">
-                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full  withdrawalPayoutMethod"
+
+
+                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-start gap-4 hover:border-secondary-500/50 transition-colors w-full  withdrawalPayoutMethod"
                                      data-method-type="BANK"
                                      data-section-selector="#requestWithdrawal__bankMethod">
+                                    {% svg_icon icon_name="bankIcon" css_classes="w-5 h-5 text-secondary-500" %}
+
                                     <span>Bank Transfer</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
-                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
+                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-start gap-4 hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
                                      data-method-type="PAYONEER"
                                      data-section-selector="#requestWithdrawal__payoneerMethod">
+                                    <div class="w-5 h-5 border-2 border-secondary-500 rounded-full"></div>
+
                                     <span>Payoneer</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
-                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
+                                <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-start gap-4 hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
                                      data-section-selector="#requestWithdrawal__cryptoMethod"
                                      data-method-type="CRYPTOCURRENCY">
+                                    {% svg_icon icon_name="bitcoinIcon" css_classes="w-5 h-5 text-secondary-500" %}
+
                                     <span>Cryptocurrency</span>
                                 </div>
                             </div>
