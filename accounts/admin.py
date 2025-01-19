@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 
 from accounts.models import *
 
+
 class UserBalanceInline(admin.TabularInline):
     """
     Inline for UserBalance model in User admin.
@@ -39,7 +40,7 @@ class UserAdmin(UserAdmin):
         queryset = queryset.prefetch_related(
             "referrals",
             "referrals__referred__referrals",
-        )
+        ).order_by("-created_at")
         return queryset
 
     def total_balance(self, obj: User):
@@ -109,7 +110,6 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ("created_at", "updated_at")
-
 
 
 admin.site.register(UserSubscription)
