@@ -35,8 +35,11 @@ class UserAdmin(UserAdmin):
     inlines = [UserBalanceInline]
     search_fields = ["username", "email"]
 
+    def get_ordering(self, request):
+        return ["-created_at"]
+
     def get_queryset(self, request):
-        queryset = super().get_queryset(request).order_by("-created_at")
+        queryset = super().get_queryset(request)
         queryset = queryset.prefetch_related(
             "referrals",
             "referrals__referred__referrals",
