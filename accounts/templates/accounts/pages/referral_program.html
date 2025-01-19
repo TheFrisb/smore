@@ -280,7 +280,7 @@
                                     <code class="text-secondary-400 font-mono">{{ request.user.referral_link }}</code>
                                 </div>
                                 <button class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-500/10 text-secondary-400 hover:bg-secondary-500/20 transition-colors copyButton"
-                                        data-value="http://localhost:8000/?ref=WEEQcEklDqTb">
+                                        data-value="{{ request.user.referral_link }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                          stroke-linejoin="round" class="lucide lucide-copy w-5 h-5 copyIcon">
