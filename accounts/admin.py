@@ -36,11 +36,11 @@ class UserAdmin(UserAdmin):
     search_fields = ["username", "email"]
 
     def get_queryset(self, request):
-        queryset = super().get_queryset(request)
+        queryset = super().get_queryset(request).order_by("-created_at")
         queryset = queryset.prefetch_related(
             "referrals",
             "referrals__referred__referrals",
-        ).order_by("-created_at")
+        )
         return queryset
 
     def total_balance(self, obj: User):
@@ -87,7 +87,7 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
             "Payoneer",
             {
                 "fields": ("payoneer_customer_id",),
-            }
+            },
         ),
         (
             "Bank Details",
