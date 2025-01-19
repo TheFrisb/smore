@@ -95,7 +95,7 @@
                                         {% svg_icon icon_name="calendarIcon" css_classes="w-4 h-4" %}
                                         <span>{{ withdrawal.created_at|date:"M j, Y, h:i A" }}</span>
                                     </div>
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full border w-full justify-center md:w-auto
+                                    <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center w-full  md:w-auto
                                     {% if withdrawal.status == WithdrawalStatus.PROCESSING or withdrawal.status == WithdrawalStatus.COMPLETED %}
                                     bg-blue-500/10 text-blue-400 border-blue-500/20
                                     {% elif withdrawal.status == WithdrawalStatus.PENDING %}
@@ -221,7 +221,7 @@
                                                         </div>
                                                     {% else %}
                                                         <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                                                            <div class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
                                                             <div class="flex-1">
                                                                 <div class="text-sm font-medium text-primary-400">
                                                                     Approved

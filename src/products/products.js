@@ -14,6 +14,10 @@ const chooseSubscriptionFrequencyButton = document.querySelector(
   "#chooseSubscriptionFrequencyButton",
 );
 
+const authenticatedActiveSubscriptionTypeInput = document.querySelector(
+  "#userSubscriptionType",
+);
+
 let selectedProducts = [];
 let frequencyType = "month";
 
@@ -41,6 +45,20 @@ function initChooseSubscriptionFrequencyButton() {
       monthlyLabelEl.classList.remove("text-white");
 
       checkoutSummaryMode.textContent = "yearly";
+
+      if (authenticatedActiveSubscriptionTypeInput) {
+        console.log(authenticatedActiveSubscriptionTypeInput.value);
+        const activeSubscriptionType =
+          authenticatedActiveSubscriptionTypeInput.value;
+
+        if (activeSubscriptionType === "monthly") {
+          const updateEl = document.querySelector(
+            '.product[data-product-name="Soccer"] .product__currentPlanDisclaimer',
+          );
+
+          updateEl.textContent = "Upgrade to yearly and save 20%";
+        }
+      }
     } else {
       toggleButton.classList.remove("right-1");
       toggleButton.classList.add("left-1");
@@ -52,6 +70,19 @@ function initChooseSubscriptionFrequencyButton() {
       annualLabelEl.classList.remove("text-white");
 
       checkoutSummaryMode.textContent = "monthly";
+
+      if (authenticatedActiveSubscriptionTypeInput) {
+        const activeSubscriptionType =
+          authenticatedActiveSubscriptionTypeInput.value;
+
+        if (activeSubscriptionType) {
+          const updateEl = document.querySelector(
+            '.product[data-product-name="Soccer"] .product__currentPlanDisclaimer',
+          );
+
+          updateEl.textContent = "Included in your plan";
+        }
+      }
     }
 
     updatePrices();
@@ -115,6 +146,23 @@ function initProducts() {
       updateCheckoutSummaryUI();
     });
   });
+
+  if (authenticatedActiveSubscriptionTypeInput) {
+    console.log(authenticatedActiveSubscriptionTypeInput.value);
+    const activeSubscriptionType =
+      authenticatedActiveSubscriptionTypeInput.value;
+    if (activeSubscriptionType) {
+      const product = document.querySelector(
+        '.product[data-product-name="Soccer"]',
+      );
+      console.log(product);
+      product.click();
+    }
+
+    if (activeSubscriptionType && activeSubscriptionType === "yearly") {
+      chooseSubscriptionFrequencyButton.click();
+    }
+  }
 
   if (checkoutButton) {
     checkoutButton.addEventListener("click", () => {
