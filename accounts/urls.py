@@ -15,6 +15,7 @@ from .views import (
     PasswordResetConfirmView,
     PasswordResetRequestSuccessView,
     VerifyEmailView,
+    WithdrawalHistoryView,
 )
 
 app_name = "accounts"
@@ -46,5 +47,10 @@ urlpatterns = [
     ),
     path(
         "verify-email/<uidb64>/<token>/", VerifyEmailView.as_view(), name="verify_email"
+    ),
+    path(
+        "withdrawal-history/",
+        WithdrawalHistoryView.as_view(),
+        name="withdrawal_history",
     ),
 ]

@@ -113,21 +113,21 @@ class Referral(BaseInternalModel):
 
 
 class WithdrawalRequest(BaseInternalModel):
-    class Status(models.TextChoices):
-        PENDING = "pending", "Pending"
-        APPROVED = "approved", "Approved"
-        PROCESSING = "processing", "Processing"
-        COMPLETED = "completed", "Completed"
-        REJECTED = "rejected", "Rejected"
+    class Status(models.IntegerChoices):
+        PENDING = 1, "Pending"
+        APPROVED = 2, "Approved"
+        PROCESSING = 3, "Processing"
+        COMPLETED = 4, "Completed"
+        REJECTED = 5, "Rejected"
 
     class PayoutType(models.TextChoices):
-        BANK = "bank", "Bank"
-        PAYONEER = "payoneer", "Payoneer"
-        CRYPTOCURRENCY = "cryptocurrency", "Cryptocurrency"
+        BANK = "BANK", "Bank"
+        PAYONEER = "PAYONEER", "Payoneer"
+        CRYPTOCURRENCY = "CRYPTOCURRENCY", "Cryptocurrency"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="withdrawals")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=10, choices=Status, default=Status.PENDING)
+    status = models.PositiveSmallIntegerField(choices=Status, default=Status.PENDING)
     payout_type = models.CharField(max_length=20, choices=PayoutType)
     full_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -135,6 +135,7 @@ class WithdrawalRequest(BaseInternalModel):
     cryptocurrency_address = models.CharField(max_length=255, blank=True, null=True)
     payoneer_customer_id = models.CharField(max_length=255, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
+    rejection_reason = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.amount} - {self.status}"

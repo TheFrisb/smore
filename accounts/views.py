@@ -6,15 +6,16 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView
+from django.db.models import Sum, Q, Count
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views.generic import TemplateView, FormView, RedirectView
+from django.views.generic import TemplateView, FormView, RedirectView, ListView
 
 from accounts.forms.register_form import RegisterForm
 from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswordForm
-from accounts.models import User, Referral
+from accounts.models import User, Referral, WithdrawalRequest
 from accounts.services.referral_service import ReferralService
 from core.mailer.mailjet_service import MailjetService
 from core.models import FrequentlyAskedQuestion
@@ -436,6 +437,48 @@ class PasswordResetConfirmView(FormView):
 
         messages.success(self.request, "Your password has been reset. Please log in.")
         return super().form_valid(form)
+
+
+class WithdrawalHistoryView(BaseAccountView, ListView):
+    template_name = "accounts/pages/withdrawal_history.html"
+    context_object_name = "withdrawals"
+
+    def get_queryset(self):
+        withdrawal_qs = WithdrawalRequest.objects.filter(
+            user=self.request.user
+        ).order_by("-created_at")
+
+        return withdrawal_qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Withdrawal History"
+        context["withdrawal_stats"] = self.get_withdrawal_stats()
+        context["WithdrawalStatus"] = WithdrawalRequest.Status
+        return context
+
+    def get_withdrawal_stats(self):
+        qs = self.get_queryset()
+        stats = qs.aggregate(
+            total_withdrawn_amount=Sum(
+                "amount", filter=Q(status=WithdrawalRequest.Status.COMPLETED)
+            ),
+            total_completed=Count(
+                "id", filter=Q(status=WithdrawalRequest.Status.COMPLETED)
+            ),
+            total_rejected=Count(
+                "id", filter=Q(status=WithdrawalRequest.Status.REJECTED)
+            ),
+            total_in_progress=Count(
+                "id", filter=Q(status__in=[WithdrawalRequest.Status.PENDING, WithdrawalRequest.Status.PROCESSING,
+                                           WithdrawalRequest.Status.APPROVED])
+            ),
+        )
+
+        for key, value in stats.items():
+            stats[key] = value or 0
+
+        return stats
 
 
 class VerifyEmailView(RedirectView):

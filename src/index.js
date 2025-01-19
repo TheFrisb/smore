@@ -6,6 +6,7 @@ import { initCloseButtons } from "./closeButton";
 import initWithdrawalRequest from "./withdrawals/withdrawals";
 import initFaq from "./faq/faq";
 import { initUserMobileMenu } from "./menu/userMenu";
+import initWithdrawalHistory from "./withdrawals/withdrawalHistory";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -17,4 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initWithdrawalRequest();
   initFaq();
   initUserMobileMenu();
+
+  initWithdrawalHistory();
 });
