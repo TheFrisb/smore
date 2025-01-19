@@ -1,6 +1,8 @@
 {% extends 'accounts/base.html' %}
 {% block dashboard %}
 
+    <input type="hidden" value="{% url 'accounts:withdrawal_history' %}" id="redirectUrl">
+
     <div class="space-y-8">
         <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
             <div class="flex items-center justify-between mb-8"><h2 class="text-2xl font-bold text-white">Available
@@ -38,14 +40,14 @@
                         <div class="space-y-3">
                             <div class="relative flex items-center">
                                 <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full  withdrawalPayoutMethod"
-                                     data-method-type="bank"
+                                     data-method-type="BANK"
                                      data-section-selector="#requestWithdrawal__bankMethod">
                                     <span>Bank Transfer</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
                                 <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
-                                     data-method-type="payoneer"
+                                     data-method-type="PAYONEER"
                                      data-section-selector="#requestWithdrawal__payoneerMethod">
                                     <span>Payoneer</span>
                                 </div>
@@ -53,7 +55,7 @@
                             <div class="relative flex items-center">
                                 <div class="bg-primary-900/50 px-4 py-3 rounded-lg border border-primary-700/50 text-primary-300 flex items-center justify-between hover:border-secondary-500/50 transition-colors w-full withdrawalPayoutMethod"
                                      data-section-selector="#requestWithdrawal__cryptoMethod"
-                                     data-method-type="cryptocurrency">
+                                     data-method-type="CRYPTOCURRENCY">
                                     <span>Cryptocurrency</span>
                                 </div>
                             </div>

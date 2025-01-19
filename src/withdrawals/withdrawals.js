@@ -54,6 +54,8 @@ function initWithdrawalRequest() {
 async function makeRequest() {
   const url = "/api/accounts/request-withdrawal/";
 
+  const redirectUrl = document.querySelector("#redirectUrl").value;
+
   const data = getData();
 
   const response = await fetch(url, {
@@ -68,7 +70,7 @@ async function makeRequest() {
   const result = await response.json();
 
   if (response.ok) {
-    window.location.reload();
+    window.location.href = redirect;
   } else {
     if (result.errors && Array.isArray(result.errors)) {
       result.errors.forEach((error) => {

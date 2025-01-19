@@ -294,9 +294,6 @@ class ManagePlanView(BaseAccountView, TemplateView):
 class RequestWithdrawalView(BaseAccountView, TemplateView):
     template_name = "accounts/pages/request_withdrawal.html"
 
-    def get_success_url(self):
-        return reverse("accounts:my_account")
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page_title"] = "Request Withdrawal"
@@ -470,8 +467,14 @@ class WithdrawalHistoryView(BaseAccountView, ListView):
                 "id", filter=Q(status=WithdrawalRequest.Status.REJECTED)
             ),
             total_in_progress=Count(
-                "id", filter=Q(status__in=[WithdrawalRequest.Status.PENDING, WithdrawalRequest.Status.PROCESSING,
-                                           WithdrawalRequest.Status.APPROVED])
+                "id",
+                filter=Q(
+                    status__in=[
+                        WithdrawalRequest.Status.PENDING,
+                        WithdrawalRequest.Status.PROCESSING,
+                        WithdrawalRequest.Status.APPROVED,
+                    ]
+                ),
             ),
         )
 
