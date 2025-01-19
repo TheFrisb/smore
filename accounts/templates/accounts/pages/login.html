@@ -45,7 +45,7 @@
                     {% endif %}
 
 
-                    <form class="space-y-6" method="post" action="{% url 'accounts:login' %}">
+                    <form class="space-y-6" method="post" action="{% url 'accounts:login' %}" id="loginForm">
                         {% csrf_token %}
                         <div><label for="username"
                                     class="block text-sm font-medium text-primary-300 mb-2">Username</label>
@@ -96,7 +96,7 @@
                                     password?</a>
                             </div>
                         </div>
-                        <button type="submit"
+                        <button type="submit" id="loginButton"
                                 class="formSubmitButton group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg group  items-center bg-secondary-600 text-white  hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -125,4 +125,14 @@
             </div>
         </div>
     </section>
+
+    <script>
+      const form = document.getElementById("loginForm");
+
+      form.addEventListener("submit", function (e) {
+        // Disable the submit button to prevent multiple submissions
+        const loginButton = document.getElementById("loginButton");
+        loginButton.disabled = true;
+      });
+    </script>
 {% endblock content %}

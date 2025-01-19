@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    <form class="space-y-6" method="post" action="{% url 'accounts:register' %}">
+                    <form class="space-y-6" method="post" action="{% url 'accounts:register' %}" id="registerForm">
                         {% csrf_token %}
                         <div><label for="username"
                                     class="block text-sm font-medium text-primary-300 mb-2">Username</label>
@@ -160,7 +160,7 @@
                                     Policy</a></label>
                         </div>
 
-                        <button type="submit"
+                        <button type="submit" id="registerButton"
                                 class="formSubmitButton group relative w-full flex items-center justify-center py-3 px-4 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800">
                             Create Account
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -188,4 +188,12 @@
             </div>
         </div>
     </section>
+    <script>
+      const form = document.getElementById("registerForm");
+
+      form.addEventListener("submit", function (e) {
+        const registerButton = document.getElementById("registerButton");
+        registerButton.disabled = true;
+      });
+    </script>
 {% endblock content %}
