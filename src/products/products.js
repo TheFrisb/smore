@@ -112,7 +112,7 @@ function updatePrices() {
       yearlyNoDiscountPrice.classList.add("hidden");
     }
 
-    priceEl.textContent = `$${price}`;
+    priceEl.textContent = `€${price}`;
   });
 
   updateCheckoutSummaryUI();
@@ -212,7 +212,7 @@ function updateCheckoutSummaryUI() {
     const productName = productEl.getAttribute("data-product-name");
     const productPrice = productEl.querySelector(".product__price").textContent;
 
-    total_price += parseFloat(productPrice.replace("$", ""));
+    total_price += parseFloat(productPrice.replace("€", ""));
 
     checkoutSummary += `
     <div class="space-y-4 mb-8 divide-y divide-primary-700/30">
@@ -228,7 +228,7 @@ function updateCheckoutSummaryUI() {
     checkoutSummary += `
     <div class="flex justify-between items-center text-secondary-500 py-3">
     <span>Multi-sport Discount</span>
-    <span>-$${(selectedProducts.length - 1) * 20}</span> 
+    <span>-€${(selectedProducts.length - 1) * 20}</span> 
     </div>
     `;
   }
@@ -244,7 +244,7 @@ function updateCheckoutSummaryUI() {
   let totalPriceEl = document.querySelector(
     ".checkoutSummarySection__totalPrice",
   );
-  totalPriceEl.textContent = `$${total_price.toFixed(2)}`;
+  totalPriceEl.textContent = `€${total_price.toFixed(2)}`;
 }
 
 function pushOrRemoveProduct(id) {
