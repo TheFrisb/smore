@@ -80,7 +80,7 @@ function initChooseSubscriptionFrequencyButton() {
             '.product[data-product-name="Soccer"] .product__currentPlanDisclaimer',
           );
 
-          updateEl.textContent = "Included in your plan";
+          updateEl.textContent = "Current plan";
         }
       }
     }
@@ -129,6 +129,7 @@ function initProducts() {
       if (product.classList.contains("notSelectable")) {
         return;
       }
+
       const productId = product.getAttribute("data-product-id");
 
       const productCheckboxContainer = product.querySelector(
@@ -252,6 +253,14 @@ function pushOrRemoveProduct(id) {
   if (productIndex === -1) {
     selectedProducts.push(id);
   } else {
+    if (authenticatedActiveSubscriptionTypeInput) {
+      console.log(authenticatedActiveSubscriptionTypeInput.value);
+      const activeSubscriptionType =
+        authenticatedActiveSubscriptionTypeInput.value;
+      if (activeSubscriptionType) {
+        return;
+      }
+    }
     selectedProducts.splice(productIndex, 1);
   }
 }
@@ -262,6 +271,15 @@ function updateClickedProductUI(
   productCheckboxEl,
 ) {
   if (productElement.classList.contains("selected")) {
+    if (authenticatedActiveSubscriptionTypeInput) {
+      console.log(authenticatedActiveSubscriptionTypeInput.value);
+      const activeSubscriptionType =
+        authenticatedActiveSubscriptionTypeInput.value;
+      if (activeSubscriptionType) {
+        return;
+      }
+    }
+
     productElement.classList.remove("selected");
     productElement.classList.remove(
       "bg-secondary-500/20",

@@ -78,8 +78,7 @@
                             {% if request.user.is_authenticated and request.user.subscription_is_active and product.name == 'Soccer' %}
                                 <div class="mb-6">
                                     <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
-                                        <p class="text-sm font-medium product__currentPlanDisclaimer">Included in your
-                                            plan</p>
+                                        <p class="text-sm font-medium product__currentPlanDisclaimer">Current plan</p>
                                     </div>
                                     <p class="text-sm font-medium text-primary-300">Plan expiry
                                         date: {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
