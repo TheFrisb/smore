@@ -6,13 +6,20 @@ from accounts.models import User
 
 
 class RegisterForm(forms.ModelForm):
-    full_name = forms.CharField(
-        max_length=150,
-        required=True,
+    first_name = forms.CharField(
         widget=forms.TextInput(
-            attrs={"placeholder": "Full Name", "class": "form-control"}
+            attrs={"placeholder": "First Name", "class": "form-control"}
         ),
+        required=True,
     )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"placeholder": "Last Name", "class": "form-control"}
+        ),
+        required=True,
+    )
+
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={"placeholder": "Password", "class": "form-control"}
@@ -46,13 +53,6 @@ class RegisterForm(forms.ModelForm):
 
         if password and confirm_password and password != confirm_password:
             raise ValidationError({"confirm_password": "Passwords do not match."})
-
-        full_name = cleaned_data.get("full_name")
-        words = full_name.split()
-        if len(words) < 2:
-            raise ValidationError(
-                {"full_name": "Please provide your full name (Name and Surname)"}
-            )
 
         if User.objects.filter(username=cleaned_data.get("username")).exists():
             raise ValidationError({"username": "Username already exists."})

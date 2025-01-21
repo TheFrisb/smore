@@ -77,8 +77,8 @@ class RegisterUserView(TemplateView):
             username=form.cleaned_data["username"],
             email=form.cleaned_data["email"],
             password=make_password(form.cleaned_data["password"]),
-            first_name=form.cleaned_data["full_name"].split()[0],
-            last_name=form.cleaned_data["full_name"].split()[1],
+            first_name=form.cleaned_data["first_name"],
+            last_name=form.cleaned_data["last_name"],
         )
 
         logger.info(f"User {user.username} created.")

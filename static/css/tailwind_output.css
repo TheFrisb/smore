@@ -2872,6 +2872,10 @@ html {
     width: auto;
   }
 
+  .md\:w-\[305px\] {
+    width: 305px;
+  }
+
   .md\:-translate-x-1\/2 {
     --tw-translate-x: -50%;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
