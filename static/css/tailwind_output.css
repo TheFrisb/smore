@@ -670,8 +670,8 @@ video {
   left: 50%;
 }
 
-.left-8 {
-  left: 2rem;
+.left-16 {
+  left: 4rem;
 }
 
 .right-0 {
@@ -684,6 +684,10 @@ video {
 
 .right-1\/2 {
   right: 50%;
+}
+
+.right-16 {
+  right: 4rem;
 }
 
 .right-\[-290px\] {
@@ -716,6 +720,10 @@ video {
 
 .top-8 {
   top: 2rem;
+}
+
+.top-10 {
+  top: 2.5rem;
 }
 
 .z-10 {
@@ -1095,6 +1103,10 @@ video {
 
 .w-px {
   width: 1px;
+}
+
+.w-\[60\%\] {
+  width: 60%;
 }
 
 .min-w-12 {
@@ -1652,10 +1664,6 @@ video {
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=');
 }
 
-.bg-\[url\(\'https\:\/\/i\.ibb\.co\/LRzvJgr\/smore-dashboard\.png\'\)\] {
-  background-image: url('https://i.ibb.co/LRzvJgr/smore-dashboard.png');
-}
-
 .bg-gradient-dark {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -1678,6 +1686,10 @@ video {
 
 .bg-squares-pattern {
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=');
+}
+
+.bg-\[url\(\'\/static\/assets\/images\/logo\.png\'\)\] {
+  background-image: url('/static/assets/images/logo.png');
 }
 
 .from-emerald-900\/20 {
@@ -2297,10 +2309,6 @@ video {
   color: rgb(75 118 165 / var(--tw-placeholder-opacity, 1));
 }
 
-.\!opacity-15 {
-  opacity: 0.15 !important;
-}
-
 .opacity-0 {
   opacity: 0;
 }
@@ -2864,20 +2872,24 @@ html {
     width: 16rem;
   }
 
-  .md\:w-\[640px\] {
-    width: 640px;
-  }
-
-  .md\:w-auto {
-    width: auto;
-  }
-
   .md\:w-\[305px\] {
     width: 305px;
   }
 
-  .md\:w-\[308px\] {
-    width: 308px;
+  .md\:w-\[360px\] {
+    width: 360px;
+  }
+
+  .md\:w-\[400px\] {
+    width: 400px;
+  }
+
+  .md\:w-\[420px\] {
+    width: 420px;
+  }
+
+  .md\:w-auto {
+    width: auto;
   }
 
   .md\:-translate-x-1\/2 {
