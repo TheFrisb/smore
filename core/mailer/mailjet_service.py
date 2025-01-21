@@ -101,9 +101,9 @@ class MailjetService:
                 {
                     "From": {"Email": "info@smore.bet", "Name": "SMORE"},
                     "To": [{"Email": user.email, "Name": user.username}],
-                    "TemplateID": 6649156,
+                    "TemplateID": site_settings.password_reset_template_id,
                     "TemplateLanguage": True,
-                    "Subject": "Please confirm your email",
+                    "Subject": "Reset your password",
                     "Variables": {
                         "link": reset_link,
                         "username": user.username,

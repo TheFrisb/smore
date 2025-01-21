@@ -378,10 +378,6 @@ class PasswordResetRequestView(FormView):
             logger.info(f"Password reset link for {user.username}: {reset_url}")
             self.mail_service.send_reset_password_email(user, reset_url)
 
-        messages.success(
-            self.request,
-            "If that email is registered, a password reset link has been sent.",
-        )
         return super().form_valid(form)
 
 
@@ -433,7 +429,7 @@ class PasswordResetConfirmView(FormView):
         # Log out if the user was authenticated
         logout(self.request)
 
-        messages.success(self.request, "Your password has been reset. Please log in.")
+        messages.success(self.request, "Your password has been reset.")
         return super().form_valid(form)
 
 
