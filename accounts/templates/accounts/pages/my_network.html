@@ -57,16 +57,34 @@
                 </div>
             </div>
         </div>
-        <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-4 md:p-8 border border-primary-700/30"><h2
-                class="text-2xl font-bold text-white mb-6">Referral Network</h2>
+        <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-4 md:p-8 border border-primary-700/30">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6"><h2
+                    class="text-2xl font-bold text-white mb-4 sm:mb-0">Referral Network</h2>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                        <span class="text-primary-300 text-sm">Active: {{ network.referral_counts.active_subscription_count }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-primary-500"></div>
+                        <span class="text-primary-300 text-sm">Inactive: {{ network.referral_counts.inactive_subscription_count }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                        <span class="text-primary-300 text-sm">Total: {{ network.referral_counts.total_referrals }}</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-primary-300 text-sm mb-6">A referral is considered active if the referred user has an active
+                subscription</p>
             <div class="space-y-4">
                 {% if network.first_level %}
                     {% for direct_referral in network.first_level %}
                         <div class="space-y-4">
-                            <div class="bg-primary-900/50 rounded-lg p-6 border border-primary-800/50">
+                            <div class="bg-primary-900/50 rounded-lg p-6 border border-primary-800/50 ">
                                 <div class="flex items-center justify-between mb-4">
                                     <div class="flex items-center space-x-4 overflow-hidden">
-                                        <div class="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center">
+                                        <div class="w-12 h-12 min-w-12 min-h-12 bg-primary-500/10 rounded-lg flex items-center justify-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24"
                                                  fill="none" stroke="currentColor" stroke-width="2"
@@ -79,7 +97,7 @@
                                                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                             </svg>
                                         </div>
-                                        <div class="">
+                                        <div class="overflow-hidden">
                                             <h3 class="text-white font-medium text-lg truncate">{{ direct_referral.user.username }}</h3>
                                             <div class="flex items-center text-primary-300 text-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -107,9 +125,9 @@
                                         <div class="text-primary-300 text-sm mb-3">Indirect Referrals</div>
                                         {% for indirect_referral in direct_referral.second_level %}
                                             <div class="space-y-3">
-                                                <div class="bg-primary-950/30 rounded-lg p-4 flex items-center justify-between">
-                                                    <div class="flex items-center space-x-3">
-                                                        <div class="w-8 h-8 bg-primary-500/5 rounded-lg flex items-center justify-center">
+                                                <div class="bg-primary-950/30 rounded-lg p-4 flex items-center justify-between ">
+                                                    <div class="flex items-center space-x-3 overflow-hidden">
+                                                        <div class="w-8 h-8 min-w-8 min-h-8 bg-primary-500/5 rounded-lg flex items-center justify-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                  height="24"
                                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -122,8 +140,8 @@
                                                                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                                             </svg>
                                                         </div>
-                                                        <div>
-                                                            <h4 class="text-white font-medium">{{ indirect_referral.user.username }}</h4>
+                                                        <div class="overflow-hidden">
+                                                            <h4 class="text-white font-medium truncate">{{ indirect_referral.user.username }}</h4>
                                                             <div class="flex items-center text-primary-400 text-xs">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                      height="24"

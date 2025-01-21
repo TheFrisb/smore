@@ -26,29 +26,54 @@
 
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="mb-8 bg-secondary-500/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-500/30 flex items-center justify-between animate-fadeIn message-{{ message.id }}">
-                                <div class="flex items-center space-x-3">
-                                    <div class="bg-secondary-500/20 rounded-full p-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                             stroke-linejoin="round"
-                                             class="lucide lucide-check-circle2 w-5 h-5 text-secondary-400">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <path d="m9 12 2 2 4-4"></path>
-                                        </svg>
+                            <div class="mb-8 bg-secondary-500/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-500/30  animate-fadeIn message-{{ message.id }}">
+                                <div class="flex items-center justify-between ">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="bg-secondary-500/20 rounded-full p-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round"
+                                                 class="lucide lucide-check-circle2 w-5 h-5 text-secondary-400">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <path d="m9 12 2 2 4-4"></path>
+                                            </svg>
+                                        </div>
+                                        <p class="text-secondary-400">{{ message }}</p>
                                     </div>
-                                    <p class="text-secondary-400">{{ message }}</p>
+
+
+                                    <div class="flex items-center justify-end gap-6">
+
+                                        {% if 'email-verification' in message.tags %}
+                                            <button class="text-primary-300 hover:text-white transition-colors resendEmailButton hidden md:block">
+                                                Resend email
+                                            </button>
+                                        {% endif %}
+
+                                        <button class="text-primary-300 hover:text-white transition-colors closeButton"
+                                                data-close-element-selector=".message-{{ message.id }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round" class="w-5 h-5">
+                                                <path d="M18 6 6 18"></path>
+                                                <path d="m6 6 12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
-                                <button class="text-primary-300 hover:text-white transition-colors closeButton"
-                                        data-close-element-selector=".message-{{ message.id }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="w-5 h-5">
-                                        <path d="M18 6 6 18"></path>
-                                        <path d="m6 6 12 12"></path>
-                                    </svg>
-                                </button>
+
+                                {% if 'email-verification' in message.tags %}
+                                    <div class="flex items-center justify-center md:hidden">
+                                        <button class="text-primary-300 hover:text-white transition-colors resendEmailButton p-4 ">
+                                            Resend email
+                                        </button>
+                                    </div>
+                                {% endif %}
+
                             </div>
                         {% endfor %}
                     {% endif %}

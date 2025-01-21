@@ -26,15 +26,16 @@ logger = logging.getLogger(__name__)
 class BaseAccountView(LoginRequiredMixin):
     login_url = reverse_lazy("accounts:login")
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     # if email is not verified, add message and continue dispatch as normal
-    #     if request.user.is_authenticated and not request.user.is_email_verified:
-    #         messages.warning(
-    #             request,
-    #             "Please verify your email address.",
-    #         )
-    #
-    #     return super().dispatch(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        # if email is not verified, add message and continue dispatch as normal
+        if request.user.is_authenticated and not request.user.is_email_verified:
+            messages.warning(
+                request,
+                "We've sent you an email to verify your account. Please check your inbox.",
+                extra_tags="email-verification",
+            )
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class LoginUserView(LoginView):

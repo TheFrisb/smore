@@ -11,6 +11,7 @@ from accounts.models import (
     User,
     Referral,
     ReferralEarning,
+    UserSubscription,
 )
 
 logger = logging.getLogger(__name__)
@@ -207,6 +208,7 @@ class ReferralService:
             "direct_referrals_count": len(direct_referrals),
             "indirect_referrals_count": len(indirect_referrals),
             "total_earnings": self.get_two_level_total_earnings(user),
+            "referral_counts": self.get_referral_counts(user),
         }
 
     def get_two_level_total_earnings(self, user):
@@ -221,3 +223,33 @@ class ReferralService:
         ).get("total") or Decimal("0.00")
 
         return direct_sum + indirect_sum
+
+    def get_referral_counts(self, user: User) -> dict:
+        """
+        Returns counts of:
+          - total referrals
+          - referrals with an active subscription
+          - referrals without an active subscription
+        for the given user (as the referrer).
+        """
+        # 1) All referral rows where `user` is the referrer (direct or indirect),
+        #    because your `Referral` table includes level=1 and level=2 rows.
+        total_referrals = Referral.objects.filter(referrer=user).count()
+
+        # 2) Referrals for which the referred user has an active subscription.
+        #    We'll look at the referred__subscription__status field in the DB.
+        #    `UserSubscription.Status.ACTIVE` is just the string "active".
+        total_with_active_subscription = Referral.objects.filter(
+            referrer=user, referred__subscription__status=UserSubscription.Status.ACTIVE
+        ).count()
+
+        # 3) Everything else doesn't have an active subscription
+        total_without_active_subscription = (
+                total_referrals - total_with_active_subscription
+        )
+
+        return {
+            "total_referrals": total_referrals,
+            "active_subscription_count": total_with_active_subscription,
+            "inactive_subscription_count": total_without_active_subscription,
+        }
