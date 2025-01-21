@@ -726,6 +726,10 @@ video {
   top: 2.5rem;
 }
 
+.top-16 {
+  top: 4rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -2835,6 +2839,10 @@ html {
     left: 50%;
   }
 
+  .md\:top-16 {
+    top: 4rem;
+  }
+
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
   }
@@ -2890,6 +2898,10 @@ html {
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:w-\[270px\] {
+    width: 270px;
   }
 
   .md\:-translate-x-1\/2 {
