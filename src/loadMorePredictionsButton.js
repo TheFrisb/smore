@@ -82,7 +82,13 @@ function initLoadMorePredictionsButton() {
                         <div class="grid grid-cols-2 gap-4 mb-6">
                             <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
                                 <div class="text-sm text-primary-300 mb-1">Kick-off Date</div>
-                                <div class="font-medium text-white">${new Date(prediction.kickoff_date).toLocaleDateString()}</div>
+                                <div class="font-medium text-white">${new Date(
+                                  prediction.kickoff_date,
+                                ).toLocaleDateString("en-GB", {
+                                  day: "2-digit",
+                                  month: "2-digit",
+                                  year: "numeric",
+                                })}</div>
                             </div>
                             <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
                                 <div class="text-sm text-primary-300 mb-1">Kick-off Time</div>
