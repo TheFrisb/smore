@@ -11,6 +11,7 @@ class PredictionPagination(PageNumberPagination):
 
 
 class PaginatedPredictionView(ListAPIView):
+    authentication_classes = []
     queryset = Prediction.objects.filter(
         visibility=Prediction.Visibility.PUBLIC,
         status__in=[Prediction.Status.WON, Prediction.Status.LOST],
