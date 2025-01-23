@@ -8,6 +8,7 @@ import initFaq from "./faq/faq";
 import { initUserMobileMenu } from "./menu/userMenu";
 import initWithdrawalHistory from "./withdrawals/withdrawalHistory";
 import { initResendEmailButtons } from "./resendEmailButton";
+import initLoadMorePredictionsButton from "./loadMorePredictionsButton";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initWithdrawalHistory();
   initResendEmailButtons();
+  initLoadMorePredictionsButton();
 });
