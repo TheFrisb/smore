@@ -155,7 +155,7 @@ class UserSubscription(BaseInternalModel):
     )
     status = models.CharField(max_length=10, choices=Status, default=Status.INACTIVE)
     frequency = models.CharField(max_length=10, choices=Frequency)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     stripe_subscription_id = models.CharField(max_length=255, blank=True)
