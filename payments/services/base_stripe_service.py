@@ -5,6 +5,7 @@ from stripe import Customer
 
 from accounts.models import User
 from backend import settings
+from core.mailer.mailjet_service import MailjetService
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,7 @@ class BaseStripeService:
         self.webhook_secret = settings.STRIPE_WEBHOOK_SECRET_KEY
         self.stripe_client = stripe
         self.stripe_client.api_key = self.api_key
+        self.mailer = MailjetService()
 
     def create_stripe_customer(self, user: User) -> Customer:
         if user.stripe_customer_id:

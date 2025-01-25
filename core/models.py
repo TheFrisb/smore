@@ -103,6 +103,7 @@ class SiteSettings(BaseInternalModel, SingletonModel):
     customer_withdrawal_request_template_id = models.IntegerField(blank=True, null=True)
     email_confirmation_template_id = models.IntegerField(blank=True, null=True)
     password_reset_template_id = models.IntegerField(blank=True, null=True)
+    generic_content_template_id = models.IntegerField(blank=True, null=True)
     notification_email = models.EmailField()
 
     def __str__(self):

@@ -1,7 +1,26 @@
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
 from django.contrib.auth.admin import UserAdmin
 
 from accounts.models import *
+
+
+class SubscriptionTypeFilter(SimpleListFilter):
+    title = "Subscription Type"
+    parameter_name = "subscription_type"
+
+    def lookups(self, request, model_admin):
+        return (
+            ("paid", "Paid"),
+            ("custom", "Custom"),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == "paid":
+            return queryset.exclude(stripe_subscription_id="")
+        if self.value() == "custom":
+            return queryset.filter(stripe_subscription_id="")
+        return queryset
 
 
 class UserBalanceInline(admin.TabularInline):
@@ -146,4 +165,39 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
         return fieldsets
 
 
-admin.site.register(UserSubscription)
+@admin.register(UserSubscription)
+class UserSubscriptionAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["user"]
+    list_display = (
+        "user",
+        "is_active",
+        "frequency",
+        "price",
+        "start_date",
+        "end_date",
+        "stripe_subscription_id",
+        "is_custom_subscription",
+    )
+    search_fields = ("user__username", "stripe_subscription_id")
+    list_filter = ("status", "frequency", SubscriptionTypeFilter)
+
+    fieldsets = (
+        (None, {"fields": ("user", "status", "frequency", "price")}),
+        ("Dates", {"fields": ("start_date", "end_date")}),
+        ("Stripe", {"fields": ("stripe_subscription_id",)}),
+        ("Products", {"fields": ("products",)}),
+    )
+    filter_horizontal = ("products",)
+    readonly_fields = ["stripe_subscription_id", "price"]
+
+    def is_active(self, obj):
+        return obj.is_active
+
+    is_active.boolean = True
+    is_active.short_description = "Active"
+
+    def is_custom_subscription(self, obj):
+        return not obj.stripe_subscription_id
+
+    is_custom_subscription.boolean = True
+    is_custom_subscription.short_description = "Custom Subscription"

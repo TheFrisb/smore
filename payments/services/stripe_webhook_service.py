@@ -21,6 +21,7 @@ class StripeWebhookEvent(Enum):
 
 
 class StripeWebhookService(BaseStripeService):
+
     def process_stripe_event(self, payload, sig_header):
         event = self.stripe_client.Webhook.construct_event(
             payload, sig_header, self.webhook_secret
@@ -39,6 +40,7 @@ class StripeWebhookService(BaseStripeService):
             self.process_subscription_deleted(event["data"]["object"])
 
     def process_invoice_paid(self, event_data):
+        new_subscription = False
         stripe_customer_id = event_data["customer"]
         stripe_subscription_id = event_data["subscription"]
         amount_paid_cents = event_data.get("amount_paid", 0)
@@ -112,6 +114,7 @@ class StripeWebhookService(BaseStripeService):
                 end_date=subscription_end_time,
                 stripe_subscription_id=stripe_subscription_id,
             )
+            new_subscription = True
 
         else:
             logger.info(
@@ -128,6 +131,9 @@ class StripeWebhookService(BaseStripeService):
 
         referral_service = ReferralService()
         referral_service.award_commissions_for_invoice(user, amount_paid)
+
+        if new_subscription:
+            self.mailer.send_new_subscription_email(user, user_subscription)
 
     def process_subscription_updated(self, event_data):
         logger.info(f"Received subscription updated event: {event_data}")
@@ -147,6 +153,9 @@ class StripeWebhookService(BaseStripeService):
             ).update(status=UserSubscription.Status.ACTIVE)
 
         if subscription_status != "canceled":
+            logger.info(
+                f"Subscription with ID: {stripe_subscription_id} is updated to: {subscription_status}"
+            )
             return
 
         logger.info(f"Subscription canceled for subscription: {stripe_subscription_id}")

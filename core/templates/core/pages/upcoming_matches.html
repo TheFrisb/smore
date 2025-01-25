@@ -9,7 +9,7 @@
         <div class="container mx-auto px-4">
 
 
-            {% if not request.user.subscription_is_active %}
+            {% if not request.user.is_authenticated or not request.user.subscription_is_active %}
                 <div class="max-w-2xl mx-auto text-center">
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">
                         <div class="w-20 h-20 bg-secondary-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8">

@@ -5,7 +5,6 @@ from itertools import groupby
 from django.urls import reverse
 from django.views.generic import TemplateView
 
-from accounts.views import BaseAccountView
 from core.models import (
     Product,
     Addon,
@@ -167,7 +166,7 @@ class CookiesPolicyView(TemplateView):
         return context
 
 
-class UpcomingMatchesView(BaseAccountView, TemplateView):
+class UpcomingMatchesView(TemplateView):
     template_name = "core/pages/upcoming_matches.html"
 
     def get_context_data(self, **kwargs):

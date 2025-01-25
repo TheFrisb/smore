@@ -175,7 +175,7 @@ class UserSubscription(BaseInternalModel):
         return self.end_date
 
     def __str__(self):
-        return f"{self.user.username} - {self.status} - {self.frequency}"
+        return f"{self.get_status_display()} {self.get_frequency_display()} subscription for {self.user.username}"
 
 
 class ReferralEarning(BaseInternalModel):

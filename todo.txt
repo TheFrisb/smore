@@ -1,12 +1,4 @@
-1. User Subscriptions
-- User autofill
-- Is custom field
-- Ne smeti custom subskripcii u payout
-- Stripe subscription ID
-- Products poubav widget
 
-2. Withdrawal requests
-- Show samo tii fields so mu trebat spored payout type
 
 3. Users
 - Filter po active/inactive
