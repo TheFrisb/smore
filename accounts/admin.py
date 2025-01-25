@@ -70,6 +70,19 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
+                "classes": ("collapse",),
+            },
+        ),
+        (
             _("Personal info"),
             {
                 "fields": (
@@ -92,19 +105,6 @@ class UserAdmin(UserAdmin):
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
-        (
-            _("Permissions"),
-            {
-                "fields": (
-                    "is_active",
-                    "is_staff",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions",
-                ),
-                "classes": ("collapse",),
-            },
-        ),
     )
 
     readonly_fields = [
