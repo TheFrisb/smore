@@ -50,7 +50,13 @@ class UserSubscriptionInline(admin.StackedInline):
 @admin.register(User)
 class UserAdmin(UserAdmin):
     change_form_template = "admin/accounts/user/change_form.html"
-    search_fields = ["username", "email"]
+    search_fields = [
+        "username",
+        "email",
+        "stripe_customer_id",
+        "first_name",
+        "last_name",
+    ]
     ordering = ["-created_at"]
     list_filter = [UserActiveStatusFilter, UserSubscriptionTypeFilter]
     list_display = [
@@ -328,7 +334,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         "stripe_subscription_id",
         "is_custom_subscription",
     )
-    search_fields = ("user__username", "stripe_subscription_id")
+    search_fields = ("user__username", "user__email", "user__stripe_customer_id", "stripe_subscription_id")
     list_filter = ("status", "frequency", SubscriptionTypeFilter)
 
     fieldsets = (
