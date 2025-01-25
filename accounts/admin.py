@@ -1,84 +1,234 @@
+from decimal import Decimal
+
 from django.contrib import admin
-from django.contrib.admin import SimpleListFilter
 from django.contrib.auth.admin import UserAdmin
+from django.db.models import Count, Q, F, Value
+from django.db.models.functions import Coalesce
+from django.utils import dateformat
+from django.utils.translation import gettext_lazy as _
 
+from accounts.admin_filters import (
+    SubscriptionTypeFilter,
+    UserActiveStatusFilter,
+    UserSubscriptionTypeFilter,
+)
 from accounts.models import *
+from accounts.services.referral_service import ReferralService
 
 
-class SubscriptionTypeFilter(SimpleListFilter):
-    title = "Subscription Type"
-    parameter_name = "subscription_type"
-
-    def lookups(self, request, model_admin):
-        return (
-            ("paid", "Paid"),
-            ("custom", "Custom"),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == "paid":
-            return queryset.exclude(stripe_subscription_id="")
-        if self.value() == "custom":
-            return queryset.filter(stripe_subscription_id="")
-        return queryset
-
-
-class UserBalanceInline(admin.TabularInline):
+class UserSubscriptionInline(admin.StackedInline):
     """
-    Inline for UserBalance model in User admin.
+    Inline admin for UserSubscription.
+    Displayed only if the user has a subscription.
     """
 
-    model = UserBalance
-    fields = ["balance"]
-    readonly_fields = ["balance"]
-    extra = 0
+    model = UserSubscription
+    can_delete = False
+    readonly_fields = [
+        "status",
+        "frequency",
+        "price",
+        "start_date",
+        "end_date",
+        "stripe_subscription_id",
+        "products",
+    ]
+
+    extra = 0  # Prevent adding new inline rows in this case
+    verbose_name = "Subscription"
+    verbose_name_plural = "Subscription"
+
+    def has_add_permission(self, request, obj=None):
+        """
+        Prevent adding a new subscription through the inline.
+        Subscriptions are created elsewhere in the system.
+        """
+        return False
 
 
 # Register your models here.
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    """
-    Admin model for User model.
-    """
-
+    change_form_template = "admin/accounts/user/change_form.html"
+    search_fields = ["username", "email"]
+    ordering = ["-created_at"]
+    list_filter = [UserActiveStatusFilter, UserSubscriptionTypeFilter]
     list_display = [
         "username",
         "email",
-        "total_balance",
-        "first_level_referrals_count",
-        "second_level_referrals_count",
-        "stripe_customer_id",
+        "direct_referrals",
+        "indirect_referrals",
+        "available_balance",
+        "subscribed_sports",
+        "subscription_start_date",
+        "subscription_end_date",
+        "is_subscribed",
+        "is_custom_subscription",
         "created_at",
     ]
-    list_filter = ["created_at"]
-    inlines = [UserBalanceInline]
-    search_fields = ["username", "email"]
 
-    def get_ordering(self, request):
-        return ["-created_at"]
+    fieldsets = (
+        (None, {"fields": ("username", "password")}),
+        (
+            _("Personal info"),
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "stripe_customer_id",
+                    "referral_link",
+                )
+            },
+        ),
+        (
+            _("Referrals and Balance"),
+            {
+                "fields": (
+                    "direct_referrals",
+                    "indirect_referrals",
+                    "available_balance",
+                )
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
+                "classes": ("collapse",),
+            },
+        ),
+    )
+
+    readonly_fields = [
+        "created_at",
+        "updated_at",
+        "referral_link",
+        "available_balance",
+        "direct_referrals",
+        "indirect_referrals",
+        "stripe_customer_id",
+    ]
 
     def get_queryset(self, request):
+        """
+        Annotate direct and indirect referrals for efficient querying.
+        """
         queryset = super().get_queryset(request)
-        queryset = queryset.prefetch_related(
-            "referrals",
-            "referrals__referred__referrals",
-        )
-        return queryset
-
-    def total_balance(self, obj: User):
-        return obj.balance.balance
-
-    def first_level_referrals_count(self, obj: User):
-        return obj.referrals.count()
-
-    def second_level_referrals_count(self, obj: User):
-        return sum(
-            referral.referred.referrals.count() for referral in obj.referrals.all()
+        return queryset.annotate(
+            direct_referral_count=Count(
+                "referrals", filter=Q(referrals__level=Referral.Level.DIRECT)
+            ),
+            indirect_referral_count=Count(
+                "referrals", filter=Q(referrals__level=Referral.Level.INDIRECT)
+            ),
+            balance_annotation=Coalesce(F("balance__balance"), Value(Decimal("0.00"))),
         )
 
-    total_balance.short_description = "Total Balance"
-    first_level_referrals_count.short_description = "1st-Level Referrals"
-    second_level_referrals_count.short_description = "2nd-Level Referrals"
+    def direct_referrals(self, obj):
+        """
+        Return the count of direct referrals for a user.
+        """
+        return obj.direct_referral_count
+
+    def indirect_referrals(self, obj):
+        """
+        Return the count of indirect referrals for a user.
+        """
+        return obj.indirect_referral_count
+
+    def available_balance(self, obj):
+        """
+        Display the available balance for a user from the annotated field.
+        """
+        return obj.balance_annotation
+
+    def subscription_start_date(self, obj):
+        """
+        Display the subscription start date if it exists.
+        """
+        if hasattr(obj, "subscription") and obj.subscription:
+            return dateformat.format(obj.subscription.start_date, "F j, Y")
+        return None
+
+    def subscription_end_date(self, obj):
+        """
+        Display the subscription end date if it exists.
+        """
+        if hasattr(obj, "subscription") and obj.subscription:
+            return dateformat.format(obj.subscription.end_date, "F j, Y")
+        return None
+
+    def is_subscribed(self, obj):
+        """
+        Display whether the user is subscribed (Active).
+        """
+        return obj.subscription_is_active
+
+    def is_custom_subscription(self, obj):
+        if hasattr(obj, "subscription") and obj.subscription:
+            return not obj.subscription.stripe_subscription_id
+        return False
+
+    def subscribed_sports(self, obj):
+        """
+        Return a comma-separated list of subscribed sports (products) for the user.
+        """
+        if hasattr(obj, "subscription") and obj.subscription:
+            return ", ".join(
+                [product.name for product in obj.subscription.products.all()]
+            )
+        return None
+
+    direct_referrals.admin_order_field = "direct_referral_count"
+    direct_referrals.short_description = "Direct Referrals"
+
+    indirect_referrals.admin_order_field = "indirect_referral_count"
+    indirect_referrals.short_description = "Indirect Referrals"
+
+    available_balance.admin_order_field = "balance_annotation"
+    available_balance.short_description = "Available Balance"
+
+    subscription_start_date.short_description = "Subscription Start"
+    subscription_end_date.short_description = "Subscription End"
+
+    is_subscribed.boolean = True
+    is_subscribed.short_description = "Subscribed"
+
+    is_custom_subscription.boolean = True
+    is_custom_subscription.short_description = "Custom Subscription"
+
+    subscribed_sports.short_description = "Subscribed Sports"
+
+    def get_inlines(self, request, obj):
+        if hasattr(obj, "subscription") and obj.subscription:
+            return [UserSubscriptionInline]
+        return []
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        extra_context = extra_context or {}
+
+        # Get the User object
+        user = self.get_object(request, object_id)
+        # or user = get_object_or_404(User, pk=object_id) if you prefer that approach
+
+        # Build the network data using your ReferralService
+        referral_service = ReferralService()
+        network_data = referral_service.build_network(user)
+
+        # Inject the network data into the context
+        extra_context["network"] = network_data
+
+        return super().change_view(
+            request, object_id, form_url, extra_context=extra_context
+        )
 
 
 @admin.register(WithdrawalRequest)
