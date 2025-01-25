@@ -52,7 +52,8 @@
                                         </svg>
                                     </div>
                                     <div class="overflow-hidden">
-                                        <h3 class="text-white font-medium text-lg truncate flex items-center">{{ direct_referral.user.username }}
+                                        <a href="{% url 'admin:accounts_user_change' direct_referral.user.pk %}"
+                                           class="text-white font-medium text-lg truncate flex items-center">{{ direct_referral.user.username }}
 
                                             {% if direct_referral.user.subscription_is_active %}
                                                 <span class="ml-4 text-base text-emerald-500 ">Active Subscription</span>
@@ -60,7 +61,7 @@
                                                 <span class="ml-4 text-base text-red-500">Inactive Subscription</span>
                                             {% endif %}
 
-                                        </h3>
+                                        </a>
                                         <div class="flex items-center text-primary-300 text-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -103,16 +104,17 @@
                                                         </svg>
                                                     </div>
                                                     <div class="overflow-hidden">
-                                                        <h4 class="text-white font-medium truncate flex items-center">
+                                                        <a href="{% url 'admin:accounts_user_change' indirect_referral.user.pk %}"
+                                                           class="text-white font-medium truncate flex items-center">
                                                             {{ indirect_referral.user.username }}
 
                                                             {% if indirect_referral.user.subscription_is_active %}
-                                                                <span class="ml-4 text-sm text-emerald-500 ">Active Subscription</span>
+                                                                <span class="ml-4 text-sm text-emerald-500  ">Active Subscription</span>
                                                             {% else %}
-                                                                <span class="ml-4 text-sm text-red-500">Inactive Subscription</span>
+                                                                <span class="ml-4 text-sm text-red-500 ">Inactive Subscription</span>
                                                             {% endif %}
 
-                                                        </h4>
+                                                        </a>
                                                         <div class="flex items-center text-primary-400 text-xs">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                  height="24"
