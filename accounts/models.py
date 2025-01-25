@@ -158,7 +158,7 @@ class UserSubscription(BaseInternalModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    stripe_subscription_id = models.CharField(max_length=255)
+    stripe_subscription_id = models.CharField(max_length=255, blank=True)
 
     products = models.ManyToManyField("core.Product", related_name="subscriptions")
 
