@@ -14,6 +14,7 @@ from .views import (
     CookiesPolicyView,
     UpcomingMatchesView,
     SubscriptionRequiredView,
+    TelegramLandingView,
 )
 
 app_name = "core"
@@ -35,4 +36,5 @@ urlpatterns = [
         SubscriptionRequiredView.as_view(),
         name="subscription_required",
     ),
+    path("telegram-landing/", TelegramLandingView.as_view(), name="telegram_landing"),
 ]
