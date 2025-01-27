@@ -1,10 +1,50 @@
-{% extends 'core/base.html' %}
 {% load static %}
-{% block content %}
-    <section class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smore - {{ page_title }}</title>
+    <link rel="preload" href="{% static 'js/core_v6.bundle.js' %}" as="script">
+    <link rel="stylesheet" href="{% static 'css/tailwind_output_v4.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+
+    {% block extrahead %}{% endblock extrahead %}
+
+</head>
+<body class="min-h-screen bg-primary-950" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
+
+<header class="fixed top-0 w-full bg-gradient-to-r from-primary-950/95 via-primary-900/95 to-primary-950/95 backdrop-blur-md shadow-dark-lg z-50">
+    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+    <div class="container mx-auto px-4">
+        <div class="flex items-center min-h-20 justify-start gap-4">
+
+            <img src="{% static 'assets/images/logo.png' %}" alt="Smore Logo" class="h-12">
+
+            <div class="relative group flex-shrink-0">
+                <div class="absolute -inset-1 bg-gradient-to-r from-secondary-500 to-secondary-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-start md:gap-2 gap-0">
+                    <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary-200 ">SMORE</span>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="h-screen py-20 overflow-hidden">
+
+
+    <section class=" bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
-        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none"
-        ><img
+        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none"><img
                 src="{% static 'assets/images/logo.png' %}" alt="Background Logo"
                 class="w-[80%] max-w-[800px] object-contain !opacity-20 select-none"></div>
         <div class="absolute inset-0">
@@ -13,22 +53,18 @@
             <div class="absolute left-0 bottom-1/4 w-96 h-96 bg-secondary-500/5 rounded-full filter blur-3xl"></div>
         </div>
 
-        <div class="absolute top-8 left-8 w-5/12 md:w-[420px] opacity-5"
-             data-aos="fade-up-right" data-aos-duration="800">
+        <div class="absolute top-8 left-8 w-5/12 md:w-[420px] opacity-5 aos-init aos-animate" data-aos="fade-up-right"
+             data-aos-duration="800">
 
-            <img class=" w-full h-full  opacity-5"
-                 src="{% static 'assets/images/soccer_player2.png' %}"
-                 alt="">
+            <img class=" w-full h-full  opacity-5" src="/static/assets/images/soccer_player2.png" alt="">
 
 
         </div>
 
-        <div class="absolute bottom-8 right-8 w-4/12 md:w-[420px] opacity-5"
+        <div class="absolute bottom-8 right-8 w-4/12 md:w-[420px] opacity-5 aos-init aos-animate"
              data-aos="fade-up-right" data-aos-duration="1200">
 
-            <img class=" w-full h-full  opacity-5"
-                 src="{% static 'assets/images/basketball-player.png' %}"
-                 alt="">
+            <img class=" w-full h-full  opacity-5" src="/static/assets/images/basketball-player.png" alt="">
 
 
         </div>
@@ -36,7 +72,7 @@
             <div class="flex justify-center w-full">
                 <a href="https://t.me/smoreinfo" target="_blank" data-aos="flip-down" data-aos-duration="400"
                    rel="noopener noreferrer"
-                   class="w-full lg:w-auto group relative inline-flex items-center justify-between px-4 py-5 text-xl font-bold text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30 z-10">
+                   class="w-full lg:w-auto group relative inline-flex items-center justify-between px-4 py-5 text-xl font-bold text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30 z-10 aos-init aos-animate">
                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                     <div class="flex items-center justify-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -56,7 +92,10 @@
             </div>
         </div>
     </section>
-{% endblock content %}
+
+</main>
 
 
-
+<script src="{% static 'js/core_v6.bundle.js' %}"></script>
+</body>
+</html>
