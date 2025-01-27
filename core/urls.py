@@ -36,5 +36,5 @@ urlpatterns = [
         SubscriptionRequiredView.as_view(),
         name="subscription_required",
     ),
-    path("telegram-landing/", TelegramLandingView.as_view(), name="telegram_landing"),
+    path("start/", TelegramLandingView.as_view(), name="telegram_landing"),
 ]
