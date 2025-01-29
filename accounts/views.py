@@ -15,6 +15,7 @@ from django.views.generic import TemplateView, FormView, RedirectView, ListView
 
 from accounts.forms.register_form import RegisterForm
 from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswordForm
+from accounts.mixins import RedirectAuthenticatedUserMixin
 from accounts.models import User, Referral, WithdrawalRequest
 from accounts.services.referral_service import ReferralService
 from core.mailer.mailjet_service import MailjetService
@@ -38,7 +39,7 @@ class BaseAccountView(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class LoginUserView(LoginView):
+class LoginUserView(RedirectAuthenticatedUserMixin, LoginView):
     template_name = "accounts/pages/login.html"
 
     def get_success_url(self):
@@ -59,7 +60,7 @@ class LogoutUserView(LogoutView):
         return context
 
 
-class RegisterUserView(TemplateView):
+class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
     def __init__(self):
         super().__init__()
 
@@ -420,7 +421,7 @@ class PasswordResetConfirmView(FormView):
             messages.error(
                 self.request, "Password reset link is invalid or has expired."
             )
-            return redirect("password_reset_request")
+            return redirect("accounts:password_reset")
 
         new_password = form.cleaned_data["new_password"]
         self.user.set_password(new_password)
