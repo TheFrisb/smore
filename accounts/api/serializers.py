@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from accounts.forms.withdrawal_request_form import is_valid_btc_address
-from accounts.models import WithdrawalRequest, UserSubscription
+from accounts.models import WithdrawalRequest
 
 
 class WithdrawalRequestSerializer(serializers.ModelSerializer):
@@ -86,15 +86,6 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
         if data.get("user").available_balance < data.get("amount"):
             raise serializers.ValidationError(
                 {"amount": "You don't have enough balance to make this withdrawal."}
-            )
-
-        if not UserSubscription.objects.filter(
-                user=data.get("user"), status=UserSubscription.Status.ACTIVE
-        ).exists():
-            raise serializers.ValidationError(
-                {
-                    "user": "You need to have an active subscription to make a withdrawal."
-                }
             )
 
         return data

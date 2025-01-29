@@ -48,12 +48,10 @@ class ReferralService:
             # Skip if not active
             if not referrer.subscription_is_active:
                 logger.info(
-                    f"Skipping commission for {referrer.username} "
-                    f"({ref.level}). Inactive subscription."
+                    f"User: {referrer.username} does not have an active subscription. Referral level: {ref.level}"
                 )
-                continue
 
-            # Determine rate from the referral level
+                # Determine rate from the referral level
             commission_rate = level_to_rate.get(ref.level)
             if not commission_rate:
                 # e.g., if level is unexpected or 0
@@ -71,11 +69,11 @@ class ReferralService:
             )
 
     def _create_referral_earning(
-        self,
-        referral: Referral,
-        receiver: User,
-        commission_rate: Decimal,
-        total_amount: Decimal,
+            self,
+            referral: Referral,
+            receiver: User,
+            commission_rate: Decimal,
+            total_amount: Decimal,
     ):
         """
         Calculate commission, update the receiver's balance, create ReferralEarning.
@@ -245,7 +243,7 @@ class ReferralService:
 
         # 3) Everything else doesn't have an active subscription
         total_without_active_subscription = (
-            total_referrals - total_with_active_subscription
+                total_referrals - total_with_active_subscription
         )
 
         return {

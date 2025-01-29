@@ -151,7 +151,7 @@
                                         {% if withdrawal.iban %}
                                             <div>
                                                 <div class="text-sm text-primary-300">IBAN</div>
-                                                <div class="text-white font-mono text-sm">US29NWBK60161331926819</div>
+                                                <div class="text-white font-mono text-sm">{{ withdrawal.iban }}</div>
                                             </div>
                                         {% endif %}
                                         {% if withdrawal.payoneer_customer_id %}
@@ -242,7 +242,7 @@
                                                         </div>
                                                     {% else %}
                                                         <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                                                            <div class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
                                                             <div class="flex-1">
                                                                 <div class="text-sm font-medium text-primary-400">
                                                                     Processing
@@ -264,7 +264,7 @@
                                                         </div>
                                                     {% else %}
                                                         <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                                                            <div class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
                                                             <div class="flex-1">
                                                                 <div class="text-sm font-medium text-primary-400">
                                                                     Completed
