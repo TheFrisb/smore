@@ -74,7 +74,7 @@ class UserAdmin(UserAdmin):
     ]
 
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
+        (None, {"fields": ("username", "password", "provider", "google_sub")}),
         (
             _("Permissions"),
             {
@@ -121,6 +121,8 @@ class UserAdmin(UserAdmin):
         "direct_referrals",
         "indirect_referrals",
         "stripe_customer_id",
+        "provider",
+        "google_sub",
     ]
 
     def get_queryset(self, request):
