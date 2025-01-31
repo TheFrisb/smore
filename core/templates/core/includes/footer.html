@@ -1,3 +1,4 @@
+{% load static %}
 <footer class="bg-gradient-to-b from-primary-900 to-primary-950 pt-20 pb-10 relative overflow-hidden">
     <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
 
@@ -5,7 +6,7 @@
     <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-4 gap-12 mb-16">
             <div class="md:col-span-2">
-                <img src="https://i.ibb.co/LRzvJgr/smore-logo.png" alt="Smore.bet" class="h-12 mb-8">
+                <img src="{% static 'assets/images/logo.png' %}" alt="smoreltd.com" class="h-12 mb-8">
                 <p class="text-primary-300 max-w-md mb-8 text-lg leading-relaxed">Expert sports predictions powered
                     by advanced analytics and professional insights. Join thousands of successful bettors who trust
                     <span class="text-secondary-400">Smore</span>.</p>

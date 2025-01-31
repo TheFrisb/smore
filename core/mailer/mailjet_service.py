@@ -43,7 +43,7 @@ class MailjetService:
         data = {
             "Messages": [
                 {
-                    "From": {"Email": "info@smore.bet", "Name": "SMORE"},
+                    "From": {"Email": "info@smoreltd.com", "Name": "SMORE"},
                     "To": [
                         {
                             "Email": withdrawal_request.user.email,
@@ -78,7 +78,7 @@ class MailjetService:
         data = {
             "Messages": [
                 {
-                    "From": {"Email": "info@smore.bet", "Name": "SMORE"},
+                    "From": {"Email": "info@smoreltd.com", "Name": "SMORE"},
                     "To": [{"Email": user.email, "Name": user.username}],
                     "TemplateID": site_settings.email_confirmation_template_id,
                     "TemplateLanguage": True,
@@ -99,7 +99,7 @@ class MailjetService:
         data = {
             "Messages": [
                 {
-                    "From": {"Email": "info@smore.bet", "Name": "SMORE"},
+                    "From": {"Email": "info@smoreltd.com", "Name": "SMORE"},
                     "To": [{"Email": user.email, "Name": user.username}],
                     "TemplateID": site_settings.password_reset_template_id,
                     "TemplateLanguage": True,
@@ -126,7 +126,7 @@ class MailjetService:
         data = {
             "Messages": [
                 {
-                    "From": {"Email": "info@smore.bet", "Name": "SMORE"},
+                    "From": {"Email": "info@smoreltd.com", "Name": "SMORE"},
                     "To": [
                         {"Email": site_settings.notification_email, "Name": "SMORE"}
                     ],
