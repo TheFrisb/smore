@@ -563,6 +563,11 @@ def google_receiver(request):
         },
     )
 
+    if created:
+        logger.info(f"User: {user.username} created via Google OAuth.")
+    else:
+        logger.info(f"User: {user.username} logged in via Google OAuth.")
+
     login(request, user)
 
     return redirect("accounts:my_account")
