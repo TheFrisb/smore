@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load util_tags %}
 {% block content %}
     <section
             class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -108,7 +109,27 @@
                         </button>
                     </form>
                 </div>
+                <div class="mt-6">
+                    <div id="g_id_onload"
+                         data-client_id="157232878412-blfc50vn5b2jngoeb5u537uati3na5hq.apps.googleusercontent.com"
+                         data-context="signup"
+                         data-ux_mode="redirect"
+                         data-login_uri={% get_full_url "accounts:google_receiver" %}
+                                 data-itp_support="true">
+                    </div>
+
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="rectangular"
+                         data-theme="outline"
+                         data-text="signin_with"
+                         data-size="large"
+                         data-logo_alignment="left">
+                    </div>
+                </div>
             </div>
+
+
             <div class="text-center">
                 <p class="text-primary-300">Don't have an account?
                     <a class="font-medium text-secondary-500 hover:text-secondary-400 inline-flex items-center group"

@@ -16,6 +16,7 @@ from .views import (
     PasswordResetRequestSuccessView,
     VerifyEmailView,
     WithdrawalHistoryView,
+    google_receiver,
 )
 
 app_name = "accounts"
@@ -53,4 +54,5 @@ urlpatterns = [
         WithdrawalHistoryView.as_view(),
         name="withdrawal_history",
     ),
+    path("auth/google-receiver/", google_receiver, name="google_receiver"),
 ]

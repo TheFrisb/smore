@@ -41,7 +41,7 @@ def send_email_confirmation_token(sender, instance: User, created, **kwargs):
     Generates a token and sends an email confirmation link.
     This runs ONLY when a new User row is created.
     """
-    if created:
+    if created and not instance.is_email_verified:
         # If you're *not* defaulting to is_active=False in the model,
         # and want to disable them here, you can do:
         # instance.is_active = False

@@ -17,9 +17,18 @@ class User(BaseInternalModel, AbstractUser):
     Custom User model to store user details.
     """
 
+    class ProviderType(models.TextChoices):
+        INTERNAL = "internal", "Internal"
+        GOOGLE = "google", "Google"
+
     referral_code = models.CharField(max_length=12, unique=True, blank=True, null=True)
     stripe_customer_id = models.CharField(max_length=255, blank=True, null=True)
     is_email_verified = models.BooleanField(default=False)
+
+    provider = models.CharField(
+        max_length=20, choices=ProviderType, default=ProviderType.INTERNAL
+    )
+    google_sub = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.username

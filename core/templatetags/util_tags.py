@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.safestring import mark_safe, SafeString
@@ -40,3 +41,14 @@ def svg_icon(icon_name: str = None, css_classes: str = None) -> SafeString:
         f'<svg class="{css_classes or ""}"><use xlink:href="{sprite_path}#{icon_name}"></use></svg>'
     )
     return mark_safe(svg_markup)
+
+
+@register.simple_tag
+def get_full_url(url_name) -> str:
+    """
+    Returns the URL to redirect to after signing in with Google OAuth.
+    """
+    base_url = settings.BASE_URL
+    view_url = reverse(url_name)
+
+    return f"{base_url}{view_url}"

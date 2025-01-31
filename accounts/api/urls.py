@@ -13,4 +13,6 @@ urlpatterns = [
         PostSendConfirmEmailMailView.as_view(),
         name="resend_email_confirmation",
     ),
+
+
 ]

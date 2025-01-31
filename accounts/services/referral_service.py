@@ -69,11 +69,11 @@ class ReferralService:
             )
 
     def _create_referral_earning(
-            self,
-            referral: Referral,
-            receiver: User,
-            commission_rate: Decimal,
-            total_amount: Decimal,
+        self,
+        referral: Referral,
+        receiver: User,
+        commission_rate: Decimal,
+        total_amount: Decimal,
     ):
         """
         Calculate commission, update the receiver's balance, create ReferralEarning.
@@ -243,7 +243,7 @@ class ReferralService:
 
         # 3) Everything else doesn't have an active subscription
         total_without_active_subscription = (
-                total_referrals - total_with_active_subscription
+            total_referrals - total_with_active_subscription
         )
 
         return {

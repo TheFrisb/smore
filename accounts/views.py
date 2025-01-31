@@ -1,17 +1,22 @@
 import logging
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView
+from django.core.exceptions import PermissionDenied
 from django.db.models import Sum, Q, Count
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, FormView, RedirectView, ListView
+from google.auth.transport import requests
+from google.oauth2 import id_token
 
 from accounts.forms.register_form import RegisterForm
 from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswordForm
@@ -360,7 +365,7 @@ class PasswordResetRequestView(FormView):
         """
         email = form.cleaned_data["email"]
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(email=email, provider=User.ProviderType.INTERNAL)
         except User.DoesNotExist:
             user = None
 
@@ -397,7 +402,7 @@ class PasswordResetConfirmView(FormView):
 
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
+            user = User.objects.get(pk=uid, provider=User.ProviderType.INTERNAL)
         except (TypeError, ValueError, User.DoesNotExist):
             user = None
 
@@ -517,3 +522,47 @@ class VerifyEmailView(RedirectView):
             messages.error(self.request, "Invalid or expired email confirmation link.")
             logger.error("Invalid or expired email confirmation link.")
             return reverse("core:home")
+
+
+@csrf_exempt
+def google_receiver(request):
+    """
+    Google Call Back
+    """
+    if request.method != "POST":
+        logger.error("Google Receiver called with non-POST request.")
+        raise PermissionDenied("Invalid request method.")
+
+    credential = request.POST.get("credential", None)
+
+    if not credential:
+        logger.error("Google Receiver called without credential in POST data.")
+        raise PermissionDenied("Missing credential in POST data.")
+
+    try:
+        user_data = id_token.verify_oauth2_token(
+            credential, requests.Request(), settings.GOOGLE_OAUTH_CLIENT_ID
+        )
+    except ValueError:
+        logger.error("Google Receiver called with invalid credential.")
+        raise PermissionDenied("Invalid credential.")
+
+    logger.info(f"Google Receiver data: {user_data}")
+
+    email = user_data.get("email", None)
+    sub = user_data.get("sub", None)
+
+    # get or create user
+    user, created = User.objects.get_or_create(
+        email=email,
+        defaults={
+            "username": email,
+            "provider": User.ProviderType.GOOGLE,
+            "google_sub": sub,
+            "is_email_verified": True,
+        },
+    )
+
+    login(request, user)
+
+    return redirect("accounts:my_account")
