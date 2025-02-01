@@ -20,3 +20,14 @@ html {
 .animate-fadeIn {
     animation: fadeIn 0.3s ease-out forwards;
 }
+
+.g_id_signin > div > div > div {
+    @apply border border-primary-700/50 hover:bg-primary-800/50 rounded-lg bg-primary-900/50  transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800 text-white;
+    @apply hover:border-primary-700/50;
+    @apply text-base;
+}
+
+div.g_id_signin > div > div > div {
+    @apply h-12;
+    @apply px-4;
+}
