@@ -31,3 +31,7 @@ div.g_id_signin > div > div > div {
     @apply h-12;
     @apply px-4;
 }
+
+.g_id_signin > div > div:nth-child(2) > div:nth-child(2) {
+    visibility: hidden !important;
+}
