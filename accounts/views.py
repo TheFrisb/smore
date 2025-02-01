@@ -218,7 +218,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         return None
 
     def _create_second_level_referral(
-            self, grandparent: User, referred: User, form
+        self, grandparent: User, referred: User, form
     ) -> bool:
         """
         Create row (grandparent->referred, level=2).

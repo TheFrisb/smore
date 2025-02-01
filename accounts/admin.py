@@ -336,7 +336,12 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         "stripe_subscription_id",
         "is_custom_subscription",
     )
-    search_fields = ("user__username", "user__email", "user__stripe_customer_id", "stripe_subscription_id")
+    search_fields = (
+        "user__username",
+        "user__email",
+        "user__stripe_customer_id",
+        "stripe_subscription_id",
+    )
     list_filter = ("status", "frequency", SubscriptionTypeFilter)
 
     fieldsets = (
