@@ -1,0 +1,2360 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-02 14:54+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/admin.py:79
+msgid "Permissions"
+msgstr ""
+
+#: accounts/admin.py:92
+msgid "Personal info"
+msgstr ""
+
+#: accounts/admin.py:104
+msgid "Referrals and Balance"
+msgstr ""
+
+#: accounts/admin.py:113
+msgid "Important dates"
+msgstr ""
+
+#: accounts/templates/accounts/base.html:53
+#: accounts/templates/accounts/base.html:74
+msgid "Resend email"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:42
+msgid "Account"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:62
+msgid "My Network"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:80
+msgid "Manage Plan"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:98
+#: accounts/templates/accounts/pages/request_withdrawal.html:169
+msgid "Request Withdrawal"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:117
+#: accounts/templates/accounts/pages/withdrawal_history.html:7
+msgid "Withdrawal History"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:133
+#: accounts/templates/accounts/pages/contact_us.html:6
+#: core/templates/core/pages/disclaimer.html:169
+#: core/templates/core/pages/home.html:60
+#: core/templates/core/pages/privacy_policy.html:230
+msgid "Contact Us"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:151
+#: core/templates/core/includes/header.html:79
+#: core/templates/core/includes/header.html:144
+#: core/templates/core/pages/faq.html:10
+msgid "FAQ"
+msgstr ""
+
+#: accounts/templates/accounts/includes/sidebar.html:170
+#: core/templates/core/includes/header.html:161
+msgid "Sign Out"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:7
+msgid ""
+"Our support team is available 24/7 to assist you. Choose your preferred "
+"method of communication below"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:20
+#: accounts/templates/accounts/pages/contact_us.html:38
+#: core/templates/core/pages/contact_us.html:28
+#: core/templates/core/pages/contact_us.html:49
+msgid "Instant messaging support"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:23
+#: core/templates/core/pages/contact_us.html:30
+msgid "Message us on WhatsApp"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:41
+#: core/templates/core/pages/contact_us.html:51
+msgid "Message us on Telegram"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:47
+msgid "Other Ways to Reach Us"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:58
+msgid "Working Hours"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:59
+msgid "Support Available"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:86
+msgid "Fast Response Time"
+msgstr ""
+
+#: accounts/templates/accounts/pages/contact_us.html:87
+msgid ""
+"We aim to respond to all inquiries within 15 minutes. Our dedicated support "
+"team is here to help you 24/7, ensuring you get the assistance you need when "
+"you need it"
+msgstr ""
+
+#: accounts/templates/accounts/pages/faq.html:12
+#: core/templates/core/pages/faq.html:11
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: accounts/templates/accounts/pages/faq.html:13
+msgid ""
+"Find answers to common questions about our prediction service, methodology, "
+"and success rates"
+msgstr ""
+
+#: accounts/templates/accounts/pages/faq.html:48
+msgid "Still have questions? We're here to help"
+msgstr ""
+
+#: accounts/templates/accounts/pages/faq.html:58
+#: core/templates/core/pages/faq.html:57
+msgid "Contact Support"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:18
+msgid "Welcome back"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:19
+msgid "Sign in to access your account"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:97
+msgid "Forgot your password"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:108
+#: accounts/templates/accounts/pages/register.html:225
+msgid "Sign in"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:135
+msgid "Don't have an account"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:138
+msgid "Register now"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:8
+msgid "Current Plan"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:9
+msgid "Your active subscriptions and add-ons"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:30
+msgid "analysis per"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:31
+msgid "month"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:32
+msgid "year"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:39
+#: accounts/templates/accounts/pages/referral_program.html:107
+#: accounts/templates/accounts/pages/referral_program.html:114
+msgid "per month"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:45
+msgid "per year"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:52
+msgid "You don't have an active subscription"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:73
+msgid "Update Subscription"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:74
+msgid ""
+"Want to add more sports or features to your plan? Visit our plans page to "
+"explore all available options"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:76
+msgid "View Available Plans"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:86
+#: accounts/templates/accounts/pages/manage_plan.html:91
+#: core/templates/core/pages/plans.html:224
+msgid "Manage Subscription"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:87
+msgid "Update your billing method or cancel your subscription"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_account.html:6
+msgid "Account Details"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_account.html:9
+#: accounts/templates/accounts/pages/request_withdrawal.html:117
+#: accounts/templates/accounts/pages/withdrawal_history.html:135
+msgid "Full Name"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_account.html:42
+#: accounts/templates/accounts/pages/referral_program.html:263
+msgid "Your Referral Link"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_account.html:62
+msgid "Share this code with friends to earn rewards when they join"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:19
+msgid "Direct Referrals"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:20
+msgid "First level"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:38
+#: accounts/templates/accounts/pages/my_network.html:125
+msgid "Indirect Referrals"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:39
+msgid "Second level"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:54
+msgid "Total Earnings"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:55
+msgid "All levels"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:63
+msgid "Referral Network"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:67
+msgid "Active"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:71
+msgid "Inactive"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:75
+msgid "Total"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:79
+msgid ""
+"A referral is considered active if the referred user has an active "
+"subscription"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:113
+#: accounts/templates/accounts/pages/my_network.html:159
+msgid "Joined"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:120
+msgid "Direct earnings"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:165
+msgid "Indirect earnings"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_network.html:177
+msgid "No referrals yet"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:20
+msgid "Smore's Referral System"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:21
+msgid "Earn Recurring Rewards with Tiered Bonuses"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:24
+msgid ""
+"Smore offers a lucrative referral system designed to reward you for bringing "
+"in new customers. Even without an active subscription, you can earn monthly "
+"recurring rewards for both direct and indirect referrals. Plus, our tiered "
+"bonus structure lets you earn even more as you grow your network!"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:27
+msgid "How Smore's Referral System Works"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:41
+#, python-format
+msgid "First-Level Referrals: Earn 20%% + Tiered Bonuses"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:44
+#, python-format
+msgid ""
+"For every direct referral (first-level), you earn 20%% of their monthly "
+"subscription fee"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:45
+msgid ""
+"Additionally, you receive a tiered bonus based on how many first-level "
+"referrals you’ve accumulated"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:50
+#: accounts/templates/accounts/pages/referral_program.html:58
+#: accounts/templates/accounts/pages/referral_program.html:66
+msgid "referrals"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:52
+#: accounts/templates/accounts/pages/referral_program.html:60
+#: accounts/templates/accounts/pages/referral_program.html:68
+#: accounts/templates/accounts/pages/referral_program.html:123
+msgid "bonus"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:86
+msgid "Second-Level Referrals: Earn"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:88
+#, python-format
+msgid ""
+"If your first-level referrals bring in new customers (second-level "
+"referrals), you'll earn 5%% of their monthly subscription fee for as long as "
+"they stay subscribed"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:94
+msgid "Example: Earnings with 30 Direct Referrals (and Bonuses)"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:98
+msgid ""
+"Let’s say you refer 30 direct customers (first-level referrals), and each of "
+"them refers 3 new customers (second-level referrals) and each customer "
+"subscribes to the €69.99/month plan"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:100
+msgid "Here’s how much you could earn"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:105
+msgid "First-Level Earnings"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:112
+msgid "Second-Level Earnings"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:119
+msgid "Total Monthly Earnings"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:121
+msgid "including"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:128
+msgid "Example Summary"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:130
+msgid ""
+"By referring 30 customers directly (earning €419.70/month) and helping them "
+"bring in 90 second-level referrals (earning €315/month), you could earn a "
+"total of €1,034.70/month, including a €300 tiered bonus"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:132
+msgid ""
+"Start building your network today, and let Smore’s referral system turn your "
+"efforts into reliable monthly income"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:136
+msgid "Why Smore's Referral System is a Game-Changer"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:150
+msgid "Recurring Monthly Rewards"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:151
+#, python-format
+msgid ""
+"Earn 20%% from first-level referrals and 5%% from second-level referrals "
+"every month"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:167
+msgid "Tiered Bonuses"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:168
+msgid ""
+"Smore’s bonus system grows with your efforts. For every  10 first-level "
+"referrals, you unlock a bigger bonus (€100 for 10-19, €200 for 20-29, €300 "
+"for 30-39, etc.)"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:185
+msgid "Scalable Income"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:186
+msgid ""
+"The more customers you refer and the more they refer, the higher your rewards"
+"—there’s no earning limit!"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:200
+msgid "Simple and Transparent"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:201
+msgid ""
+"Easily track your referrals, bonuses, and monthly earnings in your Smore "
+"dashboard"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:209
+msgid "How to Get Started"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:223
+msgid "Join Smore"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:224
+msgid "Make an account to get started"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:240
+msgid "Access Your Unique Referral Link"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:241
+msgid "Get your personalized referral link to share with your network"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:255
+msgid "Earn Monthly Rewards and Bonuses"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:256
+msgid ""
+"Earn €13.99/month for every direct referral, €3.50/month for every indirect "
+"referral, and enjoy tiered bonuses as your network grows"
+msgstr ""
+
+#: accounts/templates/accounts/pages/referral_program.html:285
+msgid ""
+"Build your network and let Smore's referral system turn your efforts into "
+"reliable monthly income"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:17
+msgid "Create your account"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:18
+msgid "Join thousands of successful bettors"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:66
+msgid "First Name"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:82
+msgid "Last Name"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:98
+#: accounts/templates/accounts/request_reset_password.html:27
+msgid "Email address"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:140
+msgid "Confirm Password"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:167
+msgid "I am 18 years or older"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:173
+msgid "I agree to the"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:176
+#: core/templates/core/includes/footer.html:108
+#: core/templates/core/pages/terms_of_service.html:19
+msgid "Terms of Service"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:176
+msgid "and"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:178
+#: core/templates/core/includes/footer.html:119
+#: core/templates/core/pages/privacy_policy.html:18
+msgid "Privacy Policy"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:183
+msgid "Create Account"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:197
+msgid "Or"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:223
+msgid "Already have an account"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:10
+msgid "Available Balance"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:13
+msgid "Available for withdrawal"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:19
+msgid "Withdrawal Amount"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:38
+msgid "Choose a payout method"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:50
+msgid "Bank Transfer"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:59
+msgid "Payoneer"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:68
+msgid "Cryptocurrency"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:77
+msgid "Full Name (as on bank account)"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:84
+msgid "Email"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:91
+msgid "Country of Residence"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:98
+msgid "IBAN Code"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:111
+msgid ""
+"Please ensure your full name matches exactly as it appears on your bank "
+"account. Incorrect details may result in failed transfers that cannot be "
+"refunded"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:124
+msgid "Payoneer Email Address"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:131
+msgid "Payoneer customer ID"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:144
+msgid ""
+"Please verify your Payoneer email address carefully. Funds sent to incorrect "
+"Payoneer accounts cannot be recovered"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:149
+msgid "Bitcoin Address"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:163
+msgid ""
+"Please carefully verify your Bitcoin address before submitting. We cannot "
+"refund or resend funds if sent to an incorrect address"
+msgstr ""
+
+#: accounts/templates/accounts/pages/request_withdrawal.html:179
+msgid ""
+"All withdrawals are processed within 24 hours during business days. Please "
+"review your withdrawal details carefully as we cannot modify or cancel the "
+"ransaction once it's processed"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:9
+msgid "Total withdrawn amount"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:18
+#: accounts/templates/accounts/pages/withdrawal_history.html:263
+#: accounts/templates/accounts/pages/withdrawal_history.html:271
+msgid "Completed"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:34
+msgid "In Progress"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:50
+msgid "Rejected"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:89
+msgid "Transfer"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:147
+msgid "Country"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:165
+msgid "Cryptocurrency Address"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:171
+msgid "Withdrawal Progress"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:184
+msgid "Rejection Reason"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:188
+msgid "No reason provided"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:200
+#: accounts/templates/accounts/pages/withdrawal_history.html:208
+msgid "Pending"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:220
+#: accounts/templates/accounts/pages/withdrawal_history.html:228
+msgid "Approved"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:241
+#: accounts/templates/accounts/pages/withdrawal_history.html:249
+msgid "Processing"
+msgstr ""
+
+#: accounts/templates/accounts/pages/withdrawal_history.html:286
+msgid "You haven't made a withdrawal request yet"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:17
+msgid "Reset Your Password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:18
+msgid "Enter your new password below"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:48
+msgid "New Password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:73
+msgid "Confirm New Password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:148
+#: accounts/templates/accounts/password_reset_request_success.html:17
+#: accounts/templates/accounts/request_reset_password.html:17
+msgid "Reset Password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:161
+#: accounts/templates/accounts/password_reset_request_success.html:45
+#: accounts/templates/accounts/request_reset_password.html:62
+msgid "Back to Sign In"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_request_success.html:18
+msgid "Check your email for reset instructions"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_request_success.html:32
+msgid ""
+"If an account exists with the credentials you've entered, an email will be "
+"sent with instructions to reset your password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_request_success.html:33
+msgid "Please check your spam folder if you don't see the email in your inbox"
+msgstr ""
+
+#: accounts/templates/accounts/request_reset_password.html:18
+msgid "Enter your email to receive password reset instructions"
+msgstr ""
+
+#: accounts/templates/accounts/request_reset_password.html:49
+msgid "Send Reset Instructions"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:10
+msgid ""
+"Expert sports predictions powered  by advanced analytics and professional "
+"insights. Join thousands of successful bettors who trust"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:47
+msgid "Quick Links"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:58
+msgid "About Us"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:70
+#: core/templates/core/includes/header.html:75
+#: core/templates/core/includes/header.html:137
+msgid "Plans"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:82
+msgid "Contact"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:93
+#: core/templates/core/includes/header.html:84
+#: core/templates/core/includes/header.html:148
+msgid "How to Join"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:97
+msgid "Legal"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:130
+#: core/templates/core/pages/disclaimer.html:20
+msgid "Disclaimer"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:138
+msgid "All rights reserved"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:141
+msgid "Terms"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:145
+msgid "Privacy"
+msgstr ""
+
+#: core/templates/core/includes/footer.html:149
+msgid "Cookies"
+msgstr ""
+
+#: core/templates/core/includes/header.html:57
+#: core/templates/core/includes/header.html:129
+msgid "Home"
+msgstr ""
+
+#: core/templates/core/includes/header.html:61
+#: core/templates/core/includes/header.html:131
+msgid "Upcoming Matches"
+msgstr ""
+
+#: core/templates/core/includes/header.html:65
+#: core/templates/core/includes/header.html:134
+msgid "History"
+msgstr ""
+
+#: core/templates/core/includes/header.html:70
+#: core/templates/core/includes/header.html:140
+msgid "Referral Program"
+msgstr ""
+
+#: core/templates/core/includes/header.html:104
+#: core/templates/core/includes/header.html:166
+msgid "Sign In"
+msgstr ""
+
+#: core/templates/core/includes/header.html:106
+#: core/templates/core/includes/header.html:169
+msgid "Sign Up"
+msgstr ""
+
+#: core/templates/core/includes/header.html:155
+msgid "My Account"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:11
+msgid "About Smore"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:12
+msgid "Transforming Sports Predictions Through Data Science"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:13
+msgid ""
+"We combine advanced analytics, machine learning, and expert insights to "
+"provide the most accurate sports predictions in the industry."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:33
+#: core/templates/core/pages/home.html:33
+#: core/templates/core/pages/home.html:249
+#: core/templates/core/pages/subscription_required.html:25
+#: core/templates/core/pages/upcoming_matches.html:40
+msgid "Success Rate"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:51
+msgid "Active Users"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:69
+msgid "Daily Picks"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:85
+#: core/templates/core/pages/home.html:321
+msgid "Expert Support"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:97
+msgid "Our Story"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:98
+msgid "A Decade of Excellence in Sports Analytics"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:99
+msgid "Founded in 2014,"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:100
+msgid ""
+"emerged from a simple vision: to revolutionize sports predictions through "
+"the power of data science and machine learning."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:102
+msgid ""
+"What started as a small team of sports enthusiasts and data scientists has "
+"grown into a leading platform trusted by over 10,000 users worldwide."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:103
+msgid ""
+"Our commitment to accuracy, transparency, and user success has earned us a "
+"reputation as the most reliable sports prediction service in the industry."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:118
+msgid "Our Values"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:119
+msgid "What Sets Us Apart"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:120
+msgid ""
+"Our core values drive everything we do, from developing prediction models to "
+"supporting our users."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:140
+msgid "Data-Driven Excellence"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:141
+msgid ""
+"Our predictions are powered by advanced algorithms and machine learning "
+"models that analyze vast amounts of sports data."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:152
+msgid "Integrity First"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:153
+msgid ""
+"We maintain the highest standards of transparency and honesty in all our "
+"predictions and analysis."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:165
+msgid "Continuous Innovation"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:166
+msgid ""
+"We constantly refine our prediction models and analysis methods to maintain "
+"our industry-leading accuracy."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:177
+msgid "User Success"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:178
+msgid ""
+"Your success is our success. We're committed to providing the insights you "
+"need to make informed decisions."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:188
+msgid "Ready to Experience the Future of Sports Predictions?"
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:189
+msgid ""
+"Join thousands of successful users who trust our expert predictions and "
+"analysis."
+msgstr ""
+
+#: core/templates/core/pages/about_us.html:194
+#: core/templates/core/pages/how_to_join.html:261
+msgid "Get Started Now"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:10
+msgid "Get in Touch"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:11
+msgid "We're Here to Help"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:12
+msgid ""
+"Have questions about our predictions or need assistance? Our expert team is "
+"ready to help you 24/7"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:70
+msgid "Send us an email anytime"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:88
+msgid "Support"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:89
+msgid ""
+"Our team is available around the clock to assist you with any questions or "
+"concerns"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:100
+msgid "Fast Response"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:101
+msgid "We aim to respond to all inquiries within 15 minutes during peak hours"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:113
+msgid "Global Coverage"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:114
+msgid "Support available in multiple languages for our international user base"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:126
+msgid "Expert Assistance"
+msgstr ""
+
+#: core/templates/core/pages/contact_us.html:127
+msgid "Get help from our team of experienced sports analysis professionals"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:23
+#: core/templates/core/pages/privacy_policy.html:220
+msgid "Cookie Policy"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:36
+msgid "This Cookie Policy explains how"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:38
+msgid ""
+"uses cookies and similar technologies to provide, customize, evaluate, "
+"improve, and secure our services. By using our website, you consent to our "
+"use of cookies as described in this policy."
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:41
+msgid "What Are Cookies?"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:42
+msgid ""
+"Cookies are small text files that are stored on your device when you visit "
+"our website. They help us remember your preferences, understand how you use "
+"our site, and provide you with a more personalized experience."
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:45
+msgid "Types of Cookies We Use"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:57
+msgid "Session Authentication"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:59
+msgid "Required"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:61
+msgid ""
+"Essential cookies that maintain your login status and secure your session "
+"while using our service."
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:63
+#: core/templates/core/pages/cookies_policy.html:100
+msgid "Examples:"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:67
+msgid "Authentication tokens"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:71
+msgid "Session identifiers"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:75
+msgid "Security tokens"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:95
+msgid "Analytics"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:96
+msgid "Optional"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:98
+msgid ""
+"Facebook Pixel tracking to help us understand user interactions and improve "
+"our service."
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:104
+msgid "Click tracking"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:108
+msgid "Page views"
+msgstr ""
+
+#: core/templates/core/pages/cookies_policy.html:112
+msgid "User journey analysis"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:30
+#: core/templates/core/pages/privacy_policy.html:28
+msgid "Last Updated"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:42
+msgid "Important Notice"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:43
+msgid ""
+"Before using our service, please read this disclaimer carefully. By "
+"accessing and using"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:44
+msgid "you acknowledge and agree to the terms outlined in this disclaimer."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:62
+msgid "Risk Warning"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:63
+msgid ""
+"Sports betting involves substantial risk and may not be suitable for all "
+"users. Past performance of our predictions does not guarantee future "
+"results. Users must understand that they are responsible for their own "
+"betting decisions and any resulting financial losses."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:80
+msgid "No Guaranteed Returns"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:81
+msgid ""
+"While we strive to provide accurate predictions based on comprehensive "
+"analysis, we cannot and do not guarantee any specific success rate or "
+"financial returns. Sports events are inherently unpredictable, and many "
+"factors beyond our control can affect outcomes."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:103
+msgid "Information Purpose Only"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:104
+msgid ""
+"Our predictions and analysis are provided for informational purposes only. "
+"They should not be considered as financial advice or a recommendation to "
+"place specific bets. Users should conduct their own research and exercise "
+"their own judgment before making any betting decisions."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:120
+msgid "Legal Compliance"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:121
+msgid ""
+"Users are responsible for ensuring that their use of our service complies "
+"with all applicable laws and regulations in their jurisdiction. Sports "
+"betting may be restricted or illegal in certain regions, and it is the "
+"user's responsibility to verify and comply with local laws."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:126
+msgid "Additional Important Points"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:130
+msgid ""
+"We are not liable for any losses incurred from using our predictions or "
+"analysis."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:134
+msgid ""
+"Our service is intended for entertainment and informational purposes only."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:138
+msgid "Past performance statistics are not indicative of future results."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:142
+msgid "Always gamble responsibly and within your means."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:146
+msgid ""
+"If you feel you may have a gambling problem, seek professional help "
+"immediately."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:151
+msgid "Responsible Gambling"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:152
+msgid ""
+"We strongly encourage responsible gambling practices. If you or someone you "
+"know has a gambling problem, please contact the appropriate support services "
+"in your region."
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:155
+msgid "Gambling Addiction Helpline"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:156
+msgid "24/7 Confidential Support"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:161
+msgid "Online Resources"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:162
+msgid "Visit for Help &amp; Information"
+msgstr ""
+
+#: core/templates/core/pages/disclaimer.html:170
+msgid "If you have any questions about this Disclaimer, please contact us:"
+msgstr ""
+
+#: core/templates/core/pages/faq.html:12
+msgid ""
+"Find answers to common questions about our prediction service, methodology, "
+"and success rates."
+msgstr ""
+
+#: core/templates/core/pages/faq.html:47
+msgid "Still have questions? We're here to help."
+msgstr ""
+
+#: core/templates/core/pages/history.html:10
+msgid "Track Record"
+msgstr ""
+
+#: core/templates/core/pages/history.html:11
+msgid "Prediction History"
+msgstr ""
+
+#: core/templates/core/pages/history.html:12
+msgid ""
+"Explore our comprehensive track record of predictions across multiple "
+"sports, showcasing our consistent success rate and analytical expertise."
+msgstr ""
+
+#: core/templates/core/pages/history.html:21
+#: core/templates/core/pages/history.html:55
+#: core/templates/core/pages/upcoming_matches.html:74
+#: core/templates/core/pages/upcoming_matches.html:124
+msgid "Soccer"
+msgstr ""
+
+#: core/templates/core/pages/history.html:25
+#: core/templates/core/pages/history.html:34
+#: core/templates/core/pages/upcoming_matches.html:87
+msgid "Soon"
+msgstr ""
+
+#: core/templates/core/pages/history.html:29
+#: core/templates/core/pages/upcoming_matches.html:82
+msgid "Basketball"
+msgstr ""
+
+#: core/templates/core/pages/history.html:82
+#: core/templates/core/pages/upcoming_matches.html:130
+msgid "Match"
+msgstr ""
+
+#: core/templates/core/pages/history.html:100
+#: core/templates/core/pages/upcoming_matches.html:148
+msgid "Kick-off Date"
+msgstr ""
+
+#: core/templates/core/pages/history.html:104
+#: core/templates/core/pages/upcoming_matches.html:152
+msgid "Kick-off Time"
+msgstr ""
+
+#: core/templates/core/pages/history.html:111
+#: core/templates/core/pages/upcoming_matches.html:160
+msgid "Prediction"
+msgstr ""
+
+#: core/templates/core/pages/history.html:116
+msgid "Result"
+msgstr ""
+
+#: core/templates/core/pages/history.html:124
+#: core/templates/core/pages/home.html:160
+#: core/templates/core/pages/upcoming_matches.html:165
+msgid "Odds"
+msgstr ""
+
+#: core/templates/core/pages/history.html:135
+msgid "Load More"
+msgstr ""
+
+#: core/templates/core/pages/home.html:21
+msgid "Smart Predictions for Better Results"
+msgstr ""
+
+#: core/templates/core/pages/home.html:23
+msgid "The intelligent way to win!"
+msgstr ""
+
+#: core/templates/core/pages/home.html:25
+msgid ""
+"Behind every winning strategy is a team that truly understands the game. Our "
+"dedicated professionals dive deep into the action to bring you sharp, "
+"insightful sports analyses you can trust"
+msgstr ""
+
+#: core/templates/core/pages/home.html:45
+msgid "Users"
+msgstr ""
+
+#: core/templates/core/pages/home.html:72
+#: core/templates/core/pages/telegram_landing.html:95
+msgid "Free Telegram Channel"
+msgstr ""
+
+#: core/templates/core/pages/home.html:115
+msgid "Featured Pick"
+msgstr ""
+
+#: core/templates/core/pages/home.html:116
+msgid "Today's Top Pick"
+msgstr ""
+
+#: core/templates/core/pages/home.html:121
+#: core/templates/core/pages/home.html:137
+msgid "Kickoff Time"
+msgstr ""
+
+#: core/templates/core/pages/home.html:132
+msgid "League"
+msgstr ""
+
+#: core/templates/core/pages/home.html:156
+msgid "Our Prediction"
+msgstr ""
+
+#: core/templates/core/pages/home.html:168
+msgid "View more picks"
+msgstr ""
+
+#: core/templates/core/pages/home.html:179
+msgid "Get a plan to see more picks"
+msgstr ""
+
+#: core/templates/core/pages/home.html:190
+msgid "Get Full Analysis"
+msgstr ""
+
+#: core/templates/core/pages/home.html:223
+msgid "Why Choose Us"
+msgstr ""
+
+#: core/templates/core/pages/home.html:224
+#: core/templates/core/pages/how_to_join.html:197
+msgid "Why Choose"
+msgstr ""
+
+#: core/templates/core/pages/home.html:226
+msgid ""
+"Join thousands of successful bettors who trust our expert predictions and "
+"analysis"
+msgstr ""
+
+#: core/templates/core/pages/home.html:251
+msgid "Industry-leading prediction accuracy across all sports categories"
+msgstr ""
+
+#: core/templates/core/pages/home.html:274
+msgid "Satisfied Clients"
+msgstr ""
+
+#: core/templates/core/pages/home.html:276
+msgid "Growing community of successful bettors who trust our insights"
+msgstr ""
+
+#: core/templates/core/pages/home.html:299
+msgid "Monthly Analyses"
+msgstr ""
+
+#: core/templates/core/pages/home.html:301
+msgid "Fresh predictions and in-depth analysis delivered every day"
+msgstr ""
+
+#: core/templates/core/pages/home.html:323
+msgid "Round-the-clock assistance from our professional team"
+msgstr ""
+
+#: core/templates/core/pages/home.html:340
+msgid "Advantages of choosing Smore"
+msgstr ""
+
+#: core/templates/core/pages/home.html:341
+msgid "Unlock Your Betting Potential"
+msgstr ""
+
+#: core/templates/core/pages/home.html:342
+msgid ""
+"Experience the power of professional sports analysis with our comprehensive "
+"suite of features"
+msgstr ""
+
+#: core/templates/core/pages/home.html:365
+msgid "We Do All the Hard Work"
+msgstr ""
+
+#: core/templates/core/pages/home.html:367
+msgid ""
+"Our expert team analyzes thousands of data points, statistics, and trends to "
+"deliver accurate predictions, so you don't have to spend hours researching"
+msgstr ""
+
+#: core/templates/core/pages/home.html:369
+#: core/templates/core/pages/home.html:420
+msgid "Key Benefits"
+msgstr ""
+
+#: core/templates/core/pages/home.html:373
+msgid "Advanced statistical analysis"
+msgstr ""
+
+#: core/templates/core/pages/home.html:377
+msgid "Machine learning predictions"
+msgstr ""
+
+#: core/templates/core/pages/home.html:381
+msgid "Expert human oversight"
+msgstr ""
+
+#: core/templates/core/pages/home.html:385
+msgid "Real-time data processing"
+msgstr ""
+
+#: core/templates/core/pages/home.html:391
+msgid "View Our Process"
+msgstr ""
+
+#: core/templates/core/pages/home.html:416
+msgid "Premium Telegram Channel"
+msgstr ""
+
+#: core/templates/core/pages/home.html:418
+msgid ""
+"Get instant access to our exclusive Telegram channel with real-time "
+"predictions, live updates, and expert insights delivered straight to your "
+"mobile."
+msgstr ""
+
+#: core/templates/core/pages/home.html:424
+msgid "Instant predictions delivery"
+msgstr ""
+
+#: core/templates/core/pages/home.html:428
+msgid "Live match updates"
+msgstr ""
+
+#: core/templates/core/pages/home.html:432
+msgid "Expert community insights"
+msgstr ""
+
+#: core/templates/core/pages/home.html:436
+msgid "24/7 support access"
+msgstr ""
+
+#: core/templates/core/pages/home.html:441
+msgid "Join Channel"
+msgstr ""
+
+#: core/templates/core/pages/home.html:467
+msgid "Mobile App Coming Soon"
+msgstr ""
+
+#: core/templates/core/pages/home.html:469
+msgid ""
+"Experience seamless betting predictions with our upcoming mobile app, "
+"featuring push notifications, personalized alerts, and an intuitive "
+"interface."
+msgstr ""
+
+#: core/templates/core/pages/home.html:475
+msgid "Real-time notifications"
+msgstr ""
+
+#: core/templates/core/pages/home.html:479
+msgid "Personalized predictions"
+msgstr ""
+
+#: core/templates/core/pages/home.html:483
+msgid "Match tracking"
+msgstr ""
+
+#: core/templates/core/pages/home.html:487
+msgid "Performance analytics"
+msgstr ""
+
+#: core/templates/core/pages/home.html:493
+msgid "You'll receive an email when the application is launched"
+msgstr ""
+
+#: core/templates/core/pages/home.html:497
+#: core/templates/core/pages/home.html:783
+msgid "Get started to be notified"
+msgstr ""
+
+#: core/templates/core/pages/home.html:521
+#: core/templates/core/pages/how_to_join.html:255
+msgid "Ready to Start Winning?"
+msgstr ""
+
+#: core/templates/core/pages/home.html:546
+msgid "Our Process"
+msgstr ""
+
+#: core/templates/core/pages/home.html:547
+msgid "How We Create Winning Predictions"
+msgstr ""
+
+#: core/templates/core/pages/home.html:548
+msgid ""
+"Our comprehensive analysis process combines advanced statistics, expert "
+"insights, and risk management"
+msgstr ""
+
+#: core/templates/core/pages/home.html:580
+#: core/templates/core/pages/home.html:617
+#: core/templates/core/pages/home.html:655
+#: core/templates/core/pages/home.html:692
+msgid "Step"
+msgstr ""
+
+#: core/templates/core/pages/home.html:581
+msgid "Match Analysis"
+msgstr ""
+
+#: core/templates/core/pages/home.html:584
+msgid ""
+"At SMORE, we dive deep into match analysis to give you the edge in sports "
+"outcome. By combining recent form, head-to-head stats, injury updates, and "
+"market trends, we provide insightful predictions to maximize your chances of "
+"success."
+msgstr ""
+
+#: core/templates/core/pages/home.html:618
+msgid "Odds analysis"
+msgstr ""
+
+#: core/templates/core/pages/home.html:621
+msgid ""
+"Odds analysis evaluates betting odds by comparing probabilities with key "
+"factors like team form, player stats, and match dynamics. For soccer, "
+"basketball, and NFL, we analyze performance trends, injuries, and strategies "
+"to uncover value bets. SMORE simplifies the data, helping you boost your "
+"potential outcomes."
+msgstr ""
+
+#: core/templates/core/pages/home.html:656
+msgid "Risk Management"
+msgstr ""
+
+#: core/templates/core/pages/home.html:659
+msgid ""
+"Risk management is at the core of our approach. SMORE identifies, evaluates, "
+"and minimizes uncertainties by analyzing data, setting clear limits, and "
+"diversifying strategies. By leveraging expertise and precision, we ensure "
+"well-informed decisions that balance calculated risks, helping you achieve "
+"consistent and sustainable results."
+msgstr ""
+
+#: core/templates/core/pages/home.html:693
+msgid "Detailed Report"
+msgstr ""
+
+#: core/templates/core/pages/home.html:696
+msgid ""
+"SMORE’s detailed reports provide a comprehensive breakdown of key factors "
+"influencing sports outcomes. Our analysis includes team and player "
+"performance, historical data, current form, tactical insights, and external "
+"variables such as injuries, weather, and schedules. We dive deep into "
+"probabilities and trends, offering clear, data-backed insights to support "
+"strategic decisions. Each report is tailored to provide clarity and "
+"precision, helping you stay ahead with accurate and actionable information."
+msgstr ""
+
+#: core/templates/core/pages/home.html:717
+#: core/templates/core/pages/home.html:797
+#: core/templates/core/pages/plans.html:49
+#: core/templates/core/pages/plans.html:155
+msgid "Coming Soon"
+msgstr ""
+
+#: core/templates/core/pages/home.html:718
+msgid "Take Smore"
+msgstr ""
+
+#: core/templates/core/pages/home.html:719
+msgid "Anywhere"
+msgstr ""
+
+#: core/templates/core/pages/home.html:722
+msgid ""
+"is now coming to mobile. Get instant access to expert predictions, live "
+"updates, and personalized alerts. Your winning strategy in your pocket."
+msgstr ""
+
+#: core/templates/core/pages/home.html:741
+msgid "Instant Notifications"
+msgstr ""
+
+#: core/templates/core/pages/home.html:741
+msgid "Real-time alerts for new predictions"
+msgstr ""
+
+#: core/templates/core/pages/home.html:751
+msgid "Live Match Updates"
+msgstr ""
+
+#: core/templates/core/pages/home.html:751
+msgid "Track your predictions in real-time"
+msgstr ""
+
+#: core/templates/core/pages/home.html:763
+msgid "Access"
+msgstr ""
+
+#: core/templates/core/pages/home.html:763
+msgid "Premium features on the go"
+msgstr ""
+
+#: core/templates/core/pages/home.html:769
+msgid "Early Access"
+msgstr ""
+
+#: core/templates/core/pages/home.html:773
+msgid "Get Notified on Launch"
+msgstr ""
+
+#: core/templates/core/pages/home.html:774
+msgid ""
+"Join our exclusive early access list and be the first to experience the "
+"future of sports predictions."
+msgstr ""
+
+#: core/templates/core/pages/home.html:777
+msgid "You'll receive an email when the application is launched."
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:20
+msgid "Join Now"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:22
+msgid "Start Winning Today"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:23
+msgid ""
+"Join thousands of successful bettors who trust our expert predictions. Get "
+"started in minutes with our simple three-step process"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:52
+msgid "Create Your Account"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:53
+msgid ""
+"Sign up in less than 2 minutes with just your email and password. No "
+"complicated verification process"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:63
+msgid "Instant account activation"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:72
+msgid "Secure authentication"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:81
+msgid "No credit card required to start"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:112
+msgid "Choose Your Package"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:113
+msgid ""
+"Select from our flexible sports packages. Start with one sport and add more "
+"anytime with our special multi-sport discount"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:123
+msgid "Flexible sport combinations"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:132
+msgid "Special multi-sport discounts"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:141
+msgid "Add or remove sports anytime"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:160
+msgid "Complete Payment"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:161
+msgid ""
+"Safe and secure payment processing. Choose from multiple payment methods "
+"including Credit Card, Apple Pay, Google Pay, Revolut"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:171
+msgid "Secure payment processing"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:180
+msgid "Multiple payment options"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:189
+msgid "Instant access after payment"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:209
+msgid "Instant Access"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:210
+msgid "Get immediate access to predictions and analysis right after joining"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:221
+msgid "Risk-Free Trial"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:222
+msgid "7-day money-back guarantee if you're not completely satisfied"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:235
+msgid "Round-the-clock customer support to assist you with any questions"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:247
+msgid "Mobile Ready"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:248
+msgid "Access predictions on any device through our responsive platform"
+msgstr ""
+
+#: core/templates/core/pages/how_to_join.html:256
+msgid ""
+"Join now and get instant access to expert predictions with our 7-day money-"
+"back guarantee"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:20
+msgid "Monthly"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:26
+msgid "Annual"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:27
+#, python-format
+msgid "Save 20%%"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:81
+msgid "Current plan"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:83
+msgid "Plan expiry"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:95
+msgid "analysis per month"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:103
+msgid "High Odds"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:111
+msgid "Betting Guidance"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:119
+msgid "Promotions & Giveaways"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:127
+msgid "24/7 Client Support"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:135
+msgid "Affiliate program"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:141
+msgid "No products available"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:164
+msgid "Add-on"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:193
+msgid "Summary"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:196
+msgid "monthly"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:197
+msgid "price"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:208
+#: core/templates/core/pages/plans.html:239
+msgid "Get Started"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:253
+msgid "Need help choosing?"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:255
+msgid "Contact our team"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:31
+msgid ""
+"At Smore, we take your privacy seriously. This Privacy Policy explains how "
+"we collect, use, and protect your personal information. By using our "
+"service, you agree to the collection and use of information in accordance "
+"with this policy"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:46
+msgid "Information We Collect"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:50
+msgid "Personal Information (name, email, phone number)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:54
+msgid "Account Information (username, password)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:58
+msgid "Payment Information (processed securely through our payment providers)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:62
+msgid "Usage Data (how you interact with our service)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:66
+msgid "Device Information (IP address, browser type, device type)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:83
+msgid "How We Use Your Information"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:87
+msgid "Provide and maintain our Service"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:91
+msgid "Process your payments and subscriptions"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:95
+msgid "Send you important updates and notifications"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:99
+msgid "Improve our services and user experience"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:103
+msgid "Detect and prevent fraudulent activities"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:120
+msgid "Data Security"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:124
+msgid "Industry-standard encryption protocols"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:128
+msgid "Regular security audits and updates"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:132
+msgid "Strict access controls for employee data access"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:136
+msgid "Secure data storage and transmission"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:140
+msgid "Continuous monitoring for potential security threats"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:156
+msgid "Your Privacy Rights"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:160
+msgid "Access your personal data"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:164
+msgid "Request data correction or deletion"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:168
+msgid "Opt-out of marketing communications"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:172
+msgid "Data portability rights"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:176
+msgid "Right to withdraw consent"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:193
+msgid "Communications"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:197
+msgid "Service-related notifications"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:201
+msgid "Marketing communications (with consent)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:205
+msgid "Important updates about your account"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:209
+msgid "Responses to your inquiries"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:213
+msgid "Newsletter (optional subscription)"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:221
+msgid ""
+"We use cookies and similar tracking technologies to track activity on our "
+"Service and hold certain information. Cookies are files with a small amount "
+"of data which may include an anonymous unique identifier"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:222
+msgid ""
+"You can instruct your browser to refuse all cookies or to indicate when a "
+"cookie is being sent. However, if you do not accept cookies, you may not be "
+"able to use some portions of our Service"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:225
+msgid "Changes to This Privacy Policy"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:226
+msgid ""
+"We may update our Privacy Policy from time to time. We will notify you of "
+"any changes by posting the new Privacy Policy on this page and updating the "
+"Last Updated date"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:227
+msgid ""
+"You are advised to review this Privacy Policy periodically for any changes. "
+"Changes to this Privacy Policy are effective when they are posted on this "
+"page"
+msgstr ""
+
+#: core/templates/core/pages/privacy_policy.html:231
+msgid "If you have any questions about this Privacy Policy, please contact us"
+msgstr ""
+
+#: core/templates/core/pages/subscription_required.html:19
+msgid "Premium Content"
+msgstr ""
+
+#: core/templates/core/pages/subscription_required.html:28
+#: core/templates/core/pages/upcoming_matches.html:33
+msgid "Daily Expert Predictions"
+msgstr ""
+
+#: core/templates/core/pages/subscription_required.html:31
+msgid "Detailed Match Analysis"
+msgstr ""
+
+#: core/templates/core/pages/subscription_required.html:34
+#: core/templates/core/pages/upcoming_matches.html:51
+msgid "View Plans"
+msgstr ""
+
+#: core/templates/core/pages/telegram_landing.html:116
+msgid "Website"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:33
+msgid ""
+"Welcome to SMORE. These Terms of Service govern your use of our website, "
+"app, services, and any content or features provided by"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:35
+msgid ""
+"By accessing or using our Service, you agree to be bound by these Terms. If "
+"you do not agree with these Terms, please do not use the Service"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:38
+msgid "Acceptance of Terms"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:41
+msgid ""
+"By using our Service, you acknowledge that you have read, understood, and "
+"agree to be bound by these Terms and any future amendments or updates to them"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:45
+msgid "Description of the Service"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:48
+msgid ""
+"Our Service provides sports results analysis, predictions, and insights "
+"based on statistical data, historical performance, and other relevant "
+"factors. We aim to offer helpful guidance for users interested in sports "
+"betting, fantasy sports, or general interest in sports performance"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:52
+msgid "No Guarantee of Accuracy"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:55
+msgid ""
+"While we use reasonable efforts to provide accurate and insightful analysis, "
+"we do not guarantee the correctness, completeness, or reliability of any "
+"sports result or prediction generated through our Service. All analysis and "
+"predictions are based on historical data and statistical modeling, but "
+"outcomes may differ due to unforeseen factors such as player performance, "
+"weather, or  other variables"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:56
+msgid ""
+"You understand and acknowledge that all use of our analysis and predictions "
+"is at your own risk"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:60
+msgid "Subscription and Payment"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:66
+msgid "Subscription Fees"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:66
+msgid ""
+"Access to our Service is provided on a monthly subscription basis. The "
+"current subscription fee is outlined at the point of purchase"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:69
+msgid "No Refund Policy"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:69
+msgid ""
+"Due to the nature of our Service, all subscription fees are non-refundable, "
+"even if you cancel your subscription before the end of the billing cycle. By "
+"subscribing, you agree to this no-refund policy"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:72
+msgid "Billing"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:72
+msgid ""
+"Subscriptions will automatically renew at the end of each monthly period, "
+"and you will be charged the prevailing monthly rate unless you cancel your "
+"subscription before the next billing cycle"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:79
+msgid "User Responsibilities"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:82
+msgid "By using our Service, you agree to"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:84
+msgid ""
+"Use the Service only for lawful purposes and in accordance with these Terms"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:86
+msgid ""
+"Not misuse or exploit our Service for any illegal activities, including but "
+"not limited to fraud, betting manipulation, or other unlawful conduct"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:88
+msgid "Keep your account information secure and confidential"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:90
+msgid ""
+"By accessing or using our Service, you confirm that you are at least the "
+"minimum legal age required to participate in any betting or gambling "
+"activities in your jurisdiction"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:91
+msgid ""
+"If you are under the legal age for gambling in your jurisdiction, you must "
+"not use the Service. We reserve the right to verify your age and suspend or "
+"terminate your access to the Service if we believe you do not meet the legal "
+"age requirement"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:92
+msgid ""
+"By using our Service, you acknowledge and understand that gambling can be "
+"addictive and that participating in betting or gambling activities may lead "
+"to financial loss or other negative consequences. You accept full "
+"responsibility for any risks associated with your participation, including "
+"the potential for addiction"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:97
+msgid "Intellectual Property"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:103
+msgid "Ownership of Content"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:103
+msgid ""
+"All content, materials, and intellectual property related to our Service, "
+"including but not limited to analysis, predictions, design, and trademarks, "
+"are owned by"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:104
+msgid "or its licensors and"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:105
+msgid "are protected by copyright and other intellectual property laws"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:108
+msgid "License to Use"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:108
+msgid ""
+"We grant you a limited, non-exclusive, non-transferable license to access "
+"and use our Service for personal, non-commercial purposes, in accordance "
+"with these Terms."
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:115
+msgid "Termination and Suspension"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:121
+msgid "Our Rights to Terminate"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:121
+msgid ""
+"We reserve the right to suspend or terminate your access to the Service at "
+"our sole discretion if we suspect that you have violated these Terms or "
+"engaged in any fraudulent or unlawful activities"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:124
+msgid "User's Rights to Terminate"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:124
+msgid ""
+"You may cancel your subscription at any time, but please note that no "
+"refunds will be provided"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:131
+msgid "Privacy and Data Protection"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:134
+msgid ""
+"Your use of the Service is also governed by our Privacy Policy, which "
+"outlines how we collect, use, and protect your personal information. By "
+"using the Service, you agree to the practices described in our Privacy Policy"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:138
+msgid "Disclaimers"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:144
+msgid "No Warranty"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:144
+msgid ""
+"The Service is provided as-is, without any warranties or representations, "
+"whether express or implied, including but not limited to the accuracy or "
+"reliability of predictions, analysis, or any other aspect of the Service"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:147
+msgid "Limitation of Liability"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:147
+msgid "To the fullest extent permitted by applicable law"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:149
+msgid ""
+"will not be liable for any indirect, incidental, special, consequential, or "
+"punitive damages, or any loss of profit, revenue, data, or use, arising out "
+"of or related to your use of the Service, even if we have been advised of "
+"the possibility of such damages"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:156
+msgid "Dispute Resolution"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:159
+msgid ""
+"Any dispute, controversy, or claim arising out of or relating to these Terms "
+"shall be resolved through binding arbitration, administered by the Bulgarian "
+"Chamber of Commerce and Industry (BCCI) in accordance with its Arbitration "
+"Rules. The place of arbitration shall be Sofia, Bulgaria, and the language "
+"of arbitration shall be Bulgarian/English. The decision of the arbitrator(s) "
+"shall be final and binding on all parties"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:166
+msgid ""
+"We may update or modify these Terms at any time. When we do, we will post "
+"the updated Terms on our website and provide the date of the most recent "
+"update. Continued use of the Service after such changes indicates your "
+"acceptance of the revised Terms"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:170
+msgid "Governing Law"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:173
+msgid ""
+"These Terms are governed by and construed in accordance with the laws of "
+"Bulgaria, without regard to its conflict of laws principles"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:177
+#: core/templates/core/pages/terms_of_service.html:186
+msgid "Contact Information"
+msgstr ""
+
+#: core/templates/core/pages/terms_of_service.html:181
+msgid "For any questions regarding these Terms, please contact us at"
+msgstr ""
+
+#: core/templates/core/pages/upcoming_matches.html:24
+msgid "Premium Predictions"
+msgstr ""
+
+#: core/templates/core/pages/upcoming_matches.html:25
+msgid ""
+"Subscribe to access all our expert predictions for upcoming matches, "
+"featuring detailed analysis and insights."
+msgstr ""
+
+#: core/templates/core/pages/upcoming_matches.html:48
+msgid "High odds"
+msgstr ""
+
+#: core/templates/core/pages/upcoming_matches.html:63
+msgid "Upcoming Predictions"
+msgstr ""
+
+#: core/templates/core/pages/upcoming_matches.html:64
+msgid "View our expert predictions for upcoming matches"
+msgstr ""

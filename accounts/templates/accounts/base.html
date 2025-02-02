@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -50,7 +50,7 @@
 
                                         {% if 'email-verification' in message.tags %}
                                             <button class="text-primary-300 hover:text-white transition-colors resendEmailButton hidden md:block">
-                                                Resend email
+                                                {% trans "Resend email" %}
                                             </button>
                                         {% endif %}
 
@@ -71,7 +71,7 @@
                                 {% if 'email-verification' in message.tags %}
                                     <div class="flex items-center justify-center md:hidden">
                                         <button class="text-primary-300 hover:text-white transition-colors resendEmailButton p-4 ">
-                                            Resend email
+                                            {% trans "Resend email" %}
                                         </button>
                                     </div>
                                 {% endif %}

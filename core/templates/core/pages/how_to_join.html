@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-5"></div>
@@ -15,11 +16,12 @@
                     class="lucide lucide-user-plus w-4 h-4 mr-2"><path
                     d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line
                     x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11"
-                                                                y2="11"></line></svg>Join Now</span>
+                                                                y2="11"></line></svg>
+                {% trans "Join Now" %}</span>
                 <h2 class="text-5xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-secondary-100 to-white">
-                    Start Winning Today</h2>
-                <p class="text-primary-200 max-w-2xl mx-auto">Join thousands of successful bettors who trust our expert
-                    predictions. Get started in minutes with our simple three-step process.</p></div>
+                    {% trans "Start Winning Today" %}</h2>
+                <p class="text-primary-200 max-w-2xl mx-auto">{% trans "Join thousands of successful bettors who trust our expert predictions. Get started in minutes with our simple three-step process" %}.</p>
+            </div>
             <div class="max-w-6xl mx-auto mb-24 relative">
                 <div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary-500/20 to-transparent"></div>
                 <div class="grid md:grid-cols-3 gap-8">
@@ -47,9 +49,8 @@
                                     </svg>
                                 </div>
                                 <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-secondary-400 transition-colors">
-                                    Create Your Account</h3>
-                                <p class="text-primary-200 mb-6">Sign up in less than 2 minutes with just your email and
-                                    password. No complicated verification process.</p>
+                                    {% trans "Create Your Account" %}</h3>
+                                <p class="text-primary-200 mb-6">{% trans "Sign up in less than 2 minutes with just your email and password. No complicated verification process" %}.</p>
                                 <ul class="space-y-3">
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -59,7 +60,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Instant account activation</span></li>
+                                        <span>{% trans "Instant account activation" %}</span></li>
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -68,7 +69,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Secure authentication</span></li>
+                                        <span>{% trans "Secure authentication" %}</span></li>
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -77,7 +78,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>No credit card required to start</span></li>
+                                        <span>{% trans "No credit card required to start" %}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -108,9 +109,8 @@
                                     </svg>
                                 </div>
                                 <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-secondary-400 transition-colors">
-                                    Choose Your Package</h3>
-                                <p class="text-primary-200 mb-6">Select from our flexible sports packages. Start with
-                                    one sport and add more anytime with our special multi-sport discount.</p>
+                                    {% trans "Choose Your Package" %}</h3>
+                                <p class="text-primary-200 mb-6">{% trans "Select from our flexible sports packages. Start with one sport and add more anytime with our special multi-sport discount" %}.</p>
                                 <ul class="space-y-3">
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -120,7 +120,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Flexible sport combinations</span></li>
+                                        <span>{% trans "Flexible sport combinations" %}</span></li>
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -129,7 +129,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Special multi-sport discounts</span></li>
+                                        <span>{% trans "Special multi-sport discounts" %}</span></li>
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -138,7 +138,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Add or remove sports anytime</span></li>
+                                        <span>{% trans "Add or remove sports anytime" %}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -157,9 +157,8 @@
                                     </svg>
                                 </div>
                                 <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-secondary-400 transition-colors">
-                                    Complete Payment</h3>
-                                <p class="text-primary-200 mb-6">Safe and secure payment processing. Choose from
-                                    multiple payment methods including Credit Card, Apple Pay, Google Pay, Revolut</p>
+                                    {% trans "Complete Payment" %}</h3>
+                                <p class="text-primary-200 mb-6">{% trans "Safe and secure payment processing. Choose from multiple payment methods including Credit Card, Apple Pay, Google Pay, Revolut" %}</p>
                                 <ul class="space-y-3">
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -169,7 +168,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Secure payment processing</span></li>
+                                        <span>{% trans "Secure payment processing" %}</span></li>
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -178,7 +177,7 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Multiple payment options</span></li>
+                                        <span>{% trans "Multiple payment options" %}</span></li>
                                     <li class="flex items-center text-primary-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -187,14 +186,15 @@
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m9 12 2 2 4-4"></path>
                                         </svg>
-                                        <span>Instant access after payment</span></li>
+                                        <span>{% trans "Instant access after payment" %}</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="max-w-6xl mx-auto mb-16"><h3 class="text-3xl font-bold text-white text-center mb-12">Why Choose
+            <div class="max-w-6xl mx-auto mb-16"><h3
+                    class="text-3xl font-bold text-white text-center mb-12">{% trans "Why Choose" %}
                 <span class="text-secondary-400">SMORE</span></h3>
                 <div class="grid md:grid-cols-4 gap-8">
                     <div class="bg-primary-800/30 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-secondary-500/30 transition-all duration-300 group">
@@ -206,9 +206,9 @@
                             </svg>
                         </div>
                         <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-secondary-400 transition-colors">
-                            Instant Access</h4>
-                        <p class="text-primary-300 text-sm">Get immediate access to predictions and analysis right after
-                            joining</p></div>
+                            {% trans "Instant Access" %}</h4>
+                        <p class="text-primary-300 text-sm">{% trans "Get immediate access to predictions and analysis right after joining" %}</p>
+                    </div>
                     <div class="bg-primary-800/30 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-secondary-500/30 transition-all duration-300 group">
                         <div class="bg-secondary-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -218,9 +218,9 @@
                             </svg>
                         </div>
                         <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-secondary-400 transition-colors">
-                            Risk-Free Trial</h4>
-                        <p class="text-primary-300 text-sm">7-day money-back guarantee if you're not completely
-                            satisfied</p></div>
+                            {% trans "Risk-Free Trial" %}</h4>
+                        <p class="text-primary-300 text-sm">{% trans "7-day money-back guarantee if you're not completely satisfied" %}</p>
+                    </div>
                     <div class="bg-primary-800/30 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-secondary-500/30 transition-all duration-300 group">
                         <div class="bg-secondary-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -232,8 +232,8 @@
                         </div>
                         <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-secondary-400 transition-colors">
                             24/7 Support</h4>
-                        <p class="text-primary-300 text-sm">Round-the-clock customer support to assist you with any
-                            questions</p></div>
+                        <p class="text-primary-300 text-sm">{% trans "Round-the-clock customer support to assist you with any questions" %}</p>
+                    </div>
                     <div class="bg-primary-800/30 backdrop-blur-sm rounded-xl p-6 border border-primary-700/30 hover:border-secondary-500/30 transition-all duration-300 group">
                         <div class="bg-secondary-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -244,21 +244,21 @@
                             </svg>
                         </div>
                         <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-secondary-400 transition-colors">
-                            Mobile Ready</h4>
-                        <p class="text-primary-300 text-sm">Access predictions on any device through our responsive
-                            platform</p></div>
+                            {% trans "Mobile Ready" %}</h4>
+                        <p class="text-primary-300 text-sm">{% trans "Access predictions on any device through our responsive platform" %}</p>
+                    </div>
                 </div>
             </div>
             {% if not request.user.is_authenticated %}
                 <div class="max-w-3xl mx-auto text-center">
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-primary-700/30 shadow-lg shadow-secondary-500/5">
-                        <h3 class="text-2xl font-bold text-white mb-4">Ready to Start Winning?</h3>
-                        <p class="text-primary-200 mb-8">Join now and get instant access to expert predictions with our
-                            7-day money-back guarantee.</p>
+                        <h3 class="text-2xl font-bold text-white mb-4">{% trans "Ready to Start Winning?" %}</h3>
+                        <p class="text-primary-200 mb-8">{% trans "Join now and get instant access to expert predictions with our 7-day money-back guarantee" %}.</p>
                         <a href="{% url 'accounts:register' %}"
                            class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
                             <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                            <div class="relative flex items-center"><span class="text-lg">Get Started Now</span>
+                            <div class="relative flex items-center"><span
+                                    class="text-lg">{% trans "Get Started Now" %}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                      stroke-linejoin="round"

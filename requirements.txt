@@ -12,6 +12,7 @@ Django==5.1.4
 django-admin-sortable2==2.2.4
 django-cors-headers==4.6.0
 django-debug-toolbar==4.4.6
+django-rosetta==0.10.1
 django-solo==2.4.0
 djangorestframework==3.15.2
 drf-standardized-errors==0.14.1
@@ -32,6 +33,7 @@ numpy==2.2.1
 packaging==24.2
 pathspec==0.12.1
 platformdirs==4.3.6
+polib==1.2.0
 proto-plus==1.26.0
 protobuf==5.29.3
 psycopg2-binary==2.9.10

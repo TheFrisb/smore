@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load util_tags %}
+{% load util_tags i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
@@ -21,10 +21,8 @@
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                             </svg>
                         </div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Premium Predictions</h2>
-                        <p class="text-xl text-primary-200 mb-8">Subscribe to access all our expert predictions for
-                            upcoming
-                            matches, featuring detailed analysis and insights.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">{% trans "Premium Predictions" %}</h2>
+                        <p class="text-xl text-primary-200 mb-8">{% trans "Subscribe to access all our expert predictions for upcoming matches, featuring detailed analysis and insights." %}</p>
                         <div class="space-y-6 mb-8 flex items-center flex-col">
                             <div class="flex items-center justify-center space-x-2 text-primary-200 w-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -32,14 +30,14 @@
                                      stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
                                     <path d="M20 6 9 17l-5-5"></path>
                                 </svg>
-                                <span>Daily Expert Predictions</span></div>
+                                <span>{% trans "Daily Expert Predictions" %}</span></div>
                             <div class="flex items-center justify-center space-x-2 text-primary-200 w-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                      stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
                                     <path d="M20 6 9 17l-5-5"></path>
                                 </svg>
-                                <span>92%+ Success Rate</span></div>
+                                <span>92%+ {% trans "Success Rate" %}</span></div>
 
                             <div class="flex items-center justify-center space-x-2 text-primary-200 w-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -47,10 +45,10 @@
                                      stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
                                     <path d="M20 6 9 17l-5-5"></path>
                                 </svg>
-                                <span>High odds</span></div>
+                                <span>{% trans "High odds" %}</span></div>
                         </div>
                         <a class="inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200"
-                           href="{% url 'core:plans' %}">View Plans
+                           href="{% url 'core:plans' %}">{% trans "View Plans" %}
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none"
                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -62,8 +60,8 @@
             {% else %}
                 <div class="text-center mb-16">
                     {#                <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">{% now 'l, F j, Y' %}</span>#}
-                    <h2 class="text-4xl font-bold text-white mb-4">Upcoming Predictions</h2>
-                    <p class="text-primary-200 max-w-2xl mx-auto">View our expert predictions for upcoming matches</p>
+                    <h2 class="text-4xl font-bold text-white mb-4">{% trans "Upcoming Predictions" %}</h2>
+                    <p class="text-primary-200 max-w-2xl mx-auto">{% trans "View our expert predictions for upcoming matches" %}</p>
                 </div>
                 <div class="grid gap-4 mt-8 max-w-6xl mx-auto">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-8">
@@ -73,7 +71,7 @@
                                 <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
                                     {% svg_icon icon_name="soccerIcon" css_classes="w-4 h-4" %}
 
-                                    <span>Soccer</span></button>
+                                    <span>{% trans "Soccer" %}</span></button>
                             </div>
                             <div class="relative">
                                 <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
@@ -81,12 +79,12 @@
                                 <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
                                         disabled="">
                                     {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4" %}
-                                    <span>Basketball</span>
+                                    <span>{% trans "Basketball" %}</span>
                                 </button>
                             </div>
                             <div class="relative">
                                 <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
-                                    <span class="text-xs text-secondary-400">Soon</span></div>
+                                    <span class="text-xs text-secondary-400">{% trans "Soon" %}</span></div>
                                 <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
                                         disabled="">
                                     {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4" %}
@@ -123,13 +121,13 @@
 
                                             </div>
 
-                                            <span class="text-sm text-primary-100">Soccer</span>
+                                            <span class="text-sm text-primary-100">{% trans "Soccer" %}</span>
 
                                         </div>
 
                                     </div>
                                     <div class="mb-6">
-                                        <div class="text-sm text-primary-300 mb-2">Match:</div>
+                                        <div class="text-sm text-primary-300 mb-2">{% trans "Match" %}:</div>
                                         <div class="bg-gradient-to-br from-primary-900/20 to-primary-800/90 border-primary-700/50 rounded-lg border p-6 py-12 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300">
                                             <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/0 via-secondary-500/5 to-secondary-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg pointer-events-none"></div>
                                             <div
@@ -147,11 +145,11 @@
                                     </div>
                                     <div class="grid grid-cols-2 gap-4 mb-6">
                                         <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
-                                            <div class="text-sm text-primary-300 mb-1">Kick-off Date</div>
+                                            <div class="text-sm text-primary-300 mb-1">{% trans "Kick-off Date" %}</div>
                                             <div class="font-medium text-white">{{ prediction.kickoff_date|date:"d/m/Y" }}</div>
                                         </div>
                                         <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
-                                            <div class="text-sm text-primary-300 mb-1">Kick-off Time</div>
+                                            <div class="text-sm text-primary-300 mb-1">{% trans "Kick-off Time" %}</div>
                                             <div class="font-medium text-white">{{ prediction.kickoff_time|time:"H:i" }}
                                                 (GMT+1)
                                             </div>
@@ -159,12 +157,12 @@
                                     </div>
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
-                                            <div class="text-sm text-primary-300">Prediction</div>
+                                            <div class="text-sm text-primary-300">{% trans "Prediction" %}</div>
                                             <div class="font-semibold text-xl text-white">{{ prediction.prediction }}</div>
                                         </div>
                                         <div>
                                             <div class="text-right">
-                                                <div class="text-sm text-primary-300">Odds</div>
+                                                <div class="text-sm text-primary-300">{% trans "Odds" %}</div>
                                                 <div class="font-semibold text-lg text-secondary-400">{{ prediction.odds }}
                                                 </div>
                                             </div>

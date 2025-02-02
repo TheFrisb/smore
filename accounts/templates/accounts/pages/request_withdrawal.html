@@ -1,22 +1,22 @@
 {% extends 'accounts/base.html' %}
-{% load util_tags %}
+{% load util_tags i18n %}
 {% block dashboard %}
 
     <input type="hidden" value="{% url 'accounts:withdrawal_history' %}" id="redirectUrl">
 
     <div class="space-y-8">
         <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
-            <div class="flex items-center justify-between mb-8"><h2 class="text-2xl font-bold text-white">Available
-                Balance</h2>
+            <div class="flex items-center justify-between mb-8"><h2
+                    class="text-2xl font-bold text-white">{% trans "Available Balance" %}</h2>
                 <div class="text-right"><p class="text-3xl font-bold text-secondary-400">
                     ${{ request.user.balance.balance }}</p>
-                    <p class="text-primary-300 text-sm">Available for withdrawal</p></div>
+                    <p class="text-primary-300 text-sm">{% trans "Available for withdrawal" %}</p></div>
             </div>
 
             <div class="space-y-6">
                 <div>
-                    <label for="amount" class="block text-sm font-medium text-primary-300 mb-2">Withdrawal
-                        Amount</label>
+                    <label for="amount"
+                           class="block text-sm font-medium text-primary-300 mb-2">{% trans "Withdrawal Amount" %}</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -34,8 +34,8 @@
                     </div>
                 </div>
                 <div>
-                    <label for="payment-method" class="block text-sm font-medium text-primary-300 mb-2">Choose a payout
-                        method:</label>
+                    <label for="payment-method"
+                           class="block text-sm font-medium text-primary-300 mb-2">{% trans "Choose a payout method" %}:</label>
                     <div class="relative">
 
                         <div class="space-y-3">
@@ -47,7 +47,7 @@
                                      data-section-selector="#requestWithdrawal__bankMethod">
                                     {% svg_icon icon_name="bankIcon" css_classes="w-5 h-5 text-secondary-500" %}
 
-                                    <span>Bank Transfer</span>
+                                    <span>{% trans "Bank Transfer" %}</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
@@ -56,7 +56,7 @@
                                      data-section-selector="#requestWithdrawal__payoneerMethod">
                                     <div class="w-5 h-5 border-2 border-secondary-500 rounded-full"></div>
 
-                                    <span>Payoneer</span>
+                                    <span>{% trans "Payoneer" %}</span>
                                 </div>
                             </div>
                             <div class="relative flex items-center">
@@ -65,7 +65,7 @@
                                      data-method-type="CRYPTOCURRENCY">
                                     {% svg_icon icon_name="bitcoinIcon" css_classes="w-5 h-5 text-secondary-500" %}
 
-                                    <span>Cryptocurrency</span>
+                                    <span>{% trans "Cryptocurrency" %}</span>
                                 </div>
                             </div>
                         </div>
@@ -74,29 +74,28 @@
                 <div class="space-y-4 requestWithdrawal__formSection hidden" id="requestWithdrawal__bankMethod">
                     <div>
                         <label for="requestWithdrawal__bankMethod__fullName"
-                               class="block text-sm font-medium text-primary-300 mb-2">Full Name (as on
-                            bank account)</label>
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "Full Name (as on bank account)" %}</label>
                         <input type="text" id="requestWithdrawal__bankMethod__fullName"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter full name" value="">
                     </div>
                     <div>
                         <label for="requestWithdrawal__bankMethod__email"
-                               class="block text-sm font-medium text-primary-300 mb-2">Email</label>
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "Email" %}</label>
                         <input type="email" id="requestWithdrawal__bankMethod__email"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter email" value="">
                     </div>
                     <div>
                         <label for="requestWithdrawal__bankMethod__country"
-                               class="block text-sm font-medium text-primary-300 mb-2">Country of Residence</label>
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "Country of Residence" %}</label>
                         <input type="text" id="requestWithdrawal__bankMethod__country"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter country of residence" value="">
                     </div>
                     <div>
                         <label for="requestWithdrawal__bankMethod__iban"
-                               class="block text-sm font-medium text-primary-300 mb-2">IBAN Code</label>
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "IBAN Code" %}</label>
                         <input type="text" id="requestWithdrawal__bankMethod__iban"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter IBAN" value="">
@@ -109,29 +108,27 @@
                             <line x1="12" x2="12" y1="8" y2="12"></line>
                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                         </svg>
-                        <p class="text-sm text-primary-300">Please ensure your full name matches exactly as it appears
-                            on your bank account. Incorrect details may result in failed transfers that cannot be
-                            refunded.</p>
+                        <p class="text-sm text-primary-300">{% trans "Please ensure your full name matches exactly as it appears on your bank account. Incorrect details may result in failed transfers that cannot be refunded" %}.</p>
                     </div>
                 </div>
                 <div class="space-y-4 requestWithdrawal__formSection hidden" id="requestWithdrawal__payoneerMethod">
                     <div>
-                        <label for="payoneer-name" class="block text-sm font-medium text-primary-300 mb-2">Full
-                            Name</label>
+                        <label for="payoneer-name"
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "Full Name" %}</label>
                         <input type="text" id="requestWithdrawal__payoneerMethod__fullName"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter full name" value="">
                     </div>
                     <div>
-                        <label for="payoneer-email" class="block text-sm font-medium text-primary-300 mb-2">Payoneer
-                            Email Address</label>
+                        <label for="payoneer-email"
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "Payoneer Email Address" %}</label>
                         <input type="email" id="requestWithdrawal__payoneerMethod__email"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter Payoneer email" value="">
                     </div>
                     <div>
-                        <label for="payoneer-email" class="block text-sm font-medium text-primary-300 mb-2">Payoneer
-                            customer ID</label>
+                        <label for="payoneer-email"
+                               class="block text-sm font-medium text-primary-300 mb-2">{% trans "Payoneer customer ID" %}</label>
                         <input type="text" id="requestWithdrawal__payoneerMethod__payoneer_customer_id"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
                                placeholder="Enter Payoneer customer ID" value="">
@@ -144,13 +141,12 @@
                             <line x1="12" x2="12" y1="8" y2="12"></line>
                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                         </svg>
-                        <p class="text-sm text-primary-300">Please verify your Payoneer email address carefully. Funds
-                            sent to incorrect Payoneer accounts cannot be recovered.</p>
+                        <p class="text-sm text-primary-300">{% trans "Please verify your Payoneer email address carefully. Funds sent to incorrect Payoneer accounts cannot be recovered" %}.</p>
                     </div>
                 </div>
                 <div class="space-y-4 requestWithdrawal__formSection hidden" id="requestWithdrawal__cryptoMethod">
-                    <label for="btc-address" class="block text-sm font-medium text-primary-300 mb-2">Bitcoin
-                        Address</label>
+                    <label for="btc-address"
+                           class="block text-sm font-medium text-primary-300 mb-2">{% trans "Bitcoin Address" %}</label>
                     <div class="relative">
                         <input type="text" id="requestWithdrawal__cryptoMethod__address"
                                class="appearance-none relative block w-full px-3 py-3 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:border-secondary-500/50 transition-all duration-200"
@@ -164,13 +160,13 @@
                             <line x1="12" x2="12" y1="8" y2="12"></line>
                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                         </svg>
-                        <p class="text-sm text-primary-300">Please carefully verify your Bitcoin address before
-                            submitting. We cannot refund or resend funds if sent to an incorrect address.</p></div>
+                        <p class="text-sm text-primary-300">{% trans "Please carefully verify your Bitcoin address before submitting. We cannot refund or resend funds if sent to an incorrect address" %}.</p>
+                    </div>
                 </div>
                 <button
                         class="w-full py-3 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800"
                         id="requestWithdrawalButton">
-                    Request Withdrawal
+                    {% trans "Request Withdrawal" %}
                 </button>
                 <div class="bg-primary-900/50 rounded-lg p-4 flex items-start space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -180,9 +176,8 @@
                         <line x1="12" x2="12" y1="8" y2="12"></line>
                         <line x1="12" x2="12.01" y1="16" y2="16"></line>
                     </svg>
-                    <p class="text-sm text-primary-300">All withdrawals are processed within 24 hours during business
-                        days. Please review your withdrawal details carefully as we cannot modify or cancel the
-                        transaction once it's processed.</p></div>
+                    <p class="text-sm text-primary-300">{% trans "All withdrawals are processed within 24 hours during business days. Please review your withdrawal details carefully as we cannot modify or cancel the ransaction once it's processed" %}.</p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% load util_tags %}
+{% load util_tags i18n %}
 {% block content %}
     <section
             class="min-h-screen flex items-center bg-gradient-dark from-primary-950 via-primary-900 to-primary-800 relative overflow-hidden py-20 xl:py-0">
@@ -18,13 +18,11 @@
                 <div class="lg:w-1/2 text-white space-y-8" data-aos="zoom-in" data-aos-duration="500">
                     <div class="mb-8">
                         <h1
-                                class="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">Smart Predictions for Better
-                            Results</h1>
-                        <h2 class="text-2xl md:text-3xl font-bold text-secondary-400">- The intelligent way to win!</h2>
+                                class="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">{% trans "Smart Predictions for Better Results" %}</h1>
+                        <h2 class="text-2xl md:text-3xl font-bold text-secondary-400">
+                            - {% trans "The intelligent way to win!" %}</h2>
                     </div>
-                    <p class="text-xl text-primary-200 mb-8">Behind every winning strategy is a team that truly
-                        understands the game. Our dedicated professionals dive deep into the action to bring you sharp,
-                        insightful sports analyses you can trust.</p>
+                    <p class="text-xl text-primary-200 mb-8">{% trans "Behind every winning strategy is a team that truly understands the game. Our dedicated professionals dive deep into the action to bring you sharp, insightful sports analyses you can trust" %}.</p>
                     <div class="flex items-center space-x-4 text-primary-100">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -32,7 +30,7 @@
                                  stroke-linejoin="round" class="lucide lucide-check w-5 h-5 mr-2 text-secondary-400">
                                 <path d="M20 6 9 17l-5-5"></path>
                             </svg>
-                            <span>92% Success Rate</span></div>
+                            <span>92% {% trans "Success Rate" %}</span></div>
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -44,7 +42,7 @@
                                 <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
                                 <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
                             </svg>
-                            <span>5K+ Users</span></div>
+                            <span>5K+ {% trans "Users" %}</span></div>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center justify-center shadow-lg shadow-secondary-600/20"
@@ -59,7 +57,7 @@
 
 
                         <a class="border border-primary-300 text-primary-300 px-6 py-3 rounded-lg font-semibold hover:bg-primary-800/50 transition-colors hover:text-white text-center"
-                           href="{% url 'core:contact_us' %}">Contact Us</a>
+                           href="{% url 'core:contact_us' %}">{% trans "Contact Us" %}</a>
 
 
                     </div>
@@ -71,7 +69,7 @@
                             <path d="m22 2-7 20-4-9-9-4Z"></path>
                             <path d="M22 2 11 13"></path>
                         </svg>
-                        Free Telegram Channel</a>
+                        {% trans "Free Telegram Channel" %}</a>
                     <div class="flex flex-col sm:flex-row items-center gap-6 pt-8">
                         <a href="#mobileComingSoonSection"
                            class="w-48 h-14 transition-all duration-300 hover:scale-105 hover:brightness-110 filter saturate-150">
@@ -114,13 +112,13 @@
             <div class="container mx-auto px-4" data-aos="flip-up"
                  data-aos-duration="800">
                 <div class="text-center mb-12"><span
-                        class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">Featured Pick</span>
-                    <h2 class="text-4xl font-bold text-white">Today's Top Pick</h2></div>
+                        class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">{% trans "Featured Pick" %}</span>
+                    <h2 class="text-4xl font-bold text-white">{% trans "Today's Top Pick" %}</h2></div>
                 <div class="max-w-3xl mx-auto bg-primary-900/50 backdrop-blur-sm rounded-2xl shadow-dark-lg p-8 border border-primary-700/30">
                     <div class="relative">
                         <div class="space-y-6">
                             <div class="text-center  md:hidden"><span
-                                    class="text-sm text-primary-300">Kickoff Time</span>
+                                    class="text-sm text-primary-300">{% trans "Kickoff Time" %}</span>
                                 <div class="text-white font-medium">{{ pick_of_the_day.prediction.kickoff_datetime }}</div>
                             </div>
                             <div class="flex items-center justify-between">
@@ -131,12 +129,12 @@
                                         {% svg_icon icon_name=pick_of_the_day.prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
 
                                     </div>
-                                    <div><span class="text-sm text-primary-300">League</span>
+                                    <div><span class="text-sm text-primary-300">{% trans "League" %}</span>
                                         <h3 class="text-lg font-semibold text-white">{{ pick_of_the_day.prediction.league }}</h3>
                                     </div>
                                 </div>
                                 <div class="text-right hidden md:block"><span
-                                        class="text-sm text-primary-300">Kickoff Time</span>
+                                        class="text-sm text-primary-300">{% trans "Kickoff Time" %}</span>
                                     <div class="text-white font-medium">{{ pick_of_the_day.prediction.kickoff_datetime }}</div>
                                 </div>
                             </div>
@@ -155,11 +153,11 @@
                             </div>
                             <div class="bg-secondary-500/5 p-4 rounded-xl border border-secondary-500/20 flex items-center justify-between">
                                 <div class="flex items-start justify-start flex-col">
-                                    <p class="text-sm text-primary-300 mb-2">Our Prediction</p>
+                                    <p class="text-sm text-primary-300 mb-2">{% trans "Our Prediction" %}</p>
                                     <p class="text-lg font-semibold text-white">{{ pick_of_the_day.prediction.prediction }}</p>
                                 </div>
                                 <div class="flex items-start justify-start flex-col">
-                                    <p class="text-sm text-primary-300 mb-2">Odds</p>
+                                    <p class="text-sm text-primary-300 mb-2">{% trans "Odds" %}</p>
                                     <p class="text-lg font-semibold text-secondary-500">{{ pick_of_the_day.prediction.odds }}</p>
                                 </div>
                             </div>
@@ -167,7 +165,7 @@
                                 {% if request.user.is_authenticated and request.user.subscription_is_active %}
                                     <a href="{% url 'core:upcoming_matches' %}"
                                        class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
-                                        <span>View more picks</span>
+                                        <span>{% trans "View more picks" %}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -178,7 +176,7 @@
                                 {% elif request.user.is_authenticated and not request.user.subscription_is_active %}
                                     <a href="{% url 'core:plans' %}"
                                        class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
-                                        <span>Get a plan to see more picks</span>
+                                        <span>{% trans "Get a plan to see more picks" %}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -189,7 +187,7 @@
                                 {% else %}
                                     <a href="{% url 'accounts:register' %}"
                                        class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
-                                        <span>Get Full Analysis</span>
+                                        <span>{% trans "Get Full Analysis" %}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -222,11 +220,11 @@
         </div>
         <div class="container mx-auto px-4">
             <div class="text-center mb-16"><span
-                    class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">Why Choose Us</span>
-                <h2 class="text-4xl font-bold text-white mb-6">Why Choose <span
+                    class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">{% trans "Why Choose Us" %}</span>
+                <h2 class="text-4xl font-bold text-white mb-6">{% trans "Why Choose" %} <span
                         class="text-secondary-400">SMORE</span></h2>
-                <p class="text-primary-200 max-w-2xl mx-auto">Join thousands of successful bettors who trust our expert
-                    predictions and analysis</p></div>
+                <p class="text-primary-200 max-w-2xl mx-auto">{% trans "Join thousands of successful bettors who trust our expert predictions and analysis" %}</p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-24">
                 <div class="relative group" data-aos-offset="150" data-aos="fade-right">
                     <div class="absolute inset-0 bg-gradient-to-br from-secondary-500/0 via-secondary-500/0 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
@@ -248,10 +246,10 @@
                                 <div class="text-3xl font-bold text-white group-hover:text-secondary-400 transition-colors">
                                     92%
                                 </div>
-                                <div class="text-lg font-semibold text-primary-200">Success Rate</div>
+                                <div class="text-lg font-semibold text-primary-200">{% trans "Success Rate" %}</div>
                             </div>
-                            <p class="text-primary-300 leading-relaxed">Industry-leading prediction accuracy across all
-                                sports categories</p></div>
+                            <p class="text-primary-300 leading-relaxed">{% trans "Industry-leading prediction accuracy across all sports categories" %}</p>
+                        </div>
                         <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                 </div>
@@ -273,10 +271,10 @@
                                 <div class="text-3xl font-bold text-white group-hover:text-secondary-400 transition-colors">
                                     5,000+
                                 </div>
-                                <div class="text-lg font-semibold text-primary-200">Satisfied Clients</div>
+                                <div class="text-lg font-semibold text-primary-200">{% trans "Satisfied Clients" %}</div>
                             </div>
-                            <p class="text-primary-300 leading-relaxed">Growing community of successful bettors who
-                                trust our insights</p></div>
+                            <p class="text-primary-300 leading-relaxed">{% trans "Growing community of successful bettors who trust our insights" %}</p>
+                        </div>
                         <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                 </div>
@@ -296,12 +294,12 @@
                         <div class="space-y-4">
                             <div>
                                 <div class="text-3xl font-bold text-white group-hover:text-secondary-400 transition-colors">
-                                    30-90
+                                    60-90
                                 </div>
-                                <div class="text-lg font-semibold text-primary-200">Monthly Analyses</div>
+                                <div class="text-lg font-semibold text-primary-200">{% trans "Monthly Analyses" %}</div>
                             </div>
-                            <p class="text-primary-300 leading-relaxed">Fresh predictions and in-depth analysis
-                                delivered every day</p></div>
+                            <p class="text-primary-300 leading-relaxed">{% trans "Fresh predictions and in-depth analysis delivered every day" %}</p>
+                        </div>
                         <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                 </div>
@@ -320,10 +318,10 @@
                                 <div class="text-3xl font-bold text-white group-hover:text-secondary-400 transition-colors">
                                     24/7
                                 </div>
-                                <div class="text-lg font-semibold text-primary-200">Expert Support</div>
+                                <div class="text-lg font-semibold text-primary-200">{% trans "Expert Support" %}</div>
                             </div>
-                            <p class="text-primary-300 leading-relaxed">Round-the-clock assistance from our professional
-                                team</p></div>
+                            <p class="text-primary-300 leading-relaxed">{% trans "Round-the-clock assistance from our professional team" %}</p>
+                        </div>
                         <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                 </div>
@@ -339,10 +337,10 @@
             <div class="text-center mb-16 relative">
 
                 <span
-                        class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">Advantages of choosing Smore</span>
-                <h2 class="text-3xl font-bold text-white mb-4">Unlock Your Betting Potential</h2>
-                <p class="text-primary-200 max-w-2xl mx-auto">Experience the power of professional sports analysis with
-                    our comprehensive suite of features</p></div>
+                        class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">{% trans "Advantages of choosing Smore" %}</span>
+                <h2 class="text-3xl font-bold text-white mb-4">{% trans "Unlock Your Betting Potential" %}</h2>
+                <p class="text-primary-200 max-w-2xl mx-auto">{% trans "Experience the power of professional sports analysis with our comprehensive suite of features" %}</p>
+            </div>
             <div class="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
                 <div data-aos-offset="150" data-aos="zoom-in" class="relative group flex">
                     <div class="absolute inset-0 bg-gradient-to-br from-secondary-500/0 via-secondary-500/0 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
@@ -364,34 +362,33 @@
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-white group-hover:text-secondary-400 transition-colors ml-6">
-                                We Do All the Hard Work</h3></div>
-                        <div class="space-y-6 flex-1 flex flex-col"><p class="text-primary-300 leading-relaxed">Our
-                            expert team analyzes thousands of data points, statistics, and trends to deliver accurate
-                            predictions, so you don't have to spend hours researching.</p>
+                                {% trans "We Do All the Hard Work" %}</h3></div>
+                        <div class="space-y-6 flex-1 flex flex-col"><p
+                                class="text-primary-300 leading-relaxed">{% trans "Our expert team analyzes thousands of data points, statistics, and trends to deliver accurate predictions, so you don't have to spend hours researching" %}.</p>
                             <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50"><h4
-                                    class="text-white font-medium mb-3">Key Benefits</h4>
+                                    class="text-white font-medium mb-3">{% trans "Key Benefits" %}</h4>
                                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Advanced statistical analysis
+                                        {% trans "Advanced statistical analysis" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Machine learning predictions
+                                        {% trans "Machine learning predictions" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Expert human oversight
+                                        {% trans "Expert human oversight" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Real-time data processing
+                                        {% trans "Real-time data processing" %}
                                     </li>
                                 </ul>
                             </div>
                             <a href="#processFlowSection"
-                               class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 border-2 border-secondary-500/30 hover:border-secondary-500/50 hover:text-secondary-300 rounded-lg font-medium transition-all duration-300 group">View
-                                Our Process
+                               class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 border-2 border-secondary-500/30 hover:border-secondary-500/50 hover:text-secondary-300 rounded-lg font-medium transition-all duration-300 group">
+                                {% trans "View Our Process" %}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                      stroke-linejoin="round"
@@ -416,34 +413,32 @@
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-white group-hover:text-secondary-400 transition-colors ml-6">
-                                Premium Telegram Channel</h3></div>
-                        <div class="space-y-6 flex-1 flex flex-col"><p class="text-primary-300 leading-relaxed">Get
-                            instant access to our exclusive Telegram channel with real-time predictions, live updates,
-                            and expert insights delivered straight to your mobile.</p>
+                                {% trans "Premium Telegram Channel" %}</h3></div>
+                        <div class="space-y-6 flex-1 flex flex-col"><p
+                                class="text-primary-300 leading-relaxed">{% trans "Get instant access to our exclusive Telegram channel with real-time predictions, live updates, and expert insights delivered straight to your mobile." %}</p>
                             <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50"><h4
-                                    class="text-white font-medium mb-3">Key Benefits</h4>
+                                    class="text-white font-medium mb-3">{% trans "Key Benefits" %}</h4>
                                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Instant predictions delivery
+                                        {% trans "Instant predictions delivery" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Live match updates
+                                        {% trans "Live match updates" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Expert community insights
+                                        {% trans "Expert community insights" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        24/7 support access
+                                        {% trans "24/7 support access" %}
                                     </li>
                                 </ul>
                             </div>
                             <a href="https://t.me/smoreinfo"
-                               class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 border-2 border-secondary-500/30 hover:border-secondary-500/50 hover:text-secondary-300 rounded-lg font-medium transition-all duration-300 group">Join
-                                Channel
+                               class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 border-2 border-secondary-500/30 hover:border-secondary-500/50 hover:text-secondary-300 rounded-lg font-medium transition-all duration-300 group">{% trans "Join Channel" %}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                      stroke-linejoin="round"
@@ -469,39 +464,37 @@
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-white group-hover:text-secondary-400 transition-colors ml-6">
-                                Mobile App Coming Soon</h3></div>
+                                {% trans "Mobile App Coming Soon" %}</h3></div>
                         <div class="space-y-6 flex-1 flex flex-col"><p class="text-primary-300 leading-relaxed">
-                            Experience seamless betting predictions with our upcoming mobile app, featuring push
-                            notifications, personalized alerts, and an intuitive interface.</p>
+                            {% trans "Experience seamless betting predictions with our upcoming mobile app, featuring push notifications, personalized alerts, and an intuitive interface." %}</p>
                             <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50"><h4
                                     class="text-white font-medium mb-3">Key Benefits</h4>
                                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Real-time notifications
+                                        {% trans "Real-time notifications" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Personalized predictions
+                                        {% trans "Personalized predictions" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Match tracking
+                                        {% trans "Match tracking" %}
                                     </li>
                                     <li class="flex items-center text-primary-200">
                                         <div class="w-1.5 h-1.5 rounded-full bg-secondary-500 mr-3"></div>
-                                        Performance analytics
+                                        {% trans "Performance analytics" %}
                                     </li>
                                 </ul>
                             </div>
                             {% if request.user.is_authenticated %}
                                 <p class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 font-medium transition-all duration-300 ">
-                                    You'll receive an email when the application is launched
+                                    {% trans "You'll receive an email when the application is launched" %}
                                 </p>
                             {% else %}
                                 <a href="{% url 'accounts:register' %}"
-                                   class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 border-2 border-secondary-500/30 hover:border-secondary-500/50 hover:text-secondary-300 rounded-lg font-medium transition-all duration-300 group">Get
-                                    started to be notified
+                                   class="inline-flex items-center justify-center w-full px-6 py-4 text-secondary-400 border-2 border-secondary-500/30 hover:border-secondary-500/50 hover:text-secondary-300 rounded-lg font-medium transition-all duration-300 group">{% trans "Get started to be notified" %}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                          stroke-linejoin="round"
@@ -525,7 +518,7 @@
             </div>
             <div class="max-w-3xl mx-auto text-center mt-8" data-aos-offset="150" data-aos="zoom-out-down">
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-primary-700/30 shadow-lg shadow-secondary-500/5">
-                    <h3 class="text-2xl font-bold text-white mb-4">Ready to Start Winning?</h3>
+                    <h3 class="text-2xl font-bold text-white mb-4">{% trans "Ready to Start Winning?" %}</h3>
                     <p class="text-primary-200 mb-8">{{ primary_button_description }}</p>
                     <a href="{{ primary_button_url }}"
                        class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
@@ -550,10 +543,10 @@
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-5"></div>
         <div class="container mx-auto px-4">
             <div class="text-center mb-16"><span
-                    class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4 In">Our Process</span>
-                <h2 class="text-4xl font-bold text-white mb-4 In">How We Create Winning Predictions</h2>
-                <p class="text-primary-200 max-w-2xl mx-auto">Our comprehensive analysis process combines advanced
-                    statistics, expert insights, and risk management</p></div>
+                    class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4 In">{% trans "Our Process" %}</span>
+                <h2 class="text-4xl font-bold text-white mb-4 In">{% trans "How We Create Winning Predictions" %}</h2>
+                <p class="text-primary-200 max-w-2xl mx-auto">{% trans "Our comprehensive analysis process combines advanced statistics, expert insights, and risk management" %}</p>
+            </div>
             <div class="relative max-w-6xl mx-auto">
                 <div class="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-secondary-500/30 to-transparent hidden lg:block"></div>
                 <div class="space-y-24">
@@ -584,13 +577,11 @@
                                             </svg>
                                         </div>
                                         <div><span
-                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">Step 1</span>
-                                            <h3 class="text-2xl font-bold text-white">Match Analysis</h3></div>
+                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">{% trans "Step" %} 1</span>
+                                            <h3 class="text-2xl font-bold text-white">{% trans "Match Analysis" %}</h3>
+                                        </div>
                                     </div>
-                                    <p class="text-primary-200 text-lg leading-relaxed">At SMORE, we dive deep into
-                                        match analysis to give you the edge in sports outcome. By combining recent form,
-                                        head-to-head stats, injury updates, and market trends, we provide insightful
-                                        predictions to maximize your chances of success.</p>
+                                    <p class="text-primary-200 text-lg leading-relaxed">{% trans "At SMORE, we dive deep into match analysis to give you the edge in sports outcome. By combining recent form, head-to-head stats, injury updates, and market trends, we provide insightful predictions to maximize your chances of success." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -623,14 +614,11 @@
                                             </svg>
                                         </div>
                                         <div><span
-                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">Step 2</span>
-                                            <h3 class="text-2xl font-bold text-white">Odds analysis</h3></div>
+                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">{% trans "Step" %} 2</span>
+                                            <h3 class="text-2xl font-bold text-white">{% trans "Odds analysis" %}</h3>
+                                        </div>
                                     </div>
-                                    <p class="text-primary-200 text-lg leading-relaxed">Odds analysis evaluates betting
-                                        odds by comparing probabilities with key factors like team form, player stats,
-                                        and match dynamics. For soccer, basketball, and NFL, we analyze performance
-                                        trends, injuries, and strategies to uncover value bets. SMORE simplifies the
-                                        data, helping you boost your potential outcomes.</p>
+                                    <p class="text-primary-200 text-lg leading-relaxed">{% trans "Odds analysis evaluates betting odds by comparing probabilities with key factors like team form, player stats, and match dynamics. For soccer, basketball, and NFL, we analyze performance trends, injuries, and strategies to uncover value bets. SMORE simplifies the data, helping you boost your potential outcomes." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -664,14 +652,11 @@
                                             </svg>
                                         </div>
                                         <div><span
-                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">Step 3</span>
-                                            <h3 class="text-2xl font-bold text-white">Risk Management</h3></div>
+                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">{% trans "Step" %} 3</span>
+                                            <h3 class="text-2xl font-bold text-white">{% trans "Risk Management" %}</h3>
+                                        </div>
                                     </div>
-                                    <p class="text-primary-200 text-lg leading-relaxed">Risk management is at the core
-                                        of our approach. SMORE identifies, evaluates, and minimizes uncertainties by
-                                        analyzing data, setting clear limits, and diversifying strategies. By leveraging
-                                        expertise and precision, we ensure well-informed decisions that balance
-                                        calculated risks, helping you achieve consistent and sustainable results.</p>
+                                    <p class="text-primary-200 text-lg leading-relaxed">{% trans "Risk management is at the core of our approach. SMORE identifies, evaluates, and minimizes uncertainties by analyzing data, setting clear limits, and diversifying strategies. By leveraging expertise and precision, we ensure well-informed decisions that balance calculated risks, helping you achieve consistent and sustainable results." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -704,17 +689,11 @@
                                             </svg>
                                         </div>
                                         <div><span
-                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">Step 4</span>
-                                            <h3 class="text-2xl font-bold text-white">Detailed Report</h3></div>
+                                                class="inline-block px-3 py-1 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-medium mb-2">{% trans "Step" %} 4</span>
+                                            <h3 class="text-2xl font-bold text-white">{% trans "Detailed Report" %}</h3>
+                                        </div>
                                     </div>
-                                    <p class="text-primary-200 text-lg leading-relaxed">SMORE’s detailed reports provide
-                                        a comprehensive breakdown of key factors influencing sports outcomes. Our
-                                        analysis includes team and player performance, historical data, current form,
-                                        tactical insights, and external variables such as injuries, weather, and
-                                        schedules. We dive deep into probabilities and trends, offering clear,
-                                        data-backed insights to support strategic decisions. Each report is tailored to
-                                        provide clarity and precision, helping you stay ahead with accurate and
-                                        actionable information.</p>
+                                    <p class="text-primary-200 text-lg leading-relaxed">{% trans "SMORE’s detailed reports provide a comprehensive breakdown of key factors influencing sports outcomes. Our analysis includes team and player performance, historical data, current form, tactical insights, and external variables such as injuries, weather, and schedules. We dive deep into probabilities and trends, offering clear, data-backed insights to support strategic decisions. Each report is tailored to provide clarity and precision, helping you stay ahead with accurate and actionable information." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -735,14 +714,13 @@
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <span data-aos="zoom-in" data-aos-duration="500" data-aos-delay="100"
-                          class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">Coming Soon</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Take Smore <span
-                            class="text-secondary-400">Anywhere</span></h2>
+                          class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">{% trans "Coming Soon" %}</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">{% trans "Take Smore" %} <span
+                            class="text-secondary-400">{% trans "Anywhere" %}</span></h2>
 
                     <p class="text-xl text-primary-200 mb-8 max-w-2xl mx-auto"><span
-                            class="text-secondary-400">Smore</span> is now coming to mobile. Get
-                        instant access to expert predictions, live updates, and personalized alerts. Your winning
-                        strategy in your pocket.</p>
+                            class="text-secondary-400">Smore</span> {% trans "is now coming to mobile. Get instant access to expert predictions, live updates, and personalized alerts. Your winning strategy in your pocket." %}
+                    </p>
                     <div class="flex flex-col sm:flex-row justify-center items-center gap-6 max-w-md mx-auto"><a
                             href="#"
                             class="w-48 h-14 transition-all duration-300 hover:scale-105 hover:brightness-110 filter saturate-150 opacity-75 cursor-not-allowed"><img
@@ -760,8 +738,8 @@
                                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                 </svg>
                             </div>
-                            <p class="text-primary-200 text-sm">Instant Notifications<br>Real-time alerts for new
-                                predictions</p></div>
+                            <p class="text-primary-200 text-sm">{% trans "Instant Notifications" %}<br>{% trans "Real-time alerts for new predictions" %}
+                            </p></div>
                         <div class="text-center">
                             <div class="bg-secondary-500/10 w-12 h-12 rounded-full flex items-center justify-center mb-3 mx-auto">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -770,8 +748,8 @@
                                     <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                                 </svg>
                             </div>
-                            <p class="text-primary-200 text-sm">Live Match Updates<br>Track your predictions in
-                                real-time</p></div>
+                            <p class="text-primary-200 text-sm">{% trans "Live Match Updates" %}<br>{% trans "Track your predictions in real-time" %}
+                            </p></div>
                         <div class="text-center">
                             <div class="bg-secondary-500/10 w-12 h-12 rounded-full flex items-center justify-center mb-3 mx-auto">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -781,29 +759,28 @@
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
                             </div>
-                            <p class="text-primary-200 text-sm">24/7 Access<br>Premium features on the go</p></div>
+                            <p class="text-primary-200 text-sm">
+                                24/7 {% trans "Access" %}<br>{% trans "Premium features on the go" %}</p></div>
                     </div>
                 </div>
                 <div class="relative mt-20">
                     <div class=" backdrop-blur-sm rounded-2xl p-8 ">
                         <div class="absolute -top-4 left-1/2 transform -translate-x-1/2"><span
-                                class="inline-block px-4 py-2 bg-secondary-500/10 text-secondary-400 text-sm font-semibold rounded-full border border-secondary-500/20">Early Access</span>
+                                class="inline-block px-4 py-2 bg-secondary-500/10 text-secondary-400 text-sm font-semibold rounded-full border border-secondary-500/20">{% trans "Early Access" %}</span>
                         </div>
                         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                            <div class="text-center md:text-left"><h3 class="text-2xl font-bold text-white mb-4">Get
-                                Notified on Launch</h3>
-                                <p class="text-primary-200 mb-6">Join our exclusive early access list and be the first
-                                    to experience the future of sports predictions.</p>
+                            <div class="text-center md:text-left"><h3
+                                    class="text-2xl font-bold text-white mb-4">{% trans "Get Notified on Launch" %}</h3>
+                                <p class="text-primary-200 mb-6">{% trans "Join our exclusive early access list and be the first to experience the future of sports predictions." %}</p>
                                 {% if request.user.is_authenticated %}
                                     <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50 inline-flex">
-                                        <div class="font-medium text-white">You'll receive an email when the application
-                                            is launched.
+                                        <div class="font-medium text-white">{% trans "You'll receive an email when the application is launched." %}
                                         </div>
                                     </div>
                                 {% else %}
                                     <a href="{% url 'accounts:register' %}"
                                        class="inline-flex items-center justify-center px-6 py-3 text-white bg-secondary-600 rounded-lg hover:bg-secondary-500 transition-colors group">
-                                        Get started to be notified
+                                        {% trans "Get started to be notified" %}
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -817,7 +794,7 @@
                             <div class="relative w-64 h-[500px]">
                                 <div class="relative w-64 h-[500px] rounded-[3rem] border-8 border-primary-800 overflow-hidden shadow-2xl transform hover:rotate-6 transition-all duration-300 bg-gradient-to-b from-primary-900 to-primary-950">
                                     <div class="flex items-start justify-center w-full h-full inset-0 bg-[url('/static/assets/images/logo.png')] bg-contain bg-no-repeat bg-opacity-10 bg-center">
-                                        <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">Coming Soon</span>
+                                        <span class="inline-block px-4 py-2 rounded-full bg-secondary-500/50 text-secondary-400 text-sm font-semibold my-4">{% trans "Coming Soon" %}</span>
                                     </div>
                                 </div>
                             </div>

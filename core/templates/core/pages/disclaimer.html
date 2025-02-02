@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
@@ -16,7 +17,7 @@
                             <line x1="12" x2="12.01" y1="16" y2="16"></line>
                         </svg>
                     </div>
-                    <h1 class="text-4xl font-bold text-white mb-4">Disclaimer</h1>
+                    <h1 class="text-4xl font-bold text-white mb-4">{% trans "Disclaimer" %}</h1>
                     <div class="flex items-center justify-center space-x-2 text-primary-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +27,7 @@
                             <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                             <path d="M3 10h18"></path>
                         </svg>
-                        <span>Last Updated: 10.01.25</span></div>
+                        <span>{% trans "Last Updated" %}: 10.01.25</span></div>
                 </div>
                 <div class="bg-red-500/10 backdrop-blur-sm rounded-2xl p-6 border border-red-500/20 mb-12">
                     <div class="flex items-start space-x-4">
@@ -38,11 +39,10 @@
                             <path d="M12 17h.01"></path>
                         </svg>
                         <div>
-                            <h2 class="text-lg font-semibold text-white mb-2">Important Notice</h2>
-                            <p class="text-primary-200">Before using our service, please read this disclaimer carefully.
-                                By accessing and using <span class="text-secondary-400">smoreltd.com</span>, you
-                                acknowledge and agree to the terms outlined in
-                                this disclaimer.</p>
+                            <h2 class="text-lg font-semibold text-white mb-2">{% trans "Important Notice" %}</h2>
+                            <p class="text-primary-200">{% trans "Before using our service, please read this disclaimer carefully. By accessing and using" %}
+                                <span class="text-secondary-400">smoreltd.com</span>, {% trans "you acknowledge and agree to the terms outlined in this disclaimer." %}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -59,11 +59,9 @@
                                     <path d="M12 17h.01"></path>
                                 </svg>
                             </div>
-                            <div><h2 class="text-2xl font-bold text-white mb-4">Risk Warning</h2>
-                                <p class="text-primary-200 leading-relaxed">Sports betting involves substantial risk and
-                                    may not be suitable for all users. Past performance of our predictions does not
-                                    guarantee future results. Users must understand that they are responsible for their
-                                    own betting decisions and any resulting financial losses.</p></div>
+                            <div><h2 class="text-2xl font-bold text-white mb-4">{% trans "Risk Warning" %}</h2>
+                                <p class="text-primary-200 leading-relaxed">{% trans "Sports betting involves substantial risk and may not be suitable for all users. Past performance of our predictions does not guarantee future results. Users must understand that they are responsible for their own betting decisions and any resulting financial losses." %}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30 transition-all duration-300 hover:border-primary-500/30">
@@ -79,11 +77,9 @@
                                     <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
                                 </svg>
                             </div>
-                            <div><h2 class="text-2xl font-bold text-white mb-4">No Guaranteed Returns</h2>
-                                <p class="text-primary-200 leading-relaxed">While we strive to provide accurate
-                                    predictions based on comprehensive analysis, we cannot and do not guarantee any
-                                    specific success rate or financial returns. Sports events are inherently
-                                    unpredictable, and many factors beyond our control can affect outcomes.</p></div>
+                            <div><h2 class="text-2xl font-bold text-white mb-4">{% trans "No Guaranteed Returns" %}</h2>
+                                <p class="text-primary-200 leading-relaxed">{% trans "While we strive to provide accurate predictions based on comprehensive analysis, we cannot and do not guarantee any specific success rate or financial returns. Sports events are inherently unpredictable, and many factors beyond our control can affect outcomes." %}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30 transition-all duration-300 hover:border-primary-500/30">
@@ -103,11 +99,10 @@
                                     <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
                                 </svg>
                             </div>
-                            <div><h2 class="text-2xl font-bold text-white mb-4">Information Purpose Only</h2>
-                                <p class="text-primary-200 leading-relaxed">Our predictions and analysis are provided
-                                    for informational purposes only. They should not be considered as financial advice
-                                    or a recommendation to place specific bets. Users should conduct their own research
-                                    and exercise their own judgment before making any betting decisions.</p></div>
+                            <div><h2
+                                    class="text-2xl font-bold text-white mb-4">{% trans "Information Purpose Only" %}</h2>
+                                <p class="text-primary-200 leading-relaxed">{% trans "Our predictions and analysis are provided for informational purposes only. They should not be considered as financial advice or a recommendation to place specific bets. Users should conduct their own research and exercise their own judgment before making any betting decisions." %}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30 transition-all duration-300 hover:border-primary-500/30">
@@ -122,60 +117,57 @@
                                     <path d="M12 16h.01"></path>
                                 </svg>
                             </div>
-                            <div><h2 class="text-2xl font-bold text-white mb-4">Legal Compliance</h2>
-                                <p class="text-primary-200 leading-relaxed">Users are responsible for ensuring that
-                                    their use of our service complies with all applicable laws and regulations in their
-                                    jurisdiction. Sports betting may be restricted or illegal in certain regions, and it
-                                    is the user's responsibility to verify and comply with local laws.</p></div>
+                            <div><h2 class="text-2xl font-bold text-white mb-4">{% trans "Legal Compliance" %}</h2>
+                                <p class="text-primary-200 leading-relaxed">{% trans "Users are responsible for ensuring that their use of our service complies with all applicable laws and regulations in their jurisdiction. Sports betting may be restricted or illegal in certain regions, and it is the user's responsibility to verify and comply with local laws." %}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
-                            class="text-2xl font-bold text-white mb-6">Additional Important Points</h2>
+                            class="text-2xl font-bold text-white mb-6">{% trans "Additional Important Points" %}</h2>
                         <div class="space-y-4">
                             <div class="flex items-center space-x-4">
                                 <div class="w-2 h-2 rounded-full bg-primary-500"></div>
-                                <p class="text-primary-200">We are not liable for any losses incurred from using our
-                                    predictions or analysis.</p></div>
+                                <p class="text-primary-200">{% trans "We are not liable for any losses incurred from using our predictions or analysis." %}</p>
+                            </div>
                             <div class="flex items-center space-x-4">
                                 <div class="w-2 h-2 rounded-full bg-primary-500"></div>
-                                <p class="text-primary-200">Our service is intended for entertainment and informational
-                                    purposes only.</p></div>
+                                <p class="text-primary-200">{% trans "Our service is intended for entertainment and informational purposes only." %}</p>
+                            </div>
                             <div class="flex items-center space-x-4">
                                 <div class="w-2 h-2 rounded-full bg-primary-500"></div>
-                                <p class="text-primary-200">Past performance statistics are not indicative of future
-                                    results.</p></div>
+                                <p class="text-primary-200">{% trans "Past performance statistics are not indicative of future results." %}</p>
+                            </div>
                             <div class="flex items-center space-x-4">
                                 <div class="w-2 h-2 rounded-full bg-primary-500"></div>
-                                <p class="text-primary-200">Always gamble responsibly and within your means.</p></div>
+                                <p class="text-primary-200">{% trans "Always gamble responsibly and within your means." %}</p>
+                            </div>
                             <div class="flex items-center space-x-4">
                                 <div class="w-2 h-2 rounded-full bg-primary-500"></div>
-                                <p class="text-primary-200">If you feel you may have a gambling problem, seek
-                                    professional help immediately.</p></div>
+                                <p class="text-primary-200">{% trans "If you feel you may have a gambling problem, seek professional help immediately." %}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-primary-900/50 rounded-xl p-8 border border-primary-700/30"><h2
-                            class="text-xl font-bold text-white mb-4">Responsible Gambling</h2>
-                        <p class="text-primary-200 mb-6">We strongly encourage responsible gambling practices. If you or
-                            someone you know has a gambling problem, please contact the appropriate support services in
-                            your region.</p>
+                            class="text-xl font-bold text-white mb-4">{% trans "Responsible Gambling" %}</h2>
+                        <p class="text-primary-200 mb-6">{% trans "We strongly encourage responsible gambling practices. If you or someone you know has a gambling problem, please contact the appropriate support services in your region." %}</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-primary-800/50 p-4 rounded-lg border border-primary-700/30"><h3
-                                    class="text-white font-semibold mb-2">Gambling Addiction Helpline</h3>
-                                <p class="text-primary-300">24/7 Confidential Support</p><a href="tel:1-800-522-4700"
-                                                                                            class="text-secondary-400 hover:text-primary-300 transition-colors">1-800-522-4700</a>
+                                    class="text-white font-semibold mb-2">{% trans "Gambling Addiction Helpline" %}</h3>
+                                <p class="text-primary-300">{% trans "24/7 Confidential Support" %}</p><a
+                                        href="tel:1-800-522-4700"
+                                        class="text-secondary-400 hover:text-primary-300 transition-colors">1-800-522-4700</a>
                             </div>
                             <div class="bg-primary-800/50 p-4 rounded-lg border border-primary-700/30"><h3
-                                    class="text-white font-semibold mb-2">Online Resources</h3>
-                                <p class="text-primary-300">Visit for Help &amp; Information</p><a
+                                    class="text-white font-semibold mb-2">{% trans "Online Resources" %}</h3>
+                                <p class="text-primary-300">{% trans "Visit for Help &amp; Information" %}</p><a
                                         href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer"
                                         class="text-secondary-400 hover:text-primary-300 transition-colors">www.begambleaware.org</a>
                             </div>
                         </div>
                     </div>
                     <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/30"><h3
-                            class="text-lg font-semibold text-white mb-4">Contact Us</h3>
-                        <p class="text-primary-200 mb-4">If you have any questions about this Disclaimer, please contact
-                            us:</p>
+                            class="text-lg font-semibold text-white mb-4">{% trans "Contact Us" %}</h3>
+                        <p class="text-primary-200 mb-4">{% trans "If you have any questions about this Disclaimer, please contact us:" %}</p>
                         <div class="space-y-3">
                             <div class="flex items-center text-primary-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

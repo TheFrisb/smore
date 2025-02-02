@@ -1,4 +1,4 @@
-{% load util_tags %}
+{% load util_tags i18n %}
 <div class="lg:w-64 flex-shrink-0">
     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-6 border border-primary-700/30 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
         <div class="lg:mb-6 lg:pb-6 lg:border-b lg:border-primary-700/30" id="userDashboardMenuDropdown">
@@ -39,7 +39,7 @@
                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <span>Account</span>
+                    <span>{% trans "Account" %}</span>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -59,7 +59,7 @@
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
-                    <span>My Network</span>
+                    <span>{% trans "My Network" %}</span>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -77,7 +77,7 @@
                         <rect width="20" height="14" x="2" y="5" rx="2"></rect>
                         <line x1="2" x2="22" y1="10" y2="10"></line>
                     </svg>
-                    <span>Manage Plan</span></div>
+                    <span>{% trans "Manage Plan" %}</span></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 opacity-50">
@@ -95,7 +95,7 @@
                         <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
                         <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
                     </svg>
-                    <span>Request Withdrawal</span></div>
+                    <span>{% trans "Request Withdrawal" %}</span></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 opacity-50">
@@ -114,7 +114,7 @@
                         <path d="M3 3v5h5"></path>
                         <path d="M12 7v5l4 2"></path>
                     </svg>
-                    <span>Withdrawal History</span></div>
+                    <span>{% trans "Withdrawal History" %}</span></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                      class="lucide lucide-chevron-right w-4 h-4 opacity-50">
@@ -130,7 +130,7 @@
                          stroke-linejoin="round" class="lucide lucide-message-square w-5 h-5 mr-3">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
-                    <span>Contact Us</span></div>
+                    <span>{% trans "Contact Us" %}</span></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 opacity-50">
@@ -148,7 +148,7 @@
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                         <path d="M12 17h.01"></path>
                     </svg>
-                    <span>FAQ</span></div>
+                    <span>{% trans "FAQ" %}</span></div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 opacity-50">
@@ -167,7 +167,7 @@
                             <polyline points="16 17 21 12 16 7"></polyline>
                             <line x1="21" x2="9" y1="12" y2="12"></line>
                         </svg>
-                        <span>Sign Out</span></div>
+                        <span>{% trans "Sign Out" %}</span></div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                          stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 opacity-50">

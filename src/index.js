@@ -11,6 +11,7 @@ import { initResendEmailButtons } from "./resendEmailButton";
 import initLoadMorePredictionsButton from "./loadMorePredictionsButton";
 import { initLoginForm } from "./loginForm";
 import { initRegisterForm } from "./registerForm";
+import initLanguageSelectionButton from "./languageSelection";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -29,4 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initLoginForm();
   initRegisterForm();
+
+  initLanguageSelectionButton();
 });

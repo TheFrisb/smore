@@ -24,6 +24,8 @@ from django.urls.conf import include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
+    path("rosetta/", include("rosetta.urls")),
+    path('i18n/', include('django.conf.urls.i18n')),
     path("", include("core.urls")),
     path("accounts/", include("accounts.urls")),
     path("api/payments/", include("payments.urls")),

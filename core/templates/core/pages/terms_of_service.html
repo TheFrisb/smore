@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
@@ -15,7 +16,7 @@
                             <path d="M19 17V5a2 2 0 0 0-2-2H4"></path>
                         </svg>
                     </div>
-                    <h1 class="text-4xl font-bold text-white mb-4">Terms of Service</h1>
+                    <h1 class="text-4xl font-bold text-white mb-4">{% trans "Terms of Service" %}</h1>
                     <div class="flex items-center justify-center space-x-2 text-primary-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -29,197 +30,160 @@
                 </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">
                     <div class="prose prose-invert max-w-none"><p class="text-primary-200 text-lg leading-relaxed mb-8">
-                        Welcome to SMORE. These Terms of Service govern your use of our website, app, services, and any
-                        content or features provided by <span class="text-secondary-400">smoreltd.com</span>. By
-                        accessing
-                        or using our Service, you agree to be
-                        bound by these Terms. If you do not agree with these Terms, please do not use the Service.</p>
+                        {% trans "Welcome to SMORE. These Terms of Service govern your use of our website, app, services, and any content or features provided by" %}
+                        <span class="text-secondary-400">smoreltd.com</span>.
+                        {% trans "By accessing or using our Service, you agree to be bound by these Terms. If you do not agree with these Terms, please do not use the Service" %}.
+                    </p>
                         <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">1</span>Acceptance
-                            of Terms</h2>
-                            <div class="text-primary-200 space-y-4"><p>By using our Service, you acknowledge that you
-                                have read, understood, and agree to be bound by these Terms and any future amendments or
-                                updates to them.</p></div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">2</span>Description
-                            of the Service</h2>
-                            <div class="text-primary-200 space-y-4"><p>Our Service provides sports results analysis,
-                                predictions, and insights based on statistical data, historical performance, and other
-                                relevant factors. We aim to offer helpful guidance for users interested in sports
-                                betting, fantasy sports, or general interest in sports performance.</p></div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">3</span>No
-                            Guarantee of Accuracy</h2>
-                            <div class="text-primary-200 space-y-4"><p>While we use reasonable efforts to provide
-                                accurate and insightful analysis, we do not guarantee the correctness, completeness, or
-                                reliability of any sports result or prediction generated through our Service. All
-                                analysis and predictions are based on historical data and statistical modeling, but
-                                outcomes may differ due to unforeseen factors such as player performance, weather, or
-                                other variables.<br><br>You understand and acknowledge that all use of our analysis and
-                                predictions is at your own risk.</p></div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">4</span>Subscription
-                            and Payment</h2>
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">1</span>{% trans "Acceptance of Terms" %}
+                        </h2>
                             <div class="text-primary-200 space-y-4">
-                                <div class="space-y-4">
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li><strong class="text-white">Subscription Fees:</strong> Access to our Service
-                                            is provided on a monthly subscription basis. The current subscription fee is
-                                            outlined at the point of purchase.
-                                        </li>
-                                        <li><strong class="text-white">No Refund Policy:</strong> Due to the nature of
-                                            our Service, all subscription fees are non-refundable, even if you cancel
-                                            your subscription before the end of the billing cycle. By subscribing, you
-                                            agree to this no-refund policy.
-                                        </li>
-                                        <li><strong class="text-white">Billing:</strong> Subscriptions will
-                                            automatically renew at the end of each monthly period, and you will be
-                                            charged the prevailing monthly rate unless you cancel your subscription
-                                            before the next billing cycle.
-                                        </li>
-                                    </ul>
-                                </div>
+                                <p>{% trans "By using our Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and any future amendments or updates to them" %}.</p>
                             </div>
                         </div>
                         <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">5</span>User
-                            Responsibilities</h2>
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">2</span>{% trans "Description of the Service" %}
+                        </h2>
                             <div class="text-primary-200 space-y-4">
-                                <div class="space-y-4"><p>By using our Service, you agree to:</p>
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Use the Service only for lawful purposes and in accordance with these
-                                            Terms.
-                                        </li>
-                                        <li>Not misuse or exploit our Service for any illegal activities, including but
-                                            not limited to fraud, betting manipulation, or other unlawful conduct.
-                                        </li>
-                                        <li>Keep your account information secure and confidential.</li>
-                                    </ul>
-                                    <p>By accessing or using our Service, you confirm that you are at least the minimum
-                                        legal age required to participate in any betting or gambling activities in your
-                                        jurisdiction.</p>
-                                    <p>If you are under the legal age for gambling in your jurisdiction, you must not
-                                        use the Service. We reserve the right to verify your age and suspend or
-                                        terminate your access to the Service if we believe you do not meet the legal age
-                                        requirement.</p>
-                                    <p>By using our Service, you acknowledge and understand that gambling can be
-                                        addictive and that participating in betting or gambling activities may lead to
-                                        financial loss or other negative consequences. You accept full responsibility
-                                        for any risks associated with your participation, including the potential for
-                                        addiction.</p></div>
+                                <p>{% trans "Our Service provides sports results analysis, predictions, and insights based on statistical data, historical performance, and other relevant factors. We aim to offer helpful guidance for users interested in sports betting, fantasy sports, or general interest in sports performance" %}.</p>
                             </div>
                         </div>
                         <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">6</span>Intellectual
-                            Property</h2>
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">3</span>{% trans "No Guarantee of Accuracy" %}
+                        </h2>
                             <div class="text-primary-200 space-y-4">
-                                <div class="space-y-4">
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li><strong class="text-white">Ownership of Content:</strong> All content,
-                                            materials, and intellectual property related to our Service, including but
-                                            not limited to analysis, predictions, design, and trademarks, are owned by
-                                            <span class="text-secondary-400">smoreltd.com</span> or its licensors and
-                                            are
-                                            protected by copyright and other
-                                            intellectual property laws.
-                                        </li>
-                                        <li><strong class="text-white">License to Use:</strong> We grant you a limited,
-                                            non-exclusive, non-transferable license to access and use our Service for
-                                            personal, non-commercial purposes, in accordance with these Terms.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                <p>{% trans "While we use reasonable efforts to provide accurate and insightful analysis, we do not guarantee the correctness, completeness, or reliability of any sports result or prediction generated through our Service. All analysis and predictions are based on historical data and statistical modeling, but outcomes may differ due to unforeseen factors such as player performance, weather, or  other variables" %}.
+                                    <br><br>{% trans "You understand and acknowledge that all use of our analysis and predictions is at your own risk" %}.
+                                </p></div>
                         </div>
                         <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">7</span>Termination
-                            and Suspension</h2>
-                            <div class="text-primary-200 space-y-4">
-                                <div class="space-y-4">
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li><strong class="text-white">Our Rights to Terminate:</strong> We reserve the
-                                            right to suspend or terminate your access to the Service at our sole
-                                            discretion if we suspect that you have violated these Terms or engaged in
-                                            any fraudulent or unlawful activities.
-                                        </li>
-                                        <li><strong class="text-white">User's Rights to Terminate:</strong> You may
-                                            cancel your subscription at any time, but please note that no refunds will
-                                            be provided.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">8</span>Privacy
-                            and Data Protection</h2>
-                            <div class="text-primary-200 space-y-4"><p>Your use of the Service is also governed by our
-                                Privacy Policy, which outlines how we collect, use, and protect your personal
-                                information. By using the Service, you agree to the practices described in our Privacy
-                                Policy.</p></div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">9</span>Disclaimers
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">4</span>{% trans "Subscription and Payment" %}
                         </h2>
                             <div class="text-primary-200 space-y-4">
                                 <div class="space-y-4">
                                     <ul class="list-disc list-inside space-y-2">
-                                        <li><strong class="text-white">No Warranty:</strong> The Service is provided
-                                            "as-is," without any warranties or representations, whether express or
-                                            implied, including but not limited to the accuracy or reliability of
-                                            predictions, analysis, or any other aspect of the Service.
+                                        <li><strong
+                                                class="text-white">{% trans "Subscription Fees" %}:</strong> {% trans "Access to our Service is provided on a monthly subscription basis. The current subscription fee is outlined at the point of purchase" %}.
                                         </li>
-                                        <li><strong class="text-white">Limitation of Liability:</strong> To the fullest
-                                            extent permitted by applicable law, <span class="text-secondary-400">smoreltd.com</span>
-                                            will not be liable for any
-                                            indirect, incidental, special, consequential, or punitive damages, or any
-                                            loss of profit, revenue, data, or use, arising out of or related to your use
-                                            of the Service, even if we have been advised of the possibility of such
-                                            damages.
+                                        <li><strong
+                                                class="text-white">{% trans "No Refund Policy" %}:</strong> {% trans "Due to the nature of our Service, all subscription fees are non-refundable, even if you cancel your subscription before the end of the billing cycle. By subscribing, you agree to this no-refund policy" %}.
+                                        </li>
+                                        <li><strong
+                                                class="text-white">{% trans "Billing" %}:</strong> {% trans "Subscriptions will automatically renew at the end of each monthly period, and you will be charged the prevailing monthly rate unless you cancel your subscription before the next billing cycle" %}.
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">10</span>Dispute
-                            Resolution</h2>
-                            <div class="text-primary-200 space-y-4"><p>Any dispute, controversy, or claim arising out of
-                                or relating to these Terms shall be resolved through binding arbitration, administered
-                                by the Bulgarian Chamber of Commerce and Industry (BCCI) in accordance with its
-                                Arbitration Rules. The place of arbitration shall be Sofia, Bulgaria, and the language
-                                of arbitration shall be Bulgarian/English. The decision of the arbitrator(s) shall be
-                                final and binding on all parties.</p></div>
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">5</span>{% trans "User Responsibilities" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <div class="space-y-4"><p>{% trans "By using our Service, you agree to" %}:</p>
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li>{% trans "Use the Service only for lawful purposes and in accordance with these Terms" %}.
+                                        </li>
+                                        <li>{% trans "Not misuse or exploit our Service for any illegal activities, including but not limited to fraud, betting manipulation, or other unlawful conduct" %}.
+                                        </li>
+                                        <li>{% trans "Keep your account information secure and confidential" %}.</li>
+                                    </ul>
+                                    <p>{% trans "By accessing or using our Service, you confirm that you are at least the minimum legal age required to participate in any betting or gambling activities in your jurisdiction" %}.</p>
+                                    <p>{% trans "If you are under the legal age for gambling in your jurisdiction, you must not use the Service. We reserve the right to verify your age and suspend or terminate your access to the Service if we believe you do not meet the legal age requirement" %}.</p>
+                                    <p>{% trans "By using our Service, you acknowledge and understand that gambling can be addictive and that participating in betting or gambling activities may lead to financial loss or other negative consequences. You accept full responsibility for any risks associated with your participation, including the potential for addiction" %}.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">6</span>{% trans "Intellectual Property" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <div class="space-y-4">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li><strong
+                                                class="text-white">{% trans "Ownership of Content" %}:</strong> {% trans "All content, materials, and intellectual property related to our Service, including but not limited to analysis, predictions, design, and trademarks, are owned by" %}
+                                            <span class="text-secondary-400">smoreltd.com</span> {% trans "or its licensors and" %}
+                                            {% trans "are protected by copyright and other intellectual property laws" %}.
+                                        </li>
+                                        <li><strong
+                                                class="text-white">{% trans "License to Use" %}:</strong> {% trans "We grant you a limited, non-exclusive, non-transferable license to access and use our Service for personal, non-commercial purposes, in accordance with these Terms." %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">7</span>{% trans "Termination and Suspension" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <div class="space-y-4">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li><strong
+                                                class="text-white">{% trans "Our Rights to Terminate" %}:</strong> {% trans "We reserve the right to suspend or terminate your access to the Service at our sole discretion if we suspect that you have violated these Terms or engaged in any fraudulent or unlawful activities" %}.
+                                        </li>
+                                        <li><strong
+                                                class="text-white">{% trans "User's Rights to Terminate" %}:</strong> {% trans "You may cancel your subscription at any time, but please note that no refunds will be provided" %}.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">8</span>{% trans "Privacy and Data Protection" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <p>{% trans "Your use of the Service is also governed by our Privacy Policy, which outlines how we collect, use, and protect your personal information. By using the Service, you agree to the practices described in our Privacy Policy" %}.</p>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">9</span>{% trans "Disclaimers" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <div class="space-y-4">
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li><strong
+                                                class="text-white">{% trans "No Warranty" %}:</strong> {% trans "The Service is provided as-is, without any warranties or representations, whether express or implied, including but not limited to the accuracy or reliability of predictions, analysis, or any other aspect of the Service" %}.
+                                        </li>
+                                        <li><strong
+                                                class="text-white">{% trans "Limitation of Liability" %}:</strong> {% trans "To the fullest extent permitted by applicable law" %},
+                                            <span class="text-secondary-400">smoreltd.com</span>
+                                            {% trans "will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profit, revenue, data, or use, arising out of or related to your use of the Service, even if we have been advised of the possibility of such damages" %}.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">10</span>{% trans "Dispute Resolution" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <p>{% trans "Any dispute, controversy, or claim arising out of or relating to these Terms shall be resolved through binding arbitration, administered by the Bulgarian Chamber of Commerce and Industry (BCCI) in accordance with its Arbitration Rules. The place of arbitration shall be Sofia, Bulgaria, and the language of arbitration shall be Bulgarian/English. The decision of the arbitrator(s) shall be final and binding on all parties" %}.</p>
+                            </div>
                         </div>
                         <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
                                 class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">11</span>Modification
                             of Terms</h2>
-                            <div class="text-primary-200 space-y-4"><p>We may update or modify these Terms at any time.
-                                When we do, we will post the updated Terms on our website and provide the date of the
-                                most recent update. Continued use of the Service after such changes indicates your
-                                acceptance of the revised Terms.</p></div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">12</span>Governing
-                            Law</h2>
-                            <div class="text-primary-200 space-y-4"><p>These Terms are governed by and construed in
-                                accordance with the laws of Bulgaria, without regard to its conflict of laws
-                                principles.</p></div>
-                        </div>
-                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
-                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">13</span>Contact
-                            Information</h2>
                             <div class="text-primary-200 space-y-4">
-                                <div class="space-y-4"><p>For any questions regarding these Terms, please contact us
-                                    at:</p>
+                                <p>{% trans "We may update or modify these Terms at any time. When we do, we will post the updated Terms on our website and provide the date of the most recent update. Continued use of the Service after such changes indicates your acceptance of the revised Terms" %}.</p>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">12</span>{% trans "Governing Law" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <p>{% trans "These Terms are governed by and construed in accordance with the laws of Bulgaria, without regard to its conflict of laws principles" %}.</p>
+                            </div>
+                        </div>
+                        <div class="mb-12"><h2 class="text-2xl font-bold text-white mb-4 flex items-center"><span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-500/10 text-secondary-500 mr-3 text-sm">13</span>{% trans "Contact Information" %}
+                        </h2>
+                            <div class="text-primary-200 space-y-4">
+                                <div class="space-y-4">
+                                    <p>{% trans "For any questions regarding these Terms, please contact us at" %}:</p>
                                     <p>Budu M Ltd.</p></div>
                             </div>
                         </div>
                         <div class="mt-12 bg-primary-900/50 rounded-xl p-6 border border-primary-700/30"><h3
-                                class="text-lg font-semibold text-white mb-4">Contact Information</h3>
+                                class="text-lg font-semibold text-white mb-4">{% trans "Contact Information" %}</h3>
                             <div class="space-y-3">
                                 <div class="flex items-center text-primary-200">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

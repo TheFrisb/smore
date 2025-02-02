@@ -52,3 +52,19 @@ def get_full_url(url_name) -> str:
     view_url = reverse(url_name)
 
     return f"{base_url}{view_url}"
+
+
+@register.simple_tag
+def get_language_flag_emoji(language_code: str) -> str:
+    """
+    Returns the emoji flag for the given language code.
+    """
+    flags = {
+        "en": "🇬🇧",
+        "el": "🇬🇷",
+        "it": "🇮🇹",
+        "fr": "🇫🇷",
+        "de": "🇩🇪",
+    }
+
+    return flags.get(language_code.lower()[:2], "🌐")

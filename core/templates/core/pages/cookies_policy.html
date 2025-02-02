@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
@@ -19,7 +20,7 @@
                             <path d="M7 14v.01"></path>
                         </svg>
                     </div>
-                    <h1 class="text-4xl font-bold text-white mb-4">Cookie Policy</h1>
+                    <h1 class="text-4xl font-bold text-white mb-4">{% trans "Cookie Policy" %}</h1>
                     <div class="flex items-center justify-center space-x-2 text-primary-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -32,16 +33,16 @@
                         <span>Last Updated: 10.01.25</span></div>
                 </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30 mb-12"><p
-                        class="text-primary-200 text-lg leading-relaxed">This Cookie Policy explains how <span
-                        class="text-secondary-400">Smore</span> uses
-                    cookies and similar technologies to provide, customize, evaluate, improve, and secure our services.
-                    By using our website, you consent to our use of cookies as described in this policy.</p></div>
+                        class="text-primary-200 text-lg leading-relaxed">{% trans "This Cookie Policy explains how" %}
+                    <span
+                            class="text-secondary-400">Smore</span> {% trans "uses cookies and similar technologies to provide, customize, evaluate, improve, and secure our services. By using our website, you consent to our use of cookies as described in this policy." %}
+                </p></div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30 mb-8"><h2
-                        class="text-2xl font-bold text-white mb-4">What Are Cookies?</h2>
-                    <p class="text-primary-200 leading-relaxed">Cookies are small text files that are stored on your
-                        device when you visit our website. They help us remember your preferences, understand how you
-                        use our site, and provide you with a more personalized experience.</p></div>
-                <div class="space-y-8 mb-12"><h2 class="text-2xl font-bold text-white">Types of Cookies We Use</h2>
+                        class="text-2xl font-bold text-white mb-4">{% trans "What Are Cookies?" %}</h2>
+                    <p class="text-primary-200 leading-relaxed">{% trans "Cookies are small text files that are stored on your device when you visit our website. They help us remember your preferences, understand how you use our site, and provide you with a more personalized experience." %}</p>
+                </div>
+                <div class="space-y-8 mb-12"><h2
+                        class="text-2xl font-bold text-white">{% trans "Types of Cookies We Use" %}</h2>
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30 transition-all duration-300 hover:border-primary-500/30">
                         <div class="flex items-start space-x-6">
                             <div class="bg-primary-500/10 p-4 rounded-xl">
@@ -53,25 +54,25 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between mb-4"><h3
-                                        class="text-xl font-bold text-white">Session Authentication</h3><span
-                                        class="px-3 py-1 rounded-full text-sm bg-primary-500/10 text-secondary-400 border border-primary-500/20">Required</span>
+                                        class="text-xl font-bold text-white">{% trans "Session Authentication" %}</h3>
+                                    <span
+                                            class="px-3 py-1 rounded-full text-sm bg-primary-500/10 text-secondary-400 border border-primary-500/20">{% trans "Required" %}</span>
                                 </div>
-                                <p class="text-primary-200 mb-4">Essential cookies that maintain your login status and
-                                    secure your session while using our service.</p>
+                                <p class="text-primary-200 mb-4">{% trans "Essential cookies that maintain your login status and secure your session while using our service." %}</p>
                                 <div class="bg-primary-900/50 rounded-lg p-4"><h4 class="text-white font-medium mb-2">
-                                    Examples:</h4>
+                                    {% trans "Examples:" %}</h4>
                                     <ul class="space-y-2">
                                         <li class="flex items-center text-primary-300">
                                             <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-3"></div>
-                                            Authentication tokens
+                                            {% trans "Authentication tokens" %}
                                         </li>
                                         <li class="flex items-center text-primary-300">
                                             <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-3"></div>
-                                            Session identifiers
+                                            {% trans "Session identifiers" %}
                                         </li>
                                         <li class="flex items-center text-primary-300">
                                             <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-3"></div>
-                                            Security tokens
+                                            {% trans "Security tokens" %}
                                         </li>
                                     </ul>
                                 </div>
@@ -91,25 +92,24 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between mb-4"><h3
-                                        class="text-xl font-bold text-white">Analytics</h3><span
-                                        class="px-3 py-1 rounded-full text-sm bg-primary-700/50 text-primary-300 border border-primary-600/20">Optional</span>
+                                        class="text-xl font-bold text-white">{% trans "Analytics" %}</h3><span
+                                        class="px-3 py-1 rounded-full text-sm bg-primary-700/50 text-primary-300 border border-primary-600/20">{% trans "Optional" %}</span>
                                 </div>
-                                <p class="text-primary-200 mb-4">Facebook Pixel tracking to help us understand user
-                                    interactions and improve our service.</p>
+                                <p class="text-primary-200 mb-4">{% trans "Facebook Pixel tracking to help us understand user interactions and improve our service." %}</p>
                                 <div class="bg-primary-900/50 rounded-lg p-4"><h4 class="text-white font-medium mb-2">
-                                    Examples:</h4>
+                                    {% trans "Examples:" %}</h4>
                                     <ul class="space-y-2">
                                         <li class="flex items-center text-primary-300">
                                             <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-3"></div>
-                                            Click tracking
+                                            {% trans "Click tracking" %}
                                         </li>
                                         <li class="flex items-center text-primary-300">
                                             <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-3"></div>
-                                            Page views
+                                            {% trans "Page views" %}
                                         </li>
                                         <li class="flex items-center text-primary-300">
                                             <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-3"></div>
-                                            User journey analysis
+                                            {% trans "User journey analysis" %}
                                         </li>
                                     </ul>
                                 </div>

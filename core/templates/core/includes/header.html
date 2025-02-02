@@ -1,57 +1,66 @@
-{% load util_tags %}
+{% load i18n util_tags %}
+
+{% get_current_language as CURRENT_LANGUAGE %}
+
 <header class="fixed top-0 w-full bg-gradient-to-r from-primary-950/95 via-primary-900/95 to-primary-950/95 backdrop-blur-md shadow-dark-lg z-50">
     <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
     <div class="container mx-auto px-4">
         <div class="flex items-center min-h-20 justify-between">
-            <a class="relative group flex-shrink-0" href="{% url 'core:home' %}">
-                <div class="relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-secondary-500 to-secondary-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="flex flex-col md:flex-row items-start md:items-center justify-start md:gap-2 gap-0">
-                        <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary-200 ">SMORE</span>
-                        {#                        <span class="text-2xl text-white hidden md:block">|</span>#}
-                        {#                        <div class="relative flex items-center">#}
-                        {#                            <span class="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary-200 leading-4">#}
-                        {#                                Smart <span class="text-secondary-400">Score</span>#}
-                        {#                            </span>#}
-                        {#                        </div>#}
+            <div class="flex items-center justify-start gap-4">
+                <a class="relative group flex-shrink-0" href="{% url 'core:home' %}">
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-secondary-500 to-secondary-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="flex flex-col md:flex-row items-start md:items-center justify-start md:gap-2 gap-0">
+                            <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary-200 ">SMORE</span>
+                            {#                        <span class="text-2xl text-white hidden md:block">|</span>#}
+                            {#                        <div class="relative flex items-center">#}
+                            {#                            <span class="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary-200 leading-4">#}
+                            {#                                Smart <span class="text-secondary-400">Score</span>#}
+                            {#                            </span>#}
+                            {#                        </div>#}
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+                {#add#}
+            </div>
+
+
             <nav class="hidden lg:flex justify-center flex-1 space-x-6 xl:space-x-12">
                 <a class="relative group {% if request|is_link_active:'core:home' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:home' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                    Home</a>
+                    {% trans "Home" %}</a>
                 <a class="relative group {% if request|is_link_active:'core:upcoming_matches' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:upcoming_matches' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                    Upcoming Matches</a>
+                    {% trans "Upcoming Matches" %}</a>
                 <a class="relative group {% if request|is_link_active:'core:history' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:history' %}">
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                    History</a>
+                    {% trans "History" %}</a>
                 {% if request.user.is_authenticated %}
                     <a class="relative group {% if request|is_link_active:'accounts:referral_program' %}text-white{% else %}text-primary-300{% endif %}"
                        href="{% url 'accounts:referral_program' %}"><span
                             class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                        Referral Program</a>
+                        {% trans "Referral Program" %}</a>
                 {% endif %}
                 <a class="relative group {% if request|is_link_active:'core:plans' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:plans' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                    Plans</a>
+                    {% trans "Plans" %}</a>
                 <a class="relative group {% if request|is_link_active:'core:faq' %}text-white{% else %}text-primary-300{% endif %}"
                    href="{% url 'core:faq' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                    FAQ</a>
+                    {% trans "FAQ" %}</a>
                 {% if not request.user.is_authenticated %}
                     <a class="relative group {% if request|is_link_active:'core:how_to_join' %}text-white{% else %}text-primary-300{% endif %}"
                        href="{% url 'core:how_to_join' %}"><span
                             class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                        How to Join</a>
+                        {% trans "How to Join" %}</a>
                 {% endif %}
             </nav>
             <div class="flex items-center space-x-4 lg:space-x-6">
+
                 {% if request.user.is_authenticated %}
                     <a class="flex items-center space-x-2 text-primary-300 hover:text-white transition-colors"
                        href="{% url 'accounts:my_account' %}">
@@ -67,9 +76,9 @@
                     <a class="hidden lg:inline-flex text-primary-300 hover:text-white transition-colors relative group"
                        href="{% url 'accounts:login' %}">
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                        Sign In</a>
+                        {% trans "Sign In" %}</a>
                     <a class="relative hidden lg:inline-flex items-center justify-center px-6 py-2.5 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-950"
-                       href="{% url 'accounts:register' %}">Sign Up</a>
+                       href="{% url 'accounts:register' %}">{% trans "Sign Up" %}</a>
                 {% endif %}
                 <button class="lg:hidden p-2 text-primary-300 hover:text-white transition-colors" id="mobileMenuButton">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -92,47 +101,47 @@
              id="mobileMenuDropdownContainer">
             <nav class="py-4 space-y-2 border-t border-primary-700/30">
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:home' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                   href="{% url 'core:home' %}">Home</a>
+                   href="{% url 'core:home' %}">{% trans "Home" %}</a>
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:upcoming_matches' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                   href="{% url 'core:upcoming_matches' %}">Upcoming Matches</a>
+                   href="{% url 'core:upcoming_matches' %}">{% trans "Upcoming Matches" %}</a>
 
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:history' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                   href="{% url 'core:history' %}">History</a>
+                   href="{% url 'core:history' %}">{% trans "History" %}</a>
 
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:plans' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                   href="{% url 'core:plans' %}">Plans</a>
+                   href="{% url 'core:plans' %}">{% trans "Plans" %}</a>
                 {% if request.user.is_authenticated %}
                     <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'accounts:referral_program' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                       href="{% url 'accounts:referral_program' %}">Referral Program</a>
+                       href="{% url 'accounts:referral_program' %}">{% trans "Referral Program" %}</a>
                 {% endif %}
 
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:faq' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                   href="{% url 'core:faq' %}">FAQ</a>
+                   href="{% url 'core:faq' %}">{% trans "FAQ" %}</a>
 
                 {% if not request.user.is_authenticated %}
                     <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:how_to_join' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                       href="{% url 'core:how_to_join' %}">How to Join</a>
+                       href="{% url 'core:how_to_join' %}">{% trans "How to Join" %}</a>
                 {% endif %}
 
 
                 <div class="pt-4 space-y-2 border-t border-primary-700/30 mt-4">
                     {% if request.user.is_authenticated %}
                         <a class="block px-4 py-2 rounded-lg transition-colors text-primary-300 hover:bg-primary-800/50 hover:text-white"
-                           href="{% url 'accounts:my_account' %}">My Account</a>
+                           href="{% url 'accounts:my_account' %}">{% trans "My Account" %}</a>
 
                         <form action="{% url 'accounts:logout' %}" method="post">
                             {% csrf_token %}
                             <button type="submit"
                                     class="block px-4 py-2 rounded-lg transition-colors text-red-400 hover:bg-primary-800/50 hover:text-white">
-                                Sign Out
+                                {% trans "Sign Out" %}
                             </button>
                         </form>
                     {% else %}
                         <a class="block px-4 py-2 text-primary-300 hover:text-white transition-colors"
-                           href="{% url 'accounts:login' %}">Sign In</a>
+                           href="{% url 'accounts:login' %}">{% trans "Sign In" %}</a>
 
                         <a class="block px-4 py-2 text-white bg-gradient-to-r from-secondary-600 to-primary-500 rounded-lg"
-                           href="{% url 'accounts:register' %}">Sign Up</a>
+                           href="{% url 'accounts:register' %}">{% trans "Sign Up" %}</a>
                     {% endif %}
                 </div>
 

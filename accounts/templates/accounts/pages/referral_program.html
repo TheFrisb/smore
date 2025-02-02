@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-950 via-primary-900 to-primary-800 relative overflow-hidden">
         <div class="container mx-auto px-4">
@@ -16,18 +17,14 @@
                                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                             </svg>
                         </div>
-                        <div><h1 class="text-2xl font-bold text-white">Smore's Referral System</h1>
-                            <p class="text-secondary-400">Earn Recurring Rewards with Tiered Bonuses</p></div>
+                        <div><h1 class="text-2xl font-bold text-white">{% trans "Smore's Referral System" %}</h1>
+                            <p class="text-secondary-400">{% trans "Earn Recurring Rewards with Tiered Bonuses" %}</p>
+                        </div>
                     </div>
-                    <p class="text-primary-200 text-lg leading-relaxed">Smore offers a lucrative referral system
-                        designed to
-                        reward you for bringing in new customers. Even without an active subscription, you
-                        can earn
-                        monthly recurring rewards for both direct and indirect referrals. Plus, our tiered bonus
-                        structure lets
-                        you earn even more as you grow your network!</p></div>
+                    <p class="text-primary-200 text-lg leading-relaxed">{% trans "Smore offers a lucrative referral system designed to reward you for bringing in new customers. Even without an active subscription, you can earn monthly recurring rewards for both direct and indirect referrals. Plus, our tiered bonus structure lets you earn even more as you grow your network!" %}</p>
+                </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
-                        class="text-xl font-bold text-white mb-6">How Smore's Referral System Works</h2>
+                        class="text-xl font-bold text-white mb-6">{% trans "How Smore's Referral System Works" %}</h2>
                     <div class="space-y-8">
                         <div class="bg-primary-900/50 rounded-xl p-6 border border-primary-700/50">
                             <div class="flex items-center space-x-4 mb-4">
@@ -41,34 +38,34 @@
                                         <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-semibold text-white">First-Level Referrals: Earn 20% + Tiered
-                                    Bonuses</h3></div>
+                                <h3 class="text-lg font-semibold text-white">{% trans "First-Level Referrals: Earn 20% + Tiered Bonuses" %}</h3>
+                            </div>
                             <div class="space-y-4">
-                                <p class="text-primary-200">For every direct referral (first-level),
-                                    you earn
-                                    20% of their monthly subscription fee.</p>
-                                <p class="text-primary-200">Additionally, you receive a tiered bonus based on how many
-                                    first-level referrals you’ve accumulated:</p>
+                                <p class="text-primary-200">{% trans "For every direct referral (first-level), you earn 20% of their monthly subscription fee" %}.</p>
+                                <p class="text-primary-200">{% trans "Additionally, you receive a tiered bonus based on how many first-level referrals you’ve accumulated" %}:</p>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="bg-primary-800/50 p-4 rounded-lg border border-primary-700/30">
                                         <div class="text-center">
-                                            <div class="text-secondary-400 font-semibold mb-2">10-19 referrals</div>
+                                            <div class="text-secondary-400 font-semibold mb-2">
+                                                10-19 {% trans "referrals" %}</div>
                                             <div class="text-2xl font-bold text-white">€100</div>
-                                            <div class="text-primary-300 text-sm">bonus</div>
+                                            <div class="text-primary-300 text-sm">{% trans "bonus" %}</div>
                                         </div>
                                     </div>
                                     <div class="bg-primary-800/50 p-4 rounded-lg border border-primary-700/30">
                                         <div class="text-center">
-                                            <div class="text-secondary-400 font-semibold mb-2">20-29 referrals</div>
+                                            <div class="text-secondary-400 font-semibold mb-2">
+                                                20-29 {% trans "referrals" %}</div>
                                             <div class="text-2xl font-bold text-white">€200</div>
-                                            <div class="text-primary-300 text-sm">bonus</div>
+                                            <div class="text-primary-300 text-sm">{% trans "bonus" %}</div>
                                         </div>
                                     </div>
                                     <div class="bg-primary-800/50 p-4 rounded-lg border border-primary-700/30">
                                         <div class="text-center">
-                                            <div class="text-secondary-400 font-semibold mb-2">30-39 referrals</div>
+                                            <div class="text-secondary-400 font-semibold mb-2">
+                                                30-39 {% trans "referrals" %}</div>
                                             <div class="text-2xl font-bold text-white">€300</div>
-                                            <div class="text-primary-300 text-sm">bonus</div>
+                                            <div class="text-primary-300 text-sm">{% trans "bonus" %}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,64 +83,57 @@
                                         <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-semibold text-white">Second-Level Referrals: Earn 5%</h3></div>
-                            <p class="text-primary-200">If your first-level referrals bring in new customers
-                                (second-level
-                                referrals), you'll earn 5% of their monthly subscription fee for as long as they stay
-                                subscribed.</p></div>
+                                <h3 class="text-lg font-semibold text-white">{% trans "Second-Level Referrals: Earn" %}
+                                    5%</h3></div>
+                            <p class="text-primary-200">{% trans "If your first-level referrals bring in new customers (second-level referrals), you'll earn 5% of their monthly subscription fee for as long as they stay subscribed" %}.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
                     <h2
-                            class="text-xl font-bold text-white mb-6">Example: Earnings with 30 Direct Referrals (and
-                        Bonuses)</h2>
+                            class="text-xl font-bold text-white mb-6">{% trans "Example: Earnings with 30 Direct Referrals (and Bonuses)" %}</h2>
 
                     <div class="space-y-6">
                         <p class="text-primary-200">
-                            Let’s say you refer 30 direct customers (first-level referrals), and each of them refers 3
-                            new
-                            customers (second-level referrals) and each customer subscribes to the €69.99/month plan.
+                            {% trans "Let’s say you refer 30 direct customers (first-level referrals), and each of them refers 3 new customers (second-level referrals) and each customer subscribes to the €69.99/month plan" %}.
                             <br>
-                            Here’s how much you could earn:
+                            {% trans "Here’s how much you could earn" %}:
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
                                 <div class="text-center">
-                                    <div class="text-secondary-400 mb-2">First-Level Earnings</div>
+                                    <div class="text-secondary-400 mb-2">{% trans "First-Level Earnings" %}</div>
                                     <div class="text-3xl font-bold text-white">€419.70</div>
-                                    <div class="text-primary-300 text-sm">per month</div>
+                                    <div class="text-primary-300 text-sm">{% trans "per month" %}</div>
                                 </div>
                             </div>
                             <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
                                 <div class="text-center">
-                                    <div class="text-secondary-400 mb-2">Second-Level Earnings</div>
+                                    <div class="text-secondary-400 mb-2">{% trans "Second-Level Earnings" %}</div>
                                     <div class="text-3xl font-bold text-white">€315.00</div>
-                                    <div class="text-primary-300 text-sm">per month</div>
+                                    <div class="text-primary-300 text-sm">{% trans "per month" %}</div>
                                 </div>
                             </div>
                             <div class="bg-secondary-500/10 p-6 rounded-xl border border-secondary-500/20">
                                 <div class="text-center">
-                                    <div class="text-secondary-400 mb-2">Total Monthly Earnings</div>
+                                    <div class="text-secondary-400 mb-2">{% trans "Total Monthly Earnings" %}</div>
                                     <div class="text-3xl font-bold text-white">€1,034.70</div>
-                                    <div class="text-primary-300 text-sm">including <span
+                                    <div class="text-primary-300 text-sm">{% trans "including" %} <span
                                             class="font-bold text-secondary-400">€300</span>
-                                        <span class="text-secondary-400 font-bold">bonus</span>
+                                        <span class="text-secondary-400 font-bold">{% trans "bonus" %}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <h2 class="text-xl font-bold text-white">Example Summary:</h2>
+                        <h2 class="text-xl font-bold text-white">{% trans "Example Summary" %}:</h2>
                         <p class="text-primary-200">
-                            By referring 30 customers directly (earning €419.70/month) and helping them bring in 90
-                            second-level referrals (earning €315/month), you could earn a total of €1,034.70/month,
-                            including a €300 tiered bonus.
+                            {% trans "By referring 30 customers directly (earning €419.70/month) and helping them bring in 90 second-level referrals (earning €315/month), you could earn a total of €1,034.70/month, including a €300 tiered bonus" %}.
                         </p>
-                        <p class="text-primary-200">Start building your network today, and let Smore’s referral system
-                            turn your efforts into reliable monthly income!</p>
+                        <p class="text-primary-200">{% trans "Start building your network today, and let Smore’s referral system turn your efforts into reliable monthly income" %}!</p>
                     </div>
                 </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
-                        class="text-xl font-bold text-white mb-6">Why Smore's Referral System is a Game-Changer</h2>
+                        class="text-xl font-bold text-white mb-6">{% trans "Why Smore's Referral System is a Game-Changer" %}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
                             <div class="flex items-start space-x-4">
@@ -156,10 +146,10 @@
                                         <polyline points="16 7 22 7 22 13"></polyline>
                                     </svg>
                                 </div>
-                                <div><h3 class="text-lg font-semibold text-white mb-2">Recurring Monthly Rewards</h3>
-                                    <p class="text-primary-200">Earn 20% from first-level referrals and 5% from
-                                        second-level
-                                        referrals every month.</p></div>
+                                <div><h3
+                                        class="text-lg font-semibold text-white mb-2">{% trans "Recurring Monthly Rewards" %}</h3>
+                                    <p class="text-primary-200">{% trans "Earn 20% from first-level referrals and 5% from second-level referrals every month" %}.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
@@ -174,10 +164,8 @@
                                         <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
                                     </svg>
                                 </div>
-                                <div><h3 class="text-lg font-semibold text-white mb-2">Tiered Bonuses</h3>
-                                    <p class="text-primary-200">Smore’s bonus system grows with your efforts. For every
-                                        10 first-level referrals, you unlock a bigger bonus (€100 for 10-19, €200 for
-                                        20-29, €300 for 30-39, etc.).</p>
+                                <div><h3 class="text-lg font-semibold text-white mb-2">{% trans "Tiered Bonuses" %}</h3>
+                                    <p class="text-primary-200">{% trans "Smore’s bonus system grows with your efforts. For every  10 first-level referrals, you unlock a bigger bonus (€100 for 10-19, €200 for 20-29, €300 for 30-39, etc.)" %}.</p>
                                 </div>
                             </div>
                         </div>
@@ -193,9 +181,9 @@
                                         <circle cx="12" cy="12" r="2"></circle>
                                     </svg>
                                 </div>
-                                <div><h3 class="text-lg font-semibold text-white mb-2">Scalable Income</h3>
-                                    <p class="text-primary-200">The more customers you refer and the more they refer,
-                                        the higher your rewards—there’s no earning limit!</p>
+                                <div><h3
+                                        class="text-lg font-semibold text-white mb-2">{% trans "Scalable Income" %}</h3>
+                                    <p class="text-primary-200">{% trans "The more customers you refer and the more they refer, the higher your rewards—there’s no earning limit!" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -208,9 +196,9 @@
                                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                     </svg>
                                 </div>
-                                <div><h3 class="text-lg font-semibold text-white mb-2">Simple and Transparent</h3>
-                                    <p class="text-primary-200">Easily track your referrals, bonuses, and monthly
-                                        earnings in your Smore dashboard.
+                                <div><h3
+                                        class="text-lg font-semibold text-white mb-2">{% trans "Simple and Transparent" %}</h3>
+                                    <p class="text-primary-200">{% trans "Easily track your referrals, bonuses, and monthly earnings in your Smore dashboard" %}.
                                     </p>
                                 </div>
                             </div>
@@ -218,7 +206,7 @@
                     </div>
                 </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30"><h2
-                        class="text-xl font-bold text-white mb-6">How to Get Started</h2>
+                        class="text-xl font-bold text-white mb-6">{% trans "How to Get Started" %}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
                             <div class="flex flex-col items-center text-center">
@@ -232,8 +220,8 @@
                                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-semibold text-white mb-2">Join Smore</h3>
-                                <p class="text-primary-200">Make an account to get started</p></div>
+                                <h3 class="text-lg font-semibold text-white mb-2">{% trans "Join Smore" %}</h3>
+                                <p class="text-primary-200">{% trans "Make an account to get started" %}</p></div>
                         </div>
                         <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
                             <div class="flex flex-col items-center text-center">
@@ -249,9 +237,8 @@
                                         <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-semibold text-white mb-2">Access Your Unique Referral Link</h3>
-                                <p class="text-primary-200">Get your personalized referral link to share with your
-                                    network</p>
+                                <h3 class="text-lg font-semibold text-white mb-2">{% trans "Access Your Unique Referral Link" %}</h3>
+                                <p class="text-primary-200">{% trans "Get your personalized referral link to share with your network" %}</p>
                             </div>
                         </div>
                         <div class="bg-primary-900/50 p-6 rounded-xl border border-primary-700/50">
@@ -265,15 +252,15 @@
                                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-semibold text-white mb-2">Earn Monthly Rewards and Bonuses</h3>
-                                <p class="text-primary-200">Earn €13.99/month for every direct referral, €3.50/month for
-                                    every indirect referral, and enjoy tiered bonuses as your network grows.</p>
+                                <h3 class="text-lg font-semibold text-white mb-2">{% trans "Earn Monthly Rewards and Bonuses" %}</h3>
+                                <p class="text-primary-200">{% trans "Earn €13.99/month for every direct referral, €3.50/month for every indirect referral, and enjoy tiered bonuses as your network grows" %}.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
-                    <div class="text-center"><h2 class="text-2xl font-bold text-white mb-6">Your Referral Link</h2>
+                    <div class="text-center"><h2
+                            class="text-2xl font-bold text-white mb-6">{% trans "Your Referral Link" %}</h2>
                         <div class="max-w-3xl mx-auto">
                             <div class="flex items-center space-x-3 mb-6">
                                 <div class="flex-1 bg-primary-900/50 px-4 py-2 md:px-6 md:py-4 rounded-lg border border-primary-700/30">
@@ -295,9 +282,8 @@
                                 </button>
                             </div>
                         </div>
-                        <p class="text-primary-200 mb-6">Build your network and let Smore's referral system turn your
-                            efforts
-                            into reliable monthly income.</p></div>
+                        <p class="text-primary-200 mb-6">{% trans "Build your network and let Smore's referral system turn your efforts into reliable monthly income" %}.</p>
+                    </div>
                 </div>
             </div>
 

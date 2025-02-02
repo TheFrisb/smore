@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load util_tags %}
+{% load util_tags i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-5"></div>
@@ -7,10 +7,10 @@
         <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
         <div class="container mx-auto px-4">
             <div class="flex flex-col items-center text-center mb-16"><span
-                    class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">Track Record</span>
-                <h2 class="text-4xl font-bold text-white mb-4">Prediction History</h2>
-                <p class="text-primary-200 max-w-2xl mx-auto">Explore our comprehensive track record of predictions
-                    across multiple sports, showcasing our consistent success rate and analytical expertise.</p></div>
+                    class="inline-block px-4 py-2 rounded-full bg-secondary-500/10 text-secondary-400 text-sm font-semibold mb-4">{% trans "Track Record" %}</span>
+                <h2 class="text-4xl font-bold text-white mb-4">{% trans "Prediction History" %}</h2>
+                <p class="text-primary-200 max-w-2xl mx-auto">{% trans "Explore our comprehensive track record of predictions across multiple sports, showcasing our consistent success rate and analytical expertise." %}</p>
+            </div>
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-8">
                 <div class="flex flex-wrap gap-3">
 
@@ -18,20 +18,20 @@
                         <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
                             {% svg_icon icon_name="soccerIcon" css_classes="w-4 h-4" %}
 
-                            <span>Soccer</span></button>
+                            <span>{% trans "Soccer" %}</span></button>
                     </div>
                     <div class="relative">
                         <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
-                            <span class="text-xs text-secondary-400">Soon</span></div>
+                            <span class="text-xs text-secondary-400">{% trans "Soon" %}</span></div>
                         <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
                                 disabled="">
                             {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4" %}
-                            <span>Basketball</span>
+                            <span>{% trans "Basketball" %}</span>
                         </button>
                     </div>
                     <div class="relative">
                         <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
-                            <span class="text-xs text-secondary-400">Soon</span></div>
+                            <span class="text-xs text-secondary-400">{% trans "Soon" %}</span></div>
                         <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
                                 disabled="">
                             {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4" %}
@@ -52,7 +52,7 @@
 
                                 </div>
 
-                                <span class="text-sm text-primary-100">Soccer</span>
+                                <span class="text-sm text-primary-100">{% trans "Soccer" %}</span>
 
                             </div>
                             <div class="flex items-center space-x-2 px-4 py-2 rounded-lg
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="mb-6">
-                            <div class="text-sm text-primary-300 mb-2">Match:</div>
+                            <div class="text-sm text-primary-300 mb-2">{% trans "Match" %}:</div>
                             <div class="bg-gradient-to-br rounded-lg border p-6 py-10 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 {% if prediction.status == "WON" %}from-emerald-900/20 to-primary-800/90 border-emerald-500/20{% else %}from-red-900/20 to-primary-800/90 border-red-500/20{% endif %}">
                                 <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/0 via-secondary-500/5 to-secondary-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg pointer-events-none"></div>
                                 <div
@@ -97,23 +97,23 @@
                         </div>
                         <div class="grid grid-cols-2 gap-4 mb-6">
                             <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
-                                <div class="text-sm text-primary-300 mb-1">Kick-off Date</div>
+                                <div class="text-sm text-primary-300 mb-1">{% trans "Kick-off Date" %}</div>
                                 <div class="font-medium text-white">{{ prediction.kickoff_date|date:"d/m/Y" }}</div>
                             </div>
                             <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">
-                                <div class="text-sm text-primary-300 mb-1">Kick-off Time</div>
+                                <div class="text-sm text-primary-300 mb-1">{% trans "Kick-off Time" %}</div>
                                 <div class="font-medium text-white">{{ prediction.kickoff_time|time:"H:i" }} (GMT+1)
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <div class="text-sm text-primary-300">Prediction</div>
+                                <div class="text-sm text-primary-300">{% trans "Prediction" %}</div>
                                 <div class="font-semibold text-lg text-white">{{ prediction.prediction }}</div>
                             </div>
                             <div>
                                 <div class="text-right">
-                                    <div class="text-sm text-primary-300">Result</div>
+                                    <div class="text-sm text-primary-300">{% trans "Result" %}</div>
                                     <div class="font-semibold text-3xl text-secondary-400">{{ prediction.result }}
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                         </div>
                         <div class="mt-4 pt-4 border-t border-primary-700/30">
                             <div class="flex items-center justify-between">
-                                <div class="text-sm text-primary-300">Odds</div>
+                                <div class="text-sm text-primary-300">{% trans "Odds" %}</div>
                                 <div class="font-medium text-secondary-400">{{ prediction.odds }}</div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                 <button id="loadMorePredictionsButton" data-next-page="2"
                         class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div class="relative flex items-center"><span class="text-lg">Load More</span>
+                    <div class="relative flex items-center"><span class="text-lg">{% trans "Load More" %}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                              class="lucide lucide-chevron-down w-5 h-5 ml-2 transform group-hover:translate-y-0.5 transition-transform duration-300">
