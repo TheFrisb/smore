@@ -114,8 +114,9 @@
                          data-client_id="157232878412-blfc50vn5b2jngoeb5u537uati3na5hq.apps.googleusercontent.com"
                          data-context="signup"
                          data-ux_mode="redirect"
-                         data-login_uri={% get_full_url "accounts:google_receiver" %}
-                                 data-itp_support="true">
+                         data-login_uri="{% get_full_url "accounts:google_receiver" %}"
+                         data-auto_prompt="false"
+                    >
                     </div>
 
                     <div class="g_id_signin"
