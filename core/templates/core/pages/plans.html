@@ -39,7 +39,10 @@
                          "
                          data-product-id="{{ product.id }}" data-product-monthly-price="{{ product.monthly_price }}"
                          data-product-annual-price="{{ product.yearly_price }}"
-                         data-product-name="{{ product.name }}">
+                         data-product-name="{{ product.get_name_display }}"
+                         data-product-name-untranslated="{{ product.name }}"
+                         data-translated-mode-month="{% trans 'month' %}"
+                         data-translated-mode-year="{% trans 'year' %}">
                         {% if product.name != "Soccer" %}
                             <div class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
                             </div>
@@ -55,7 +58,9 @@
                                 <div>
                                     <div class="flex items-center space-x-2">
                                         {% svg_icon icon_name=product.name|lower|add:"Icon" css_classes="w-6 h-6 text-secondary-400" %}
-                                        <h3 class="text-xl font-bold text-white">{{ product.name }}</h3>
+                                        <h3 class="text-xl font-bold text-white">
+                                            {{ product.get_name_display }}
+                                        </h3>
                                     </div>
                                     <div class="flex items-center gap-3 mt-2">
                                         <p class="text-lg text-primary-400 line-through hidden product__yearlyPriceNoDiscount">
@@ -63,7 +68,8 @@
                                         <p class="text-2xl font-bold text-secondary-400  product__price">
                                             €{{ product.monthly_price }}</p>
                                     </div>
-                                    <p class="text-sm text-primary-300">per <span class="product__subscriptionMode">month</span>
+                                    <p class="text-sm text-primary-300">{% trans "per" %} <span
+                                            class="product__subscriptionMode">{% trans "month" %}</span>
                                     </p>
                                     {#                                    <p class="text-sm text-secondary-500/80 product__discountSection hidden">#}
                                     {#                                        ${{ product.discount }} off with another#}
@@ -78,7 +84,9 @@
                             {% if request.user.is_authenticated and request.user.subscription_is_active and product.name == 'Soccer' %}
                                 <div class="mb-6">
                                     <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
-                                        <p class="text-sm font-medium product__currentPlanDisclaimer">{% trans "Current plan" %}</p>
+                                        <p class="text-sm font-medium product__currentPlanDisclaimer"
+                                           data-current-plan="{% trans 'Current plan' %}"
+                                           data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
                                     </div>
                                     <p class="text-sm font-medium text-primary-300">{% trans "Plan expiry" %}
                                         date: {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
@@ -192,8 +200,9 @@
                     <div class="flex justify-between items-center mb-6"><h3 class="text-xl font-bold text-white">
                         {% trans "Summary" %}</h3>
                         <div class="text-right">
-                            <p class="text-sm text-primary-300 mb-1">Total <span
-                                    id="subscriptionMode">{% trans "monthly" %}</span>
+                            <p class="text-sm text-primary-300 mb-1">{% trans "Total" %} <span
+                                    id="subscriptionMode" data-translated-monthly="{% trans 'monthly' %}"
+                                    data-translated-yearly="{% trans 'Yearly'|lower %}">{% trans "monthly" %}</span>
                                 {% trans "price" %}</p>
                             <p class="text-3xl font-bold bg-gradient-to-r from-secondary-400 to-secondary-300 bg-clip-text text-transparent checkoutSummarySection__totalPrice">
                                 €0.00</p></div>
@@ -217,7 +226,6 @@
                     {% elif request.user.is_authenticated and request.user.subscription_is_active %}
                         <a href="{% url 'payments:update_subscription' %}"
                            class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
-
                            disabled="">
                             <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                             <div class="relative flex items-center"><span

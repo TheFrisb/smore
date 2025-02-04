@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-02 14:54+0100\n"
+"POT-Creation-Date: 2025-02-04 21:23+0100\n"
 "PO-Revision-Date: 2025-02-03 23:03+0000\n"
 "Last-Translator: Aleksandar Ristovski <aleksandar_cano12@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,6 +35,59 @@ msgstr "Empfehlungen und Guthaben"
 msgid "Important dates"
 msgstr "Wichtige Termine"
 
+#: accounts/models.py:127
+#: accounts/templates/accounts/pages/withdrawal_history.html:200
+#: accounts/templates/accounts/pages/withdrawal_history.html:208
+#: core/models.py:60
+msgid "Pending"
+msgstr "Ausstehend"
+
+#: accounts/models.py:128
+#: accounts/templates/accounts/pages/withdrawal_history.html:220
+#: accounts/templates/accounts/pages/withdrawal_history.html:228
+msgid "Approved"
+msgstr "Genehmigt"
+
+#: accounts/models.py:129
+#: accounts/templates/accounts/pages/withdrawal_history.html:241
+#: accounts/templates/accounts/pages/withdrawal_history.html:249
+msgid "Processing"
+msgstr "In Bearbeitung"
+
+#: accounts/models.py:130
+#: accounts/templates/accounts/pages/withdrawal_history.html:18
+#: accounts/templates/accounts/pages/withdrawal_history.html:263
+#: accounts/templates/accounts/pages/withdrawal_history.html:271
+msgid "Completed"
+msgstr "Abgeschlossen"
+
+#: accounts/models.py:131
+#: accounts/templates/accounts/pages/withdrawal_history.html:50
+msgid "Rejected"
+msgstr "Abgelehnt"
+
+#: accounts/models.py:134
+msgid "Bank"
+msgstr ""
+
+#: accounts/models.py:135
+#: accounts/templates/accounts/pages/request_withdrawal.html:59
+msgid "Payoneer"
+msgstr "Payoneer"
+
+#: accounts/models.py:136
+#: accounts/templates/accounts/pages/request_withdrawal.html:68
+msgid "Cryptocurrency"
+msgstr "Kryptowährung"
+
+#: accounts/models.py:160 core/templates/core/pages/plans.html:20
+msgid "Monthly"
+msgstr ""
+
+#: accounts/models.py:161 core/templates/core/pages/plans.html:205
+msgid "Yearly"
+msgstr ""
+
 #: accounts/templates/accounts/base.html:53
 #: accounts/templates/accounts/base.html:74
 msgid "Resend email"
@@ -44,21 +97,23 @@ msgstr "E-Mail erneut senden"
 msgid "Account"
 msgstr "Konto"
 
-#: accounts/templates/accounts/includes/sidebar.html:62
+#: accounts/templates/accounts/includes/sidebar.html:62 accounts/views.py:288
 msgid "My Network"
 msgstr "Mein Netzwerk"
 
-#: accounts/templates/accounts/includes/sidebar.html:80
+#: accounts/templates/accounts/includes/sidebar.html:80 accounts/views.py:298
 msgid "Manage Plan"
 msgstr "Plan verwalten"
 
 #: accounts/templates/accounts/includes/sidebar.html:98
 #: accounts/templates/accounts/pages/request_withdrawal.html:169
+#: accounts/views.py:313
 msgid "Request Withdrawal"
 msgstr "Auszahlung anfordern"
 
 #: accounts/templates/accounts/includes/sidebar.html:117
 #: accounts/templates/accounts/pages/withdrawal_history.html:7
+#: accounts/views.py:462
 msgid "Withdrawal History"
 msgstr "Auszahlungsverlauf"
 
@@ -71,14 +126,14 @@ msgid "Contact Us"
 msgstr "Kontaktieren Sie uns"
 
 #: accounts/templates/accounts/includes/sidebar.html:151
-#: core/templates/core/includes/header.html:79
-#: core/templates/core/includes/header.html:144
-#: core/templates/core/pages/faq.html:10
+#: core/templates/core/includes/header.html:91
+#: core/templates/core/includes/header.html:156
+#: core/templates/core/pages/faq.html:10 core/views.py:113
 msgid "FAQ"
 msgstr "Häufig gestellte Fragen (FAQ)"
 
 #: accounts/templates/accounts/includes/sidebar.html:170
-#: core/templates/core/includes/header.html:161
+#: core/templates/core/includes/header.html:173
 msgid "Sign Out"
 msgstr "Abmelden"
 
@@ -126,13 +181,13 @@ msgstr "Schnelle Reaktionszeit"
 #: accounts/templates/accounts/pages/contact_us.html:87
 msgid ""
 "We aim to respond to all inquiries within 15 minutes. Our dedicated support "
-"team is here to help you 24/7, ensuring you get the assistance you need when"
-" you need it"
+"team is here to help you 24/7, ensuring you get the assistance you need when "
+"you need it"
 msgstr ""
 "Wir bemühen uns, alle Anfragen innerhalb von 15 Minuten zu beantworten. "
-"Unser engagiertes Support-Team steht Ihnen rund um die Uhr zur Verfügung, um"
-" sicherzustellen, dass Sie die Hilfe erhalten, die Sie benötigen, wann immer"
-" Sie sie brauchen."
+"Unser engagiertes Support-Team steht Ihnen rund um die Uhr zur Verfügung, um "
+"sicherzustellen, dass Sie die Hilfe erhalten, die Sie benötigen, wann immer "
+"Sie sie brauchen."
 
 #: accounts/templates/accounts/pages/faq.html:12
 #: core/templates/core/pages/faq.html:11
@@ -144,8 +199,8 @@ msgid ""
 "Find answers to common questions about our prediction service, methodology, "
 "and success rates"
 msgstr ""
-"Finden Sie Antworten auf häufige Fragen zu unserem Vorhersagedienst, unserer"
-" Methodik und Erfolgsquote"
+"Finden Sie Antworten auf häufige Fragen zu unserem Vorhersagedienst, unserer "
+"Methodik und Erfolgsquote"
 
 #: accounts/templates/accounts/pages/faq.html:48
 msgid "Still have questions? We're here to help"
@@ -173,11 +228,11 @@ msgstr " Passwort vergessen"
 msgid "Sign in"
 msgstr "Anmelden"
 
-#: accounts/templates/accounts/pages/login.html:135
+#: accounts/templates/accounts/pages/login.html:136
 msgid "Don't have an account"
 msgstr "Kein Konto?"
 
-#: accounts/templates/accounts/pages/login.html:138
+#: accounts/templates/accounts/pages/login.html:139
 msgid "Register now"
 msgstr "Jetzt registrieren"
 
@@ -194,10 +249,13 @@ msgid "analysis per"
 msgstr "Analyse pro"
 
 #: accounts/templates/accounts/pages/manage_plan.html:31
+#: core/templates/core/pages/plans.html:44
+#: core/templates/core/pages/plans.html:72
 msgid "month"
 msgstr "Monat"
 
 #: accounts/templates/accounts/pages/manage_plan.html:32
+#: core/templates/core/pages/plans.html:45
 msgid "year"
 msgstr "Jahr"
 
@@ -233,7 +291,7 @@ msgstr "Verfügbare Tarife anzeigen"
 
 #: accounts/templates/accounts/pages/manage_plan.html:86
 #: accounts/templates/accounts/pages/manage_plan.html:91
-#: core/templates/core/pages/plans.html:224
+#: core/templates/core/pages/plans.html:232
 msgid "Manage Subscription"
 msgstr "Abonnement verwalten"
 
@@ -301,6 +359,7 @@ msgid "Inactive"
 msgstr "Inaktiv"
 
 #: accounts/templates/accounts/pages/my_network.html:75
+#: core/templates/core/pages/plans.html:203
 msgid "Total"
 msgstr "Gesamt"
 
@@ -339,16 +398,16 @@ msgstr "Verdienen Sie wiederkehrende Belohnungen mit gestaffelten Boni"
 
 #: accounts/templates/accounts/pages/referral_program.html:24
 msgid ""
-"Smore offers a lucrative referral system designed to reward you for bringing"
-" in new customers. Even without an active subscription, you can earn monthly"
-" recurring rewards for both direct and indirect referrals. Plus, our tiered "
+"Smore offers a lucrative referral system designed to reward you for bringing "
+"in new customers. Even without an active subscription, you can earn monthly "
+"recurring rewards for both direct and indirect referrals. Plus, our tiered "
 "bonus structure lets you earn even more as you grow your network!"
 msgstr ""
 "Smore bietet ein lukratives Empfehlungsprogramm, das Sie für das Werben "
 "neuer Kunden belohnt. Selbst ohne aktives Abonnement können Sie monatlich "
-"wiederkehrende Belohnungen für direkte und indirekte Empfehlungen verdienen."
-" Darüber hinaus ermöglicht Ihnen unsere gestaffelte Bonusstruktur, noch mehr"
-" zu verdienen, wenn Ihr Netzwerk wächst!"
+"wiederkehrende Belohnungen für direkte und indirekte Empfehlungen verdienen. "
+"Darüber hinaus ermöglicht Ihnen unsere gestaffelte Bonusstruktur, noch mehr "
+"zu verdienen, wenn Ihr Netzwerk wächst!"
 
 #: accounts/templates/accounts/pages/referral_program.html:27
 msgid "How Smore's Referral System Works"
@@ -357,7 +416,7 @@ msgstr "So funktioniert das Smore-Empfehlungssystem"
 #: accounts/templates/accounts/pages/referral_program.html:41
 #, python-format
 msgid "First-Level Referrals: Earn 20%% + Tiered Bonuses"
-msgstr "Erste-Level-Empfehlungen: Verdienen Sie 20% + gestaffelte Boni"
+msgstr "Erste-Level-Empfehlungen: Verdienen Sie 20%% + gestaffelte Boni"
 
 #: accounts/templates/accounts/pages/referral_program.html:44
 #, python-format
@@ -365,8 +424,8 @@ msgid ""
 "For every direct referral (first-level), you earn 20%% of their monthly "
 "subscription fee"
 msgstr ""
-"Für jede direkte Empfehlung (erste Ebene) erhalten Sie 20% ihrer monatlichen"
-" Abonnementgebühr"
+"Für jede direkte Empfehlung (erste Ebene) erhalten Sie 20%% ihrer "
+"monatlichen Abonnementgebühr"
 
 #: accounts/templates/accounts/pages/referral_program.html:45
 msgid ""
@@ -397,11 +456,11 @@ msgstr "Zweite-Level-Empfehlungen: Verdienen Sie"
 #, python-format
 msgid ""
 "If your first-level referrals bring in new customers (second-level "
-"referrals), you'll earn 5%% of their monthly subscription fee for as long as"
-" they stay subscribed"
+"referrals), you'll earn 5%% of their monthly subscription fee for as long as "
+"they stay subscribed"
 msgstr ""
 "Wenn Ihre ersten-Level-Empfehlungen neue Kunden werben (zweite-Level-"
-"Empfehlungen), erhalten Sie 5% ihrer monatlichen Abonnementgebühr, solange "
+"Empfehlungen), erhalten Sie 5%% ihrer monatlichen Abonnementgebühr, solange "
 "sie abonniert bleiben"
 
 #: accounts/templates/accounts/pages/referral_program.html:94
@@ -410,13 +469,13 @@ msgstr "Beispiel: Einnahmen mit 30 direkten Empfehlungen (und Boni)"
 
 #: accounts/templates/accounts/pages/referral_program.html:98
 msgid ""
-"Let’s say you refer 30 direct customers (first-level referrals), and each of"
-" them refers 3 new customers (second-level referrals) and each customer "
+"Let’s say you refer 30 direct customers (first-level referrals), and each of "
+"them refers 3 new customers (second-level referrals) and each customer "
 "subscribes to the €69.99/month plan"
 msgstr ""
 "Angenommen, Sie werben 30 direkte Kunden (erste-Level-Empfehlungen), und "
-"jeder von ihnen wirbt 3 neue Kunden (zweite-Level-Empfehlungen), wobei jeder"
-" Kunde den €69,99/Monat-Plan abonniert"
+"jeder von ihnen wirbt 3 neue Kunden (zweite-Level-Empfehlungen), wobei jeder "
+"Kunde den €69,99/Monat-Plan abonniert"
 
 #: accounts/templates/accounts/pages/referral_program.html:100
 msgid "Here’s how much you could earn"
@@ -455,8 +514,8 @@ msgstr ""
 
 #: accounts/templates/accounts/pages/referral_program.html:132
 msgid ""
-"Start building your network today, and let Smore’s referral system turn your"
-" efforts into reliable monthly income"
+"Start building your network today, and let Smore’s referral system turn your "
+"efforts into reliable monthly income"
 msgstr ""
 "Beginnen Sie noch heute mit dem Aufbau Ihres Netzwerks, und lassen Sie "
 "Smores Empfehlungssystem Ihre Bemühungen in ein zuverlässiges monatliches "
@@ -476,7 +535,7 @@ msgid ""
 "Earn 20%% from first-level referrals and 5%% from second-level referrals "
 "every month"
 msgstr ""
-"Verdienen Sie jeden Monat 20% aus ersten-Level-Empfehlungen und 5% aus "
+"Verdienen Sie jeden Monat 20%% aus ersten-Level-Empfehlungen und 5%% aus "
 "zweiten-Level-Empfehlungen"
 
 #: accounts/templates/accounts/pages/referral_program.html:167
@@ -490,8 +549,8 @@ msgid ""
 "for 30-39, etc.)"
 msgstr ""
 "Smores Bonussystem wächst mit Ihren Bemühungen. Für jeweils 10 erste-Level-"
-"Empfehlungen schalten Sie einen höheren Bonus frei (€100 für 10-19, €200 für"
-" 20-29, €300 für 30-39 usw.)"
+"Empfehlungen schalten Sie einen höheren Bonus frei (€100 für 10-19, €200 für "
+"20-29, €300 für 30-39 usw.)"
 
 #: accounts/templates/accounts/pages/referral_program.html:185
 msgid "Scalable Income"
@@ -499,8 +558,8 @@ msgstr "Skalierbares Einkommen"
 
 #: accounts/templates/accounts/pages/referral_program.html:186
 msgid ""
-"The more customers you refer and the more they refer, the higher your "
-"rewards—there’s no earning limit!"
+"The more customers you refer and the more they refer, the higher your rewards"
+"—there’s no earning limit!"
 msgstr ""
 "Je mehr Kunden Sie werben und je mehr diese wiederum neue Kunden werben, "
 "desto höher sind Ihre Belohnungen – es gibt kein Verdienstlimit!"
@@ -514,8 +573,8 @@ msgid ""
 "Easily track your referrals, bonuses, and monthly earnings in your Smore "
 "dashboard"
 msgstr ""
-"Verfolgen Sie ganz einfach Ihre Empfehlungen, Boni und monatlichen Einnahmen"
-" in Ihrem Smore-Dashboard"
+"Verfolgen Sie ganz einfach Ihre Empfehlungen, Boni und monatlichen Einnahmen "
+"in Ihrem Smore-Dashboard"
 
 #: accounts/templates/accounts/pages/referral_program.html:209
 msgid "How to Get Started"
@@ -548,9 +607,9 @@ msgid ""
 "Earn €13.99/month for every direct referral, €3.50/month for every indirect "
 "referral, and enjoy tiered bonuses as your network grows"
 msgstr ""
-"Verdienen Sie €13,99/Monat für jede direkte Empfehlung, €3,50/Monat für jede"
-" indirekte Empfehlung und profitieren Sie von gestaffelten Boni, während Ihr"
-" Netzwerk wächst"
+"Verdienen Sie €13,99/Monat für jede direkte Empfehlung, €3,50/Monat für jede "
+"indirekte Empfehlung und profitieren Sie von gestaffelten Boni, während Ihr "
+"Netzwerk wächst"
 
 #: accounts/templates/accounts/pages/referral_program.html:285
 msgid ""
@@ -595,7 +654,7 @@ msgstr "Ich stimme den"
 
 #: accounts/templates/accounts/pages/register.html:176
 #: core/templates/core/includes/footer.html:108
-#: core/templates/core/pages/terms_of_service.html:19
+#: core/templates/core/pages/terms_of_service.html:19 core/views.py:150
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
 
@@ -605,7 +664,7 @@ msgstr "und"
 
 #: accounts/templates/accounts/pages/register.html:178
 #: core/templates/core/includes/footer.html:119
-#: core/templates/core/pages/privacy_policy.html:18
+#: core/templates/core/pages/privacy_policy.html:18 core/views.py:159
 msgid "Privacy Policy"
 msgstr "Datenschutzrichtlinie"
 
@@ -640,14 +699,6 @@ msgstr "Wählen Sie eine Auszahlungsmethode"
 #: accounts/templates/accounts/pages/request_withdrawal.html:50
 msgid "Bank Transfer"
 msgstr "Banküberweisung"
-
-#: accounts/templates/accounts/pages/request_withdrawal.html:59
-msgid "Payoneer"
-msgstr "Payoneer"
-
-#: accounts/templates/accounts/pages/request_withdrawal.html:68
-msgid "Cryptocurrency"
-msgstr "Kryptowährung"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:77
 msgid "Full Name (as on bank account)"
@@ -685,8 +736,8 @@ msgstr "Payoneer-Kundennummer"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:144
 msgid ""
-"Please verify your Payoneer email address carefully. Funds sent to incorrect"
-" Payoneer accounts cannot be recovered"
+"Please verify your Payoneer email address carefully. Funds sent to incorrect "
+"Payoneer accounts cannot be recovered"
 msgstr ""
 "Bitte überprüfen Sie Ihre Payoneer-E-Mail-Adresse sorgfältig. An falsche "
 "Payoneer-Konten gesendete Gelder können nicht zurückgeholt werden"
@@ -718,19 +769,9 @@ msgstr ""
 msgid "Total withdrawn amount"
 msgstr "Gesamtauszahlungsbetrag"
 
-#: accounts/templates/accounts/pages/withdrawal_history.html:18
-#: accounts/templates/accounts/pages/withdrawal_history.html:263
-#: accounts/templates/accounts/pages/withdrawal_history.html:271
-msgid "Completed"
-msgstr "Abgeschlossen"
-
 #: accounts/templates/accounts/pages/withdrawal_history.html:34
 msgid "In Progress"
 msgstr "In Bearbeitung"
-
-#: accounts/templates/accounts/pages/withdrawal_history.html:50
-msgid "Rejected"
-msgstr "Abgelehnt"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:89
 msgid "Transfer"
@@ -755,21 +796,6 @@ msgstr "Ablehnungsgrund"
 #: accounts/templates/accounts/pages/withdrawal_history.html:188
 msgid "No reason provided"
 msgstr "Kein Grund angegeben"
-
-#: accounts/templates/accounts/pages/withdrawal_history.html:200
-#: accounts/templates/accounts/pages/withdrawal_history.html:208
-msgid "Pending"
-msgstr "Ausstehend"
-
-#: accounts/templates/accounts/pages/withdrawal_history.html:220
-#: accounts/templates/accounts/pages/withdrawal_history.html:228
-msgid "Approved"
-msgstr "Genehmigt"
-
-#: accounts/templates/accounts/pages/withdrawal_history.html:241
-#: accounts/templates/accounts/pages/withdrawal_history.html:249
-msgid "Processing"
-msgstr "In Bearbeitung"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:286
 msgid "You haven't made a withdrawal request yet"
@@ -813,8 +839,8 @@ msgid ""
 "If an account exists with the credentials you've entered, an email will be "
 "sent with instructions to reset your password"
 msgstr ""
-"Falls ein Konto mit den eingegebenen Anmeldedaten existiert, wird eine "
-"E-Mail mit Anweisungen zum Zurücksetzen des Passworts gesendet"
+"Falls ein Konto mit den eingegebenen Anmeldedaten existiert, wird eine E-"
+"Mail mit Anweisungen zum Zurücksetzen des Passworts gesendet"
 
 #: accounts/templates/accounts/password_reset_request_success.html:33
 msgid "Please check your spam folder if you don't see the email in your inbox"
@@ -832,6 +858,89 @@ msgstr ""
 msgid "Send Reset Instructions"
 msgstr "Anweisungen zum Zurücksetzen senden"
 
+#: accounts/views.py:42
+msgid ""
+"We've sent you an email to verify your account. Please check your inbox."
+msgstr ""
+
+#: accounts/views.py:58
+msgid "Login"
+msgstr ""
+
+#: accounts/views.py:67
+msgid "Logout"
+msgstr ""
+
+#: accounts/views.py:118 accounts/views.py:149
+msgid "An unexpected error has occured. Please try again or contact support."
+msgstr ""
+
+#: accounts/views.py:186
+msgid "Invalid referral code. Please enter a valid code."
+msgstr ""
+
+#: accounts/views.py:273 core/templates/core/includes/header.html:167
+msgid "My Account"
+msgstr "Mein Benutzerkonto"
+
+#: accounts/views.py:322 core/templates/core/pages/contact_us.html:88
+#: core/views.py:141
+msgid "Support"
+msgstr "Kundensupport"
+
+#: accounts/views.py:341 core/templates/core/includes/header.html:82
+#: core/templates/core/includes/header.html:152
+msgid "Referral Program"
+msgstr "Empfehlungsprogramm"
+
+#: accounts/views.py:350 accounts/views.py:365
+msgid "Password Reset Request"
+msgstr ""
+
+#: accounts/views.py:434
+msgid "Password reset link is invalid or has expired."
+msgstr ""
+
+#: accounts/views.py:445
+msgid "Your password has been reset."
+msgstr ""
+
+#: accounts/views.py:521
+msgid "Your email has been confirmed! Welcome aboard."
+msgstr ""
+
+#: accounts/views.py:530
+msgid "Invalid or expired email confirmation link."
+msgstr ""
+
+#: core/models.py:36 core/templates/core/pages/history.html:21
+#: core/templates/core/pages/history.html:55
+#: core/templates/core/pages/upcoming_matches.html:74
+#: core/templates/core/pages/upcoming_matches.html:124
+msgid "Soccer"
+msgstr ""
+
+#: core/models.py:37 core/templates/core/pages/history.html:29
+#: core/templates/core/pages/upcoming_matches.html:82
+msgid "Basketball"
+msgstr ""
+
+#: core/models.py:38 core/templates/core/pages/upcoming_matches.html:92
+msgid "NFL"
+msgstr ""
+
+#: core/models.py:47
+msgid "AI Prediction Assistant"
+msgstr ""
+
+#: core/models.py:58
+msgid "Won"
+msgstr ""
+
+#: core/models.py:59
+msgid "Lost"
+msgstr ""
+
 #: core/templates/core/includes/footer.html:10
 msgid ""
 "Expert sports predictions powered  by advanced analytics and professional "
@@ -845,13 +954,13 @@ msgstr ""
 msgid "Quick Links"
 msgstr "Schnellzugriff"
 
-#: core/templates/core/includes/footer.html:58
+#: core/templates/core/includes/footer.html:58 core/views.py:132
 msgid "About Us"
 msgstr "Über uns"
 
 #: core/templates/core/includes/footer.html:70
-#: core/templates/core/includes/header.html:75
-#: core/templates/core/includes/header.html:137
+#: core/templates/core/includes/header.html:87
+#: core/templates/core/includes/header.html:149 core/views.py:92
 msgid "Plans"
 msgstr "Tarife"
 
@@ -860,8 +969,8 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #: core/templates/core/includes/footer.html:93
-#: core/templates/core/includes/header.html:84
-#: core/templates/core/includes/header.html:148
+#: core/templates/core/includes/header.html:96
+#: core/templates/core/includes/header.html:160 core/views.py:123
 msgid "How to Join"
 msgstr "So treten Sie bei"
 
@@ -870,7 +979,7 @@ msgid "Legal"
 msgstr "Rechtliches"
 
 #: core/templates/core/includes/footer.html:130
-#: core/templates/core/pages/disclaimer.html:20
+#: core/templates/core/pages/disclaimer.html:20 core/views.py:168
 msgid "Disclaimer"
 msgstr "Haftungsausschluss"
 
@@ -890,39 +999,30 @@ msgstr "Datenschutz"
 msgid "Cookies"
 msgstr "Cookies "
 
-#: core/templates/core/includes/header.html:57
-#: core/templates/core/includes/header.html:129
+#: core/templates/core/includes/header.html:69
+#: core/templates/core/includes/header.html:141 core/views.py:26
 msgid "Home"
 msgstr "Startseite"
 
-#: core/templates/core/includes/header.html:61
-#: core/templates/core/includes/header.html:131
+#: core/templates/core/includes/header.html:73
+#: core/templates/core/includes/header.html:143 core/views.py:188
 msgid "Upcoming Matches"
 msgstr "Bevorstehende Spiele"
 
-#: core/templates/core/includes/header.html:65
-#: core/templates/core/includes/header.html:134
+#: core/templates/core/includes/header.html:77
+#: core/templates/core/includes/header.html:146 core/views.py:73
 msgid "History"
 msgstr "Verlauf"
 
-#: core/templates/core/includes/header.html:70
-#: core/templates/core/includes/header.html:140
-msgid "Referral Program"
-msgstr "Empfehlungsprogramm"
-
-#: core/templates/core/includes/header.html:104
-#: core/templates/core/includes/header.html:166
+#: core/templates/core/includes/header.html:116
+#: core/templates/core/includes/header.html:178
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: core/templates/core/includes/header.html:106
-#: core/templates/core/includes/header.html:169
+#: core/templates/core/includes/header.html:118
+#: core/templates/core/includes/header.html:181
 msgid "Sign Up"
 msgstr "Registrieren"
-
-#: core/templates/core/includes/header.html:155
-msgid "My Account"
-msgstr "Mein Benutzerkonto"
 
 #: core/templates/core/pages/about_us.html:11
 msgid "About Smore"
@@ -983,12 +1083,16 @@ msgstr ""
 "Data Science und maschinellem Lernen zu revolutionieren."
 
 #: core/templates/core/pages/about_us.html:102
+#, fuzzy
+#| msgid ""
+#| "What started as a small team of sports enthusiasts and data scientists "
+#| "has grown into a leading platform trusted by over 10,000 users worldwide."
 msgid ""
 "What started as a small team of sports enthusiasts and data scientists has "
-"grown into a leading platform trusted by over 10,000 users worldwide."
+"grown into a leading platform trusted by over 5,000 users worldwide."
 msgstr ""
-"Was als kleines Team aus Sportbegeisterten und Datenwissenschaftlern begann,"
-" hat sich zu einer führenden Plattform entwickelt, der weltweit über 5000 "
+"Was als kleines Team aus Sportbegeisterten und Datenwissenschaftlern begann, "
+"hat sich zu einer führenden Plattform entwickelt, der weltweit über 5000 "
 "Nutzer vertrauen."
 
 #: core/templates/core/pages/about_us.html:103
@@ -1010,8 +1114,8 @@ msgstr "Was uns auszeichnet"
 
 #: core/templates/core/pages/about_us.html:120
 msgid ""
-"Our core values drive everything we do, from developing prediction models to"
-" supporting our users."
+"Our core values drive everything we do, from developing prediction models to "
+"supporting our users."
 msgstr ""
 "Unsere Kernwerte bestimmen alles, was wir tun – von der Entwicklung unserer "
 "Vorhersagemodelle bis hin zur Unterstützung unserer Nutzer."
@@ -1101,10 +1205,6 @@ msgstr ""
 msgid "Send us an email anytime"
 msgstr "Senden Sie uns jederzeit eine E-Mail"
 
-#: core/templates/core/pages/contact_us.html:88
-msgid "Support"
-msgstr "Kundensupport"
-
 #: core/templates/core/pages/contact_us.html:89
 msgid ""
 "Our team is available around the clock to assist you with any questions or "
@@ -1128,8 +1228,7 @@ msgid "Global Coverage"
 msgstr "Globale Abdeckung"
 
 #: core/templates/core/pages/contact_us.html:114
-msgid ""
-"Support available in multiple languages for our international user base"
+msgid "Support available in multiple languages for our international user base"
 msgstr ""
 "Support in mehreren Sprachen für unsere internationale Nutzerbasis verfügbar"
 
@@ -1174,8 +1273,8 @@ msgid ""
 msgstr ""
 "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, "
 "wenn Sie unsere Website besuchen. Sie helfen uns, Ihre Präferenzen zu "
-"speichern, Ihr Nutzungsverhalten zu verstehen und Ihnen eine personalisierte"
-" Erfahrung zu bieten."
+"speichern, Ihr Nutzungsverhalten zu verstehen und Ihnen eine personalisierte "
+"Erfahrung zu bieten."
 
 #: core/templates/core/pages/cookies_policy.html:45
 msgid "Types of Cookies We Use"
@@ -1276,11 +1375,11 @@ msgid ""
 "results. Users must understand that they are responsible for their own "
 "betting decisions and any resulting financial losses."
 msgstr ""
-"Sportwetten bergen erhebliche Risiken und sind möglicherweise nicht für alle"
-" Nutzer geeignet. Die bisherige Leistung unserer Vorhersagen garantiert "
-"keine zukünftigen Ergebnisse. Nutzer müssen verstehen, dass sie für ihre "
-"eigenen Wettentscheidungen und daraus resultierende finanzielle Verluste "
-"selbst verantwortlich sind."
+"Sportwetten bergen erhebliche Risiken und sind möglicherweise nicht für alle "
+"Nutzer geeignet. Die bisherige Leistung unserer Vorhersagen garantiert keine "
+"zukünftigen Ergebnisse. Nutzer müssen verstehen, dass sie für ihre eigenen "
+"Wettentscheidungen und daraus resultierende finanzielle Verluste selbst "
+"verantwortlich sind."
 
 #: core/templates/core/pages/disclaimer.html:80
 msgid "No Guaranteed Returns"
@@ -1359,8 +1458,8 @@ msgstr ""
 #: core/templates/core/pages/disclaimer.html:142
 msgid "Always gamble responsibly and within your means."
 msgstr ""
-"Spielen Sie stets verantwortungsbewusst und nur im Rahmen Ihrer finanziellen"
-" Möglichkeiten."
+"Spielen Sie stets verantwortungsbewusst und nur im Rahmen Ihrer finanziellen "
+"Möglichkeiten."
 
 #: core/templates/core/pages/disclaimer.html:146
 msgid ""
@@ -1377,12 +1476,12 @@ msgstr "Verantwortungsbewusstes Glücksspiel"
 #: core/templates/core/pages/disclaimer.html:152
 msgid ""
 "We strongly encourage responsible gambling practices. If you or someone you "
-"know has a gambling problem, please contact the appropriate support services"
-" in your region."
+"know has a gambling problem, please contact the appropriate support services "
+"in your region."
 msgstr ""
 "Wir setzen uns nachdrücklich für verantwortungsbewusstes Glücksspiel ein. "
-"Wenn Sie oder jemand, den Sie kennen, ein Glücksspielproblem hat, wenden Sie"
-" sich bitte an die zuständigen Unterstützungsdienste in Ihrer Region."
+"Wenn Sie oder jemand, den Sie kennen, ein Glücksspielproblem hat, wenden Sie "
+"sich bitte an die zuständigen Unterstützungsdienste in Ihrer Region."
 
 #: core/templates/core/pages/disclaimer.html:155
 msgid "Gambling Addiction Helpline"
@@ -1428,22 +1527,11 @@ msgid ""
 "sports, showcasing our consistent success rate and analytical expertise."
 msgstr ""
 
-#: core/templates/core/pages/history.html:21
-#: core/templates/core/pages/history.html:55
-#: core/templates/core/pages/upcoming_matches.html:74
-#: core/templates/core/pages/upcoming_matches.html:124
-msgid "Soccer"
-msgstr ""
-
 #: core/templates/core/pages/history.html:25
 #: core/templates/core/pages/history.html:34
+#: core/templates/core/pages/upcoming_matches.html:78
 #: core/templates/core/pages/upcoming_matches.html:87
 msgid "Soon"
-msgstr ""
-
-#: core/templates/core/pages/history.html:29
-#: core/templates/core/pages/upcoming_matches.html:82
-msgid "Basketball"
 msgstr ""
 
 #: core/templates/core/pages/history.html:82
@@ -1490,8 +1578,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:25
 msgid ""
-"Behind every winning strategy is a team that truly understands the game. Our"
-" dedicated professionals dive deep into the action to bring you sharp, "
+"Behind every winning strategy is a team that truly understands the game. Our "
+"dedicated professionals dive deep into the action to bring you sharp, "
 "insightful sports analyses you can trust"
 msgstr ""
 
@@ -1500,7 +1588,7 @@ msgid "Users"
 msgstr ""
 
 #: core/templates/core/pages/home.html:72
-#: core/templates/core/pages/telegram_landing.html:95
+#: core/templates/core/pages/telegram_landing.html:95 core/views.py:102
 msgid "Free Telegram Channel"
 msgstr ""
 
@@ -1596,8 +1684,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:367
 msgid ""
-"Our expert team analyzes thousands of data points, statistics, and trends to"
-" deliver accurate predictions, so you don't have to spend hours researching"
+"Our expert team analyzes thousands of data points, statistics, and trends to "
+"deliver accurate predictions, so you don't have to spend hours researching"
 msgstr ""
 
 #: core/templates/core/pages/home.html:369
@@ -1726,8 +1814,8 @@ msgstr ""
 msgid ""
 "At SMORE, we dive deep into match analysis to give you the edge in sports "
 "outcome. By combining recent form, head-to-head stats, injury updates, and "
-"market trends, we provide insightful predictions to maximize your chances of"
-" success."
+"market trends, we provide insightful predictions to maximize your chances of "
+"success."
 msgstr ""
 
 #: core/templates/core/pages/home.html:618
@@ -1738,8 +1826,8 @@ msgstr ""
 msgid ""
 "Odds analysis evaluates betting odds by comparing probabilities with key "
 "factors like team form, player stats, and match dynamics. For soccer, "
-"basketball, and NFL, we analyze performance trends, injuries, and strategies"
-" to uncover value bets. SMORE simplifies the data, helping you boost your "
+"basketball, and NFL, we analyze performance trends, injuries, and strategies "
+"to uncover value bets. SMORE simplifies the data, helping you boost your "
 "potential outcomes."
 msgstr ""
 
@@ -1749,8 +1837,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:659
 msgid ""
-"Risk management is at the core of our approach. SMORE identifies, evaluates,"
-" and minimizes uncertainties by analyzing data, setting clear limits, and "
+"Risk management is at the core of our approach. SMORE identifies, evaluates, "
+"and minimizes uncertainties by analyzing data, setting clear limits, and "
 "diversifying strategies. By leveraging expertise and precision, we ensure "
 "well-informed decisions that balance calculated risks, helping you achieve "
 "consistent and sustainable results."
@@ -1773,8 +1861,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:717
 #: core/templates/core/pages/home.html:797
-#: core/templates/core/pages/plans.html:49
-#: core/templates/core/pages/plans.html:155
+#: core/templates/core/pages/plans.html:52
+#: core/templates/core/pages/plans.html:163
 msgid "Coming Soon"
 msgstr ""
 
@@ -1948,10 +2036,6 @@ msgid ""
 "back guarantee"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:20
-msgid "Monthly"
-msgstr ""
-
 #: core/templates/core/pages/plans.html:26
 msgid "Annual"
 msgstr ""
@@ -1961,68 +2045,79 @@ msgstr ""
 msgid "Save 20%%"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:81
+#: core/templates/core/pages/plans.html:71
+msgid "per"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:88
+#: core/templates/core/pages/plans.html:89
 msgid "Current plan"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:83
+#: core/templates/core/pages/plans.html:89
+#, python-format
+msgid "Upgrade to yearly and save 20%%"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:91
 msgid "Plan expiry"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:95
+#: core/templates/core/pages/plans.html:103
 msgid "analysis per month"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:103
+#: core/templates/core/pages/plans.html:111
 msgid "High Odds"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:111
+#: core/templates/core/pages/plans.html:119
 msgid "Betting Guidance"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:119
+#: core/templates/core/pages/plans.html:127
 msgid "Promotions & Giveaways"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:127
+#: core/templates/core/pages/plans.html:135
 msgid "24/7 Client Support"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:135
+#: core/templates/core/pages/plans.html:143
 msgid "Affiliate program"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:141
+#: core/templates/core/pages/plans.html:149
 msgid "No products available"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:164
+#: core/templates/core/pages/plans.html:172
 msgid "Add-on"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:193
+#: core/templates/core/pages/plans.html:201
 msgid "Summary"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:196
+#: core/templates/core/pages/plans.html:204
+#: core/templates/core/pages/plans.html:205
 msgid "monthly"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:197
+#: core/templates/core/pages/plans.html:206
 msgid "price"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:208
-#: core/templates/core/pages/plans.html:239
+#: core/templates/core/pages/plans.html:217
+#: core/templates/core/pages/plans.html:247 core/views.py:38
 msgid "Get Started"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:253
+#: core/templates/core/pages/plans.html:261
 msgid "Need help choosing?"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:255
+#: core/templates/core/pages/plans.html:263
 msgid "Contact our team"
 msgstr ""
 
@@ -2204,7 +2299,7 @@ msgid "Detailed Match Analysis"
 msgstr ""
 
 #: core/templates/core/pages/subscription_required.html:34
-#: core/templates/core/pages/upcoming_matches.html:51
+#: core/templates/core/pages/upcoming_matches.html:51 core/views.py:51
 msgid "View Plans"
 msgstr ""
 
@@ -2231,8 +2326,7 @@ msgstr ""
 #: core/templates/core/pages/terms_of_service.html:41
 msgid ""
 "By using our Service, you acknowledge that you have read, understood, and "
-"agree to be bound by these Terms and any future amendments or updates to "
-"them"
+"agree to be bound by these Terms and any future amendments or updates to them"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:45
@@ -2253,8 +2347,8 @@ msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:55
 msgid ""
-"While we use reasonable efforts to provide accurate and insightful analysis,"
-" we do not guarantee the correctness, completeness, or reliability of any "
+"While we use reasonable efforts to provide accurate and insightful analysis, "
+"we do not guarantee the correctness, completeness, or reliability of any "
 "sports result or prediction generated through our Service. All analysis and "
 "predictions are based on historical data and statistical modeling, but "
 "outcomes may differ due to unforeseen factors such as player performance, "
@@ -2288,8 +2382,8 @@ msgstr ""
 #: core/templates/core/pages/terms_of_service.html:69
 msgid ""
 "Due to the nature of our Service, all subscription fees are non-refundable, "
-"even if you cancel your subscription before the end of the billing cycle. By"
-" subscribing, you agree to this no-refund policy"
+"even if you cancel your subscription before the end of the billing cycle. By "
+"subscribing, you agree to this no-refund policy"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:72
@@ -2337,8 +2431,8 @@ msgstr ""
 msgid ""
 "If you are under the legal age for gambling in your jurisdiction, you must "
 "not use the Service. We reserve the right to verify your age and suspend or "
-"terminate your access to the Service if we believe you do not meet the legal"
-" age requirement"
+"terminate your access to the Service if we believe you do not meet the legal "
+"age requirement"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:92
@@ -2417,8 +2511,7 @@ msgstr ""
 msgid ""
 "Your use of the Service is also governed by our Privacy Policy, which "
 "outlines how we collect, use, and protect your personal information. By "
-"using the Service, you agree to the practices described in our Privacy "
-"Policy"
+"using the Service, you agree to the practices described in our Privacy Policy"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:138
@@ -2458,12 +2551,12 @@ msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:159
 msgid ""
-"Any dispute, controversy, or claim arising out of or relating to these Terms"
-" shall be resolved through binding arbitration, administered by the "
-"Bulgarian Chamber of Commerce and Industry (BCCI) in accordance with its "
-"Arbitration Rules. The place of arbitration shall be Sofia, Bulgaria, and "
-"the language of arbitration shall be Bulgarian/English. The decision of the "
-"arbitrator(s) shall be final and binding on all parties"
+"Any dispute, controversy, or claim arising out of or relating to these Terms "
+"shall be resolved through binding arbitration, administered by the Bulgarian "
+"Chamber of Commerce and Industry (BCCI) in accordance with its Arbitration "
+"Rules. The place of arbitration shall be Sofia, Bulgaria, and the language "
+"of arbitration shall be Bulgarian/English. The decision of the arbitrator(s) "
+"shall be final and binding on all parties"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:166
@@ -2514,3 +2607,34 @@ msgstr ""
 #: core/templates/core/pages/upcoming_matches.html:64
 msgid "View our expert predictions for upcoming matches"
 msgstr ""
+
+#: core/views.py:45
+msgid "What's New"
+msgstr ""
+
+#: core/views.py:47
+#, fuzzy
+#| msgid "Upcoming Matches"
+msgid "View upcoming matches"
+msgstr "Bevorstehende Spiele"
+
+#: core/views.py:54
+msgid "Choose a plan and get instant access to expert predictions"
+msgstr ""
+
+#: core/views.py:177
+#, fuzzy
+#| msgid "Cookie Policy"
+msgid "Cookies Policy"
+msgstr "Cookie-Richtlinie"
+
+#: core/views.py:213
+#, fuzzy
+#| msgid "Update Subscription"
+msgid "Subscription Required"
+msgstr "Abonnement aktualisieren"
+
+#, fuzzy
+#~| msgid "year"
+#~ msgid "yearly"
+#~ msgstr "Jahr"

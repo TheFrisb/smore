@@ -526,7 +526,9 @@ class VerifyEmailView(RedirectView):
 
             return reverse("accounts:my_account")
         else:
-            messages.error(self.request, _("Invalid or expired email confirmation link."))
+            messages.error(
+                self.request, _("Invalid or expired email confirmation link.")
+            )
             logger.error("Invalid or expired email confirmation link.")
             return reverse("core:home")
 

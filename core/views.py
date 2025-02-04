@@ -50,7 +50,9 @@ class HomeView(TemplateView):
         return {
             "primary_button_text": _("View Plans"),
             "primary_button_url": reverse("core:plans"),
-            "primary_button_description": _("Choose a plan and get instant access to expert predictions"),
+            "primary_button_description": _(
+                "Choose a plan and get instant access to expert predictions"
+            ),
         }
 
     def dispatch(self, request, *args, **kwargs):

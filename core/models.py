@@ -15,7 +15,6 @@ class BaseInternalModel(models.Model):
 
 class BaseProductModel(BaseInternalModel):
     stripe_product_id = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
     monthly_price_stripe_id = models.CharField(max_length=255)
 
@@ -33,10 +32,24 @@ class BaseProductModel(BaseInternalModel):
 
 
 class Product(BaseProductModel):
+    class Names(models.TextChoices):
+        SOCCER = "Soccer", _("Soccer")
+        BASKETBALL = "Basketball", _("Basketball")
+        NFL = "NFL", _("NFL")
+
+    name = models.CharField(max_length=255, choices=Names, default=Names.SOCCER)
     analysis_per_month = models.CharField(max_length=12)
 
 
 class Addon(BaseProductModel):
+    class Names(models.TextChoices):
+        AI_PREDICTION_ASSISTANT = "AI_PREDICTION_ASSISTANT", _(
+            "AI Prediction Assistant"
+        )
+
+    name = models.CharField(
+        max_length=255, choices=Names, default=Names.AI_PREDICTION_ASSISTANT
+    )
     description = models.TextField()
 
 

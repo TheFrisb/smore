@@ -44,7 +44,9 @@ function initChooseSubscriptionFrequencyButton() {
       monthlyLabelEl.classList.add("text-primary-300");
       monthlyLabelEl.classList.remove("text-white");
 
-      checkoutSummaryMode.textContent = "yearly";
+      checkoutSummaryMode.textContent = checkoutSummaryMode.getAttribute(
+        "data-translated-yearly",
+      );
 
       if (authenticatedActiveSubscriptionTypeInput) {
         console.log(authenticatedActiveSubscriptionTypeInput.value);
@@ -53,10 +55,10 @@ function initChooseSubscriptionFrequencyButton() {
 
         if (activeSubscriptionType === "monthly") {
           const updateEl = document.querySelector(
-            '.product[data-product-name="Soccer"] .product__currentPlanDisclaimer',
+            '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
           );
 
-          updateEl.textContent = "Upgrade to yearly and save 20%";
+          updateEl.textContent = updateEl.getAttribute("data-upgrade-plan");
         }
       }
     } else {
@@ -69,7 +71,9 @@ function initChooseSubscriptionFrequencyButton() {
       annualLabelEl.classList.add("text-primary-300");
       annualLabelEl.classList.remove("text-white");
 
-      checkoutSummaryMode.textContent = "monthly";
+      checkoutSummaryMode.textContent = checkoutSummaryMode.getAttribute(
+        "data-translated-monthly",
+      );
 
       if (authenticatedActiveSubscriptionTypeInput) {
         const activeSubscriptionType =
@@ -77,10 +81,10 @@ function initChooseSubscriptionFrequencyButton() {
 
         if (activeSubscriptionType) {
           const updateEl = document.querySelector(
-            '.product[data-product-name="Soccer"] .product__currentPlanDisclaimer',
+            '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
           );
 
-          updateEl.textContent = "Current plan";
+          updateEl.textContent = updateEl.getAttribute("data-current-plan");
         }
       }
     }
@@ -104,7 +108,9 @@ function updatePrices() {
 
     let price = frequencyType === "month" ? monthlyPrice : yearlyPrice;
 
-    mode.textContent = frequencyType;
+    mode.textContent = product.getAttribute(
+      `data-translated-mode-${frequencyType}`,
+    );
 
     if (frequencyType === "year") {
       yearlyNoDiscountPrice.classList.remove("hidden");
@@ -154,7 +160,7 @@ function initProducts() {
       authenticatedActiveSubscriptionTypeInput.value;
     if (activeSubscriptionType) {
       const product = document.querySelector(
-        '.product[data-product-name="Soccer"]',
+        '.product[data-product-name-untranslated="Soccer"]',
       );
       console.log(product);
       product.click();
