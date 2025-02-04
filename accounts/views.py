@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, FormView, RedirectView, ListView
 from google.auth.transport import requests
@@ -37,7 +38,9 @@ class BaseAccountView(LoginRequiredMixin):
         if request.user.is_authenticated and not request.user.is_email_verified:
             messages.warning(
                 request,
-                "We've sent you an email to verify your account. Please check your inbox.",
+                _(
+                    "We've sent you an email to verify your account. Please check your inbox."
+                ),
                 extra_tags="email-verification",
             )
 
@@ -52,7 +55,7 @@ class LoginUserView(RedirectAuthenticatedUserMixin, LoginView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Login"
+        context["page_title"] = _("Login")
         return context
 
 
@@ -61,7 +64,7 @@ class LogoutUserView(LogoutView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Logout"
+        context["page_title"] = _("Logout")
         return context
 
 
@@ -111,7 +114,9 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
 
             form.add_error(
                 None,
-                "An unexpected error has occured. Please try again or contact support.",
+                _(
+                    "An unexpected error has occured. Please try again or contact support."
+                ),
             )
 
         return self.render_to_response({"form": form})
@@ -140,7 +145,9 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         if not referrer:
             form.add_error(
                 None,
-                "An unexpected error has occured. Please try again or contact support.",
+                _(
+                    "An unexpected error has occured. Please try again or contact support."
+                ),
             )
             return False
 
@@ -176,7 +183,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         try:
             return User.objects.get(referral_code=referral_code)
         except User.DoesNotExist:
-            form.add_error(None, "Invalid referral code. Please enter a valid code.")
+            form.add_error(None, _("Invalid referral code. Please enter a valid code."))
             logger.error(f"Could not match referral code: {referral_code} to a user.")
             return None
 
@@ -218,7 +225,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         return None
 
     def _create_second_level_referral(
-        self, grandparent: User, referred: User, form
+            self, grandparent: User, referred: User, form
     ) -> bool:
         """
         Create row (grandparent->referred, level=2).
@@ -263,7 +270,7 @@ class MyAccountView(BaseAccountView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user"] = self.request.user
-        context["page_title"] = "My Account"
+        context["page_title"] = _("My Account")
         return context
 
 
@@ -278,7 +285,7 @@ class MyNetworkView(BaseAccountView, TemplateView):
         context = super().get_context_data(**kwargs)
 
         context["network"] = self.referral_service.build_network(self.request.user)
-        context["page_title"] = "My Network"
+        context["page_title"] = _("My Network")
         return context
 
 
@@ -288,7 +295,7 @@ class ManagePlanView(BaseAccountView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["view_plans_url"] = self.get_view_plans_url(self.request)
-        context["page_title"] = "Manage Plan"
+        context["page_title"] = _("Manage Plan")
         return context
 
     def get_view_plans_url(self, request):
@@ -303,7 +310,7 @@ class RequestWithdrawalView(BaseAccountView, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Request Withdrawal"
+        context["page_title"] = _("Request Withdrawal")
         return context
 
 
@@ -312,7 +319,7 @@ class ContactUsView(BaseAccountView, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Support"
+        context["page_title"] = _("Support")
         return context
 
 
@@ -331,7 +338,7 @@ class ReferralProgram(BaseAccountView, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Referral Program"
+        context["page_title"] = _("Referral Program")
         return context
 
 
@@ -340,7 +347,7 @@ class PasswordResetRequestSuccessView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Password Reset Request"
+        context["page_title"] = _("Password Reset Request")
         return context
 
 
@@ -355,7 +362,7 @@ class PasswordResetRequestView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Password Reset Request"
+        context["page_title"] = _("Password Reset Request")
         return context
 
     def form_valid(self, form):
@@ -424,7 +431,7 @@ class PasswordResetConfirmView(FormView):
         """
         if not self.validlink or not self.user:
             messages.error(
-                self.request, "Password reset link is invalid or has expired."
+                self.request, _("Password reset link is invalid or has expired.")
             )
             return redirect("accounts:password_reset")
 
@@ -435,7 +442,7 @@ class PasswordResetConfirmView(FormView):
         # Log out if the user was authenticated
         logout(self.request)
 
-        messages.success(self.request, "Your password has been reset.")
+        messages.success(self.request, _("Your password has been reset."))
         return super().form_valid(form)
 
 
@@ -452,7 +459,7 @@ class WithdrawalHistoryView(BaseAccountView, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Withdrawal History"
+        context["page_title"] = _("Withdrawal History")
         context["withdrawal_stats"] = self.get_withdrawal_stats()
         context["WithdrawalStatus"] = WithdrawalRequest.Status
         return context
@@ -511,7 +518,7 @@ class VerifyEmailView(RedirectView):
             logger.info(f"User {user.username} email verified.")
 
             messages.success(
-                self.request, "Your email has been confirmed! Welcome aboard."
+                self.request, _("Your email has been confirmed! Welcome aboard.")
             )
 
             # log the user in
@@ -519,7 +526,7 @@ class VerifyEmailView(RedirectView):
 
             return reverse("accounts:my_account")
         else:
-            messages.error(self.request, "Invalid or expired email confirmation link.")
+            messages.error(self.request, _("Invalid or expired email confirmation link."))
             logger.error("Invalid or expired email confirmation link.")
             return reverse("core:home")
 

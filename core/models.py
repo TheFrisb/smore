@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
 
 
@@ -41,9 +42,9 @@ class Addon(BaseProductModel):
 
 class Prediction(BaseInternalModel):
     class Status(models.TextChoices):
-        WON = "WON", "Won"
-        LOST = "LOST", "Lost"
-        PENDING = "PENDING", "Pending"
+        WON = "WON", _("Won")
+        LOST = "LOST", _("Lost")
+        PENDING = "PENDING", _("Pending")
 
     class Visibility(models.TextChoices):
         PUBLIC = "PUBLIC", "Public"

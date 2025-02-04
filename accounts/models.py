@@ -5,6 +5,7 @@ import string
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from core.models import BaseInternalModel
 
@@ -123,16 +124,16 @@ class Referral(BaseInternalModel):
 
 class WithdrawalRequest(BaseInternalModel):
     class Status(models.IntegerChoices):
-        PENDING = 1, "Pending"
-        APPROVED = 2, "Approved"
-        PROCESSING = 3, "Processing"
-        COMPLETED = 4, "Completed"
-        REJECTED = 5, "Rejected"
+        PENDING = 1, _("Pending")
+        APPROVED = 2, _("Approved")
+        PROCESSING = 3, _("Processing")
+        COMPLETED = 4, _("Completed")
+        REJECTED = 5, _("Rejected")
 
     class PayoutType(models.TextChoices):
-        BANK = "BANK", "Bank"
-        PAYONEER = "PAYONEER", "Payoneer"
-        CRYPTOCURRENCY = "CRYPTOCURRENCY", "Cryptocurrency"
+        BANK = "BANK", _("Bank")
+        PAYONEER = "PAYONEER", _("Payoneer")
+        CRYPTOCURRENCY = "CRYPTOCURRENCY", _("Cryptocurrency")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="withdrawals")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -156,8 +157,8 @@ class UserSubscription(BaseInternalModel):
         INACTIVE = "inactive", "Inactive"
 
     class Frequency(models.TextChoices):
-        MONTHLY = "monthly", "Monthly"
-        YEARLY = "yearly", "Yearly"
+        MONTHLY = "monthly", _("Monthly")
+        YEARLY = "yearly", _("Yearly")
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="subscription"

@@ -3,6 +3,7 @@ from datetime import date
 from itertools import groupby
 
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
 from core.models import (
@@ -22,7 +23,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
-        context["page_title"] = "Home"
+        context["page_title"] = _("Home")
         context.update(self.get_button_context())
 
         return context
@@ -34,22 +35,22 @@ class HomeView(TemplateView):
         user = self.request.user
         if not user.is_authenticated:
             return {
-                "primary_button_text": "Get Started",
+                "primary_button_text": _("Get Started"),
                 "primary_button_url": reverse("accounts:register"),
             }
 
         user_subscription = getattr(user, "subscription", None)
         if user_subscription and user_subscription.is_active:
             return {
-                "primary_button_text": "What's New",
+                "primary_button_text": _("What's New"),
                 "primary_button_url": reverse("core:upcoming_matches"),
-                "primary_button_description": "View upcoming matches",
+                "primary_button_description": _("View upcoming matches"),
             }
 
         return {
-            "primary_button_text": "View Plans",
+            "primary_button_text": _("View Plans"),
             "primary_button_url": reverse("core:plans"),
-            "primary_button_description": "Choose a plan and get instant access to expert predictions",
+            "primary_button_description": _("Choose a plan and get instant access to expert predictions"),
         }
 
     def dispatch(self, request, *args, **kwargs):
@@ -67,7 +68,7 @@ class HistoryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["predictions"] = self.get_history_predictions()
-        context["page_title"] = "History"
+        context["page_title"] = _("History")
         return context
 
     def get_history_predictions(self):
@@ -86,7 +87,7 @@ class PlansView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["products"] = Product.objects.all()
         context["addons"] = Addon.objects.all().order_by("order")
-        context["page_title"] = "Plans"
+        context["page_title"] = _("Plans")
 
         return context
 
@@ -96,7 +97,7 @@ class TelegramLandingView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Free Telegram Channel"
+        context["page_title"] = _("Free Telegram Channel")
         return context
 
 
@@ -107,7 +108,7 @@ class FaqView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context["faq"] = FrequentlyAskedQuestion.objects.all().order_by("order")
-        context["page_title"] = "FAQ"
+        context["page_title"] = _("FAQ")
 
         return context
 
@@ -117,7 +118,7 @@ class HowToJoinView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "How to Join"
+        context["page_title"] = _("How to Join")
         return context
 
 
@@ -126,7 +127,7 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "About Us"
+        context["page_title"] = _("About Us")
         return context
 
 
@@ -135,7 +136,7 @@ class ContactUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Support"
+        context["page_title"] = _("Support")
         return context
 
 
@@ -144,7 +145,7 @@ class TermsOfServiceView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Terms of Service"
+        context["page_title"] = _("Terms of Service")
         return context
 
 
@@ -153,7 +154,7 @@ class PrivacyPolicyView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Privacy Policy"
+        context["page_title"] = _("Privacy Policy")
         return context
 
 
@@ -162,7 +163,7 @@ class DisclaimerView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Disclaimer"
+        context["page_title"] = _("Disclaimer")
         return context
 
 
@@ -171,7 +172,7 @@ class CookiesPolicyView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Cookies Policy"
+        context["page_title"] = _("Cookies Policy")
         return context
 
 
@@ -182,7 +183,7 @@ class UpcomingMatchesView(TemplateView):
         super().get_context_data(**kwargs)
         context = {"grouped_predictions": self.get_grouped_predictions()}
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
-        context["page_title"] = "Upcoming Matches"
+        context["page_title"] = _("Upcoming Matches")
         return context
 
     def get_grouped_predictions(self):
@@ -207,5 +208,5 @@ class SubscriptionRequiredView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "Subscription Required"
+        context["page_title"] = _("Subscription Required")
         return context
