@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 21:23+0100\n"
+"POT-Creation-Date: 2025-02-04 21:38+0100\n"
 "PO-Revision-Date: 2025-02-03 23:03+0000\n"
 "Last-Translator: Aleksandar Ristovski <aleksandar_cano12@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,6 +218,16 @@ msgstr "Willkommen zurück"
 #: accounts/templates/accounts/pages/login.html:19
 msgid "Sign in to access your account"
 msgstr "Melden Sie sich an, um auf Ihr Benutzerkonto zuzugreifen"
+
+#: accounts/templates/accounts/pages/login.html:53
+#: accounts/templates/accounts/pages/my_account.html:20
+#: accounts/templates/accounts/pages/register.html:50
+msgid "Username"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:65
+msgid "Enter your username"
+msgstr ""
 
 #: accounts/templates/accounts/pages/login.html:97
 msgid "Forgot your password"
@@ -627,18 +637,42 @@ msgstr "Erstellen Sie Ihr Konto"
 msgid "Join thousands of successful bettors"
 msgstr "Schließen Sie sich tausenden erfolgreichen Wettenden an"
 
+#: accounts/templates/accounts/pages/register.html:62
+#, fuzzy
+#| msgid "Choose a payout method"
+msgid "Choose a username"
+msgstr "Wählen Sie eine Auszahlungsmethode"
+
 #: accounts/templates/accounts/pages/register.html:66
 msgid "First Name"
+msgstr "Vorname"
+
+#: accounts/templates/accounts/pages/register.html:78
+#, fuzzy
+#| msgid "First Name"
+msgid "Your First Name"
 msgstr "Vorname"
 
 #: accounts/templates/accounts/pages/register.html:82
 msgid "Last Name"
 msgstr "Nachname"
 
+#: accounts/templates/accounts/pages/register.html:94
+#, fuzzy
+#| msgid "Last Name"
+msgid "Your Last Name"
+msgstr "Nachname"
+
 #: accounts/templates/accounts/pages/register.html:98
 #: accounts/templates/accounts/request_reset_password.html:27
 msgid "Email address"
 msgstr "E-Mail-Adresse"
+
+#: accounts/templates/accounts/pages/register.html:114
+#, fuzzy
+#| msgid "New Password"
+msgid "Password"
+msgstr "Neues Passwort"
 
 #: accounts/templates/accounts/pages/register.html:140
 msgid "Confirm Password"

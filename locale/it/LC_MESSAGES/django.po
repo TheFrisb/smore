@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 21:23+0100\n"
+"POT-Creation-Date: 2025-02-04 21:38+0100\n"
 "PO-Revision-Date: 2025-02-01 22:16+0000\n"
 "Last-Translator:   <thefrisb@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,6 +209,16 @@ msgstr ""
 
 #: accounts/templates/accounts/pages/login.html:19
 msgid "Sign in to access your account"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:53
+#: accounts/templates/accounts/pages/my_account.html:20
+#: accounts/templates/accounts/pages/register.html:50
+msgid "Username"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:65
+msgid "Enter your username"
 msgstr ""
 
 #: accounts/templates/accounts/pages/login.html:97
@@ -576,17 +586,33 @@ msgstr ""
 msgid "Join thousands of successful bettors"
 msgstr ""
 
+#: accounts/templates/accounts/pages/register.html:62
+msgid "Choose a username"
+msgstr ""
+
 #: accounts/templates/accounts/pages/register.html:66
 msgid "First Name"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:78
+msgid "Your First Name"
 msgstr ""
 
 #: accounts/templates/accounts/pages/register.html:82
 msgid "Last Name"
 msgstr ""
 
+#: accounts/templates/accounts/pages/register.html:94
+msgid "Your Last Name"
+msgstr ""
+
 #: accounts/templates/accounts/pages/register.html:98
 #: accounts/templates/accounts/request_reset_password.html:27
 msgid "Email address"
+msgstr ""
+
+#: accounts/templates/accounts/pages/register.html:114
+msgid "Password"
 msgstr ""
 
 #: accounts/templates/accounts/pages/register.html:140
