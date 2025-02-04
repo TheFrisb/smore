@@ -9,57 +9,58 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-02 14:54+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-02-03 23:03+0000\n"
+"Last-Translator: Aleksandar Ristovski <aleksandar_cano12@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: accounts/admin.py:79
 msgid "Permissions"
-msgstr ""
+msgstr "Berechtigungen"
 
 #: accounts/admin.py:92
 msgid "Personal info"
-msgstr ""
+msgstr "Persönliche Informationen"
 
 #: accounts/admin.py:104
 msgid "Referrals and Balance"
-msgstr ""
+msgstr "Empfehlungen und Guthaben"
 
 #: accounts/admin.py:113
 msgid "Important dates"
-msgstr ""
+msgstr "Wichtige Termine"
 
 #: accounts/templates/accounts/base.html:53
 #: accounts/templates/accounts/base.html:74
 msgid "Resend email"
-msgstr ""
+msgstr "E-Mail erneut senden"
 
 #: accounts/templates/accounts/includes/sidebar.html:42
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #: accounts/templates/accounts/includes/sidebar.html:62
 msgid "My Network"
-msgstr ""
+msgstr "Mein Netzwerk"
 
 #: accounts/templates/accounts/includes/sidebar.html:80
 msgid "Manage Plan"
-msgstr ""
+msgstr "Plan verwalten"
 
 #: accounts/templates/accounts/includes/sidebar.html:98
 #: accounts/templates/accounts/pages/request_withdrawal.html:169
 msgid "Request Withdrawal"
-msgstr ""
+msgstr "Auszahlung anfordern"
 
 #: accounts/templates/accounts/includes/sidebar.html:117
 #: accounts/templates/accounts/pages/withdrawal_history.html:7
 msgid "Withdrawal History"
-msgstr ""
+msgstr "Auszahlungsverlauf"
 
 #: accounts/templates/accounts/includes/sidebar.html:133
 #: accounts/templates/accounts/pages/contact_us.html:6
@@ -67,276 +68,296 @@ msgstr ""
 #: core/templates/core/pages/home.html:60
 #: core/templates/core/pages/privacy_policy.html:230
 msgid "Contact Us"
-msgstr ""
+msgstr "Kontaktieren Sie uns"
 
 #: accounts/templates/accounts/includes/sidebar.html:151
 #: core/templates/core/includes/header.html:79
 #: core/templates/core/includes/header.html:144
 #: core/templates/core/pages/faq.html:10
 msgid "FAQ"
-msgstr ""
+msgstr "Häufig gestellte Fragen (FAQ)"
 
 #: accounts/templates/accounts/includes/sidebar.html:170
 #: core/templates/core/includes/header.html:161
 msgid "Sign Out"
-msgstr ""
+msgstr "Abmelden"
 
 #: accounts/templates/accounts/pages/contact_us.html:7
 msgid ""
 "Our support team is available 24/7 to assist you. Choose your preferred "
 "method of communication below"
 msgstr ""
+"Unser Support-Team ist rund um die Uhr für Sie da. Wählen Sie unten Ihre "
+"bevorzugte Kontaktmethode"
 
 #: accounts/templates/accounts/pages/contact_us.html:20
 #: accounts/templates/accounts/pages/contact_us.html:38
 #: core/templates/core/pages/contact_us.html:28
 #: core/templates/core/pages/contact_us.html:49
 msgid "Instant messaging support"
-msgstr ""
+msgstr "Sofortnachrichten-Support"
 
 #: accounts/templates/accounts/pages/contact_us.html:23
 #: core/templates/core/pages/contact_us.html:30
 msgid "Message us on WhatsApp"
-msgstr ""
+msgstr "Schreiben Sie uns auf WhatsApp"
 
 #: accounts/templates/accounts/pages/contact_us.html:41
 #: core/templates/core/pages/contact_us.html:51
 msgid "Message us on Telegram"
-msgstr ""
+msgstr "Schreiben Sie uns auf Telegram"
 
 #: accounts/templates/accounts/pages/contact_us.html:47
 msgid "Other Ways to Reach Us"
-msgstr ""
+msgstr "Weitere Kontaktmöglichkeiten"
 
 #: accounts/templates/accounts/pages/contact_us.html:58
 msgid "Working Hours"
-msgstr ""
+msgstr "Arbeitszeiten"
 
 #: accounts/templates/accounts/pages/contact_us.html:59
 msgid "Support Available"
-msgstr ""
+msgstr "Support verfügbar"
 
 #: accounts/templates/accounts/pages/contact_us.html:86
 msgid "Fast Response Time"
-msgstr ""
+msgstr "Schnelle Reaktionszeit"
 
 #: accounts/templates/accounts/pages/contact_us.html:87
 msgid ""
 "We aim to respond to all inquiries within 15 minutes. Our dedicated support "
-"team is here to help you 24/7, ensuring you get the assistance you need when "
-"you need it"
+"team is here to help you 24/7, ensuring you get the assistance you need when"
+" you need it"
 msgstr ""
+"Wir bemühen uns, alle Anfragen innerhalb von 15 Minuten zu beantworten. "
+"Unser engagiertes Support-Team steht Ihnen rund um die Uhr zur Verfügung, um"
+" sicherzustellen, dass Sie die Hilfe erhalten, die Sie benötigen, wann immer"
+" Sie sie brauchen."
 
 #: accounts/templates/accounts/pages/faq.html:12
 #: core/templates/core/pages/faq.html:11
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Häufig gestellte Fragen (FAQ)"
 
 #: accounts/templates/accounts/pages/faq.html:13
 msgid ""
 "Find answers to common questions about our prediction service, methodology, "
 "and success rates"
 msgstr ""
+"Finden Sie Antworten auf häufige Fragen zu unserem Vorhersagedienst, unserer"
+" Methodik und Erfolgsquote"
 
 #: accounts/templates/accounts/pages/faq.html:48
 msgid "Still have questions? We're here to help"
-msgstr ""
+msgstr "Haben Sie noch Fragen? Wir sind hier, um Ihnen zu helfen"
 
 #: accounts/templates/accounts/pages/faq.html:58
 #: core/templates/core/pages/faq.html:57
 msgid "Contact Support"
-msgstr ""
+msgstr "Support kontaktieren"
 
 #: accounts/templates/accounts/pages/login.html:18
 msgid "Welcome back"
-msgstr ""
+msgstr "Willkommen zurück"
 
 #: accounts/templates/accounts/pages/login.html:19
 msgid "Sign in to access your account"
-msgstr ""
+msgstr "Melden Sie sich an, um auf Ihr Benutzerkonto zuzugreifen"
 
 #: accounts/templates/accounts/pages/login.html:97
 msgid "Forgot your password"
-msgstr ""
+msgstr " Passwort vergessen"
 
 #: accounts/templates/accounts/pages/login.html:108
 #: accounts/templates/accounts/pages/register.html:225
 msgid "Sign in"
-msgstr ""
+msgstr "Anmelden"
 
 #: accounts/templates/accounts/pages/login.html:135
 msgid "Don't have an account"
-msgstr ""
+msgstr "Kein Konto?"
 
 #: accounts/templates/accounts/pages/login.html:138
 msgid "Register now"
-msgstr ""
+msgstr "Jetzt registrieren"
 
 #: accounts/templates/accounts/pages/manage_plan.html:8
 msgid "Current Plan"
-msgstr ""
+msgstr "Aktueller Plan"
 
 #: accounts/templates/accounts/pages/manage_plan.html:9
 msgid "Your active subscriptions and add-ons"
-msgstr ""
+msgstr "Ihre aktiven Abonnements und Add-ons"
 
 #: accounts/templates/accounts/pages/manage_plan.html:30
 msgid "analysis per"
-msgstr ""
+msgstr "Analyse pro"
 
 #: accounts/templates/accounts/pages/manage_plan.html:31
 msgid "month"
-msgstr ""
+msgstr "Monat"
 
 #: accounts/templates/accounts/pages/manage_plan.html:32
 msgid "year"
-msgstr ""
+msgstr "Jahr"
 
 #: accounts/templates/accounts/pages/manage_plan.html:39
 #: accounts/templates/accounts/pages/referral_program.html:107
 #: accounts/templates/accounts/pages/referral_program.html:114
 msgid "per month"
-msgstr ""
+msgstr "pro Monat"
 
 #: accounts/templates/accounts/pages/manage_plan.html:45
 msgid "per year"
-msgstr ""
+msgstr "pro Jahr"
 
 #: accounts/templates/accounts/pages/manage_plan.html:52
 msgid "You don't have an active subscription"
-msgstr ""
+msgstr "Sie haben kein aktives Abonnement"
 
 #: accounts/templates/accounts/pages/manage_plan.html:73
 msgid "Update Subscription"
-msgstr ""
+msgstr "Abonnement aktualisieren"
 
 #: accounts/templates/accounts/pages/manage_plan.html:74
 msgid ""
 "Want to add more sports or features to your plan? Visit our plans page to "
 "explore all available options"
 msgstr ""
+"Möchten Sie weitere Sportarten oder Funktionen zu Ihrem Plan hinzufügen? "
+"Besuchen Sie unsere Tarifseite, um alle verfügbaren Optionen zu erkunden"
 
 #: accounts/templates/accounts/pages/manage_plan.html:76
 msgid "View Available Plans"
-msgstr ""
+msgstr "Verfügbare Tarife anzeigen"
 
 #: accounts/templates/accounts/pages/manage_plan.html:86
 #: accounts/templates/accounts/pages/manage_plan.html:91
 #: core/templates/core/pages/plans.html:224
 msgid "Manage Subscription"
-msgstr ""
+msgstr "Abonnement verwalten"
 
 #: accounts/templates/accounts/pages/manage_plan.html:87
 msgid "Update your billing method or cancel your subscription"
 msgstr ""
+"Aktualisieren Sie Ihre Zahlungsmethode oder kündigen Sie Ihr Abonnement"
 
 #: accounts/templates/accounts/pages/my_account.html:6
 msgid "Account Details"
-msgstr ""
+msgstr "Kontodetails"
 
 #: accounts/templates/accounts/pages/my_account.html:9
 #: accounts/templates/accounts/pages/request_withdrawal.html:117
 #: accounts/templates/accounts/pages/withdrawal_history.html:135
 msgid "Full Name"
-msgstr ""
+msgstr "Vollständiger Name"
 
 #: accounts/templates/accounts/pages/my_account.html:42
 #: accounts/templates/accounts/pages/referral_program.html:263
 msgid "Your Referral Link"
-msgstr ""
+msgstr "Ihr Empfehlungslink"
 
 #: accounts/templates/accounts/pages/my_account.html:62
 msgid "Share this code with friends to earn rewards when they join"
 msgstr ""
+"Teilen Sie diesen Code mit Freunden, um Belohnungen zu erhalten, wenn sie "
+"beitreten"
 
 #: accounts/templates/accounts/pages/my_network.html:19
 msgid "Direct Referrals"
-msgstr ""
+msgstr "Direkte Empfehlungen"
 
 #: accounts/templates/accounts/pages/my_network.html:20
 msgid "First level"
-msgstr ""
+msgstr "Erste Ebene"
 
 #: accounts/templates/accounts/pages/my_network.html:38
 #: accounts/templates/accounts/pages/my_network.html:125
 msgid "Indirect Referrals"
-msgstr ""
+msgstr "Indirekte Empfehlungen"
 
 #: accounts/templates/accounts/pages/my_network.html:39
 msgid "Second level"
-msgstr ""
+msgstr "Zweite Ebene"
 
 #: accounts/templates/accounts/pages/my_network.html:54
 msgid "Total Earnings"
-msgstr ""
+msgstr "Gesamteinnahmen"
 
 #: accounts/templates/accounts/pages/my_network.html:55
 msgid "All levels"
-msgstr ""
+msgstr "Alle Ebenen"
 
 #: accounts/templates/accounts/pages/my_network.html:63
 msgid "Referral Network"
-msgstr ""
+msgstr "Empfehlungsnetzwerk"
 
 #: accounts/templates/accounts/pages/my_network.html:67
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: accounts/templates/accounts/pages/my_network.html:71
 msgid "Inactive"
-msgstr ""
+msgstr "Inaktiv"
 
 #: accounts/templates/accounts/pages/my_network.html:75
 msgid "Total"
-msgstr ""
+msgstr "Gesamt"
 
 #: accounts/templates/accounts/pages/my_network.html:79
 msgid ""
 "A referral is considered active if the referred user has an active "
 "subscription"
 msgstr ""
+"Eine Empfehlung gilt als aktiv, wenn der geworbene Benutzer ein aktives "
+"Abonnement hat"
 
 #: accounts/templates/accounts/pages/my_network.html:113
 #: accounts/templates/accounts/pages/my_network.html:159
 msgid "Joined"
-msgstr ""
+msgstr "Beigetreten"
 
 #: accounts/templates/accounts/pages/my_network.html:120
 msgid "Direct earnings"
-msgstr ""
+msgstr "Direkte Einnahmen"
 
 #: accounts/templates/accounts/pages/my_network.html:165
 msgid "Indirect earnings"
-msgstr ""
+msgstr "Indirekte Einnahmen"
 
 #: accounts/templates/accounts/pages/my_network.html:177
 msgid "No referrals yet"
-msgstr ""
+msgstr "Noch keine Empfehlungen"
 
 #: accounts/templates/accounts/pages/referral_program.html:20
 msgid "Smore's Referral System"
-msgstr ""
+msgstr "Smore’s Empfehlungsprogramm"
 
 #: accounts/templates/accounts/pages/referral_program.html:21
 msgid "Earn Recurring Rewards with Tiered Bonuses"
-msgstr ""
+msgstr "Verdienen Sie wiederkehrende Belohnungen mit gestaffelten Boni"
 
 #: accounts/templates/accounts/pages/referral_program.html:24
 msgid ""
-"Smore offers a lucrative referral system designed to reward you for bringing "
-"in new customers. Even without an active subscription, you can earn monthly "
-"recurring rewards for both direct and indirect referrals. Plus, our tiered "
+"Smore offers a lucrative referral system designed to reward you for bringing"
+" in new customers. Even without an active subscription, you can earn monthly"
+" recurring rewards for both direct and indirect referrals. Plus, our tiered "
 "bonus structure lets you earn even more as you grow your network!"
 msgstr ""
+"Smore bietet ein lukratives Empfehlungsprogramm, das Sie für das Werben "
+"neuer Kunden belohnt. Selbst ohne aktives Abonnement können Sie monatlich "
+"wiederkehrende Belohnungen für direkte und indirekte Empfehlungen verdienen."
+" Darüber hinaus ermöglicht Ihnen unsere gestaffelte Bonusstruktur, noch mehr"
+" zu verdienen, wenn Ihr Netzwerk wächst!"
 
 #: accounts/templates/accounts/pages/referral_program.html:27
 msgid "How Smore's Referral System Works"
-msgstr ""
+msgstr "So funktioniert das Smore-Empfehlungssystem"
 
 #: accounts/templates/accounts/pages/referral_program.html:41
 #, python-format
 msgid "First-Level Referrals: Earn 20%% + Tiered Bonuses"
-msgstr ""
+msgstr "Erste-Level-Empfehlungen: Verdienen Sie 20% + gestaffelte Boni"
 
 #: accounts/templates/accounts/pages/referral_program.html:44
 #, python-format
@@ -344,72 +365,82 @@ msgid ""
 "For every direct referral (first-level), you earn 20%% of their monthly "
 "subscription fee"
 msgstr ""
+"Für jede direkte Empfehlung (erste Ebene) erhalten Sie 20% ihrer monatlichen"
+" Abonnementgebühr"
 
 #: accounts/templates/accounts/pages/referral_program.html:45
 msgid ""
 "Additionally, you receive a tiered bonus based on how many first-level "
 "referrals you’ve accumulated"
 msgstr ""
+"Zusätzlich erhalten Sie einen gestaffelten Bonus, basierend auf der Anzahl "
+"Ihrer ersten-Level-Empfehlungen"
 
 #: accounts/templates/accounts/pages/referral_program.html:50
 #: accounts/templates/accounts/pages/referral_program.html:58
 #: accounts/templates/accounts/pages/referral_program.html:66
 msgid "referrals"
-msgstr ""
+msgstr "Empfehlungen"
 
 #: accounts/templates/accounts/pages/referral_program.html:52
 #: accounts/templates/accounts/pages/referral_program.html:60
 #: accounts/templates/accounts/pages/referral_program.html:68
 #: accounts/templates/accounts/pages/referral_program.html:123
 msgid "bonus"
-msgstr ""
+msgstr "Bonus"
 
 #: accounts/templates/accounts/pages/referral_program.html:86
 msgid "Second-Level Referrals: Earn"
-msgstr ""
+msgstr "Zweite-Level-Empfehlungen: Verdienen Sie"
 
 #: accounts/templates/accounts/pages/referral_program.html:88
 #, python-format
 msgid ""
 "If your first-level referrals bring in new customers (second-level "
-"referrals), you'll earn 5%% of their monthly subscription fee for as long as "
-"they stay subscribed"
+"referrals), you'll earn 5%% of their monthly subscription fee for as long as"
+" they stay subscribed"
 msgstr ""
+"Wenn Ihre ersten-Level-Empfehlungen neue Kunden werben (zweite-Level-"
+"Empfehlungen), erhalten Sie 5% ihrer monatlichen Abonnementgebühr, solange "
+"sie abonniert bleiben"
 
 #: accounts/templates/accounts/pages/referral_program.html:94
 msgid "Example: Earnings with 30 Direct Referrals (and Bonuses)"
-msgstr ""
+msgstr "Beispiel: Einnahmen mit 30 direkten Empfehlungen (und Boni)"
 
 #: accounts/templates/accounts/pages/referral_program.html:98
 msgid ""
-"Let’s say you refer 30 direct customers (first-level referrals), and each of "
-"them refers 3 new customers (second-level referrals) and each customer "
+"Let’s say you refer 30 direct customers (first-level referrals), and each of"
+" them refers 3 new customers (second-level referrals) and each customer "
 "subscribes to the €69.99/month plan"
 msgstr ""
+"Angenommen, Sie werben 30 direkte Kunden (erste-Level-Empfehlungen), und "
+"jeder von ihnen wirbt 3 neue Kunden (zweite-Level-Empfehlungen), wobei jeder"
+" Kunde den €69,99/Monat-Plan abonniert"
 
 #: accounts/templates/accounts/pages/referral_program.html:100
 msgid "Here’s how much you could earn"
-msgstr ""
+msgstr "So viel könnten Sie verdienen"
 
 #: accounts/templates/accounts/pages/referral_program.html:105
 msgid "First-Level Earnings"
-msgstr ""
+msgstr "Einnahmen aus erster Ebene"
 
 #: accounts/templates/accounts/pages/referral_program.html:112
 msgid "Second-Level Earnings"
-msgstr ""
+msgstr "Einnahmen aus zweiter Ebene"
 
 #: accounts/templates/accounts/pages/referral_program.html:119
 msgid "Total Monthly Earnings"
-msgstr ""
+msgstr "Gesamte monatliche Einnahmen"
 
 #: accounts/templates/accounts/pages/referral_program.html:121
 msgid "including"
-msgstr ""
+msgstr "einschließlich"
 
 #: accounts/templates/accounts/pages/referral_program.html:128
 msgid "Example Summary"
-msgstr ""
+msgstr "Beispiel-Zusammenfassung"
 
 #: accounts/templates/accounts/pages/referral_program.html:130
 msgid ""
@@ -417,20 +448,27 @@ msgid ""
 "bring in 90 second-level referrals (earning €315/month), you could earn a "
 "total of €1,034.70/month, including a €300 tiered bonus"
 msgstr ""
+"Durch das direkte Werben von 30 Kunden (Einnahmen: €419,70/Monat) und das "
+"Unterstützen dieser Kunden beim Werben von 90 Zweit-Level-Empfehlungen "
+"(Einnahmen: €315/Monat) könnten Sie insgesamt €1.034,70/Monat verdienen, "
+"einschließlich eines gestaffelten Bonus von €300"
 
 #: accounts/templates/accounts/pages/referral_program.html:132
 msgid ""
-"Start building your network today, and let Smore’s referral system turn your "
-"efforts into reliable monthly income"
+"Start building your network today, and let Smore’s referral system turn your"
+" efforts into reliable monthly income"
 msgstr ""
+"Beginnen Sie noch heute mit dem Aufbau Ihres Netzwerks, und lassen Sie "
+"Smores Empfehlungssystem Ihre Bemühungen in ein zuverlässiges monatliches "
+"Einkommen verwandeln"
 
 #: accounts/templates/accounts/pages/referral_program.html:136
 msgid "Why Smore's Referral System is a Game-Changer"
-msgstr ""
+msgstr "Warum das Smore-Empfehlungssystem ein Game-Changer ist"
 
 #: accounts/templates/accounts/pages/referral_program.html:150
 msgid "Recurring Monthly Rewards"
-msgstr ""
+msgstr "Wiederkehrende monatliche Belohnungen"
 
 #: accounts/templates/accounts/pages/referral_program.html:151
 #, python-format
@@ -438,10 +476,12 @@ msgid ""
 "Earn 20%% from first-level referrals and 5%% from second-level referrals "
 "every month"
 msgstr ""
+"Verdienen Sie jeden Monat 20% aus ersten-Level-Empfehlungen und 5% aus "
+"zweiten-Level-Empfehlungen"
 
 #: accounts/templates/accounts/pages/referral_program.html:167
 msgid "Tiered Bonuses"
-msgstr ""
+msgstr "Gestaffelte Boni"
 
 #: accounts/templates/accounts/pages/referral_program.html:168
 msgid ""
@@ -449,167 +489,181 @@ msgid ""
 "referrals, you unlock a bigger bonus (€100 for 10-19, €200 for 20-29, €300 "
 "for 30-39, etc.)"
 msgstr ""
+"Smores Bonussystem wächst mit Ihren Bemühungen. Für jeweils 10 erste-Level-"
+"Empfehlungen schalten Sie einen höheren Bonus frei (€100 für 10-19, €200 für"
+" 20-29, €300 für 30-39 usw.)"
 
 #: accounts/templates/accounts/pages/referral_program.html:185
 msgid "Scalable Income"
-msgstr ""
+msgstr "Skalierbares Einkommen"
 
 #: accounts/templates/accounts/pages/referral_program.html:186
 msgid ""
-"The more customers you refer and the more they refer, the higher your rewards"
-"—there’s no earning limit!"
+"The more customers you refer and the more they refer, the higher your "
+"rewards—there’s no earning limit!"
 msgstr ""
+"Je mehr Kunden Sie werben und je mehr diese wiederum neue Kunden werben, "
+"desto höher sind Ihre Belohnungen – es gibt kein Verdienstlimit!"
 
 #: accounts/templates/accounts/pages/referral_program.html:200
 msgid "Simple and Transparent"
-msgstr ""
+msgstr "Einfach und transparent"
 
 #: accounts/templates/accounts/pages/referral_program.html:201
 msgid ""
 "Easily track your referrals, bonuses, and monthly earnings in your Smore "
 "dashboard"
 msgstr ""
+"Verfolgen Sie ganz einfach Ihre Empfehlungen, Boni und monatlichen Einnahmen"
+" in Ihrem Smore-Dashboard"
 
 #: accounts/templates/accounts/pages/referral_program.html:209
 msgid "How to Get Started"
-msgstr ""
+msgstr "So starten Sie"
 
 #: accounts/templates/accounts/pages/referral_program.html:223
 msgid "Join Smore"
-msgstr ""
+msgstr "Smore beitreten"
 
 #: accounts/templates/accounts/pages/referral_program.html:224
 msgid "Make an account to get started"
-msgstr ""
+msgstr "Erstellen Sie ein Konto, um loszulegen"
 
 #: accounts/templates/accounts/pages/referral_program.html:240
 msgid "Access Your Unique Referral Link"
-msgstr ""
+msgstr "Greifen Sie auf Ihren einzigartigen Empfehlungslink zu"
 
 #: accounts/templates/accounts/pages/referral_program.html:241
 msgid "Get your personalized referral link to share with your network"
 msgstr ""
+"Holen Sie sich Ihren personalisierten Empfehlungslink, um ihn mit Ihrem "
+"Netzwerk zu teilen"
 
 #: accounts/templates/accounts/pages/referral_program.html:255
 msgid "Earn Monthly Rewards and Bonuses"
-msgstr ""
+msgstr "Verdienen Sie monatliche Belohnungen und Boni"
 
 #: accounts/templates/accounts/pages/referral_program.html:256
 msgid ""
 "Earn €13.99/month for every direct referral, €3.50/month for every indirect "
 "referral, and enjoy tiered bonuses as your network grows"
 msgstr ""
+"Verdienen Sie €13,99/Monat für jede direkte Empfehlung, €3,50/Monat für jede"
+" indirekte Empfehlung und profitieren Sie von gestaffelten Boni, während Ihr"
+" Netzwerk wächst"
 
 #: accounts/templates/accounts/pages/referral_program.html:285
 msgid ""
 "Build your network and let Smore's referral system turn your efforts into "
 "reliable monthly income"
 msgstr ""
+"Bauen Sie Ihr Netzwerk auf und lassen Sie Smores Empfehlungssystem Ihre "
+"Bemühungen in ein zuverlässiges monatliches Einkommen verwandeln"
 
 #: accounts/templates/accounts/pages/register.html:17
 msgid "Create your account"
-msgstr ""
+msgstr "Erstellen Sie Ihr Konto"
 
 #: accounts/templates/accounts/pages/register.html:18
 msgid "Join thousands of successful bettors"
-msgstr ""
+msgstr "Schließen Sie sich tausenden erfolgreichen Wettenden an"
 
 #: accounts/templates/accounts/pages/register.html:66
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 #: accounts/templates/accounts/pages/register.html:82
 msgid "Last Name"
-msgstr ""
+msgstr "Nachname"
 
 #: accounts/templates/accounts/pages/register.html:98
 #: accounts/templates/accounts/request_reset_password.html:27
 msgid "Email address"
-msgstr ""
+msgstr "E-Mail-Adresse"
 
 #: accounts/templates/accounts/pages/register.html:140
 msgid "Confirm Password"
-msgstr ""
+msgstr "Passwort bestätigen"
 
 #: accounts/templates/accounts/pages/register.html:167
 msgid "I am 18 years or older"
-msgstr ""
+msgstr "Ich bin 18 Jahre oder älter"
 
 #: accounts/templates/accounts/pages/register.html:173
 msgid "I agree to the"
-msgstr ""
+msgstr "Ich stimme den"
 
 #: accounts/templates/accounts/pages/register.html:176
 #: core/templates/core/includes/footer.html:108
 #: core/templates/core/pages/terms_of_service.html:19
 msgid "Terms of Service"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 #: accounts/templates/accounts/pages/register.html:176
 msgid "and"
-msgstr ""
+msgstr "und"
 
 #: accounts/templates/accounts/pages/register.html:178
 #: core/templates/core/includes/footer.html:119
 #: core/templates/core/pages/privacy_policy.html:18
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Datenschutzrichtlinie"
 
 #: accounts/templates/accounts/pages/register.html:183
 msgid "Create Account"
-msgstr ""
+msgstr "Konto erstellen"
 
 #: accounts/templates/accounts/pages/register.html:197
 msgid "Or"
-msgstr ""
+msgstr "Oder"
 
 #: accounts/templates/accounts/pages/register.html:223
 msgid "Already have an account"
-msgstr ""
+msgstr "Bereits ein Konto?"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:10
 msgid "Available Balance"
-msgstr ""
+msgstr "Verfügbares Guthaben"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:13
 msgid "Available for withdrawal"
-msgstr ""
+msgstr "Zur Auszahlung verfügbar"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:19
 msgid "Withdrawal Amount"
-msgstr ""
+msgstr "Auszahlungsbetrag"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:38
 msgid "Choose a payout method"
-msgstr ""
+msgstr "Wählen Sie eine Auszahlungsmethode"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:50
 msgid "Bank Transfer"
-msgstr ""
+msgstr "Banküberweisung"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:59
 msgid "Payoneer"
-msgstr ""
+msgstr "Payoneer"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:68
 msgid "Cryptocurrency"
-msgstr ""
+msgstr "Kryptowährung"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:77
 msgid "Full Name (as on bank account)"
-msgstr ""
+msgstr "Vollständiger Name (wie im Bankkonto angegeben)"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:84
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:91
 msgid "Country of Residence"
-msgstr ""
+msgstr "Wohnsitzland"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:98
 msgid "IBAN Code"
-msgstr ""
+msgstr "IBAN-Code"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:111
 msgid ""
@@ -617,30 +671,38 @@ msgid ""
 "account. Incorrect details may result in failed transfers that cannot be "
 "refunded"
 msgstr ""
+"Bitte stellen Sie sicher, dass Ihr vollständiger Name genau so angegeben "
+"ist, wie er auf Ihrem Bankkonto erscheint. Falsche Angaben können zu "
+"fehlgeschlagenen Überweisungen führen, die nicht erstattet werden können"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:124
 msgid "Payoneer Email Address"
-msgstr ""
+msgstr "Payoneer-E-Mail-Adresse"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:131
 msgid "Payoneer customer ID"
-msgstr ""
+msgstr "Payoneer-Kundennummer"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:144
 msgid ""
-"Please verify your Payoneer email address carefully. Funds sent to incorrect "
-"Payoneer accounts cannot be recovered"
+"Please verify your Payoneer email address carefully. Funds sent to incorrect"
+" Payoneer accounts cannot be recovered"
 msgstr ""
+"Bitte überprüfen Sie Ihre Payoneer-E-Mail-Adresse sorgfältig. An falsche "
+"Payoneer-Konten gesendete Gelder können nicht zurückgeholt werden"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:149
 msgid "Bitcoin Address"
-msgstr ""
+msgstr "Bitcoin-Adresse"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:163
 msgid ""
 "Please carefully verify your Bitcoin address before submitting. We cannot "
 "refund or resend funds if sent to an incorrect address"
 msgstr ""
+"Bitte überprüfen Sie Ihre Bitcoin-Adresse sorgfältig, bevor Sie sie "
+"einreichen. Wir können keine Erstattungen vornehmen oder Gelder erneut "
+"senden, wenn sie an eine falsche Adresse gesendet wurden"
 
 #: accounts/templates/accounts/pages/request_withdrawal.html:179
 msgid ""
@@ -648,220 +710,236 @@ msgid ""
 "review your withdrawal details carefully as we cannot modify or cancel the "
 "ransaction once it's processed"
 msgstr ""
+"Alle Auszahlungen werden an Werktagen innerhalb von 24 Stunden bearbeitet. "
+"Bitte überprüfen Sie Ihre Auszahlungsdetails sorgfältig, da wir die "
+"Transaktion nach der Verarbeitung nicht mehr ändern oder stornieren können"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:9
 msgid "Total withdrawn amount"
-msgstr ""
+msgstr "Gesamtauszahlungsbetrag"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:18
 #: accounts/templates/accounts/pages/withdrawal_history.html:263
 #: accounts/templates/accounts/pages/withdrawal_history.html:271
 msgid "Completed"
-msgstr ""
+msgstr "Abgeschlossen"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:34
 msgid "In Progress"
-msgstr ""
+msgstr "In Bearbeitung"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:50
 msgid "Rejected"
-msgstr ""
+msgstr "Abgelehnt"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:89
 msgid "Transfer"
-msgstr ""
+msgstr "Überweisung"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:147
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:165
 msgid "Cryptocurrency Address"
-msgstr ""
+msgstr "Kryptowährungsadresse"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:171
 msgid "Withdrawal Progress"
-msgstr ""
+msgstr "Auszahlungsfortschritt"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:184
 msgid "Rejection Reason"
-msgstr ""
+msgstr "Ablehnungsgrund"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:188
 msgid "No reason provided"
-msgstr ""
+msgstr "Kein Grund angegeben"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:200
 #: accounts/templates/accounts/pages/withdrawal_history.html:208
 msgid "Pending"
-msgstr ""
+msgstr "Ausstehend"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:220
 #: accounts/templates/accounts/pages/withdrawal_history.html:228
 msgid "Approved"
-msgstr ""
+msgstr "Genehmigt"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:241
 #: accounts/templates/accounts/pages/withdrawal_history.html:249
 msgid "Processing"
-msgstr ""
+msgstr "In Bearbeitung"
 
 #: accounts/templates/accounts/pages/withdrawal_history.html:286
 msgid "You haven't made a withdrawal request yet"
-msgstr ""
+msgstr "Sie haben noch keine Auszahlungsanforderung gestellt"
 
 #: accounts/templates/accounts/password_reset_confirm.html:17
 msgid "Reset Your Password"
-msgstr ""
+msgstr "Setzen Sie Ihr Passwort zurück"
 
 #: accounts/templates/accounts/password_reset_confirm.html:18
 msgid "Enter your new password below"
-msgstr ""
+msgstr "Geben Sie unten Ihr neues Passwort ein"
 
 #: accounts/templates/accounts/password_reset_confirm.html:48
 msgid "New Password"
-msgstr ""
+msgstr "Neues Passwort"
 
 #: accounts/templates/accounts/password_reset_confirm.html:73
 msgid "Confirm New Password"
-msgstr ""
+msgstr "Neues Passwort bestätigen"
 
 #: accounts/templates/accounts/password_reset_confirm.html:148
 #: accounts/templates/accounts/password_reset_request_success.html:17
 #: accounts/templates/accounts/request_reset_password.html:17
 msgid "Reset Password"
-msgstr ""
+msgstr "Passwort zurücksetzen"
 
 #: accounts/templates/accounts/password_reset_confirm.html:161
 #: accounts/templates/accounts/password_reset_request_success.html:45
 #: accounts/templates/accounts/request_reset_password.html:62
 msgid "Back to Sign In"
-msgstr ""
+msgstr "Zurück zur Anmeldung"
 
 #: accounts/templates/accounts/password_reset_request_success.html:18
 msgid "Check your email for reset instructions"
 msgstr ""
+"Überprüfen Sie Ihre E-Mails für Anweisungen zum Zurücksetzen des Passworts"
 
 #: accounts/templates/accounts/password_reset_request_success.html:32
 msgid ""
 "If an account exists with the credentials you've entered, an email will be "
 "sent with instructions to reset your password"
 msgstr ""
+"Falls ein Konto mit den eingegebenen Anmeldedaten existiert, wird eine "
+"E-Mail mit Anweisungen zum Zurücksetzen des Passworts gesendet"
 
 #: accounts/templates/accounts/password_reset_request_success.html:33
 msgid "Please check your spam folder if you don't see the email in your inbox"
 msgstr ""
+"Bitte überprüfen Sie Ihren Spam-Ordner, falls die E-Mail nicht in Ihrem "
+"Posteingang erscheint"
 
 #: accounts/templates/accounts/request_reset_password.html:18
 msgid "Enter your email to receive password reset instructions"
 msgstr ""
+"Geben Sie Ihre E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen des "
+"Passworts zu erhalten"
 
 #: accounts/templates/accounts/request_reset_password.html:49
 msgid "Send Reset Instructions"
-msgstr ""
+msgstr "Anweisungen zum Zurücksetzen senden"
 
 #: core/templates/core/includes/footer.html:10
 msgid ""
 "Expert sports predictions powered  by advanced analytics and professional "
 "insights. Join thousands of successful bettors who trust"
 msgstr ""
+"Experten-Sportvorhersagen basierend auf fortschrittlicher Analytik und "
+"professionellen Einblicken. Schließen Sie sich tausenden erfolgreichen "
+"Wettenden an, die vertrauen auf"
 
 #: core/templates/core/includes/footer.html:47
 msgid "Quick Links"
-msgstr ""
+msgstr "Schnellzugriff"
 
 #: core/templates/core/includes/footer.html:58
 msgid "About Us"
-msgstr ""
+msgstr "Über uns"
 
 #: core/templates/core/includes/footer.html:70
 #: core/templates/core/includes/header.html:75
 #: core/templates/core/includes/header.html:137
 msgid "Plans"
-msgstr ""
+msgstr "Tarife"
 
 #: core/templates/core/includes/footer.html:82
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: core/templates/core/includes/footer.html:93
 #: core/templates/core/includes/header.html:84
 #: core/templates/core/includes/header.html:148
 msgid "How to Join"
-msgstr ""
+msgstr "So treten Sie bei"
 
 #: core/templates/core/includes/footer.html:97
 msgid "Legal"
-msgstr ""
+msgstr "Rechtliches"
 
 #: core/templates/core/includes/footer.html:130
 #: core/templates/core/pages/disclaimer.html:20
 msgid "Disclaimer"
-msgstr ""
+msgstr "Haftungsausschluss"
 
 #: core/templates/core/includes/footer.html:138
 msgid "All rights reserved"
-msgstr ""
+msgstr "Alle Rechte vorbehalten"
 
 #: core/templates/core/includes/footer.html:141
 msgid "Terms"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 #: core/templates/core/includes/footer.html:145
 msgid "Privacy"
-msgstr ""
+msgstr "Datenschutz"
 
 #: core/templates/core/includes/footer.html:149
 msgid "Cookies"
-msgstr ""
+msgstr "Cookies "
 
 #: core/templates/core/includes/header.html:57
 #: core/templates/core/includes/header.html:129
 msgid "Home"
-msgstr ""
+msgstr "Startseite"
 
 #: core/templates/core/includes/header.html:61
 #: core/templates/core/includes/header.html:131
 msgid "Upcoming Matches"
-msgstr ""
+msgstr "Bevorstehende Spiele"
 
 #: core/templates/core/includes/header.html:65
 #: core/templates/core/includes/header.html:134
 msgid "History"
-msgstr ""
+msgstr "Verlauf"
 
 #: core/templates/core/includes/header.html:70
 #: core/templates/core/includes/header.html:140
 msgid "Referral Program"
-msgstr ""
+msgstr "Empfehlungsprogramm"
 
 #: core/templates/core/includes/header.html:104
 #: core/templates/core/includes/header.html:166
 msgid "Sign In"
-msgstr ""
+msgstr "Anmelden"
 
 #: core/templates/core/includes/header.html:106
 #: core/templates/core/includes/header.html:169
 msgid "Sign Up"
-msgstr ""
+msgstr "Registrieren"
 
 #: core/templates/core/includes/header.html:155
 msgid "My Account"
-msgstr ""
+msgstr "Mein Benutzerkonto"
 
 #: core/templates/core/pages/about_us.html:11
 msgid "About Smore"
-msgstr ""
+msgstr "Über Smore"
 
 #: core/templates/core/pages/about_us.html:12
 msgid "Transforming Sports Predictions Through Data Science"
-msgstr ""
+msgstr "Sportvorhersagen durch Data Science revolutionieren"
 
 #: core/templates/core/pages/about_us.html:13
 msgid ""
 "We combine advanced analytics, machine learning, and expert insights to "
 "provide the most accurate sports predictions in the industry."
 msgstr ""
+"Wir kombinieren fortschrittliche Analysen, maschinelles Lernen und "
+"Experteneinblicke, um die genauesten Sportvorhersagen der Branche "
+"bereitzustellen."
 
 #: core/templates/core/pages/about_us.html:33
 #: core/templates/core/pages/home.html:33
@@ -869,180 +947,209 @@ msgstr ""
 #: core/templates/core/pages/subscription_required.html:25
 #: core/templates/core/pages/upcoming_matches.html:40
 msgid "Success Rate"
-msgstr ""
+msgstr "Erfolgsrate"
 
 #: core/templates/core/pages/about_us.html:51
 msgid "Active Users"
-msgstr ""
+msgstr "Aktive Nutzer"
 
 #: core/templates/core/pages/about_us.html:69
 msgid "Daily Picks"
-msgstr ""
+msgstr "Tägliche Tipps"
 
 #: core/templates/core/pages/about_us.html:85
 #: core/templates/core/pages/home.html:321
 msgid "Expert Support"
-msgstr ""
+msgstr "Experten-Support"
 
 #: core/templates/core/pages/about_us.html:97
 msgid "Our Story"
-msgstr ""
+msgstr "Unsere Geschichte"
 
 #: core/templates/core/pages/about_us.html:98
 msgid "A Decade of Excellence in Sports Analytics"
-msgstr ""
+msgstr "Ein Jahrzehnt Exzellenz in der Sportanalyse"
 
 #: core/templates/core/pages/about_us.html:99
 msgid "Founded in 2014,"
-msgstr ""
+msgstr "Gegründet im Jahr 2014,"
 
 #: core/templates/core/pages/about_us.html:100
 msgid ""
 "emerged from a simple vision: to revolutionize sports predictions through "
 "the power of data science and machine learning."
 msgstr ""
+"entstand aus einer einfachen Vision: Sportvorhersagen durch die Kraft von "
+"Data Science und maschinellem Lernen zu revolutionieren."
 
 #: core/templates/core/pages/about_us.html:102
 msgid ""
 "What started as a small team of sports enthusiasts and data scientists has "
 "grown into a leading platform trusted by over 10,000 users worldwide."
 msgstr ""
+"Was als kleines Team aus Sportbegeisterten und Datenwissenschaftlern begann,"
+" hat sich zu einer führenden Plattform entwickelt, der weltweit über 5000 "
+"Nutzer vertrauen."
 
 #: core/templates/core/pages/about_us.html:103
 msgid ""
 "Our commitment to accuracy, transparency, and user success has earned us a "
 "reputation as the most reliable sports prediction service in the industry."
 msgstr ""
+"Unser Engagement für Genauigkeit, Transparenz und den Erfolg unserer Nutzer "
+"hat uns den Ruf als zuverlässigster Sportvorhersagedienst der Branche "
+"eingebracht."
 
 #: core/templates/core/pages/about_us.html:118
 msgid "Our Values"
-msgstr ""
+msgstr "Unsere Werte"
 
 #: core/templates/core/pages/about_us.html:119
 msgid "What Sets Us Apart"
-msgstr ""
+msgstr "Was uns auszeichnet"
 
 #: core/templates/core/pages/about_us.html:120
 msgid ""
-"Our core values drive everything we do, from developing prediction models to "
-"supporting our users."
+"Our core values drive everything we do, from developing prediction models to"
+" supporting our users."
 msgstr ""
+"Unsere Kernwerte bestimmen alles, was wir tun – von der Entwicklung unserer "
+"Vorhersagemodelle bis hin zur Unterstützung unserer Nutzer."
 
 #: core/templates/core/pages/about_us.html:140
 msgid "Data-Driven Excellence"
-msgstr ""
+msgstr "Datengetriebene Exzellenz"
 
 #: core/templates/core/pages/about_us.html:141
 msgid ""
 "Our predictions are powered by advanced algorithms and machine learning "
 "models that analyze vast amounts of sports data."
 msgstr ""
+"Unsere Vorhersagen basieren auf fortschrittlichen Algorithmen und "
+"maschinellen Lernmodellen, die enorme Mengen an Sportdaten analysieren."
 
 #: core/templates/core/pages/about_us.html:152
 msgid "Integrity First"
-msgstr ""
+msgstr "Integrität an erster Stelle"
 
 #: core/templates/core/pages/about_us.html:153
 msgid ""
 "We maintain the highest standards of transparency and honesty in all our "
 "predictions and analysis."
 msgstr ""
+"Wir wahren die höchsten Standards an Transparenz und Ehrlichkeit in all "
+"unseren Vorhersagen und Analysen."
 
 #: core/templates/core/pages/about_us.html:165
 msgid "Continuous Innovation"
-msgstr ""
+msgstr "Ständige Innovation"
 
 #: core/templates/core/pages/about_us.html:166
 msgid ""
 "We constantly refine our prediction models and analysis methods to maintain "
 "our industry-leading accuracy."
 msgstr ""
+"Wir verfeinern kontinuierlich unsere Vorhersagemodelle und Analysemethoden, "
+"um unsere branchenführende Genauigkeit zu gewährleisten."
 
 #: core/templates/core/pages/about_us.html:177
 msgid "User Success"
-msgstr ""
+msgstr "Erfolg der Nutzer"
 
 #: core/templates/core/pages/about_us.html:178
 msgid ""
 "Your success is our success. We're committed to providing the insights you "
 "need to make informed decisions."
 msgstr ""
+"Ihr Erfolg ist unser Erfolg. Wir sind bestrebt, Ihnen die Einblicke zu "
+"bieten, die Sie für fundierte Entscheidungen benötigen."
 
 #: core/templates/core/pages/about_us.html:188
 msgid "Ready to Experience the Future of Sports Predictions?"
-msgstr ""
+msgstr "Bereit, die Zukunft der Sportvorhersagen zu erleben?"
 
 #: core/templates/core/pages/about_us.html:189
 msgid ""
 "Join thousands of successful users who trust our expert predictions and "
 "analysis."
 msgstr ""
+"Schließen Sie sich tausenden erfolgreichen Nutzern an, die unseren "
+"Expertenvorhersagen und Analysen vertrauen."
 
 #: core/templates/core/pages/about_us.html:194
 #: core/templates/core/pages/how_to_join.html:261
 msgid "Get Started Now"
-msgstr ""
+msgstr "Jetzt loslegen"
 
 #: core/templates/core/pages/contact_us.html:10
 msgid "Get in Touch"
-msgstr ""
+msgstr "Kontakt aufnehmen"
 
 #: core/templates/core/pages/contact_us.html:11
 msgid "We're Here to Help"
-msgstr ""
+msgstr "Wir sind für Sie da"
 
 #: core/templates/core/pages/contact_us.html:12
 msgid ""
 "Have questions about our predictions or need assistance? Our expert team is "
 "ready to help you 24/7"
 msgstr ""
+"Haben Sie Fragen zu unseren Vorhersagen oder benötigen Unterstützung? Unser "
+"Expertenteam steht Ihnen rund um die Uhr zur Verfügung"
 
 #: core/templates/core/pages/contact_us.html:70
 msgid "Send us an email anytime"
-msgstr ""
+msgstr "Senden Sie uns jederzeit eine E-Mail"
 
 #: core/templates/core/pages/contact_us.html:88
 msgid "Support"
-msgstr ""
+msgstr "Kundensupport"
 
 #: core/templates/core/pages/contact_us.html:89
 msgid ""
 "Our team is available around the clock to assist you with any questions or "
 "concerns"
 msgstr ""
+"Unser Team steht Ihnen rund um die Uhr zur Verfügung, um Ihnen bei Fragen "
+"oder Anliegen zu helfen"
 
 #: core/templates/core/pages/contact_us.html:100
 msgid "Fast Response"
-msgstr ""
+msgstr "Schnelle Reaktionszeit"
 
 #: core/templates/core/pages/contact_us.html:101
 msgid "We aim to respond to all inquiries within 15 minutes during peak hours"
 msgstr ""
+"Wir bemühen uns, alle Anfragen während der Stoßzeiten innerhalb von 15 "
+"Minuten zu beantworten"
 
 #: core/templates/core/pages/contact_us.html:113
 msgid "Global Coverage"
-msgstr ""
+msgstr "Globale Abdeckung"
 
 #: core/templates/core/pages/contact_us.html:114
-msgid "Support available in multiple languages for our international user base"
+msgid ""
+"Support available in multiple languages for our international user base"
 msgstr ""
+"Support in mehreren Sprachen für unsere internationale Nutzerbasis verfügbar"
 
 #: core/templates/core/pages/contact_us.html:126
 msgid "Expert Assistance"
-msgstr ""
+msgstr "Expertenunterstützung"
 
 #: core/templates/core/pages/contact_us.html:127
 msgid "Get help from our team of experienced sports analysis professionals"
 msgstr ""
+"Erhalten Sie Unterstützung von unserem Team erfahrener Sportanalyse-Experten"
 
 #: core/templates/core/pages/cookies_policy.html:23
 #: core/templates/core/pages/privacy_policy.html:220
 msgid "Cookie Policy"
-msgstr ""
+msgstr "Cookie-Richtlinie"
 
 #: core/templates/core/pages/cookies_policy.html:36
 msgid "This Cookie Policy explains how"
-msgstr ""
+msgstr "Diese Cookie-Richtlinie erklärt, wie"
 
 #: core/templates/core/pages/cookies_policy.html:38
 msgid ""
@@ -1050,10 +1157,14 @@ msgid ""
 "improve, and secure our services. By using our website, you consent to our "
 "use of cookies as described in this policy."
 msgstr ""
+" Cookies und ähnliche Technologien verwendet werden, um unsere Dienste "
+"bereitzustellen, anzupassen, zu bewerten, zu verbessern und zu sichern. "
+"Durch die Nutzung unserer Website stimmen Sie der Verwendung von Cookies "
+"gemäß dieser Richtlinie zu."
 
 #: core/templates/core/pages/cookies_policy.html:41
 msgid "What Are Cookies?"
-msgstr ""
+msgstr "Was sind Cookies?"
 
 #: core/templates/core/pages/cookies_policy.html:42
 msgid ""
@@ -1061,90 +1172,102 @@ msgid ""
 "our website. They help us remember your preferences, understand how you use "
 "our site, and provide you with a more personalized experience."
 msgstr ""
+"Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, "
+"wenn Sie unsere Website besuchen. Sie helfen uns, Ihre Präferenzen zu "
+"speichern, Ihr Nutzungsverhalten zu verstehen und Ihnen eine personalisierte"
+" Erfahrung zu bieten."
 
 #: core/templates/core/pages/cookies_policy.html:45
 msgid "Types of Cookies We Use"
-msgstr ""
+msgstr "Arten von Cookies, die wir verwenden"
 
 #: core/templates/core/pages/cookies_policy.html:57
 msgid "Session Authentication"
-msgstr ""
+msgstr "Sitzungs-Authentifizierung"
 
 #: core/templates/core/pages/cookies_policy.html:59
 msgid "Required"
-msgstr ""
+msgstr "Erforderlich"
 
 #: core/templates/core/pages/cookies_policy.html:61
 msgid ""
 "Essential cookies that maintain your login status and secure your session "
 "while using our service."
 msgstr ""
+"Essenzielle Cookies, die Ihren Anmeldestatus aufrechterhalten und Ihre "
+"Sitzung während der Nutzung unseres Dienstes sichern."
 
 #: core/templates/core/pages/cookies_policy.html:63
 #: core/templates/core/pages/cookies_policy.html:100
 msgid "Examples:"
-msgstr ""
+msgstr "Beispiele:"
 
 #: core/templates/core/pages/cookies_policy.html:67
 msgid "Authentication tokens"
-msgstr ""
+msgstr "Authentifizierungs-Token"
 
 #: core/templates/core/pages/cookies_policy.html:71
 msgid "Session identifiers"
-msgstr ""
+msgstr "Sitzungskennungen"
 
 #: core/templates/core/pages/cookies_policy.html:75
 msgid "Security tokens"
-msgstr ""
+msgstr "Sicherheits-Token"
 
 #: core/templates/core/pages/cookies_policy.html:95
 msgid "Analytics"
-msgstr ""
+msgstr "Analytik"
 
 #: core/templates/core/pages/cookies_policy.html:96
 msgid "Optional"
-msgstr ""
+msgstr "Optional"
 
 #: core/templates/core/pages/cookies_policy.html:98
 msgid ""
 "Facebook Pixel tracking to help us understand user interactions and improve "
 "our service."
 msgstr ""
+"Facebook Pixel-Tracking, um Nutzerinteraktionen zu verstehen und unseren "
+"Service zu verbessern."
 
 #: core/templates/core/pages/cookies_policy.html:104
 msgid "Click tracking"
-msgstr ""
+msgstr "Klick-Tracking"
 
 #: core/templates/core/pages/cookies_policy.html:108
 msgid "Page views"
-msgstr ""
+msgstr "Seitenaufrufe"
 
 #: core/templates/core/pages/cookies_policy.html:112
 msgid "User journey analysis"
-msgstr ""
+msgstr "Analyse der Nutzerreise"
 
 #: core/templates/core/pages/disclaimer.html:30
 #: core/templates/core/pages/privacy_policy.html:28
 msgid "Last Updated"
-msgstr ""
+msgstr "Zuletzt aktualisiert"
 
 #: core/templates/core/pages/disclaimer.html:42
 msgid "Important Notice"
-msgstr ""
+msgstr "Wichtiger Hinweis"
 
 #: core/templates/core/pages/disclaimer.html:43
 msgid ""
 "Before using our service, please read this disclaimer carefully. By "
 "accessing and using"
 msgstr ""
+"Bitte lesen Sie diesen Haftungsausschluss sorgfältig, bevor Sie unseren "
+"Dienst nutzen. Durch den Zugriff und die Nutzung von"
 
 #: core/templates/core/pages/disclaimer.html:44
 msgid "you acknowledge and agree to the terms outlined in this disclaimer."
 msgstr ""
+"erkennen Sie die in diesem Haftungsausschluss aufgeführten Bedingungen an "
+"und stimmen ihnen zu."
 
 #: core/templates/core/pages/disclaimer.html:62
 msgid "Risk Warning"
-msgstr ""
+msgstr "Risikohinweis"
 
 #: core/templates/core/pages/disclaimer.html:63
 msgid ""
@@ -1153,10 +1276,15 @@ msgid ""
 "results. Users must understand that they are responsible for their own "
 "betting decisions and any resulting financial losses."
 msgstr ""
+"Sportwetten bergen erhebliche Risiken und sind möglicherweise nicht für alle"
+" Nutzer geeignet. Die bisherige Leistung unserer Vorhersagen garantiert "
+"keine zukünftigen Ergebnisse. Nutzer müssen verstehen, dass sie für ihre "
+"eigenen Wettentscheidungen und daraus resultierende finanzielle Verluste "
+"selbst verantwortlich sind."
 
 #: core/templates/core/pages/disclaimer.html:80
 msgid "No Guaranteed Returns"
-msgstr ""
+msgstr "Keine garantierten Gewinne"
 
 #: core/templates/core/pages/disclaimer.html:81
 msgid ""
@@ -1165,10 +1293,15 @@ msgid ""
 "financial returns. Sports events are inherently unpredictable, and many "
 "factors beyond our control can affect outcomes."
 msgstr ""
+"Obwohl wir bestrebt sind, auf umfassender Analyse basierende präzise "
+"Vorhersagen bereitzustellen, können und werden wir keine bestimmte "
+"Erfolgsquote oder finanzielle Rendite garantieren. Sportereignisse sind von "
+"Natur aus unvorhersehbar, und viele Faktoren, die außerhalb unserer "
+"Kontrolle liegen, können die Ergebnisse beeinflussen."
 
 #: core/templates/core/pages/disclaimer.html:103
 msgid "Information Purpose Only"
-msgstr ""
+msgstr "Nur zu Informationszwecken"
 
 #: core/templates/core/pages/disclaimer.html:104
 msgid ""
@@ -1177,10 +1310,14 @@ msgid ""
 "place specific bets. Users should conduct their own research and exercise "
 "their own judgment before making any betting decisions."
 msgstr ""
+"Unsere Vorhersagen und Analysen dienen ausschließlich Informationszwecken. "
+"Sie sollten nicht als Finanzberatung oder Empfehlung für bestimmte Wetten "
+"betrachtet werden. Nutzer sollten ihre eigenen Recherchen durchführen und "
+"ihr eigenes Urteilsvermögen anwenden, bevor sie Wettentscheidungen treffen."
 
 #: core/templates/core/pages/disclaimer.html:120
 msgid "Legal Compliance"
-msgstr ""
+msgstr "Rechtliche Einhaltung"
 
 #: core/templates/core/pages/disclaimer.html:121
 msgid ""
@@ -1189,62 +1326,79 @@ msgid ""
 "betting may be restricted or illegal in certain regions, and it is the "
 "user's responsibility to verify and comply with local laws."
 msgstr ""
+"Nutzer sind dafür verantwortlich, sicherzustellen, dass die Nutzung unseres "
+"Dienstes mit allen geltenden Gesetzen und Vorschriften in ihrer jeweiligen "
+"Region übereinstimmt. Sportwetten können in bestimmten Regionen "
+"eingeschränkt oder illegal sein, und es liegt in der Verantwortung des "
+"Nutzers, sich über die lokalen Gesetze zu informieren und diese einzuhalten."
 
 #: core/templates/core/pages/disclaimer.html:126
 msgid "Additional Important Points"
-msgstr ""
+msgstr "Weitere wichtige Hinweise"
 
 #: core/templates/core/pages/disclaimer.html:130
 msgid ""
 "We are not liable for any losses incurred from using our predictions or "
 "analysis."
 msgstr ""
+"Wir übernehmen keine Haftung für Verluste, die durch die Nutzung unserer "
+"Vorhersagen oder Analysen entstehen."
 
 #: core/templates/core/pages/disclaimer.html:134
 msgid ""
 "Our service is intended for entertainment and informational purposes only."
 msgstr ""
+"Unser Dienst dient ausschließlich Unterhaltungs- und Informationszwecken."
 
 #: core/templates/core/pages/disclaimer.html:138
 msgid "Past performance statistics are not indicative of future results."
 msgstr ""
+"Vergangene Leistungsstatistiken sind kein Indikator für zukünftige "
+"Ergebnisse."
 
 #: core/templates/core/pages/disclaimer.html:142
 msgid "Always gamble responsibly and within your means."
 msgstr ""
+"Spielen Sie stets verantwortungsbewusst und nur im Rahmen Ihrer finanziellen"
+" Möglichkeiten."
 
 #: core/templates/core/pages/disclaimer.html:146
 msgid ""
 "If you feel you may have a gambling problem, seek professional help "
 "immediately."
 msgstr ""
+"Wenn Sie das Gefühl haben, ein Glücksspielproblem zu haben, suchen Sie "
+"sofort professionelle Hilfe."
 
 #: core/templates/core/pages/disclaimer.html:151
 msgid "Responsible Gambling"
-msgstr ""
+msgstr "Verantwortungsbewusstes Glücksspiel"
 
 #: core/templates/core/pages/disclaimer.html:152
 msgid ""
 "We strongly encourage responsible gambling practices. If you or someone you "
-"know has a gambling problem, please contact the appropriate support services "
-"in your region."
+"know has a gambling problem, please contact the appropriate support services"
+" in your region."
 msgstr ""
+"Wir setzen uns nachdrücklich für verantwortungsbewusstes Glücksspiel ein. "
+"Wenn Sie oder jemand, den Sie kennen, ein Glücksspielproblem hat, wenden Sie"
+" sich bitte an die zuständigen Unterstützungsdienste in Ihrer Region."
 
 #: core/templates/core/pages/disclaimer.html:155
 msgid "Gambling Addiction Helpline"
-msgstr ""
+msgstr "Hotline für Glücksspielsucht"
 
 #: core/templates/core/pages/disclaimer.html:156
 msgid "24/7 Confidential Support"
-msgstr ""
+msgstr "Rund um die Uhr vertrauliche Unterstützung"
 
 #: core/templates/core/pages/disclaimer.html:161
 msgid "Online Resources"
-msgstr ""
+msgstr "Online-Ressourcen"
 
 #: core/templates/core/pages/disclaimer.html:162
 msgid "Visit for Help &amp; Information"
-msgstr ""
+msgstr "Besuchen Sie uns für Hilfe und Informationen"
 
 #: core/templates/core/pages/disclaimer.html:170
 msgid "If you have any questions about this Disclaimer, please contact us:"
@@ -1336,8 +1490,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:25
 msgid ""
-"Behind every winning strategy is a team that truly understands the game. Our "
-"dedicated professionals dive deep into the action to bring you sharp, "
+"Behind every winning strategy is a team that truly understands the game. Our"
+" dedicated professionals dive deep into the action to bring you sharp, "
 "insightful sports analyses you can trust"
 msgstr ""
 
@@ -1442,8 +1596,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:367
 msgid ""
-"Our expert team analyzes thousands of data points, statistics, and trends to "
-"deliver accurate predictions, so you don't have to spend hours researching"
+"Our expert team analyzes thousands of data points, statistics, and trends to"
+" deliver accurate predictions, so you don't have to spend hours researching"
 msgstr ""
 
 #: core/templates/core/pages/home.html:369
@@ -1572,8 +1726,8 @@ msgstr ""
 msgid ""
 "At SMORE, we dive deep into match analysis to give you the edge in sports "
 "outcome. By combining recent form, head-to-head stats, injury updates, and "
-"market trends, we provide insightful predictions to maximize your chances of "
-"success."
+"market trends, we provide insightful predictions to maximize your chances of"
+" success."
 msgstr ""
 
 #: core/templates/core/pages/home.html:618
@@ -1584,8 +1738,8 @@ msgstr ""
 msgid ""
 "Odds analysis evaluates betting odds by comparing probabilities with key "
 "factors like team form, player stats, and match dynamics. For soccer, "
-"basketball, and NFL, we analyze performance trends, injuries, and strategies "
-"to uncover value bets. SMORE simplifies the data, helping you boost your "
+"basketball, and NFL, we analyze performance trends, injuries, and strategies"
+" to uncover value bets. SMORE simplifies the data, helping you boost your "
 "potential outcomes."
 msgstr ""
 
@@ -1595,8 +1749,8 @@ msgstr ""
 
 #: core/templates/core/pages/home.html:659
 msgid ""
-"Risk management is at the core of our approach. SMORE identifies, evaluates, "
-"and minimizes uncertainties by analyzing data, setting clear limits, and "
+"Risk management is at the core of our approach. SMORE identifies, evaluates,"
+" and minimizes uncertainties by analyzing data, setting clear limits, and "
 "diversifying strategies. By leveraging expertise and precision, we ensure "
 "well-informed decisions that balance calculated risks, helping you achieve "
 "consistent and sustainable results."
@@ -2077,7 +2231,8 @@ msgstr ""
 #: core/templates/core/pages/terms_of_service.html:41
 msgid ""
 "By using our Service, you acknowledge that you have read, understood, and "
-"agree to be bound by these Terms and any future amendments or updates to them"
+"agree to be bound by these Terms and any future amendments or updates to "
+"them"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:45
@@ -2098,8 +2253,8 @@ msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:55
 msgid ""
-"While we use reasonable efforts to provide accurate and insightful analysis, "
-"we do not guarantee the correctness, completeness, or reliability of any "
+"While we use reasonable efforts to provide accurate and insightful analysis,"
+" we do not guarantee the correctness, completeness, or reliability of any "
 "sports result or prediction generated through our Service. All analysis and "
 "predictions are based on historical data and statistical modeling, but "
 "outcomes may differ due to unforeseen factors such as player performance, "
@@ -2133,8 +2288,8 @@ msgstr ""
 #: core/templates/core/pages/terms_of_service.html:69
 msgid ""
 "Due to the nature of our Service, all subscription fees are non-refundable, "
-"even if you cancel your subscription before the end of the billing cycle. By "
-"subscribing, you agree to this no-refund policy"
+"even if you cancel your subscription before the end of the billing cycle. By"
+" subscribing, you agree to this no-refund policy"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:72
@@ -2182,8 +2337,8 @@ msgstr ""
 msgid ""
 "If you are under the legal age for gambling in your jurisdiction, you must "
 "not use the Service. We reserve the right to verify your age and suspend or "
-"terminate your access to the Service if we believe you do not meet the legal "
-"age requirement"
+"terminate your access to the Service if we believe you do not meet the legal"
+" age requirement"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:92
@@ -2262,7 +2417,8 @@ msgstr ""
 msgid ""
 "Your use of the Service is also governed by our Privacy Policy, which "
 "outlines how we collect, use, and protect your personal information. By "
-"using the Service, you agree to the practices described in our Privacy Policy"
+"using the Service, you agree to the practices described in our Privacy "
+"Policy"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:138
@@ -2302,12 +2458,12 @@ msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:159
 msgid ""
-"Any dispute, controversy, or claim arising out of or relating to these Terms "
-"shall be resolved through binding arbitration, administered by the Bulgarian "
-"Chamber of Commerce and Industry (BCCI) in accordance with its Arbitration "
-"Rules. The place of arbitration shall be Sofia, Bulgaria, and the language "
-"of arbitration shall be Bulgarian/English. The decision of the arbitrator(s) "
-"shall be final and binding on all parties"
+"Any dispute, controversy, or claim arising out of or relating to these Terms"
+" shall be resolved through binding arbitration, administered by the "
+"Bulgarian Chamber of Commerce and Industry (BCCI) in accordance with its "
+"Arbitration Rules. The place of arbitration shall be Sofia, Bulgaria, and "
+"the language of arbitration shall be Bulgarian/English. The decision of the "
+"arbitrator(s) shall be final and binding on all parties"
 msgstr ""
 
 #: core/templates/core/pages/terms_of_service.html:166
