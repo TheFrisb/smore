@@ -985,11 +985,11 @@ msgstr ""
 #: core/templates/core/pages/about_us.html:102
 msgid ""
 "What started as a small team of sports enthusiasts and data scientists has "
-"grown into a leading platform trusted by over 10,000 users worldwide."
+"grown into a leading platform trusted by over 50000 users worldwide."
 msgstr ""
 "Αυτό που ξεκίνησε ως μια μικρή ομάδα αθλητικών ενθουσιαστών και επιστημόνων "
 "δεδομένων έχει εξελιχθεί σε μια κορυφαία πλατφόρμα που εμπιστεύονται πάνω "
-"από 10.000 χρήστες παγκοσμίως."
+"από 5000 χρήστες παγκοσμίως."
 
 #: core/templates/core/pages/about_us.html:103
 msgid ""
