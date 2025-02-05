@@ -26,7 +26,8 @@
                     <button class="cursor-pointer flex items-center space-x-2 px-3 py-2 text-primary-300 hover:text-white transition-colors rounded-lg hover:bg-primary-800/50"
                             id="languageSelectionButton">
                         <!-- Use the filter to show the flag for the current language -->
-                        <span>{% get_language_flag_emoji CURRENT_LANGUAGE|slice:":2" %}</span>
+                        {% get_language_flag_icon_name CURRENT_LANGUAGE|slice:":2" as flag_icon %}
+                        {% svg_icon icon_name=flag_icon css_classes="w-5 h-5" %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                              class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon">
@@ -45,11 +46,17 @@
                                 <!-- if lang code is en or el, render button
                                 else render a tag -->
                                 {% if lang_code == 'en' or lang_code == 'el' %}
+                                    {# Get the proper SVG icon ID for this language #}
+                                    {% get_language_flag_icon_name lang_code as flag_icon %}
                                     <button type="submit"
                                             class="w-full flex items-center space-x-3 px-4 py-2 text-sm transition-colors
-                                            {% if CURRENT_LANGUAGE|slice:":2" == lang_code %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:text-white hover:bg-primary-700/50{% endif %}">
-                                        <!-- Use the filter to display the flag for each language -->
-                                        <span class="text-base">{% get_language_flag_emoji lang_code %}</span>
+                                            {% if CURRENT_LANGUAGE|slice:":2" == lang_code %}
+                                                bg-secondary-500/10 text-secondary-400
+                                            {% else %}
+                                                text-primary-300 hover:text-white hover:bg-primary-700/50
+                                            {% endif %}">
+                                        {# Render the SVG icon using the flag icon ID #}
+                                        {% svg_icon icon_name=flag_icon css_classes="w-5 h-5" %}
                                         <span>{{ lang_name }}</span>
                                     </button>
                                 {% endif %}
