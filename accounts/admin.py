@@ -277,19 +277,11 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
                 "fields": (
                     "full_name",
                     "email",
-                    "payoneer_customer_id",
                     "iban",
                     "country",
                     "cryptocurrency_address",
                 )
             },
-        )
-
-    def get_payoneer_fieldset(self):
-        """Returns the Payoneer-specific fieldset."""
-        return (
-            "Payoneer Details",
-            {"fields": ("full_name", "email", "payoneer_customer_id")},
         )
 
     def get_cryptocurrency_fieldset(self):
@@ -313,9 +305,8 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
             fieldsets.append(self.get_all_details_fieldset())
         else:
             # Adjust fieldsets based on payout_type
-            if obj.payout_type == WithdrawalRequest.PayoutType.PAYONEER:
-                fieldsets.append(self.get_payoneer_fieldset())
-            elif obj.payout_type == WithdrawalRequest.PayoutType.CRYPTOCURRENCY:
+
+            if obj.payout_type == WithdrawalRequest.PayoutType.CRYPTOCURRENCY:
                 fieldsets.append(self.get_cryptocurrency_fieldset())
             elif obj.payout_type == WithdrawalRequest.PayoutType.BANK:
                 fieldsets.append(self.get_bank_fieldset())

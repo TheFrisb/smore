@@ -54,30 +54,6 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
                     {"country": "Please provide your country."}
                 )
 
-        elif payout_type == WithdrawalRequest.PayoutType.PAYONEER:
-            if not data.get("full_name"):
-                raise serializers.ValidationError(
-                    {"full_name": "Please provide your full name."}
-                )
-
-            if not data.get("payoneer_customer_id"):
-                raise serializers.ValidationError(
-                    {
-                        "payoneer_customer_id": "Please provide your Payoneer customer ID."
-                    }
-                )
-
-            # check if full name contains at least 2 words
-            if len(data.get("full_name").split()) < 2:
-                raise serializers.ValidationError(
-                    {"full_name": "Please provide your full name."}
-                )
-
-            if not data.get("email"):
-                raise serializers.ValidationError(
-                    {"email": "Please provide your Payoneer email."}
-                )
-
         if data.get("amount") <= 0:
             raise serializers.ValidationError(
                 {"amount": "Please provide a valid amount."}

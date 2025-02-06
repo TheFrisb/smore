@@ -132,7 +132,6 @@ class WithdrawalRequest(BaseInternalModel):
 
     class PayoutType(models.TextChoices):
         BANK = "BANK", _("Bank")
-        PAYONEER = "PAYONEER", _("Payoneer")
         CRYPTOCURRENCY = "CRYPTOCURRENCY", _("Cryptocurrency")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="withdrawals")
@@ -143,7 +142,6 @@ class WithdrawalRequest(BaseInternalModel):
     email = models.EmailField(blank=True, null=True)
     iban = models.CharField(max_length=255, blank=True, null=True)
     cryptocurrency_address = models.CharField(max_length=255, blank=True, null=True)
-    payoneer_customer_id = models.CharField(max_length=255, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     rejection_reason = models.TextField(blank=True, null=True)
 

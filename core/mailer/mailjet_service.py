@@ -28,13 +28,6 @@ class MailjetService:
             extra_param_3 = f"Country: {withdrawal_request.country}"
             extra_param_4 = f"IBAN Code: {withdrawal_request.iban}"
 
-        elif withdrawal_request.payout_type == WithdrawalRequest.PayoutType.PAYONEER:
-            extra_param_1 = f"Full Name: {withdrawal_request.full_name}"
-            extra_param_2 = f"Payoneer Email: {withdrawal_request.email}"
-            extra_param_3 = (
-                f"Payoneer Customer ID: {withdrawal_request.payoneer_customer_id}"
-            )
-
         else:
             extra_param_1 = (
                 f"Bitcoin Address: {withdrawal_request.cryptocurrency_address}"

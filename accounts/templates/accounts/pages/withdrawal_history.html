@@ -154,12 +154,6 @@
                                                 <div class="text-white font-mono text-sm">{{ withdrawal.iban }}</div>
                                             </div>
                                         {% endif %}
-                                        {% if withdrawal.payoneer_customer_id %}
-                                            <div>
-                                                <div class="text-sm text-primary-300">Payoneer Customer ID</div>
-                                                <div class="text-white font-mono text-sm">{{ withdrawal.payoneer_customer_id }}</div>
-                                            </div>
-                                        {% endif %}
                                         {% if withdrawal.cryptocurrency_address %}
                                             <div>
                                                 <div class="text-sm text-primary-300">{% trans "Cryptocurrency Address" %}</div>

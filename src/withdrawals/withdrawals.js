@@ -103,23 +103,6 @@ function getData() {
     };
   }
 
-  if (activeMethod === "PAYONEER") {
-    return {
-      amount: parseFloat(
-        document.querySelector("#withdrawalRequest__amount").value,
-      ),
-      payout_type: activeMethod,
-      full_name: document.querySelector(
-        "#requestWithdrawal__payoneerMethod__fullName",
-      ).value,
-      payoneer_customer_id: document.querySelector(
-        "#requestWithdrawal__payoneerMethod__payoneer_customer_id",
-      ).value,
-      email: document.querySelector("#requestWithdrawal__payoneerMethod__email")
-        .value,
-    };
-  }
-
   if (activeMethod === "CRYPTOCURRENCY") {
     return {
       amount: parseFloat(
