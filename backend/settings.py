@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "accounts",
     "core",
     "payments",
+    "facebook",
     "scripts",
 ]
 
@@ -214,3 +215,7 @@ MAILJET_SECRET_KEY = config("MAILJET_SECRET_KEY")
 
 # Google OAUTH Configuration
 GOOGLE_OAUTH_CLIENT_ID = config("GOOGLE_OAUTH_CLIENT_ID")
+
+# Facebook Pixel Configuration
+FACEBOOK_PIXEL_DATASET_ID = config("FACEBOOK_PIXEL_DATASET_ID")
+FACEBOOK_PIXEL_ACCESS_TOKEN = config("FACEBOOK_PIXEL_ACCESS_TOKEN")

@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from core.models import Product
+from facebook.services.facebook_pixel import FacebookPixel
 from payments.services.stripe_checkout_service import (
     StripeCheckoutService,
     StripePortalSessionFlow,
@@ -57,6 +58,14 @@ class CreateCheckoutUrlView(APIView):
 
         checkout_session = self.service.create_checkout_session(request.user, price_ids)
 
+        try:
+            fb_pixel = FacebookPixel(request)
+            fb_pixel.initiate_checkout(products.first(), checkout_session.amount_total)
+        except Exception as e:
+            logger.error(
+                f"Error while sending InitiateCheckout Facebook Pixel event: {e}"
+            )
+
         output_serializer = self.OutputSerializer(data={"url": checkout_session.url})
         output_serializer.is_valid(raise_exception=True)
         return Response(output_serializer.data)
@@ -98,6 +107,16 @@ class PaymentSuccessView(RedirectView):
             self.request,
             'You are now subscribed. You can manage your plan in the "Manage Plan" section.',
         )
+
+        try:
+            fb_pixel = FacebookPixel(self.request)
+            fb_pixel.purchase(
+                self.request.user.subscription.products.first(),
+                self.request.user.subscription.price,
+            )
+        except Exception as e:
+            logger.error(f"Error while sending Purchase Facebook Pixel event: {e}")
+
         return reverse("accounts:my_account")
 
 

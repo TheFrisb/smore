@@ -25,12 +25,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("rosetta/", include("rosetta.urls")),
-    path('i18n/', include('django.conf.urls.i18n')),
+    path("i18n/", include("django.conf.urls.i18n")),
     path("", include("core.urls")),
     path("accounts/", include("accounts.urls")),
     path("api/payments/", include("payments.urls")),
     path("api/accounts/", include("accounts.api.urls")),
     path("api/", include("core.api.urls")),
+    path("facebook/", include("facebook.urls")),
 ]
 
 if settings.DEBUG:

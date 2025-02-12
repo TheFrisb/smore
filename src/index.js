@@ -12,6 +12,7 @@ import initLoadMorePredictionsButton from "./loadMorePredictionsButton";
 import { initLoginForm } from "./loginForm";
 import { initRegisterForm } from "./registerForm";
 import initLanguageSelectionButton from "./languageSelection";
+import { initContactPixelEvent } from "./contact_pixel_event";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -32,4 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initRegisterForm();
 
   initLanguageSelectionButton();
+
+  initContactPixelEvent();
 });

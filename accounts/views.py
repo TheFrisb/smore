@@ -26,6 +26,7 @@ from accounts.models import User, Referral, WithdrawalRequest
 from accounts.services.referral_service import ReferralService
 from core.mailer.mailjet_service import MailjetService
 from core.models import FrequentlyAskedQuestion
+from facebook.services.facebook_pixel import FacebookPixel
 
 logger = logging.getLogger(__name__)
 
@@ -109,6 +110,13 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
             login(request, authenticated_user)
             request.session.pop("referral_code", None)
             logger.info(f"User {user.username} registered successfully.")
+
+            try:
+                fb_pixel = FacebookPixel(request.user)
+                fb_pixel.complete_registration()
+            except Exception as e:
+                logger.error("Error sending Contact Facebook Pixel event", exc_info=e)
+
             return redirect("accounts:my_account")
         else:
 
