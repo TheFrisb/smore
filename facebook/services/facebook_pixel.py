@@ -55,6 +55,10 @@ class FacebookPixel:
         event_response = self.send_event("CompleteRegistration")
         logger.info(f"CompleteRegistration event sent: {event_response}")
 
+    def lead(self):
+        event_response = self.send_event("Lead")
+        logger.info(f"Lead event sent: {event_response}")
+
     def contact(self):
         event_response = self.send_event("Contact")
         logger.info(f"Contact event sent: {event_response}")

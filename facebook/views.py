@@ -13,3 +13,12 @@ class ContactPixelEventApiView(APIView):
         fb_pixel = FacebookPixel(request)
         fb_pixel.contact()
         return Response(status=HTTP_204_NO_CONTENT)
+
+
+class LeadPixelEventApiView(APIView):
+    permission_classes = []
+
+    def post(self, request, *args, **kwargs):
+        fb_pixel = FacebookPixel(request)
+        fb_pixel.lead()
+        return Response(status=HTTP_204_NO_CONTENT)

@@ -111,6 +111,15 @@ class TelegramLandingView(TemplateView):
         context["page_title"] = _("Free Telegram Channel")
         return context
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            fb = FacebookPixel(self.request)
+            fb.view_content()
+        except Exception as e:
+            logger.error(f"Error while sending View Content Facebook Pixel event: {e}")
+
+        return super().dispatch(request, *args, **kwargs)
+
 
 class FaqView(TemplateView):
     template_name = "core/pages/faq.html"

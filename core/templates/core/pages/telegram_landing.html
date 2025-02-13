@@ -8,13 +8,41 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Smore - {{ page_title }}</title>
-    <link rel="preload" href="{% static 'js/core_v9.bundle.js' %}" as="script">
+    <link rel="preload" href="{% static 'js/core_v10.bundle.js' %}" as="script">
     <link rel="stylesheet" href="{% static 'css/tailwind_output_v8.css' %}">
     <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '480381268269305');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=480381268269305&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 
     {% block extrahead %}{% endblock extrahead %}
 
@@ -83,7 +111,7 @@
             </div>
             <a href="https://t.me/smoreinfo" data-aos="flip-down" data-aos-duration="400"
                rel="noopener noreferrer"
-               class="w-full lg:w-auto group relative inline-flex items-center justify-between px-4 py-5 text-xl font-bold text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30 z-10  ">
+               class="fireLeadEventButton w-full lg:w-auto group relative inline-flex items-center justify-between px-4 py-5 text-xl font-bold text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30 z-10  ">
                 <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 <div class="flex items-center justify-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -126,6 +154,6 @@
 </section>
 
 
-<script src="{% static 'js/core_v9.bundle.js' %}"></script>
+<script src="{% static 'js/core_v10.bundle.js' %}"></script>
 </body>
 </html>
