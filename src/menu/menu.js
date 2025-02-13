@@ -2,6 +2,8 @@ export function initMobileMenu() {
   const menuButton = document.querySelector("#mobileMenuButton");
   const menu = document.querySelector("#mobileMenuDropdownContainer");
 
+  if (!menuButton || !menu) return;
+
   menuButton.addEventListener("click", () => {
     if (menu.classList.contains("active")) {
       hideMenu();
