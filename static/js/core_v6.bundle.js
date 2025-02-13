@@ -99,10 +99,12 @@
           p = function () {
             return c.Date.now();
           };
+
         function f(a) {
           var t = typeof a;
           return !!a && ("object" == t || "function" == t);
         }
+
         function b(a) {
           if ("number" == typeof a) return a;
           if (
@@ -130,6 +132,7 @@
               ? NaN
               : +a;
         }
+
         a.exports = function (a, t, o) {
           var e,
             s,
@@ -143,15 +146,18 @@
             h = !0;
           if ("function" != typeof a)
             throw new TypeError("Expected a function");
+
           function v(t) {
             var o = e,
               n = s;
             return (e = s = void 0), (l = t), (i = a.apply(n, o));
           }
+
           function g(a) {
             var o = a - r;
             return void 0 === r || o >= t || o < 0 || (u && a - l >= n);
           }
+
           function w() {
             var a = p();
             if (g(a)) return x(a);
@@ -163,9 +169,11 @@
               })(a),
             );
           }
+
           function x(a) {
             return (d = void 0), h && e ? v(a) : ((e = s = void 0), i);
           }
+
           function _() {
             var a = p(),
               o = g(a);
@@ -178,6 +186,7 @@
             }
             return void 0 === d && (d = setTimeout(w, t)), i;
           }
+
           return (
             (t = b(t) || 0),
             f(o) &&
@@ -212,10 +221,12 @@
           f = function () {
             return u.Date.now();
           };
+
         function b(a) {
           var t = typeof a;
           return !!a && ("object" == t || "function" == t);
         }
+
         function h(a) {
           if ("number" == typeof a) return a;
           if (
@@ -243,6 +254,7 @@
               ? NaN
               : +a;
         }
+
         a.exports = function (a, t, o) {
           var s = !0,
             n = !0;
@@ -263,15 +275,18 @@
                 y = !1,
                 v = !0;
               if ("function" != typeof a) throw new TypeError(e);
+
               function g(t) {
                 var o = s,
                   e = n;
                 return (s = n = void 0), (c = t), (d = a.apply(e, o));
               }
+
               function w(a) {
                 var o = a - l;
                 return void 0 === l || o >= t || o < 0 || (y && a - c >= i);
               }
+
               function x() {
                 var a = f();
                 if (w(a)) return _(a);
@@ -283,9 +298,11 @@
                   })(a),
                 );
               }
+
               function _(a) {
                 return (r = void 0), v && s ? g(a) : ((s = n = void 0), d);
               }
+
               function L() {
                 var a = f(),
                   o = w(a);
@@ -298,6 +315,7 @@
                 }
                 return void 0 === r && (r = setTimeout(x, t)), d;
               }
+
               return (
                 (t = h(t) || 0),
                 b(o) &&
@@ -321,6 +339,7 @@
       72: (a) => {
         "use strict";
         var t = [];
+
         function o(a) {
           for (var o = -1, e = 0; e < t.length; e++)
             if (t[e].identifier === a) {
@@ -329,6 +348,7 @@
             }
           return o;
         }
+
         function e(a, e) {
           for (var n = {}, i = [], d = 0; d < a.length; d++) {
             var r = a[d],
@@ -354,6 +374,7 @@
           }
           return i;
         }
+
         function s(a, t) {
           var o = t.domAPI(t);
           return (
@@ -373,6 +394,7 @@
             }
           );
         }
+
         a.exports = function (a, s) {
           var n = e((a = a || []), (s = s || {}));
           return function (a) {
@@ -434,7 +456,10 @@
         "use strict";
         a.exports = function (a) {
           if ("undefined" == typeof document)
-            return { update: function () {}, remove: function () {} };
+            return {
+              update: function () {},
+              remove: function () {},
+            };
           var t = a.insertStyleElement(a);
           return {
             update: function (o) {
@@ -484,12 +509,14 @@
       },
     },
     t = {};
+
   function o(e) {
     var s = t[e];
     if (void 0 !== s) return s.exports;
     var n = (t[e] = { id: e, exports: {} });
     return a[e](n, n.exports, o), n.exports;
   }
+
   (o.n = (a) => {
     var t = a && a.__esModule ? () => a.default : () => a;
     return o.d(t, { a: t }), t;
@@ -512,6 +539,7 @@
     (o.nc = void 0),
     (() => {
       "use strict";
+
       function a() {
         return (function (a) {
           if (!document.cookie) return null;
@@ -523,6 +551,7 @@
           return null;
         })("csrftoken");
       }
+
       var t = document.querySelectorAll(".product"),
         e = document.querySelector(".checkoutSummarySection"),
         s = document.querySelector(".checkoutSummary__items"),
@@ -531,6 +560,7 @@
         d = document.querySelector("#userSubscriptionType"),
         r = [],
         l = "month";
+
       function c() {
         var a = "",
           t = 0;
@@ -558,6 +588,7 @@
             ".checkoutSummarySection__totalPrice",
           ).textContent = "€".concat(t.toFixed(2)));
       }
+
       const u = function () {
         if (t && e) {
           if (
@@ -732,6 +763,7 @@
         N = o(181),
         q = o.n(N);
       let C = () => {};
+
       function O(a) {
         let t, o, e;
         for (t = 0; t < a.length; t += 1) {
@@ -740,6 +772,7 @@
         }
         return !1;
       }
+
       function A(a) {
         a &&
           a.forEach((a) => {
@@ -748,6 +781,7 @@
             if (O(t.concat(o))) return C();
           });
       }
+
       function T() {
         return (
           window.MutationObserver ||
@@ -755,6 +789,7 @@
           window.MozMutationObserver
         );
       }
+
       const M = function () {
           return !!T();
         },
@@ -776,21 +811,26 @@
           /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i,
         F =
           /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i;
+
       function H() {
         return navigator.userAgent || navigator.vendor || window.opera || "";
       }
+
       const W = new (class {
           phone() {
             const a = H();
             return !(!P.test(a) && !I.test(a.substr(0, 4)));
           }
+
           mobile() {
             const a = H();
             return !(!D.test(a) && !F.test(a.substr(0, 4)));
           }
+
           tablet() {
             return this.mobile() && !this.phone();
           }
+
           ie11() {
             return (
               "-ms-scroll-limit" in document.documentElement.style &&
@@ -1006,6 +1046,7 @@
           function a(a) {
             (this.options = a), (this.listeners = {});
           }
+
           return (
             (a.prototype.on = function (a, t) {
               var o = this.listeners[a] || [];
@@ -1028,6 +1069,7 @@
           function a() {
             this.notifications = [];
           }
+
           return (
             (a.prototype.push = function (a) {
               this.notifications.push(a),
@@ -1094,6 +1136,7 @@
               (this.animationEndEventName = this._getAnimationEndEventName()),
               this._createA11yContainer();
           }
+
           return (
             (a.prototype.on = function (a, t) {
               var o;
@@ -1323,6 +1366,7 @@
                 return t.triggerEvent(da.Click, o);
               });
           }
+
           return (
             (a.prototype.error = function (a) {
               var t = this.normalizeOptions("error", a);
@@ -1392,6 +1436,7 @@
             a
           );
         })();
+
       function ya(a) {
         return (
           (ya =
@@ -1410,6 +1455,7 @@
           ya(a)
         );
       }
+
       function ma() {
         ma = function () {
           return t;
@@ -1427,6 +1473,7 @@
           i = n.iterator || "@@iterator",
           d = n.asyncIterator || "@@asyncIterator",
           r = n.toStringTag || "@@toStringTag";
+
         function l(a, t, o) {
           return (
             Object.defineProperty(a, t, {
@@ -1438,6 +1485,7 @@
             a[t]
           );
         }
+
         try {
           l({}, "");
         } catch (a) {
@@ -1445,12 +1493,14 @@
             return (a[t] = o);
           };
         }
+
         function c(a, t, o, e) {
           var n = t && t.prototype instanceof h ? t : h,
             i = Object.create(n.prototype),
             d = new C(e || []);
           return s(i, "_invoke", { value: S(a, o, d) }), i;
         }
+
         function u(a, t, o) {
           try {
             return { type: "normal", arg: a.call(t, o) };
@@ -1458,15 +1508,20 @@
             return { type: "throw", arg: a };
           }
         }
+
         t.wrap = c;
         var y = "suspendedStart",
           m = "suspendedYield",
           p = "executing",
           f = "completed",
           b = {};
+
         function h() {}
+
         function v() {}
+
         function g() {}
+
         var w = {};
         l(w, i, function () {
           return this;
@@ -1475,6 +1530,7 @@
           _ = x && x(x(O([])));
         _ && _ !== o && e.call(_, i) && (w = _);
         var L = (g.prototype = h.prototype = Object.create(w));
+
         function k(a) {
           ["next", "throw", "return"].forEach(function (t) {
             l(a, t, function (a) {
@@ -1482,6 +1538,7 @@
             });
           });
         }
+
         function E(a, t) {
           function o(s, n, i, d) {
             var r = u(a[s], a, n);
@@ -1508,6 +1565,7 @@
             }
             d(r.arg);
           }
+
           var n;
           s(this, "_invoke", {
             value: function (a, e) {
@@ -1516,10 +1574,12 @@
                   o(a, e, t, s);
                 });
               }
+
               return (n = n ? n.then(s, s) : s());
             },
           });
         }
+
         function S(t, o, e) {
           var s = y;
           return function (n, i) {
@@ -1553,6 +1613,7 @@
             }
           };
         }
+
         function j(t, o) {
           var e = o.method,
             s = t.iterator[e];
@@ -1591,21 +1652,25 @@
               (o.delegate = null),
               b);
         }
+
         function N(a) {
           var t = { tryLoc: a[0] };
           1 in a && (t.catchLoc = a[1]),
             2 in a && ((t.finallyLoc = a[2]), (t.afterLoc = a[3])),
             this.tryEntries.push(t);
         }
+
         function q(a) {
           var t = a.completion || {};
           (t.type = "normal"), delete t.arg, (a.completion = t);
         }
+
         function C(a) {
           (this.tryEntries = [{ tryLoc: "root" }]),
             a.forEach(N, this),
             this.reset(!0);
         }
+
         function O(t) {
           if (t || "" === t) {
             var o = t[i];
@@ -1623,6 +1688,7 @@
           }
           throw new TypeError(ya(t) + " is not iterable");
         }
+
         return (
           (v.prototype = g),
           s(L, "constructor", { value: g, configurable: !0 }),
@@ -1714,6 +1780,7 @@
             dispatchException: function (t) {
               if (this.done) throw t;
               var o = this;
+
               function s(e, s) {
                 return (
                   (d.type = "throw"),
@@ -1723,6 +1790,7 @@
                   !!s
                 );
               }
+
               for (var n = this.tryEntries.length - 1; n >= 0; --n) {
                 var i = this.tryEntries[n],
                   d = i.completion;
@@ -1814,6 +1882,7 @@
           t
         );
       }
+
       function pa(a, t, o, e, s, n, i) {
         try {
           var d = a[n](i),
@@ -1823,10 +1892,12 @@
         }
         d.done ? t(r) : Promise.resolve(r).then(e, s);
       }
+
       var fa,
         ba = document.querySelectorAll(".withdrawalPayoutMethod"),
         ha = document.querySelector("#requestWithdrawalButton"),
         va = new ua({ duration: 5e3, position: { x: "right", y: "top" } });
+
       function ga() {
         var t;
         return (
@@ -1926,26 +1997,32 @@
               o = arguments;
             return new Promise(function (e, s) {
               var n = t.apply(a, o);
+
               function i(a) {
                 pa(n, e, s, i, d, "next", a);
               }
+
               function d(a) {
                 pa(n, e, s, i, d, "throw", a);
               }
+
               i(void 0);
             });
           }),
           ga.apply(this, arguments)
         );
       }
+
       var wa = document.querySelectorAll(".faqItemWrapper");
       var xa = document.querySelectorAll(".resendEmailButton"),
         _a = new ua({ duration: 5e3, position: { x: "right", y: "top" } });
+
       function La(a, t) {
         (null == t || t > a.length) && (t = a.length);
         for (var o = 0, e = Array(t); o < t; o++) e[o] = a[o];
         return e;
       }
+
       var ka = document.getElementById("loadMorePredictionsButton"),
         Ea = document.getElementById("predictionsContainer");
       const Sa = function () {
@@ -1970,7 +2047,7 @@
                       n,
                       i,
                       d =
-                        '\n                              <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">\n                        <div class="flex items-center justify-between mb-6">\n                            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                                <div class="bg-primary-900/50 p-2 rounded-lg">\n\n\n                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite5.svg#soccerIcon"></use></svg>\n\n                                </div>\n\n                                <span class="text-sm text-primary-100">Soccer</span>\n\n                            </div>\n                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg\n                                    '
+                        '\n                              <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">\n                        <div class="flex items-center justify-between mb-6">\n                            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                                <div class="bg-primary-900/50 p-2 rounded-lg">\n\n\n                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite6.svg#soccerIcon"></use></svg>\n\n                                </div>\n\n                                <span class="text-sm text-primary-100">Soccer</span>\n\n                            </div>\n                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg\n                                    '
                           .concat(
                             "WON" === a.status
                               ? "bg-emerald-500/10 text-emerald-400"
@@ -2161,11 +2238,13 @@
           (function () {
             var a = document.querySelector("#mobileMenuButton"),
               t = document.querySelector("#mobileMenuDropdownContainer");
+
             function o() {
               var t = a.querySelector(".closeIcon");
               a.querySelector(".hamburgerIcon").classList.toggle("hidden"),
                 t.classList.toggle("hidden");
             }
+
             a.addEventListener("click", function () {
               t.classList.contains("active")
                 ? (t.classList.add("max-h-0", "opacity-0", "opacity-hidden"),
@@ -2284,9 +2363,11 @@
           (function () {
             var a = document.querySelector("#userDashboardMenuDropdown"),
               t = document.querySelector("#userDashboardMenu");
+
             function o() {
               a.querySelector(".toggleIcon").classList.toggle("rotate-180");
             }
+
             a &&
               t &&
               a.addEventListener("click", function () {

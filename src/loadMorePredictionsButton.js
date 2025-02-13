@@ -30,7 +30,7 @@ function initLoadMorePredictionsButton() {
                                 <div class="bg-primary-900/50 p-2 rounded-lg">
 
 
-                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite5.svg#soccerIcon"></use></svg>
+                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite6.svg#soccerIcon"></use></svg>
 
                                 </div>
 

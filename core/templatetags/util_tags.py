@@ -36,7 +36,7 @@ def svg_icon(icon_name: str = None, css_classes: str = None) -> SafeString:
     if not icon_name:
         raise ValueError("The 'icon_name' parameter is required.")
 
-    sprite_path: str = static("assets/svg/sprite5.svg")
+    sprite_path: str = static("assets/svg/sprite6.svg")
     svg_markup: str = (
         f'<svg class="{css_classes or ""}"><use xlink:href="{sprite_path}#{icon_name}"></use></svg>'
     )
@@ -62,6 +62,7 @@ def get_language_flag_icon_name(language_code: str) -> str:
     flags = {
         "en": "enFlagIcon",
         "el": "elFlagIcon",
+        "de": "deFlagIcon",
     }
 
     return flags.get(language_code.lower()[:2], "globalFlagIcon")

@@ -101,6 +101,27 @@ class FacebookPixel:
 
         logger.info(f"Purchase event sent: {event_response}")
 
+    def subscribe(self, product, total_price):
+        custom_data = CustomData(
+            value=float(total_price),
+            currency="USD",
+            content_type="product",
+            content_ids=[product.id],
+            num_items=1,
+            contents=[
+                Content(
+                    product_id=product.id,
+                    quantity=1,
+                    item_price=float(total_price),
+                    title=product.get_name_display(),
+                )
+            ],
+        )
+
+        event_response = self.send_event("Subscribe", custom_data)
+
+        logger.info(f"Purchase event sent: {event_response}")
+
     def extract_event_source_url(self):
         referrer = self.request.META.get("HTTP_REFERER", None)
         if referrer:
