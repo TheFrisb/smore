@@ -115,7 +115,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
                 fb_pixel = FacebookPixel(request)
                 fb_pixel.complete_registration()
             except Exception as e:
-                logger.error("Error sending Contact Facebook Pixel event", exc_info=e)
+                logger.error("Error sending Complete Registration Facebook Pixel event", exc_info=e)
 
             return redirect("accounts:my_account")
         else:

@@ -45,7 +45,7 @@
 
                                 <!-- if lang code is en or el, render button
                                 else render a tag -->
-                                {% if lang_code == 'en' or lang_code == 'el' %}
+                                {% if lang_code == 'en' or lang_code == 'el' or lang_code == 'de' %}
                                     {# Get the proper SVG icon ID for this language #}
                                     {% get_language_flag_icon_name lang_code as flag_icon %}
                                     <button type="submit"

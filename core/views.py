@@ -98,7 +98,7 @@ class PlansView(TemplateView):
             fb = FacebookPixel(self.request)
             fb.view_content()
         except Exception as e:
-            logger.error(f"Error while sending Facebook Pixel event: {e}")
+            logger.error(f"Error while sending View Content Facebook Pixel event: {e}")
 
         return super().dispatch(request, *args, **kwargs)
 
