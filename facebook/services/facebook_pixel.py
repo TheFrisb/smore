@@ -29,7 +29,7 @@ class FacebookPixel:
         user_data = self.get_default_user_data()
 
         event_0 = Event(
-            event_name="ViewContent",
+            event_name=event_name,
             event_time=int(datetime.now().timestamp()),
             user_data=user_data,
             action_source=ActionSource.WEBSITE,
