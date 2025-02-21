@@ -49,7 +49,9 @@ class FacebookPixel:
 
     def view_content(self):
         event_response = self.send_event("ViewContent")
-        logger.info(f"ViewContent event sent: {event_response}, from url: {self.extract_event_source_url()}")
+        logger.info(
+            f"ViewContent event sent: {event_response}, from url: {self.extract_event_source_url()}"
+        )
 
     def complete_registration(self):
         event_response = self.send_event("CompleteRegistration")

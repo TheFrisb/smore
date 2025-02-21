@@ -90,15 +90,21 @@ class Referral(BaseInternalModel):
         INDIRECT = 2, "Indirect"
 
     referrer = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="referrals"
+        User,
+        on_delete=models.CASCADE,
+        related_name="referrals",
+        help_text="The user who referred someone",
     )
     referred = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="referred_by"
+        User,
+        on_delete=models.CASCADE,
+        related_name="referred_by",
+        help_text="The user who was referred",
     )
     level = models.PositiveSmallIntegerField(choices=Level)
 
     def __str__(self):
-        return f"{self.referrer.username} referred {self.referred.username}"
+        return f"{self.referrer.username} referred {self.referred.username} [{self.get_level_display()} referral]"
 
     @staticmethod
     def get_second_level_referrals(user: User):

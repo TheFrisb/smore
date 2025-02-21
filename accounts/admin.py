@@ -355,3 +355,16 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
 
     is_custom_subscription.boolean = True
     is_custom_subscription.short_description = "Custom Subscription"
+
+
+class ReferralEarningInline(admin.TabularInline):
+    model = ReferralEarning
+    autocomplete_fields = ["referral", "receiver"]
+    extra = 1
+
+
+@admin.register(Referral)
+class ReferralAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["referrer", "referred"]
+    search_fields = ["referrer__username", "referred__username"]
+    inlines = [ReferralEarningInline]
