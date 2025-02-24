@@ -10,8 +10,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from accounts.api.serializers import WithdrawalRequestSerializer
 from accounts.models import UserBalance
+from accounts.serializers import WithdrawalRequestSerializer
 from core.mailer.mailjet_service import MailjetService
 
 logger = logging.getLogger(__name__)
