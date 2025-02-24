@@ -41,3 +41,9 @@ class BaseStripeService:
         logger.info(f"Successfully fetched subscription with ID: {subscription_id}")
 
         return subscription
+
+    def deactivate_subscription(self, subscription_id: str):
+        logger.info(f"Deactivating subscription with ID: {subscription_id}")
+        subscription = self.stripe_client.Subscription.retrieve(subscription_id)
+        subscription.delete()
+        logger.info(f"Successfully deactivated subscription with ID: {subscription_id}")

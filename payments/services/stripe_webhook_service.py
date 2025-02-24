@@ -101,6 +101,17 @@ class StripeWebhookService(BaseStripeService):
         ).first()
 
         if not user_subscription:
+
+            existing_subscription = UserSubscription.objects.filter(user=user).first()
+            if existing_subscription:
+                logger.info(
+                    f"Existing subscription found for user {user.username} and subscription ID {existing_subscription.stripe_subscription_id}"
+                )
+                self.deactivate_subscription(
+                    existing_subscription.stripe_subscription_id
+                )
+                existing_subscription.delete()
+
             logger.info(
                 f"No internal subscription found for user {user.username} and subscription ID {stripe_subscription_id}"
             )
@@ -159,7 +170,7 @@ class StripeWebhookService(BaseStripeService):
             return
 
         logger.info(f"Subscription canceled for subscription: {stripe_subscription_id}")
-        self.delete_subscription(stripe_customer_id, stripe_subscription_id)
+        self.mark_subscription_inactive(stripe_customer_id, stripe_subscription_id)
 
     def process_subscription_deleted(self, event_data):
         stripe_subscription_id = event_data["id"]
@@ -170,13 +181,15 @@ class StripeWebhookService(BaseStripeService):
             f"Received subscription deleted event with status: {subscription_status} for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"
         )
 
-        self.delete_subscription(stripe_customer_id, stripe_subscription_id)
+        self.mark_subscription_inactive(stripe_customer_id, stripe_subscription_id)
 
-    def delete_subscription(self, stripe_customer_id: str, stripe_subscription_id: str):
+    def mark_subscription_inactive(
+            self, stripe_customer_id: str, stripe_subscription_id: str
+    ):
         logger.info(
             f"Deleting internal subscription for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"
         )
         UserSubscription.objects.filter(
             user__stripe_customer_id=stripe_customer_id,
             stripe_subscription_id=stripe_subscription_id,
-        ).delete()
+        ).update(status=UserSubscription.Status.INACTIVE)
