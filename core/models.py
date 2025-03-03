@@ -156,7 +156,7 @@ class Prediction(BaseInternalModel):
     visibility = models.CharField(
         max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
     )
-    match = models.ForeignKey(
+    match = models.OneToOneField(
         SportMatch, on_delete=models.CASCADE, unique=True, related_name="predictions"
     )
     prediction = models.CharField(max_length=255)
