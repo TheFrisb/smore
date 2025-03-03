@@ -86,7 +86,7 @@ class PredictionAdmin(admin.ModelAdmin):
     ]
     search_fields = ("match__home_team__name", "match__away_team__name")
     list_filter = ["product", "status", "visibility"]
-    ordering = ["-created_at"]
+    ordering = ["-match__kickoff_datetime"]
     readonly_fields = ["created_at", "updated_at"]
 
     fieldsets = (
@@ -142,7 +142,9 @@ class SportMatchAdmin(admin.ModelAdmin):
 
     def get_search_results(self, request, queryset, search_term):
         # Filter matches to those on or after midnight today
-        midnight_today = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        midnight_today = timezone.now().replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
         queryset = queryset.filter(kickoff_datetime__gte=midnight_today)
         # Apply the default search filtering
         return super().get_search_results(request, queryset, search_term)
