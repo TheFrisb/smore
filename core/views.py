@@ -259,7 +259,9 @@ class UpcomingMatchesView(TemplateView):
         if not self.request.user.is_authenticated:
             return []
 
-        return PurchasedPredictions.objects.filter(user=self.request.user).values_list("prediction_id", flat=True)
+        return PurchasedPredictions.objects.filter(user=self.request.user).values_list(
+            "prediction_id", flat=True
+        )
 
     def get_grouped_predictions(self):
         predictions = (
