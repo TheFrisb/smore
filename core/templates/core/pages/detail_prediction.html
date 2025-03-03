@@ -57,7 +57,8 @@
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
             {% if can_view_prediction %}
-                <div class="!text-primary-100 !leading-7 py-4 ck-content">{{ prediction.detailed_analysis|safe }}</div>
+                <div class="!text-primary-100  py-4 ck-content text-justify"
+                     style="word-spacing:-1px!important">{{ prediction.detailed_analysis|safe }}</div>
             {% else %}
                 <div class="max-w-2xl mx-auto text-center py-4">
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">

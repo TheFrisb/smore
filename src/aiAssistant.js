@@ -1,4 +1,4 @@
-import { getCsrfToken } from "./utils";
+import {getCsrfToken} from "./utils";
 
 const messagesContainer = document.getElementById(
   "aiAssistantMessagesContainer",
@@ -56,7 +56,7 @@ function sendMessage() {
   sendButton.disabled = true;
 
   // Add the "thinking" message with pulse animation
-  const aiMessage = renderMessage("AI Assistant is thinking...", false);
+  const aiMessage = renderMessage("AI Analyst is thinking...", false);
 
   fetch(apiUrl, {
     method: "POST",
@@ -64,7 +64,7 @@ function sendMessage() {
       "Content-Type": "application/json",
       "X-CSRFToken": getCsrfToken(),
     },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({message}),
   })
     .then((response) => response.json())
     .then((data) => {

@@ -257,7 +257,7 @@ CKEDITOR_5_CONFIGS = {
                 "bulletedList",
                 "numberedList",
                 "blockQuote",
-                "imageUpload",
+                # "imageUpload",
             ],
         }
     },

@@ -116,13 +116,13 @@ class DetailedPredictionView(DetailView):
             return True
 
         if (
-                self.request.user.is_authenticated
-                and self.request.user.can_view_prediction_type(prediction.product)
+            self.request.user.is_authenticated
+            and self.request.user.can_view_prediction_type(prediction.product)
         ):
             return True
 
         if PurchasedPredictions.objects.filter(
-                user=self.request.user, prediction=prediction
+            user=self.request.user, prediction=prediction
         ).exists():
             return True
 
@@ -288,8 +288,8 @@ class UpcomingMatchesView(TemplateView):
     def get_show_predictions(self):
         soccer = Product.objects.get(name="Soccer")
         return (
-                self.request.user.is_authenticated
-                and self.request.user.can_view_prediction_type(soccer)
+            self.request.user.is_authenticated
+            and self.request.user.can_view_prediction_type(soccer)
         )
 
 
@@ -298,7 +298,7 @@ class AiAssistantView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = _("AI Assistant")
+        context["page_title"] = _("AI Analyst")
         context["hide_footer"] = True
         context["hide_ai_button"] = True
         return context
