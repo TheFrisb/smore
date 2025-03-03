@@ -32,6 +32,8 @@
         {% endif %}
 
     </div>
+    {% if show_predictions or prediction.id in purchased_prediction_ids %}
+{% else %}
     <div class="flex items-center justify-start gap-2 pb-2 relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  fill="none"
@@ -42,6 +44,7 @@
             </svg>
         <h2 class=" font-bold text-red-500 text-center">{% trans "Prediction locked" %}</h2>
     </div>
+{% endif %}
     <div class="mb-6">
         <div class="flex items-center justify-between mb-2">
             {% if prediction.status == "LOST" %}
