@@ -54,13 +54,11 @@ class Command(BaseCommand):
                 home_team = SportTeam.objects.filter(name=home_team_name).first()
                 if home_team is None:
                     logger.info(f"Home team {home_team_name} not found")
-                    logger.info(item)
                     continue
 
                 away_team = SportTeam.objects.filter(name=away_team_name).first()
                 if away_team is None:
                     logger.info(f"Away team {away_team_name} not found")
-                    logger.info(item)
                     continue
 
                 match = SportMatch.objects.filter(
@@ -88,8 +86,10 @@ class Command(BaseCommand):
                     )
 
                 except Exception as e:
-                    logger.error(f"Failed to create prediction: {e}")
-                    logger.error(item)
+                    # if not duplicate key error, log the error
+                    if "duplicate key" not in str(e):
+                        logger.error(f"Failed to create prediction: {e}")
+                        logger.error(item)
 
             self.stdout.write(f"Found {len(leagues)} unique leagues")
 
