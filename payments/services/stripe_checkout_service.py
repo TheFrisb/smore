@@ -24,7 +24,6 @@ class StripeCheckoutService(BaseStripeService):
     def create_subscription_checkout_session(
             self, user: User | AbstractBaseUser, price_ids: List[str]
     ) -> Session:
-        price_ids.append("price_1QyPsRAklG4ANUCweAkTaJLL")
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:payment_success')}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:plans')}",

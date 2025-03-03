@@ -40,13 +40,13 @@
                     </div>
                 </div>
             </div>
-            <div class="grid gap-4 mt-8 max-w-6xl mx-auto" id="predictionsContainer">
+            <div class="grid gap-8 mt-8 max-w-6xl mx-auto" id="predictionsContainer">
                 {% for prediction in predictions %}
                     {% include 'core/includes/prediction.html' %}
                 {% endfor %}
             </div>
             <div class="mt-12 text-center">
-                <button id="loadMorePredictionsButton" data-next-page="1"
+                <button id="loadMorePredictionsButton" data-next-page="2"
                         class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                     <div class="relative flex items-center"><span class="text-lg">{% trans "Load More" %}</span>

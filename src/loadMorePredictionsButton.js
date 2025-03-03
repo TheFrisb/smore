@@ -27,12 +27,12 @@ function initLoadMorePredictionsButton() {
       .then((data) => {
         data.results.forEach((prediction) => {
           const predictionHtml = `
-          <div class="${prediction.status == "LOST" ? "bg-red-500/10 border-red-500/50 hover:border-red-500" : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500"} backdrop-blur-sm rounded-lg p-6 border border-primary-700/30  transition-all duration-300 group transform animate-fadeIn">
+          <div class="${prediction.status == "LOST" ? "bg-red-500/10 border-red-500/50 hover:border-red-500" : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500"} backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">
     <div class="flex items-center justify-between mb-6">
         <div class="flex items-center justify-between w-full">
             <div class="flex  justify-start items-center space-x-3 text-primary-300">
                 <div class="bg-primary-900/80 p-2 rounded-lg">
-                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite6.svg#soccerIcon"></use></svg>
+                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite7.svg#soccerIcon"></use></svg>
                 </div>
                 <span class=" text-primary-100">Soccer</span>
             </div>
@@ -40,7 +40,7 @@ function initLoadMorePredictionsButton() {
               prediction.detailed_analysis !== ""
                 ? `<a href="/predictions/${prediction.id}/"
                class="text-secondary-400 flex items-center gap-2 group group-hover:text-primary-300 transition-all duration-300">
-                <svg class="w-5 h-5"><use xlink:href="/static/assets/svg/sprite6.svg#arrowRight"></use></svg>
+                <svg class="w-5 h-5"><use xlink:href="/static/assets/svg/sprite7.svg#arrowRight"></use></svg>
                 <p class="font-bold ">View analysis</p>
             </a>`
                 : ""
@@ -51,7 +51,7 @@ function initLoadMorePredictionsButton() {
     <div class="mb-6">
         <div class="flex items-center justify-between mb-2">
             <p class="text-sm text-primary-100 ">Match</p>
-            ${prediction.status == "LOST" ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite6.svg#circleX"></use></svg></div>' : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite6.svg#circleCheck"></use></svg></div>'}
+            ${prediction.status == "LOST" ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite7.svg#circleX"></use></svg></div>' : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite7.svg#circleCheck"></use></svg></div>'}
 
         </div>
         <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">
@@ -74,7 +74,7 @@ function initLoadMorePredictionsButton() {
                     </div>
                 </div>
                 <div class="flex items-center justify-end gap-1">
-                        <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite6.svg#chevronUp"></use></svg>
+                        <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite7.svg#chevronUp"></use></svg>
                         <p class="text-primary-100">Odds</p>
                         <span class="text-emerald-400 font-bold">${prediction.odds}</span>
                     </div>
