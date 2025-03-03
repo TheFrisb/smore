@@ -47,6 +47,8 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
+        self.populate_countries()
+        self.populate_leagues()
         self.populate_teams()
 
     def populate_countries(self):

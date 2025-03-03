@@ -22,7 +22,7 @@ function initDateItems() {
       const minutes = String(date.getMinutes()).padStart(2, "0");
 
       // Format the date and time as "YYYY-MM-DD HH:MM"
-      const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+      const formattedDate = `${year}-${month}-${day}, ${hours}:${minutes}`;
 
       // Update the text content
       item.textContent = formattedDate;
