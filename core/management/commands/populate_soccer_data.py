@@ -147,13 +147,17 @@ class Command(BaseCommand):
                     kickoff_timestamp, tz=timezone.utc
                 )
 
-                match_obj = SportMatch.objects.create(
-                    external_id=fixture.get("id"),
-                    league=league_obj,
-                    home_team=home_team_obj,
-                    away_team=away_team_obj,
-                    kickoff_datetime=kickoff_datetime,
-                )
+                try:
+                    match_obj = SportMatch.objects.create(
+                        external_id=fixture.get("id"),
+                        league=league_obj,
+                        home_team=home_team_obj,
+                        away_team=away_team_obj,
+                        kickoff_datetime=kickoff_datetime,
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to create match {fixture.get('id')}: {e}")
+                    continue
 
                 self.stdout.write(f"Successfully created {match_obj}")
 
@@ -166,21 +170,20 @@ class Command(BaseCommand):
             team_logo_url, f"assets/teams/logos/", f"{team_id}.png"
         )
 
-        # team_obj, created = SportTeam.objects.get_or_create(
-        #     external_id=team_id,
-        #     name=team_name,
-        #     league=league_obj,
-        #     defaults={"logo": team_logo_path},
-        # )
-
-        team_obj = SportTeam.objects.filter(external_id=team_id).first()
-        if not team_obj:
-            team_obj = SportTeam.objects.create(
+        try:
+            team_obj, created = SportTeam.objects.get_or_create(
                 external_id=team_id,
                 name=team_name,
                 league=league_obj,
-                logo=team_logo_path,
+                defaults={"logo": team_logo_path},
             )
+
+            if not created:
+                team_obj.logo = team_logo_path
+                team_obj.save()
+        except Exception as e:
+            logger.error(f"Failed to create team {team_name}: {e}")
+            return None
 
         self.stdout.write(f"Successfully created {team_obj}")
         return team_obj
