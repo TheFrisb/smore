@@ -1,27 +1,35 @@
-{% load util_tags i18n %}
+{% load util_tags i18n static %}
 
 <div class="
         {% if prediction.status == 'LOST' %}bg-red-500/10 border-red-500/50 hover:border-red-500
         {% elif prediction.status == 'WON' %}bg-[#14212e] border-emerald-500/50 hover:border-emerald-500
         {% else %}bg-primary-800/50 border-primary-700/30 hover:border-emerald-500/50{% endif %}
         backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">
-    <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center justify-between w-full">
-            <div class="flex  justify-start items-center space-x-3 text-primary-300">
-                <div class="bg-primary-900/80 p-2 rounded-lg">
-                    {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+    <div class="mb-6">
 
+        {% if prediction.has_detailed_analysis %}
+            <div class="flex items-center justify-between w-full">
+                <div class="flex  justify-start items-center space-x-3 text-primary-300">
+                    <div class="bg-primary-900/80 p-2 rounded-lg">
+                        {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+
+                    </div>
+                    <span class=" text-primary-100">{% trans "Soccer" %}</span>
                 </div>
-                <span class=" text-primary-100">{% trans "Soccer" %}</span>
-            </div>
-            {% if prediction.has_detailed_analysis %}
                 <a href="{% url 'core:detailed_prediction' prediction.id %}"
                    class="text-secondary-400 flex items-center gap-2 transition-all duration-300">
                     {% svg_icon icon_name="arrowRight" css_classes="w-5 h-5" %}
                     <p class="font-bold ">View analysis</p>
                 </a>
-            {% endif %}
-        </div>
+            </div>
+        {% else %}
+            <div class="flex  justify-center items-center space-x-3 text-primary-300">
+                <div class="bg-primary-900/80 p-2 rounded-lg">
+                    {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+                </div>
+                <span class=" text-primary-100">{% trans "Soccer" %}</span>
+            </div>
+        {% endif %}
 
     </div>
     <div class="mb-6">
@@ -53,32 +61,41 @@
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
 
-            <div class="flex items-center justify-between">
-                <div class="flex flex-col items-start gap-2">
-                    <div class="flex items-center justify-start gap-2">
-                        <img src="{{ prediction.match.home_team.logo.url }}" width="24" style="height: auto!important">
-                        <p class="text-primary-100 font-bold">{{ prediction.match.home_team.name }}</p>
-                    </div>
-                    <div class="flex items-center justify-start gap-2">
-                        <img src="{{ prediction.match.away_team.logo.url }}" width="24" style="height: auto!important">
-                        <p class="text-primary-100 font-bold">{{ prediction.match.away_team.name }}</p>
-                    </div>
-                </div>
-                {% if show_predictions or prediction.id in purchased_prediction_ids %}
-                    <div class="flex items-center justify-end gap-1">
-                        {% svg_icon icon_name="chevronUp" css_classes="w-5 h-5 text-emerald-400" %}
-
-                        <p class="text-primary-100">Odds</p>
-                        <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
-                    </div>
-                {% endif %}
-            </div>
             <div class="flex items-center justify-center gap-1">
-                <p class="text-primary-200 text-sm">Date, Time:</p>
-                <p class="text-white text-sm dateItem"
+                <p class="text-primary-200 text-xs">Date, Time:</p>
+                <p class="text-white text-xs dateItem"
                    data-date="{{ prediction.match.kickoff_datetime|date:'c' }}">{{ prediction.match.kickoff_datetime|date:'Y-m-d H:i' }}
                     UTC</p>
             </div>
+
+            <div class=" grid grid-cols-3 place-items-center">
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="{{ prediction.match.home_team.logo.url }}" class="h-8 w-auto">
+                    <p class="text-primary-100 text-sm md:text-base font-bold text-center">{{ prediction.match.home_team.name }}</p>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="{% static 'assets/images/vs.png' %}" alt=""
+                         class="w-4 md:w-8 h-auto">
+                </div>
+
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="{{ prediction.match.away_team.logo.url }}" class="h-8 w-auto">
+                    <p class="text-primary-100 text-sm md:text-base font-bold text-center">{{ prediction.match.away_team.name }}</p>
+                </div>
+            </div>
+
+            {% if show_predictions or prediction.id in purchased_prediction_ids %}
+                <div class="relative">
+                    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+                </div>
+                <div class="flex items-center justify-center gap-1">
+                    {% svg_icon icon_name="chevronUp" css_classes="w-5 h-5 text-emerald-400" %}
+
+                    <p class="text-primary-100">Odds</p>
+                    <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
+                </div>
+            {% endif %}
+
         </div>
     </div>
 
