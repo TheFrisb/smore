@@ -252,10 +252,14 @@ class UpcomingMatchesView(TemplateView):
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
         context["page_title"] = _("Upcoming Matches")
         context["show_predictions"] = self.get_show_predictions()
-        context["purchased_prediction_ids"] = PurchasedPredictions.objects.filter(
-            user=self.request.user
-        ).values_list("prediction_id", flat=True)
+        context["purchased_prediction_ids"] = self.get_purchased_prediction_ids()
         return context
+
+    def get_purchased_prediction_ids(self):
+        if not self.request.user.is_authenticated:
+            return []
+
+        return PurchasedPredictions.objects.filter(user=self.request.user).values_list("prediction_id", flat=True)
 
     def get_grouped_predictions(self):
         predictions = (
