@@ -1,6 +1,12 @@
 {% extends 'core/base.html' %}
 {% block extrahead %}
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.2.1/ckeditor5.css"/>
+    <style>
+        .ck-content ul,
+        .ck-content ol {
+            list-style-position: inside !important; /* Markers align with the text */
+        }
+    </style>
 {% endblock extrahead %}
 {% load util_tags i18n static %}
 {% block content %}
