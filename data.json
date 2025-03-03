@@ -1,0 +1,2719 @@
+[
+  {
+    "model": "core.prediction",
+    "pk": 1,
+    "fields": {
+      "created_at": "2025-01-16T12:48:35.174Z",
+      "updated_at": "2025-01-17T22:29:59.929Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Aston Villa",
+      "away_team": "West Ham",
+      "prediction": "Aston Villa (To win match)",
+      "odds": "1.80",
+      "result": "2:1",
+      "kickoff_date": "2025-01-10",
+      "kickoff_time": "21:00:00",
+      "league": "45",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 2,
+    "fields": {
+      "created_at": "2025-01-17T22:06:55.163Z",
+      "updated_at": "2025-01-17T22:30:25.683Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Nantes",
+      "away_team": "Monaco",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.80",
+      "result": "2:2",
+      "kickoff_date": "2025-01-10",
+      "kickoff_time": "19:00:00",
+      "league": "61",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 3,
+    "fields": {
+      "created_at": "2025-01-17T22:08:45.829Z",
+      "updated_at": "2025-01-17T22:30:32.069Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Rayo Vallecano",
+      "away_team": "Celta Vigo",
+      "prediction": "Total Goals (Over 2.5)",
+      "odds": "2.20",
+      "result": "2:1",
+      "kickoff_date": "2025-01-10",
+      "kickoff_time": "21:00:00",
+      "league": "140",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 4,
+    "fields": {
+      "created_at": "2025-01-17T22:10:48.531Z",
+      "updated_at": "2025-01-17T22:30:39.101Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "St. Pauli",
+      "away_team": "Eintracht Frankfurt",
+      "prediction": "Eintracht (To win match)",
+      "odds": "2.15",
+      "result": "0:1",
+      "kickoff_date": "2025-01-11",
+      "kickoff_time": "15:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 5,
+    "fields": {
+      "created_at": "2025-01-17T22:13:49.509Z",
+      "updated_at": "2025-01-17T22:30:53.566Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Rennes",
+      "away_team": "Marseille",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.80",
+      "result": "1:2",
+      "kickoff_date": "2025-01-11",
+      "kickoff_time": "21:05:00",
+      "league": "61",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 6,
+    "fields": {
+      "created_at": "2025-01-17T22:15:49.146Z",
+      "updated_at": "2025-01-17T22:31:02.251Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "RB Leipzig",
+      "away_team": "Werder Bremen",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.53",
+      "result": "4:2",
+      "kickoff_date": "2025-01-12",
+      "kickoff_time": "15:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 7,
+    "fields": {
+      "created_at": "2025-01-17T22:17:22.659Z",
+      "updated_at": "2025-01-17T22:31:09.388Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Elche",
+      "away_team": "Real Zaragoza",
+      "prediction": "Elche (To win match)",
+      "odds": "1.75",
+      "result": "1:0",
+      "kickoff_date": "2025-01-12",
+      "kickoff_time": "16:15:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 8,
+    "fields": {
+      "created_at": "2025-01-17T22:19:38.841Z",
+      "updated_at": "2025-01-17T22:31:17.413Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "OFI Crete",
+      "away_team": "Levadiakos",
+      "prediction": "OFI Crete (To win match)",
+      "odds": "2.20",
+      "result": "0:0",
+      "kickoff_date": "2025-01-13",
+      "kickoff_time": "17:00:00",
+      "league": "197",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 9,
+    "fields": {
+      "created_at": "2025-01-17T22:21:28.073Z",
+      "updated_at": "2025-01-17T22:31:24.269Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Pisa",
+      "away_team": "Carrarese",
+      "prediction": "Pisa (To win match)",
+      "odds": "1.85",
+      "result": "2:1",
+      "kickoff_date": "2025-01-13",
+      "kickoff_time": "20:30:00",
+      "league": "136",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 10,
+    "fields": {
+      "created_at": "2025-01-17T22:23:09.571Z",
+      "updated_at": "2025-01-17T22:31:40.834Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Goztepe",
+      "away_team": "Kasimpasa",
+      "prediction": "Goztepe (To win match)",
+      "odds": "1.95",
+      "result": "5:0",
+      "kickoff_date": "2025-01-13",
+      "kickoff_time": "18:00:00",
+      "league": "204",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 11,
+    "fields": {
+      "created_at": "2025-01-17T22:25:08.970Z",
+      "updated_at": "2025-01-17T22:31:43.643Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Leyton Orient",
+      "away_team": "Derby",
+      "prediction": "Leyton Orient (To win match)",
+      "odds": "2.30",
+      "result": "0:0",
+      "kickoff_date": "2025-01-14",
+      "kickoff_time": "20:45:00",
+      "league": "45",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 12,
+    "fields": {
+      "created_at": "2025-01-17T22:26:32.638Z",
+      "updated_at": "2025-01-17T22:31:48.276Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Wolfsburg",
+      "away_team": "Borussia Monchengladbach",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.53",
+      "result": "5:1",
+      "kickoff_date": "2025-01-14",
+      "kickoff_time": "20:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 13,
+    "fields": {
+      "created_at": "2025-01-17T22:27:45.331Z",
+      "updated_at": "2025-01-17T22:31:55.919Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Como",
+      "away_team": "AC Milan",
+      "prediction": "AC Milan (To win match)",
+      "odds": "1.90",
+      "result": "1:2",
+      "kickoff_date": "2025-01-14",
+      "kickoff_time": "18:30:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 14,
+    "fields": {
+      "created_at": "2025-01-17T22:29:37.297Z",
+      "updated_at": "2025-01-17T22:32:02.162Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Blackburn",
+      "away_team": "Portsmouth",
+      "prediction": "Blackburn (To win match)",
+      "odds": "1.70",
+      "result": "3:0",
+      "kickoff_date": "2025-01-15",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 15,
+    "fields": {
+      "created_at": "2025-01-17T22:33:28.214Z",
+      "updated_at": "2025-01-17T22:33:28.214Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "VfB Stuttgart",
+      "away_team": "RB Leipzig",
+      "prediction": "VfB Stuttgart (To win match)",
+      "odds": "1.85",
+      "result": "2:1",
+      "kickoff_date": "2025-01-15",
+      "kickoff_time": "20:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 16,
+    "fields": {
+      "created_at": "2025-01-17T22:34:44.078Z",
+      "updated_at": "2025-01-17T22:34:44.078Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Brest",
+      "away_team": "Nantes",
+      "prediction": "Brest (To win match)",
+      "odds": "2.15",
+      "result": "2:1",
+      "kickoff_date": "2025-01-15",
+      "kickoff_time": "18:30:00",
+      "league": "66",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 17,
+    "fields": {
+      "created_at": "2025-01-17T22:36:48.507Z",
+      "updated_at": "2025-01-17T22:36:48.507Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Shrewsbury",
+      "away_team": "Wrexham",
+      "prediction": "Wrexham (To win match)",
+      "odds": "1.83",
+      "result": "2:1",
+      "kickoff_date": "2025-01-16",
+      "kickoff_time": "21:00:00",
+      "league": "41",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 18,
+    "fields": {
+      "created_at": "2025-01-17T22:38:43.451Z",
+      "updated_at": "2025-01-17T22:40:14.581Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Jahn Regensburg",
+      "away_team": "Hannover 96",
+      "prediction": "Hannover 96 (To win match)",
+      "odds": "1.80",
+      "result": "0:1",
+      "kickoff_date": "2025-01-17",
+      "kickoff_time": "18:30:00",
+      "league": "79",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 19,
+    "fields": {
+      "created_at": "2025-01-17T22:41:21.288Z",
+      "updated_at": "2025-01-17T22:41:21.288Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "FC Cartagena",
+      "away_team": "Real Oviedo",
+      "prediction": "Real Oviedo (To win match)",
+      "odds": "1.70",
+      "result": "0:1",
+      "kickoff_date": "2025-01-17",
+      "kickoff_time": "20:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 20,
+    "fields": {
+      "created_at": "2025-01-17T22:42:21.657Z",
+      "updated_at": "2025-01-18T12:25:54.266Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Burnley",
+      "away_team": "Sunderland",
+      "prediction": "Total Goals (Under 2.5)",
+      "odds": "1.50",
+      "result": "0:0",
+      "kickoff_date": "2025-01-17",
+      "kickoff_time": "21:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 21,
+    "fields": {
+      "created_at": "2025-01-18T13:31:05.327Z",
+      "updated_at": "2025-01-18T17:03:48.924Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Sheffield Utd",
+      "away_team": "Norwich",
+      "prediction": "Sheffield Utd (To win match)",
+      "odds": "2.05",
+      "result": "2:0",
+      "kickoff_date": "2025-01-18",
+      "kickoff_time": "16:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 22,
+    "fields": {
+      "created_at": "2025-01-18T13:32:53.175Z",
+      "updated_at": "2025-01-18T16:34:06.635Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Bochum",
+      "away_team": "RB Leipzig",
+      "prediction": "RB Leipzig (To win match)",
+      "odds": "2.00",
+      "result": "",
+      "kickoff_date": "2025-01-18",
+      "kickoff_time": "15:30:00",
+      "league": "78",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 23,
+    "fields": {
+      "created_at": "2025-01-18T13:33:43.561Z",
+      "updated_at": "2025-01-18T20:50:34.238Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Mansfield",
+      "away_team": "Wycombe",
+      "prediction": "Wycombe (To win match)",
+      "odds": "2.55",
+      "result": "1:2",
+      "kickoff_date": "2025-01-18",
+      "kickoff_time": "16:00:00",
+      "league": "41",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 24,
+    "fields": {
+      "created_at": "2025-01-18T13:34:18.309Z",
+      "updated_at": "2025-01-18T17:03:55.119Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Slaford",
+      "away_team": "Fleetwood",
+      "prediction": "Salford (To win match)",
+      "odds": "1.85",
+      "result": "",
+      "kickoff_date": "2025-01-18",
+      "kickoff_time": "16:00:00",
+      "league": "42",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 25,
+    "fields": {
+      "created_at": "2025-01-19T10:35:31.363Z",
+      "updated_at": "2025-01-19T22:35:36.883Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Union Berlin",
+      "away_team": "Mainz",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.80",
+      "result": "2:1",
+      "kickoff_date": "2025-01-19",
+      "kickoff_time": "15:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 26,
+    "fields": {
+      "created_at": "2025-01-19T10:36:39.693Z",
+      "updated_at": "2025-01-19T22:35:47.087Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Eyupspor",
+      "away_team": "Alanyaspor",
+      "prediction": "Eyupspor (To win match)",
+      "odds": "2.00",
+      "result": "3:0",
+      "kickoff_date": "2025-01-19",
+      "kickoff_time": "17:00:00",
+      "league": "204",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 27,
+    "fields": {
+      "created_at": "2025-01-19T10:38:26.925Z",
+      "updated_at": "2025-01-20T22:50:48.167Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Valencia",
+      "away_team": "Real Sociedad",
+      "prediction": "Real Sociedad (To win match)",
+      "odds": "2.50",
+      "result": "1:0",
+      "kickoff_date": "2025-01-19",
+      "kickoff_time": "21:00:00",
+      "league": "140",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 28,
+    "fields": {
+      "created_at": "2025-01-19T19:49:53.511Z",
+      "updated_at": "2025-01-20T22:49:37.843Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Panserraikos",
+      "away_team": "Lamia",
+      "prediction": "Panserraikos (To win match)",
+      "odds": "2.00",
+      "result": "2:0",
+      "kickoff_date": "2025-01-20",
+      "kickoff_time": "17:00:00",
+      "league": "197",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 29,
+    "fields": {
+      "created_at": "2025-01-19T19:52:56.331Z",
+      "updated_at": "2025-01-20T22:50:05.908Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Oliveirense",
+      "away_team": "Penafiel",
+      "prediction": "Penafiel (To win match)",
+      "odds": "1.90",
+      "result": "2:2",
+      "kickoff_date": "2025-01-20",
+      "kickoff_time": "19:00:00",
+      "league": "94 2",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 30,
+    "fields": {
+      "created_at": "2025-01-20T11:02:11.219Z",
+      "updated_at": "2025-01-22T10:05:11.626Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Bologna",
+      "away_team": "Dortmund",
+      "prediction": "Bologna (To win match)",
+      "odds": "3.10",
+      "result": "",
+      "kickoff_date": "2025-01-21",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 31,
+    "fields": {
+      "created_at": "2025-01-20T11:07:05.807Z",
+      "updated_at": "2025-01-22T10:04:21.478Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Middlesbrough",
+      "away_team": "West Brom",
+      "prediction": "Middlesbrough (To win match)",
+      "odds": "1.95",
+      "result": "2:0",
+      "kickoff_date": "2025-01-21",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 32,
+    "fields": {
+      "created_at": "2025-01-20T11:07:47.544Z",
+      "updated_at": "2025-01-20T11:07:47.544Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Watford",
+      "away_team": "Preston",
+      "prediction": "Watford (To win match)",
+      "odds": "2.05",
+      "result": "",
+      "kickoff_date": "2025-01-21",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 33,
+    "fields": {
+      "created_at": "2025-01-20T23:02:41.262Z",
+      "updated_at": "2025-01-22T21:58:43.525Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Leeds",
+      "away_team": "Norwich",
+      "prediction": "Leeds (To win match ) & Over 1 Goal",
+      "odds": "1.65",
+      "result": "2:0",
+      "kickoff_date": "2025-01-22",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 34,
+    "fields": {
+      "created_at": "2025-01-20T23:03:40.458Z",
+      "updated_at": "2025-01-22T21:59:12.557Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Plymouth",
+      "away_team": "Burnley",
+      "prediction": "Both teams to score (No)",
+      "odds": "1.80",
+      "result": "0:5",
+      "kickoff_date": "2025-01-22",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 35,
+    "fields": {
+      "created_at": "2025-01-21T19:53:54.088Z",
+      "updated_at": "2025-01-23T22:30:49.908Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Lazio",
+      "away_team": "Real Sociedad",
+      "prediction": "Lazio (To win match)",
+      "odds": "2.30",
+      "result": "3:1",
+      "kickoff_date": "2025-01-23",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 36,
+    "fields": {
+      "created_at": "2025-01-21T19:54:49.549Z",
+      "updated_at": "2025-01-23T22:31:00.381Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Eintracht Frankfurt",
+      "away_team": "Ferencvaros",
+      "prediction": "Eintracht (To win match)",
+      "odds": "1.60",
+      "result": "2:0",
+      "kickoff_date": "2025-01-23",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 37,
+    "fields": {
+      "created_at": "2025-01-21T19:55:34.004Z",
+      "updated_at": "2025-01-23T22:31:17.102Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Royale Union SG",
+      "away_team": "Braga",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.57",
+      "result": "2:1",
+      "kickoff_date": "2025-01-23",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 38,
+    "fields": {
+      "created_at": "2025-01-22T13:51:51.816Z",
+      "updated_at": "2025-01-24T21:37:16.833Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Elche",
+      "away_team": "Eibar",
+      "prediction": "Elche (To win match)",
+      "odds": "1.85",
+      "result": "2:0",
+      "kickoff_date": "2025-01-24",
+      "kickoff_time": "20:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 39,
+    "fields": {
+      "created_at": "2025-01-22T13:53:34.647Z",
+      "updated_at": "2025-01-24T21:36:55.237Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Caen",
+      "away_team": "Guingamp",
+      "prediction": "Guingamp (To win match)",
+      "odds": "2.50",
+      "result": "0:1",
+      "kickoff_date": "2025-01-24",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 40,
+    "fields": {
+      "created_at": "2025-01-22T13:55:19.724Z",
+      "updated_at": "2025-01-24T21:37:06.667Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Heracles",
+      "away_team": "Utrecht",
+      "prediction": "Utrecht (To win match)",
+      "odds": "1.85",
+      "result": "1:1",
+      "kickoff_date": "2025-01-24",
+      "kickoff_time": "20:00:00",
+      "league": "88",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 41,
+    "fields": {
+      "created_at": "2025-01-23T17:45:15.505Z",
+      "updated_at": "2025-01-26T10:27:06.464Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Cheltenham",
+      "away_team": "Salford",
+      "prediction": "Cheltenham (To win match)",
+      "odds": "3.30",
+      "result": "2:1",
+      "kickoff_date": "2025-01-25",
+      "kickoff_time": "16:00:00",
+      "league": "42",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 42,
+    "fields": {
+      "created_at": "2025-01-23T17:47:10.300Z",
+      "updated_at": "2025-01-26T10:26:57.560Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Cordoba",
+      "away_team": "Racing Santander",
+      "prediction": "Racing Santander (To win match)",
+      "odds": "2.90",
+      "result": "1:2",
+      "kickoff_date": "2025-01-25",
+      "kickoff_time": "16:15:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 43,
+    "fields": {
+      "created_at": "2025-01-23T17:48:25.822Z",
+      "updated_at": "2025-01-26T10:14:24.158Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Ayr",
+      "away_team": "Partick Thistle",
+      "prediction": "Ayr (To win match)",
+      "odds": "1.75",
+      "result": "2:1",
+      "kickoff_date": "2025-01-25",
+      "kickoff_time": "16:00:00",
+      "league": "180",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 44,
+    "fields": {
+      "created_at": "2025-01-24T16:07:01.543Z",
+      "updated_at": "2025-01-26T17:10:54.389Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Albacete",
+      "away_team": "Almeria",
+      "prediction": "Almeria (To win match)",
+      "odds": "2.20",
+      "result": "2:1",
+      "kickoff_date": "2025-01-26",
+      "kickoff_time": "16:15:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 45,
+    "fields": {
+      "created_at": "2025-01-24T16:10:30.966Z",
+      "updated_at": "2025-01-27T14:32:43.263Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Nice",
+      "away_team": "Marseille",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.70",
+      "result": "",
+      "kickoff_date": "2025-01-26",
+      "kickoff_time": "20:45:00",
+      "league": "61",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 46,
+    "fields": {
+      "created_at": "2025-01-24T16:13:53.827Z",
+      "updated_at": "2025-01-27T14:32:03.768Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "FC Porto",
+      "away_team": "Santa Clara",
+      "prediction": "Porto (To win match) & Over 1 Goals",
+      "odds": "2.10",
+      "result": "1:1",
+      "kickoff_date": "2025-01-26",
+      "kickoff_time": "19:00:00",
+      "league": "94",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 47,
+    "fields": {
+      "created_at": "2025-01-25T16:32:30.824Z",
+      "updated_at": "2025-01-27T21:56:07.012Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Cadiz CF",
+      "away_team": "Mirandes",
+      "prediction": "Draw or Mirandes (Double chance)",
+      "odds": "1.72",
+      "result": "",
+      "kickoff_date": "2025-01-27",
+      "kickoff_time": "20:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 48,
+    "fields": {
+      "created_at": "2025-01-25T16:34:08.338Z",
+      "updated_at": "2025-01-27T21:56:28.883Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Venezia",
+      "away_team": "Verona",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.90",
+      "result": "1:1",
+      "kickoff_date": "2025-01-27",
+      "kickoff_time": "18:30:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 49,
+    "fields": {
+      "created_at": "2025-01-25T16:37:00.457Z",
+      "updated_at": "2025-01-27T21:55:51.856Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Annecy",
+      "away_team": "Dunkerque",
+      "prediction": "Dunkerque (To win match)",
+      "odds": "2.30",
+      "result": "0:2",
+      "kickoff_date": "2025-01-27",
+      "kickoff_time": "20:45:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 50,
+    "fields": {
+      "created_at": "2025-01-26T12:01:18.938Z",
+      "updated_at": "2025-01-28T21:40:46.747Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Exeter",
+      "away_team": "Leyton Orient",
+      "prediction": "Leyton Orient (To win match)",
+      "odds": "2.25",
+      "result": "2:6",
+      "kickoff_date": "2025-01-28",
+      "kickoff_time": "20:45:00",
+      "league": "41",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 51,
+    "fields": {
+      "created_at": "2025-01-26T12:02:37.845Z",
+      "updated_at": "2025-01-28T21:45:55.739Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Wrexham",
+      "away_team": "Stevenage",
+      "prediction": "Wrexham (To win match)",
+      "odds": "2.05",
+      "result": "2:3",
+      "kickoff_date": "2025-01-28",
+      "kickoff_time": "20:45:00",
+      "league": "41",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 52,
+    "fields": {
+      "created_at": "2025-01-26T12:03:55.182Z",
+      "updated_at": "2025-01-28T21:45:51.316Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Salford",
+      "away_team": "Newport",
+      "prediction": "Salford (To win match) & Over 1 Goals (Total Goals)",
+      "odds": "1.70",
+      "result": "1:1",
+      "kickoff_date": "2025-01-28",
+      "kickoff_time": "20:45:00",
+      "league": "42",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 53,
+    "fields": {
+      "created_at": "2025-01-27T14:45:22.912Z",
+      "updated_at": "2025-01-30T02:06:49.697Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Inter",
+      "away_team": "Monaco",
+      "prediction": "Inter (To win match)",
+      "odds": "1.61",
+      "result": "3:0",
+      "kickoff_date": "2025-01-29",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 54,
+    "fields": {
+      "created_at": "2025-01-27T14:47:50.495Z",
+      "updated_at": "2025-01-30T02:06:57.258Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Sporting CP",
+      "away_team": "Bologna",
+      "prediction": "Sporting CP (To win match) & Over 1 Goals",
+      "odds": "1.61",
+      "result": "",
+      "kickoff_date": "2025-01-29",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 55,
+    "fields": {
+      "created_at": "2025-01-27T14:49:21.624Z",
+      "updated_at": "2025-01-30T02:07:07.844Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "PSV",
+      "away_team": "Liverpool",
+      "prediction": "Over 2.5 (Total Goals)",
+      "odds": "1.50",
+      "result": "3:2",
+      "kickoff_date": "2025-01-29",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 56,
+    "fields": {
+      "created_at": "2025-01-28T13:20:27.178Z",
+      "updated_at": "2025-01-31T08:44:49.286Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Anderlecht",
+      "away_team": "Hoffenheim",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.53",
+      "result": "3:4",
+      "kickoff_date": "2025-01-30",
+      "kickoff_time": "21:00:00",
+      "league": "3",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 57,
+    "fields": {
+      "created_at": "2025-01-28T13:21:27.002Z",
+      "updated_at": "2025-01-31T08:45:19.557Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "AS Roma",
+      "away_team": "Eintracht Frankfurt",
+      "prediction": "AS Roma (To win match)",
+      "odds": "1.67",
+      "result": "2:0",
+      "kickoff_date": "2025-01-30",
+      "kickoff_time": "21:00:00",
+      "league": "3",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 58,
+    "fields": {
+      "created_at": "2025-01-28T13:24:36.839Z",
+      "updated_at": "2025-01-31T08:46:45.624Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Maccabi Tel Aviv",
+      "away_team": "FC Porto",
+      "prediction": "FC Porto (To win match)",
+      "odds": "1.50",
+      "result": "0:1",
+      "kickoff_date": "2025-01-30",
+      "kickoff_time": "21:00:00",
+      "league": "3",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 59,
+    "fields": {
+      "created_at": "2025-01-29T15:17:42.837Z",
+      "updated_at": "2025-02-01T09:43:16.772Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Palermo",
+      "away_team": "Pisa",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.90",
+      "result": "1:2",
+      "kickoff_date": "2025-01-31",
+      "kickoff_time": "20:30:00",
+      "league": "136",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 60,
+    "fields": {
+      "created_at": "2025-01-29T15:20:39.027Z",
+      "updated_at": "2025-02-01T09:44:09.303Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Falkirk",
+      "away_team": "Livingston",
+      "prediction": "Under 2.5 Goals (Total Goals)",
+      "odds": "1.80",
+      "result": "1:2",
+      "kickoff_date": "2025-01-31",
+      "kickoff_time": "20:45:00",
+      "league": "180",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 61,
+    "fields": {
+      "created_at": "2025-01-29T15:23:31.330Z",
+      "updated_at": "2025-02-01T09:43:55.047Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Bastia",
+      "away_team": "Metz",
+      "prediction": "Draw or Metz (Double Chance) & Over 1 Goals (Total Goals)",
+      "odds": "2.05",
+      "result": "1:1",
+      "kickoff_date": "2025-01-31",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 62,
+    "fields": {
+      "created_at": "2025-01-31T08:52:48.803Z",
+      "updated_at": "2025-02-01T17:58:01.895Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Brest",
+      "away_team": "PSG",
+      "prediction": "Brest over 0.5 (Team Total Goals)",
+      "odds": "1.53",
+      "result": "2:5",
+      "kickoff_date": "2025-02-01",
+      "kickoff_time": "17:00:00",
+      "league": "61",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 63,
+    "fields": {
+      "created_at": "2025-01-31T10:43:36.608Z",
+      "updated_at": "2025-02-01T17:31:11.407Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Derby",
+      "away_team": "Sheffield Utd",
+      "prediction": "Sheffield Utd (To win match)",
+      "odds": "2.15",
+      "result": "0:1",
+      "kickoff_date": "2025-02-01",
+      "kickoff_time": "16:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 64,
+    "fields": {
+      "created_at": "2025-01-31T10:45:55.703Z",
+      "updated_at": "2025-02-01T17:31:23.411Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Birmingham",
+      "away_team": "Rotherham",
+      "prediction": "Birmingham (To win match)",
+      "odds": "1.53",
+      "result": "2:1",
+      "kickoff_date": "2025-02-01",
+      "kickoff_time": "16:00:00",
+      "league": "41",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 65,
+    "fields": {
+      "created_at": "2025-01-31T10:48:18.676Z",
+      "updated_at": "2025-02-01T17:32:08.869Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Leeds",
+      "away_team": "Cardiff",
+      "prediction": "Leeds (To win match ) & Over 1 Goal",
+      "odds": "1.53",
+      "result": "7:0",
+      "kickoff_date": "2025-02-01",
+      "kickoff_time": "16:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 66,
+    "fields": {
+      "created_at": "2025-01-31T11:27:56.598Z",
+      "updated_at": "2025-02-02T23:04:35.689Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Kaiserslautern",
+      "away_team": "Preussen Munster",
+      "prediction": "Kaiserslautern (To win match)",
+      "odds": "1.83",
+      "result": "2:1",
+      "kickoff_date": "2025-02-02",
+      "kickoff_time": "13:30:00",
+      "league": "79",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 67,
+    "fields": {
+      "created_at": "2025-01-31T11:31:04.847Z",
+      "updated_at": "2025-02-02T23:02:30.790Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Goztepe",
+      "away_team": "Alanyaspor",
+      "prediction": "Goztepe (To win match)",
+      "odds": "1.70",
+      "result": "",
+      "kickoff_date": "2025-02-02",
+      "kickoff_time": "14:00:00",
+      "league": "204",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 68,
+    "fields": {
+      "created_at": "2025-01-31T11:34:53.651Z",
+      "updated_at": "2025-02-02T23:04:51.548Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Eintracht Frankfurt",
+      "away_team": "Wolfsburg",
+      "prediction": "Eintracht Frankfurt (To win match)",
+      "odds": "1.90",
+      "result": "1:1",
+      "kickoff_date": "2025-02-02",
+      "kickoff_time": "15:30:00",
+      "league": "78",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 69,
+    "fields": {
+      "created_at": "2025-01-31T11:35:29.224Z",
+      "updated_at": "2025-02-02T23:04:58.928Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "AC Milan",
+      "away_team": "Inter",
+      "prediction": "Inter (To win match)",
+      "odds": "1.90",
+      "result": "1:1",
+      "kickoff_date": "2025-02-02",
+      "kickoff_time": "18:00:00",
+      "league": "135",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 70,
+    "fields": {
+      "created_at": "2025-02-01T16:09:28.284Z",
+      "updated_at": "2025-02-04T10:40:39.608Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Levante",
+      "away_team": "Racing Club Ferrol",
+      "prediction": "Levante (To win match) & Over 1 Goals (Total Goals)",
+      "odds": "1.70",
+      "result": "0:1",
+      "kickoff_date": "2025-02-03",
+      "kickoff_time": "20:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 71,
+    "fields": {
+      "created_at": "2025-02-01T16:14:02.417Z",
+      "updated_at": "2025-02-04T10:40:47.630Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Cagliari",
+      "away_team": "Lazio",
+      "prediction": "Lazio (To win match)",
+      "odds": "2.00",
+      "result": "1:2",
+      "kickoff_date": "2025-02-03",
+      "kickoff_time": "20:45:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 72,
+    "fields": {
+      "created_at": "2025-02-02T23:19:18.830Z",
+      "updated_at": "2025-02-05T00:00:35.931Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Grasshoppers",
+      "away_team": "Lausanne",
+      "prediction": "Draw or Lausanne (Double Chance) & Over 1 Goals (Total Goals)",
+      "odds": "1.66",
+      "result": "2:2",
+      "kickoff_date": "2025-02-04",
+      "kickoff_time": "20:30:00",
+      "league": "207",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 73,
+    "fields": {
+      "created_at": "2025-02-02T23:24:00.752Z",
+      "updated_at": "2025-02-05T00:00:26.089Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Burnley",
+      "away_team": "Oxford Utd",
+      "prediction": "Burnley (To win match)",
+      "odds": "1.50",
+      "result": "",
+      "kickoff_date": "2025-02-04",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 74,
+    "fields": {
+      "created_at": "2025-02-03T21:00:43.765Z",
+      "updated_at": "2025-02-05T22:35:56.163Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "AC Milan",
+      "away_team": "AS Roma",
+      "prediction": "AC Milan (To win match)",
+      "odds": "2.05",
+      "result": "3:1",
+      "kickoff_date": "2025-02-05",
+      "kickoff_time": "20:45:00",
+      "league": "137",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 75,
+    "fields": {
+      "created_at": "2025-02-03T21:01:50.326Z",
+      "updated_at": "2025-02-05T22:36:04.261Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Leganes",
+      "away_team": "Real Madrid",
+      "prediction": "Real Madrid (To win match) & Over 1 Goals",
+      "odds": "1.75",
+      "result": "2:3",
+      "kickoff_date": "2025-02-05",
+      "kickoff_time": "21:00:00",
+      "league": "143",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 76,
+    "fields": {
+      "created_at": "2025-02-04T11:23:34.426Z",
+      "updated_at": "2025-02-07T15:02:12.606Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Valencia",
+      "away_team": "Barcelona",
+      "prediction": "Barcelona (To win match) & Over 1 Goals (Total Goals)",
+      "odds": "1.57",
+      "result": "0:5",
+      "kickoff_date": "2025-02-06",
+      "kickoff_time": "21:30:00",
+      "league": "143",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 77,
+    "fields": {
+      "created_at": "2025-02-04T11:26:51.083Z",
+      "updated_at": "2025-02-07T15:01:55.816Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Winterthur",
+      "away_team": "Zurich",
+      "prediction": "Zurich (To win match)",
+      "odds": "2.05",
+      "result": "0:2",
+      "kickoff_date": "2025-02-06",
+      "kickoff_time": "20:30:00",
+      "league": "207",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 78,
+    "fields": {
+      "created_at": "2025-02-05T17:21:56.173Z",
+      "updated_at": "2025-02-08T00:03:02.844Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "PSG",
+      "away_team": "Monaco",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.53",
+      "result": "4:1",
+      "kickoff_date": "2025-02-07",
+      "kickoff_time": "21:05:00",
+      "league": "61",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 79,
+    "fields": {
+      "created_at": "2025-02-05T17:23:00.118Z",
+      "updated_at": "2025-02-08T00:03:09.584Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Paris FC",
+      "away_team": "Pau FC",
+      "prediction": "Paris FC (To win match)",
+      "odds": "1.66",
+      "result": "3:1",
+      "kickoff_date": "2025-02-07",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 80,
+    "fields": {
+      "created_at": "2025-02-07T17:23:02.311Z",
+      "updated_at": "2025-02-08T21:05:35.467Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Magdeburg",
+      "away_team": "Nurnberg",
+      "prediction": "Magdeburg to win either half",
+      "odds": "1.53",
+      "result": "(1:3) 3:4",
+      "kickoff_date": "2025-02-08",
+      "kickoff_time": "13:00:00",
+      "league": "79",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 81,
+    "fields": {
+      "created_at": "2025-02-07T17:25:02.093Z",
+      "updated_at": "2025-02-08T21:05:54.798Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Lugano",
+      "away_team": "Grasshoppers",
+      "prediction": "Lugano (To win match)",
+      "odds": "1.83",
+      "result": "1:1",
+      "kickoff_date": "2025-02-08",
+      "kickoff_time": "18:00:00",
+      "league": "207",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 82,
+    "fields": {
+      "created_at": "2025-02-07T17:26:13.291Z",
+      "updated_at": "2025-02-08T21:06:02.041Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Metz",
+      "away_team": "Clermont",
+      "prediction": "Metz (To win match)",
+      "odds": "1.70",
+      "result": "3:1",
+      "kickoff_date": "2025-02-08",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 83,
+    "fields": {
+      "created_at": "2025-02-08T22:18:07.037Z",
+      "updated_at": "2025-02-09T22:46:15.983Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Sevilla",
+      "away_team": "Barcelona",
+      "prediction": "Barcelona (To win match) & Over 1 Goals (Total Goals)",
+      "odds": "1.57",
+      "result": "1:4",
+      "kickoff_date": "2025-02-09",
+      "kickoff_time": "21:00:00",
+      "league": "140",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 84,
+    "fields": {
+      "created_at": "2025-02-08T22:29:03.609Z",
+      "updated_at": "2025-02-09T22:47:04.082Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "RB Leipzig",
+      "away_team": "St. Pauli",
+      "prediction": "RB Leipzig (To win match)",
+      "odds": "1.60",
+      "result": "2:0",
+      "kickoff_date": "2025-02-09",
+      "kickoff_time": "17:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 85,
+    "fields": {
+      "created_at": "2025-02-08T22:34:22.252Z",
+      "updated_at": "2025-02-09T17:50:52.697Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Lazio",
+      "away_team": "Monza",
+      "prediction": "Lazio (To win match) & Over 1 Goals (Total Goals)",
+      "odds": "1.53",
+      "result": "5:1",
+      "kickoff_date": "2025-02-09",
+      "kickoff_time": "15:00:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 86,
+    "fields": {
+      "created_at": "2025-02-09T00:19:34.001Z",
+      "updated_at": "2025-02-11T09:34:05.235Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "R.Oviedo",
+      "away_team": "Eldense",
+      "prediction": "R.Oviedo (To win match)",
+      "odds": "1.61",
+      "result": "0:0",
+      "kickoff_date": "2025-02-10",
+      "kickoff_time": "20:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 87,
+    "fields": {
+      "created_at": "2025-02-09T00:21:20.334Z",
+      "updated_at": "2025-02-11T09:33:56.330Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Atromitos",
+      "away_team": "Athens Kallithea",
+      "prediction": "Atromitos (To win match)",
+      "odds": "1.90",
+      "result": "1:2",
+      "kickoff_date": "2025-02-10",
+      "kickoff_time": "17:00:00",
+      "league": "197",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 88,
+    "fields": {
+      "created_at": "2025-02-09T17:41:44.500Z",
+      "updated_at": "2025-02-12T11:08:15.875Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Brest",
+      "away_team": "PSG",
+      "prediction": "PSG (To win match) & Over 1 Goals (Total Goals)",
+      "odds": "1.50",
+      "result": "0:3",
+      "kickoff_date": "2025-02-11",
+      "kickoff_time": "18:45:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 89,
+    "fields": {
+      "created_at": "2025-02-09T17:46:06.393Z",
+      "updated_at": "2025-02-12T11:08:30.999Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Bradford",
+      "away_team": "Accrington Stanley",
+      "prediction": "Bradford (To win match) & 1-4 Goals (Match Goals Range)",
+      "odds": "1.83",
+      "result": "1:0",
+      "kickoff_date": "2025-02-11",
+      "kickoff_time": "20:45:00",
+      "league": "42",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 90,
+    "fields": {
+      "created_at": "2025-02-09T17:50:25.742Z",
+      "updated_at": "2025-02-12T11:08:48.297Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Juventus",
+      "away_team": "PSV",
+      "prediction": "Juventus (To win either half)",
+      "odds": "1.50",
+      "result": "(1:0) 2:1",
+      "kickoff_date": "2025-02-11",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 91,
+    "fields": {
+      "created_at": "2025-02-10T13:54:39.190Z",
+      "updated_at": "2025-02-12T23:37:16.069Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Sheffield Utd",
+      "away_team": "Middlesbrough",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.80",
+      "result": "3:1",
+      "kickoff_date": "2025-02-12",
+      "kickoff_time": "21:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 92,
+    "fields": {
+      "created_at": "2025-02-10T13:56:11.305Z",
+      "updated_at": "2025-02-12T23:37:22.505Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Monaco",
+      "away_team": "Benfica",
+      "prediction": "Under 2.5 Goals (Total Goals)",
+      "odds": "2.20",
+      "result": "0:1",
+      "kickoff_date": "2025-02-12",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 93,
+    "fields": {
+      "created_at": "2025-02-11T14:37:32.647Z",
+      "updated_at": "2025-02-13T22:07:08.429Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "FC Copenhagen",
+      "away_team": "Heidenheim",
+      "prediction": "Draw or Heidenheim (Double Chance)",
+      "odds": "2.30",
+      "result": "1:2",
+      "kickoff_date": "2025-02-13",
+      "kickoff_time": "21:00:00",
+      "league": "848",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 94,
+    "fields": {
+      "created_at": "2025-02-11T14:38:57.111Z",
+      "updated_at": "2025-02-13T19:57:57.973Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Midtjylland",
+      "away_team": "Real Sociedad",
+      "prediction": "Midtjyland Over 0.5 (Team Total Goals)",
+      "odds": "1.50",
+      "result": "1:2",
+      "kickoff_date": "2025-02-13",
+      "kickoff_time": "18:45:00",
+      "league": "3",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 95,
+    "fields": {
+      "created_at": "2025-02-11T14:40:42.645Z",
+      "updated_at": "2025-02-26T22:33:18.622Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "PAOK",
+      "away_team": "FCSB",
+      "prediction": "Paok or Draw (Double Chance) & Over 1 Goals (Total Goals)",
+      "odds": "1.50",
+      "result": "1:2",
+      "kickoff_date": "2025-02-13",
+      "kickoff_time": "21:00:00",
+      "league": "3",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 96,
+    "fields": {
+      "created_at": "2025-02-12T13:34:59.889Z",
+      "updated_at": "2025-02-14T22:15:16.413Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Troyes",
+      "away_team": "Lorient",
+      "prediction": "Lorient (To win match)",
+      "odds": "1.95",
+      "result": "0:1",
+      "kickoff_date": "2025-02-14",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 97,
+    "fields": {
+      "created_at": "2025-02-12T13:35:58.812Z",
+      "updated_at": "2025-02-14T22:16:06.157Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Mirandes",
+      "away_team": "Racing Club Ferrol",
+      "prediction": "Mirandes (To win match)",
+      "odds": "1.65",
+      "result": "4:1",
+      "kickoff_date": "2025-02-14",
+      "kickoff_time": "20:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 98,
+    "fields": {
+      "created_at": "2025-02-12T13:38:20.301Z",
+      "updated_at": "2025-02-14T22:15:32.779Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Bologna",
+      "away_team": "Torino",
+      "prediction": "Bologna (To win either half)",
+      "odds": "1.50",
+      "result": "(1:1) 3:2",
+      "kickoff_date": "2025-02-14",
+      "kickoff_time": "20:45:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 99,
+    "fields": {
+      "created_at": "2025-02-13T21:45:49.010Z",
+      "updated_at": "2025-02-15T18:46:32.472Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Preston",
+      "away_team": "Burnley",
+      "prediction": "Burnley (To win either half)",
+      "odds": "1.66",
+      "result": "0:0",
+      "kickoff_date": "2025-02-15",
+      "kickoff_time": "13:30:00",
+      "league": "40",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 100,
+    "fields": {
+      "created_at": "2025-02-13T21:50:17.077Z",
+      "updated_at": "2025-02-15T22:22:36.539Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Atl. Madrid",
+      "away_team": "Celta Vigo",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "2.00",
+      "result": "1:1",
+      "kickoff_date": "2025-02-15",
+      "kickoff_time": "18:30:00",
+      "league": "140",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 101,
+    "fields": {
+      "created_at": "2025-02-13T21:55:33.275Z",
+      "updated_at": "2025-02-15T22:22:48.875Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Racing Santander",
+      "away_team": "Cadiz CF",
+      "prediction": "Cadiz CF (To win match)",
+      "odds": "3.30",
+      "result": "2:3",
+      "kickoff_date": "2025-02-15",
+      "kickoff_time": "18:30:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 102,
+    "fields": {
+      "created_at": "2025-02-13T21:57:13.444Z",
+      "updated_at": "2025-02-18T21:52:53.797Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Winterthur",
+      "away_team": "Young Boys",
+      "prediction": "Young Boys (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.66",
+      "result": "1:0",
+      "kickoff_date": "2025-02-15",
+      "kickoff_time": "20:30:00",
+      "league": "207",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 103,
+    "fields": {
+      "created_at": "2025-02-14T10:48:18.260Z",
+      "updated_at": "2025-02-16T19:20:02.996Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Huesca",
+      "away_team": "Granada",
+      "prediction": "Huesca or Draw (Double chance) & Over 0.5 Goals (Total Goals)",
+      "odds": "1.61",
+      "result": "1:1",
+      "kickoff_date": "2025-02-16",
+      "kickoff_time": "16:15:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 104,
+    "fields": {
+      "created_at": "2025-02-14T10:54:25.329Z",
+      "updated_at": "2025-02-16T23:17:57.636Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Regensburg",
+      "away_team": "Hamburger SV",
+      "prediction": "Hamburger SV (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.83",
+      "result": "1:1",
+      "kickoff_date": "2025-02-16",
+      "kickoff_time": "13:30:00",
+      "league": "79",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 105,
+    "fields": {
+      "created_at": "2025-02-14T10:55:17.401Z",
+      "updated_at": "2025-02-16T23:17:18.114Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Juventus",
+      "away_team": "Inter",
+      "prediction": "Inter (To win either half)",
+      "odds": "1.66",
+      "result": "1:0",
+      "kickoff_date": "2025-02-16",
+      "kickoff_time": "20:45:00",
+      "league": "135",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 106,
+    "fields": {
+      "created_at": "2025-02-16T19:47:50.837Z",
+      "updated_at": "2025-02-17T22:14:49.335Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Annecy",
+      "away_team": "Caen",
+      "prediction": "Annecy (To win either half)",
+      "odds": "1.66",
+      "result": "1:0",
+      "kickoff_date": "2025-02-17",
+      "kickoff_time": "20:45:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 107,
+    "fields": {
+      "created_at": "2025-02-16T19:49:07.212Z",
+      "updated_at": "2025-02-17T22:14:56.506Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Leeds",
+      "away_team": "Sunderland",
+      "prediction": "Leeds (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.86",
+      "result": "2:1",
+      "kickoff_date": "2025-02-17",
+      "kickoff_time": "21:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 108,
+    "fields": {
+      "created_at": "2025-02-16T20:07:37.329Z",
+      "updated_at": "2025-02-18T21:52:21.954Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Wycombe",
+      "away_team": "Bristol Rovers",
+      "prediction": "Wycombe (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.61",
+      "result": "2:0",
+      "kickoff_date": "2025-02-18",
+      "kickoff_time": "20:45:00",
+      "league": "41",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 109,
+    "fields": {
+      "created_at": "2025-02-16T20:15:42.361Z",
+      "updated_at": "2025-02-18T21:52:12.777Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "AC Milan",
+      "away_team": "Feyenoord",
+      "prediction": "AC Milan (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.61",
+      "result": "1:1",
+      "kickoff_date": "2025-02-18",
+      "kickoff_time": "18:45:00",
+      "league": "2",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 110,
+    "fields": {
+      "created_at": "2025-02-16T20:17:46.239Z",
+      "updated_at": "2025-02-20T00:41:26.823Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "PSV",
+      "away_team": "Juventus",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.61",
+      "result": "2:1",
+      "kickoff_date": "2025-02-19",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 111,
+    "fields": {
+      "created_at": "2025-02-16T20:28:34.269Z",
+      "updated_at": "2025-02-20T00:40:38.424Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Real Madrid",
+      "away_team": "Manchester City",
+      "prediction": "Real Madrid (To win match)",
+      "odds": "1.90",
+      "result": "3:1",
+      "kickoff_date": "2025-02-19",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 112,
+    "fields": {
+      "created_at": "2025-02-20T00:06:01.558Z",
+      "updated_at": "2025-02-21T11:28:25.753Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "FCSB",
+      "away_team": "PAOK",
+      "prediction": "Draw or PAOK (Double Chance) & Over 0.5 Goals (Total Goals)",
+      "odds": "1.57",
+      "result": "2:0",
+      "kickoff_date": "2025-02-20",
+      "kickoff_time": "18:45:00",
+      "league": "3",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 113,
+    "fields": {
+      "created_at": "2025-02-20T00:08:46.763Z",
+      "updated_at": "2025-02-21T11:28:08.946Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Real Sociedad",
+      "away_team": "Midtjylland",
+      "prediction": "Real Sociedad (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.83",
+      "result": "5:2",
+      "kickoff_date": "2025-02-20",
+      "kickoff_time": "21:00:00",
+      "league": "3",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 114,
+    "fields": {
+      "created_at": "2025-02-20T00:11:02.702Z",
+      "updated_at": "2025-02-26T22:34:23.217Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "APOEL",
+      "away_team": "Celje",
+      "prediction": "APOEL (To win match)",
+      "odds": "1.57",
+      "result": "0:2",
+      "kickoff_date": "2025-02-20",
+      "kickoff_time": "21:00:00",
+      "league": "848",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 115,
+    "fields": {
+      "created_at": "2025-02-20T00:13:22.450Z",
+      "updated_at": "2025-02-21T21:20:33.215Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Dunkerque",
+      "away_team": "Clermont",
+      "prediction": "Dunkerque (To win either half)",
+      "odds": "1.50",
+      "result": "3:0",
+      "kickoff_date": "2025-02-21",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 116,
+    "fields": {
+      "created_at": "2025-02-20T00:31:49.078Z",
+      "updated_at": "2025-02-21T21:20:41.462Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Hamburger SV",
+      "away_team": "Kaiserslautern",
+      "prediction": "Hamburger SV (To win match)",
+      "odds": "1.70",
+      "result": "3:0",
+      "kickoff_date": "2025-02-21",
+      "kickoff_time": "18:30:00",
+      "league": "79",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 117,
+    "fields": {
+      "created_at": "2025-02-21T21:22:52.724Z",
+      "updated_at": "2025-02-26T22:32:52.360Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Karlsruher SC",
+      "away_team": "Magdeburg",
+      "prediction": "Magdeburg (To win either half)",
+      "odds": "1.66",
+      "result": "(1:1) 3:1",
+      "kickoff_date": "2025-02-22",
+      "kickoff_time": "13:00:00",
+      "league": "79",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 118,
+    "fields": {
+      "created_at": "2025-02-21T21:29:33.856Z",
+      "updated_at": "2025-02-23T13:04:09.389Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Mainz",
+      "away_team": "St. Pauli",
+      "prediction": "Mainz or Draw (Double Chance) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.57",
+      "result": "2:0",
+      "kickoff_date": "2025-02-22",
+      "kickoff_time": "15:30:00",
+      "league": "78",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 119,
+    "fields": {
+      "created_at": "2025-02-21T21:38:09.797Z",
+      "updated_at": "2025-02-23T13:11:40.189Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Torino",
+      "away_team": "AC Milan",
+      "prediction": "Over 2.5 (Total Goals)",
+      "odds": "1.90",
+      "result": "2:1",
+      "kickoff_date": "2025-02-22",
+      "kickoff_time": "18:00:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 120,
+    "fields": {
+      "created_at": "2025-02-21T21:46:13.636Z",
+      "updated_at": "2025-02-23T13:08:58.008Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Metz",
+      "away_team": "AC Ajaccio",
+      "prediction": "Metz (To win match) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.83",
+      "result": "",
+      "kickoff_date": "2025-02-22",
+      "kickoff_time": "20:00:00",
+      "league": "62",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 121,
+    "fields": {
+      "created_at": "2025-02-21T21:57:02.845Z",
+      "updated_at": "2025-02-23T14:25:40.862Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Como",
+      "away_team": "Napoli",
+      "prediction": "Draw or Napoli (Double Chance) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.75",
+      "result": "2:1",
+      "kickoff_date": "2025-02-23",
+      "kickoff_time": "12:30:00",
+      "league": "135",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 122,
+    "fields": {
+      "created_at": "2025-02-21T22:03:11.856Z",
+      "updated_at": "2025-02-23T21:02:39.048Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Mansfield",
+      "away_team": "Wrexham",
+      "prediction": "Wrexham (To win either half)",
+      "odds": "1.66",
+      "result": "(1:1) 1:2",
+      "kickoff_date": "2025-02-23",
+      "kickoff_time": "16:00:00",
+      "league": "41",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 123,
+    "fields": {
+      "created_at": "2025-02-21T22:08:22.283Z",
+      "updated_at": "2025-02-23T21:02:22.165Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Olympiacos",
+      "away_team": "PAOK",
+      "prediction": "Olympiacos or Draw (Double Chance) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.53",
+      "result": "2:1",
+      "kickoff_date": "2025-02-23",
+      "kickoff_time": "19:30:00",
+      "league": "197",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 124,
+    "fields": {
+      "created_at": "2025-02-21T22:42:53.556Z",
+      "updated_at": "2025-02-24T23:04:42.569Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Sheffield Utd",
+      "away_team": "Leeds",
+      "prediction": "Sheffield Utd Over 0.5 (Team Total Goals)",
+      "odds": "1.50",
+      "result": "1:3",
+      "kickoff_date": "2025-02-24",
+      "kickoff_time": "21:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 125,
+    "fields": {
+      "created_at": "2025-02-24T20:51:02.602Z",
+      "updated_at": "2025-02-25T23:03:56.477Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Barcelona",
+      "away_team": "Atl. Madrid",
+      "prediction": "Barcelona (To win either half) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.50",
+      "result": "(3:2) 4:4",
+      "kickoff_date": "2025-02-25",
+      "kickoff_time": "21:30:00",
+      "league": "143",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 126,
+    "fields": {
+      "created_at": "2025-02-24T20:51:59.237Z",
+      "updated_at": "2025-02-25T23:04:03.221Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Inter",
+      "away_team": "Lazio",
+      "prediction": "Inter Over 1.5 (Team Total Goals)",
+      "odds": "1.83",
+      "result": "2:0",
+      "kickoff_date": "2025-02-25",
+      "kickoff_time": "21:00:00",
+      "league": "137",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 127,
+    "fields": {
+      "created_at": "2025-02-25T15:42:24.187Z",
+      "updated_at": "2025-02-26T22:31:57.871Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Tottenham",
+      "away_team": "Manchester City",
+      "prediction": "Tottenham or Draw (Double Chance)",
+      "odds": "1.80",
+      "result": "0:1",
+      "kickoff_date": "2025-02-26",
+      "kickoff_time": "20:30:00",
+      "league": "39",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 128,
+    "fields": {
+      "created_at": "2025-02-25T15:48:46.933Z",
+      "updated_at": "2025-03-01T11:14:32.691Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "Real Sociedad",
+      "away_team": "Real Madrid",
+      "prediction": "Real Madrid (To win either half) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.72",
+      "result": "0:1",
+      "kickoff_date": "2025-02-26",
+      "kickoff_time": "21:30:00",
+      "league": "143",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 129,
+    "fields": {
+      "created_at": "2025-02-25T15:58:10.155Z",
+      "updated_at": "2025-02-27T22:17:54.906Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Zurich",
+      "away_team": "Young Boys",
+      "prediction": "Young Boys (To win either half)",
+      "odds": "1.61",
+      "result": "(1:1) 2:3",
+      "kickoff_date": "2025-02-27",
+      "kickoff_time": "20:30:00",
+      "league": "209",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 130,
+    "fields": {
+      "created_at": "2025-02-25T16:01:17.103Z",
+      "updated_at": "2025-02-27T22:18:05.255Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Bologna",
+      "away_team": "AC Milan",
+      "prediction": "Bologna or Draw (Double Chance) & Over 0.5 Goals (Total Goals)",
+      "odds": "1.66",
+      "result": "2:1",
+      "kickoff_date": "2025-02-27",
+      "kickoff_time": "20:45:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 131,
+    "fields": {
+      "created_at": "2025-02-26T18:33:18.135Z",
+      "updated_at": "2025-03-01T11:13:51.814Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Dusseldorf",
+      "away_team": "Greuther Furth",
+      "prediction": "Over 2.5 Goals (Total Goals)",
+      "odds": "1.67",
+      "result": "",
+      "kickoff_date": "2025-02-28",
+      "kickoff_time": "18:30:00",
+      "league": "79",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 132,
+    "fields": {
+      "created_at": "2025-02-26T18:35:25.760Z",
+      "updated_at": "2025-03-01T11:14:02.055Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Fiorentina",
+      "away_team": "Lecce",
+      "prediction": "Fiorentina or Draw (Double Chance) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.57",
+      "result": "1:0",
+      "kickoff_date": "2025-02-28",
+      "kickoff_time": "20:45:00",
+      "league": "135",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 133,
+    "fields": {
+      "created_at": "2025-02-28T15:24:22.127Z",
+      "updated_at": "2025-03-01T21:16:01.273Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "QPR",
+      "away_team": "Sheffield Utd",
+      "prediction": "Sheffield Utd (To win either half)",
+      "odds": "1.72",
+      "result": "(0:1) 1:2",
+      "kickoff_date": "2025-03-01",
+      "kickoff_time": "16:00:00",
+      "league": "40",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 134,
+    "fields": {
+      "created_at": "2025-02-28T15:25:50.070Z",
+      "updated_at": "2025-03-01T21:17:16.456Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Betis",
+      "away_team": "Real Madrid",
+      "prediction": "Real Madrid (To win either half)",
+      "odds": "1.50",
+      "result": "(1:1) 2:1",
+      "kickoff_date": "2025-03-01",
+      "kickoff_time": "18:30:00",
+      "league": "140",
+      "status": "LOST"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 135,
+    "fields": {
+      "created_at": "2025-02-28T15:27:26.580Z",
+      "updated_at": "2025-03-01T21:17:24.225Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Basel",
+      "away_team": "Sion",
+      "prediction": "Basel (To win match)",
+      "odds": "1.65",
+      "result": "2:0",
+      "kickoff_date": "2025-03-01",
+      "kickoff_time": "18:00:00",
+      "league": "207",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 136,
+    "fields": {
+      "created_at": "2025-02-28T15:42:24.004Z",
+      "updated_at": "2025-03-02T22:47:51.298Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Bologna",
+      "away_team": "Cagliari",
+      "prediction": "Bologna (To win match)",
+      "odds": "1.57",
+      "result": "2:1",
+      "kickoff_date": "2025-03-02",
+      "kickoff_time": "15:00:00",
+      "league": "135",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 137,
+    "fields": {
+      "created_at": "2025-02-28T15:45:44.122Z",
+      "updated_at": "2025-03-02T22:47:27.719Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Lyon",
+      "away_team": "Brest",
+      "prediction": "Lyon (To win either half) & Over 1.5 Goals (Total Goals)",
+      "odds": "1.57",
+      "result": "(1:1) 2:1",
+      "kickoff_date": "2025-03-02",
+      "kickoff_time": "15:00:00",
+      "league": "61",
+      "status": "WON"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 138,
+    "fields": {
+      "created_at": "2025-02-28T15:48:04.935Z",
+      "updated_at": "2025-03-02T22:46:57.009Z",
+      "product": 1,
+      "visibility": "PRIVATE",
+      "home_team": "R.Oviedo",
+      "away_team": "Dep. La Coruna",
+      "prediction": "R.Oviedo (To win either half)",
+      "odds": "1.53",
+      "result": "",
+      "kickoff_date": "2025-03-02",
+      "kickoff_time": "16:15:00",
+      "league": "SPAIN: LaLiga2",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 139,
+    "fields": {
+      "created_at": "2025-03-02T22:45:42.212Z",
+      "updated_at": "2025-03-02T22:45:42.213Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "AC Ajaccio",
+      "away_team": "Dunkerque",
+      "prediction": "Dunkerque (To win either half)",
+      "odds": "1.80",
+      "result": "",
+      "kickoff_date": "2025-03-03",
+      "kickoff_time": "20:45:00",
+      "league": "62",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 140,
+    "fields": {
+      "created_at": "2025-03-02T22:46:33.301Z",
+      "updated_at": "2025-03-02T22:46:33.301Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Juve",
+      "away_team": "Verona",
+      "prediction": "Juventus Over 1.5 Goals (Team Total Goals)",
+      "odds": "1.50",
+      "result": "",
+      "kickoff_date": "2025-03-03",
+      "kickoff_time": "20:45:00",
+      "league": "135",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 141,
+    "fields": {
+      "created_at": "2025-03-02T23:07:08.389Z",
+      "updated_at": "2025-03-02T23:07:08.389Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Cardiff",
+      "away_team": "Burnley",
+      "prediction": "Burnley (To win either half)",
+      "odds": "1.53",
+      "result": "",
+      "kickoff_date": "2025-03-04",
+      "kickoff_time": "20:45:00",
+      "league": "40",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 142,
+    "fields": {
+      "created_at": "2025-03-02T23:07:44.515Z",
+      "updated_at": "2025-03-02T23:07:44.515Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "Wycombe",
+      "away_team": "Burton",
+      "prediction": "Wycombe (To win match)",
+      "odds": "1.50",
+      "result": "",
+      "kickoff_date": "2025-03-04",
+      "kickoff_time": "21:00:00",
+      "league": "41",
+      "status": "PENDING"
+    }
+  },
+  {
+    "model": "core.prediction",
+    "pk": 143,
+    "fields": {
+      "created_at": "2025-03-02T23:08:26.136Z",
+      "updated_at": "2025-03-02T23:08:26.136Z",
+      "product": 1,
+      "visibility": "PUBLIC",
+      "home_team": "PSV",
+      "away_team": "Arsenal",
+      "prediction": "Both teams to score (Yes)",
+      "odds": "1.80",
+      "result": "",
+      "kickoff_date": "2025-03-04",
+      "kickoff_time": "21:00:00",
+      "league": "2",
+      "status": "PENDING"
+    }
+  }
+]

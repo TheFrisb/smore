@@ -34,6 +34,15 @@ class User(BaseInternalModel, AbstractUser):
     def __str__(self):
         return self.username
 
+    def can_view_prediction_type(self, product):
+        """
+        Check if the user can view predictions for the given product.
+        """
+        if not self.subscription_is_active:
+            return False
+
+        return product in self.subscription.products.all()
+
     @property
     def referral_link(self):
         """
@@ -208,3 +217,13 @@ class ReferralEarning(BaseInternalModel):
 
     def __str__(self):
         return f"{self.receiver.username} - {self.amount}"
+
+
+class PurchasedPredictions(BaseInternalModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="purchases")
+    prediction = models.ForeignKey(
+        "core.Prediction", on_delete=models.CASCADE, related_name="purchases"
+    )
+
+    def __str__(self):
+        return f"{self.user.username} - {self.prediction.match}"

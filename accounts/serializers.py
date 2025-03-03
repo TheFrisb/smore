@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from accounts.forms.withdrawal_request_form import is_valid_btc_address
-from accounts.models import WithdrawalRequest
+from accounts.models import WithdrawalRequest, UserSubscription, User
+from core.models import Product
 
 
 class WithdrawalRequestSerializer(serializers.ModelSerializer):
@@ -65,3 +66,48 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
             )
 
         return data
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ["name", "analysis_per_month"]
+
+
+class UserSubscriptionSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True)
+
+    price = serializers.DecimalField(
+        max_digits=10, decimal_places=2, coerce_to_string=False
+    )
+
+    class Meta:
+        model = UserSubscription
+        fields = ["status", "frequency", "price", "start_date", "end_date", "products"]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    user_subscription = UserSubscriptionSerializer(
+        source="subscription", read_only=True
+    )
+
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "is_email_verified",
+            "user_subscription",
+            "first_name",
+            "last_name",
+        ]
+        read_only_fields = [
+            "id",
+            "username",
+            "email",
+            "is_email_verified",
+            "user_subscription",
+            "first_name",
+            "last_name",
+        ]

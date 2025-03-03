@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
 
@@ -53,54 +56,6 @@ class Addon(BaseProductModel):
     description = models.TextField()
 
 
-class Prediction(BaseInternalModel):
-    class Status(models.TextChoices):
-        WON = "WON", _("Won")
-        LOST = "LOST", _("Lost")
-        PENDING = "PENDING", _("Pending")
-
-    class Visibility(models.TextChoices):
-        PUBLIC = "PUBLIC", "Public"
-        PRIVATE = "PRIVATE", "Private"
-
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    visibility = models.CharField(
-        max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
-    )
-    home_team = models.CharField(max_length=255)
-    away_team = models.CharField(max_length=255)
-    prediction = models.CharField(max_length=255)
-    odds = models.DecimalField(max_digits=10, decimal_places=2)
-    result = models.CharField(max_length=255, blank=True)
-    kickoff_date = models.DateField()
-    kickoff_time = models.TimeField()
-    league = models.CharField(max_length=255)
-    status = models.CharField(
-        max_length=10, choices=Status, default=Status.PENDING, db_index=True
-    )
-
-    def __str__(self):
-        return f"{self.product.name} prediction for {self.home_team} vs {self.away_team}, {self.kickoff_time} ({self.league})"
-
-    @property
-    def kickoff_datetime(self):
-        # return date and time in a single string without time having seconds
-        return f"{self.kickoff_date} {self.kickoff_time.strftime('%H:%M')} (GMT+1)"
-
-    class Meta:
-        verbose_name = "Prediction"
-        verbose_name_plural = "Predictions"
-
-
-class PickOfTheDay(BaseInternalModel, SingletonModel):
-    prediction = models.OneToOneField(
-        Prediction, on_delete=models.CASCADE, null=True, blank=True
-    )
-
-    def __str__(self):
-        return f"Pick of the Day: {self.prediction}"
-
-
 class FrequentlyAskedQuestion(BaseInternalModel):
     question = models.CharField(max_length=255)
     answer = models.TextField()
@@ -126,3 +81,104 @@ class SiteSettings(BaseInternalModel, SingletonModel):
     class Meta:
         verbose_name = "Site Settings"
         verbose_name_plural = "Site Settings"
+
+
+class SportCountry(BaseInternalModel):
+    name = models.CharField(max_length=255, unique=True)
+    code = models.CharField(max_length=255, blank=True)
+    logo = models.FileField(upload_to="assets/countries/flags/")
+
+    def __str__(self):
+        return self.name
+
+
+class SportLeague(BaseInternalModel):
+    external_id = models.IntegerField(unique=True)
+    name = models.CharField(max_length=255)
+    country = models.ForeignKey(SportCountry, on_delete=models.CASCADE)
+    league_type = models.CharField(max_length=255)
+    logo = models.FileField(upload_to="assets/leagues/logos/")
+    current_season_id = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class SportTeam(BaseInternalModel):
+    external_id = models.IntegerField(unique=True)
+    name = models.CharField(max_length=255)
+    league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
+    logo = models.FileField(upload_to="assets/teams/logos/")
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class SportMatch(BaseInternalModel):
+    external_id = models.IntegerField(unique=True)
+    league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
+    home_team = models.ForeignKey(
+        SportTeam, on_delete=models.CASCADE, related_name="home_team"
+    )
+    home_team_score = models.CharField(max_length=2, blank=True)
+    away_team = models.ForeignKey(
+        SportTeam, on_delete=models.CASCADE, related_name="away_team"
+    )
+    away_team_score = models.CharField(max_length=2, blank=True)
+
+    kickoff_datetime = models.DateTimeField()
+
+    @property
+    def is_live(self):
+        # calculate if the match is live (soccer match)
+        match_end_time = self.kickoff_datetime + timedelta(hours=2)
+        return self.kickoff_datetime <= timezone.now() <= match_end_time
+
+    @property
+    def league_name(self):
+        return self.league.name
+
+    def __str__(self):
+        return f"[{self.league.name}] {self.home_team.name} vs {self.away_team.name} ({self.kickoff_datetime})"
+
+
+class Prediction(BaseInternalModel):
+    class Status(models.TextChoices):
+        WON = "WON", _("Won")
+        LOST = "LOST", _("Lost")
+        PENDING = "PENDING", _("Pending")
+
+    class Visibility(models.TextChoices):
+        PUBLIC = "PUBLIC", "Public"
+        PRIVATE = "PRIVATE", "Private"
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    visibility = models.CharField(
+        max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
+    )
+    match = models.ForeignKey(SportMatch, on_delete=models.CASCADE)
+    prediction = models.CharField(max_length=255)
+    odds = models.DecimalField(max_digits=10, decimal_places=2)
+    result = models.CharField(max_length=255, blank=True)
+
+    status = models.CharField(
+        max_length=10, choices=Status, default=Status.PENDING, db_index=True
+    )
+
+    detailed_analysis = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"[{self.product.name}] {self.match.home_team.name} vs {self.match.away_team.name} ({self.prediction})"
+
+    class Meta:
+        verbose_name = "Prediction"
+        verbose_name_plural = "Predictions"
+
+
+class PickOfTheDay(BaseInternalModel, SingletonModel):
+    prediction = models.OneToOneField(
+        Prediction, on_delete=models.CASCADE, null=True, blank=True
+    )
+
+    def __str__(self):
+        return f"Pick of the Day: {self.prediction}"

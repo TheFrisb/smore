@@ -1,7 +1,9 @@
 from django.urls import path
 
-from core.api.views import PaginatedPredictionView
+from core.api.views import PaginatedPredictionView, PredictionListView
 
 urlpatterns = [
-    path("predictions/", PaginatedPredictionView.as_view(), name="predictions-api"),
+    path("history/predictions/", PaginatedPredictionView.as_view(), name="predictions-api"),
+
+    path('predictions/', PredictionListView.as_view(), name='predictions-list'),
 ]

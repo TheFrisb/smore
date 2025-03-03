@@ -14,9 +14,12 @@ import { initRegisterForm } from "./registerForm";
 import initLanguageSelectionButton from "./languageSelection";
 import { initContactPixelEvent } from "./contact_pixel_event";
 import { initLeadPixelEvent } from "./lead_pixel_event";
+import initAiAssistant from "./aiAssistant";
+import { initDateItems } from "./dateItem";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
+  initDateItems();
   initMobileMenu();
   initProducts();
   initCopyButtons();
@@ -37,4 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initContactPixelEvent();
   initLeadPixelEvent();
+
+  initAiAssistant();
 });

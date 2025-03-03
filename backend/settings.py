@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 from decouple import config, Csv
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     # Third party apps
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt",
     "drf_standardized_errors",
     "adminsortable2",
     "solo",
@@ -50,6 +52,8 @@ INSTALLED_APPS = [
     "payments",
     "facebook",
     "scripts",
+    "authentication",
+    "ai_assistant",
 ]
 
 MIDDLEWARE = [
@@ -130,9 +134,21 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
+}
+
+# JWT Configuration
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=20),  # Access token lifetime
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # Refresh token lifetime
+    "ROTATE_REFRESH_TOKENS": True,  # Rotate refresh tokens
+    "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens
+    "UPDATE_LAST_LOGIN": True,  # Update last login time
+    "USER_ID_FIELD": "id",  # Use user ID in the token
+    "USER_ID_CLAIM": "user_id",  # Claim name for user ID
 }
 
 # Logging Configuration
@@ -219,3 +235,10 @@ GOOGLE_OAUTH_CLIENT_ID = config("GOOGLE_OAUTH_CLIENT_ID")
 # Facebook Pixel Configuration
 FACEBOOK_PIXEL_DATASET_ID = config("FACEBOOK_PIXEL_DATASET_ID")
 FACEBOOK_PIXEL_ACCESS_TOKEN = config("FACEBOOK_PIXEL_ACCESS_TOKEN")
+
+# RapidAPI Configuration
+RAPIDAPI_HOST = config("RAPIDAPI_HOST")
+RAPIDAPI_KEY = config("RAPIDAPI_KEY")
+
+# OpenAI Configuration
+OPENAI_API_KEY = config("OPENAI_API_KEY")

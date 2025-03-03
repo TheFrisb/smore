@@ -31,7 +31,9 @@ urlpatterns = [
     path("api/payments/", include("payments.urls")),
     path("api/accounts/", include("accounts.api.urls")),
     path("api/", include("core.api.urls")),
+    path("api/auth/", include("authentication.urls")),
     path("facebook/", include("facebook.urls")),
+    path("api/ai-assistant/", include("ai_assistant.urls")),
 ]
 
 if settings.DEBUG:

@@ -15,6 +15,8 @@ from .views import (
     UpcomingMatchesView,
     SubscriptionRequiredView,
     TelegramLandingView,
+    DetailedPredictionView,
+    AiAssistantView,
 )
 
 app_name = "core"
@@ -36,5 +38,11 @@ urlpatterns = [
         SubscriptionRequiredView.as_view(),
         name="subscription_required",
     ),
+    path(
+        "predictions/<int:pk>/",
+        DetailedPredictionView.as_view(),
+        name="detailed_prediction",
+    ),
+    path("ai-assistant/", AiAssistantView.as_view(), name="ai_assistant"),
     path("start/", TelegramLandingView.as_view(), name="telegram_landing"),
 ]

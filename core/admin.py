@@ -1,5 +1,7 @@
 from adminsortable2.admin import SortableAdminMixin
+from django import forms
 from django.contrib import admin
+from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
 from core.models import (
@@ -9,6 +11,10 @@ from core.models import (
     Addon,
     FrequentlyAskedQuestion,
     SiteSettings,
+    SportCountry,
+    SportLeague,
+    SportTeam,
+    SportMatch,
 )
 
 
@@ -51,18 +57,34 @@ class AddonAdmin(SortableAdminMixin, admin.ModelAdmin):
     search_fields = ["name"]
 
 
+class PredictionAdminForm(forms.ModelForm):
+    class Meta:
+        model = Prediction
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Calculate midnight today in UTC
+        midnight_today = timezone.now().replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        # Filter SportMatch queryset to include only matches on or after today
+        self.fields["match"].queryset = SportMatch.objects.filter(
+            kickoff_datetime__gte=midnight_today
+        )
+
+
 @admin.register(Prediction)
 class PredictionAdmin(admin.ModelAdmin):
+    form = PredictionAdminForm
+    autocomplete_fields = ["match"]
     list_display = [
-        "product",
-        "home_team",
-        "away_team",
+        "match",
         "prediction",
-        "kickoff_time",
         "status",
         "visibility",
     ]
-    search_fields = ("home_team", "away_team", "league", "product__name", "prediction")
+    search_fields = ("match__home_team__name", "match__away_team__name")
     list_filter = ["product", "status", "visibility"]
     ordering = ["-created_at"]
     readonly_fields = ["created_at", "updated_at"]
@@ -73,15 +95,14 @@ class PredictionAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "product",
-                    "kickoff_date",
-                    "kickoff_time",
-                    "league",
-                    "home_team",
-                    "away_team",
-                )
+                    "match",
+                ),
             },
         ),
-        ("Prediction Details", {"fields": ("prediction", "odds", "result")}),
+        (
+            "Prediction Details",
+            {"fields": ("prediction", "odds", "result", "detailed_analysis")},
+        ),
         ("Status and Visibility", {"fields": ("status", "visibility")}),
         ("Additional Information", {"fields": ("created_at", "updated_at")}),
     )
@@ -98,3 +119,20 @@ class FrequentlyAskedQuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 
 admin.site.register(SiteSettings, SingletonModelAdmin)
+admin.site.register(SportCountry)
+admin.site.register(SportLeague)
+
+
+@admin.register(SportTeam)
+class SportTeamAdmin(admin.ModelAdmin):
+    search_fields = ["name", "league__name"]
+
+
+@admin.register(SportMatch)
+class SportMatchAdmin(admin.ModelAdmin):
+    search_fields = [
+        "home_team__name",
+        "away_team__name",
+        "league__name",
+        "kickoff_datetime",
+    ]

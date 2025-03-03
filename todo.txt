@@ -1,19 +1,17 @@
 
 
-3. Users
-- Filter po active/inactive
-- List view da ima subscription, subscription start, subscription end
-- Majni stripe customer id
-- Detail view:
---- Personal info collapse
---- Permissions collapse
---- User Balance inline kako property
---- Direct so indirect referrals nested inline so zarabotka
-
-
 8. Subscription bonuses
 - Every 15th of the month, give bonuses to users:
 -- 5-10: 100$
 -- 11-20: 200$
 -- 21-30: 300$
 
+
+
+
+
+1. Add AI Chat
+2. Make cron job to fetch matches
+3. Initial migration script
+
+5. Track match scores

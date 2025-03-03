@@ -1,11 +1,12 @@
 import logging
-from datetime import date
 from itertools import groupby
 
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 
+from accounts.models import PurchasedPredictions
 from core.models import (
     Product,
     Addon,
@@ -26,6 +27,7 @@ class HomeView(TemplateView):
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
         context["page_title"] = _("Home")
         context.update(self.get_button_context())
+
         return context
 
     def get_button_context(self):
@@ -71,15 +73,60 @@ class HistoryView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["predictions"] = self.get_history_predictions()
         context["page_title"] = _("History")
+        context["show_predictions"] = True
         return context
 
     def get_history_predictions(self):
         predictions = Prediction.objects.filter(
             visibility=Prediction.Visibility.PUBLIC,
             status__in=[Prediction.Status.WON, Prediction.Status.LOST],
-        ).order_by("-kickoff_date", "-kickoff_time")[0:20]
+        ).order_by("-match__kickoff_datetime")[0:1]
 
         return predictions
+
+
+class DetailedPredictionView(DetailView):
+    model = Prediction
+    template_name = "core/pages/detail_prediction.html"
+    context_object_name = "prediction"
+
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .select_related(
+                "match",
+                "match__home_team",
+                "match__away_team",
+                "match__league",
+                "match__league__country",
+            )
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = _("Prediction Details")
+        context["can_view_prediction"] = self.can_view_prediction()
+        return context
+
+    def can_view_prediction(self):
+        prediction = self.get_object()
+
+        if prediction.status != Prediction.Status.PENDING:
+            return True
+
+        if (
+                self.request.user.is_authenticated
+                and self.request.user.can_view_prediction_type(prediction.product)
+        ):
+            return True
+
+        if PurchasedPredictions.objects.filter(
+                user=self.request.user, prediction=prediction
+        ).exists():
+            return True
+
+        return False
 
 
 class PlansView(TemplateView):
@@ -204,23 +251,51 @@ class UpcomingMatchesView(TemplateView):
         context = {"grouped_predictions": self.get_grouped_predictions()}
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
         context["page_title"] = _("Upcoming Matches")
+        context["show_predictions"] = self.get_show_predictions()
+        context["purchased_prediction_ids"] = PurchasedPredictions.objects.filter(
+            user=self.request.user
+        ).values_list("prediction_id", flat=True)
         return context
 
     def get_grouped_predictions(self):
-        predictions = Prediction.objects.filter(
-            kickoff_date__gte=date.today(),
-            visibility=Prediction.Visibility.PUBLIC,
-            status=Prediction.Status.PENDING,
-        ).order_by("kickoff_date", "kickoff_time")
+        predictions = (
+            Prediction.objects.filter(
+                match__kickoff_datetime__date__gte=timezone.now().date(),
+                visibility=Prediction.Visibility.PUBLIC,
+                status=Prediction.Status.PENDING,
+            )
+            .select_related(
+                "match", "match__home_team", "match__away_team", "match__league"
+            )
+            .order_by("match__kickoff_datetime")
+        )
 
         grouped_predictions = {
             kickoff_date: list(predictions)
             for kickoff_date, predictions in groupby(
-                predictions, key=lambda x: x.kickoff_date
+                predictions, key=lambda p: p.match.kickoff_datetime.date()
             )
         }
 
         return grouped_predictions
+
+    def get_show_predictions(self):
+        soccer = Product.objects.get(name="Soccer")
+        return (
+                self.request.user.is_authenticated
+                and self.request.user.can_view_prediction_type(soccer)
+        )
+
+
+class AiAssistantView(TemplateView):
+    template_name = "core/pages/ai_assistant.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = _("AI Assistant")
+        context["hide_footer"] = True
+        context["hide_ai_button"] = True
+        return context
 
 
 class SubscriptionRequiredView(TemplateView):

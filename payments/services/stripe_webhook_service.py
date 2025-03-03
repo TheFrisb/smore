@@ -6,9 +6,9 @@ from enum import Enum
 from django.db import models
 from django.utils import timezone
 
-from accounts.models import User, UserSubscription
+from accounts.models import User, UserSubscription, PurchasedPredictions
 from accounts.services.referral_service import ReferralService
-from core.models import Product
+from core.models import Product, Prediction
 from payments.services.base_stripe_service import BaseStripeService
 
 logger = logging.getLogger(__name__)
@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class StripeWebhookEvent(Enum):
     INVOICE_PAID = "invoice.paid"
+    PAYMENT_INTENT_SUCCEEDED = "payment_intent.succeeded"
     SUBSCRIPTION_UPDATED = "customer.subscription.updated"
     SUBSCRIPTION_DELETED = "customer.subscription.deleted"
 
@@ -32,6 +33,9 @@ class StripeWebhookService(BaseStripeService):
 
         if event_type == StripeWebhookEvent.INVOICE_PAID.value:
             self.process_invoice_paid(event["data"]["object"])
+
+        if event_type == StripeWebhookEvent.PAYMENT_INTENT_SUCCEEDED.value:
+            self.process_payment_intent_succeeded(event["data"]["object"])
 
         if event_type == StripeWebhookEvent.SUBSCRIPTION_UPDATED.value:
             self.process_subscription_updated(event["data"]["object"])
@@ -145,6 +149,34 @@ class StripeWebhookService(BaseStripeService):
 
         if new_subscription:
             self.mailer.send_new_subscription_email(user, user_subscription)
+
+    def process_payment_intent_succeeded(self, event_data):
+        logger.info(f"Received payment intent ({event_data['id']}) succeeded event")
+        stripe_customer_id = event_data["customer"]
+        prediction_id = event_data["metadata"].get("prediction_id", None)
+
+        if not prediction_id:
+            logger.info(f"No prediction ID found in payment intent: {event_data['id']}")
+            return
+
+        customer = User.objects.filter(stripe_customer_id=stripe_customer_id).first()
+        if not customer:
+            logger.error(f"No customer found with stripe ID: {stripe_customer_id}")
+            return
+
+        prediction = Prediction.objects.filter(id=prediction_id).first()
+        if not prediction:
+            logger.error(f"No prediction found with ID: {prediction_id}")
+            return
+
+        purchased_prediction = PurchasedPredictions.objects.create(
+            user=customer,
+            prediction=prediction,
+        )
+
+        logger.info(
+            f"Created purchased prediction: {purchased_prediction.id} for user: {customer.username}."
+        )
 
     def process_subscription_updated(self, event_data):
         logger.info(f"Received subscription updated event: {event_data}")

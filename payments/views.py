@@ -10,7 +10,7 @@ from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from core.models import Product
+from core.models import Product, Prediction
 from facebook.services.facebook_pixel import FacebookPixel
 from payments.services.stripe_checkout_service import (
     StripeCheckoutService,
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 # Create your views here.
-class CreateCheckoutUrlView(APIView):
+class CreateSubscriptionCheckoutUrl(APIView):
     def __init__(self):
         super().__init__()
         self.service = StripeCheckoutService()
@@ -56,7 +56,9 @@ class CreateCheckoutUrlView(APIView):
         elif serializer.validated_data["frequency"] == "year":
             price_ids = [product.yearly_price_stripe_id for product in products]
 
-        checkout_session = self.service.create_checkout_session(request.user, price_ids)
+        checkout_session = self.service.create_subscription_checkout_session(
+            request.user, price_ids
+        )
 
         try:
             fb_pixel = FacebookPixel(request)
@@ -69,6 +71,31 @@ class CreateCheckoutUrlView(APIView):
         output_serializer = self.OutputSerializer(data={"url": checkout_session.url})
         output_serializer.is_valid(raise_exception=True)
         return Response(output_serializer.data)
+
+
+class CreatePredictionCheckoutUrl(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        prediction_id = self.kwargs["prediction_id"]
+        prediction = Prediction.objects.get(id=prediction_id)
+
+        if not prediction:
+            messages.error(self.request, "Prediction not found.")
+            return reverse("core:home")
+
+        service = StripeCheckoutService()
+        checkout_session = service.create_onetime_prediction_checkout_session(
+            self.request.user, prediction
+        )
+
+        try:
+            fb_pixel = FacebookPixel(self.request)
+            fb_pixel.initiate_checkout(prediction.product, 9.99)
+        except Exception as e:
+            logger.error(
+                f"Error while sending InitiateCheckout Facebook Pixel event: {e}"
+            )
+
+        return checkout_session.url
 
 
 class ManageSubscriptionView(RedirectView):
@@ -101,7 +128,7 @@ class UpdateSubscriptionView(RedirectView):
         return portal_session.url
 
 
-class PaymentSuccessView(RedirectView):
+class SubscriptionPaymentSuccessView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         messages.success(
             self.request,

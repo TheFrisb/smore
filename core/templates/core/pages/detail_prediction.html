@@ -1,0 +1,141 @@
+{% extends 'core/base.html' %}
+{% load util_tags i18n static %}
+{% block content %}
+    <section class="pb-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
+        <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+        <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+
+        <div class="w-full bg-[#0D151E] relative">
+            <div class="container mx-auto px-4 py-4 md:py-12">
+                <div class="w-full flex items-center justify-center gap-2 relative pb-2">
+
+                    <img src="{{ prediction.match.league.country.logo.url }}" alt="" width="20"
+                         style="height: auto!important">
+                    <p class="text-emerald-400 font-bold">{{ prediction.match.league_name }}</p>
+                </div>
+                {% if prediction.match.is_live %}
+                    <p class="text text-red-500 font-bold text-center animate-pulse">LIVE</p>
+                {% else %}
+                    <p class="text-primary-200 text-sm text-center dateItem"
+                       data-date="{{ prediction.match.kickoff_datetime|date:'c' }}">{{ prediction.match.kickoff_datetime|date:"Y-m-d H:i" }}</p>
+                {% endif %}
+
+                <div class=" grid grid-cols-3">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <img src="{{ prediction.match.home_team.logo.url }}" width="64" style="height: auto!important">
+                        <p class="text-primary-100 font-bold text-center">{{ prediction.match.home_team.name }}</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <img src="{% static 'assets/images/vs.png' %}" alt="" width="32"
+                             style="height: auto!important">
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <img src="{{ prediction.match.away_team.logo.url }}" width="64" style="height: auto!important">
+                        <p class="text-primary-100 font-bold text-center">{{ prediction.match.away_team.name }}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+
+        </div>
+
+        <div class="container mx-auto px-4">
+            <div class="relative py-4">
+                <p class="text-secondary-400 font-bold">Match Analysis</p>
+                <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+            </div>
+            {% if can_view_prediction %}
+                <p class="text-primary-100 leading-7 py-4">{{ prediction.detailed_analysis }}</p>
+            {% else %}
+                <div class="max-w-2xl mx-auto text-center py-4">
+                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">
+                        <div class="flex flex-col items-center justify-center gap-2 pb-2 relative mb-4">
+                            <div class="w-16 h-16 bg-secondary-500/10 rounded-2xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="lucide lucide-lock w-10 h-10 text-white">
+                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-secondary-400 text-center">{% trans "Premium Prediction" %}</h2>
+                            <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+                        </div>
+                        <p class=" text-primary-200 mb-4">Subscribe to access our expert predictions for upcoming
+                            matches, featuring detailed analysis and insights.</p>
+                        <div class="space-y-6 mb-4">
+                            <div class="flex items-center justify-center space-x-2 text-primary-200">
+                                <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                                <span>92%+ {% trans "Success Rate" %}</span></div>
+                            <div class="flex items-center justify-center space-x-2 text-primary-200">
+                                <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                                <span>{% trans "Daily Expert Predictions" %}</span></div>
+                            <div class="flex items-center justify-center space-x-2 text-primary-200">
+                                <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
+                                <span>{% trans "Detailed Match Analysis" %}</span></div>
+                        </div>
+                        <a class="inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200 mb-6"
+                           href="{% url 'core:plans' %}">{% trans "View Plans" %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="lucide lucide-chevron-right ml-2 w-5 h-5">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </a>
+                        <div class="flex items-center justify-around gap-4 mb-4">
+                            <div class="h-[1px] w-full bg-secondary-700/20"></div>
+                            <p class="border border-secondary-500/50 rounded-full px-4 py-1  bg-secondary-500/10 text-secondary-400 font-bold">
+                                OR</p>
+                            <div class="h-[1px] w-full bg-secondary-500/20"></div>
+                        </div>
+                        <p class="text-primary-100 mb-4">Unlock this prediction for <span
+                                class="text-secondary-400">$9.99</span></p>
+                        <a class="inline-flex items-center justify-center px-8 py-4 font-medium text-white border border-secondary-500/50 rounded-lg hover:shadow-lg hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200 mb-4 bg-[#14202d] gap-2"
+                           href="{% url 'payments:prediction_checkout' prediction_id=prediction.id %}">{% trans "Unlock" %}
+                            {% svg_icon icon_name="circleCheck" css_classes="w-6 h-6 text-emerald-500" %}
+                        </a>
+
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="fixed w-screen bg-[#0D151E] bottom-0 self-end z-50">
+            <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    {% if can_view_prediction %}
+                        <div class="flex flex-col items-start justify-start">
+                            <p class="text-primary-400 text-sm">Prediction</p>
+                            <div class="flex items-center justify-start gap-2">
+                                <p class="font-bold  {% if prediction.status == 'LOST' %}text-red-500{% elif prediction.status == 'WON' %}text-emerald-500{% else %}text-secondary-400{% endif %}">{{ prediction.prediction }}</p>
+                                {% if prediction.status == "LOST" %}
+                                    {% svg_icon icon_name="circleX" css_classes="w-6 h-6 text-red-500" %}
+                                {% elif prediction.status == "WON" %}
+                                    {% svg_icon icon_name="circleCheck" css_classes="w-6 h-6 text-emerald-500" %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end gap-1">
+                            {% svg_icon icon_name="chevronUp" css_classes="w-5 h-5 text-emerald-400" %}
+
+                            <p class="text-primary-100">Odds</p>
+                            <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
+                        </div>
+                    {% else %}
+                        <div class="flex items-center justify-start gap-2">
+                            {% svg_icon icon_name="lock" css_classes="w-6 h-6 text-red-500" %}
+                            <p class="text-red-500">Prediction locked</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+    </section>
+{% endblock content %}

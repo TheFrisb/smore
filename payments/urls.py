@@ -1,16 +1,22 @@
 from django.urls import path
 
 from payments.views import (
-    CreateCheckoutUrlView,
+    CreateSubscriptionCheckoutUrl,
     stripe_webhook,
     ManageSubscriptionView,
     UpdateSubscriptionView,
-    PaymentSuccessView,
+    SubscriptionPaymentSuccessView,
+    CreatePredictionCheckoutUrl,
 )
 
 app_name = "payments"
 urlpatterns = [
-    path("checkout/", CreateCheckoutUrlView.as_view(), name="checkout"),
+    path("checkout/", CreateSubscriptionCheckoutUrl.as_view(), name="checkout"),
+    path(
+        "prediction/checkout/<int:prediction_id>/",
+        CreatePredictionCheckoutUrl.as_view(),
+        name="prediction_checkout",
+    ),
     path(
         "manage-subscription/",
         ManageSubscriptionView.as_view(),
@@ -21,6 +27,10 @@ urlpatterns = [
         UpdateSubscriptionView.as_view(),
         name="update_subscription",
     ),
-    path("payment-success/", PaymentSuccessView.as_view(), name="payment_success"),
+    path(
+        "payment-success/",
+        SubscriptionPaymentSuccessView.as_view(),
+        name="payment_success",
+    ),
     path("stripe/webhook/", stripe_webhook, name="stripe_webhook"),
 ]
