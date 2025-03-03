@@ -170,17 +170,20 @@ class Command(BaseCommand):
             team_logo_url, f"assets/teams/logos/", f"{team_id}.png"
         )
 
+        team_obj = SportTeam.objects.filter(external_id=team_id).first()
+        if team_obj:
+            team_obj.logo = team_logo_path
+            team_obj.save()
+            self.stdout.write(f"Successfully updated {team_obj}")
+            return team_obj
+
         try:
-            team_obj, created = SportTeam.objects.get_or_create(
+            team_obj = SportTeam.objects.create(
                 external_id=team_id,
                 name=team_name,
                 league=league_obj,
-                defaults={"logo": team_logo_path},
+                logo=team_logo_path,
             )
-
-            if not created:
-                team_obj.logo = team_logo_path
-                team_obj.save()
         except Exception as e:
             logger.error(f"Failed to create team {team_name}: {e}")
             return None
