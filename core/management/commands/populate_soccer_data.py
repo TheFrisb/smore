@@ -47,8 +47,6 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        self.populate_countries()
-        self.populate_leagues()
         self.populate_teams()
 
     def populate_countries(self):
@@ -168,16 +166,21 @@ class Command(BaseCommand):
             team_logo_url, f"assets/teams/logos/", f"{team_id}.png"
         )
 
-        team_obj, created = SportTeam.objects.get_or_create(
-            external_id=team_id,
-            name=team_name,
-            league=league_obj,
-            defaults={"logo": team_logo_path},
-        )
+        # team_obj, created = SportTeam.objects.get_or_create(
+        #     external_id=team_id,
+        #     name=team_name,
+        #     league=league_obj,
+        #     defaults={"logo": team_logo_path},
+        # )
 
-        if not created:
-            team_obj.logo = team_logo_path
-            team_obj.save()
+        team_obj = SportTeam.objects.filter(external_id=team_id).first()
+        if not team_obj:
+            team_obj = SportTeam.objects.create(
+                external_id=team_id,
+                name=team_name,
+                league=league_obj,
+                logo=team_logo_path,
+            )
 
         self.stdout.write(f"Successfully created {team_obj}")
         return team_obj
