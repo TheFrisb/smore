@@ -3,7 +3,7 @@
   var a = {
       629: (a, t, o) => {
         "use strict";
-        o.d(t, {A: () => d});
+        o.d(t, { A: () => d });
         var e = o(601),
           n = o.n(e),
           s = o(314),
@@ -28,53 +28,53 @@
                   t[4] && (o += "@supports (".concat(t[4], ") {")),
                   t[2] && (o += "@media ".concat(t[2], " {")),
                   e &&
-                  (o += "@layer".concat(
-                    t[5].length > 0 ? " ".concat(t[5]) : "",
-                    " {",
-                  )),
-                    (o += a(t)),
+                    (o += "@layer".concat(
+                      t[5].length > 0 ? " ".concat(t[5]) : "",
+                      " {",
+                    )),
+                  (o += a(t)),
                   e && (o += "}"),
                   t[2] && (o += "}"),
                   t[4] && (o += "}"),
-                    o
+                  o
                 );
               }).join("");
             }),
-              (t.i = function (a, o, e, n, s) {
-                "string" == typeof a && (a = [[null, a, void 0]]);
-                var i = {};
-                if (e)
-                  for (var d = 0; d < this.length; d++) {
-                    var r = this[d][0];
-                    null != r && (i[r] = !0);
-                  }
-                for (var c = 0; c < a.length; c++) {
-                  var l = [].concat(a[c]);
-                  (e && i[l[0]]) ||
+            (t.i = function (a, o, e, n, s) {
+              "string" == typeof a && (a = [[null, a, void 0]]);
+              var i = {};
+              if (e)
+                for (var d = 0; d < this.length; d++) {
+                  var r = this[d][0];
+                  null != r && (i[r] = !0);
+                }
+              for (var c = 0; c < a.length; c++) {
+                var l = [].concat(a[c]);
+                (e && i[l[0]]) ||
                   (void 0 !== s &&
-                  (void 0 === l[5] ||
-                  (l[1] = "@layer"
-                    .concat(l[5].length > 0 ? " ".concat(l[5]) : "", " {")
-                    .concat(l[1], "}")),
+                    (void 0 === l[5] ||
+                      (l[1] = "@layer"
+                        .concat(l[5].length > 0 ? " ".concat(l[5]) : "", " {")
+                        .concat(l[1], "}")),
                     (l[5] = s)),
                   o &&
-                  (l[2]
-                    ? ((l[1] = "@media "
-                      .concat(l[2], " {")
-                      .concat(l[1], "}")),
-                      (l[2] = o))
-                    : (l[2] = o)),
+                    (l[2]
+                      ? ((l[1] = "@media "
+                          .concat(l[2], " {")
+                          .concat(l[1], "}")),
+                        (l[2] = o))
+                      : (l[2] = o)),
                   n &&
-                  (l[4]
-                    ? ((l[1] = "@supports ("
-                      .concat(l[4], ") {")
-                      .concat(l[1], "}")),
-                      (l[4] = n))
-                    : (l[4] = "".concat(n))),
-                    t.push(l));
-                }
-              }),
-              t
+                    (l[4]
+                      ? ((l[1] = "@supports ("
+                          .concat(l[4], ") {")
+                          .concat(l[1], "}")),
+                        (l[4] = n))
+                      : (l[4] = "".concat(n))),
+                  t.push(l));
+              }
+            }),
+            t
           );
         };
       },
@@ -112,8 +112,8 @@
               return (
                 "symbol" == typeof a ||
                 ((function (a) {
-                    return !!a && "object" == typeof a;
-                  })(a) &&
+                  return !!a && "object" == typeof a;
+                })(a) &&
                   "[object Symbol]" == u.call(a))
               );
             })(a)
@@ -190,18 +190,18 @@
           return (
             (t = b(t) || 0),
             f(o) &&
-            ((l = !!o.leading),
+              ((l = !!o.leading),
               (s = (u = "maxWait" in o) ? y(b(o.maxWait) || 0, t) : s),
               (h = "trailing" in o ? !!o.trailing : h)),
-              (L.cancel = function () {
-                void 0 !== d && clearTimeout(d),
-                  (c = 0),
-                  (e = r = n = d = void 0);
-              }),
-              (L.flush = function () {
-                return void 0 === d ? i : x(p());
-              }),
-              L
+            (L.cancel = function () {
+              void 0 !== d && clearTimeout(d),
+                (c = 0),
+                (e = r = n = d = void 0);
+            }),
+            (L.flush = function () {
+              return void 0 === d ? i : x(p());
+            }),
+            L
           );
         };
       },
@@ -234,8 +234,8 @@
               return (
                 "symbol" == typeof a ||
                 ((function (a) {
-                    return !!a && "object" == typeof a;
-                  })(a) &&
+                  return !!a && "object" == typeof a;
+                })(a) &&
                   "[object Symbol]" == y.call(a))
               );
             })(a)
@@ -261,78 +261,78 @@
           if ("function" != typeof a) throw new TypeError(e);
           return (
             b(o) &&
-            ((n = "leading" in o ? !!o.leading : n),
+              ((n = "leading" in o ? !!o.leading : n),
               (s = "trailing" in o ? !!o.trailing : s)),
-              (function (a, t, o) {
-                var n,
-                  s,
-                  i,
-                  d,
-                  r,
-                  c,
-                  l = 0,
-                  u = !1,
-                  y = !1,
-                  v = !0;
-                if ("function" != typeof a) throw new TypeError(e);
+            (function (a, t, o) {
+              var n,
+                s,
+                i,
+                d,
+                r,
+                c,
+                l = 0,
+                u = !1,
+                y = !1,
+                v = !0;
+              if ("function" != typeof a) throw new TypeError(e);
 
-                function g(t) {
-                  var o = n,
-                    e = s;
-                  return (n = s = void 0), (l = t), (d = a.apply(e, o));
-                }
+              function g(t) {
+                var o = n,
+                  e = s;
+                return (n = s = void 0), (l = t), (d = a.apply(e, o));
+              }
 
-                function w(a) {
-                  var o = a - c;
-                  return void 0 === c || o >= t || o < 0 || (y && a - l >= i);
-                }
+              function w(a) {
+                var o = a - c;
+                return void 0 === c || o >= t || o < 0 || (y && a - l >= i);
+              }
 
-                function x() {
-                  var a = f();
-                  if (w(a)) return L(a);
-                  r = setTimeout(
-                    x,
-                    (function (a) {
-                      var o = t - (a - c);
-                      return y ? p(o, i - (a - l)) : o;
-                    })(a),
-                  );
-                }
-
-                function L(a) {
-                  return (r = void 0), v && n ? g(a) : ((n = s = void 0), d);
-                }
-
-                function k() {
-                  var a = f(),
-                    o = w(a);
-                  if (((n = arguments), (s = this), (c = a), o)) {
-                    if (void 0 === r)
-                      return (function (a) {
-                        return (l = a), (r = setTimeout(x, t)), u ? g(a) : d;
-                      })(c);
-                    if (y) return (r = setTimeout(x, t)), g(c);
-                  }
-                  return void 0 === r && (r = setTimeout(x, t)), d;
-                }
-
-                return (
-                  (t = h(t) || 0),
-                  b(o) &&
-                  ((u = !!o.leading),
-                    (i = (y = "maxWait" in o) ? m(h(o.maxWait) || 0, t) : i),
-                    (v = "trailing" in o ? !!o.trailing : v)),
-                    (k.cancel = function () {
-                      void 0 !== r && clearTimeout(r),
-                        (l = 0),
-                        (n = c = s = r = void 0);
-                    }),
-                    (k.flush = function () {
-                      return void 0 === r ? d : L(f());
-                    }),
-                    k
+              function x() {
+                var a = f();
+                if (w(a)) return L(a);
+                r = setTimeout(
+                  x,
+                  (function (a) {
+                    var o = t - (a - c);
+                    return y ? p(o, i - (a - l)) : o;
+                  })(a),
                 );
-              })(a, t, {leading: n, maxWait: t, trailing: s})
+              }
+
+              function L(a) {
+                return (r = void 0), v && n ? g(a) : ((n = s = void 0), d);
+              }
+
+              function k() {
+                var a = f(),
+                  o = w(a);
+                if (((n = arguments), (s = this), (c = a), o)) {
+                  if (void 0 === r)
+                    return (function (a) {
+                      return (l = a), (r = setTimeout(x, t)), u ? g(a) : d;
+                    })(c);
+                  if (y) return (r = setTimeout(x, t)), g(c);
+                }
+                return void 0 === r && (r = setTimeout(x, t)), d;
+              }
+
+              return (
+                (t = h(t) || 0),
+                b(o) &&
+                  ((u = !!o.leading),
+                  (i = (y = "maxWait" in o) ? m(h(o.maxWait) || 0, t) : i),
+                  (v = "trailing" in o ? !!o.trailing : v)),
+                (k.cancel = function () {
+                  void 0 !== r && clearTimeout(r),
+                    (l = 0),
+                    (n = c = s = r = void 0);
+                }),
+                (k.flush = function () {
+                  return void 0 === r ? d : L(f());
+                }),
+                k
+              );
+            })(a, t, { leading: n, maxWait: t, trailing: s })
           );
         };
       },
@@ -368,7 +368,7 @@
             else {
               var p = n(m, e);
               (e.byIndex = d),
-                t.splice(d, 0, {identifier: u, updater: p, references: 1});
+                t.splice(d, 0, { identifier: u, updater: p, references: 1 });
             }
             i.push(u);
           }
@@ -379,19 +379,19 @@
           var o = t.domAPI(t);
           return (
             o.update(a),
-              function (t) {
-                if (t) {
-                  if (
-                    t.css === a.css &&
-                    t.media === a.media &&
-                    t.sourceMap === a.sourceMap &&
-                    t.supports === a.supports &&
-                    t.layer === a.layer
-                  )
-                    return;
-                  o.update((a = t));
-                } else o.remove();
-              }
+            function (t) {
+              if (t) {
+                if (
+                  t.css === a.css &&
+                  t.media === a.media &&
+                  t.sourceMap === a.sourceMap &&
+                  t.supports === a.supports &&
+                  t.layer === a.layer
+                )
+                  return;
+                o.update((a = t));
+              } else o.remove();
+            }
           );
         }
 
@@ -457,10 +457,8 @@
         a.exports = function (a) {
           if ("undefined" == typeof document)
             return {
-              update: function () {
-              },
-              remove: function () {
-              },
+              update: function () {},
+              remove: function () {},
             };
           var t = a.insertStyleElement(a);
           return {
@@ -468,25 +466,25 @@
               !(function (a, t, o) {
                 var e = "";
                 o.supports && (e += "@supports (".concat(o.supports, ") {")),
-                o.media && (e += "@media ".concat(o.media, " {"));
+                  o.media && (e += "@media ".concat(o.media, " {"));
                 var n = void 0 !== o.layer;
                 n &&
-                (e += "@layer".concat(
-                  o.layer.length > 0 ? " ".concat(o.layer) : "",
-                  " {",
-                )),
+                  (e += "@layer".concat(
+                    o.layer.length > 0 ? " ".concat(o.layer) : "",
+                    " {",
+                  )),
                   (e += o.css),
-                n && (e += "}"),
-                o.media && (e += "}"),
-                o.supports && (e += "}");
+                  n && (e += "}"),
+                  o.media && (e += "}"),
+                  o.supports && (e += "}");
                 var s = o.sourceMap;
                 s &&
-                "undefined" != typeof btoa &&
-                (e +=
-                  "\n/*# sourceMappingURL=data:application/json;base64,".concat(
-                    btoa(unescape(encodeURIComponent(JSON.stringify(s)))),
-                    " */",
-                  )),
+                  "undefined" != typeof btoa &&
+                  (e +=
+                    "\n/*# sourceMappingURL=data:application/json;base64,".concat(
+                      btoa(unescape(encodeURIComponent(JSON.stringify(s)))),
+                      " */",
+                    )),
                   t.styleTagTransform(e, a, t.options);
               })(t, a, o);
             },
@@ -504,7 +502,7 @@
         a.exports = function (a, t) {
           if (t.styleSheet) t.styleSheet.cssText = a;
           else {
-            for (; t.firstChild;) t.removeChild(t.firstChild);
+            for (; t.firstChild; ) t.removeChild(t.firstChild);
             t.appendChild(document.createTextNode(a));
           }
         };
@@ -515,19 +513,19 @@
   function o(e) {
     var n = t[e];
     if (void 0 !== n) return n.exports;
-    var s = (t[e] = {id: e, exports: {}});
+    var s = (t[e] = { id: e, exports: {} });
     return a[e](s, s.exports, o), s.exports;
   }
 
   (o.n = (a) => {
     var t = a && a.__esModule ? () => a.default : () => a;
-    return o.d(t, {a: t}), t;
+    return o.d(t, { a: t }), t;
   }),
     (o.d = (a, t) => {
       for (var e in t)
         o.o(t, e) &&
-        !o.o(a, e) &&
-        Object.defineProperty(a, e, {enumerable: !0, get: t[e]});
+          !o.o(a, e) &&
+          Object.defineProperty(a, e, { enumerable: !0, get: t[e] });
     }),
     (o.g = (function () {
       if ("object" == typeof globalThis) return globalThis;
@@ -578,14 +576,14 @@
                 .concat(n, "</span>\n    <span>")
                 .concat(s, "</span>\n    </div>\n    </div>\n    "));
         }),
-        r.length > 1 &&
-        (a +=
-          '\n    <div class="flex justify-between items-center text-secondary-500 py-3">\n    <span>Multi-sport Discount</span>\n    <span>-€'.concat(
-            20 * (r.length - 1),
-            "</span> \n    </div>\n    ",
-          )),
+          r.length > 1 &&
+            (a +=
+              '\n    <div class="flex justify-between items-center text-secondary-500 py-3">\n    <span>Multi-sport Discount</span>\n    <span>-€'.concat(
+                20 * (r.length - 1),
+                "</span> \n    </div>\n    ",
+              )),
           (n.innerHTML = a),
-        s && (0 === r.length ? (s.disabled = !0) : (s.disabled = !1)),
+          s && (0 === r.length ? (s.disabled = !0) : (s.disabled = !1)),
           (document.querySelector(
             ".checkoutSummarySection__totalPrice",
           ).textContent = "€".concat(t.toFixed(2)));
@@ -595,14 +593,14 @@
         if (t && e) {
           if (
             (i &&
-            i.addEventListener("click", function () {
-              var a = i.querySelector(".toggleButton"),
-                t = document.querySelector(".annualLabel"),
-                o = document.querySelector(".monthlyLabel"),
-                n = e.querySelector("#subscriptionMode");
-              if (a.classList.contains("left-1")) {
-                if (
-                  (a.classList.remove("left-1"),
+              i.addEventListener("click", function () {
+                var a = i.querySelector(".toggleButton"),
+                  t = document.querySelector(".annualLabel"),
+                  o = document.querySelector(".monthlyLabel"),
+                  n = e.querySelector("#subscriptionMode");
+                if (a.classList.contains("left-1")) {
+                  if (
+                    (a.classList.remove("left-1"),
                     a.classList.add("right-1"),
                     (c = "year"),
                     t.classList.remove("text-primary-300"),
@@ -610,15 +608,15 @@
                     o.classList.add("text-primary-300"),
                     o.classList.remove("text-white"),
                     (n.textContent = n.getAttribute("data-translated-yearly")),
-                  d && (console.log(d.value), "monthly" === d.value))
-                ) {
-                  var s = document.querySelector(
-                    '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
-                  );
-                  s.textContent = s.getAttribute("data-upgrade-plan");
-                }
-              } else if (
-                (a.classList.remove("right-1"),
+                    d && (console.log(d.value), "monthly" === d.value))
+                  ) {
+                    var s = document.querySelector(
+                      '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
+                    );
+                    s.textContent = s.getAttribute("data-upgrade-plan");
+                  }
+                } else if (
+                  (a.classList.remove("right-1"),
                   a.classList.add("left-1"),
                   (c = "month"),
                   o.classList.remove("text-primary-300"),
@@ -626,83 +624,83 @@
                   t.classList.add("text-primary-300"),
                   t.classList.remove("text-white"),
                   (n.textContent = n.getAttribute("data-translated-monthly")),
-                d && d.value)
-              ) {
-                var r = document.querySelector(
-                  '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
-                );
-                r.textContent = r.getAttribute("data-current-plan");
-              }
-              document.querySelectorAll(".product").forEach(function (a) {
-                var t = a.querySelector(".product__price"),
-                  o = a.querySelector(".product__subscriptionMode"),
-                  e = a.querySelector(".product__yearlyPriceNoDiscount"),
-                  n = a.getAttribute("data-product-monthly-price"),
-                  s = a.getAttribute("data-product-annual-price"),
-                  i = "month" === c ? n : s;
-                (o.textContent = a.getAttribute(
-                  "data-translated-mode-".concat(c),
-                )),
-                  "year" === c
-                    ? e.classList.remove("hidden")
-                    : e.classList.add("hidden"),
-                  (t.textContent = "€".concat(i));
+                  d && d.value)
+                ) {
+                  var r = document.querySelector(
+                    '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
+                  );
+                  r.textContent = r.getAttribute("data-current-plan");
+                }
+                document.querySelectorAll(".product").forEach(function (a) {
+                  var t = a.querySelector(".product__price"),
+                    o = a.querySelector(".product__subscriptionMode"),
+                    e = a.querySelector(".product__yearlyPriceNoDiscount"),
+                    n = a.getAttribute("data-product-monthly-price"),
+                    s = a.getAttribute("data-product-annual-price"),
+                    i = "month" === c ? n : s;
+                  (o.textContent = a.getAttribute(
+                    "data-translated-mode-".concat(c),
+                  )),
+                    "year" === c
+                      ? e.classList.remove("hidden")
+                      : e.classList.add("hidden"),
+                    (t.textContent = "€".concat(i));
+                }),
+                  l();
               }),
-                l();
-            }),
-              t.forEach(function (a) {
-                a.addEventListener("click", function () {
-                  if (!a.classList.contains("notSelectable")) {
-                    var t = a.getAttribute("data-product-id"),
-                      o = a.querySelector(".product__checkboxContainer"),
-                      e = a.querySelector(".product__checkboxIcon");
-                    !(function (a, t, o) {
-                      if (a.classList.contains("selected")) {
+            t.forEach(function (a) {
+              a.addEventListener("click", function () {
+                if (!a.classList.contains("notSelectable")) {
+                  var t = a.getAttribute("data-product-id"),
+                    o = a.querySelector(".product__checkboxContainer"),
+                    e = a.querySelector(".product__checkboxIcon");
+                  !(function (a, t, o) {
+                    if (a.classList.contains("selected")) {
+                      if (d && (console.log(d.value), d.value)) return;
+                      a.classList.remove("selected"),
+                        a.classList.remove(
+                          "bg-secondary-500/20",
+                          "border-secondary-500/50",
+                        ),
+                        a.classList.add(
+                          "hover:border-primary-500/30",
+                          "hover:shadow-lg",
+                          "hover:shadow-primary-500/10",
+                          "bg-primary-800/50",
+                        ),
+                        t.classList.remove(
+                          "bg-primary-500",
+                          "border-primary-500",
+                        ),
+                        o.classList.add("hidden");
+                    } else
+                      a.classList.add("selected"),
+                        a.classList.add(
+                          "bg-secondary-500/20",
+                          "border-secondary-500/50",
+                        ),
+                        a.classList.remove(
+                          "hover:border-primary-500/30",
+                          "hover:shadow-lg",
+                          "hover:shadow-primary-500/10",
+                          "bg-primary-800/50",
+                        ),
+                        t.classList.add("bg-primary-500", "border-primary-500"),
+                        o.classList.remove("hidden");
+                  })(a, o, e),
+                    (function (a) {
+                      var t = r.indexOf(a);
+                      if (-1 === t) r.push(a);
+                      else {
                         if (d && (console.log(d.value), d.value)) return;
-                        a.classList.remove("selected"),
-                          a.classList.remove(
-                            "bg-secondary-500/20",
-                            "border-secondary-500/50",
-                          ),
-                          a.classList.add(
-                            "hover:border-primary-500/30",
-                            "hover:shadow-lg",
-                            "hover:shadow-primary-500/10",
-                            "bg-primary-800/50",
-                          ),
-                          t.classList.remove(
-                            "bg-primary-500",
-                            "border-primary-500",
-                          ),
-                          o.classList.add("hidden");
-                      } else
-                        a.classList.add("selected"),
-                          a.classList.add(
-                            "bg-secondary-500/20",
-                            "border-secondary-500/50",
-                          ),
-                          a.classList.remove(
-                            "hover:border-primary-500/30",
-                            "hover:shadow-lg",
-                            "hover:shadow-primary-500/10",
-                            "bg-primary-800/50",
-                          ),
-                          t.classList.add("bg-primary-500", "border-primary-500"),
-                          o.classList.remove("hidden");
-                    })(a, o, e),
-                      (function (a) {
-                        var t = r.indexOf(a);
-                        if (-1 === t) r.push(a);
-                        else {
-                          if (d && (console.log(d.value), d.value)) return;
-                          r.splice(t, 1);
-                        }
-                      })(t),
-                      l();
-                  }
-                });
-              }),
-              d)
+                        r.splice(t, 1);
+                      }
+                    })(t),
+                    l();
+                }
+              });
+            }),
+            d)
           ) {
             console.log(d.value);
             var o = d.value;
@@ -715,35 +713,35 @@
             o && "yearly" === o && i.click();
           }
           s &&
-          s.addEventListener("click", function () {
-            if (!s.disabled) {
-              s.disabled = !0;
-              var t = a();
-              fetch("/api/payments/checkout/", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-CSRFToken": t,
-                },
-                body: JSON.stringify({
-                  products: r.map(Number),
-                  frequency: c,
-                }),
-              })
-                .then(function (a) {
-                  return a.json();
+            s.addEventListener("click", function () {
+              if (!s.disabled) {
+                s.disabled = !0;
+                var t = a();
+                fetch("/api/payments/checkout/", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": t,
+                  },
+                  body: JSON.stringify({
+                    products: r.map(Number),
+                    frequency: c,
+                  }),
                 })
-                .then(function (a) {
-                  window.location.href = a.url;
-                })
-                .catch(function (a) {
-                  console.error("Error:", a);
-                })
-                .finally(function () {
-                  s.disabled = !1;
-                });
-            }
-          });
+                  .then(function (a) {
+                    return a.json();
+                  })
+                  .then(function (a) {
+                    window.location.href = a.url;
+                  })
+                  .catch(function (a) {
+                    console.error("Error:", a);
+                  })
+                  .finally(function () {
+                    s.disabled = !1;
+                  });
+              }
+            });
         }
       };
       var y = o(72),
@@ -766,13 +764,12 @@
         (E.domAPI = f()),
         (E.insertStyleElement = x()),
         m()(_.A, E),
-      _.A && _.A.locals && _.A.locals;
+        _.A && _.A.locals && _.A.locals;
       var S = o(858),
         j = o.n(S),
         N = o(181),
         q = o.n(N);
-      let C = () => {
-      };
+      let C = () => {};
 
       function A(a) {
         let t, o, e;
@@ -785,11 +782,11 @@
 
       function O(a) {
         a &&
-        a.forEach((a) => {
-          const t = Array.prototype.slice.call(a.addedNodes),
-            o = Array.prototype.slice.call(a.removedNodes);
-          if (A(t.concat(o))) return C();
-        });
+          a.forEach((a) => {
+            const t = Array.prototype.slice.call(a.addedNodes),
+              o = Array.prototype.slice.call(a.removedNodes);
+            if (A(t.concat(o))) return C();
+          });
       }
 
       function T() {
@@ -853,33 +850,33 @@
           return (
             B.ie11()
               ? ((o = document.createEvent("CustomEvent")),
-                o.initCustomEvent(a, !0, !0, {detail: t}))
-              : (o = new CustomEvent(a, {detail: t})),
-              document.dispatchEvent(o)
+                o.initCustomEvent(a, !0, !0, { detail: t }))
+              : (o = new CustomEvent(a, { detail: t })),
+            document.dispatchEvent(o)
           );
         },
         W = (a) =>
           a.forEach((a, t) =>
             ((a, t) => {
-              const {options: o, position: e, node: n, data: s} = a,
+              const { options: o, position: e, node: n, data: s } = a,
                 i = () => {
                   a.animated &&
-                  (((a, t) => {
-                    t && t.forEach((t) => a.classList.remove(t));
-                  })(n, o.animatedClassNames),
+                    (((a, t) => {
+                      t && t.forEach((t) => a.classList.remove(t));
+                    })(n, o.animatedClassNames),
                     R("aos:out", n),
-                  a.options.id && R(`aos:in:${a.options.id}`, n),
+                    a.options.id && R(`aos:in:${a.options.id}`, n),
                     (a.animated = !1));
                 };
               o.mirror && t >= e.out && !o.once
                 ? i()
                 : t >= e.in
                   ? a.animated ||
-                  (((a, t) => {
-                    t && t.forEach((t) => a.classList.add(t));
-                  })(n, o.animatedClassNames),
+                    (((a, t) => {
+                      t && t.forEach((t) => a.classList.add(t));
+                    })(n, o.animatedClassNames),
                     R("aos:in", n),
-                  a.options.id && R(`aos:in:${a.options.id}`, n),
+                    a.options.id && R(`aos:in:${a.options.id}`, n),
                     (a.animated = !0))
                   : a.animated && !o.once && i();
             })(a, window.pageYOffset),
@@ -887,11 +884,11 @@
         Y = function (a) {
           let t = 0,
             o = 0;
-          for (; a && !isNaN(a.offsetLeft) && !isNaN(a.offsetTop);)
+          for (; a && !isNaN(a.offsetLeft) && !isNaN(a.offsetTop); )
             (t += a.offsetLeft - ("BODY" != a.tagName ? a.scrollLeft : 0)),
               (o += a.offsetTop - ("BODY" != a.tagName ? a.scrollTop : 0)),
               (a = a.offsetParent);
-          return {top: o, left: t};
+          return { top: o, left: t };
         },
         X = (a, t, o) => {
           const e = a.getAttribute("data-aos-" + t);
@@ -909,8 +906,8 @@
             d = s || o;
           let r = a;
           n &&
-          document.querySelectorAll(n) &&
-          (r = document.querySelectorAll(n)[0]);
+            document.querySelectorAll(n) &&
+            (r = document.querySelectorAll(n)[0]);
           let c = Y(r).top - e;
           switch (d) {
             case "top-bottom":
@@ -948,14 +945,14 @@
           let n = a;
           return (
             o &&
-            document.querySelectorAll(o) &&
-            (n = document.querySelectorAll(o)[0]),
+              document.querySelectorAll(o) &&
+              (n = document.querySelectorAll(o)[0]),
             Y(n).top + n.offsetHeight - e
           );
         },
         U = () => {
           const a = document.querySelectorAll("[data-aos]");
-          return Array.prototype.map.call(a, (a) => ({node: a}));
+          return Array.prototype.map.call(a, (a) => ({ node: a }));
         };
       let K = [],
         J = !1,
@@ -979,39 +976,39 @@
       const V = () => document.all && !window.atob,
         Z = function (a = !1) {
           a && (J = !0),
-          J &&
-          ((K = (function (a, t) {
-            return (
-              a.forEach((a, o) => {
-                const e = X(a.node, "mirror", t.mirror),
-                  n = X(a.node, "once", t.once),
-                  s = X(a.node, "id"),
-                  i = t.useClassNames && a.node.getAttribute("data-aos"),
-                  d = [t.animatedClassName]
-                    .concat(i ? i.split(" ") : [])
-                    .filter((a) => "string" == typeof a);
-                t.initClassName && a.node.classList.add(t.initClassName),
-                  (a.position = {
-                    in: $(a.node, t.offset, t.anchorPlacement),
-                    out: e && G(a.node, t.offset),
+            J &&
+              ((K = (function (a, t) {
+                return (
+                  a.forEach((a, o) => {
+                    const e = X(a.node, "mirror", t.mirror),
+                      n = X(a.node, "once", t.once),
+                      s = X(a.node, "id"),
+                      i = t.useClassNames && a.node.getAttribute("data-aos"),
+                      d = [t.animatedClassName]
+                        .concat(i ? i.split(" ") : [])
+                        .filter((a) => "string" == typeof a);
+                    t.initClassName && a.node.classList.add(t.initClassName),
+                      (a.position = {
+                        in: $(a.node, t.offset, t.anchorPlacement),
+                        out: e && G(a.node, t.offset),
+                      }),
+                      (a.options = {
+                        once: n,
+                        mirror: e,
+                        animatedClassNames: d,
+                        id: s,
+                      });
                   }),
-                  (a.options = {
-                    once: n,
-                    mirror: e,
-                    animatedClassNames: d,
-                    id: s,
-                  });
-              }),
-                a
-            );
-          })(K, Q)),
-            W(K),
-            window.addEventListener(
-              "scroll",
-              j()(() => {
-                W(K, Q.once);
-              }, Q.throttleDelay),
-            ));
+                  a
+                );
+              })(K, Q)),
+              W(K),
+              window.addEventListener(
+                "scroll",
+                j()(() => {
+                  W(K, Q.once);
+                }, Q.throttleDelay),
+              ));
         },
         aa = function () {
           if (((K = U()), oa(Q.disable) || V())) return ta();
@@ -1023,9 +1020,9 @@
               a.node.removeAttribute("data-aos-easing"),
               a.node.removeAttribute("data-aos-duration"),
               a.node.removeAttribute("data-aos-delay"),
-            Q.initClassName && a.node.classList.remove(Q.initClassName),
-            Q.animatedClassName &&
-            a.node.classList.remove(Q.animatedClassName);
+              Q.initClassName && a.node.classList.remove(Q.initClassName),
+              Q.animatedClassName &&
+                a.node.classList.remove(Q.animatedClassName);
           });
         },
         oa = function (a) {
@@ -1049,7 +1046,7 @@
                     Object.prototype.hasOwnProperty.call(t, n) && (a[n] = t[n]);
                 return a;
               }),
-              sa.apply(this, arguments)
+            sa.apply(this, arguments)
           );
         },
         ia = (function () {
@@ -1062,13 +1059,13 @@
               var o = this.listeners[a] || [];
               this.listeners[a] = o.concat([t]);
             }),
-              (a.prototype.triggerEvent = function (a, t) {
-                var o = this;
-                (this.listeners[a] || []).forEach(function (a) {
-                  return a({target: o, event: t});
-                });
-              }),
-              a
+            (a.prototype.triggerEvent = function (a, t) {
+              var o = this;
+              (this.listeners[a] || []).forEach(function (a) {
+                return a({ target: o, event: t });
+              });
+            }),
+            a
           );
         })();
       !(function (a) {
@@ -1085,17 +1082,17 @@
               this.notifications.push(a),
                 this.updateFn(a, ea.Add, this.notifications);
             }),
-              (a.prototype.splice = function (a, t) {
-                var o = this.notifications.splice(a, t)[0];
-                return this.updateFn(o, ea.Remove, this.notifications), o;
-              }),
-              (a.prototype.indexOf = function (a) {
-                return this.notifications.indexOf(a);
-              }),
-              (a.prototype.onUpdate = function (a) {
-                this.updateFn = a;
-              }),
-              a
+            (a.prototype.splice = function (a, t) {
+              var o = this.notifications.splice(a, t)[0];
+              return this.updateFn(o, ea.Remove, this.notifications), o;
+            }),
+            (a.prototype.indexOf = function (a) {
+              return this.notifications.indexOf(a);
+            }),
+            (a.prototype.onUpdate = function (a) {
+              this.updateFn = a;
+            }),
+            a
           );
         })();
       !(function (a) {
@@ -1107,18 +1104,18 @@
               type: "success",
               className: "notyf__toast--success",
               backgroundColor: "#3dc763",
-              icon: {className: "notyf__icon--success", tagName: "i"},
+              icon: { className: "notyf__icon--success", tagName: "i" },
             },
             {
               type: "error",
               className: "notyf__toast--error",
               backgroundColor: "#ed3d3d",
-              icon: {className: "notyf__icon--error", tagName: "i"},
+              icon: { className: "notyf__icon--error", tagName: "i" },
             },
           ],
           duration: 2e3,
           ripple: !0,
-          position: {x: "right", y: "bottom"},
+          position: { x: "right", y: "bottom" },
           dismissible: !1,
         },
         la = (function () {
@@ -1152,205 +1149,205 @@
               var o;
               this.events = sa(sa({}, this.events), (((o = {})[a] = t), o));
             }),
-              (a.prototype.update = function (a, t) {
-                t === ea.Add
-                  ? this.addNotification(a)
-                  : t === ea.Remove && this.removeNotification(a);
-              }),
-              (a.prototype.removeNotification = function (a) {
-                var t,
-                  o,
-                  e = this,
-                  n = this._popRenderedNotification(a);
-                n &&
+            (a.prototype.update = function (a, t) {
+              t === ea.Add
+                ? this.addNotification(a)
+                : t === ea.Remove && this.removeNotification(a);
+            }),
+            (a.prototype.removeNotification = function (a) {
+              var t,
+                o,
+                e = this,
+                n = this._popRenderedNotification(a);
+              n &&
                 ((t = n.node).classList.add("notyf__toast--disappear"),
-                  t.addEventListener(
-                    this.animationEndEventName,
-                    (o = function (a) {
-                      a.target === t &&
+                t.addEventListener(
+                  this.animationEndEventName,
+                  (o = function (a) {
+                    a.target === t &&
                       (t.removeEventListener(e.animationEndEventName, o),
-                        e.container.removeChild(t));
-                    }),
-                  ));
-              }),
-              (a.prototype.addNotification = function (a) {
-                var t = this._renderNotification(a);
-                this.notifications.push({notification: a, node: t}),
-                  this._announce(a.options.message || "Notification");
-              }),
-              (a.prototype._renderNotification = function (a) {
-                var t,
-                  o = this._buildNotificationCard(a),
-                  e = a.options.className;
-                return (
-                  e && (t = o.classList).add.apply(t, e.split(" ")),
-                    this.container.appendChild(o),
-                    o
-                );
-              }),
-              (a.prototype._popRenderedNotification = function (a) {
-                for (
-                  var t = -1, o = 0;
-                  o < this.notifications.length && t < 0;
-                  o++
-                )
-                  this.notifications[o].notification === a && (t = o);
-                if (-1 !== t) return this.notifications.splice(t, 1)[0];
-              }),
-              (a.prototype.getXPosition = function (a) {
-                var t;
-                return (
-                  (null === (t = null == a ? void 0 : a.position) || void 0 === t
-                    ? void 0
-                    : t.x) || "right"
-                );
-              }),
-              (a.prototype.getYPosition = function (a) {
-                var t;
-                return (
-                  (null === (t = null == a ? void 0 : a.position) || void 0 === t
-                    ? void 0
-                    : t.y) || "bottom"
-                );
-              }),
-              (a.prototype.adjustContainerAlignment = function (a) {
-                var t = this.X_POSITION_FLEX_MAP[this.getXPosition(a)],
-                  o = this.Y_POSITION_FLEX_MAP[this.getYPosition(a)],
-                  e = this.container.style;
-                e.setProperty("justify-content", o),
-                  e.setProperty("align-items", t);
-              }),
-              (a.prototype._buildNotificationCard = function (a) {
-                var t = this,
-                  o = a.options,
-                  e = o.icon;
-                this.adjustContainerAlignment(o);
-                var n = this._createHTMLElement({
-                    tagName: "div",
-                    className: "notyf__toast",
+                      e.container.removeChild(t));
                   }),
-                  s = this._createHTMLElement({
-                    tagName: "div",
-                    className: "notyf__ripple",
-                  }),
-                  i = this._createHTMLElement({
-                    tagName: "div",
-                    className: "notyf__wrapper",
-                  }),
-                  d = this._createHTMLElement({
-                    tagName: "div",
-                    className: "notyf__message",
-                  });
-                d.innerHTML = o.message || "";
-                var r = o.background || o.backgroundColor;
-                if (e) {
-                  var c = this._createHTMLElement({
-                    tagName: "div",
-                    className: "notyf__icon",
-                  });
-                  if (
-                    (("string" == typeof e || e instanceof String) &&
-                    (c.innerHTML = new String(e).valueOf()),
-                    "object" == typeof e)
-                  ) {
-                    var l = e.tagName,
-                      u = void 0 === l ? "i" : l,
-                      y = e.className,
-                      m = e.text,
-                      p = e.color,
-                      f = void 0 === p ? r : p,
-                      b = this._createHTMLElement({
-                        tagName: u,
-                        className: y,
-                        text: m,
-                      });
-                    f && (b.style.color = f), c.appendChild(b);
-                  }
-                  i.appendChild(c);
-                }
+                ));
+            }),
+            (a.prototype.addNotification = function (a) {
+              var t = this._renderNotification(a);
+              this.notifications.push({ notification: a, node: t }),
+                this._announce(a.options.message || "Notification");
+            }),
+            (a.prototype._renderNotification = function (a) {
+              var t,
+                o = this._buildNotificationCard(a),
+                e = a.options.className;
+              return (
+                e && (t = o.classList).add.apply(t, e.split(" ")),
+                this.container.appendChild(o),
+                o
+              );
+            }),
+            (a.prototype._popRenderedNotification = function (a) {
+              for (
+                var t = -1, o = 0;
+                o < this.notifications.length && t < 0;
+                o++
+              )
+                this.notifications[o].notification === a && (t = o);
+              if (-1 !== t) return this.notifications.splice(t, 1)[0];
+            }),
+            (a.prototype.getXPosition = function (a) {
+              var t;
+              return (
+                (null === (t = null == a ? void 0 : a.position) || void 0 === t
+                  ? void 0
+                  : t.x) || "right"
+              );
+            }),
+            (a.prototype.getYPosition = function (a) {
+              var t;
+              return (
+                (null === (t = null == a ? void 0 : a.position) || void 0 === t
+                  ? void 0
+                  : t.y) || "bottom"
+              );
+            }),
+            (a.prototype.adjustContainerAlignment = function (a) {
+              var t = this.X_POSITION_FLEX_MAP[this.getXPosition(a)],
+                o = this.Y_POSITION_FLEX_MAP[this.getYPosition(a)],
+                e = this.container.style;
+              e.setProperty("justify-content", o),
+                e.setProperty("align-items", t);
+            }),
+            (a.prototype._buildNotificationCard = function (a) {
+              var t = this,
+                o = a.options,
+                e = o.icon;
+              this.adjustContainerAlignment(o);
+              var n = this._createHTMLElement({
+                  tagName: "div",
+                  className: "notyf__toast",
+                }),
+                s = this._createHTMLElement({
+                  tagName: "div",
+                  className: "notyf__ripple",
+                }),
+                i = this._createHTMLElement({
+                  tagName: "div",
+                  className: "notyf__wrapper",
+                }),
+                d = this._createHTMLElement({
+                  tagName: "div",
+                  className: "notyf__message",
+                });
+              d.innerHTML = o.message || "";
+              var r = o.background || o.backgroundColor;
+              if (e) {
+                var c = this._createHTMLElement({
+                  tagName: "div",
+                  className: "notyf__icon",
+                });
                 if (
-                  (i.appendChild(d),
-                    n.appendChild(i),
-                  r &&
+                  (("string" == typeof e || e instanceof String) &&
+                    (c.innerHTML = new String(e).valueOf()),
+                  "object" == typeof e)
+                ) {
+                  var l = e.tagName,
+                    u = void 0 === l ? "i" : l,
+                    y = e.className,
+                    m = e.text,
+                    p = e.color,
+                    f = void 0 === p ? r : p,
+                    b = this._createHTMLElement({
+                      tagName: u,
+                      className: y,
+                      text: m,
+                    });
+                  f && (b.style.color = f), c.appendChild(b);
+                }
+                i.appendChild(c);
+              }
+              if (
+                (i.appendChild(d),
+                n.appendChild(i),
+                r &&
                   (o.ripple
                     ? ((s.style.background = r), n.appendChild(s))
                     : (n.style.background = r)),
-                    o.dismissible)
-                ) {
-                  var h = this._createHTMLElement({
-                      tagName: "div",
-                      className: "notyf__dismiss",
-                    }),
-                    v = this._createHTMLElement({
-                      tagName: "button",
-                      className: "notyf__dismiss-btn",
-                    });
-                  h.appendChild(v),
-                    i.appendChild(h),
-                    n.classList.add("notyf__toast--dismissible"),
-                    v.addEventListener("click", function (o) {
-                      var e, n;
-                      null === (n = (e = t.events)[da.Dismiss]) ||
+                o.dismissible)
+              ) {
+                var h = this._createHTMLElement({
+                    tagName: "div",
+                    className: "notyf__dismiss",
+                  }),
+                  v = this._createHTMLElement({
+                    tagName: "button",
+                    className: "notyf__dismiss-btn",
+                  });
+                h.appendChild(v),
+                  i.appendChild(h),
+                  n.classList.add("notyf__toast--dismissible"),
+                  v.addEventListener("click", function (o) {
+                    var e, n;
+                    null === (n = (e = t.events)[da.Dismiss]) ||
                       void 0 === n ||
-                      n.call(e, {target: a, event: o}),
-                        o.stopPropagation();
-                    });
-                }
-                n.addEventListener("click", function (o) {
-                  var e, n;
-                  return null === (n = (e = t.events)[da.Click]) || void 0 === n
-                    ? void 0
-                    : n.call(e, {target: a, event: o});
-                });
-                var g = "top" === this.getYPosition(o) ? "upper" : "lower";
-                return n.classList.add("notyf__toast--" + g), n;
-              }),
-              (a.prototype._createHTMLElement = function (a) {
-                var t = a.tagName,
-                  o = a.className,
-                  e = a.text,
-                  n = document.createElement(t);
-                return o && (n.className = o), (n.textContent = e || null), n;
-              }),
-              (a.prototype._createA11yContainer = function () {
-                var a = this._createHTMLElement({
-                  tagName: "div",
-                  className: "notyf-announcer",
-                });
-                a.setAttribute("aria-atomic", "true"),
-                  a.setAttribute("aria-live", "polite"),
-                  (a.style.border = "0"),
-                  (a.style.clip = "rect(0 0 0 0)"),
-                  (a.style.height = "1px"),
-                  (a.style.margin = "-1px"),
-                  (a.style.overflow = "hidden"),
-                  (a.style.padding = "0"),
-                  (a.style.position = "absolute"),
-                  (a.style.width = "1px"),
-                  (a.style.outline = "0"),
-                  document.body.appendChild(a),
-                  (this.a11yContainer = a);
-              }),
-              (a.prototype._announce = function (a) {
-                var t = this;
-                (this.a11yContainer.textContent = ""),
-                  setTimeout(function () {
-                    t.a11yContainer.textContent = a;
-                  }, 100);
-              }),
-              (a.prototype._getAnimationEndEventName = function () {
-                var a,
-                  t = document.createElement("_fake"),
-                  o = {
-                    MozTransition: "animationend",
-                    OTransition: "oAnimationEnd",
-                    WebkitTransition: "webkitAnimationEnd",
-                    transition: "animationend",
-                  };
-                for (a in o) if (void 0 !== t.style[a]) return o[a];
-                return "animationend";
-              }),
-              a
+                      n.call(e, { target: a, event: o }),
+                      o.stopPropagation();
+                  });
+              }
+              n.addEventListener("click", function (o) {
+                var e, n;
+                return null === (n = (e = t.events)[da.Click]) || void 0 === n
+                  ? void 0
+                  : n.call(e, { target: a, event: o });
+              });
+              var g = "top" === this.getYPosition(o) ? "upper" : "lower";
+              return n.classList.add("notyf__toast--" + g), n;
+            }),
+            (a.prototype._createHTMLElement = function (a) {
+              var t = a.tagName,
+                o = a.className,
+                e = a.text,
+                n = document.createElement(t);
+              return o && (n.className = o), (n.textContent = e || null), n;
+            }),
+            (a.prototype._createA11yContainer = function () {
+              var a = this._createHTMLElement({
+                tagName: "div",
+                className: "notyf-announcer",
+              });
+              a.setAttribute("aria-atomic", "true"),
+                a.setAttribute("aria-live", "polite"),
+                (a.style.border = "0"),
+                (a.style.clip = "rect(0 0 0 0)"),
+                (a.style.height = "1px"),
+                (a.style.margin = "-1px"),
+                (a.style.overflow = "hidden"),
+                (a.style.padding = "0"),
+                (a.style.position = "absolute"),
+                (a.style.width = "1px"),
+                (a.style.outline = "0"),
+                document.body.appendChild(a),
+                (this.a11yContainer = a);
+            }),
+            (a.prototype._announce = function (a) {
+              var t = this;
+              (this.a11yContainer.textContent = ""),
+                setTimeout(function () {
+                  t.a11yContainer.textContent = a;
+                }, 100);
+            }),
+            (a.prototype._getAnimationEndEventName = function () {
+              var a,
+                t = document.createElement("_fake"),
+                o = {
+                  MozTransition: "animationend",
+                  OTransition: "oAnimationEnd",
+                  WebkitTransition: "webkitAnimationEnd",
+                  transition: "animationend",
+                };
+              for (a in o) if (void 0 !== t.style[a]) return o[a];
+              return "animationend";
+            }),
+            a
           );
         })(),
         ua = (function () {
@@ -1382,68 +1379,68 @@
               var t = this.normalizeOptions("error", a);
               return this.open(t);
             }),
-              (a.prototype.success = function (a) {
-                var t = this.normalizeOptions("success", a);
-                return this.open(t);
-              }),
-              (a.prototype.open = function (a) {
-                var t =
-                    this.options.types.find(function (t) {
-                      return t.type === a.type;
-                    }) || {},
-                  o = sa(sa({}, t), a);
-                this.assignProps(["ripple", "position", "dismissible"], o);
-                var e = new ia(o);
-                return this._pushNotification(e), e;
-              }),
-              (a.prototype.dismissAll = function () {
-                for (; this.notifications.splice(0, 1);) ;
-              }),
-              (a.prototype.assignProps = function (a, t) {
-                var o = this;
-                a.forEach(function (a) {
-                  t[a] = null == t[a] ? o.options[a] : t[a];
-                });
-              }),
-              (a.prototype._pushNotification = function (a) {
-                var t = this;
-                this.notifications.push(a);
-                var o =
-                  void 0 !== a.options.duration
-                    ? a.options.duration
-                    : this.options.duration;
-                o &&
+            (a.prototype.success = function (a) {
+              var t = this.normalizeOptions("success", a);
+              return this.open(t);
+            }),
+            (a.prototype.open = function (a) {
+              var t =
+                  this.options.types.find(function (t) {
+                    return t.type === a.type;
+                  }) || {},
+                o = sa(sa({}, t), a);
+              this.assignProps(["ripple", "position", "dismissible"], o);
+              var e = new ia(o);
+              return this._pushNotification(e), e;
+            }),
+            (a.prototype.dismissAll = function () {
+              for (; this.notifications.splice(0, 1); );
+            }),
+            (a.prototype.assignProps = function (a, t) {
+              var o = this;
+              a.forEach(function (a) {
+                t[a] = null == t[a] ? o.options[a] : t[a];
+              });
+            }),
+            (a.prototype._pushNotification = function (a) {
+              var t = this;
+              this.notifications.push(a);
+              var o =
+                void 0 !== a.options.duration
+                  ? a.options.duration
+                  : this.options.duration;
+              o &&
                 setTimeout(function () {
                   return t._removeNotification(a);
                 }, o);
-              }),
-              (a.prototype._removeNotification = function (a) {
-                var t = this.notifications.indexOf(a);
-                -1 !== t && this.notifications.splice(t, 1);
-              }),
-              (a.prototype.normalizeOptions = function (a, t) {
-                var o = {type: a};
-                return (
-                  "string" == typeof t
-                    ? (o.message = t)
-                    : "object" == typeof t && (o = sa(sa({}, o), t)),
-                    o
-                );
-              }),
-              (a.prototype.registerTypes = function (a) {
-                var t = ((a && a.types) || []).slice();
-                return ca.types
-                  .map(function (a) {
-                    var o = -1;
-                    t.forEach(function (t, e) {
-                      t.type === a.type && (o = e);
-                    });
-                    var e = -1 !== o ? t.splice(o, 1)[0] : {};
-                    return sa(sa({}, a), e);
-                  })
-                  .concat(t);
-              }),
-              a
+            }),
+            (a.prototype._removeNotification = function (a) {
+              var t = this.notifications.indexOf(a);
+              -1 !== t && this.notifications.splice(t, 1);
+            }),
+            (a.prototype.normalizeOptions = function (a, t) {
+              var o = { type: a };
+              return (
+                "string" == typeof t
+                  ? (o.message = t)
+                  : "object" == typeof t && (o = sa(sa({}, o), t)),
+                o
+              );
+            }),
+            (a.prototype.registerTypes = function (a) {
+              var t = ((a && a.types) || []).slice();
+              return ca.types
+                .map(function (a) {
+                  var o = -1;
+                  t.forEach(function (t, e) {
+                    t.type === a.type && (o = e);
+                  });
+                  var e = -1 !== o ? t.splice(o, 1)[0] : {};
+                  return sa(sa({}, a), e);
+                })
+                .concat(t);
+            }),
+            a
           );
         })();
 
@@ -1452,17 +1449,17 @@
           (ya =
             "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
               ? function (a) {
-                return typeof a;
-              }
+                  return typeof a;
+                }
               : function (a) {
-                return a &&
-                "function" == typeof Symbol &&
-                a.constructor === Symbol &&
-                a !== Symbol.prototype
-                  ? "symbol"
-                  : typeof a;
-              }),
-            ya(a)
+                  return a &&
+                    "function" == typeof Symbol &&
+                    a.constructor === Symbol &&
+                    a !== Symbol.prototype
+                    ? "symbol"
+                    : typeof a;
+                }),
+          ya(a)
         );
       }
 
@@ -1492,7 +1489,7 @@
               configurable: !0,
               writable: !0,
             }),
-              a[t]
+            a[t]
           );
         }
 
@@ -1508,14 +1505,14 @@
           var s = t && t.prototype instanceof h ? t : h,
             i = Object.create(s.prototype),
             d = new C(e || []);
-          return n(i, "_invoke", {value: S(a, o, d)}), i;
+          return n(i, "_invoke", { value: S(a, o, d) }), i;
         }
 
         function u(a, t, o) {
           try {
-            return {type: "normal", arg: a.call(t, o)};
+            return { type: "normal", arg: a.call(t, o) };
           } catch (a) {
-            return {type: "throw", arg: a};
+            return { type: "throw", arg: a };
           }
         }
 
@@ -1526,14 +1523,11 @@
           f = "completed",
           b = {};
 
-        function h() {
-        }
+        function h() {}
 
-        function v() {
-        }
+        function v() {}
 
-        function g() {
-        }
+        function g() {}
 
         var w = {};
         c(w, i, function () {
@@ -1560,21 +1554,21 @@
                 l = c.value;
               return l && "object" == ya(l) && e.call(l, "__await")
                 ? t.resolve(l.__await).then(
-                  function (a) {
-                    o("next", a, i, d);
-                  },
-                  function (a) {
-                    o("throw", a, i, d);
-                  },
-                )
+                    function (a) {
+                      o("next", a, i, d);
+                    },
+                    function (a) {
+                      o("throw", a, i, d);
+                    },
+                  )
                 : t.resolve(l).then(
-                  function (a) {
-                    (c.value = a), i(c);
-                  },
-                  function (a) {
-                    return o("throw", a, i, d);
-                  },
-                );
+                    function (a) {
+                      (c.value = a), i(c);
+                    },
+                    function (a) {
+                      return o("throw", a, i, d);
+                    },
+                  );
             }
             d(r.arg);
           }
@@ -1599,9 +1593,9 @@
             if (n === p) throw Error("Generator is already running");
             if (n === f) {
               if ("throw" === s) throw i;
-              return {value: a, done: !0};
+              return { value: a, done: !0 };
             }
-            for (e.method = s, e.arg = i; ;) {
+            for (e.method = s, e.arg = i; ; ) {
               var d = e.delegate;
               if (d) {
                 var r = j(d, e);
@@ -1619,10 +1613,10 @@
               var c = u(t, o, e);
               if ("normal" === c.type) {
                 if (((n = e.done ? f : m), c.arg === b)) continue;
-                return {value: c.arg, done: e.done};
+                return { value: c.arg, done: e.done };
               }
               "throw" === c.type &&
-              ((n = f), (e.method = "throw"), (e.arg = c.arg));
+                ((n = f), (e.method = "throw"), (e.arg = c.arg));
             }
           };
         }
@@ -1636,15 +1630,15 @@
               ("throw" === e &&
                 t.iterator.return &&
                 ((o.method = "return"),
-                  (o.arg = a),
-                  j(t, o),
+                (o.arg = a),
+                j(t, o),
                 "throw" === o.method)) ||
-              ("return" !== e &&
-                ((o.method = "throw"),
+                ("return" !== e &&
+                  ((o.method = "throw"),
                   (o.arg = new TypeError(
                     "The iterator does not provide a '" + e + "' method",
                   )))),
-                b
+              b
             );
           var s = u(n, t.iterator, o.arg);
           if ("throw" === s.type)
@@ -1656,7 +1650,7 @@
             ? i.done
               ? ((o[t.resultName] = i.value),
                 (o.next = t.nextLoc),
-              "return" !== o.method && ((o.method = "next"), (o.arg = a)),
+                "return" !== o.method && ((o.method = "next"), (o.arg = a)),
                 (o.delegate = null),
                 b)
               : i
@@ -1667,9 +1661,9 @@
         }
 
         function N(a) {
-          var t = {tryLoc: a[0]};
+          var t = { tryLoc: a[0] };
           1 in a && (t.catchLoc = a[1]),
-          2 in a && ((t.finallyLoc = a[2]), (t.afterLoc = a[3])),
+            2 in a && ((t.finallyLoc = a[2]), (t.afterLoc = a[3])),
             this.tryEntries.push(t);
         }
 
@@ -1679,7 +1673,7 @@
         }
 
         function C(a) {
-          (this.tryEntries = [{tryLoc: "root"}]),
+          (this.tryEntries = [{ tryLoc: "root" }]),
             a.forEach(N, this),
             this.reset(!0);
         }
@@ -1692,7 +1686,7 @@
             if (!isNaN(t.length)) {
               var n = -1,
                 s = function o() {
-                  for (; ++n < t.length;)
+                  for (; ++n < t.length; )
                     if (e.call(t, n)) return (o.value = t[n]), (o.done = !1), o;
                   return (o.value = a), (o.done = !0), o;
                 };
@@ -1704,195 +1698,195 @@
 
         return (
           (v.prototype = g),
-            n(k, "constructor", {value: g, configurable: !0}),
-            n(g, "constructor", {value: v, configurable: !0}),
-            (v.displayName = c(g, r, "GeneratorFunction")),
-            (t.isGeneratorFunction = function (a) {
-              var t = "function" == typeof a && a.constructor;
-              return (
-                !!t &&
-                (t === v || "GeneratorFunction" === (t.displayName || t.name))
-              );
-            }),
-            (t.mark = function (a) {
-              return (
-                Object.setPrototypeOf
-                  ? Object.setPrototypeOf(a, g)
-                  : ((a.__proto__ = g), c(a, r, "GeneratorFunction")),
-                  (a.prototype = Object.create(k)),
-                  a
-              );
-            }),
-            (t.awrap = function (a) {
-              return {__await: a};
-            }),
-            _(E.prototype),
-            c(E.prototype, d, function () {
-              return this;
-            }),
-            (t.AsyncIterator = E),
-            (t.async = function (a, o, e, n, s) {
-              void 0 === s && (s = Promise);
-              var i = new E(l(a, o, e, n), s);
-              return t.isGeneratorFunction(o)
-                ? i
-                : i.next().then(function (a) {
+          n(k, "constructor", { value: g, configurable: !0 }),
+          n(g, "constructor", { value: v, configurable: !0 }),
+          (v.displayName = c(g, r, "GeneratorFunction")),
+          (t.isGeneratorFunction = function (a) {
+            var t = "function" == typeof a && a.constructor;
+            return (
+              !!t &&
+              (t === v || "GeneratorFunction" === (t.displayName || t.name))
+            );
+          }),
+          (t.mark = function (a) {
+            return (
+              Object.setPrototypeOf
+                ? Object.setPrototypeOf(a, g)
+                : ((a.__proto__ = g), c(a, r, "GeneratorFunction")),
+              (a.prototype = Object.create(k)),
+              a
+            );
+          }),
+          (t.awrap = function (a) {
+            return { __await: a };
+          }),
+          _(E.prototype),
+          c(E.prototype, d, function () {
+            return this;
+          }),
+          (t.AsyncIterator = E),
+          (t.async = function (a, o, e, n, s) {
+            void 0 === s && (s = Promise);
+            var i = new E(l(a, o, e, n), s);
+            return t.isGeneratorFunction(o)
+              ? i
+              : i.next().then(function (a) {
                   return a.done ? a.value : i.next();
                 });
-            }),
-            _(k),
-            c(k, r, "Generator"),
-            c(k, i, function () {
-              return this;
-            }),
-            c(k, "toString", function () {
-              return "[object Generator]";
-            }),
-            (t.keys = function (a) {
-              var t = Object(a),
-                o = [];
-              for (var e in t) o.push(e);
-              return (
-                o.reverse(),
-                  function a() {
-                    for (; o.length;) {
-                      var e = o.pop();
-                      if (e in t) return (a.value = e), (a.done = !1), a;
-                    }
-                    return (a.done = !0), a;
-                  }
-              );
-            }),
-            (t.values = A),
-            (C.prototype = {
-              constructor: C,
-              reset: function (t) {
-                if (
-                  ((this.prev = 0),
-                    (this.next = 0),
-                    (this.sent = this._sent = a),
-                    (this.done = !1),
-                    (this.delegate = null),
-                    (this.method = "next"),
-                    (this.arg = a),
-                    this.tryEntries.forEach(q),
-                    !t)
-                )
-                  for (var o in this)
-                    "t" === o.charAt(0) &&
+          }),
+          _(k),
+          c(k, r, "Generator"),
+          c(k, i, function () {
+            return this;
+          }),
+          c(k, "toString", function () {
+            return "[object Generator]";
+          }),
+          (t.keys = function (a) {
+            var t = Object(a),
+              o = [];
+            for (var e in t) o.push(e);
+            return (
+              o.reverse(),
+              function a() {
+                for (; o.length; ) {
+                  var e = o.pop();
+                  if (e in t) return (a.value = e), (a.done = !1), a;
+                }
+                return (a.done = !0), a;
+              }
+            );
+          }),
+          (t.values = A),
+          (C.prototype = {
+            constructor: C,
+            reset: function (t) {
+              if (
+                ((this.prev = 0),
+                (this.next = 0),
+                (this.sent = this._sent = a),
+                (this.done = !1),
+                (this.delegate = null),
+                (this.method = "next"),
+                (this.arg = a),
+                this.tryEntries.forEach(q),
+                !t)
+              )
+                for (var o in this)
+                  "t" === o.charAt(0) &&
                     e.call(this, o) &&
                     !isNaN(+o.slice(1)) &&
                     (this[o] = a);
-              },
-              stop: function () {
-                this.done = !0;
-                var a = this.tryEntries[0].completion;
-                if ("throw" === a.type) throw a.arg;
-                return this.rval;
-              },
-              dispatchException: function (t) {
-                if (this.done) throw t;
-                var o = this;
+            },
+            stop: function () {
+              this.done = !0;
+              var a = this.tryEntries[0].completion;
+              if ("throw" === a.type) throw a.arg;
+              return this.rval;
+            },
+            dispatchException: function (t) {
+              if (this.done) throw t;
+              var o = this;
 
-                function n(e, n) {
-                  return (
-                    (d.type = "throw"),
-                      (d.arg = t),
-                      (o.next = e),
-                    n && ((o.method = "next"), (o.arg = a)),
-                      !!n
-                  );
-                }
+              function n(e, n) {
+                return (
+                  (d.type = "throw"),
+                  (d.arg = t),
+                  (o.next = e),
+                  n && ((o.method = "next"), (o.arg = a)),
+                  !!n
+                );
+              }
 
-                for (var s = this.tryEntries.length - 1; s >= 0; --s) {
-                  var i = this.tryEntries[s],
-                    d = i.completion;
-                  if ("root" === i.tryLoc) return n("end");
-                  if (i.tryLoc <= this.prev) {
-                    var r = e.call(i, "catchLoc"),
-                      c = e.call(i, "finallyLoc");
-                    if (r && c) {
-                      if (this.prev < i.catchLoc) return n(i.catchLoc, !0);
-                      if (this.prev < i.finallyLoc) return n(i.finallyLoc);
-                    } else if (r) {
-                      if (this.prev < i.catchLoc) return n(i.catchLoc, !0);
-                    } else {
-                      if (!c)
-                        throw Error("try statement without catch or finally");
-                      if (this.prev < i.finallyLoc) return n(i.finallyLoc);
-                    }
+              for (var s = this.tryEntries.length - 1; s >= 0; --s) {
+                var i = this.tryEntries[s],
+                  d = i.completion;
+                if ("root" === i.tryLoc) return n("end");
+                if (i.tryLoc <= this.prev) {
+                  var r = e.call(i, "catchLoc"),
+                    c = e.call(i, "finallyLoc");
+                  if (r && c) {
+                    if (this.prev < i.catchLoc) return n(i.catchLoc, !0);
+                    if (this.prev < i.finallyLoc) return n(i.finallyLoc);
+                  } else if (r) {
+                    if (this.prev < i.catchLoc) return n(i.catchLoc, !0);
+                  } else {
+                    if (!c)
+                      throw Error("try statement without catch or finally");
+                    if (this.prev < i.finallyLoc) return n(i.finallyLoc);
                   }
                 }
-              },
-              abrupt: function (a, t) {
-                for (var o = this.tryEntries.length - 1; o >= 0; --o) {
-                  var n = this.tryEntries[o];
-                  if (
-                    n.tryLoc <= this.prev &&
-                    e.call(n, "finallyLoc") &&
-                    this.prev < n.finallyLoc
-                  ) {
-                    var s = n;
-                    break;
-                  }
+              }
+            },
+            abrupt: function (a, t) {
+              for (var o = this.tryEntries.length - 1; o >= 0; --o) {
+                var n = this.tryEntries[o];
+                if (
+                  n.tryLoc <= this.prev &&
+                  e.call(n, "finallyLoc") &&
+                  this.prev < n.finallyLoc
+                ) {
+                  var s = n;
+                  break;
                 }
-                s &&
+              }
+              s &&
                 ("break" === a || "continue" === a) &&
                 s.tryLoc <= t &&
                 t <= s.finallyLoc &&
                 (s = null);
-                var i = s ? s.completion : {};
-                return (
-                  (i.type = a),
-                    (i.arg = t),
-                    s
-                      ? ((this.method = "next"), (this.next = s.finallyLoc), b)
-                      : this.complete(i)
-                );
-              },
-              complete: function (a, t) {
-                if ("throw" === a.type) throw a.arg;
-                return (
-                  "break" === a.type || "continue" === a.type
-                    ? (this.next = a.arg)
-                    : "return" === a.type
-                      ? ((this.rval = this.arg = a.arg),
-                        (this.method = "return"),
-                        (this.next = "end"))
-                      : "normal" === a.type && t && (this.next = t),
-                    b
-                );
-              },
-              finish: function (a) {
-                for (var t = this.tryEntries.length - 1; t >= 0; --t) {
-                  var o = this.tryEntries[t];
-                  if (o.finallyLoc === a)
-                    return this.complete(o.completion, o.afterLoc), q(o), b;
-                }
-              },
-              catch: function (a) {
-                for (var t = this.tryEntries.length - 1; t >= 0; --t) {
-                  var o = this.tryEntries[t];
-                  if (o.tryLoc === a) {
-                    var e = o.completion;
-                    if ("throw" === e.type) {
-                      var n = e.arg;
-                      q(o);
-                    }
-                    return n;
+              var i = s ? s.completion : {};
+              return (
+                (i.type = a),
+                (i.arg = t),
+                s
+                  ? ((this.method = "next"), (this.next = s.finallyLoc), b)
+                  : this.complete(i)
+              );
+            },
+            complete: function (a, t) {
+              if ("throw" === a.type) throw a.arg;
+              return (
+                "break" === a.type || "continue" === a.type
+                  ? (this.next = a.arg)
+                  : "return" === a.type
+                    ? ((this.rval = this.arg = a.arg),
+                      (this.method = "return"),
+                      (this.next = "end"))
+                    : "normal" === a.type && t && (this.next = t),
+                b
+              );
+            },
+            finish: function (a) {
+              for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                var o = this.tryEntries[t];
+                if (o.finallyLoc === a)
+                  return this.complete(o.completion, o.afterLoc), q(o), b;
+              }
+            },
+            catch: function (a) {
+              for (var t = this.tryEntries.length - 1; t >= 0; --t) {
+                var o = this.tryEntries[t];
+                if (o.tryLoc === a) {
+                  var e = o.completion;
+                  if ("throw" === e.type) {
+                    var n = e.arg;
+                    q(o);
                   }
+                  return n;
                 }
-                throw Error("illegal catch attempt");
-              },
-              delegateYield: function (t, o, e) {
-                return (
-                  (this.delegate = {iterator: A(t), resultName: o, nextLoc: e}),
-                  "next" === this.method && (this.arg = a),
-                    b
-                );
-              },
-            }),
-            t
+              }
+              throw Error("illegal catch attempt");
+            },
+            delegateYield: function (t, o, e) {
+              return (
+                (this.delegate = { iterator: A(t), resultName: o, nextLoc: e }),
+                "next" === this.method && (this.arg = a),
+                b
+              );
+            },
+          }),
+          t
         );
       }
 
@@ -1909,7 +1903,7 @@
       var fa,
         ba = document.querySelectorAll(".withdrawalPayoutMethod"),
         ha = document.querySelector("#requestWithdrawalButton"),
-        va = new ua({duration: 5e3, position: {x: "right", y: "top"}});
+        va = new ua({ duration: 5e3, position: { x: "right", y: "top" } });
 
       function ga() {
         var t;
@@ -1917,14 +1911,14 @@
           (t = ma().mark(function t() {
             var o, e, n, s;
             return ma().wrap(function (t) {
-              for (; ;)
+              for (;;)
                 switch ((t.prev = t.next)) {
                   case 0:
                     return (
                       (o = document.querySelector("#redirectUrl").value),
-                        (e =
-                          "BANK" === fa
-                            ? {
+                      (e =
+                        "BANK" === fa
+                          ? {
                               amount: parseFloat(
                                 document.querySelector(
                                   "#withdrawalRequest__amount",
@@ -1944,8 +1938,8 @@
                                 "#requestWithdrawal__bankMethod__iban",
                               ).value,
                             }
-                            : "CRYPTOCURRENCY" === fa
-                              ? {
+                          : "CRYPTOCURRENCY" === fa
+                            ? {
                                 amount: parseFloat(
                                   document.querySelector(
                                     "#withdrawalRequest__amount",
@@ -1956,16 +1950,16 @@
                                   "#requestWithdrawal__cryptoMethod__address",
                                 ).value,
                               }
-                              : void 0),
-                        (t.next = 5),
-                        fetch("/api/accounts/request-withdrawal/", {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": a(),
-                          },
-                          body: JSON.stringify(e),
-                        })
+                            : void 0),
+                      (t.next = 5),
+                      fetch("/api/accounts/request-withdrawal/", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          "X-CSRFToken": a(),
+                        },
+                        body: JSON.stringify(e),
+                      })
                     );
                   case 5:
                     return (n = t.sent), (t.next = 8), n.json();
@@ -1975,41 +1969,41 @@
                         ? (window.location.href = o)
                         : s.errors && Array.isArray(s.errors)
                           ? s.errors.forEach(function (a) {
-                            a.detail && va.error(a.detail);
-                          })
+                              a.detail && va.error(a.detail);
+                            })
                           : va.error(
-                            "An unknown error occurred. Please try again.",
-                          );
+                              "An unknown error occurred. Please try again.",
+                            );
                   case 10:
                   case "end":
                     return t.stop();
                 }
             }, t);
           })),
-            (ga = function () {
-              var a = this,
-                o = arguments;
-              return new Promise(function (e, n) {
-                var s = t.apply(a, o);
+          (ga = function () {
+            var a = this,
+              o = arguments;
+            return new Promise(function (e, n) {
+              var s = t.apply(a, o);
 
-                function i(a) {
-                  pa(s, e, n, i, d, "next", a);
-                }
+              function i(a) {
+                pa(s, e, n, i, d, "next", a);
+              }
 
-                function d(a) {
-                  pa(s, e, n, i, d, "throw", a);
-                }
+              function d(a) {
+                pa(s, e, n, i, d, "throw", a);
+              }
 
-                i(void 0);
-              });
-            }),
-            ga.apply(this, arguments)
+              i(void 0);
+            });
+          }),
+          ga.apply(this, arguments)
         );
       }
 
       var wa = document.querySelectorAll(".faqItemWrapper");
       var xa = document.querySelectorAll(".resendEmailButton"),
-        La = new ua({duration: 5e3, position: {x: "right", y: "top"}});
+        La = new ua({ duration: 5e3, position: { x: "right", y: "top" } });
 
       function ka(a, t) {
         (null == t || t > a.length) && (t = a.length);
@@ -2021,74 +2015,74 @@
         Ea = document.getElementById("predictionsContainer");
       const Sa = function () {
         _a &&
-        Ea &&
-        _a.addEventListener("click", function () {
-          var a = this,
-            t = a.getAttribute("data-next-page"),
-            o = "/api/predictions/?page=".concat(t);
-          fetch(o)
-            .then(function (a) {
-              if (!a.ok) throw new Error("Failed to load more predictions.");
-              return a.json();
-            })
-            .then(function (o) {
-              if (
-                (o.results.forEach(function (a) {
-                  var t,
-                    o,
-                    e,
-                    n,
-                    s,
-                    i,
-                    d =
-                      '\n                              <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">\n                        <div class="flex items-center justify-between mb-6">\n                            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                                <div class="bg-primary-900/50 p-2 rounded-lg">\n\n\n                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite7.svg#soccerIcon"></use></svg>\n\n                                </div>\n\n                                <span class="text-sm text-primary-100">Soccer</span>\n\n                            </div>\n                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg\n                                    '
-                        .concat(
-                          "WON" === a.status
-                            ? "bg-emerald-500/10 text-emerald-400"
-                            : "bg-red-500/30 text-primary-200",
-                          '">\n\n                                        ',
-                        )
-                        .concat(
-                          "WON" === a.status
-                            ? '\n                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"\n                             viewBox="0 0 24 24"\n                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"\n                             stroke-linejoin="round" class="lucide lucide-check w-5 h-5">\n                            <path d="M20 6 9 17l-5-5"></path>\n                        </svg>'
-                            : '\n                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"\n                             viewBox="0 0 24 24"\n                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"\n                             stroke-linejoin="round" class="lucide lucide-x w-5 h-5">\n                            <path d="M18 6L6 18"></path>\n                            <path d="M6 6L18 18"></path>\n                        </svg>',
-                          ' \n\n                                <span class="font-medium">',
-                        )
-                        .concat(
-                          a.status,
-                          '</span>\n                            </div>\n                        </div>\n                        <div class="mb-6">\n                            <div class="text-sm text-primary-300 mb-2">Match:</div>\n                            <div class="bg-gradient-to-br rounded-lg border p-6 py-10 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 ',
-                        )
-                        .concat(
-                          "WON" === a.status
-                            ? "from-emerald-900/20 to-primary-800/90 border-emerald-500/20"
-                            : "from-red-900/20 to-primary-800/90 border-red-500/20",
-                          '">\n                                <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/0 via-secondary-500/5 to-secondary-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg pointer-events-none"></div>\n                                <div\n                                        class="absolute top-0 left-1/2 -translate-x-1/2  p-2 rounded-lg text-nowrap"\n                                >\n                                    <p class="text-sm text-secondary-400 font-bold w-full">',
-                        )
-                        .concat(
-                          a.league,
-                          '</p>\n                                </div>\n\n                                <div class="flex flex-col md:flex-row flex-wrap items-center justify-center md:justify-between gap-x-12 gap-y-4">\n                                    <span class="text-xl font-bold text-white whitespace-normal  flex-shrink md:text-left md:w-4/12">',
-                        )
-                        .concat(
-                          a.home_team,
-                          '</span>\n                                    <span class="text-secondary-400 font-medium text-lg px-4 py-2 rounded-full bg-secondary-500/10 border border-secondary-500/20">vs</span>\n                                    <span class="text-xl font-bold text-white whitespace-normal flex-shrink md:text-right md:w-4/12">',
-                        )
-                        .concat(
-                          a.away_team,
-                          '</span>\n                                </div>\n                            </div>\n                        </div>\n                        <div class="grid grid-cols-2 gap-4 mb-6">\n                            <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">\n                                <div class="text-sm text-primary-300 mb-1">Kick-off Date</div>\n                                <div class="font-medium text-white">',
-                        )
-                        .concat(
-                          new Date(a.kickoff_date).toLocaleDateString(
-                            "en-GB",
-                            {
-                              day: "2-digit",
-                              month: "2-digit",
-                              year: "numeric",
-                            },
-                          ),
-                          '</div>\n                            </div>\n                            <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">\n                                <div class="text-sm text-primary-300 mb-1">Kick-off Time</div>\n                                <div class="font-medium text-white">',
-                        )
-                        .concat(
-                          ((t = a.kickoff_time),
+          Ea &&
+          _a.addEventListener("click", function () {
+            var a = this,
+              t = a.getAttribute("data-next-page"),
+              o = "/api/predictions/?page=".concat(t);
+            fetch(o)
+              .then(function (a) {
+                if (!a.ok) throw new Error("Failed to load more predictions.");
+                return a.json();
+              })
+              .then(function (o) {
+                if (
+                  (o.results.forEach(function (a) {
+                    var t,
+                      o,
+                      e,
+                      n,
+                      s,
+                      i,
+                      d =
+                        '\n                              <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">\n                        <div class="flex items-center justify-between mb-6">\n                            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                                <div class="bg-primary-900/50 p-2 rounded-lg">\n\n\n                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite7.svg#soccerIcon"></use></svg>\n\n                                </div>\n\n                                <span class="text-sm text-primary-100">Soccer</span>\n\n                            </div>\n                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg\n                                    '
+                          .concat(
+                            "WON" === a.status
+                              ? "bg-emerald-500/10 text-emerald-400"
+                              : "bg-red-500/30 text-primary-200",
+                            '">\n\n                                        ',
+                          )
+                          .concat(
+                            "WON" === a.status
+                              ? '\n                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"\n                             viewBox="0 0 24 24"\n                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"\n                             stroke-linejoin="round" class="lucide lucide-check w-5 h-5">\n                            <path d="M20 6 9 17l-5-5"></path>\n                        </svg>'
+                              : '\n                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"\n                             viewBox="0 0 24 24"\n                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"\n                             stroke-linejoin="round" class="lucide lucide-x w-5 h-5">\n                            <path d="M18 6L6 18"></path>\n                            <path d="M6 6L18 18"></path>\n                        </svg>',
+                            ' \n\n                                <span class="font-medium">',
+                          )
+                          .concat(
+                            a.status,
+                            '</span>\n                            </div>\n                        </div>\n                        <div class="mb-6">\n                            <div class="text-sm text-primary-300 mb-2">Match:</div>\n                            <div class="bg-gradient-to-br rounded-lg border p-6 py-10 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 ',
+                          )
+                          .concat(
+                            "WON" === a.status
+                              ? "from-emerald-900/20 to-primary-800/90 border-emerald-500/20"
+                              : "from-red-900/20 to-primary-800/90 border-red-500/20",
+                            '">\n                                <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/0 via-secondary-500/5 to-secondary-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg pointer-events-none"></div>\n                                <div\n                                        class="absolute top-0 left-1/2 -translate-x-1/2  p-2 rounded-lg text-nowrap"\n                                >\n                                    <p class="text-sm text-secondary-400 font-bold w-full">',
+                          )
+                          .concat(
+                            a.league,
+                            '</p>\n                                </div>\n\n                                <div class="flex flex-col md:flex-row flex-wrap items-center justify-center md:justify-between gap-x-12 gap-y-4">\n                                    <span class="text-xl font-bold text-white whitespace-normal  flex-shrink md:text-left md:w-4/12">',
+                          )
+                          .concat(
+                            a.home_team,
+                            '</span>\n                                    <span class="text-secondary-400 font-medium text-lg px-4 py-2 rounded-full bg-secondary-500/10 border border-secondary-500/20">vs</span>\n                                    <span class="text-xl font-bold text-white whitespace-normal flex-shrink md:text-right md:w-4/12">',
+                          )
+                          .concat(
+                            a.away_team,
+                            '</span>\n                                </div>\n                            </div>\n                        </div>\n                        <div class="grid grid-cols-2 gap-4 mb-6">\n                            <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">\n                                <div class="text-sm text-primary-300 mb-1">Kick-off Date</div>\n                                <div class="font-medium text-white">',
+                          )
+                          .concat(
+                            new Date(a.kickoff_date).toLocaleDateString(
+                              "en-GB",
+                              {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                              },
+                            ),
+                            '</div>\n                            </div>\n                            <div class="bg-primary-900/50 p-4 rounded-lg border border-primary-700/50">\n                                <div class="text-sm text-primary-300 mb-1">Kick-off Time</div>\n                                <div class="font-medium text-white">',
+                          )
+                          .concat(
+                            ((t = a.kickoff_time),
                             (s = t.split(":")),
                             (i = 2),
                             (o =
@@ -2100,8 +2094,8 @@
                                   null == a
                                     ? null
                                     : ("undefined" != typeof Symbol &&
-                                      a[Symbol.iterator]) ||
-                                    a["@@iterator"];
+                                        a[Symbol.iterator]) ||
+                                      a["@@iterator"];
                                 if (null != o) {
                                   var e,
                                     n,
@@ -2120,7 +2114,7 @@
                                         !(r = (e = s.call(o)).done) &&
                                         (d.push(e.value), d.length !== t);
                                         r = !0
-                                      ) ;
+                                      );
                                   } catch (a) {
                                     (c = !0), (n = a);
                                   } finally {
@@ -2144,16 +2138,16 @@
                                   var o = {}.toString.call(a).slice(8, -1);
                                   return (
                                     "Object" === o &&
-                                    a.constructor &&
-                                    (o = a.constructor.name),
-                                      "Map" === o || "Set" === o
-                                        ? Array.from(a)
-                                        : "Arguments" === o ||
-                                        /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(
-                                          o,
-                                        )
-                                          ? ka(a, t)
-                                          : void 0
+                                      a.constructor &&
+                                      (o = a.constructor.name),
+                                    "Map" === o || "Set" === o
+                                      ? Array.from(a)
+                                      : "Arguments" === o ||
+                                          /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(
+                                            o,
+                                          )
+                                        ? ka(a, t)
+                                        : void 0
                                   );
                                 }
                               })(s, i) ||
@@ -2165,32 +2159,32 @@
                             (e = o[0]),
                             (n = o[1]),
                             "".concat(e, ":").concat(n)),
-                          ' (GMT+1)\n                                </div>\n                            </div>\n                        </div>\n                        <div class="grid grid-cols-2 gap-4">\n                            <div>\n                                <div class="text-sm text-primary-300">Prediction</div>\n                                <div class="font-semibold text-lg text-white">',
-                        )
-                        .concat(
-                          a.prediction,
-                          '</div>\n                            </div>\n                            <div>\n                                <div class="text-right">\n                                    <div class="text-sm text-primary-300">Result</div>\n                                    <div class="font-semibold text-3xl text-secondary-400">',
-                        )
-                        .concat(
-                          a.result,
-                          '\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class="mt-4 pt-4 border-t border-primary-700/30">\n                            <div class="flex items-center justify-between">\n                                <div class="text-sm text-primary-300">Odds</div>\n                                <div class="font-medium text-secondary-400">',
-                        )
-                        .concat(
-                          a.odds,
-                          "</div> \n                            </div>\n                        </div>\n                    </div>\n\n          ",
-                        );
-                  Ea.insertAdjacentHTML("beforeend", d);
-                }),
+                            ' (GMT+1)\n                                </div>\n                            </div>\n                        </div>\n                        <div class="grid grid-cols-2 gap-4">\n                            <div>\n                                <div class="text-sm text-primary-300">Prediction</div>\n                                <div class="font-semibold text-lg text-white">',
+                          )
+                          .concat(
+                            a.prediction,
+                            '</div>\n                            </div>\n                            <div>\n                                <div class="text-right">\n                                    <div class="text-sm text-primary-300">Result</div>\n                                    <div class="font-semibold text-3xl text-secondary-400">',
+                          )
+                          .concat(
+                            a.result,
+                            '\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class="mt-4 pt-4 border-t border-primary-700/30">\n                            <div class="flex items-center justify-between">\n                                <div class="text-sm text-primary-300">Odds</div>\n                                <div class="font-medium text-secondary-400">',
+                          )
+                          .concat(
+                            a.odds,
+                            "</div> \n                            </div>\n                        </div>\n                    </div>\n\n          ",
+                          );
+                    Ea.insertAdjacentHTML("beforeend", d);
+                  }),
                   o.next)
-              ) {
-                var e = parseInt(t) + 1;
-                a.setAttribute("data-next-page", e);
-              } else a.remove();
-            })
-            .catch(function (a) {
-              console.error(a), alert("Failed to load more predictions.");
-            });
-        });
+                ) {
+                  var e = parseInt(t) + 1;
+                  a.setAttribute("data-next-page", e);
+                } else a.remove();
+              })
+              .catch(function (a) {
+                console.error(a), alert("Failed to load more predictions.");
+              });
+          });
       };
       var ja = document.getElementById("loginForm"),
         Na = document.getElementById("registerForm"),
@@ -2200,18 +2194,18 @@
         var t, o;
         (Q = Object.assign(Q, o)),
           (K = U()),
-        Q.disableMutationObserver ||
-        M() ||
-        (console.info(
-          '\n      aos: MutationObserver is not supported on this browser,\n      code mutations observing has been disabled.\n      You may have to call "refreshHard()" by yourself.\n    ',
-        ),
-          (Q.disableMutationObserver = !0)),
-        Q.disableMutationObserver || z("[data-aos]", aa),
+          Q.disableMutationObserver ||
+            M() ||
+            (console.info(
+              '\n      aos: MutationObserver is not supported on this browser,\n      code mutations observing has been disabled.\n      You may have to call "refreshHard()" by yourself.\n    ',
+            ),
+            (Q.disableMutationObserver = !0)),
+          Q.disableMutationObserver || z("[data-aos]", aa),
           oa(Q.disable) || V()
             ? ta()
             : (document
-              .querySelector("body")
-              .setAttribute("data-aos-easing", Q.easing),
+                .querySelector("body")
+                .setAttribute("data-aos-easing", Q.easing),
               document
                 .querySelector("body")
                 .setAttribute("data-aos-duration", Q.duration),
@@ -2220,14 +2214,14 @@
                 .setAttribute("data-aos-delay", Q.delay),
               -1 === ["DOMContentLoaded", "load"].indexOf(Q.startEvent)
                 ? document.addEventListener(Q.startEvent, function () {
-                  Z(!0);
-                })
+                    Z(!0);
+                  })
                 : window.addEventListener("load", function () {
-                  Z(!0);
-                }),
-            "DOMContentLoaded" === Q.startEvent &&
-            ["complete", "interactive"].indexOf(document.readyState) > -1 &&
-            Z(!0),
+                    Z(!0);
+                  }),
+              "DOMContentLoaded" === Q.startEvent &&
+                ["complete", "interactive"].indexOf(document.readyState) > -1 &&
+                Z(!0),
               window.addEventListener("resize", q()(Z, Q.debounceDelay, !0)),
               window.addEventListener(
                 "orientationchange",
@@ -2254,110 +2248,110 @@
             });
           })(),
           u(),
-        na.length &&
-        na.forEach(function (a) {
-          a.addEventListener("click", function () {
-            var t = a.getAttribute("data-value"),
-              o = a.querySelector(".checkmarkIcon"),
-              e = a.querySelector(".copyIcon");
-            navigator.clipboard.writeText(t).then(function () {
-              o.classList.remove("hidden"),
-                e.classList.add("hidden"),
-                setTimeout(function () {
-                  o.classList.add("hidden"), e.classList.remove("hidden");
-                }, 1e3);
-            });
-          });
-        }),
+          na.length &&
+            na.forEach(function (a) {
+              a.addEventListener("click", function () {
+                var t = a.getAttribute("data-value"),
+                  o = a.querySelector(".checkmarkIcon"),
+                  e = a.querySelector(".copyIcon");
+                navigator.clipboard.writeText(t).then(function () {
+                  o.classList.remove("hidden"),
+                    e.classList.add("hidden"),
+                    setTimeout(function () {
+                      o.classList.add("hidden"), e.classList.remove("hidden");
+                    }, 1e3);
+                });
+              });
+            }),
           document.querySelectorAll(".closeButton").forEach(function (a) {
             a.addEventListener("click", function () {
               var t = a.getAttribute("data-close-element-selector");
               document.querySelector(t).classList.add("hidden");
             });
           }),
-        ba.length &&
-        (console.log("Withdrawal request form found!"),
-          ba.forEach(function (a) {
-            a.addEventListener("click", function () {
-              var t,
-                o = a.getAttribute("data-method-type"),
-                e = a.getAttribute("data-section-selector"),
-                n = document.querySelector(e);
-              document
-                .querySelectorAll(".requestWithdrawal__formSection")
-                .forEach(function (a) {
-                  a.classList.add("hidden");
-                }),
-                n.classList.remove("hidden"),
-                ba.forEach(function (a) {
-                  a.classList.remove("border-secondary-500/30", "text-white"),
-                    a.classList.add(
-                      "border-primary-700/50",
-                      "text-primary-300",
-                    );
-                }),
-                (t = a).classList.remove("border-primary-700/50"),
-                t.classList.add("border-secondary-500/30", "text-white"),
-                (fa = o);
-            });
-          }),
-          ha.addEventListener("click", function (a) {
-            fa &&
-            (a.disabled ||
-              ((a.disabled = !0),
-                (function () {
-                  return ga.apply(this, arguments);
-                })().then(function (t) {
-                  return (a.disabled = !1);
-                })));
-          })),
-        wa.length &&
-        wa.forEach(function (a) {
-          a.addEventListener("click", function () {
-            var t = a.querySelector(".faqItemButton"),
-              o = a.querySelector(".faqItemIcon"),
-              e = a.querySelector(".faqItemContent");
-            a.classList.contains("active")
-              ? (function (a, t, o, e) {
-                a.classList.remove(
-                  "active",
-                  "border-secondary-500/30",
-                  "bg-primary-800/70",
-                ),
-                  a.classList.add(
-                    "border-primary-700/30",
-                    "hover:border-secondary-500/20",
-                  ),
-                  t.classList.remove("bg-primary-800/70"),
-                  t.classList.add(
-                    "group-hover:bg-primary-800/70",
-                    "bg-primary-800/50",
-                  ),
-                  o.classList.remove("rotate-180"),
-                  e.classList.remove("max-h-96", "overflow-auto"),
-                  e.classList.add("max-h-0", "overflow-hidden");
-              })(a, t, o, e)
-              : (function (a, t, o, e) {
-                a.classList.add(
-                  "active",
-                  "border-secondary-500/30",
-                  "bg-primary-800/70",
-                ),
-                  a.classList.remove(
-                    "border-primary-700/30",
-                    "hover:border-secondary-500/20",
-                  ),
-                  t.classList.add("bg-primary-800/70"),
-                  t.classList.remove(
-                    "group-hover:bg-primary-800/70",
-                    "bg-primary-800/50",
-                  ),
-                  o.classList.add("rotate-180"),
-                  e.classList.add("max-h-96"),
-                  e.classList.remove("max-h-0");
-              })(a, t, o, e);
-          });
-        }),
+          ba.length &&
+            (console.log("Withdrawal request form found!"),
+            ba.forEach(function (a) {
+              a.addEventListener("click", function () {
+                var t,
+                  o = a.getAttribute("data-method-type"),
+                  e = a.getAttribute("data-section-selector"),
+                  n = document.querySelector(e);
+                document
+                  .querySelectorAll(".requestWithdrawal__formSection")
+                  .forEach(function (a) {
+                    a.classList.add("hidden");
+                  }),
+                  n.classList.remove("hidden"),
+                  ba.forEach(function (a) {
+                    a.classList.remove("border-secondary-500/30", "text-white"),
+                      a.classList.add(
+                        "border-primary-700/50",
+                        "text-primary-300",
+                      );
+                  }),
+                  (t = a).classList.remove("border-primary-700/50"),
+                  t.classList.add("border-secondary-500/30", "text-white"),
+                  (fa = o);
+              });
+            }),
+            ha.addEventListener("click", function (a) {
+              fa &&
+                (a.disabled ||
+                  ((a.disabled = !0),
+                  (function () {
+                    return ga.apply(this, arguments);
+                  })().then(function (t) {
+                    return (a.disabled = !1);
+                  })));
+            })),
+          wa.length &&
+            wa.forEach(function (a) {
+              a.addEventListener("click", function () {
+                var t = a.querySelector(".faqItemButton"),
+                  o = a.querySelector(".faqItemIcon"),
+                  e = a.querySelector(".faqItemContent");
+                a.classList.contains("active")
+                  ? (function (a, t, o, e) {
+                      a.classList.remove(
+                        "active",
+                        "border-secondary-500/30",
+                        "bg-primary-800/70",
+                      ),
+                        a.classList.add(
+                          "border-primary-700/30",
+                          "hover:border-secondary-500/20",
+                        ),
+                        t.classList.remove("bg-primary-800/70"),
+                        t.classList.add(
+                          "group-hover:bg-primary-800/70",
+                          "bg-primary-800/50",
+                        ),
+                        o.classList.remove("rotate-180"),
+                        e.classList.remove("max-h-96", "overflow-auto"),
+                        e.classList.add("max-h-0", "overflow-hidden");
+                    })(a, t, o, e)
+                  : (function (a, t, o, e) {
+                      a.classList.add(
+                        "active",
+                        "border-secondary-500/30",
+                        "bg-primary-800/70",
+                      ),
+                        a.classList.remove(
+                          "border-primary-700/30",
+                          "hover:border-secondary-500/20",
+                        ),
+                        t.classList.add("bg-primary-800/70"),
+                        t.classList.remove(
+                          "group-hover:bg-primary-800/70",
+                          "bg-primary-800/50",
+                        ),
+                        o.classList.add("rotate-180"),
+                        e.classList.add("max-h-96"),
+                        e.classList.remove("max-h-0");
+                    })(a, t, o, e);
+              });
+            }),
           (function () {
             var a = document.querySelector("#userDashboardMenuDropdown"),
               t = document.querySelector("#userDashboardMenu");
@@ -2367,58 +2361,58 @@
             }
 
             a &&
-            t &&
-            a.addEventListener("click", function () {
-              window.innerWidth > 1020 ||
-              (t.classList.contains("active")
-                ? (a.classList.remove(
-                  "mb-6",
-                  "pb-6",
-                  "border-b",
-                  "border-primary-700/30",
-                ),
-                  t.classList.add("h-0"),
-                  t.classList.remove("h-auto", "active"),
-                  o())
-                : (a.classList.add(
-                  "mb-6",
-                  "pb-6",
-                  "border-b",
-                  "border-primary-700/30",
-                ),
-                  t.classList.add("h-auto", "active"),
-                  t.classList.remove("h-0"),
-                  o()));
-            });
+              t &&
+              a.addEventListener("click", function () {
+                window.innerWidth > 1020 ||
+                  (t.classList.contains("active")
+                    ? (a.classList.remove(
+                        "mb-6",
+                        "pb-6",
+                        "border-b",
+                        "border-primary-700/30",
+                      ),
+                      t.classList.add("h-0"),
+                      t.classList.remove("h-auto", "active"),
+                      o())
+                    : (a.classList.add(
+                        "mb-6",
+                        "pb-6",
+                        "border-b",
+                        "border-primary-700/30",
+                      ),
+                      t.classList.add("h-auto", "active"),
+                      t.classList.remove("h-0"),
+                      o()));
+              });
           })(),
-        (t = document.querySelectorAll(".withdrawalRequestItem")).length &&
-        t.forEach(function (a) {
-          a.addEventListener("click", function () {
-            var t = a.querySelector(".withdrawalRequestItem__icon"),
-              o = a.querySelector(".withdrawalRequestItem__content");
-            t.classList.toggle("rotate-180"), o.classList.toggle("hidden");
-          });
-        }),
-        xa.length &&
-        xa.forEach(function (t) {
-          t.addEventListener("click", function () {
-            fetch("/api/accounts/resend-email-confirmation/", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": a(),
-              },
-            }).then(function (a) {
-              a.ok
-                ? La.success(
-                  "We've resent the email confirmation link. Please check your inbox.",
-                )
-                : La.error(
-                  "An unexpected error has occured. Please try again later.",
-                );
-            });
-          });
-        }),
+          (t = document.querySelectorAll(".withdrawalRequestItem")).length &&
+            t.forEach(function (a) {
+              a.addEventListener("click", function () {
+                var t = a.querySelector(".withdrawalRequestItem__icon"),
+                  o = a.querySelector(".withdrawalRequestItem__content");
+                t.classList.toggle("rotate-180"), o.classList.toggle("hidden");
+              });
+            }),
+          xa.length &&
+            xa.forEach(function (t) {
+              t.addEventListener("click", function () {
+                fetch("/api/accounts/resend-email-confirmation/", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": a(),
+                  },
+                }).then(function (a) {
+                  a.ok
+                    ? La.success(
+                        "We've resent the email confirmation link. Please check your inbox.",
+                      )
+                    : La.error(
+                        "An unexpected error has occured. Please try again later.",
+                      );
+                });
+              });
+            }),
           Sa(),
           (function () {
             if (ja) {
@@ -2445,20 +2439,20 @@
               });
             }
           })(),
-        Ca &&
-        Ca.forEach(function (t) {
-          t.addEventListener("click", function () {
-            fetch("/facebook/pixel/events/contact/", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": a(),
-              },
-            }).then(function (a) {
-              return console.log("Contact pixel event request sent");
+          Ca &&
+            Ca.forEach(function (t) {
+              t.addEventListener("click", function () {
+                fetch("/facebook/pixel/events/contact/", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": a(),
+                  },
+                }).then(function (a) {
+                  return console.log("Contact pixel event request sent");
+                });
+              });
             });
-          });
-        });
       });
     })();
 })();
