@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django_ckeditor_5.fields import CKEditor5Field
 from solo.models import SingletonModel
 
 
@@ -167,7 +168,13 @@ class Prediction(BaseInternalModel):
         max_length=10, choices=Status, default=Status.PENDING, db_index=True
     )
 
-    detailed_analysis = models.TextField(blank=True)
+    detailed_analysis = CKEditor5Field(blank=True)
+
+    @property
+    def has_detailed_analysis(self):
+        return (
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+        )
 
     def __str__(self):
         return f"[{self.product.name}] {self.match.home_team.name} vs {self.match.away_team.name} ({self.prediction})"

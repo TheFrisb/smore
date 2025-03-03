@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "adminsortable2",
     "solo",
     "rosetta",
+    "django_ckeditor_5",
     # Local apps
     "accounts",
     "core",
@@ -242,3 +243,27 @@ RAPIDAPI_KEY = config("RAPIDAPI_KEY")
 
 # OpenAI Configuration
 OPENAI_API_KEY = config("OPENAI_API_KEY")
+
+# CkEditor 5 Configuration
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": {
+            "items": [
+                # "heading",
+                "|",
+                "bold",
+                "italic",
+                "link",
+                "bulletedList",
+                "numberedList",
+                "blockQuote",
+                "imageUpload",
+            ],
+        }
+    },
+}
+
+# Define a constant in settings.py to specify file upload permissions
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = (
+    "staff"  # Possible values: "staff", "authenticated", "any"
+)

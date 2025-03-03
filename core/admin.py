@@ -107,6 +107,9 @@ class PredictionAdmin(admin.ModelAdmin):
         ("Additional Information", {"fields": ("created_at", "updated_at")}),
     )
 
+    class Media:
+        css = {"all": ("css/admin/custom_admin.css",)}
+
 
 @admin.register(PickOfTheDay)
 class PickOfTheDayAdmin(SingletonModelAdmin):
@@ -136,3 +139,10 @@ class SportMatchAdmin(admin.ModelAdmin):
         "league__name",
         "kickoff_datetime",
     ]
+
+    def get_search_results(self, request, queryset, search_term):
+        # Filter matches to those on or after midnight today
+        midnight_today = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        queryset = queryset.filter(kickoff_datetime__gte=midnight_today)
+        # Apply the default search filtering
+        return super().get_search_results(request, queryset, search_term)

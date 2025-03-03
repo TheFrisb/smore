@@ -1,4 +1,7 @@
 {% extends 'core/base.html' %}
+{% block extrahead %}
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.2.1/ckeditor5.css"/>
+{% endblock extrahead %}
 {% load util_tags i18n static %}
 {% block content %}
     <section class="pb-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
@@ -48,7 +51,7 @@
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
             {% if can_view_prediction %}
-                <p class="text-primary-100 leading-7 py-4">{{ prediction.detailed_analysis }}</p>
+                <div class="!text-primary-100 !leading-7 py-4 ck-content">{{ prediction.detailed_analysis|safe }}</div>
             {% else %}
                 <div class="max-w-2xl mx-auto text-center py-4">
                     <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">

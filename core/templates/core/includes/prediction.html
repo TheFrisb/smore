@@ -14,7 +14,7 @@
                 </div>
                 <span class=" text-primary-100">{% trans "Soccer" %}</span>
             </div>
-            {% if prediction.detailed_analysis %}
+            {% if prediction.has_detailed_analysis %}
                 <a href="{% url 'core:detailed_prediction' prediction.id %}"
                    class="text-secondary-400 flex items-center gap-2 transition-all duration-300">
                     {% svg_icon icon_name="arrowRight" css_classes="w-5 h-5" %}

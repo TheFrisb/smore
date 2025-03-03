@@ -1,0 +1,9 @@
+
+html[data-theme='dark'] .ck-content > * {
+    color: #000;
+}
+
+html[data-theme='dark'] .ck-content td {
+    color: #000;
+    background-color: #fff;
+}
