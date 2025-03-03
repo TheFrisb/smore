@@ -156,7 +156,9 @@ class Prediction(BaseInternalModel):
     visibility = models.CharField(
         max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
     )
-    match = models.ForeignKey(SportMatch, on_delete=models.CASCADE, null=True, blank=True)
+    match = models.ForeignKey(
+        SportMatch, on_delete=models.CASCADE, unique=True, related_name="predictions"
+    )
     prediction = models.CharField(max_length=255)
     odds = models.DecimalField(max_digits=10, decimal_places=2)
     result = models.CharField(max_length=255, blank=True)

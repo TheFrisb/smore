@@ -77,16 +77,20 @@ class Command(BaseCommand):
                     logger.info(item)
                     continue
 
-                obj = Prediction.objects.create(
-                    product=soccer,
-                    match=match,
-                    prediction=prediction,
-                    odds=odds,
-                    status=status,
-                    visibility=visibility,
-                )
+                try:
+                    obj = Prediction.objects.create(
+                        product=soccer,
+                        match=match,
+                        prediction=prediction,
+                        odds=odds,
+                        status=status,
+                        visibility=visibility,
+                    )
 
-                logger.info(f"Successfully created {obj}")
+                    logger.info(f"Successfully created {obj}")
+                except Exception as e:
+                    logger.error(f"Failed to create prediction: {e}")
+                    logger.error(item)
 
             self.stdout.write(f"Found {len(leagues)} unique leagues")
 
