@@ -33,18 +33,18 @@
 
     </div>
     {% if show_predictions or prediction.id in purchased_prediction_ids %}
-{% else %}
-    <div class="flex items-center justify-center gap-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+    {% else %}
+        <div class="flex items-center justify-center gap-2 pb-2 relative">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                  class="lucide lucide-lock w-8 h-8 text-red-500">
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
-        <h2 class=" font-bold text-red-500 text-center text-lg">{% trans "Prediction locked" %}</h2>
-    </div>
-{% endif %}
+            <h2 class=" font-bold text-red-500 text-center text-lg">{% trans "Prediction locked" %}</h2>
+        </div>
+    {% endif %}
     <div class="mb-6">
         <div class="flex items-center justify-between mb-2">
             {% if prediction.status == "LOST" %}
@@ -119,7 +119,7 @@
     {% else %}
         <div class="flex flex-col gap-2">
             <a href="{% url 'core:plans' %}"
-               class="w-[150px] inline-flex w-fit mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
+               class="w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
                 Subscribe
                 {% svg_icon icon_name="arrowRight" css_classes="w-5 h-5 text-secondary-400" %}
             </a>
@@ -127,18 +127,21 @@
 
             <div class="flex items-center justify-around gap-4 py-2">
                 <div class="h-[1px] w-full bg-secondary-700/20"></div>
-{#                <p class="border border-secondary-500/50 rounded-full px-4 py-1  bg-secondary-500/10 text-secondary-400 font-bold">#}
-{#                    OR</p>#}
+                {#                <p class="border border-secondary-500/50 rounded-full px-4 py-1  bg-secondary-500/10 text-secondary-400 font-bold">#}
+                {#                    OR</p>#}
                 <p class="text-secondary-400 font-bold">OR</p>
                 <div class="h-[1px] w-full bg-secondary-500/20"></div>
             </div>
 
-                 <a href="{% url 'payments:prediction_checkout' prediction_id=prediction.id %}"
-               class="w-[150px] inline-flex w-fit mx-auto gap-2 items-center justify-center px-6 py-3 text-white rounded-lg font-semibold hover:bg-primary-700/50 border border-secondary-500/50 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200  bg-[#14202d] gap-2">
+            <a href="{% url 'payments:prediction_checkout' prediction_id=prediction.id %}"
+               class="w-[150px] inline-flex  mx-auto items-center justify-center px-6 py-3 text-white rounded-lg font-semibold hover:bg-primary-700/50 border border-secondary-500/50 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200  bg-[#14202d] gap-2">
                 Unlock
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" class="w-5 h-5 text-white"><path d="M240-160h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Zm0 80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h280v-80q0-83 58.5-141.5T720-920q83 0 141.5 58.5T920-720h-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80h120q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Z"/></svg>
-                 </a>
-        <p class="text-primary-100  text-center text-sm">this prediction for <span
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="currentColor" class="w-5 h-5 text-white">
+                    <path d="M240-160h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Zm0 80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h280v-80q0-83 58.5-141.5T720-920q83 0 141.5 58.5T920-720h-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80h120q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Z"/>
+                </svg>
+            </a>
+            <p class="text-primary-100  text-center text-sm">this prediction for <span
                     class="text-secondary-400">$9.99</span></p>
         </div>
     {% endif %}
