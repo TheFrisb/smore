@@ -83,7 +83,9 @@ class PredictionAdmin(admin.ModelAdmin):
         "prediction",
         "status",
         "visibility",
+        "detailed_analysis_status",
     ]
+
     search_fields = ("match__home_team__name", "match__away_team__name")
     list_filter = ["product", "status", "visibility"]
     ordering = ["-match__kickoff_datetime"]
@@ -106,6 +108,12 @@ class PredictionAdmin(admin.ModelAdmin):
         ("Status and Visibility", {"fields": ("status", "visibility")}),
         ("Additional Information", {"fields": ("created_at", "updated_at")}),
     )
+
+    def detailed_analysis_status(self, obj):
+        return obj.has_detailed_analysis
+
+    detailed_analysis_status.boolean = True
+    detailed_analysis_status.short_description = "Detailed Analysis"
 
     class Media:
         css = {"all": ("css/admin/custom_admin.css",)}
