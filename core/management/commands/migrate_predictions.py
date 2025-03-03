@@ -87,7 +87,6 @@ class Command(BaseCommand):
                         visibility=visibility,
                     )
 
-                    logger.info(f"Successfully created {obj}")
                 except Exception as e:
                     logger.error(f"Failed to create prediction: {e}")
                     logger.error(item)
