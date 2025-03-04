@@ -301,8 +301,11 @@ function updateClickedProductUI(
       const activeSubscriptionType =
         authenticatedActiveSubscriptionTypeInput.value;
       if (activeSubscriptionType) {
-        if(productElement.classList.contains("product__currentPlanDisclaimer")) {
+        if (
+          productElement.classList.contains("product__currentPlanDisclaimer")
+        ) {
           return;
+        }
       }
     }
 
