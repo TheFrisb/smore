@@ -33,7 +33,7 @@ class SendMessageToAiView(APIView):
         input_serializer.is_valid(raise_exception=True)
 
         user_subscription = UserSubscription.objects.filter(
-            user=self.request.user, products__name=Product.Names.AI_ASSISTANT
+            user=self.request.user, products__name=Product.Names.AI_ANALYST
         ).first()
         if not user_subscription:
             return Response(

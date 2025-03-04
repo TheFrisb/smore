@@ -307,7 +307,7 @@ class AiAssistantView(TemplateView):
         context["has_access"] = (
                 self.request.user.is_authenticated
                 and self.request.user.has_access_to_product(
-            Product.objects.get(name=Product.Names.AI_ASSISTANT)
+            Product.objects.get(name=Product.Names.AI_ANALYST)
         )
         )
         return context

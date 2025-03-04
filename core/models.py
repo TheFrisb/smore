@@ -58,7 +58,7 @@ class Product(BaseProductModel):
         SOCCER = "Soccer", _("Soccer")
         BASKETBALL = "Basketball", _("Basketball")
         NFL = "NFL", _("NFL")
-        AI_ASSISTANT = "AI Assistant", _("AI Assistant")
+        AI_ANALYST = "AI Analyst", _("AI Analyst")
 
     name = models.CharField(max_length=255, choices=Names, default=Names.SOCCER)
     type = models.CharField(choices=Types, max_length=255, default=Types.SUBSCRIPTION)
