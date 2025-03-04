@@ -70,6 +70,9 @@ class CreateSubscriptionCheckoutUrl(APIView):
 
 class CreatePredictionCheckoutUrl(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return reverse("accounts:login")
+
         prediction_id = self.kwargs["prediction_id"]
         prediction = Prediction.objects.get(id=prediction_id)
 

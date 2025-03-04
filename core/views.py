@@ -25,6 +25,7 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
         context["page_title"] = _("Home")
+        context["show_ai_button"] = True
         context.update(self.get_button_context())
 
         return context
@@ -120,9 +121,12 @@ class DetailedPredictionView(DetailView):
         ):
             return True
 
-        if PurchasedPredictions.objects.filter(
-                user=self.request.user, prediction=prediction
-        ).exists():
+        if (
+                self.request.user.is_authenticated
+                and PurchasedPredictions.objects.filter(
+            user=self.request.user, prediction=prediction
+        ).exists()
+        ):
             return True
 
         return False
