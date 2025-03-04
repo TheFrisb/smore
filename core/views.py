@@ -44,7 +44,7 @@ class HomeView(TemplateView):
         user_subscription = getattr(user, "subscription", None)
         if user_subscription and user_subscription.is_active:
             return {
-                "primary_button_text": _("What's New"),
+                "primary_button_text": _("Upcoming matches"),
                 "primary_button_url": reverse("core:upcoming_matches"),
                 "primary_button_description": _("View upcoming matches"),
             }

@@ -52,7 +52,7 @@ class LoginUserView(RedirectAuthenticatedUserMixin, LoginView):
     template_name = "accounts/pages/login.html"
 
     def get_success_url(self):
-        return self.request.GET.get("next", reverse("accounts:my_account"))
+        return self.request.GET.get("next", reverse("core:home"))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -115,7 +115,10 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
                 fb_pixel = FacebookPixel(request)
                 fb_pixel.complete_registration()
             except Exception as e:
-                logger.error("Error sending Complete Registration Facebook Pixel event", exc_info=e)
+                logger.error(
+                    "Error sending Complete Registration Facebook Pixel event",
+                    exc_info=e,
+                )
 
             return redirect("accounts:my_account")
         else:
