@@ -99,7 +99,7 @@ class StripeCheckoutService(BaseStripeService):
                 "price_data": {
                     "currency": "usd",
                     "product_data": {
-                        "name": f"Premium prediction for: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
+                        "name": f"Premium prediction: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
                     },
                     "unit_amount": 999,
                 },
