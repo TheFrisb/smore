@@ -212,14 +212,30 @@ class SubscriptionPaymentSuccessView(RedirectView):
 
         try:
             fb_pixel = FacebookPixel(self.request)
-            fb_pixel.purchase(
-                self.request.user.subscription.products.first(),
+            fb_pixel.subscribe(
+                self.request.user.subscription.products.all(),
                 self.request.user.subscription.price,
             )
         except Exception as e:
-            logger.error(f"Error while sending Purchase Facebook Pixel event: {e}")
+            logger.error(f"Error while sending Subscribe Facebook Pixel event: {e}")
 
         return reverse("accounts:my_account")
+
+
+class PurchasePaymentSuccessView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        prediction_pk = self.kwargs["prediction_pk"]
+        prediction = Prediction.objects.prefetch_related(
+            "match", "match__home_team", "match__away_team"
+        ).get(pk=prediction_pk)
+
+        try:
+            fb_pixel = FacebookPixel(self.request)
+            fb_pixel.purchase(prediction, 9.99)
+        except Exception as e:
+            logger.error(f"Error while sending Purchase Facebook Pixel event: {e}")
+
+        return reverse("core:detailed_prediction", kwargs={"pk": prediction_pk})
 
 
 @csrf_exempt

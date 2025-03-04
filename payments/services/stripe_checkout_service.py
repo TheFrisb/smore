@@ -43,7 +43,7 @@ class StripeCheckoutService(BaseStripeService):
             self, user: User | AbstractBaseUser, prediction: Prediction
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
-            success_url=f"{settings.BASE_URL}{reverse('core:detailed_prediction', kwargs={'pk': prediction.id})}",
+            success_url=f"{settings.BASE_URL}{reverse('payments:purchase_payment_success', kwargs={'prediction_pk': prediction.id})}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:detailed_prediction', kwargs={'pk': prediction.id})}",
             mode="payment",
             customer=user.stripe_customer_id,

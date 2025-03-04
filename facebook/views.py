@@ -29,7 +29,7 @@ class LeadPixelEventApiView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             fb_pixel = FacebookPixel(request)
-            fb_pixel.subscribe()
+            fb_pixel.lead()
         except Exception as e:
             logger.error(f"Error sending Subscribe Facebook Pixel event: {e}")
         return Response(status=HTTP_204_NO_CONTENT)

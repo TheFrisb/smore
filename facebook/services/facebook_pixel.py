@@ -12,6 +12,7 @@ from facebook_business.adobjects.serverside.event import Event
 from facebook_business.adobjects.serverside.event_request import EventRequest
 from facebook_business.adobjects.serverside.user_data import UserData
 
+from core.models import Prediction
 from facebook.utils import get_ip_addr, get_user_agent
 
 logger = logging.getLogger(__name__)
@@ -86,19 +87,19 @@ class FacebookPixel:
 
         logger.info(f"InitiateCheckout event sent: {event_response}")
 
-    def purchase(self, product, total_price):
+    def purchase(self, prediction: Prediction, total_price):
         custom_data = CustomData(
             value=float(total_price),
             currency="USD",
             content_type="product",
-            content_ids=[product.id],
+            content_ids=[prediction.id],
             num_items=1,
             contents=[
                 Content(
-                    product_id=product.id,
+                    product_id=prediction.id,
                     quantity=1,
                     item_price=float(total_price),
-                    title=product.get_name_display(),
+                    title=f"Premium prediction: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
                 )
             ],
         )
@@ -107,8 +108,25 @@ class FacebookPixel:
 
         logger.info(f"Purchase event sent: {event_response}")
 
-    def subscribe(self):
-        event_response = self.send_event("Subscribe")
+    def subscribe(self, products, total_price):
+        custom_data = CustomData(
+            value=float(total_price),
+            currency="USD",
+            content_type="product",
+            content_ids=[product.id for product in products],
+            num_items=1,
+            contents=[
+                Content(
+                    product_id=product.id,
+                    quantity=1,
+                    item_price=float(total_price),
+                    title=product.get_name_display(),
+                )
+                for product in products
+            ],
+        )
+
+        event_response = self.send_event("Subscribe", custom_data)
 
         logger.info(f"Subscribe event sent: {event_response}")
 

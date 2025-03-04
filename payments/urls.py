@@ -7,6 +7,7 @@ from payments.views import (
     UpdateSubscriptionView,
     SubscriptionPaymentSuccessView,
     CreatePredictionCheckoutUrl,
+    PurchasePaymentSuccessView,
 )
 
 app_name = "payments"
@@ -31,6 +32,11 @@ urlpatterns = [
         "payment-success/",
         SubscriptionPaymentSuccessView.as_view(),
         name="payment_success",
+    ),
+    path(
+        "payment/prediction/success/<int:prediction_pk>/",
+        PurchasePaymentSuccessView.as_view(),
+        name="purchase_payment_success",
     ),
     path("stripe/webhook/", stripe_webhook, name="stripe_webhook"),
 ]
