@@ -1,4 +1,4 @@
-import {getCsrfToken} from "./utils";
+import { getCsrfToken } from "./utils";
 
 const messagesContainer = document.getElementById(
   "aiAssistantMessagesContainer",
@@ -22,23 +22,19 @@ function renderMessage(message, isUserMessage) {
   messageContainer.appendChild(messageWrapper);
 
   messagesContainer.appendChild(messageContainer);
-
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
   return messageContainer;
 }
 
-/** New function to render text between ** as bold */
 function setMessageWithBold(element, message) {
   element.innerHTML = ""; // Clear existing content
 
   const parts = message.split(/\*\*/g); // Split by **
   parts.forEach((part, index) => {
     if (index % 2 === 0) {
-      // Even indices are regular text
       element.appendChild(document.createTextNode(part));
     } else {
-      // Odd indices are bold text
       const strong = document.createElement("strong");
       strong.textContent = part;
       element.appendChild(strong);
@@ -46,16 +42,28 @@ function setMessageWithBold(element, message) {
   });
 }
 
-function sendMessage() {
+function sendMessage(hasAccess) {
+  if (isLoading) {
+    return;
+  }
   const apiUrl = "/api/ai-assistant/send-message/";
   const message = input.value;
 
-  // Display the user's message
   renderMessage(message, true);
   input.value = "";
   sendButton.disabled = true;
 
-  // Add the "thinking" message with pulse animation
+  if (!hasAccess) {
+    const errorMessage = renderMessage(
+      "You need to subscribe to the AI Assistant product to use this feature.",
+      false,
+    );
+    errorMessage.classList.remove("animate-pulse");
+    return;
+  }
+
+  isLoading = true;
+
   const aiMessage = renderMessage("AI Analyst is thinking...", false);
 
   fetch(apiUrl, {
@@ -64,7 +72,7 @@ function sendMessage() {
       "Content-Type": "application/json",
       "X-CSRFToken": getCsrfToken(),
     },
-    body: JSON.stringify({message}),
+    body: JSON.stringify({ message }),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -72,11 +80,15 @@ function sendMessage() {
       setMessageWithBold(aiMessage.querySelector("p"), data.message);
     })
     .catch((error) => {
-      const errorMessage = renderMessage(
-        "An error occurred. Please try again later.",
-        false,
+      aiMessage.classList.remove("animate-pulse");
+      setMessageWithBold(
+        aiMessage.querySelector("p"),
+        "An error occurred while processing the message.",
       );
-      errorMessage.classList.remove("animate-pulse");
+      console.error("An error occurred while processing the message:", error);
+    })
+    .finally(() => {
+      isLoading = false;
     });
 }
 
@@ -85,12 +97,19 @@ function initAiAssistant() {
     return;
   }
 
-  sendButton.addEventListener("click", sendMessage);
+  const hasAccess = document.querySelector("#hasAccessInput").value === "True";
+
+  // Modified event listener to pass hasAccess
+  sendButton.addEventListener("click", () => sendMessage(hasAccess));
 
   input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      sendMessage();
+    if (event.key === "Enter" && !event.shiftKey && input.value.trim()) {
+      event.preventDefault(); // Prevent new line when sending
+      sendMessage(hasAccess);
     }
+  });
+
+  input.addEventListener("input", () => {
     sendButton.disabled = !input.value.trim();
   });
 }

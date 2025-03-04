@@ -9,9 +9,13 @@
 
 
 
-
-1. Add AI Chat
-2. Make cron job to fetch matches
-3. Initial migration script
-
 5. Track match scores
+
+
+
+2. AI Chat
+- Restrict access to users with plan
+- Improve prompts
+3. Match cron job
+4. Match score tracking
+5. Deploy

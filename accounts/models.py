@@ -34,7 +34,7 @@ class User(BaseInternalModel, AbstractUser):
     def __str__(self):
         return self.username
 
-    def can_view_prediction_type(self, product):
+    def has_access_to_product(self, product):
         """
         Check if the user can view predictions for the given product.
         """

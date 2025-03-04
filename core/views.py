@@ -9,7 +9,6 @@ from django.views.generic import TemplateView, DetailView
 from accounts.models import PurchasedPredictions
 from core.models import (
     Product,
-    Addon,
     PickOfTheDay,
     Prediction,
     FrequentlyAskedQuestion,
@@ -116,13 +115,13 @@ class DetailedPredictionView(DetailView):
             return True
 
         if (
-            self.request.user.is_authenticated
-            and self.request.user.can_view_prediction_type(prediction.product)
+                self.request.user.is_authenticated
+                and self.request.user.has_access_to_product(prediction.product)
         ):
             return True
 
         if PurchasedPredictions.objects.filter(
-            user=self.request.user, prediction=prediction
+                user=self.request.user, prediction=prediction
         ).exists():
             return True
 
@@ -134,8 +133,12 @@ class PlansView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["products"] = Product.objects.all()
-        context["addons"] = Addon.objects.all().order_by("order")
+        context["subscriptions"] = Product.objects.filter(
+            type=Product.Types.SUBSCRIPTION
+        ).order_by("order")
+        context["addons"] = Product.objects.filter(type=Product.Types.ADDON).order_by(
+            "order"
+        )
         context["page_title"] = _("Plans")
 
         return context
@@ -288,8 +291,8 @@ class UpcomingMatchesView(TemplateView):
     def get_show_predictions(self):
         soccer = Product.objects.get(name="Soccer")
         return (
-            self.request.user.is_authenticated
-            and self.request.user.can_view_prediction_type(soccer)
+                self.request.user.is_authenticated
+                and self.request.user.has_access_to_product(soccer)
         )
 
 
@@ -301,6 +304,12 @@ class AiAssistantView(TemplateView):
         context["page_title"] = _("AI Analyst")
         context["hide_footer"] = True
         context["hide_ai_button"] = True
+        context["has_access"] = (
+                self.request.user.is_authenticated
+                and self.request.user.has_access_to_product(
+            Product.objects.get(name=Product.Names.AI_ASSISTANT)
+        )
+        )
         return context
 
 

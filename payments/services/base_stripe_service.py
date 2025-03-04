@@ -1,7 +1,8 @@
 import logging
+from decimal import Decimal
 
 import stripe
-from stripe import Customer
+from stripe import Customer, Subscription
 
 from accounts.models import User
 from backend import settings
@@ -41,6 +42,22 @@ class BaseStripeService:
         logger.info(f"Successfully fetched subscription with ID: {subscription_id}")
 
         return subscription
+
+    def calculate_subscription_price(self, subscription: Subscription) -> Decimal:
+        total = sum(
+            item.price.unit_amount * item.quantity
+            for item in subscription["items"]["data"]
+        )
+        return Decimal(total / 100)
+
+    def modify_stripe_subscription(self, subscription_id: str, items_list: list[dict]):
+        logger.info(f"Modifying subscription with ID: {subscription_id}")
+        subscription = self.stripe_client.Subscription.retrieve(subscription_id)
+        subscription.items = items_list
+        subscription.payment_behavior = "pending_if_incomplete"
+        subscription.proration_behavior = "always_invoice"
+        subscription.save()
+        logger.info(f"Successfully modified subscription with ID: {subscription_id}")
 
     def deactivate_subscription(self, subscription_id: str):
         logger.info(f"Deactivating subscription with ID: {subscription_id}")

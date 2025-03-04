@@ -22,8 +22,22 @@ class BaseProductModel(BaseInternalModel):
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
     monthly_price_stripe_id = models.CharField(max_length=255)
 
+    discounted_monthly_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+    discounted_monthly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
+
     yearly_price = models.DecimalField(max_digits=10, decimal_places=2)
     yearly_price_stripe_id = models.CharField(max_length=255)
+
+    discounted_yearly_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+    discounted_yearly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
 
     order = models.PositiveIntegerField(default=0)
 
@@ -36,25 +50,20 @@ class BaseProductModel(BaseInternalModel):
 
 
 class Product(BaseProductModel):
+    class Types(models.TextChoices):
+        SUBSCRIPTION = "SUBSCRIPTION", _("Subscription")
+        ADDON = "ADDON", _("Addon")
+
     class Names(models.TextChoices):
         SOCCER = "Soccer", _("Soccer")
         BASKETBALL = "Basketball", _("Basketball")
         NFL = "NFL", _("NFL")
+        AI_ASSISTANT = "AI Assistant", _("AI Assistant")
 
     name = models.CharField(max_length=255, choices=Names, default=Names.SOCCER)
-    analysis_per_month = models.CharField(max_length=12)
-
-
-class Addon(BaseProductModel):
-    class Names(models.TextChoices):
-        AI_PREDICTION_ASSISTANT = "AI_PREDICTION_ASSISTANT", _(
-            "AI Prediction Assistant"
-        )
-
-    name = models.CharField(
-        max_length=255, choices=Names, default=Names.AI_PREDICTION_ASSISTANT
-    )
-    description = models.TextField()
+    type = models.CharField(choices=Types, max_length=255, default=Types.SUBSCRIPTION)
+    analysis_per_month = models.CharField(max_length=12, blank=True)
+    description = models.TextField(blank=True)
 
 
 class FrequentlyAskedQuestion(BaseInternalModel):
@@ -173,7 +182,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

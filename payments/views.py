@@ -14,7 +14,6 @@ from core.models import Product, Prediction
 from facebook.services.facebook_pixel import FacebookPixel
 from payments.services.stripe_checkout_service import (
     StripeCheckoutService,
-    StripePortalSessionFlow,
 )
 from payments.services.stripe_webhook_service import StripeWebhookService
 
@@ -37,10 +36,6 @@ class CreateSubscriptionCheckoutUrl(APIView):
     def post(self, request):
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        # if user has subscription get portal session
-        if request.user.subscription_is_active:
-            return Response({"url": reverse("payments:manage-subscription")})
 
         products = Product.objects.filter(id__in=serializer.validated_data["products"])
 
@@ -112,20 +107,97 @@ class ManageSubscriptionView(RedirectView):
         return portal_session.url
 
 
-class UpdateSubscriptionView(RedirectView):
+class UpdateSubscriptionView(APIView):
+    def __init__(self):
+        super().__init__()
+        self.service = StripeCheckoutService()
 
-    def get_redirect_url(self, *args, **kwargs):
-        if not self.request.user.subscription_is_active:
+    class InputSerializer(serializers.Serializer):
+        products = serializers.ListField(child=serializers.IntegerField())
+        frequency = serializers.ChoiceField(choices=["month", "year"])
+
+    def post(self, request, *args, **kwargs):
+        # Check if the user has an active subscription
+        if not request.user.subscription_is_active:
             logger.info(
-                f"User: {self.request.user.id} attempted to update subscription without having an active subscription."
+                f"User {request.user.id} attempted to manage subscription without an active subscription."
             )
-            return reverse("core:plans")
+            return Response(
+                status=403,
+                data={"message": "The user does not have an active subscription."},
+            )
 
-        service = StripeCheckoutService()
-        portal_session = service.create_portal_session(
-            self.request.user, StripePortalSessionFlow.UPDATE_SUBSCRIPTION
+        # Validate input data
+        serializer = self.InputSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        product_ids = serializer.validated_data["products"]
+        requested_frequency = serializer.validated_data["frequency"]
+
+        # Map input frequency to model frequency
+        frequency_map = {"month": "monthly", "year": "yearly"}
+        desired_frequency = frequency_map[requested_frequency]
+
+        # Fetch requested products
+        products = Product.objects.filter(id__in=product_ids)
+        if len(products) != len(product_ids):
+            return Response(
+                status=400, data={"message": "One or more product IDs are invalid."}
+            )
+
+        # Get the user's current subscription
+        user_subscription = request.user.subscription
+        stripe_subscription = self.service.get_stripe_subscription_by_id(
+            user_subscription.stripe_subscription_id
         )
-        return portal_session.url
+
+        # Build price-to-product mapping
+        all_products = Product.objects.all()
+        price_to_product = {}
+        for product in all_products:
+            price_to_product[product.monthly_price_stripe_id] = product
+            price_to_product[product.yearly_price_stripe_id] = product
+            # Include discounted prices if they exist
+            if product.discounted_monthly_price_stripe_id:
+                price_to_product[product.discounted_monthly_price_stripe_id] = product
+            if product.discounted_yearly_price_stripe_id:
+                price_to_product[product.discounted_yearly_price_stripe_id] = product
+
+        # Determine desired price IDs based on frequency
+        desired_price_ids = {}
+        for product in products:
+            desired_price_ids[product] = (
+                product.monthly_price_stripe_id
+                if desired_frequency == "monthly"
+                else product.yearly_price_stripe_id
+            )
+
+        # Process current subscription items
+        current_items = stripe_subscription["items"]["data"]
+        items_to_update = []
+        covered_products = set()
+
+        for item in current_items:
+            price_id = item["price"]["id"]
+            product = price_to_product.get(price_id)
+            if product and product in products:
+                # Product remains in subscription, update price if frequency changed
+                desired_price_id = desired_price_ids[product]
+                items_to_update.append({"id": item["id"], "price": desired_price_id})
+                covered_products.add(product)
+            else:
+                # Product removed, delete the item
+                items_to_update.append({"id": item["id"], "deleted": True})
+
+        # Add new items for products not currently in subscription
+        for product in set(products) - covered_products:
+            items_to_update.append({"price": desired_price_ids[product]})
+
+        # Update Stripe subscription
+        self.service.modify_stripe_subscription(
+            user_subscription.stripe_subscription_id, items_to_update
+        )
+
+        return Response({"message": "Subscription updated successfully."})
 
 
 class SubscriptionPaymentSuccessView(RedirectView):

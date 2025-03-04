@@ -29,20 +29,20 @@
             </div>
             <div class="max-w-5xl mx-auto grid lg:grid-cols-3 gap-8 mb-12 relative">
 
-                {% for product in products %}
+                {% for product in subscriptions %}
                     <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/30
                          {% if product.name == "Soccer" %}
                          hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product
                          {% endif %}
-
-
                          "
-                         data-product-id="{{ product.id }}" data-product-monthly-price="{{ product.monthly_price }}"
+                         data-product-id="{{ product.id }}"
+                         data-product-type="sport"
+                         data-product-monthly-price="{{ product.monthly_price }}"
                          data-product-annual-price="{{ product.yearly_price }}"
+                         data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
                          data-product-name="{{ product.get_name_display }}"
                          data-product-name-untranslated="{{ product.name }}"
-                         data-translated-mode-month="{% trans 'month' %}"
-                         data-translated-mode-year="{% trans 'year' %}">
+                         data-translated-mode-month="{% trans 'month' %}">
                         {% if product.name != "Soccer" %}
                             <div class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
                             </div>
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="flex items-center gap-3 mt-2">
                                         <p class="text-lg text-primary-400 line-through hidden product__yearlyPriceNoDiscount">
-                                            €{{ product.monthly_price|multiply:12 }}</p>
+                                            €{{ product.monthly_price }}</p>
                                         <p class="text-2xl font-bold text-secondary-400  product__price">
                                             €{{ product.monthly_price }}</p>
                                     </div>
@@ -81,14 +81,14 @@
                                     {% svg_icon icon_name="checkboxIcon" css_classes="hidden w-5 h-5 text-white product__checkboxIcon" %}
                                 </div>
                             </div>
-                            {% if request.user.is_authenticated and request.user.subscription_is_active and product.name == 'Soccer' %}
+                            {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
                                 <div class="mb-6">
                                     <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
                                         <p class="text-sm font-medium product__currentPlanDisclaimer"
                                            data-current-plan="{% trans 'Current plan' %}"
                                            data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
                                     </div>
-                                    <p class="text-sm font-medium text-primary-300">{% trans "Plan expiry" %}
+                                    <p class="text-sm font-medium text-primary-300">{% trans "Current plan expiry" %}
                                         date: {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
                                 </div>
                             {% endif %}
@@ -151,47 +151,52 @@
 
             </div>
             <div class="max-w-5xl mx-auto mb-12">
-                {% for addon in addons %}
-                    <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/10 "
-                         data-addon-id="{{ addon.id }}"
-                         data-addon-price="{{ addon.price }}">
-                        <div class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
-                        </div>
-                        <div class="absolute w-full h-full top-0 left-0 z-20 flex items-center justify-center">
-                            <p data-aos="zoom-in" data-aos-duration="500" data-aos-delay="100"
-                               class="inline-block px-4 py-2 rounded-full bg-secondary-500/40 text-secondary-400 text-sm font-semibold mb-4 z-20">
-                                {% trans "Coming Soon" %}</p>
-                        </div>
+                {% for product in addons %}
+                    <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/10 hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product"
+                         data-product-id="{{ product.id }}"
+                         data-product-type="sport"
+                         data-product-monthly-price="{{ product.monthly_price }}"
+                         data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
+                         data-product-annual-price="{{ product.yearly_price }}"
+                         data-product-name="{{ product.get_name_display }}"
+                         data-product-name-untranslated="{{ product.name }}"
+                         data-translated-mode-month="{% trans 'month' %}"
+                    >
 
                         <div class="relative">
                             <div class="flex justify-between items-start">
                                 <div class="flex-1">
                                     <div class="flex items-center space-x-2 mb-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="none"
-                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                             stroke-linejoin="round"
-                                             class="w-6 h-6 text-secondary-400">
-                                            <path d="M12 8V4H8"></path>
-                                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-                                            <path d="M2 14h2"></path>
-                                            <path d="M20 14h2"></path>
-                                            <path d="M15 13v2"></path>
-                                            <path d="M9 13v2"></path>
-                                        </svg>
-
-                                        <h3 class="text-xl font-bold text-white">{{ addon.get_name_display }}</h3>
+                                        {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-6 h-6 text-secondary-400" %}
+                                        <h3 class="text-xl font-bold text-white">{{ product.get_name_display }}</h3>
                                         {#                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-primary-500/10 text-secondary-400">{% trans "Add-on" %}</span>#}
 
                                     </div>
-                                    <p class="text-primary-200 mb-4 addon_descriptionText break-all">{{ addon.description }}</p>
-                                    <p class="text-2xl font-bold text-secondary-400">€{{ addon.monthly_price }} <span
-                                            class="text-primary-200 text-base font-normal">per month</span>
-                                    </p>
+                                    {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
+                                        <div class="mb-6">
+                                            <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
+                                                <p class="text-sm font-medium product__currentPlanDisclaimer"
+                                                   data-current-plan="{% trans 'Current plan' %}"
+                                                   data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
+                                            </div>
+                                            <p class="text-sm font-medium text-primary-300">{% trans "Current plan expiry" %}
+                                                date: {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
+                                        </div>
+                                    {% endif %}
+                                    <p class="text-primary-200 mb-4 addon_descriptionText break-all">{{ product.description }}</p>
+                                    <div class="flex items-center gap-3 mt-2">
+                                        <p class="text-lg text-primary-400 line-through hidden product__yearlyPriceNoDiscount">
+                                            €{{ product.monthly_price }}</p>
+                                        <p class="text-2xl font-bold text-secondary-400  product__price">
+                                            €{{ product.monthly_price }}</p>
+                                        <p class="text-sm text-primary-300">{% trans "per" %} <span
+                                                class="product__subscriptionMode">{% trans "month" %}</span>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="w-6 h-6 rounded-full border-2 transition-colors border-primary-600/50"></div>
-                                <div class="absolute inset-0 bg-primary-950/5 rounded-2xl"></div>
+                                <div class="w-6 h-6 rounded-full border-2 transition-colors border-primary-600 group-hover:border-primary-500 product__checkboxContainer">
+                                    {% svg_icon icon_name="checkboxIcon" css_classes="hidden w-5 h-5 text-white product__checkboxIcon" %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -211,12 +216,13 @@
                                 €0.00</p></div>
                     </div>
                     <div class="space-y-4 mb-8 divide-y divide-primary-700/30 checkoutSummary__items"></div>
-                    {% if request.user.is_authenticated and not request.user.subscription_is_active %}
+                    {% if request.user.is_authenticated %}
                         <button class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
                                 id="checkoutButton"
+                                data-url="{% if request.user.subscription_is_active %} {% url 'payments:update_subscription' %} {% else %} {% url 'payments:checkout' %} {% endif %}"
                                 disabled="">
                             <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                            <div class="relative flex items-center"><span
+                            <div class=" flex items-center"><span
                                     class="text-lg">{% trans "Get Started" %}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -224,23 +230,17 @@
                                      class="lucide lucide-chevron-right w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
                                     <path d="m9 18 6-6-6-6"></path>
                                 </svg>
-                            </div>
-                        </button>
-                    {% elif request.user.is_authenticated and request.user.subscription_is_active %}
-                        <a href="{% url 'payments:update_subscription' %}"
-                           class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
-                           disabled="">
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                            <div class="relative flex items-center"><span
-                                    class="text-lg">{% trans "Manage Subscription" %}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="lucide lucide-chevron-right w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
-                                    <path d="m9 18 6-6-6-6"></path>
+
+                                <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden"
+                                     viewBox=" 0 0 100 101
+                                " fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                          fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                          fill="currentFill"/>
                                 </svg>
                             </div>
-                        </a>
+                        </button>
                     {% else %}
                         <a href="{% url 'accounts:register' %}"
                            class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"

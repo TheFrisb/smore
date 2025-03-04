@@ -8,7 +8,6 @@ from core.models import (
     Prediction,
     PickOfTheDay,
     Product,
-    Addon,
     FrequentlyAskedQuestion,
     SiteSettings,
     SportCountry,
@@ -25,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
         (
             "Basic Information",
             {
-                "fields": ("name", "analysis_per_month", "stripe_product_id"),
+                "fields": ("name", "type", "analysis_per_month", "stripe_product_id"),
             },
         ),
         (
@@ -35,9 +34,33 @@ class ProductAdmin(admin.ModelAdmin):
             },
         ),
         (
+            "Discounted Monthly Pricing",
+            {
+                "fields": (
+                    "discounted_monthly_price",
+                    "discounted_monthly_price_stripe_id",
+                ),
+            },
+        ),
+        (
             "Yearly Pricing",
             {
                 "fields": ("yearly_price", "yearly_price_stripe_id"),
+            },
+        ),
+        (
+            "Discounted Yearly Pricing",
+            {
+                "fields": (
+                    "discounted_yearly_price",
+                    "discounted_yearly_price_stripe_id",
+                ),
+            },
+        ),
+        (
+            "Additional Information",
+            {
+                "fields": ("description",),
             },
         ),
     )
@@ -49,12 +72,6 @@ class ProductAdmin(admin.ModelAdmin):
         "order",
     )
     ordering = ["order"]
-
-
-@admin.register(Addon)
-class AddonAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ["name", "monthly_price", "yearly_price", "order"]
-    search_fields = ["name"]
 
 
 class PredictionAdminForm(forms.ModelForm):

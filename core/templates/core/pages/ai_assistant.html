@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 {% load util_tags i18n %}
 {% block content %}
+    <input type="hidden" id="hasAccessInput" value="{{ has_access }}">
     <div class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 flex flex-col ">
         <div class="bg-primary-800/50 backdrop-blur-sm border-b border-primary-700/30 p-4">
             <div class="container mx-auto flex items-center">
@@ -30,7 +31,9 @@
             <div class="container mx-auto max-w-4xl space-y-6" id="aiAssistantMessagesContainer">
                 <div class="flex justify-start">
                     <div class="max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 mr-12">
-                        <p class="whitespace-pre-wrap">Hello! I'm your AI Analyst. How can I help you today?</p>
+                        <p class=" text-left">Hello! I'm your AI Analyst.<br>Ask me anything about sport matches
+                            analysis
+                            and predictions.</p>
                     </div>
                 </div>
             </div>
@@ -46,13 +49,14 @@
                     <path d="M9 13v2"></path>
                 </svg>
             </div>
+
         </div>
         <div class="bg-primary-800/50 backdrop-blur-sm border-t border-primary-700/30 p-4 fixed bottom-0 w-full">
             <div class="container mx-auto max-w-4xl">
                 <div class="flex items-center gap-4">
                     <div class="flex-1 bg-primary-900/50 rounded-xl border border-primary-700/30 focus-within:border-secondary-500/50 transition-colors">
                         <textarea placeholder="Type your message..." id="aiAssistantInput"
-                                  class="overflow-y-auto w-full bg-transparent border-none focus:ring-0 text-white placeholder-primary-500 p-4 min-h-[52px] max-h-32 resize-none focus:outline-none"
+                                  class="overflow-y-auto w-full bg-transparent border-none focus:ring-0 text-white placeholder-primary-500 p-4 min-h-[52px] max-h-32 resize-none focus:outline-none no-scrollbar"
                                   rows="1"></textarea>
                     </div>
                     <button disabled="" id="aiAssistantSendButton"

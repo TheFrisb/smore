@@ -60,8 +60,11 @@ class StripeWebhookService(BaseStripeService):
 
         logger.info(f"Matched invoice paid event to user: {user.username}")
 
-        amount_paid = Decimal(amount_paid_cents) / Decimal("100")
         stripe_subscription = self.get_stripe_subscription_by_id(stripe_subscription_id)
+        amount_paid = Decimal(amount_paid_cents / 100)
+        stripe_subscription_total_price = self.calculate_subscription_price(
+            stripe_subscription
+        )
 
         stripe_subscription_items = stripe_subscription["items"]["data"]
         if not stripe_subscription_items:
@@ -111,9 +114,12 @@ class StripeWebhookService(BaseStripeService):
                 logger.info(
                     f"Existing subscription found for user {user.username} and subscription ID {existing_subscription.stripe_subscription_id}"
                 )
-                self.deactivate_subscription(
-                    existing_subscription.stripe_subscription_id
-                )
+                try:
+                    self.deactivate_subscription(
+                        existing_subscription.stripe_subscription_id
+                    )
+                except Exception as e:
+                    logger.error(f"Error while deactivating existing subscription: {e}")
                 existing_subscription.delete()
 
             logger.info(
@@ -124,7 +130,7 @@ class StripeWebhookService(BaseStripeService):
                 user=user,
                 status=internal_subscription_status,
                 frequency=internal_frequency_status,
-                price=amount_paid,
+                price=stripe_subscription_total_price,
                 start_date=subscription_start_time,
                 end_date=subscription_end_time,
                 stripe_subscription_id=stripe_subscription_id,
@@ -139,7 +145,7 @@ class StripeWebhookService(BaseStripeService):
             user_subscription.start_date = subscription_start_time
             user_subscription.end_date = subscription_end_time
             user_subscription.frequency = internal_frequency_status
-            user_subscription.price = amount_paid
+            user_subscription.price = stripe_subscription_total_price
             user_subscription.save()
 
         user_subscription.products.set(internal_products)

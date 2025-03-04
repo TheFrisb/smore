@@ -1,5 +1,13 @@
 import { getCsrfToken } from "../utils";
+import { Notyf } from "notyf";
 
+let notyf = new Notyf({
+  duration: 5000,
+  position: {
+    x: "right",
+    y: "top",
+  },
+});
 const products = document.querySelectorAll(".product");
 const checkoutSummarySection = document.querySelector(
   ".checkoutSummarySection",
@@ -54,11 +62,13 @@ function initChooseSubscriptionFrequencyButton() {
           authenticatedActiveSubscriptionTypeInput.value;
 
         if (activeSubscriptionType === "monthly") {
-          const updateEl = document.querySelector(
-            '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
+          const elsToUpdate = document.querySelectorAll(
+            ".product__currentPlanDisclaimer",
           );
 
-          updateEl.textContent = updateEl.getAttribute("data-upgrade-plan");
+          elsToUpdate.forEach((el) => {
+            el.textContent = el.getAttribute("data-upgrade-plan");
+          });
         }
       }
     } else {
@@ -80,11 +90,12 @@ function initChooseSubscriptionFrequencyButton() {
           authenticatedActiveSubscriptionTypeInput.value;
 
         if (activeSubscriptionType) {
-          const updateEl = document.querySelector(
-            '.product[data-product-name-untranslated="Soccer"] .product__currentPlanDisclaimer',
+          const elsToUpdate = document.querySelectorAll(
+            ".product__currentPlanDisclaimer",
           );
-
-          updateEl.textContent = updateEl.getAttribute("data-current-plan");
+          elsToUpdate.forEach((el) => {
+            el.textContent = el.getAttribute("data-current-plan");
+          });
         }
       }
     }
@@ -98,19 +109,14 @@ function updatePrices() {
 
   products.forEach((product) => {
     const priceEl = product.querySelector(".product__price");
-    const mode = product.querySelector(".product__subscriptionMode");
     const yearlyNoDiscountPrice = product.querySelector(
       ".product__yearlyPriceNoDiscount",
     );
 
     let monthlyPrice = product.getAttribute("data-product-monthly-price");
-    let yearlyPrice = product.getAttribute("data-product-annual-price");
+    let yearlyPrice = product.getAttribute("data-product-annual-monthly-price");
 
     let price = frequencyType === "month" ? monthlyPrice : yearlyPrice;
-
-    mode.textContent = product.getAttribute(
-      `data-translated-mode-${frequencyType}`,
-    );
 
     if (frequencyType === "year") {
       yearlyNoDiscountPrice.classList.remove("hidden");
@@ -159,11 +165,12 @@ function initProducts() {
     const activeSubscriptionType =
       authenticatedActiveSubscriptionTypeInput.value;
     if (activeSubscriptionType) {
-      const product = document.querySelector(
-        '.product[data-product-name-untranslated="Soccer"]',
+      const elsToUpdate = document.querySelectorAll(
+        ".product__currentPlanDisclaimer",
       );
-      console.log(product);
-      product.click();
+      elsToUpdate.forEach((el) => {
+        el.click();
+      });
     }
 
     if (activeSubscriptionType && activeSubscriptionType === "yearly") {
@@ -178,10 +185,12 @@ function initProducts() {
       }
 
       checkoutButton.disabled = true;
-
+      const buttonSpinner = checkoutButton.querySelector(".buttonSpinner");
+      buttonSpinner.classList.remove("hidden");
       const csrfToken = getCsrfToken();
+      const url = checkoutButton.getAttribute("data-url");
 
-      fetch("/api/payments/checkout/", {
+      fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -192,15 +201,30 @@ function initProducts() {
           frequency: frequencyType,
         }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              `Status: ${response.status}. Body: ${response.body}`,
+            );
+          }
+          return response.json();
+        })
         .then((data) => {
-          window.location.href = data.url;
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            setTimeout(() => {
+              window.location.href = "/accounts/manage-plan/";
+            }, 5000);
+          }
         })
         .catch((error) => {
           console.error("Error:", error);
-        })
-        .finally(() => {
+          notyf.error(
+            "Something went wrong. Please contact support if the issue persists.",
+          );
           checkoutButton.disabled = false;
+          buttonSpinner.classList.add("hidden");
         });
     });
   }
@@ -216,7 +240,10 @@ function updateCheckoutSummaryUI() {
       `.product[data-product-id="${productId}"]`,
     );
     const productName = productEl.getAttribute("data-product-name");
-    const productPrice = productEl.querySelector(".product__price").textContent;
+    const productPrice =
+      frequencyType === "month"
+        ? productEl.getAttribute("data-product-monthly-price")
+        : productEl.getAttribute("data-product-annual-price");
 
     total_price += parseFloat(productPrice.replace("€", ""));
 
@@ -224,20 +251,12 @@ function updateCheckoutSummaryUI() {
     <div class="space-y-4 mb-8 divide-y divide-primary-700/30">
     <div class="flex justify-between items-center text-primary-200 py-3">
     <span class="capitalize">${productName}</span>
-    <span>${productPrice}</span>
+    <span>€${productPrice}</span>
     </div>
     </div>
     `;
   });
 
-  if (selectedProducts.length > 1) {
-    checkoutSummary += `
-    <div class="flex justify-between items-center text-secondary-500 py-3">
-    <span>Multi-sport Discount</span>
-    <span>-€${(selectedProducts.length - 1) * 20}</span> 
-    </div>
-    `;
-  }
   checkoutSummaryItemsSection.innerHTML = checkoutSummary;
 
   if (checkoutButton) {

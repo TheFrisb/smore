@@ -106,3 +106,13 @@ class StripeCheckoutService(BaseStripeService):
                 "quantity": 1,
             }
         ]
+
+    def update_subscription_items(
+            self, user: User, new_price_ids: List[str]
+    ) -> Session:
+        subscription_id = user.subscription.stripe_subscription_id
+        subscription = self.stripe_client.Subscription.retrieve(subscription_id)
+        items = [{"price": price_id} for price_id in new_price_ids]
+        subscription.items = items
+        subscription.save()
+        return subscription
