@@ -283,7 +283,13 @@ function pushOrRemoveProduct(id) {
       const activeSubscriptionType =
         authenticatedActiveSubscriptionTypeInput.value;
       if (activeSubscriptionType) {
-        return;
+        if (
+          document
+            .querySelector(`.product[data-product-id="${id}"]`)
+            .classList.contains("product__currentPlanDisclaimer")
+        ) {
+          return;
+        }
       }
     }
     selectedProducts.splice(productIndex, 1);
