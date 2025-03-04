@@ -81,7 +81,6 @@ function sendMessage(hasAccess) {
 
   renderMessage(message, true);
   input.value = "";
-  sendButton.disabled = true;
 
   if (!hasAccess) {
     renderNoAccessMessage();
@@ -89,6 +88,9 @@ function sendMessage(hasAccess) {
   }
 
   isLoading = true;
+
+  // disable the send button
+  sendButton.disabled = true;
 
   const aiMessage = renderMessage("AI Analyst is thinking...", false);
 
@@ -125,19 +127,27 @@ function initAiAssistant() {
 
   const hasAccess = document.querySelector("#hasAccessInput").value === "True";
 
-  // Modified event listener to pass hasAccess
-  sendButton.addEventListener("click", () => sendMessage(hasAccess));
+  // Update button state when input changes
+  input.addEventListener("input", () => {
+    console.log(input.value.trim());
+    sendButton.disabled = !input.value.trim();
+  });
 
+  // Send message on Enter key press
   input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && !event.shiftKey && input.value.trim()) {
-      event.preventDefault(); // Prevent new line when sending
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // Prevent newline
       sendMessage(hasAccess);
     }
+    // Shift + Enter will insert a newline by default
   });
 
   input.addEventListener("input", () => {
     sendButton.disabled = !input.value.trim();
   });
+
+  // Send message on button click
+  sendButton.addEventListener("click", () => sendMessage(hasAccess));
 }
 
 export default initAiAssistant;
