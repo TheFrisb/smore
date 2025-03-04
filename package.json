@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "aos": "^3.0.0-beta.6",
+    "marked": "^15.0.7",
     "notyf": "^3.10.0"
   }
 }

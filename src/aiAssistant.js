@@ -1,4 +1,5 @@
 import { getCsrfToken } from "./utils";
+import { marked } from "marked";
 
 const messagesContainer = document.getElementById(
   "aiAssistantMessagesContainer",
@@ -9,16 +10,20 @@ let isLoading = false;
 
 function renderMessage(message, isUserMessage) {
   const messageContainer = document.createElement("div");
-  messageContainer.className = `flex ${isUserMessage ? "justify-end" : "justify-start animate-pulse"}`;
+  messageContainer.className = `flex ${isUserMessage ? "justify-end" : "justify-start"}`;
 
   const messageWrapper = document.createElement("div");
   messageWrapper.className = `max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 ${isUserMessage ? "ml-12" : "mr-12"}`;
 
-  const messageText = document.createElement("p");
-  messageText.className = "whitespace-pre-wrap";
-  messageText.textContent = message;
+  const messageContent = document.createElement("div");
+  messageContent.className = "whitespace-pre-wrap";
+  messageContent.textContent = message;
 
-  messageWrapper.appendChild(messageText);
+  if (!isUserMessage && message === "AI Analyst is thinking...") {
+    messageContainer.classList.add("animate-pulse");
+  }
+
+  messageWrapper.appendChild(messageContent);
   messageContainer.appendChild(messageWrapper);
 
   messagesContainer.appendChild(messageContainer);
@@ -39,37 +44,23 @@ function renderNoAccessMessage() {
   messageText.textContent =
     "You need to subscribe to the AI Assistant product to use this feature.";
 
-  const divHtml = `
-<div class="mt-2 flex items-center justify-center w-full">
-<a href="/plans/" class="w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
-                Subscribe
-                <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite10.svg#arrowRight"></use></svg>
-            </a>
-</div>
-`;
+  const buttonContainer = document.createElement("div");
+  buttonContainer.className = "mt-2 flex items-center justify-center w-full";
+  buttonContainer.innerHTML = `
+    <a href="/plans/" class="w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
+      Subscribe
+      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite10.svg#arrowRight"></use></svg>
+    </a>
+  `;
+
   messageWrapper.appendChild(messageText);
-  messageWrapper.innerHTML += divHtml;
+  messageWrapper.appendChild(buttonContainer);
   messageContainer.appendChild(messageWrapper);
 
   messagesContainer.appendChild(messageContainer);
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
   return messageContainer;
-}
-
-function setMessageWithBold(element, message) {
-  element.innerHTML = ""; // Clear existing content
-
-  const parts = message.split(/\*\*/g); // Split by **
-  parts.forEach((part, index) => {
-    if (index % 2 === 0) {
-      element.appendChild(document.createTextNode(part));
-    } else {
-      const strong = document.createElement("strong");
-      strong.textContent = part;
-      element.appendChild(strong);
-    }
-  });
 }
 
 function sendMessage(hasAccess) {
@@ -88,8 +79,6 @@ function sendMessage(hasAccess) {
   }
 
   isLoading = true;
-
-  // disable the send button
   sendButton.disabled = true;
 
   const aiMessage = renderMessage("AI Analyst is thinking...", false);
@@ -105,18 +94,19 @@ function sendMessage(hasAccess) {
     .then((response) => response.json())
     .then((data) => {
       aiMessage.classList.remove("animate-pulse");
-      setMessageWithBold(aiMessage.querySelector("p"), data.message);
+      const messageContent = aiMessage.querySelector("div.whitespace-pre-wrap");
+      messageContent.innerHTML = marked.parse(data.message);
     })
     .catch((error) => {
       aiMessage.classList.remove("animate-pulse");
-      setMessageWithBold(
-        aiMessage.querySelector("p"),
-        "An error occurred while processing the message.",
-      );
+      const messageContent = aiMessage.querySelector("div.whitespace-pre-wrap");
+      messageContent.textContent =
+        "An error occurred while processing the message.";
       console.error("An error occurred while processing the message:", error);
     })
     .finally(() => {
       isLoading = false;
+      sendButton.disabled = false;
     });
 }
 
@@ -127,26 +117,17 @@ function initAiAssistant() {
 
   const hasAccess = document.querySelector("#hasAccessInput").value === "True";
 
-  // Update button state when input changes
   input.addEventListener("input", () => {
-    console.log(input.value.trim());
     sendButton.disabled = !input.value.trim();
   });
 
-  // Send message on Enter key press
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault(); // Prevent newline
+      event.preventDefault();
       sendMessage(hasAccess);
     }
-    // Shift + Enter will insert a newline by default
   });
 
-  input.addEventListener("input", () => {
-    sendButton.disabled = !input.value.trim();
-  });
-
-  // Send message on button click
   sendButton.addEventListener("click", () => sendMessage(hasAccess));
 }
 
