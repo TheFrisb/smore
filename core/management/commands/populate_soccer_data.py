@@ -47,8 +47,6 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        self.populate_countries()
-        self.populate_leagues()
         self.populate_teams()
 
     def populate_countries(self):
@@ -107,10 +105,10 @@ class Command(BaseCommand):
 
     def populate_teams(self):
         # make start date 9 january
-        start_date = datetime(2025, 1, 9)
+        start_date = datetime(2025, 3, 4)
 
         # loop over next 5 days
-        for i in range(60):
+        for i in range(7):
             date = start_date + timedelta(days=i)
             formatted_date = date.strftime("%Y-%m-%d")
             endpoint = f"https://api-football-v1.p.rapidapi.com/v3/fixtures?date={formatted_date}"
