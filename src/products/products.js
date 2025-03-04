@@ -283,11 +283,15 @@ function pushOrRemoveProduct(id) {
       const activeSubscriptionType =
         authenticatedActiveSubscriptionTypeInput.value;
       if (activeSubscriptionType) {
-        if (
-          document
-            .querySelector(`.product[data-product-id="${id}"]`)
-            .classList.contains("product__currentPlanDisclaimer")
-        ) {
+        console.log("Active subscription type: ", activeSubscriptionType);
+        const product = document.querySelector(
+          `.product[data-product-id="${id}"]`,
+        );
+        const currentPlanDisclaimer = product.querySelector(
+          ".product__currentPlanDisclaimer",
+        );
+
+        if (currentPlanDisclaimer) {
           return;
         }
       }
@@ -307,9 +311,10 @@ function updateClickedProductUI(
       const activeSubscriptionType =
         authenticatedActiveSubscriptionTypeInput.value;
       if (activeSubscriptionType) {
-        if (
-          productElement.classList.contains("product__currentPlanDisclaimer")
-        ) {
+        const currentPlanDisclaimer = productElement.querySelector(
+          ".product__currentPlanDisclaimer",
+        );
+        if (currentPlanDisclaimer) {
           return;
         }
       }
