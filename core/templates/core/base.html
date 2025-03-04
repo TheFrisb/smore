@@ -1,13 +1,13 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg-primary-950">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Smore - {{ page_title }}</title>
-    <link rel="preload" href="{% static 'js/core_v13.bundle.js' %}" as="script">
+    <link rel="preload" href="{% static 'js/core_v14.bundle.js' %}" as="script">
     <link rel="stylesheet" href="{% static 'css/tailwind_output_v14.css' %}">
     <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
@@ -47,7 +47,7 @@
     {% block extrahead %}{% endblock extrahead %}
 
 </head>
-<body class="min-h-screen bg-primary-950">
+<body class="min-h-screen ">
 {% include 'core/includes/header.html' %}
 <main class="pt-20">
 
@@ -75,6 +75,6 @@
     </a>
 {% endif %}
 
-<script src="{% static 'js/core_v13.bundle.js' %}"></script>
+<script src="{% static 'js/core_v14.bundle.js' %}"></script>
 </body>
 </html>
