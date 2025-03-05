@@ -16,6 +16,7 @@ import { initContactPixelEvent } from "./contact_pixel_event";
 import { initLeadPixelEvent } from "./lead_pixel_event";
 import initAiAssistant from "./aiAssistant";
 import { initDateItems } from "./dateItem";
+import { initPeekButtons } from "./passwordPeek";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -42,4 +43,23 @@ document.addEventListener("DOMContentLoaded", () => {
   initLeadPixelEvent();
 
   initAiAssistant();
+  initPeekButtons();
+
+  const container = document.querySelector("#aiAssistantRelativeContainer");
+  const aiAssistant = document.querySelector("#aiAssistantIcon");
+
+  if (container && aiAssistant) {
+    function updatePosition() {
+      const rect = container.getBoundingClientRect();
+      document.body.style.setProperty(
+        "--container-left",
+        `${rect.left + 16}px`,
+      );
+    }
+
+    // Update position on load and resize
+    window.addEventListener("resize", updatePosition);
+    updatePosition();
+    aiAssistant.classList.remove("invisible");
+  }
 });
