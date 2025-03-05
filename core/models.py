@@ -171,13 +171,15 @@ class Prediction(BaseInternalModel):
     )
     prediction = models.CharField(max_length=255)
     odds = models.DecimalField(max_digits=10, decimal_places=2)
-    result = models.CharField(max_length=255, blank=True)
-
     status = models.CharField(
         max_length=10, choices=Status, default=Status.PENDING, db_index=True
     )
 
     detailed_analysis = CKEditor5Field(blank=True)
+
+    @property
+    def result(self):
+        return f"{self.match.home_team_score} - {self.match.away_team_score}"
 
     @property
     def has_detailed_analysis(self):

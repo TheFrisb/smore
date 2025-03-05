@@ -106,7 +106,7 @@ class PredictionAdmin(admin.ModelAdmin):
     search_fields = ("match__home_team__name", "match__away_team__name")
     list_filter = ["product", "status", "visibility"]
     ordering = ["-match__kickoff_datetime"]
-    readonly_fields = ["created_at", "updated_at"]
+    readonly_fields = ["created_at", "updated_at", "result"]
 
     fieldsets = (
         (
@@ -125,6 +125,9 @@ class PredictionAdmin(admin.ModelAdmin):
         ("Status and Visibility", {"fields": ("status", "visibility")}),
         ("Additional Information", {"fields": ("created_at", "updated_at")}),
     )
+
+    def get_result(self, obj):
+        return obj.result
 
     def detailed_analysis_status(self, obj):
         return obj.has_detailed_analysis
