@@ -141,7 +141,7 @@ class SportMatch(BaseInternalModel):
     @property
     def is_live(self):
         # calculate if the match is live (soccer match)
-        match_end_time = self.kickoff_datetime + timedelta(hours=2)
+        match_end_time = self.kickoff_datetime + timedelta(minutes=105)
         return self.kickoff_datetime <= timezone.now() <= match_end_time
 
     @property
