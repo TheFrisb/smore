@@ -51,7 +51,10 @@ class Command(BaseCommand):
         self.populate_scores()
 
     def populate_scores(self):
-        predictions = Prediction.objects.all().order_by("-match__kickoff_datetime")
+        predictions = Prediction.objects.filter(match__home_team_score="").order_by(
+            "-match__kickoff_datetime"
+        )
+        logger.info(f"Found {predictions.count()} predictions without scores")
 
         for prediction in predictions:
             # sleep for 1 second to avoid rate limiting
