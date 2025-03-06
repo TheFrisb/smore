@@ -36,9 +36,11 @@
                         <img src="{{ prediction.match.home_team.logo.url }}" width="64" style="height: auto!important">
                         <p class="text-primary-100 font-bold text-center">{{ prediction.match.home_team.name }}</p>
                     </div>
-                    <div class="flex flex-col items-center justify-center gap-2">
-                        <img src="{% static 'assets/images/vs.png' %}" alt="" width="32"
+                    <div class="flex items-center justify-center relative">
+                        <p class="font-bold text-primary-200 absolute right-0  text-lg">{{ prediction.match.home_team_score }}</p>
+                        <img src="{% static 'assets/images/vs.png' %}" alt="" width="32" class="animate-pulse"
                              style="height: auto!important">
+                        <p class="font-bold text-primary-200 absolute left-0  text-lg">{{ prediction.match.away_team_score }}</p>
                     </div>
 
                     <div class="flex flex-col items-center justify-center gap-2">

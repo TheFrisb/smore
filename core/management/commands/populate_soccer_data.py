@@ -6,7 +6,7 @@ import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from core.models import SportCountry, SportLeague, SportTeam, SportMatch
+from core.models import SportCountry, SportLeague, SportTeam, SportMatch, Prediction
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,41 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        self.populate_teams()
+        self.populate_scores()
+
+    def populate_scores(self):
+        predictions = Prediction.objects.all()
+
+        for prediction in predictions:
+            sport_match = prediction.match
+            sport_match_external_id = sport_match.external_id
+
+            endpoint = f"https://api-football-v1.p.rapidapi.com/v3/fixtures?id={sport_match_external_id}"
+            response = requests.get(endpoint, headers=self.get_headers())
+
+            if response.status_code != 200:
+                logger.error(f"Failed to fetch sport matches for url: {endpoint}")
+                continue
+
+            data = response.json()
+            print(sport_match_external_id)
+            score = data.get("response")[0].get("score").get("fulltime")
+            home_team_score = score.get("home", None)
+            away_team_score = score.get("away", None)
+
+            if home_team_score is None or away_team_score is None:
+                logger.info(
+                    f"Skipping match {sport_match_external_id}, as it has no score"
+                )
+                continue
+
+            sport_match.home_team_score = home_team_score
+            sport_match.away_team_score = away_team_score
+
+            sport_match.save()
+            logger.info(
+                f"Successfully updated match {sport_match_external_id} with score {home_team_score} - {away_team_score}"
+            )
 
     def populate_countries(self):
         endpoint = "https://api-football-v1.p.rapidapi.com/v3/countries"

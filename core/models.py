@@ -184,7 +184,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):
