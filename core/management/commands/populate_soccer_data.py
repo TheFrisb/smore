@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 from datetime import datetime, timezone, timedelta
 
 import requests
@@ -53,6 +54,8 @@ class Command(BaseCommand):
         predictions = Prediction.objects.all().order_by("-match__kickoff_datetime")
 
         for prediction in predictions:
+            # sleep for 1 second to avoid rate limiting
+            time.sleep(1)
             sport_match = prediction.match
             sport_match_external_id = sport_match.external_id
 
