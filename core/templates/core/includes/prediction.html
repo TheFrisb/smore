@@ -86,10 +86,10 @@
                     <p class="text-primary-100 text-sm md:text-base font-bold text-center">{{ prediction.match.home_team.name }}</p>
                 </div>
                 <div class="flex items-center justify-center relative">
-                    <p class="font-bold text-primary-200 absolute right-0  text-lg">{{ prediction.match.home_team_score }}</p>
+                    <p class="font-bold text-primary-200 absolute left-0  text-lg">{{ prediction.match.home_team_score }}</p>
                     <img src="{% static 'assets/images/vs.png' %}" alt=""
                          class="w-4 md:w-8 h-auto">
-                    <p class="font-bold text-primary-200 absolute left-0  text-lg">{{ prediction.match.away_team_score }}</p>
+                    <p class="font-bold text-primary-200 absolute right-0  text-lg">{{ prediction.match.away_team_score }}</p>
                 </div>
 
                 <div class="flex flex-col items-center justify-center gap-2">
