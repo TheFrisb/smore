@@ -50,7 +50,7 @@ class Command(BaseCommand):
         self.populate_scores()
 
     def populate_scores(self):
-        predictions = Prediction.objects.all()
+        predictions = Prediction.objects.all().order_by("-match__kickoff_datetime")
 
         for prediction in predictions:
             sport_match = prediction.match
@@ -64,7 +64,6 @@ class Command(BaseCommand):
                 continue
 
             data = response.json()
-            print(sport_match_external_id)
             score = data.get("response")[0].get("score").get("fulltime")
             home_team_score = score.get("home", None)
             away_team_score = score.get("away", None)
