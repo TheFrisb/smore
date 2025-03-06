@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
         for prediction in predictions:
             # sleep for 1 second to avoid rate limiting
-            time.sleep(1)
+            time.sleep(5)
             sport_match = prediction.match
             sport_match_external_id = sport_match.external_id
 
