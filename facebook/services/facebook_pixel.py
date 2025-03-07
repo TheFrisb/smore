@@ -158,11 +158,26 @@ class FacebookPixel:
             else None
         )
 
+        fbc_cookie = self.request.COOKIES.get("_fbc", None)
+        fbp_cookie = self.request.COOKIES.get("_fbp", None)
+
+        logger.info(
+            f"""
+            User data:
+            - First name: {first_name}
+            - Last name: {last_name}
+            - Email: {email}
+            - External ID: {external_id}
+            - FBC: {fbc_cookie}
+            - FBP: {fbp_cookie}
+        """
+        )
+
         user_data = UserData(
             client_ip_address=get_ip_addr(self.request),
             client_user_agent=get_user_agent(self.request),
-            fbc=self.request.COOKIES.get("_fbc", None),
-            fbp=self.request.COOKIES.get("_fbp", None),
+            fbc=fbc_cookie,
+            fbp=fbp_cookie,
             first_name=first_name,
             last_name=last_name,
             email=email,
