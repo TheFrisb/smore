@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from adminsortable2.admin import SortableAdminMixin
 from django import forms
 from django.contrib import admin
@@ -85,9 +87,10 @@ class PredictionAdminForm(forms.ModelForm):
         midnight_today = timezone.now().replace(
             hour=0, minute=0, second=0, microsecond=0
         )
+        start_date = midnight_today - timedelta(days=2)
         # Filter SportMatch queryset to include only matches on or after today
         self.fields["match"].queryset = SportMatch.objects.filter(
-            kickoff_datetime__gte=midnight_today
+            kickoff_datetime__gte=start_date
         )
 
 
@@ -173,6 +176,8 @@ class SportMatchAdmin(admin.ModelAdmin):
         midnight_today = timezone.now().replace(
             hour=0, minute=0, second=0, microsecond=0
         )
-        queryset = queryset.filter(kickoff_datetime__gte=midnight_today)
+        start_date = midnight_today - timedelta(days=2)
+
+        queryset = queryset.filter(kickoff_datetime__gte=start_date)
         # Apply the default search filtering
         return super().get_search_results(request, queryset, search_term)

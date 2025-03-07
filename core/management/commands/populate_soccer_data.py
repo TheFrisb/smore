@@ -37,6 +37,7 @@ allowed_league_ids = [
     137,  # Italy Coppa Italia
     88,  # Netherlands Eredivisie
     140,  # Spain La Liga
+    141,  # Spain La Liga 2
     94,  # Portugal Primeira Liga
     197,  # Greece Super League
     180,  # Scotland Championship
@@ -48,7 +49,8 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        self.populate_scores()
+        self.populate_leagues()
+        self.populate_teams()
 
     def populate_scores(self):
         predictions = Prediction.objects.filter(match__home_team_score="").order_by(
@@ -114,10 +116,10 @@ class Command(BaseCommand):
             league = item.get("league")
             country = item.get("country")
 
-            league_name = league.get("name")
+            league_name = "La Liga 2"
             league_id = league.get("id")
 
-            if league_id not in allowed_league_ids:
+            if league_id != "141":
                 logger.info(
                     f"Skipping league {league_id}, as it is not in the allowed list"
                 )

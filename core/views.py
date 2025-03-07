@@ -1,6 +1,7 @@
 import logging
 from itertools import groupby
 
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -129,6 +130,20 @@ class DetailedPredictionView(DetailView):
             return True
 
         return False
+
+    def dispatch(self, request, *args, **kwargs):
+        prediction = self.get_object()
+
+        if (
+                prediction.status != Prediction.Status.PENDING
+                or not prediction.has_detailed_analysis
+        ):
+            logger.info(
+                f"User {request.user} tried to access detailed prediction view for prediction {prediction.id} with status {prediction.status} and has_detailed_analysis {prediction.has_detailed_analysis}. Redirecting to home page."
+            )
+            return redirect("core:home")
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PlansView(TemplateView):
