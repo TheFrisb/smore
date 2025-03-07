@@ -13,7 +13,6 @@ from core.models import (
     Prediction,
     FrequentlyAskedQuestion,
 )
-from facebook.services.facebook_pixel import FacebookPixel
 
 logger = logging.getLogger(__name__)
 
@@ -147,15 +146,6 @@ class PlansView(TemplateView):
 
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            fb = FacebookPixel(self.request)
-            fb.view_content()
-        except Exception as e:
-            logger.error(f"Error while sending View Content Facebook Pixel event: {e}")
-
-        return super().dispatch(request, *args, **kwargs)
-
 
 class TelegramLandingView(TemplateView):
     template_name = "core/pages/telegram_landing.html"
@@ -164,15 +154,6 @@ class TelegramLandingView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = _("Free Telegram Channel")
         return context
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            fb = FacebookPixel(self.request)
-            fb.view_content()
-        except Exception as e:
-            logger.error(f"Error while sending View Content Facebook Pixel event: {e}")
-
-        return super().dispatch(request, *args, **kwargs)
 
 
 class FaqView(TemplateView):

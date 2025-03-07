@@ -270,3 +270,19 @@
             </div>
         </div>
     </section>{% endblock content %}
+
+{% block scripts %}
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("{% url 'facebook:view_content_pixel_event' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+          },
+        })
+
+      });
+
+    </script>
+{% endblock scripts %}

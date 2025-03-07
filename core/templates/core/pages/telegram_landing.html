@@ -155,5 +155,18 @@
 
 
 <script src="{% static 'js/core_v17.bundle.js' %}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch("{% url 'facebook:view_content_pixel_event' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+    })
+
+  });
+
+</script>
 </body>
 </html>

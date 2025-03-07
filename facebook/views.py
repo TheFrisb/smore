@@ -23,6 +23,19 @@ class ContactPixelEventApiView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
 
+class SendViewContentPixelEventApiView(APIView):
+    permission_classes = []
+
+    def post(self, request, *args, **kwargs):
+        try:
+            fb_pixel = FacebookPixel(request)
+            fb_pixel.view_content()
+        except Exception as e:
+            logger.error(f"Error sending ViewContent Facebook Pixel event: {e}")
+
+        return Response(status=HTTP_204_NO_CONTENT)
+
+
 class LeadPixelEventApiView(APIView):
     permission_classes = []
 
