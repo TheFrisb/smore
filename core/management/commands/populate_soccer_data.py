@@ -119,7 +119,7 @@ class Command(BaseCommand):
             league_name = "La Liga 2"
             league_id = league.get("id")
 
-            if league_id != "141":
+            if league_id != 141:
                 logger.info(
                     f"Skipping league {league_id}, as it is not in the allowed list"
                 )
