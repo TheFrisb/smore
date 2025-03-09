@@ -49,7 +49,7 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        self.populate_leagues()
+        # self.populate_leagues()
         self.populate_teams()
 
     def populate_scores(self):
@@ -146,7 +146,7 @@ class Command(BaseCommand):
 
     def populate_teams(self):
         # make start date 9 january
-        start_date = datetime(2025, 3, 4)
+        start_date = datetime(2025, 3, 9)
 
         # loop over next 5 days
         for i in range(7):
