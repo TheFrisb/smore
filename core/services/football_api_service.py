@@ -118,6 +118,7 @@ class FootballApiService:
 
         for season in range(start_season, end_season):
             if season == 2025:
+                logger.info(f"Marking league ID: {league_id} as processed")
                 league_obj = SportLeague.objects.get(external_id=league_id)
                 league_obj.is_processed = True
                 league_obj.save()
@@ -141,14 +142,14 @@ class FootballApiService:
                         ).first()
                         if match_obj:
                             logger.info(
-                                f"Marking league ID: {league_id} as processed because match {match_obj.external_id} already exists"
+                                f"Marking league ID: {league_id} as processed because match {match_obj.external_id} [{match_obj.kickoff_datetime}] already exists"
                             )
                             league_obj = SportLeague.objects.get(external_id=league_id)
                             league_obj.is_processed = True
                             league_obj.save()
                             logger.info(f"Marked league ID: {league_id} as processed")
                             break
-                            
+
                     logger.error(
                         f"Failed to process fixture {item.get('fixture').get('id')}"
                     )
