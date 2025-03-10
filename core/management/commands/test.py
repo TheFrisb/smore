@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         api_service = FootballApiService()
 
-        api_service.populate_leagues()
-
-        for league in SportLeague.objects.filter(is_processed=False).values_list("external_id", flat=True):
+        for league in SportLeague.objects.filter(is_processed=False).values_list(
+                "external_id", flat=True
+        ):
             api_service.populate_matches_per_league_id(league)
