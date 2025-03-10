@@ -157,10 +157,9 @@ admin.site.register(SiteSettings, SingletonModelAdmin)
 admin.site.register(SportCountry)
 
 
-@@admin.register(SportLeague)
+@admin.register(SportLeague)
 class SportLeagueAdmin(admin.ModelAdmin):
     search_fields = ["name"]
-
 
 
 @admin.register(SportTeam)
