@@ -147,6 +147,9 @@ class FootballApiService:
                         league_obj.save()
                         logger.info(f"Marked league ID: {league_id} as processed")
                         break
+                    logger.error(
+                        f"Failed to process fixture {item.get('fixture').get('id')}"
+                    )
                     continue
 
                 if match_obj.kickoff_datetime > django_timezone.now():
