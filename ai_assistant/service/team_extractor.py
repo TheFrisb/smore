@@ -42,7 +42,7 @@ class TeamExtractor:
 
             matches = SportMatch.objects.filter(
                 Q(home_team__in=matched_teams) | Q(away_team__in=matched_teams)
-            ).order_by("-kickoff_datetime")
+            ).order_by("-kickoff_datetime")[:30]
 
             return matched_teams, list(matches)
 

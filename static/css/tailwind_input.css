@@ -49,3 +49,11 @@ div.g_id_signin > div > div > div {
 .g_id_signin > div > div:nth-child(2) > div:nth-child(2) {
     visibility: hidden !important;
 }
+
+#aiAssistantMessagesContainer h1, #aiAssistantMessagesContainer h2, #aiAssistantMessagesContainer h3, #aiAssistantMessagesContainer h4, #aiAssistantMessagesContainer h5, #aiAssistantMessagesContainer h6 {
+    @apply text-xl text-secondary-500;
+}
+
+#aiAssistantMessagesContainer strong {
+    @apply font-semibold text-secondary-500;
+}

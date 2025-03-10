@@ -116,7 +116,7 @@ class SportLeague(BaseInternalModel):
 
 class SportTeam(BaseInternalModel):
     external_id = models.IntegerField(unique=True)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     logo = models.FileField(upload_to="assets/teams/logos/")
 
@@ -135,8 +135,8 @@ class SportMatch(BaseInternalModel):
         SportTeam, on_delete=models.CASCADE, related_name="away_team"
     )
     away_team_score = models.CharField(max_length=2, blank=True)
-
     kickoff_datetime = models.DateTimeField()
+    metadata = models.JSONField(null=True)
 
     @property
     def is_live(self):
@@ -184,7 +184,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

@@ -17,6 +17,7 @@ from core.models import (
     SportTeam,
     SportMatch,
 )
+from core.services.football_api_service import allowed_league_ids
 
 
 # Register your models here.
@@ -90,7 +91,7 @@ class PredictionAdminForm(forms.ModelForm):
         start_date = midnight_today - timedelta(days=2)
         # Filter SportMatch queryset to include only matches on or after today
         self.fields["match"].queryset = SportMatch.objects.filter(
-            kickoff_datetime__gte=start_date
+            kickoff_datetime__gte=start_date, league__external_id__in=allowed_league_ids
         )
 
 
@@ -178,6 +179,8 @@ class SportMatchAdmin(admin.ModelAdmin):
         )
         start_date = midnight_today - timedelta(days=2)
 
-        queryset = queryset.filter(kickoff_datetime__gte=start_date)
+        queryset = queryset.filter(
+            kickoff_datetime__gte=start_date, league__external_id__in=allowed_league_ids
+        )
         # Apply the default search filtering
         return super().get_search_results(request, queryset, search_term)

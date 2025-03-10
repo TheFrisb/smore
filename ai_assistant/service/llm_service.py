@@ -20,9 +20,7 @@ logger = logging.getLogger(__name__)
 class LLMService:
     def __init__(self):
         self.llm = ChatOpenAI(
-            temperature=0.7,
             openai_api_key=settings.OPENAI_API_KEY,
-            model_name="gpt-3.5-turbo",
         )
 
         self.classification_prompt = PromptTemplate(
@@ -42,7 +40,7 @@ class LLMService:
         self.team_extraction_prompt = PromptTemplate(
             input_variables=["message"],
             template="""
-            Extract the full names of sports teams mentioned in the following message. Expand any abbreviations or shortened names to their full form. For example, 'man utd' should be 'Manchester United', 'barca' should be 'Barcelona'. Provide the full names as a comma-separated list.
+            Extract the full names of sports teams mentioned in the following message as to how they are presented on betting websites. For example 'Sporting' would be 'Sporting CP'. Expand any abbreviations or shortened names to their full form. For example, 'man utd' should be 'Manchester United', 'barca' should be 'Barcelona'. Provide the full names as a comma-separated list.
     
             Message: {message}
             """,
@@ -65,6 +63,7 @@ class LLMService:
         self.handlers = {
             MessageCategory.GENERAL_SPORT_INFORMATION: self._handle_general_sport,
             MessageCategory.SPORT_MATCH_ANALYSIS: self._handle_analysis,
+            MessageCategory.SPORT_MATCH_PREDICTION: self._handle_analysis,
         }
 
     def generate_response(self, user: User, message: str) -> str:
@@ -99,7 +98,22 @@ class LLMService:
             context = self._build_match_context(teams, matches)
 
             system_message = SystemMessage(
-                content="You are a sports analyst. Provide an in-depth analysis based on the user's query and the provided match data."
+                content="""
+                        You are a professional sports analyst specializing in match analysis and betting predictions. Using the provided match data, which includes historical results and prediction metrics, deliver a concise yet comprehensive analysis of the specified sports match. Your analysis should cover:
+                        
+                        - Recent team form (wins, losses, draws)
+                        - Head-to-head record (if applicable)
+                        - Tactical considerations
+                        - Contextual factors (e.g., team match histories, betting advice)
+                        
+                        Following your analysis, provide a betting prediction including:
+                        
+                        - The most likely outcome (win, loss, draw)
+                        - Your confidence level (high, medium, low)
+                        - Suggested bet type (e.g., moneyline, over/under)
+                        
+                        Structure your response with markdown using only headers, <strong> tags, and paragraph tags -- no lists. Ensure your insights are data-driven, professional, and tailored for a sports betting audience. Do not include concluding statements about the basis of your analysis or additional advice beyond the prediction.
+                        """
             )
             human_message = HumanMessage(
                 content=f"User query: {message}\n\nMatch data:\n{context}"
@@ -117,6 +131,7 @@ class LLMService:
 
         now = timezone.now()
 
+        # Organize matches by team and time (past/future)
         team_matches = {team: {"past": [], "future": []} for team in teams}
         for match in matches:
             if match.home_team in teams:
@@ -130,12 +145,14 @@ class LLMService:
                 else:
                     team_matches[match.away_team]["future"].append(match)
 
+        # Build the context string
         context = ""
         for team in teams:
             context += f"Team {team.name}:\n"
             past_matches = team_matches[team]["past"]
             future_matches = team_matches[team]["future"]
 
+            # Past matches
             if past_matches:
                 context += "Past matches:\n"
                 for match in past_matches:
@@ -145,6 +162,7 @@ class LLMService:
                     result = f"{match.home_team_score} - {match.away_team_score}"
                     context += f"- Played vs {opponent.name} in league {match.league.name} on {match.kickoff_datetime.date()} with result {result}\n"
 
+            # Future matches with prediction data
             if future_matches:
                 context += "Future matches:\n"
                 for match in future_matches:
@@ -153,8 +171,34 @@ class LLMService:
                     )
                     context += f"- Will play vs {opponent.name} in league {match.league.name} on {match.kickoff_datetime.date()}\n"
 
+                    # Include prediction data if available
+                    if match.metadata:
+                        prediction_data = match.metadata
+                        context += "  Prediction data:\n"
+                        if "winner" in prediction_data and prediction_data["winner"]:
+                            winner = prediction_data["winner"]
+                            context += f"    - Predicted winner: {winner.get('name', 'N/A')} ({winner.get('comment', 'N/A')})\n"
+                        if "percent" in prediction_data:
+                            percent = prediction_data["percent"]
+                            context += f"    - Win probabilities: Home {percent.get('home', 'N/A')}, Draw {percent.get('draw', 'N/A')}, Away {percent.get('away', 'N/A')}\n"
+                        if "advice" in prediction_data:
+                            context += (
+                                f"    - Betting advice: {prediction_data['advice']}\n"
+                            )
+                        if "goals" in prediction_data:
+                            goals = prediction_data["goals"]
+                            context += f"    - Predicted goals: Home {goals.get('home', 'N/A')}, Away {goals.get('away', 'N/A')}\n"
+                        if (
+                                "under_over" in prediction_data
+                                and prediction_data["under_over"] is not None
+                        ):
+                            context += f"    - Under/Over prediction: {prediction_data['under_over']}\n"
+                        if "win_or_draw" in prediction_data:
+                            context += f"    - Win or draw: {'Yes' if prediction_data['win_or_draw'] else 'No'}\n"
+
             context += "\n"
 
+        # Head-to-head matches (unchanged)
         if len(teams) == 2:
             team_a, team_b = teams
             head_to_head = SportMatch.objects.filter(
@@ -171,5 +215,4 @@ class LLMService:
                 context += "\n"
 
         logger.info(f"Match context: {context}")
-
         return context
