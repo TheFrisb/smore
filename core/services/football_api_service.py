@@ -134,19 +134,21 @@ class FootballApiService:
             for item in data.get("response"):
                 match_obj = self._process_fixture(item)
 
-                if match_obj is None and season < 2024:
-                    match_obj = SportMatch.objects.filter(
-                        external_id=item.get("fixture").get("id")
-                    ).first()
-                    if match_obj:
-                        logger.info(
-                            f"Marking league ID: {league_id} as processed because match {match_obj.external_id} already exists"
-                        )
-                        league_obj = SportLeague.objects.get(external_id=league_id)
-                        league_obj.is_processed = True
-                        league_obj.save()
-                        logger.info(f"Marked league ID: {league_id} as processed")
-                        break
+                if match_obj is None:
+                    if season < 2024:
+                        match_obj = SportMatch.objects.filter(
+                            external_id=item.get("fixture").get("id")
+                        ).first()
+                        if match_obj:
+                            logger.info(
+                                f"Marking league ID: {league_id} as processed because match {match_obj.external_id} already exists"
+                            )
+                            league_obj = SportLeague.objects.get(external_id=league_id)
+                            league_obj.is_processed = True
+                            league_obj.save()
+                            logger.info(f"Marked league ID: {league_id} as processed")
+                            break
+                            
                     logger.error(
                         f"Failed to process fixture {item.get('fixture').get('id')}"
                     )
