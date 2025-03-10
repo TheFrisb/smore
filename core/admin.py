@@ -172,6 +172,8 @@ class SportMatchAdmin(admin.ModelAdmin):
         "kickoff_datetime",
     ]
 
+    ordering = ["-kickoff_datetime"]
+
     def get_search_results(self, request, queryset, search_term):
         # Filter matches to those on or after midnight today
         midnight_today = timezone.now().replace(

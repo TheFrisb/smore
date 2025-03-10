@@ -20,8 +20,7 @@ logger = logging.getLogger(__name__)
 class LLMService:
     def __init__(self):
         self.llm = ChatOpenAI(
-            openai_api_key=settings.OPENAI_API_KEY,
-        )
+            openai_api_key=settings.OPENAI_API_KEY, )
 
         self.classification_prompt = PromptTemplate(
             input_variables=["message"],

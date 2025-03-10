@@ -114,10 +114,13 @@ class FootballApiService:
 
     def populate_matches_per_league_id(self, league_id: int):
         start_season = 2022
-        end_season = 2025
+        end_season = 2026
 
         for season in range(start_season, end_season):
             if season == 2025:
+                league_obj = SportLeague.objects.get(external_id=league_id)
+                league_obj.is_processed = True
+                league_obj.save()
                 break
             endpoint = f"{self.base_url}/fixtures?league={league_id}&season={season}"
             logger.info(f"Fetching sport matches from endpoint: {endpoint}")
