@@ -19,9 +19,7 @@ logger = logging.getLogger(__name__)
 
 class LLMService:
     def __init__(self):
-        self.llm = ChatOpenAI(
-            openai_api_key=settings.OPENAI_API_KEY
-        )
+        self.llm = ChatOpenAI(openai_api_key=settings.OPENAI_API_KEY)
 
         self.classification_prompt = PromptTemplate(
             input_variables=["message"],
@@ -109,7 +107,6 @@ class LLMService:
                         2. **Team Analysis:**
                            - For each team, provide a breakdown that includes:
                              - Their approach to the match.
-                             - Key players to watch.
                              - Any concerns or weaknesses.
                              - Insights into their recent performance and form, using the provided match data to highlight relevant statistics (e.g., recent wins, clean sheets, goal-scoring trends).
                            - Use subheadings for each team to clearly separate the analysis.
