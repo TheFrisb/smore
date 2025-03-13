@@ -21,6 +21,7 @@ class LLMService:
     def __init__(self):
         self.llm = ChatOpenAI(
             openai_api_key=settings.OPENAI_API_KEY,
+            model_name="o3-mini-2025-01-31"
         )
 
         self.classification_prompt = PromptTemplate(
