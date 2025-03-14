@@ -198,10 +198,10 @@ class StripeWebhookService(BaseStripeService):
             UserSubscription.objects.filter(
                 user__stripe_customer_id=stripe_customer_id,
                 stripe_subscription_id=stripe_subscription_id,
-                status=UserSubscription.Status.INACTIVE,
             ).update(status=UserSubscription.Status.ACTIVE)
+            return
 
-        if subscription_status != "canceled":
+        if subscription_status not in ["canceled", "past_due", "incomplete_expired"]:
             logger.info(
                 f"Subscription with ID: {stripe_subscription_id} is updated to: {subscription_status}"
             )
