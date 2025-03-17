@@ -58,6 +58,7 @@ class Product(BaseProductModel):
         SOCCER = "Soccer", _("Soccer")
         BASKETBALL = "Basketball", _("Basketball")
         NFL = "NFL", _("NFL")
+        TENNIS = "Tennis", _("Tennis")
         AI_ANALYST = "AI Analyst", _("AI Analyst")
 
     name = models.CharField(max_length=255, choices=Names, default=Names.SOCCER)
