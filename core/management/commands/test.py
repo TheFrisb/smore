@@ -1,10 +1,7 @@
-from datetime import datetime, timedelta
-
 from django.core.management.base import BaseCommand
 
-from core.models import SportMatch
+from core.models import SportMatch, Product
 from core.services.basketball_api_service import BasketballApiService
-from core.services.football_api_service import FootballApiService
 
 
 class Command(BaseCommand):
@@ -12,13 +9,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         basketball_api_service = BasketballApiService()
-        basketball_api_service.populate_countries()
-        basketball_api_service.populate_leagues()
+        SportMatch.objects.filter(product=Product.objects.get(name=Product.Names.BASKETBALL)).delete()
+
         basketball_api_service.populate_upcoming_matches()
-
-        tomorrow = datetime.now() + timedelta(days=2)
-
-        SportMatch.objects.filter(kickoff_datetime__gte=tomorrow).delete()
-
-        football_api_service = FootballApiService()
-        football_api_service.populate_upcoming_matches()

@@ -23,7 +23,7 @@ from core.services.football_api_service import allowed_league_ids
 
 # Register your models here.
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (
             "Basic Information",
