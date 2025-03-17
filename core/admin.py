@@ -3,6 +3,7 @@ from datetime import timedelta
 from adminsortable2.admin import SortableAdminMixin
 from django import forms
 from django.contrib import admin
+from django.db.models import Q
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
@@ -91,7 +92,12 @@ class PredictionAdminForm(forms.ModelForm):
         start_date = midnight_today - timedelta(days=2)
         # Filter SportMatch queryset to include only matches on or after today
         self.fields["match"].queryset = SportMatch.objects.filter(
-            kickoff_datetime__gte=start_date, league__external_id__in=allowed_league_ids
+            Q(
+                product__name=Product.Names.SOCCER,
+                league__external_id__in=allowed_league_ids,
+            )
+            | Q(product__name=Product.Names.BASKETBALL),
+            kickoff_datetime__gte=start_date,
         )
 
 
@@ -101,7 +107,7 @@ class PredictionAdmin(admin.ModelAdmin):
     autocomplete_fields = ["match"]
     list_display = [
         "match",
-        "prediction",
+        "product",
         "status",
         "visibility",
         "detailed_analysis_status",
@@ -186,7 +192,12 @@ class SportMatchAdmin(admin.ModelAdmin):
         start_date = midnight_today - timedelta(days=2)
 
         queryset = queryset.filter(
-            kickoff_datetime__gte=start_date, league__external_id__in=allowed_league_ids
+            Q(
+                product__name=Product.Names.SOCCER,
+                league__external_id__in=allowed_league_ids,
+            )
+            | Q(product__name=Product.Names.BASKETBALL),
+            kickoff_datetime__gte=start_date,
         )
         # Apply the default search filtering
         return super().get_search_results(request, queryset, search_term)

@@ -71,18 +71,37 @@ class HistoryView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["predictions"] = self.get_history_predictions()
+        filter = self.request.GET.get("filter", "all")
+        if filter == "all":
+            print("All sports")
+            context["filter"] = "All sports"
+            context["predictions"] = self.get_history_predictions(None)
+        else:
+            try:
+                product = Product.objects.get(name=filter)
+                context["filter"] = product.name
+                context["predictions"] = self.get_history_predictions(filter)
+            except Product.DoesNotExist:
+                context["filter"] = "All sports"
+                context["predictions"] = self.get_history_predictions(None)
+
         context["page_title"] = _("History")
         context["show_predictions"] = True
+        context["products"] = Product.objects.filter(
+            type=Product.Types.SUBSCRIPTION
+        ).order_by("order")
         return context
 
-    def get_history_predictions(self):
+    def get_history_predictions(self, filter):
         predictions = Prediction.objects.filter(
             visibility=Prediction.Visibility.PUBLIC,
             status__in=[Prediction.Status.WON, Prediction.Status.LOST],
-        ).order_by("-match__kickoff_datetime")[0:20]
+        ).order_by("-match__kickoff_datetime")
 
-        return predictions
+        if filter:
+            predictions = predictions.filter(product__name=filter)
+
+        return predictions[0:20]
 
 
 class DetailedPredictionView(DetailView):
@@ -250,12 +269,29 @@ class UpcomingMatchesView(TemplateView):
     template_name = "core/pages/upcoming_matches.html"
 
     def get_context_data(self, **kwargs):
-        super().get_context_data(**kwargs)
-        context = {"grouped_predictions": self.get_grouped_predictions()}
+        context = super().get_context_data(**kwargs)
+
+        filter = self.request.GET.get("filter", "all")
+        if filter == "all":
+            print("All sports")
+            context["filter"] = "All sports"
+            context["grouped_predictions"] = self.get_grouped_predictions(None)
+        else:
+            try:
+                product = Product.objects.get(name=filter)
+                context["filter"] = product.name
+                context["grouped_predictions"] = self.get_grouped_predictions(filter)
+            except Product.DoesNotExist:
+                context["filter"] = "All sports"
+                context["grouped_predictions"] = self.get_grouped_predictions(None)
+
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
         context["page_title"] = _("Upcoming Matches")
         context["show_predictions"] = self.get_show_predictions()
         context["purchased_prediction_ids"] = self.get_purchased_prediction_ids()
+        context["products"] = Product.objects.filter(
+            type=Product.Types.SUBSCRIPTION
+        ).order_by("order")
         return context
 
     def get_purchased_prediction_ids(self):
@@ -266,7 +302,7 @@ class UpcomingMatchesView(TemplateView):
             "prediction_id", flat=True
         )
 
-    def get_grouped_predictions(self):
+    def get_grouped_predictions(self, filter):
         predictions = (
             Prediction.objects.filter(
                 match__kickoff_datetime__date__gte=timezone.now().date(),
@@ -274,10 +310,17 @@ class UpcomingMatchesView(TemplateView):
                 status=Prediction.Status.PENDING,
             )
             .select_related(
-                "match", "match__home_team", "match__away_team", "match__league"
+                "match",
+                "match__home_team",
+                "match__away_team",
+                "match__league",
+                "product",
             )
             .order_by("match__kickoff_datetime")
         )
+
+        if filter:
+            predictions = predictions.filter(product__name=filter)
 
         grouped_predictions = {
             kickoff_date: list(predictions)

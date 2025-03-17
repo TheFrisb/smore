@@ -17,6 +17,7 @@ import { initLeadPixelEvent } from "./lead_pixel_event";
 import initAiAssistant from "./aiAssistant";
 import { initDateItems } from "./dateItem";
 import { initPeekButtons } from "./passwordPeek";
+import initSportToggler from "./sportToggler";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -44,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initAiAssistant();
   initPeekButtons();
+
+  initSportToggler();
 
   const container = document.querySelector("#aiAssistantRelativeContainer");
   const aiAssistant = document.querySelector("#aiAssistantIcon");

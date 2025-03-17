@@ -222,7 +222,7 @@ class StripeWebhookService(BaseStripeService):
         self.mark_subscription_inactive(stripe_customer_id, stripe_subscription_id)
 
     def mark_subscription_inactive(
-            self, stripe_customer_id: str, stripe_subscription_id: str
+        self, stripe_customer_id: str, stripe_subscription_id: str
     ):
         logger.info(
             f"Deleting internal subscription for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"

@@ -31,7 +31,7 @@
 
                 {% for product in subscriptions %}
                     <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/30
-                         {% if product.name == "Soccer" %}
+                         {% if product.name == "Soccer" or product.name == 'Basketball' %}
                          hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product
                          {% endif %}
                          "
@@ -43,7 +43,7 @@
                          data-product-name="{{ product.get_name_display }}"
                          data-product-name-untranslated="{{ product.name }}"
                          data-translated-mode-month="{% trans 'month' %}">
-                        {% if product.name != "Soccer" %}
+                        {% if product.name != "Soccer" and product.name != 'Basketball' %}
                             <div class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
                             </div>
                             <div class="absolute w-full h-full top-0 left-0 z-20 flex items-center justify-center">

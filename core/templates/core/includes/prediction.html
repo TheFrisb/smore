@@ -14,7 +14,8 @@
                         {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
 
                     </div>
-                    <span class=" text-primary-100">{% trans "Soccer" %}</span>
+                    <span class=" text-primary-100">{% blocktrans with name=prediction.product.name %}
+                        {{ name }}{% endblocktrans %}</span>
                 </div>
                 <a href="{% url 'core:detailed_prediction' prediction.id %}"
                    class="text-secondary-400 flex items-center gap-2 transition-all duration-300">
@@ -27,7 +28,8 @@
                 <div class="bg-primary-900/80 p-2 rounded-lg">
                     {% svg_icon icon_name=prediction.product.name|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
                 </div>
-                <span class=" text-primary-100">{% trans "Soccer" %}</span>
+                <span class=" text-primary-100">{% blocktrans with name=prediction.product.name %}
+                    {{ name }}{% endblocktrans %}</span>
             </div>
         {% endif %}
 

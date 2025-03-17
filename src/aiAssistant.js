@@ -49,7 +49,7 @@ function renderNoAccessMessage() {
   buttonContainer.innerHTML = `
     <a href="/plans/" class="w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
       Subscribe
-      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite10.svg#arrowRight"></use></svg>
+      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite11.svg#arrowRight"></use></svg>
     </a>
   `;
 

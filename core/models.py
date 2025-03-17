@@ -103,7 +103,8 @@ class SportCountry(BaseInternalModel):
 
 
 class SportLeague(BaseInternalModel):
-    external_id = models.IntegerField(unique=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255)
     country = models.ForeignKey(SportCountry, on_delete=models.CASCADE)
     league_type = models.CharField(max_length=255)
@@ -116,7 +117,8 @@ class SportLeague(BaseInternalModel):
 
 
 class SportTeam(BaseInternalModel):
-    external_id = models.IntegerField(unique=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255, db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     logo = models.FileField(upload_to="assets/teams/logos/")
@@ -126,7 +128,8 @@ class SportTeam(BaseInternalModel):
 
 
 class SportMatch(BaseInternalModel):
-    external_id = models.IntegerField(unique=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     home_team = models.ForeignKey(
         SportTeam, on_delete=models.CASCADE, related_name="home_team"

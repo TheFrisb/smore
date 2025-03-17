@@ -71,7 +71,14 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ["name", "analysis_per_month"]
+        fields = [
+            "id",
+            "name",
+            "type",
+            "analysis_per_month",
+            "monthly_price",
+            "yearly_price",
+        ]
 
 
 class UserSubscriptionSerializer(serializers.ModelSerializer):

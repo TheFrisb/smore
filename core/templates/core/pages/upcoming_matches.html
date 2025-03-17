@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load util_tags i18n %}
 {% block content %}
-    <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
+    <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
         <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
         <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
@@ -14,32 +14,64 @@
             </div>
             <div class="grid gap-4 mt-8 max-w-6xl mx-auto">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-8">
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex flex-wrap gap-3 relative">
 
-                        <div class="relative">
-                            <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
-                                {% svg_icon icon_name="soccerIcon" css_classes="w-4 h-4" %}
+                        <div class="relative min-w-48 flex justify-between items-center ">
+                            <button class="sportDropdownButton w-full flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
+                                {% with iconName=filter|cut:" "|lower|add:"Icon" %}
+                                    {% svg_icon icon_name=iconName css_classes="w-4 h-4 text-secondary" %}
+                                {% endwith %}
 
-                                <span>{% trans "Soccer" %}</span></button>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
-                                <span class="text-xs text-secondary-400">{% trans "Soon" %}</span></div>
-                            <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
-                                    disabled="">
-                                {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4" %}
-                                <span>{% trans "Basketball" %}</span>
+                                <span>{% blocktranslate with name=filter %}{{ name }}{% endblocktranslate %}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="w-5 h-5  transform group-hover:translate-y-0.5 transition-transform duration-300 !ml-auto">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+
                             </button>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute -top-3 -right-2 px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20">
-                                <span class="text-xs text-secondary-400">{% trans "Soon" %}</span></div>
-                            <button class="flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-800/50 border-primary-700/30 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/10 text-primary-500 cursor-not-allowed opacity-75"
-                                    disabled="">
-                                {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4" %}
 
-                                <span>{% trans "NFL" %}</span></button>
+
                         </div>
+                        <div class="hidden absolute top-full left-0 mt-2 w-48 bg-primary-800/95 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 z-50">
+                            <div class="relative">
+                                <a href="{% url 'core:upcoming_matches' %}"
+                                   class="w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if filter == 'all' %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="text-secondary-400 w-4 h-4">
+                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                        <path d="M4 22h16"></path>
+                                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                    </svg>
+                                    <span>{% blocktranslate %}All sports{% endblocktranslate %}</span>
+                                </a>
+                            </div>
+                            {% for product in products %}
+                                <div class="relative flex items-center justify-between">
+                                    <a {% if product.name != 'NFL' and product.name != 'Tennis' %}href="{% url 'core:upcoming_matches' %}?filter={{ product.name }}"{% endif %}
+                                       class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product.name == filter %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'NFL' or product.name == 'Tennis' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
+                                        {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-4 h-4 text-secondary-400" %}
+
+                                        <span>{% blocktrans with name=product.name %}
+                                            {{ name }}{% endblocktrans %}</span>
+                                        {% if product.name == 'NFL' or product.name == 'TENNIS' %}
+                                            <div class="px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20 ">
+                                                <span class="text-xs text-secondary-400 nowrap leading-none">Soon</span>
+                                            </div>
+                                        {% endif %}
+                                    </a>
+
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
                     </div>
                 </div>
 
@@ -62,7 +94,16 @@
                         {% for prediction in predictions %}
                             {% include 'core/includes/prediction.html' %}
                         {% endfor %}
+
+
                     </div>
+                {% empty %}
+                    <div class="text-center">
+                        <p class="text-lg text-primary-300 font-medium">
+                            No predictions available at the moment to show.
+                        </p>
+                    </div>
+
                 {% endfor %}
             </div>
         </div>

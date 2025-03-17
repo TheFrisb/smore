@@ -1,9 +1,11 @@
 from django.utils.dateparse import parse_date
+from django_filters import rest_framework as filters
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from core.models import Prediction
+from accounts.serializers import ProductSerializer
+from core.models import Prediction, Product
 from .serializers import PredictionSerializer
 
 
@@ -27,6 +29,19 @@ class PredictionPagination(PageNumberPagination):
         )
 
 
+class PredictionFilter(filters.FilterSet):
+    product = filters.CharFilter(field_name="product__name")
+
+    class Meta:
+        model = Prediction
+        fields = ["product"]
+
+
+class ProductsListView(ListAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all().order_by("order")
+
+
 class PaginatedPredictionView(ListAPIView):
     authentication_classes = []
     permission_classes = []
@@ -46,6 +61,8 @@ class PaginatedPredictionView(ListAPIView):
     )
     serializer_class = PredictionSerializer
     pagination_class = PredictionPagination
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = PredictionFilter
 
 
 class PredictionListView(ListAPIView):

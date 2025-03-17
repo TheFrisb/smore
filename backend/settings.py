@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "solo",
     "rosetta",
     "django_ckeditor_5",
+    "django_filters",
     # Local apps
     "accounts",
     "core",
@@ -240,6 +241,7 @@ FACEBOOK_PIXEL_ACCESS_TOKEN = config("FACEBOOK_PIXEL_ACCESS_TOKEN")
 # RapidAPI Configuration
 RAPIDAPI_HOST = config("RAPIDAPI_HOST")
 RAPIDAPI_KEY = config("RAPIDAPI_KEY")
+RAPIDAPI_BASKETBALL_KEY = config("RAPIDAPI_BASKETBALL_KEY")
 
 # OpenAI Configuration
 OPENAI_API_KEY = config("OPENAI_API_KEY")

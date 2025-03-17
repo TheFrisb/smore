@@ -1,4 +1,4 @@
-/*! For license information please see core_v17.bundle.js.LICENSE.txt */
+/*! For license information please see core_v18.bundle.js.LICENSE.txt */
 (() => {
   var a = {
       629: (a, t, o) => {
@@ -2035,7 +2035,7 @@
                       s,
                       i,
                       d =
-                        '\n                              <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">\n                        <div class="flex items-center justify-between mb-6">\n                            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                                <div class="bg-primary-900/50 p-2 rounded-lg">\n\n\n                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite10.svg#soccerIcon"></use></svg>\n\n                                </div>\n\n                                <span class="text-sm text-primary-100">Soccer</span>\n\n                            </div>\n                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg\n                                    '
+                        '\n                              <div class="bg-primary-800/50 backdrop-blur-sm rounded-lg p-6 border border-primary-700/30 hover:border-emerald-500/20 transition-all duration-300 group transform transition-all duration-300 animate-fadeIn">\n                        <div class="flex items-center justify-between mb-6">\n                            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                                <div class="bg-primary-900/50 p-2 rounded-lg">\n\n\n                                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite11.svg#soccerIcon"></use></svg>\n\n                                </div>\n\n                                <span class="text-sm text-primary-100">Soccer</span>\n\n                            </div>\n                            <div class="flex items-center space-x-2 px-4 py-2 rounded-lg\n                                    '
                           .concat(
                             "WON" === a.status
                               ? "bg-emerald-500/10 text-emerald-400"

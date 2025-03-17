@@ -14,8 +14,8 @@
     /***/
     "./node_modules/aos/src/js/aos.js":
       /*!****************************************!*\
-      !*** ./node_modules/aos/src/js/aos.js ***!
-      \****************************************/
+    !*** ./node_modules/aos/src/js/aos.js ***!
+    \****************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -32,8 +32,8 @@
     /***/
     "./node_modules/aos/src/js/helpers/detector.js":
       /*!*****************************************************!*\
-      !*** ./node_modules/aos/src/js/helpers/detector.js ***!
-      \*****************************************************/
+    !*** ./node_modules/aos/src/js/helpers/detector.js ***!
+    \*****************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -50,8 +50,8 @@
     /***/
     "./node_modules/aos/src/js/helpers/elements.js":
       /*!*****************************************************!*\
-      !*** ./node_modules/aos/src/js/helpers/elements.js ***!
-      \*****************************************************/
+    !*** ./node_modules/aos/src/js/helpers/elements.js ***!
+    \*****************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -68,8 +68,8 @@
     /***/
     "./node_modules/aos/src/js/helpers/getInlineOption.js":
       /*!************************************************************!*\
-      !*** ./node_modules/aos/src/js/helpers/getInlineOption.js ***!
-      \************************************************************/
+    !*** ./node_modules/aos/src/js/helpers/getInlineOption.js ***!
+    \************************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -86,8 +86,8 @@
     /***/
     "./node_modules/aos/src/js/helpers/handleScroll.js":
       /*!*********************************************************!*\
-      !*** ./node_modules/aos/src/js/helpers/handleScroll.js ***!
-      \*********************************************************/
+    !*** ./node_modules/aos/src/js/helpers/handleScroll.js ***!
+    \*********************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -104,8 +104,8 @@
     /***/
     "./node_modules/aos/src/js/helpers/offsetCalculator.js":
       /*!*************************************************************!*\
-      !*** ./node_modules/aos/src/js/helpers/offsetCalculator.js ***!
-      \*************************************************************/
+    !*** ./node_modules/aos/src/js/helpers/offsetCalculator.js ***!
+    \*************************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -122,8 +122,8 @@
     /***/
     "./node_modules/aos/src/js/helpers/prepare.js":
       /*!****************************************************!*\
-      !*** ./node_modules/aos/src/js/helpers/prepare.js ***!
-      \****************************************************/
+    !*** ./node_modules/aos/src/js/helpers/prepare.js ***!
+    \****************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -140,8 +140,8 @@
     /***/
     "./node_modules/aos/src/js/libs/observer.js":
       /*!**************************************************!*\
-      !*** ./node_modules/aos/src/js/libs/observer.js ***!
-      \**************************************************/
+    !*** ./node_modules/aos/src/js/libs/observer.js ***!
+    \**************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -158,8 +158,8 @@
     /***/
     "./node_modules/aos/src/js/libs/offset.js":
       /*!************************************************!*\
-      !*** ./node_modules/aos/src/js/libs/offset.js ***!
-      \************************************************/
+    !*** ./node_modules/aos/src/js/libs/offset.js ***!
+    \************************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -176,8 +176,8 @@
     /***/
     "./src/aiAssistant.js":
       /*!****************************!*\
-      !*** ./src/aiAssistant.js ***!
-      \****************************/
+    !*** ./src/aiAssistant.js ***!
+    \****************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -185,7 +185,7 @@
       ) => {
         "use strict";
         eval(
-          '__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");\n\nvar messagesContainer = document.getElementById("aiAssistantMessagesContainer");\nvar input = document.getElementById("aiAssistantInput");\nvar sendButton = document.getElementById("aiAssistantSendButton");\nvar isLoading = false;\nfunction renderMessage(message, isUserMessage) {\n  var messageContainer = document.createElement("div");\n  messageContainer.className = "flex ".concat(isUserMessage ? "justify-end" : "justify-start animate-pulse");\n  var messageWrapper = document.createElement("div");\n  messageWrapper.className = "max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 ".concat(isUserMessage ? "ml-12" : "mr-12");\n  var messageText = document.createElement("p");\n  messageText.className = "whitespace-pre-wrap";\n  messageText.textContent = message;\n  messageWrapper.appendChild(messageText);\n  messageContainer.appendChild(messageWrapper);\n  messagesContainer.appendChild(messageContainer);\n  messagesContainer.scrollTop = messagesContainer.scrollHeight;\n  return messageContainer;\n}\nfunction renderNoAccessMessage() {\n  var messageContainer = document.createElement("div");\n  messageContainer.className = "flex justify-start";\n  var messageWrapper = document.createElement("div");\n  messageWrapper.className = "max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 mr-12";\n  var messageText = document.createElement("p");\n  messageText.className = "whitespace-pre-wrap";\n  messageText.textContent = "You need to subscribe to the AI Assistant product to use this feature.";\n  var divHtml = "\\n<div class=\\"mt-2 flex items-center justify-center w-full\\">\\n<a href=\\"/plans/\\" class=\\"w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 \\">\\n                Subscribe\\n                <svg class=\\"w-5 h-5 text-secondary-400\\"><use xlink:href=\\"/static/assets/svg/sprite10.svg#arrowRight\\"></use></svg>\\n            </a>\\n</div>\\n";\n  messageWrapper.appendChild(messageText);\n  messageWrapper.innerHTML += divHtml;\n  messageContainer.appendChild(messageWrapper);\n  messagesContainer.appendChild(messageContainer);\n  messagesContainer.scrollTop = messagesContainer.scrollHeight;\n  return messageContainer;\n}\nfunction setMessageWithBold(element, message) {\n  element.innerHTML = ""; // Clear existing content\n\n  var parts = message.split(/\\*\\*/g); // Split by **\n  parts.forEach(function (part, index) {\n    if (index % 2 === 0) {\n      element.appendChild(document.createTextNode(part));\n    } else {\n      var strong = document.createElement("strong");\n      strong.textContent = part;\n      element.appendChild(strong);\n    }\n  });\n}\nfunction sendMessage(hasAccess) {\n  if (isLoading) {\n    return;\n  }\n  var apiUrl = "/api/ai-assistant/send-message/";\n  var message = input.value;\n  renderMessage(message, true);\n  input.value = "";\n  sendButton.disabled = true;\n  if (!hasAccess) {\n    renderNoAccessMessage();\n    return;\n  }\n  isLoading = true;\n  var aiMessage = renderMessage("AI Analyst is thinking...", false);\n  fetch(apiUrl, {\n    method: "POST",\n    headers: {\n      "Content-Type": "application/json",\n      "X-CSRFToken": (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getCsrfToken)()\n    },\n    body: JSON.stringify({\n      message: message\n    })\n  }).then(function (response) {\n    return response.json();\n  }).then(function (data) {\n    aiMessage.classList.remove("animate-pulse");\n    setMessageWithBold(aiMessage.querySelector("p"), data.message);\n  })["catch"](function (error) {\n    aiMessage.classList.remove("animate-pulse");\n    setMessageWithBold(aiMessage.querySelector("p"), "An error occurred while processing the message.");\n    console.error("An error occurred while processing the message:", error);\n  })["finally"](function () {\n    isLoading = false;\n  });\n}\nfunction initAiAssistant() {\n  if (!messagesContainer || !input || !sendButton) {\n    return;\n  }\n  var hasAccess = document.querySelector("#hasAccessInput").value === "True";\n\n  // Modified event listener to pass hasAccess\n  sendButton.addEventListener("click", function () {\n    return sendMessage(hasAccess);\n  });\n  input.addEventListener("keydown", function (event) {\n    if (event.key === "Enter" && !event.shiftKey && input.value.trim()) {\n      event.preventDefault(); // Prevent new line when sending\n      sendMessage(hasAccess);\n    }\n  });\n  input.addEventListener("input", function () {\n    sendButton.disabled = !input.value.trim();\n  });\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initAiAssistant);\n\n//# sourceURL=webpack://smore/./src/aiAssistant.js?',
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");\n\nvar messagesContainer = document.getElementById("aiAssistantMessagesContainer");\nvar input = document.getElementById("aiAssistantInput");\nvar sendButton = document.getElementById("aiAssistantSendButton");\nvar isLoading = false;\nfunction renderMessage(message, isUserMessage) {\n  var messageContainer = document.createElement("div");\n  messageContainer.className = "flex ".concat(isUserMessage ? "justify-end" : "justify-start animate-pulse");\n  var messageWrapper = document.createElement("div");\n  messageWrapper.className = "max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 ".concat(isUserMessage ? "ml-12" : "mr-12");\n  var messageText = document.createElement("p");\n  messageText.className = "whitespace-pre-wrap";\n  messageText.textContent = message;\n  messageWrapper.appendChild(messageText);\n  messageContainer.appendChild(messageWrapper);\n  messagesContainer.appendChild(messageContainer);\n  messagesContainer.scrollTop = messagesContainer.scrollHeight;\n  return messageContainer;\n}\nfunction renderNoAccessMessage() {\n  var messageContainer = document.createElement("div");\n  messageContainer.className = "flex justify-start";\n  var messageWrapper = document.createElement("div");\n  messageWrapper.className = "max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 mr-12";\n  var messageText = document.createElement("p");\n  messageText.className = "whitespace-pre-wrap";\n  messageText.textContent = "You need to subscribe to the AI Assistant product to use this feature.";\n  var divHtml = "\\n<div class=\\"mt-2 flex items-center justify-center w-full\\">\\n<a href=\\"/plans/\\" class=\\"w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 \\">\\n                Subscribe\\n                <svg class=\\"w-5 h-5 text-secondary-400\\"><use xlink:href=\\"/static/assets/svg/sprite11.svg#arrowRight\\"></use></svg>\\n            </a>\\n</div>\\n";\n  messageWrapper.appendChild(messageText);\n  messageWrapper.innerHTML += divHtml;\n  messageContainer.appendChild(messageWrapper);\n  messagesContainer.appendChild(messageContainer);\n  messagesContainer.scrollTop = messagesContainer.scrollHeight;\n  return messageContainer;\n}\nfunction setMessageWithBold(element, message) {\n  element.innerHTML = ""; // Clear existing content\n\n  var parts = message.split(/\\*\\*/g); // Split by **\n  parts.forEach(function (part, index) {\n    if (index % 2 === 0) {\n      element.appendChild(document.createTextNode(part));\n    } else {\n      var strong = document.createElement("strong");\n      strong.textContent = part;\n      element.appendChild(strong);\n    }\n  });\n}\nfunction sendMessage(hasAccess) {\n  if (isLoading) {\n    return;\n  }\n  var apiUrl = "/api/ai-assistant/send-message/";\n  var message = input.value;\n  renderMessage(message, true);\n  input.value = "";\n  sendButton.disabled = true;\n  if (!hasAccess) {\n    renderNoAccessMessage();\n    return;\n  }\n  isLoading = true;\n  var aiMessage = renderMessage("AI Analyst is thinking...", false);\n  fetch(apiUrl, {\n    method: "POST",\n    headers: {\n      "Content-Type": "application/json",\n      "X-CSRFToken": (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getCsrfToken)()\n    },\n    body: JSON.stringify({\n      message: message\n    })\n  }).then(function (response) {\n    return response.json();\n  }).then(function (data) {\n    aiMessage.classList.remove("animate-pulse");\n    setMessageWithBold(aiMessage.querySelector("p"), data.message);\n  })["catch"](function (error) {\n    aiMessage.classList.remove("animate-pulse");\n    setMessageWithBold(aiMessage.querySelector("p"), "An error occurred while processing the message.");\n    console.error("An error occurred while processing the message:", error);\n  })["finally"](function () {\n    isLoading = false;\n  });\n}\nfunction initAiAssistant() {\n  if (!messagesContainer || !input || !sendButton) {\n    return;\n  }\n  var hasAccess = document.querySelector("#hasAccessInput").value === "True";\n\n  // Modified event listener to pass hasAccess\n  sendButton.addEventListener("click", function () {\n    return sendMessage(hasAccess);\n  });\n  input.addEventListener("keydown", function (event) {\n    if (event.key === "Enter" && !event.shiftKey && input.value.trim()) {\n      event.preventDefault(); // Prevent new line when sending\n      sendMessage(hasAccess);\n    }\n  });\n  input.addEventListener("input", function () {\n    sendButton.disabled = !input.value.trim();\n  });\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initAiAssistant);\n\n//# sourceURL=webpack://smore/./src/aiAssistant.js?',
         );
 
         /***/
@@ -194,8 +194,8 @@
     /***/
     "./src/closeButton.js":
       /*!****************************!*\
-      !*** ./src/closeButton.js ***!
-      \****************************/
+    !*** ./src/closeButton.js ***!
+    \****************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -212,8 +212,8 @@
     /***/
     "./src/contact_pixel_event.js":
       /*!************************************!*\
-      !*** ./src/contact_pixel_event.js ***!
-      \************************************/
+    !*** ./src/contact_pixel_event.js ***!
+    \************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -230,8 +230,8 @@
     /***/
     "./src/dateItem.js":
       /*!*************************!*\
-      !*** ./src/dateItem.js ***!
-      \*************************/
+    !*** ./src/dateItem.js ***!
+    \*************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -248,8 +248,8 @@
     /***/
     "./src/faq/faq.js":
       /*!************************!*\
-      !*** ./src/faq/faq.js ***!
-      \************************/
+    !*** ./src/faq/faq.js ***!
+    \************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -266,8 +266,8 @@
     /***/
     "./src/index.js":
       /*!**********************!*\
-      !*** ./src/index.js ***!
-      \**********************/
+    !*** ./src/index.js ***!
+    \**********************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -284,8 +284,8 @@
     /***/
     "./src/languageSelection.js":
       /*!**********************************!*\
-      !*** ./src/languageSelection.js ***!
-      \**********************************/
+    !*** ./src/languageSelection.js ***!
+    \**********************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -302,8 +302,8 @@
     /***/
     "./src/lead_pixel_event.js":
       /*!*********************************!*\
-      !*** ./src/lead_pixel_event.js ***!
-      \*********************************/
+    !*** ./src/lead_pixel_event.js ***!
+    \*********************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -320,8 +320,8 @@
     /***/
     "./src/loadMorePredictionsButton.js":
       /*!******************************************!*\
-      !*** ./src/loadMorePredictionsButton.js ***!
-      \******************************************/
+    !*** ./src/loadMorePredictionsButton.js ***!
+    \******************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -329,7 +329,7 @@
       ) => {
         "use strict";
         eval(
-          '__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");\nfunction _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }\nfunction _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }\nfunction _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }\nfunction _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }\nfunction _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }\nfunction _arrayWithHoles(r) { if (Array.isArray(r)) return r; }\n\nvar button = document.getElementById("loadMorePredictionsButton");\nvar predictionsContainer = document.getElementById("predictionsContainer");\nfunction formatTimeString(timeString) {\n  var _timeString$split = timeString.split(":"),\n    _timeString$split2 = _slicedToArray(_timeString$split, 2),\n    hours = _timeString$split2[0],\n    minutes = _timeString$split2[1]; // Split the time string into hours and minutes\n  return "".concat(hours, ":").concat(minutes); // Return the formatted time\n}\nfunction initLoadMorePredictionsButton() {\n  if (!button || !predictionsContainer) {\n    return;\n  }\n  var show_predictions = true;\n  button.addEventListener("click", function () {\n    var button = this;\n    var nextPage = button.getAttribute("data-next-page");\n    var url = "/api/history/predictions/?page=".concat(nextPage);\n    fetch(url).then(function (response) {\n      if (!response.ok) throw new Error("Failed to load more predictions.");\n      return response.json();\n    }).then(function (data) {\n      data.results.forEach(function (prediction) {\n        var predictionHtml = "\\n          <div class=\\"".concat(prediction.status == "LOST" ? "bg-red-500/10 border-red-500/50 hover:border-red-500" : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500", " backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn\\">\\n    <div class=\\"flex items-center justify-between mb-6\\">\\n        <div class=\\"flex items-center justify-between w-full\\">\\n            <div class=\\"flex  justify-start items-center space-x-3 text-primary-300\\">\\n                <div class=\\"bg-primary-900/80 p-2 rounded-lg\\">\\n                    <svg class=\\"w-4 h-4 text-white\\"><use xlink:href=\\"/static/assets/svg/sprite10.svg#soccerIcon\\"></use></svg>\\n                </div>\\n                <span class=\\" text-primary-100\\">Soccer</span>\\n            </div>\\n            ").concat(prediction.detailed_analysis !== "" ? "<a href=\\"/predictions/".concat(prediction.id, "/\\"\\n               class=\\"text-secondary-400 flex items-center gap-2 group group-hover:text-primary-300 transition-all duration-300\\">\\n                <svg class=\\"w-5 h-5\\"><use xlink:href=\\"/static/assets/svg/sprite10.svg#arrowRight\\"></use></svg>\\n                <p class=\\"font-bold \\">View analysis</p>\\n            </a>") : "", "\\n        </div>\\n\\n    </div>\\n    <div class=\\"mb-6\\">\\n        <div class=\\"flex items-center justify-between mb-2\\">\\n            <p class=\\"text-sm text-primary-100 \\">Match</p>\\n            ").concat(prediction.status == "LOST" ? \'<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite10.svg#circleX"></use></svg></div>\' : \'                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite10.svg#circleCheck"></use></svg></div>\', "\\n\\n        </div>\\n        <div class=\\"bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4\\">\\n            <div class=\\"w-full flex items-center justify-center gap-2 relative pb-4\\">\\n                <img src=\\"").concat(prediction.match.league.country.logo, "\\" alt=\\"\\" width=\\"20\\"\\n                     style=\\"height: auto!important\\">\\n                <p class=\\"text-emerald-500 font-bold\\">").concat(prediction.match.league.name, "</p>\\n                <div class=\\"absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent\\"></div>\\n            </div>\\n\\n            <div class=\\"flex items-center justify-between\\">\\n                <div class=\\"flex flex-col items-start gap-2\\">\\n                    <div class=\\"flex items-center justify-start gap-2\\">\\n                        <img src=\\"").concat(prediction.match.home_team.logo, "\\" width=\\"24\\" style=\\"height: auto!important\\">\\n                        <p class=\\"text-primary-100 font-bold\\">").concat(prediction.match.home_team.name, "</p>\\n                    </div>\\n                    <div class=\\"flex items-center justify-start gap-2\\">\\n                        <img src=\\"").concat(prediction.match.away_team.logo, "\\" width=\\"24\\" style=\\"height: auto!important\\">\\n                        <p class=\\"text-primary-100 font-bold\\">").concat(prediction.match.away_team.name, "</p>\\n                    </div>\\n                </div>\\n                <div class=\\"flex items-center justify-end gap-1\\">\\n                        <svg class=\\"w-5 h-5 text-emerald-400\\"><use xlink:href=\\"/static/assets/svg/sprite10.svg#chevronUp\\"></use></svg>\\n                        <p class=\\"text-primary-100\\">Odds</p>\\n                        <span class=\\"text-emerald-400 font-bold\\">").concat(prediction.odds, "</span>\\n                    </div>\\n            </div>\\n            <div class=\\"flex items-center justify-start gap-1\\">\\n                <p class=\\"text-primary-200 text-sm\\">Date:</p>\\n                <p class=\\"text-white text-sm\\">").concat((0,_utils__WEBPACK_IMPORTED_MODULE_0__.formatIsoString)(prediction.match.kickoff_datetime), "</p> \\n            </div>\\n        </div>\\n    </div>\\n        <div class=\\"flex flex-col items-center justify-center\\">\\n            <div class=\\"text-sm text-white\\">Prediction</div>\\n            <div class=\\"font-semibold text-xl ").concat(prediction.status === "LOST" ? "text-red-500" : "text-emerald-500", " \\">").concat(prediction.prediction, "</div>\\n        </div>\\n</div>\\n");\n        predictionsContainer.insertAdjacentHTML("beforeend", predictionHtml);\n      });\n      if (!data.next) {\n        button.remove(); // Remove button if no more pages\n      } else {\n        var nextPageNumber = parseInt(nextPage) + 1;\n        button.setAttribute("data-next-page", nextPageNumber);\n      }\n    })["catch"](function (error) {\n      console.error(error);\n      alert("Failed to load more predictions.");\n    });\n  });\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initLoadMorePredictionsButton);\n\n//# sourceURL=webpack://smore/./src/loadMorePredictionsButton.js?',
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");\nfunction _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }\nfunction _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }\nfunction _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }\nfunction _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }\nfunction _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }\nfunction _arrayWithHoles(r) { if (Array.isArray(r)) return r; }\n\nvar button = document.getElementById("loadMorePredictionsButton");\nvar predictionsContainer = document.getElementById("predictionsContainer");\nfunction formatTimeString(timeString) {\n  var _timeString$split = timeString.split(":"),\n    _timeString$split2 = _slicedToArray(_timeString$split, 2),\n    hours = _timeString$split2[0],\n    minutes = _timeString$split2[1]; // Split the time string into hours and minutes\n  return "".concat(hours, ":").concat(minutes); // Return the formatted time\n}\nfunction initLoadMorePredictionsButton() {\n  if (!button || !predictionsContainer) {\n    return;\n  }\n  var show_predictions = true;\n  button.addEventListener("click", function () {\n    var button = this;\n    var nextPage = button.getAttribute("data-next-page");\n    var url = "/api/history/predictions/?page=".concat(nextPage);\n    fetch(url).then(function (response) {\n      if (!response.ok) throw new Error("Failed to load more predictions.");\n      return response.json();\n    }).then(function (data) {\n      data.results.forEach(function (prediction) {\n        var predictionHtml = "\\n          <div class=\\"".concat(prediction.status == "LOST" ? "bg-red-500/10 border-red-500/50 hover:border-red-500" : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500", " backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn\\">\\n    <div class=\\"flex items-center justify-between mb-6\\">\\n        <div class=\\"flex items-center justify-between w-full\\">\\n            <div class=\\"flex  justify-start items-center space-x-3 text-primary-300\\">\\n                <div class=\\"bg-primary-900/80 p-2 rounded-lg\\">\\n                    <svg class=\\"w-4 h-4 text-white\\"><use xlink:href=\\"/static/assets/svg/sprite11.svg#soccerIcon\\"></use></svg>\\n                </div>\\n                <span class=\\" text-primary-100\\">Soccer</span>\\n            </div>\\n            ").concat(prediction.detailed_analysis !== "" ? "<a href=\\"/predictions/".concat(prediction.id, "/\\"\\n               class=\\"text-secondary-400 flex items-center gap-2 group group-hover:text-primary-300 transition-all duration-300\\">\\n                <svg class=\\"w-5 h-5\\"><use xlink:href=\\"/static/assets/svg/sprite11.svg#arrowRight\\"></use></svg>\\n                <p class=\\"font-bold \\">View analysis</p>\\n            </a>") : "", "\\n        </div>\\n\\n    </div>\\n    <div class=\\"mb-6\\">\\n        <div class=\\"flex items-center justify-between mb-2\\">\\n            <p class=\\"text-sm text-primary-100 \\">Match</p>\\n            ").concat(prediction.status == "LOST" ? \'<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite11.svg#circleX"></use></svg></div>\' : \'                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite11.svg#circleCheck"></use></svg></div>\', "\\n\\n        </div>\\n        <div class=\\"bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4\\">\\n            <div class=\\"w-full flex items-center justify-center gap-2 relative pb-4\\">\\n                <img src=\\"").concat(prediction.match.league.country.logo, "\\" alt=\\"\\" width=\\"20\\"\\n                     style=\\"height: auto!important\\">\\n                <p class=\\"text-emerald-500 font-bold\\">").concat(prediction.match.league.name, "</p>\\n                <div class=\\"absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent\\"></div>\\n            </div>\\n\\n            <div class=\\"flex items-center justify-between\\">\\n                <div class=\\"flex flex-col items-start gap-2\\">\\n                    <div class=\\"flex items-center justify-start gap-2\\">\\n                        <img src=\\"").concat(prediction.match.home_team.logo, "\\" width=\\"24\\" style=\\"height: auto!important\\">\\n                        <p class=\\"text-primary-100 font-bold\\">").concat(prediction.match.home_team.name, "</p>\\n                    </div>\\n                    <div class=\\"flex items-center justify-start gap-2\\">\\n                        <img src=\\"").concat(prediction.match.away_team.logo, "\\" width=\\"24\\" style=\\"height: auto!important\\">\\n                        <p class=\\"text-primary-100 font-bold\\">").concat(prediction.match.away_team.name, "</p>\\n                    </div>\\n                </div>\\n                <div class=\\"flex items-center justify-end gap-1\\">\\n                        <svg class=\\"w-5 h-5 text-emerald-400\\"><use xlink:href=\\"/static/assets/svg/sprite11.svg#chevronUp\\"></use></svg>\\n                        <p class=\\"text-primary-100\\">Odds</p>\\n                        <span class=\\"text-emerald-400 font-bold\\">").concat(prediction.odds, "</span>\\n                    </div>\\n            </div>\\n            <div class=\\"flex items-center justify-start gap-1\\">\\n                <p class=\\"text-primary-200 text-sm\\">Date:</p>\\n                <p class=\\"text-white text-sm\\">").concat((0,_utils__WEBPACK_IMPORTED_MODULE_0__.formatIsoString)(prediction.match.kickoff_datetime), "</p> \\n            </div>\\n        </div>\\n    </div>\\n        <div class=\\"flex flex-col items-center justify-center\\">\\n            <div class=\\"text-sm text-white\\">Prediction</div>\\n            <div class=\\"font-semibold text-xl ").concat(prediction.status === "LOST" ? "text-red-500" : "text-emerald-500", " \\">").concat(prediction.prediction, "</div>\\n        </div>\\n</div>\\n");\n        predictionsContainer.insertAdjacentHTML("beforeend", predictionHtml);\n      });\n      if (!data.next) {\n        button.remove(); // Remove button if no more pages\n      } else {\n        var nextPageNumber = parseInt(nextPage) + 1;\n        button.setAttribute("data-next-page", nextPageNumber);\n      }\n    })["catch"](function (error) {\n      console.error(error);\n      alert("Failed to load more predictions.");\n    });\n  });\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initLoadMorePredictionsButton);\n\n//# sourceURL=webpack://smore/./src/loadMorePredictionsButton.js?',
         );
 
         /***/
@@ -338,8 +338,8 @@
     /***/
     "./src/loginForm.js":
       /*!**************************!*\
-      !*** ./src/loginForm.js ***!
-      \**************************/
+    !*** ./src/loginForm.js ***!
+    \**************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -356,8 +356,8 @@
     /***/
     "./src/menu/menu.js":
       /*!**************************!*\
-      !*** ./src/menu/menu.js ***!
-      \**************************/
+    !*** ./src/menu/menu.js ***!
+    \**************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -374,8 +374,8 @@
     /***/
     "./src/menu/userMenu.js":
       /*!******************************!*\
-      !*** ./src/menu/userMenu.js ***!
-      \******************************/
+    !*** ./src/menu/userMenu.js ***!
+    \******************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -392,8 +392,8 @@
     /***/
     "./src/products/products.js":
       /*!**********************************!*\
-      !*** ./src/products/products.js ***!
-      \**********************************/
+    !*** ./src/products/products.js ***!
+    \**********************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -410,8 +410,8 @@
     /***/
     "./src/referral/copyButton.js":
       /*!************************************!*\
-      !*** ./src/referral/copyButton.js ***!
-      \************************************/
+    !*** ./src/referral/copyButton.js ***!
+    \************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -428,8 +428,8 @@
     /***/
     "./src/registerForm.js":
       /*!*****************************!*\
-      !*** ./src/registerForm.js ***!
-      \*****************************/
+    !*** ./src/registerForm.js ***!
+    \*****************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -446,8 +446,8 @@
     /***/
     "./src/resendEmailButton.js":
       /*!**********************************!*\
-      !*** ./src/resendEmailButton.js ***!
-      \**********************************/
+    !*** ./src/resendEmailButton.js ***!
+    \**********************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -464,8 +464,8 @@
     /***/
     "./src/utils.js":
       /*!**********************!*\
-      !*** ./src/utils.js ***!
-      \**********************/
+    !*** ./src/utils.js ***!
+    \**********************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -482,8 +482,8 @@
     /***/
     "./src/withdrawals/withdrawalHistory.js":
       /*!**********************************************!*\
-      !*** ./src/withdrawals/withdrawalHistory.js ***!
-      \**********************************************/
+    !*** ./src/withdrawals/withdrawalHistory.js ***!
+    \**********************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -500,8 +500,8 @@
     /***/
     "./src/withdrawals/withdrawals.js":
       /*!****************************************!*\
-      !*** ./src/withdrawals/withdrawals.js ***!
-      \****************************************/
+    !*** ./src/withdrawals/withdrawals.js ***!
+    \****************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -518,8 +518,8 @@
     /***/
     "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/aos/src/sass/aos.scss":
       /*!*************************************************************************************************************************!*\
-      !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/aos/src/sass/aos.scss ***!
-      \*************************************************************************************************************************/
+    !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/aos/src/sass/aos.scss ***!
+    \*************************************************************************************************************************/
       /***/ (module, __webpack_exports__, __webpack_require__) => {
         "use strict";
         eval(
@@ -532,8 +532,8 @@
     /***/
     "./node_modules/css-loader/dist/runtime/api.js":
       /*!*****************************************************!*\
-      !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-      \*****************************************************/
+    !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+    \*****************************************************/
       /***/ (module) => {
         "use strict";
         eval(
@@ -546,8 +546,8 @@
     /***/
     "./node_modules/css-loader/dist/runtime/noSourceMaps.js":
       /*!**************************************************************!*\
-      !*** ./node_modules/css-loader/dist/runtime/noSourceMaps.js ***!
-      \**************************************************************/
+    !*** ./node_modules/css-loader/dist/runtime/noSourceMaps.js ***!
+    \**************************************************************/
       /***/ (module) => {
         "use strict";
         eval(
@@ -560,8 +560,8 @@
     /***/
     "./node_modules/lodash.debounce/index.js":
       /*!***********************************************!*\
-      !*** ./node_modules/lodash.debounce/index.js ***!
-      \***********************************************/
+    !*** ./node_modules/lodash.debounce/index.js ***!
+    \***********************************************/
       /***/ (module, __unused_webpack_exports, __webpack_require__) => {
         eval(
           "/**\n * lodash (Custom Build) <https://lodash.com/>\n * Build: `lodash modularize exports=\"npm\" -o ./`\n * Copyright jQuery Foundation and other contributors <https://jquery.org/>\n * Released under MIT license <https://lodash.com/license>\n * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>\n * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors\n */\n\n/** Used as the `TypeError` message for \"Functions\" methods. */\nvar FUNC_ERROR_TEXT = 'Expected a function';\n\n/** Used as references for various `Number` constants. */\nvar NAN = 0 / 0;\n\n/** `Object#toString` result references. */\nvar symbolTag = '[object Symbol]';\n\n/** Used to match leading and trailing whitespace. */\nvar reTrim = /^\\s+|\\s+$/g;\n\n/** Used to detect bad signed hexadecimal string values. */\nvar reIsBadHex = /^[-+]0x[0-9a-f]+$/i;\n\n/** Used to detect binary string values. */\nvar reIsBinary = /^0b[01]+$/i;\n\n/** Used to detect octal string values. */\nvar reIsOctal = /^0o[0-7]+$/i;\n\n/** Built-in method references without a dependency on `root`. */\nvar freeParseInt = parseInt;\n\n/** Detect free variable `global` from Node.js. */\nvar freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;\n\n/** Detect free variable `self`. */\nvar freeSelf = typeof self == 'object' && self && self.Object === Object && self;\n\n/** Used as a reference to the global object. */\nvar root = freeGlobal || freeSelf || Function('return this')();\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/**\n * Used to resolve the\n * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)\n * of values.\n */\nvar objectToString = objectProto.toString;\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeMax = Math.max,\n    nativeMin = Math.min;\n\n/**\n * Gets the timestamp of the number of milliseconds that have elapsed since\n * the Unix epoch (1 January 1970 00:00:00 UTC).\n *\n * @static\n * @memberOf _\n * @since 2.4.0\n * @category Date\n * @returns {number} Returns the timestamp.\n * @example\n *\n * _.defer(function(stamp) {\n *   console.log(_.now() - stamp);\n * }, _.now());\n * // => Logs the number of milliseconds it took for the deferred invocation.\n */\nvar now = function() {\n  return root.Date.now();\n};\n\n/**\n * Creates a debounced function that delays invoking `func` until after `wait`\n * milliseconds have elapsed since the last time the debounced function was\n * invoked. The debounced function comes with a `cancel` method to cancel\n * delayed `func` invocations and a `flush` method to immediately invoke them.\n * Provide `options` to indicate whether `func` should be invoked on the\n * leading and/or trailing edge of the `wait` timeout. The `func` is invoked\n * with the last arguments provided to the debounced function. Subsequent\n * calls to the debounced function return the result of the last `func`\n * invocation.\n *\n * **Note:** If `leading` and `trailing` options are `true`, `func` is\n * invoked on the trailing edge of the timeout only if the debounced function\n * is invoked more than once during the `wait` timeout.\n *\n * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred\n * until to the next tick, similar to `setTimeout` with a timeout of `0`.\n *\n * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)\n * for details over the differences between `_.debounce` and `_.throttle`.\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Function\n * @param {Function} func The function to debounce.\n * @param {number} [wait=0] The number of milliseconds to delay.\n * @param {Object} [options={}] The options object.\n * @param {boolean} [options.leading=false]\n *  Specify invoking on the leading edge of the timeout.\n * @param {number} [options.maxWait]\n *  The maximum time `func` is allowed to be delayed before it's invoked.\n * @param {boolean} [options.trailing=true]\n *  Specify invoking on the trailing edge of the timeout.\n * @returns {Function} Returns the new debounced function.\n * @example\n *\n * // Avoid costly calculations while the window size is in flux.\n * jQuery(window).on('resize', _.debounce(calculateLayout, 150));\n *\n * // Invoke `sendMail` when clicked, debouncing subsequent calls.\n * jQuery(element).on('click', _.debounce(sendMail, 300, {\n *   'leading': true,\n *   'trailing': false\n * }));\n *\n * // Ensure `batchLog` is invoked once after 1 second of debounced calls.\n * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });\n * var source = new EventSource('/stream');\n * jQuery(source).on('message', debounced);\n *\n * // Cancel the trailing debounced invocation.\n * jQuery(window).on('popstate', debounced.cancel);\n */\nfunction debounce(func, wait, options) {\n  var lastArgs,\n      lastThis,\n      maxWait,\n      result,\n      timerId,\n      lastCallTime,\n      lastInvokeTime = 0,\n      leading = false,\n      maxing = false,\n      trailing = true;\n\n  if (typeof func != 'function') {\n    throw new TypeError(FUNC_ERROR_TEXT);\n  }\n  wait = toNumber(wait) || 0;\n  if (isObject(options)) {\n    leading = !!options.leading;\n    maxing = 'maxWait' in options;\n    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;\n    trailing = 'trailing' in options ? !!options.trailing : trailing;\n  }\n\n  function invokeFunc(time) {\n    var args = lastArgs,\n        thisArg = lastThis;\n\n    lastArgs = lastThis = undefined;\n    lastInvokeTime = time;\n    result = func.apply(thisArg, args);\n    return result;\n  }\n\n  function leadingEdge(time) {\n    // Reset any `maxWait` timer.\n    lastInvokeTime = time;\n    // Start the timer for the trailing edge.\n    timerId = setTimeout(timerExpired, wait);\n    // Invoke the leading edge.\n    return leading ? invokeFunc(time) : result;\n  }\n\n  function remainingWait(time) {\n    var timeSinceLastCall = time - lastCallTime,\n        timeSinceLastInvoke = time - lastInvokeTime,\n        result = wait - timeSinceLastCall;\n\n    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;\n  }\n\n  function shouldInvoke(time) {\n    var timeSinceLastCall = time - lastCallTime,\n        timeSinceLastInvoke = time - lastInvokeTime;\n\n    // Either this is the first call, activity has stopped and we're at the\n    // trailing edge, the system time has gone backwards and we're treating\n    // it as the trailing edge, or we've hit the `maxWait` limit.\n    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||\n      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));\n  }\n\n  function timerExpired() {\n    var time = now();\n    if (shouldInvoke(time)) {\n      return trailingEdge(time);\n    }\n    // Restart the timer.\n    timerId = setTimeout(timerExpired, remainingWait(time));\n  }\n\n  function trailingEdge(time) {\n    timerId = undefined;\n\n    // Only invoke if we have `lastArgs` which means `func` has been\n    // debounced at least once.\n    if (trailing && lastArgs) {\n      return invokeFunc(time);\n    }\n    lastArgs = lastThis = undefined;\n    return result;\n  }\n\n  function cancel() {\n    if (timerId !== undefined) {\n      clearTimeout(timerId);\n    }\n    lastInvokeTime = 0;\n    lastArgs = lastCallTime = lastThis = timerId = undefined;\n  }\n\n  function flush() {\n    return timerId === undefined ? result : trailingEdge(now());\n  }\n\n  function debounced() {\n    var time = now(),\n        isInvoking = shouldInvoke(time);\n\n    lastArgs = arguments;\n    lastThis = this;\n    lastCallTime = time;\n\n    if (isInvoking) {\n      if (timerId === undefined) {\n        return leadingEdge(lastCallTime);\n      }\n      if (maxing) {\n        // Handle invocations in a tight loop.\n        timerId = setTimeout(timerExpired, wait);\n        return invokeFunc(lastCallTime);\n      }\n    }\n    if (timerId === undefined) {\n      timerId = setTimeout(timerExpired, wait);\n    }\n    return result;\n  }\n  debounced.cancel = cancel;\n  debounced.flush = flush;\n  return debounced;\n}\n\n/**\n * Checks if `value` is the\n * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)\n * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is an object, else `false`.\n * @example\n *\n * _.isObject({});\n * // => true\n *\n * _.isObject([1, 2, 3]);\n * // => true\n *\n * _.isObject(_.noop);\n * // => true\n *\n * _.isObject(null);\n * // => false\n */\nfunction isObject(value) {\n  var type = typeof value;\n  return !!value && (type == 'object' || type == 'function');\n}\n\n/**\n * Checks if `value` is object-like. A value is object-like if it's not `null`\n * and has a `typeof` result of \"object\".\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is object-like, else `false`.\n * @example\n *\n * _.isObjectLike({});\n * // => true\n *\n * _.isObjectLike([1, 2, 3]);\n * // => true\n *\n * _.isObjectLike(_.noop);\n * // => false\n *\n * _.isObjectLike(null);\n * // => false\n */\nfunction isObjectLike(value) {\n  return !!value && typeof value == 'object';\n}\n\n/**\n * Checks if `value` is classified as a `Symbol` primitive or object.\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.\n * @example\n *\n * _.isSymbol(Symbol.iterator);\n * // => true\n *\n * _.isSymbol('abc');\n * // => false\n */\nfunction isSymbol(value) {\n  return typeof value == 'symbol' ||\n    (isObjectLike(value) && objectToString.call(value) == symbolTag);\n}\n\n/**\n * Converts `value` to a number.\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to process.\n * @returns {number} Returns the number.\n * @example\n *\n * _.toNumber(3.2);\n * // => 3.2\n *\n * _.toNumber(Number.MIN_VALUE);\n * // => 5e-324\n *\n * _.toNumber(Infinity);\n * // => Infinity\n *\n * _.toNumber('3.2');\n * // => 3.2\n */\nfunction toNumber(value) {\n  if (typeof value == 'number') {\n    return value;\n  }\n  if (isSymbol(value)) {\n    return NAN;\n  }\n  if (isObject(value)) {\n    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;\n    value = isObject(other) ? (other + '') : other;\n  }\n  if (typeof value != 'string') {\n    return value === 0 ? value : +value;\n  }\n  value = value.replace(reTrim, '');\n  var isBinary = reIsBinary.test(value);\n  return (isBinary || reIsOctal.test(value))\n    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)\n    : (reIsBadHex.test(value) ? NAN : +value);\n}\n\nmodule.exports = debounce;\n\n\n//# sourceURL=webpack://smore/./node_modules/lodash.debounce/index.js?",
@@ -573,8 +573,8 @@
     /***/
     "./node_modules/lodash.throttle/index.js":
       /*!***********************************************!*\
-      !*** ./node_modules/lodash.throttle/index.js ***!
-      \***********************************************/
+    !*** ./node_modules/lodash.throttle/index.js ***!
+    \***********************************************/
       /***/ (module, __unused_webpack_exports, __webpack_require__) => {
         eval(
           "/**\n * lodash (Custom Build) <https://lodash.com/>\n * Build: `lodash modularize exports=\"npm\" -o ./`\n * Copyright jQuery Foundation and other contributors <https://jquery.org/>\n * Released under MIT license <https://lodash.com/license>\n * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>\n * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors\n */\n\n/** Used as the `TypeError` message for \"Functions\" methods. */\nvar FUNC_ERROR_TEXT = 'Expected a function';\n\n/** Used as references for various `Number` constants. */\nvar NAN = 0 / 0;\n\n/** `Object#toString` result references. */\nvar symbolTag = '[object Symbol]';\n\n/** Used to match leading and trailing whitespace. */\nvar reTrim = /^\\s+|\\s+$/g;\n\n/** Used to detect bad signed hexadecimal string values. */\nvar reIsBadHex = /^[-+]0x[0-9a-f]+$/i;\n\n/** Used to detect binary string values. */\nvar reIsBinary = /^0b[01]+$/i;\n\n/** Used to detect octal string values. */\nvar reIsOctal = /^0o[0-7]+$/i;\n\n/** Built-in method references without a dependency on `root`. */\nvar freeParseInt = parseInt;\n\n/** Detect free variable `global` from Node.js. */\nvar freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;\n\n/** Detect free variable `self`. */\nvar freeSelf = typeof self == 'object' && self && self.Object === Object && self;\n\n/** Used as a reference to the global object. */\nvar root = freeGlobal || freeSelf || Function('return this')();\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/**\n * Used to resolve the\n * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)\n * of values.\n */\nvar objectToString = objectProto.toString;\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeMax = Math.max,\n    nativeMin = Math.min;\n\n/**\n * Gets the timestamp of the number of milliseconds that have elapsed since\n * the Unix epoch (1 January 1970 00:00:00 UTC).\n *\n * @static\n * @memberOf _\n * @since 2.4.0\n * @category Date\n * @returns {number} Returns the timestamp.\n * @example\n *\n * _.defer(function(stamp) {\n *   console.log(_.now() - stamp);\n * }, _.now());\n * // => Logs the number of milliseconds it took for the deferred invocation.\n */\nvar now = function() {\n  return root.Date.now();\n};\n\n/**\n * Creates a debounced function that delays invoking `func` until after `wait`\n * milliseconds have elapsed since the last time the debounced function was\n * invoked. The debounced function comes with a `cancel` method to cancel\n * delayed `func` invocations and a `flush` method to immediately invoke them.\n * Provide `options` to indicate whether `func` should be invoked on the\n * leading and/or trailing edge of the `wait` timeout. The `func` is invoked\n * with the last arguments provided to the debounced function. Subsequent\n * calls to the debounced function return the result of the last `func`\n * invocation.\n *\n * **Note:** If `leading` and `trailing` options are `true`, `func` is\n * invoked on the trailing edge of the timeout only if the debounced function\n * is invoked more than once during the `wait` timeout.\n *\n * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred\n * until to the next tick, similar to `setTimeout` with a timeout of `0`.\n *\n * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)\n * for details over the differences between `_.debounce` and `_.throttle`.\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Function\n * @param {Function} func The function to debounce.\n * @param {number} [wait=0] The number of milliseconds to delay.\n * @param {Object} [options={}] The options object.\n * @param {boolean} [options.leading=false]\n *  Specify invoking on the leading edge of the timeout.\n * @param {number} [options.maxWait]\n *  The maximum time `func` is allowed to be delayed before it's invoked.\n * @param {boolean} [options.trailing=true]\n *  Specify invoking on the trailing edge of the timeout.\n * @returns {Function} Returns the new debounced function.\n * @example\n *\n * // Avoid costly calculations while the window size is in flux.\n * jQuery(window).on('resize', _.debounce(calculateLayout, 150));\n *\n * // Invoke `sendMail` when clicked, debouncing subsequent calls.\n * jQuery(element).on('click', _.debounce(sendMail, 300, {\n *   'leading': true,\n *   'trailing': false\n * }));\n *\n * // Ensure `batchLog` is invoked once after 1 second of debounced calls.\n * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });\n * var source = new EventSource('/stream');\n * jQuery(source).on('message', debounced);\n *\n * // Cancel the trailing debounced invocation.\n * jQuery(window).on('popstate', debounced.cancel);\n */\nfunction debounce(func, wait, options) {\n  var lastArgs,\n      lastThis,\n      maxWait,\n      result,\n      timerId,\n      lastCallTime,\n      lastInvokeTime = 0,\n      leading = false,\n      maxing = false,\n      trailing = true;\n\n  if (typeof func != 'function') {\n    throw new TypeError(FUNC_ERROR_TEXT);\n  }\n  wait = toNumber(wait) || 0;\n  if (isObject(options)) {\n    leading = !!options.leading;\n    maxing = 'maxWait' in options;\n    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;\n    trailing = 'trailing' in options ? !!options.trailing : trailing;\n  }\n\n  function invokeFunc(time) {\n    var args = lastArgs,\n        thisArg = lastThis;\n\n    lastArgs = lastThis = undefined;\n    lastInvokeTime = time;\n    result = func.apply(thisArg, args);\n    return result;\n  }\n\n  function leadingEdge(time) {\n    // Reset any `maxWait` timer.\n    lastInvokeTime = time;\n    // Start the timer for the trailing edge.\n    timerId = setTimeout(timerExpired, wait);\n    // Invoke the leading edge.\n    return leading ? invokeFunc(time) : result;\n  }\n\n  function remainingWait(time) {\n    var timeSinceLastCall = time - lastCallTime,\n        timeSinceLastInvoke = time - lastInvokeTime,\n        result = wait - timeSinceLastCall;\n\n    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;\n  }\n\n  function shouldInvoke(time) {\n    var timeSinceLastCall = time - lastCallTime,\n        timeSinceLastInvoke = time - lastInvokeTime;\n\n    // Either this is the first call, activity has stopped and we're at the\n    // trailing edge, the system time has gone backwards and we're treating\n    // it as the trailing edge, or we've hit the `maxWait` limit.\n    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||\n      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));\n  }\n\n  function timerExpired() {\n    var time = now();\n    if (shouldInvoke(time)) {\n      return trailingEdge(time);\n    }\n    // Restart the timer.\n    timerId = setTimeout(timerExpired, remainingWait(time));\n  }\n\n  function trailingEdge(time) {\n    timerId = undefined;\n\n    // Only invoke if we have `lastArgs` which means `func` has been\n    // debounced at least once.\n    if (trailing && lastArgs) {\n      return invokeFunc(time);\n    }\n    lastArgs = lastThis = undefined;\n    return result;\n  }\n\n  function cancel() {\n    if (timerId !== undefined) {\n      clearTimeout(timerId);\n    }\n    lastInvokeTime = 0;\n    lastArgs = lastCallTime = lastThis = timerId = undefined;\n  }\n\n  function flush() {\n    return timerId === undefined ? result : trailingEdge(now());\n  }\n\n  function debounced() {\n    var time = now(),\n        isInvoking = shouldInvoke(time);\n\n    lastArgs = arguments;\n    lastThis = this;\n    lastCallTime = time;\n\n    if (isInvoking) {\n      if (timerId === undefined) {\n        return leadingEdge(lastCallTime);\n      }\n      if (maxing) {\n        // Handle invocations in a tight loop.\n        timerId = setTimeout(timerExpired, wait);\n        return invokeFunc(lastCallTime);\n      }\n    }\n    if (timerId === undefined) {\n      timerId = setTimeout(timerExpired, wait);\n    }\n    return result;\n  }\n  debounced.cancel = cancel;\n  debounced.flush = flush;\n  return debounced;\n}\n\n/**\n * Creates a throttled function that only invokes `func` at most once per\n * every `wait` milliseconds. The throttled function comes with a `cancel`\n * method to cancel delayed `func` invocations and a `flush` method to\n * immediately invoke them. Provide `options` to indicate whether `func`\n * should be invoked on the leading and/or trailing edge of the `wait`\n * timeout. The `func` is invoked with the last arguments provided to the\n * throttled function. Subsequent calls to the throttled function return the\n * result of the last `func` invocation.\n *\n * **Note:** If `leading` and `trailing` options are `true`, `func` is\n * invoked on the trailing edge of the timeout only if the throttled function\n * is invoked more than once during the `wait` timeout.\n *\n * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred\n * until to the next tick, similar to `setTimeout` with a timeout of `0`.\n *\n * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)\n * for details over the differences between `_.throttle` and `_.debounce`.\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Function\n * @param {Function} func The function to throttle.\n * @param {number} [wait=0] The number of milliseconds to throttle invocations to.\n * @param {Object} [options={}] The options object.\n * @param {boolean} [options.leading=true]\n *  Specify invoking on the leading edge of the timeout.\n * @param {boolean} [options.trailing=true]\n *  Specify invoking on the trailing edge of the timeout.\n * @returns {Function} Returns the new throttled function.\n * @example\n *\n * // Avoid excessively updating the position while scrolling.\n * jQuery(window).on('scroll', _.throttle(updatePosition, 100));\n *\n * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.\n * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });\n * jQuery(element).on('click', throttled);\n *\n * // Cancel the trailing throttled invocation.\n * jQuery(window).on('popstate', throttled.cancel);\n */\nfunction throttle(func, wait, options) {\n  var leading = true,\n      trailing = true;\n\n  if (typeof func != 'function') {\n    throw new TypeError(FUNC_ERROR_TEXT);\n  }\n  if (isObject(options)) {\n    leading = 'leading' in options ? !!options.leading : leading;\n    trailing = 'trailing' in options ? !!options.trailing : trailing;\n  }\n  return debounce(func, wait, {\n    'leading': leading,\n    'maxWait': wait,\n    'trailing': trailing\n  });\n}\n\n/**\n * Checks if `value` is the\n * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)\n * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is an object, else `false`.\n * @example\n *\n * _.isObject({});\n * // => true\n *\n * _.isObject([1, 2, 3]);\n * // => true\n *\n * _.isObject(_.noop);\n * // => true\n *\n * _.isObject(null);\n * // => false\n */\nfunction isObject(value) {\n  var type = typeof value;\n  return !!value && (type == 'object' || type == 'function');\n}\n\n/**\n * Checks if `value` is object-like. A value is object-like if it's not `null`\n * and has a `typeof` result of \"object\".\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is object-like, else `false`.\n * @example\n *\n * _.isObjectLike({});\n * // => true\n *\n * _.isObjectLike([1, 2, 3]);\n * // => true\n *\n * _.isObjectLike(_.noop);\n * // => false\n *\n * _.isObjectLike(null);\n * // => false\n */\nfunction isObjectLike(value) {\n  return !!value && typeof value == 'object';\n}\n\n/**\n * Checks if `value` is classified as a `Symbol` primitive or object.\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.\n * @example\n *\n * _.isSymbol(Symbol.iterator);\n * // => true\n *\n * _.isSymbol('abc');\n * // => false\n */\nfunction isSymbol(value) {\n  return typeof value == 'symbol' ||\n    (isObjectLike(value) && objectToString.call(value) == symbolTag);\n}\n\n/**\n * Converts `value` to a number.\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to process.\n * @returns {number} Returns the number.\n * @example\n *\n * _.toNumber(3.2);\n * // => 3.2\n *\n * _.toNumber(Number.MIN_VALUE);\n * // => 5e-324\n *\n * _.toNumber(Infinity);\n * // => Infinity\n *\n * _.toNumber('3.2');\n * // => 3.2\n */\nfunction toNumber(value) {\n  if (typeof value == 'number') {\n    return value;\n  }\n  if (isSymbol(value)) {\n    return NAN;\n  }\n  if (isObject(value)) {\n    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;\n    value = isObject(other) ? (other + '') : other;\n  }\n  if (typeof value != 'string') {\n    return value === 0 ? value : +value;\n  }\n  value = value.replace(reTrim, '');\n  var isBinary = reIsBinary.test(value);\n  return (isBinary || reIsOctal.test(value))\n    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)\n    : (reIsBadHex.test(value) ? NAN : +value);\n}\n\nmodule.exports = throttle;\n\n\n//# sourceURL=webpack://smore/./node_modules/lodash.throttle/index.js?",
@@ -586,8 +586,8 @@
     /***/
     "./node_modules/notyf/notyf.es.js":
       /*!****************************************!*\
-      !*** ./node_modules/notyf/notyf.es.js ***!
-      \****************************************/
+    !*** ./node_modules/notyf/notyf.es.js ***!
+    \****************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -604,8 +604,8 @@
     /***/
     "./node_modules/aos/src/sass/aos.scss":
       /*!********************************************!*\
-      !*** ./node_modules/aos/src/sass/aos.scss ***!
-      \********************************************/
+    !*** ./node_modules/aos/src/sass/aos.scss ***!
+    \********************************************/
       /***/ (
         __unused_webpack_module,
         __webpack_exports__,
@@ -622,8 +622,8 @@
     /***/
     "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
       /*!****************************************************************************!*\
-      !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-      \****************************************************************************/
+    !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+    \****************************************************************************/
       /***/ (module) => {
         "use strict";
         eval(
@@ -636,8 +636,8 @@
     /***/
     "./node_modules/style-loader/dist/runtime/insertBySelector.js":
       /*!********************************************************************!*\
-      !*** ./node_modules/style-loader/dist/runtime/insertBySelector.js ***!
-      \********************************************************************/
+    !*** ./node_modules/style-loader/dist/runtime/insertBySelector.js ***!
+    \********************************************************************/
       /***/ (module) => {
         "use strict";
         eval(
@@ -650,8 +650,8 @@
     /***/
     "./node_modules/style-loader/dist/runtime/insertStyleElement.js":
       /*!**********************************************************************!*\
-      !*** ./node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
-      \**********************************************************************/
+    !*** ./node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
+    \**********************************************************************/
       /***/ (module) => {
         "use strict";
         eval(
@@ -664,8 +664,8 @@
     /***/
     "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js":
       /*!**********************************************************************************!*\
-      !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
-      \**********************************************************************************/
+    !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
+    \**********************************************************************************/
       /***/ (module, __unused_webpack_exports, __webpack_require__) => {
         "use strict";
         eval(
@@ -678,8 +678,8 @@
     /***/
     "./node_modules/style-loader/dist/runtime/styleDomAPI.js":
       /*!***************************************************************!*\
-      !*** ./node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
-      \***************************************************************/
+    !*** ./node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
+    \***************************************************************/
       /***/ (module) => {
         "use strict";
         eval(
@@ -692,8 +692,8 @@
     /***/
     "./node_modules/style-loader/dist/runtime/styleTagTransform.js":
       /*!*********************************************************************!*\
-      !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
-      \*********************************************************************/
+    !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
+    \*********************************************************************/
       /***/ (module) => {
         "use strict";
         eval(

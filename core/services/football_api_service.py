@@ -7,7 +7,14 @@ import requests
 from django.conf import settings
 from django.utils import timezone as django_timezone
 
-from core.models import SportCountry, SportLeague, SportTeam, SportMatch, Prediction
+from core.models import (
+    SportCountry,
+    SportLeague,
+    SportTeam,
+    SportMatch,
+    Prediction,
+    Product,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -107,6 +114,7 @@ class FootballApiService:
                     country=country_obj,
                     league_type=league_type,
                     logo=league_logo_path,
+                    product__name=Product.Names.SOCCER,
                 )
                 logger.info(f"Created league: {league_name}")
             except Exception as e:
@@ -119,7 +127,10 @@ class FootballApiService:
         for season in range(start_season, end_season):
             if season == 2025:
                 logger.info(f"Marking league ID: {league_id} as processed")
-                league_obj = SportLeague.objects.get(external_id=league_id)
+                league_obj = SportLeague.objects.get(
+                    external_id=league_id,
+                    product__name=Product.Names.SOCCER,
+                )
                 league_obj.is_processed = True
                 league_obj.save()
                 break
@@ -144,7 +155,10 @@ class FootballApiService:
                             logger.info(
                                 f"Marking league ID: {league_id} as processed because match {match_obj.external_id} [{match_obj.kickoff_datetime}] already exists"
                             )
-                            league_obj = SportLeague.objects.get(external_id=league_id)
+                            league_obj = SportLeague.objects.get(
+                                external_id=league_id,
+                                product__name=Product.Names.SOCCER,
+                            )
                             league_obj.is_processed = True
                             league_obj.save()
                             logger.info(f"Marked league ID: {league_id} as processed")
@@ -165,7 +179,7 @@ class FootballApiService:
         start_date = datetime.now()
         logger.info(f"Fetching sport matches from start_date: {start_date}")
 
-        for i in range(2):
+        for i in range(10):
             date = start_date + timedelta(days=i)
             formatted_date = date.strftime("%Y-%m-%d")
             endpoint = f"{self.base_url}/fixtures?date={formatted_date}"
@@ -220,7 +234,10 @@ class FootballApiService:
         logger.info(f"Processing fixture with ID: {fixture.get('id')}")
 
         try:
-            league_obj = SportLeague.objects.get(external_id=league_id)
+            league_obj = SportLeague.objects.get(
+                external_id=league_id,
+                product__name=Product.Names.SOCCER,
+            )
         except SportLeague.DoesNotExist:
             logger.error(f"League {league_id} not found")
             return None
@@ -252,6 +269,7 @@ class FootballApiService:
                 home_team_score=home_team_score,
                 away_team_score=away_team_score,
                 kickoff_datetime=kickoff_datetime,
+                product__name=Product.objects.get(name=Product.Names.SOCCER),
             )
             logger.info(f"Successfully created {match_obj}")
         except Exception as e:
@@ -309,6 +327,7 @@ class FootballApiService:
         try:
             team_obj, created = SportTeam.objects.get_or_create(
                 external_id=team_id,
+                product__name=Product.Names.SOCCER,
                 defaults={
                     "name": team_name,
                     "league": league_obj,
