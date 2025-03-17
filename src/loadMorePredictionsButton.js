@@ -20,7 +20,7 @@ function initLoadMorePredictionsButton() {
     const nextPage = button.getAttribute("data-next-page");
     let url = `/api/history/predictions/?page=${nextPage}`;
 
-    if (activeFilter && activeFilter !== "all") {
+    if (activeFilter && activeFilter !== "All sports") {
       url += `&product=${activeFilter}`;
     }
 
