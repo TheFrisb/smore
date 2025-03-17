@@ -114,7 +114,7 @@ class FootballApiService:
                     country=country_obj,
                     league_type=league_type,
                     logo=league_logo_path,
-                    product__name=Product.Names.SOCCER,
+                    product=Product.objects.get(name=Product.Names.SOCCER),
                 )
                 logger.info(f"Created league: {league_name}")
             except Exception as e:
@@ -269,7 +269,7 @@ class FootballApiService:
                 home_team_score=home_team_score,
                 away_team_score=away_team_score,
                 kickoff_datetime=kickoff_datetime,
-                product__name=Product.objects.get(name=Product.Names.SOCCER),
+                product=Product.objects.get(name=Product.Names.SOCCER),
             )
             logger.info(f"Successfully created {match_obj}")
         except Exception as e:
@@ -327,7 +327,7 @@ class FootballApiService:
         try:
             team_obj, created = SportTeam.objects.get_or_create(
                 external_id=team_id,
-                product__name=Product.Names.SOCCER,
+                product=Product.objects.get(name=Product.Names.SOCCER),
                 defaults={
                     "name": team_name,
                     "league": league_obj,
