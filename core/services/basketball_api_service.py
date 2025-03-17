@@ -115,6 +115,7 @@ class BasketballApiService:
         if not away_team_score:
             away_team_score = ""
 
+        logger.info(f"Processing fixture id: {external_id}, league_id: {league_id}")
         league_obj = SportLeague.objects.get(
             external_id=league_id, product__name=Product.Names.BASKETBALL
         )
