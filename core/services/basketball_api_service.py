@@ -76,7 +76,7 @@ class BasketballApiService:
                     country=country_obj,
                     league_type=league_type,
                     logo=league_logo_path,
-                    product__name=Product.Names.BASKETBALL,
+                    product=Product.objects.get(name=Product.Names.BASKETBALL),
                 )
                 logger.info(f"Created league: {league_name}")
             except Exception as e:
