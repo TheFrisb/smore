@@ -135,11 +135,11 @@ class SportMatch(BaseInternalModel):
     home_team = models.ForeignKey(
         SportTeam, on_delete=models.CASCADE, related_name="home_team"
     )
-    home_team_score = models.CharField(max_length=2, blank=True)
+    home_team_score = models.CharField(blank=True)
     away_team = models.ForeignKey(
         SportTeam, on_delete=models.CASCADE, related_name="away_team"
     )
-    away_team_score = models.CharField(max_length=2, blank=True)
+    away_team_score = models.CharField(blank=True)
     kickoff_datetime = models.DateTimeField()
     metadata = models.JSONField(null=True)
 
