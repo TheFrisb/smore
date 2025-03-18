@@ -19,6 +19,7 @@ from django.views.generic import TemplateView, FormView, RedirectView, ListView
 from google.auth.transport import requests
 from google.oauth2 import id_token
 
+from accounts.forms.login_form import LoginForm
 from accounts.forms.register_form import RegisterForm
 from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswordForm
 from accounts.mixins import RedirectAuthenticatedUserMixin
@@ -50,6 +51,7 @@ class BaseAccountView(LoginRequiredMixin):
 
 class LoginUserView(RedirectAuthenticatedUserMixin, LoginView):
     template_name = "accounts/pages/login.html"
+    form_class = LoginForm
 
     def get_success_url(self):
         return self.request.GET.get("next", reverse("core:home"))

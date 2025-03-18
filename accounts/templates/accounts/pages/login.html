@@ -50,7 +50,7 @@
                     <form class="space-y-6" method="post" action="{% url 'accounts:login' %}" id="loginForm">
                         {% csrf_token %}
                         <div><label for="username"
-                                    class="block text-sm font-medium text-primary-300 mb-2">{% trans "Username" %}</label>
+                                    class="block text-sm font-medium text-primary-300 mb-2">{% trans "Username / Email" %}</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -62,7 +62,7 @@
                                 </div>
                                 <input id="username" name="username" type="text" autocomplete="username" required=""
                                        class="appearance-none relative block w-full px-3 py-3 pl-10 border border-primary-700/50 rounded-lg bg-primary-900/50 placeholder-primary-500 text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-secondary-500/50 transition-all duration-200 hover:border-primary-500/30"
-                                       placeholder="{% trans 'Enter your username' %}" value=""></div>
+                                       placeholder="{% trans 'Enter your username / email' %}" value=""></div>
                         </div>
                         <div><label for="password"
                                     class="block text-sm font-medium text-primary-300 mb-2">{% trans 'Password' %}</label>

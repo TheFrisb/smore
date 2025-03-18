@@ -41,20 +41,10 @@ class HomeView(TemplateView):
                 "primary_button_url": reverse("accounts:register"),
             }
 
-        user_subscription = getattr(user, "subscription", None)
-        if user_subscription and user_subscription.is_active:
-            return {
-                "primary_button_text": _("Upcoming matches"),
-                "primary_button_url": reverse("core:upcoming_matches"),
-                "primary_button_description": _("View upcoming matches"),
-            }
-
         return {
-            "primary_button_text": _("View Plans"),
-            "primary_button_url": reverse("core:plans"),
-            "primary_button_description": _(
-                "Choose a plan and get instant access to expert predictions"
-            ),
+            "primary_button_text": _("Upcoming matches"),
+            "primary_button_url": reverse("core:upcoming_matches"),
+            "primary_button_description": _("View upcoming matches"),
         }
 
     def dispatch(self, request, *args, **kwargs):

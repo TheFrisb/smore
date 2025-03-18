@@ -1,3 +1,1 @@
-1. Fetch basketball matches
-2. Make dropdown
-3. Filter dropdown
+2. Popust ako ima soccer
