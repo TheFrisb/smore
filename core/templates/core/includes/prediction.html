@@ -34,7 +34,7 @@
         {% endif %}
 
     </div>
-    {% if show_predictions or prediction.id in purchased_prediction_ids %}
+    {% if prediction.product.id in allowed_prediction_products or prediction.id in purchased_prediction_ids %}
     {% else %}
         <div class="flex items-center justify-center gap-2 pb-2 relative">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            {% if show_predictions or prediction.id in purchased_prediction_ids %}
+            {% if prediction.product.id in allowed_prediction_products or prediction.id in purchased_prediction_ids %}
                 <div class="relative">
                     <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
                 </div>
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    {% if show_predictions or prediction.id in purchased_prediction_ids %}
+    {% if prediction.product.id in allowed_prediction_products or prediction.id in purchased_prediction_ids %}
         <div class="flex flex-col items-center justify-center">
             <div class="text-sm text-white">{% trans "Prediction" %}</div>
             <div class="font-semibold text-xl  {% if prediction.status == 'LOST' %}text-red-500{% elif prediction.status == 'WON' %}text-emerald-500{% else %}text-secondary-400{% endif %}">{{ prediction.prediction }}</div>

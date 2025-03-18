@@ -34,12 +34,6 @@ class HomeView(TemplateView):
         """
         Determine button text and URL based on user's login and subscription status.
         """
-        user = self.request.user
-        if not user.is_authenticated:
-            return {
-                "primary_button_text": _("Get Started"),
-                "primary_button_url": reverse("accounts:register"),
-            }
 
         return {
             "primary_button_text": _("Upcoming matches"),
@@ -63,7 +57,6 @@ class HistoryView(TemplateView):
         context = super().get_context_data(**kwargs)
         filter = self.request.GET.get("filter", "all")
         if filter == "all":
-            print("All sports")
             context["filter"] = "All sports"
             context["predictions"] = self.get_history_predictions(None)
         else:
@@ -76,7 +69,9 @@ class HistoryView(TemplateView):
                 context["predictions"] = self.get_history_predictions(None)
 
         context["page_title"] = _("History")
-        context["show_predictions"] = True
+        context["allowed_prediction_products"] = Product.objects.filter(
+            type=Product.Types.SUBSCRIPTION
+        ).values_list("id", flat=True)
         context["products"] = Product.objects.filter(
             type=Product.Types.SUBSCRIPTION
         ).order_by("order")
@@ -277,7 +272,7 @@ class UpcomingMatchesView(TemplateView):
 
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
         context["page_title"] = _("Upcoming Matches")
-        context["show_predictions"] = self.get_show_predictions()
+        context["allowed_prediction_products"] = self.get_allowed_prediction_products()
         context["purchased_prediction_ids"] = self.get_purchased_prediction_ids()
         context["products"] = Product.objects.filter(
             type=Product.Types.SUBSCRIPTION
@@ -321,12 +316,18 @@ class UpcomingMatchesView(TemplateView):
 
         return grouped_predictions
 
-    def get_show_predictions(self):
-        soccer = Product.objects.get(name="Soccer")
-        return (
-                self.request.user.is_authenticated
-                and self.request.user.has_access_to_product(soccer)
-        )
+    def get_allowed_prediction_products(self):
+        allowed_prediction_products = []
+        products = Product.objects.filter(type=Product.Types.SUBSCRIPTION)
+
+        if not self.request.user.is_authenticated:
+            return allowed_prediction_products
+
+        for product in products:
+            if self.request.user.has_access_to_product(product):
+                allowed_prediction_products.append(product.id)
+
+        return allowed_prediction_products
 
 
 class AiAssistantView(TemplateView):
