@@ -76,7 +76,7 @@ class LLMService:
 
             return response
 
-        return "Please ask me anything sports-related."
+        return "Please ask me something more specific about sports."
 
     def _handle_general_sport(self, user: User, message: str, history: List) -> str:
         """Handle general sports information requests."""
@@ -96,7 +96,7 @@ class LLMService:
         try:
             teams, matches = self.team_extractor.extract(message, history)
             if not teams:
-                return "I was unable to properly identify the teams in the message."
+                return "Please provide the full names of the teams in the match you are asking about."
 
             context = self._build_match_context(teams)
 
