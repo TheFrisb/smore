@@ -936,7 +936,7 @@ msgstr "Ungültiger oder abgelaufener E-Mail-Bestätigungslink."
 #: core/models.py:54
 #| msgid "Subscription Fees"
 msgid "Subscription"
-msgstr "Abonnementgebühren"
+msgstr "Abonnieren"
 
 #: core/models.py:55
 msgid "Addon"
