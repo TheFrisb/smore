@@ -22,11 +22,16 @@ class FacebookPixel:
     def __init__(self, request):
         self.dataset_id = settings.FACEBOOK_PIXEL_DATASET_ID
         self.request = request
+        self.should_send = settings.FACEBOOK_PIXEL_SEND_EVENTS
         FacebookAdsApi.init(
             access_token=settings.FACEBOOK_PIXEL_ACCESS_TOKEN,
         )
 
     def send_event(self, event_name, custom_data=None):
+        if not self.should_send:
+            logger.info("Facebook Pixel events are disabled")
+            return
+
         user_data = self.get_default_user_data()
 
         event_0 = Event(

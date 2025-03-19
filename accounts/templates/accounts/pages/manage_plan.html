@@ -36,13 +36,19 @@
                                 {% if request.user.subscription.is_monthly %}
                                     <div class="text-right">
                                         <div class="text-xl font-bold text-secondary-400">
-                                            €{{ product.monthly_price }}</div>
+                                            {% if user_has_soccer and product.name != 'Soccer' %}
+                                                €{{ product.discounted_monthly_price }}{% else %}
+                                                €{{ product.monthly_price }}{% endif %}
+                                        </div>
                                         <div class="text-sm text-primary-300">{% trans "per month" %}</div>
                                     </div>
                                 {% else %}
                                     <div class="text-right">
                                         <div class="text-xl font-bold text-secondary-400">
-                                            €{{ product.yearly_price }}</div>
+                                            {% if user_has_soccer and product.name != 'Soccer' %}
+                                                €{{ product.discounted_yearly_price }}{% else %}
+                                                €{{ product.yearly_price }}{% endif %}
+                                        </div>
                                         <div class="text-sm text-primary-300">{% trans "per year" %}</div>
                                     </div>
                                 {% endif %}

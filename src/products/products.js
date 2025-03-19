@@ -12,6 +12,9 @@ const products = document.querySelectorAll(".product");
 const checkoutSummarySection = document.querySelector(
   ".checkoutSummarySection",
 );
+const soccerProductElement = document.querySelector(
+  ".product[data-product-name-untranslated='Soccer']",
+);
 
 const checkoutSummaryItemsSection = document.querySelector(
   ".checkoutSummary__items",
@@ -27,7 +30,8 @@ const authenticatedActiveSubscriptionTypeInput = document.querySelector(
 );
 
 let selectedProducts = [];
-let frequencyType = "month";
+let soccerProductId;
+let frequencyType = "monthly";
 
 function initChooseSubscriptionFrequencyButton() {
   if (!chooseSubscriptionFrequencyButton) {
@@ -45,7 +49,7 @@ function initChooseSubscriptionFrequencyButton() {
     if (toggleButton.classList.contains("left-1")) {
       toggleButton.classList.remove("left-1");
       toggleButton.classList.add("right-1");
-      frequencyType = "year";
+      frequencyType = "yearly";
 
       annualLabelEl.classList.remove("text-primary-300");
       annualLabelEl.classList.add("text-white");
@@ -57,7 +61,6 @@ function initChooseSubscriptionFrequencyButton() {
       );
 
       if (authenticatedActiveSubscriptionTypeInput) {
-        console.log(authenticatedActiveSubscriptionTypeInput.value);
         const activeSubscriptionType =
           authenticatedActiveSubscriptionTypeInput.value;
 
@@ -74,7 +77,7 @@ function initChooseSubscriptionFrequencyButton() {
     } else {
       toggleButton.classList.remove("right-1");
       toggleButton.classList.add("left-1");
-      frequencyType = "month";
+      frequencyType = "monthly";
 
       monthlyLabelEl.classList.remove("text-primary-300");
       monthlyLabelEl.classList.add("text-white");
@@ -109,19 +112,23 @@ function updatePrices() {
 
   products.forEach((product) => {
     const priceEl = product.querySelector(".product__price");
-    const yearlyNoDiscountPrice = product.querySelector(
-      ".product__yearlyPriceNoDiscount",
+    const productNoDiscountPriceEl = product.querySelector(
+      ".product__NoDiscountPrice",
     );
 
-    let monthlyPrice = product.getAttribute("data-product-monthly-price");
-    let yearlyPrice = product.getAttribute("data-product-annual-monthly-price");
+    const soccerIsPresent = isSoccerProductSelected();
+    const currentProductId = product.getAttribute("data-product-id");
 
-    let price = frequencyType === "month" ? monthlyPrice : yearlyPrice;
+    let price = getProductMonthlyPrice(product);
 
-    if (frequencyType === "year") {
-      yearlyNoDiscountPrice.classList.remove("hidden");
+    if (frequencyType === "yearly") {
+      productNoDiscountPriceEl.classList.remove("hidden");
     } else {
-      yearlyNoDiscountPrice.classList.add("hidden");
+      productNoDiscountPriceEl.classList.add("hidden");
+    }
+
+    if (soccerIsPresent && currentProductId !== soccerProductId) {
+      productNoDiscountPriceEl.classList.remove("hidden");
     }
 
     priceEl.textContent = `€${price}`;
@@ -130,11 +137,17 @@ function updatePrices() {
   updateCheckoutSummaryUI();
 }
 
+function isSoccerProductSelected() {
+  return selectedProducts.includes(soccerProductId);
+}
+
 function initProducts() {
   if (!products || !checkoutSummarySection) {
     return;
   }
   initChooseSubscriptionFrequencyButton();
+
+  soccerProductId = soccerProductElement.getAttribute("data-product-id");
 
   products.forEach((product) => {
     product.addEventListener("click", () => {
@@ -156,7 +169,10 @@ function initProducts() {
       );
 
       pushOrRemoveProduct(productId);
+      updatePrices();
       updateCheckoutSummaryUI();
+
+      toggleSoccerDiscountBar();
     });
   });
 
@@ -230,6 +246,37 @@ function initProducts() {
   }
 }
 
+function getProductTotalPrice(productEl) {
+  if (
+    isSoccerProductSelected() &&
+    productEl.dataset.productId !== soccerProductId
+  ) {
+    console.log("Soccer product selected");
+    return frequencyType === "monthly"
+      ? productEl.getAttribute("data-product-monthly-discounted-price")
+      : productEl.getAttribute("data-product-annual-discounted-price");
+  } else {
+    return frequencyType === "monthly"
+      ? productEl.getAttribute("data-product-monthly-price")
+      : productEl.getAttribute("data-product-annual-price");
+  }
+}
+
+function getProductMonthlyPrice(productEl) {
+  if (
+    isSoccerProductSelected() &&
+    productEl.dataset.productId !== soccerProductId
+  ) {
+    return frequencyType === "monthly"
+      ? productEl.getAttribute("data-product-monthly-discounted-price")
+      : productEl.getAttribute("data-product-annual-discounted-monthly-price");
+  } else {
+    return frequencyType === "monthly"
+      ? productEl.getAttribute("data-product-monthly-price")
+      : productEl.getAttribute("data-product-annual-monthly-price");
+  }
+}
+
 function updateCheckoutSummaryUI() {
   let checkoutSummary = "";
 
@@ -240,10 +287,7 @@ function updateCheckoutSummaryUI() {
       `.product[data-product-id="${productId}"]`,
     );
     const productName = productEl.getAttribute("data-product-name");
-    const productPrice =
-      frequencyType === "month"
-        ? productEl.getAttribute("data-product-monthly-price")
-        : productEl.getAttribute("data-product-annual-price");
+    const productPrice = getProductTotalPrice(productEl);
 
     total_price += parseFloat(productPrice.replace("€", ""));
 
@@ -297,6 +341,21 @@ function pushOrRemoveProduct(id) {
       }
     }
     selectedProducts.splice(productIndex, 1);
+  }
+}
+
+function toggleSoccerDiscountBar() {
+  const soccerDiscountDisclaimerEls = document.querySelectorAll(
+    ".product__soccerDiscountDisclaimer",
+  );
+  if (isSoccerProductSelected()) {
+    soccerDiscountDisclaimerEls.forEach((el) => {
+      el.classList.remove("hidden");
+    });
+  } else {
+    soccerDiscountDisclaimerEls.forEach((el) => {
+      el.classList.add("hidden");
+    });
   }
 }
 

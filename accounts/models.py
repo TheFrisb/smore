@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.models import BaseInternalModel
+from core.models import BaseInternalModel, Product
 
 logger = logging.getLogger(__name__)
 
@@ -192,6 +192,10 @@ class UserSubscription(BaseInternalModel):
     @property
     def is_monthly(self):
         return self.frequency == self.Frequency.MONTHLY
+
+    @property
+    def has_soccer_access(self):
+        return self.products.filter(name=Product.Names.SOCCER).exists()
 
     @property
     def next_billing_date(self):

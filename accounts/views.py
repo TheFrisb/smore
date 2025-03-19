@@ -26,7 +26,7 @@ from accounts.mixins import RedirectAuthenticatedUserMixin
 from accounts.models import User, Referral, WithdrawalRequest
 from accounts.services.referral_service import ReferralService
 from core.mailer.mailjet_service import MailjetService
-from core.models import FrequentlyAskedQuestion
+from core.models import FrequentlyAskedQuestion, Product
 from facebook.services.facebook_pixel import FacebookPixel
 
 logger = logging.getLogger(__name__)
@@ -238,7 +238,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         return None
 
     def _create_second_level_referral(
-        self, grandparent: User, referred: User, form
+            self, grandparent: User, referred: User, form
     ) -> bool:
         """
         Create row (grandparent->referred, level=2).
@@ -309,6 +309,7 @@ class ManagePlanView(BaseAccountView, TemplateView):
         context = super().get_context_data(**kwargs)
         context["view_plans_url"] = self.get_view_plans_url(self.request)
         context["page_title"] = _("Manage Plan")
+        context["user_has_soccer"] = self._get_user_has_soccer()
         return context
 
     def get_view_plans_url(self, request):
@@ -316,6 +317,16 @@ class ManagePlanView(BaseAccountView, TemplateView):
             return reverse("payments:update_subscription")
 
         return reverse("core:plans")
+
+    def _get_user_has_soccer(self):
+        user = self.request.user
+
+        if not user.is_authenticated:
+            return False
+
+        soccer_product = Product.objects.get(name=Product.Names.SOCCER)
+
+        return user.has_access_to_product(soccer_product)
 
 
 class RequestWithdrawalView(BaseAccountView, TemplateView):

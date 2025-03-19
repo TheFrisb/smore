@@ -66,6 +66,25 @@ class Product(BaseProductModel):
     analysis_per_month = models.CharField(max_length=12, blank=True)
     description = models.TextField(blank=True)
 
+    def get_price_id_for_subscription(self, frequency, use_discounted_prices: bool):
+        if self.name == Product.Names.SOCCER:
+            if frequency == "monthly":
+                return self.monthly_price_stripe_id
+            return self.yearly_price_stripe_id
+
+        if frequency == "monthly":
+            return (
+                self.discounted_monthly_price_stripe_id
+                if use_discounted_prices
+                else self.monthly_price_stripe_id
+            )
+
+        return (
+            self.discounted_yearly_price_stripe_id
+            if use_discounted_prices
+            else self.yearly_price_stripe_id
+        )
+
 
 class FrequentlyAskedQuestion(BaseInternalModel):
     question = models.CharField(max_length=255)

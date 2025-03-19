@@ -1,7 +1,6 @@
 {% extends 'core/base.html' %}
 {% load util_tags i18n %}
 {% block content %}
-
     {% if request.user.is_authenticated and request.user.subscription_is_active %}
         <input type="hidden" id="userSubscriptionType" value="{{ request.user.subscription.frequency }}">
     {% endif %}
@@ -38,7 +37,14 @@
                          data-product-id="{{ product.id }}"
                          data-product-type="sport"
                          data-product-monthly-price="{{ product.monthly_price }}"
+                            {% if product.discounted_monthly_price %}
+                         data-product-monthly-discounted-price="{{ product.discounted_monthly_price }}"
+                            {% endif %}
                          data-product-annual-price="{{ product.yearly_price }}"
+                            {% if product.discounted_yearly_price %}
+                         data-product-annual-discounted-price="{{ product.discounted_yearly_price }}"
+                         data-product-annual-discounted-monthly-price="{{ product.discounted_yearly_price|divide:12 }}"
+                            {% endif %}
                          data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
                          data-product-name="{{ product.get_name_display }}"
                          data-product-name-untranslated="{{ product.name }}"
@@ -63,7 +69,7 @@
                                         </h3>
                                     </div>
                                     <div class="flex items-center gap-3 mt-2">
-                                        <p class="text-lg text-primary-400 line-through hidden product__yearlyPriceNoDiscount">
+                                        <p class="text-lg text-primary-400 line-through hidden product__NoDiscountPrice">
                                             €{{ product.monthly_price }}</p>
                                         <p class="text-2xl font-bold text-secondary-400  product__price">
                                             €{{ product.monthly_price }}</p>
@@ -81,17 +87,27 @@
                                     {% svg_icon icon_name="checkboxIcon" css_classes="hidden w-5 h-5 text-white product__checkboxIcon" %}
                                 </div>
                             </div>
-                            {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
-                                <div class="mb-6">
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
-                                        <p class="text-sm font-medium product__currentPlanDisclaimer"
-                                           data-current-plan="{% trans 'Current plan' %}"
-                                           data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
+                            <div class="flex flex-col items-start justify-start gap-2 ">
+                                {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
+                                    <div class="last-of-type:mb-6">
+                                        <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
+                                            <p class="text-sm font-medium product__currentPlanDisclaimer"
+                                               data-current-plan="{% trans 'Current plan' %}"
+                                               data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
+                                        </div>
+                                        <p class="text-sm font-medium text-primary-300">
+                                            {% trans "Current plan expiry date:" %} {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
                                     </div>
-                                    <p class="text-sm font-medium text-primary-300">{% trans "Current plan expiry" %}
-                                        date: {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
-                                </div>
-                            {% endif %}
+                                {% endif %}
+                                {% if not product.name == 'Soccer' %}
+                                    <div class="last-of-type:mb-6 product__soccerDiscountDisclaimer
+                                        {% if not user_has_soccer %} hidden {% endif %}">
+                                        <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2 product__sportPlanDisclaimer">
+                                            <p class="text-sm font-medium">{% trans "Soccer discount" %}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
 
                             <ul class="space-y-3">
                                 <li class="flex items-center space-x-3">
@@ -156,8 +172,15 @@
                          data-product-id="{{ product.id }}"
                          data-product-type="sport"
                          data-product-monthly-price="{{ product.monthly_price }}"
-                         data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
+                            {% if product.discounted_monthly_price %}
+                         data-product-monthly-discounted-price="{{ product.discounted_monthly_price }}"
+                            {% endif %}
                          data-product-annual-price="{{ product.yearly_price }}"
+                            {% if product.discounted_yearly_price %}
+                         data-product-annual-discounted-price="{{ product.discounted_yearly_price }}"
+                         data-product-annual-discounted-monthly-price="{{ product.discounted_yearly_price|divide:12 }}"
+                            {% endif %}
+                         data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
                          data-product-name="{{ product.get_name_display }}"
                          data-product-name-untranslated="{{ product.name }}"
                          data-translated-mode-month="{% trans 'month' %}"
@@ -172,20 +195,30 @@
                                         {#                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-primary-500/10 text-secondary-400">{% trans "Add-on" %}</span>#}
 
                                     </div>
-                                    {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
-                                        <div class="mb-6">
-                                            <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
-                                                <p class="text-sm font-medium product__currentPlanDisclaimer"
-                                                   data-current-plan="{% trans 'Current plan' %}"
-                                                   data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
+                                    <div class="flex flex-col items-start justify-start gap-2 ">
+                                        {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
+                                            <div class="last-of-type:mb-6">
+                                                <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
+                                                    <p class="text-sm font-medium product__currentPlanDisclaimer"
+                                                       data-current-plan="{% trans 'Current plan' %}"
+                                                       data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
+                                                </div>
+                                                <p class="text-sm font-medium text-primary-300">
+                                                    {% trans "Current plan expiry date:" %} {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
                                             </div>
-                                            <p class="text-sm font-medium text-primary-300">{% trans "Current plan expiry" %}
-                                                date: {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
-                                        </div>
-                                    {% endif %}
+                                        {% endif %}
+                                        {% if not product.name == 'Soccer' %}
+                                            <div class="last-of-type:mb-6 product__soccerDiscountDisclaimer
+                                        {% if not user_has_soccer %} hidden {% endif %}">
+                                                <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2 product__sportPlanDisclaimer">
+                                                    <p class="text-sm font-medium">{% trans "Soccer discount" %}</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                     <p class="text-primary-200 mb-4 addon_descriptionText break-all">{{ product.description }}</p>
                                     <div class="flex items-center gap-3 mt-2">
-                                        <p class="text-lg text-primary-400 line-through hidden product__yearlyPriceNoDiscount">
+                                        <p class="text-lg text-primary-400 line-through hidden product__NoDiscountPrice">
                                             €{{ product.monthly_price }}</p>
                                         <p class="text-2xl font-bold text-secondary-400  product__price">
                                             €{{ product.monthly_price }}</p>
