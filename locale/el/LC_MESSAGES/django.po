@@ -1493,7 +1493,6 @@ msgid "Premium Prediction"
 msgstr "Προβλέψεις Premium"
 
 #: core/templates/core/pages/detail_prediction.html:82
-#, fuzzy
 #| msgid ""
 #| "Subscribe to access all our expert predictions for upcoming matches, "
 #| "featuring detailed analysis and insights."
@@ -2929,13 +2928,11 @@ msgid ""
 msgstr ""
 
 #: core/views.py:39
-#, fuzzy
 #| msgid "Upcoming Matches"
 msgid "Upcoming matches"
 msgstr "Επερχόμενοι Αγώνες"
 
 #: core/views.py:41
-#, fuzzy
 #| msgid "Upcoming Matches"
 msgid "View upcoming matches"
 msgstr "Επερχόμενοι Αγώνες"
