@@ -936,7 +936,7 @@ msgstr "Ungültiger oder abgelaufener E-Mail-Bestätigungslink."
 #: core/models.py:54
 #| msgid "Subscription Fees"
 msgid "Subscription"
-msgstr "Abonnieren"
+msgstr "Abonnementgebühren"
 
 #: core/models.py:55
 msgid "Addon"
@@ -1108,7 +1108,7 @@ msgstr "Vorhersage"
 #: core/templates/core/pages/detail_prediction.html:96
 #| msgid "Subscription Fees"
 msgid "Subscribe"
-msgstr "Abonnementgebühren"
+msgstr "Abonnieren"
 
 #: core/templates/core/includes/prediction.html:130
 #: core/templates/core/pages/detail_prediction.html:99
