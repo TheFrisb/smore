@@ -12,9 +12,6 @@ const products = document.querySelectorAll(".product");
 const checkoutSummarySection = document.querySelector(
   ".checkoutSummarySection",
 );
-const soccerProductElement = document.querySelector(
-  ".product[data-product-name-untranslated='Soccer']",
-);
 
 const checkoutSummaryItemsSection = document.querySelector(
   ".checkoutSummary__items",
@@ -29,8 +26,10 @@ const authenticatedActiveSubscriptionTypeInput = document.querySelector(
   "#userSubscriptionType",
 );
 
+const authenticatedActiveSubscriptionFirstChosenProductId =
+  document.querySelector("#userFirstChosenProductId");
+
 let selectedProducts = [];
-let soccerProductId;
 let frequencyType = "monthly";
 
 function initChooseSubscriptionFrequencyButton() {
@@ -116,7 +115,6 @@ function updatePrices() {
       ".product__NoDiscountPrice",
     );
 
-    const soccerIsPresent = isSoccerProductSelected();
     const currentProductId = product.getAttribute("data-product-id");
 
     let price = getProductMonthlyPrice(product);
@@ -127,7 +125,10 @@ function updatePrices() {
       productNoDiscountPriceEl.classList.add("hidden");
     }
 
-    if (soccerIsPresent && currentProductId !== soccerProductId) {
+    if (
+      shouldApplyDiscount() &&
+      currentProductId !== getFirstSelectedSubscriptionProduct()
+    ) {
       productNoDiscountPriceEl.classList.remove("hidden");
     }
 
@@ -137,17 +138,22 @@ function updatePrices() {
   updateCheckoutSummaryUI();
 }
 
-function isSoccerProductSelected() {
-  return selectedProducts.includes(soccerProductId);
+function shouldApplyDiscount() {
+  // check if selectedProducts has at least 1 product
+  return selectedProducts.length > 0;
+}
+
+function getFirstSelectedSubscriptionProduct() {
+  // return the first selected product id if exists, otherwise null
+  return selectedProducts.length > 0 ? selectedProducts[0].id : null;
 }
 
 function initProducts() {
   if (!products || !checkoutSummarySection) {
     return;
   }
-  initChooseSubscriptionFrequencyButton();
 
-  soccerProductId = soccerProductElement.getAttribute("data-product-id");
+  initChooseSubscriptionFrequencyButton();
 
   products.forEach((product) => {
     product.addEventListener("click", () => {
@@ -156,6 +162,7 @@ function initProducts() {
       }
 
       const productId = product.getAttribute("data-product-id");
+      const productType = product.getAttribute("data-product-type");
 
       const productCheckboxContainer = product.querySelector(
         ".product__checkboxContainer",
@@ -168,7 +175,7 @@ function initProducts() {
         productCheckboxEl,
       );
 
-      pushOrRemoveProduct(productId);
+      pushOrRemoveProduct(productId, productType);
       updatePrices();
       updateCheckoutSummaryUI();
 
@@ -184,7 +191,28 @@ function initProducts() {
       const elsToUpdate = document.querySelectorAll(
         ".product__currentPlanDisclaimer",
       );
+
+      let firstChosenProductId = null;
+      if (authenticatedActiveSubscriptionFirstChosenProductId) {
+        firstChosenProductId =
+          authenticatedActiveSubscriptionFirstChosenProductId.value;
+      }
+
+      if (firstChosenProductId) {
+        const el = document.querySelector(
+          `.product[data-product-id="${firstChosenProductId}"]`,
+        );
+
+        if (el) {
+          el.click();
+        }
+      }
+
       elsToUpdate.forEach((el) => {
+        if (el.dataset.productId === firstChosenProductId) {
+          return;
+        }
+
         el.click();
       });
     }
@@ -213,7 +241,8 @@ function initProducts() {
           "X-CSRFToken": csrfToken,
         },
         body: JSON.stringify({
-          products: selectedProducts.map(Number),
+          products: selectedProducts.map((product) => product.id),
+          firstProduct: getFirstSelectedSubscriptionProduct(),
           frequency: frequencyType,
         }),
       })
@@ -248,10 +277,9 @@ function initProducts() {
 
 function getProductTotalPrice(productEl) {
   if (
-    isSoccerProductSelected() &&
-    productEl.dataset.productId !== soccerProductId
+    shouldApplyDiscount() &&
+    productEl.dataset.productId !== getFirstSelectedSubscriptionProduct()
   ) {
-    console.log("Soccer product selected");
     return frequencyType === "monthly"
       ? productEl.getAttribute("data-product-monthly-discounted-price")
       : productEl.getAttribute("data-product-annual-discounted-price");
@@ -264,8 +292,8 @@ function getProductTotalPrice(productEl) {
 
 function getProductMonthlyPrice(productEl) {
   if (
-    isSoccerProductSelected() &&
-    productEl.dataset.productId !== soccerProductId
+    shouldApplyDiscount() &&
+    productEl.dataset.productId !== getFirstSelectedSubscriptionProduct()
   ) {
     return frequencyType === "monthly"
       ? productEl.getAttribute("data-product-monthly-discounted-price")
@@ -282,10 +310,11 @@ function updateCheckoutSummaryUI() {
 
   let total_price = 0;
 
-  selectedProducts.forEach((productId) => {
+  selectedProducts.forEach((product) => {
     const productEl = document.querySelector(
-      `.product[data-product-id="${productId}"]`,
+      `.product[data-product-id="${product.id}"]`,
     );
+
     const productName = productEl.getAttribute("data-product-name");
     const productPrice = getProductTotalPrice(productEl);
 
@@ -316,11 +345,13 @@ function updateCheckoutSummaryUI() {
   totalPriceEl.textContent = `€${total_price.toFixed(2)}`;
 }
 
-function pushOrRemoveProduct(id) {
-  const productIndex = selectedProducts.indexOf(id);
+function pushOrRemoveProduct(id, productType) {
+  const productIndex = selectedProducts.findIndex(
+    (product) => product.id === id,
+  );
 
   if (productIndex === -1) {
-    selectedProducts.push(id);
+    selectedProducts.push({ id: id, type: productType });
   } else {
     if (authenticatedActiveSubscriptionTypeInput) {
       console.log(authenticatedActiveSubscriptionTypeInput.value);
@@ -346,17 +377,24 @@ function pushOrRemoveProduct(id) {
 
 function toggleSoccerDiscountBar() {
   const soccerDiscountDisclaimerEls = document.querySelectorAll(
-    ".product__soccerDiscountDisclaimer",
+    ".product__sportPlanDisclaimer",
   );
-  if (isSoccerProductSelected()) {
-    soccerDiscountDisclaimerEls.forEach((el) => {
+
+  soccerDiscountDisclaimerEls.forEach((el) => {
+    const productId = el.getAttribute("data-product-id");
+
+    if (
+      shouldApplyDiscount() &&
+      productId !== getFirstSelectedSubscriptionProduct()
+    ) {
+      console.log(
+        `Chosen product ID: ${productId}. First selected product ID: ${getFirstSelectedSubscriptionProduct()}`,
+      );
       el.classList.remove("hidden");
-    });
-  } else {
-    soccerDiscountDisclaimerEls.forEach((el) => {
+    } else {
       el.classList.add("hidden");
-    });
-  }
+    }
+  });
 }
 
 function updateClickedProductUI(

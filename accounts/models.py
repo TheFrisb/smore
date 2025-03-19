@@ -12,6 +12,10 @@ from core.models import BaseInternalModel, Product
 logger = logging.getLogger(__name__)
 
 
+class PredictionGroup(BaseInternalModel):
+    name = models.CharField(max_length=255)
+
+
 # Create your models here.
 class User(BaseInternalModel, AbstractUser):
     """
@@ -42,6 +46,14 @@ class User(BaseInternalModel, AbstractUser):
             return False
 
         return product in self.subscription.products.all()
+
+    def has_sport_discount(self):
+        if not self.subscription_is_active:
+            return False
+
+        return self.subscription.products.filter(
+            type=Product.Types.SUBSCRIPTION
+        ).exists()
 
     @property
     def referral_link(self):
@@ -182,8 +194,11 @@ class UserSubscription(BaseInternalModel):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     stripe_subscription_id = models.CharField(max_length=255, blank=True)
-
     products = models.ManyToManyField("core.Product", related_name="subscriptions")
+
+    first_chosen_product = models.ForeignKey(
+        "core.Product", on_delete=models.SET_NULL, null=True
+    )
 
     @property
     def is_active(self):

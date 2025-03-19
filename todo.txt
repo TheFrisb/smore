@@ -1,1 +1,4 @@
-2. Popust ako ima soccer
+2. Romit - 1 hour
+3. AI -- league implementation - 1 hour
+
+4. Smore Application

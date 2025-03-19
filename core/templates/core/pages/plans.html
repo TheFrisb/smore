@@ -3,6 +3,10 @@
 {% block content %}
     {% if request.user.is_authenticated and request.user.subscription_is_active %}
         <input type="hidden" id="userSubscriptionType" value="{{ request.user.subscription.frequency }}">
+        {% if request.user.subscription.first_chosen_product is not None %}
+            <input type="hidden" id="userFirstChosenProductId"
+                   value="{{ request.user.subscription.first_chosen_product.id }}">
+        {% endif %}
     {% endif %}
 
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
@@ -35,7 +39,7 @@
                          {% endif %}
                          "
                          data-product-id="{{ product.id }}"
-                         data-product-type="sport"
+                         data-product-type="{{ product.type }}"
                          data-product-monthly-price="{{ product.monthly_price }}"
                             {% if product.discounted_monthly_price %}
                          data-product-monthly-discounted-price="{{ product.discounted_monthly_price }}"
@@ -89,9 +93,10 @@
                             </div>
                             <div class="flex flex-col items-start justify-start gap-2 ">
                                 {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
-                                    <div class="last-of-type:mb-6">
+                                    <div class="">
                                         <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
                                             <p class="text-sm font-medium product__currentPlanDisclaimer"
+                                               data-product-id="{{ product.id }}"
                                                data-current-plan="{% trans 'Current plan' %}"
                                                data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
                                         </div>
@@ -99,17 +104,16 @@
                                             {% trans "Current plan expiry date:" %} {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
                                     </div>
                                 {% endif %}
-                                {% if not product.name == 'Soccer' %}
-                                    <div class="last-of-type:mb-6 product__soccerDiscountDisclaimer
-                                        {% if not user_has_soccer %} hidden {% endif %}">
-                                        <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2 product__sportPlanDisclaimer">
-                                            <p class="text-sm font-medium">{% trans "Soccer discount" %}</p>
-                                        </div>
+                                <div class="product__sportPlanDisclaimer
+                                        {% if not user_has_discount %} hidden {% endif %}"
+                                     data-product-id="{{ product.id }}">
+                                    <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2 ">
+                                        <p class="text-sm font-medium">{% trans "Discount" %}</p>
                                     </div>
-                                {% endif %}
+                                </div>
                             </div>
 
-                            <ul class="space-y-3">
+                            <ul class="space-y-3 pt-6">
                                 <li class="flex items-center space-x-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -170,7 +174,7 @@
                 {% for product in addons %}
                     <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/10 hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product"
                          data-product-id="{{ product.id }}"
-                         data-product-type="sport"
+                         data-product-type="{{ product.type }}"
                          data-product-monthly-price="{{ product.monthly_price }}"
                             {% if product.discounted_monthly_price %}
                          data-product-monthly-discounted-price="{{ product.discounted_monthly_price }}"
@@ -200,6 +204,7 @@
                                             <div class="last-of-type:mb-6">
                                                 <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
                                                     <p class="text-sm font-medium product__currentPlanDisclaimer"
+                                                       data-product-id="{{ product.id }}"
                                                        data-current-plan="{% trans 'Current plan' %}"
                                                        data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
                                                 </div>
@@ -207,14 +212,14 @@
                                                     {% trans "Current plan expiry date:" %} {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
                                             </div>
                                         {% endif %}
-                                        {% if not product.name == 'Soccer' %}
-                                            <div class="last-of-type:mb-6 product__soccerDiscountDisclaimer
-                                        {% if not user_has_soccer %} hidden {% endif %}">
-                                                <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2 product__sportPlanDisclaimer">
-                                                    <p class="text-sm font-medium">{% trans "Soccer discount" %}</p>
-                                                </div>
+                                        <div class="last-of-type:mb-6 product__sportPlanDisclaimer
+                                        {% if not user_has_discount %} hidden {% endif %}"
+                                             data-product-id="{{ product.id }}">
+                                            <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2">
+                                                <p class="text-sm font-medium">{% trans "Discount" %}</p>
                                             </div>
-                                        {% endif %}
+                                        </div>
+
                                     </div>
                                     <p class="text-primary-200 mb-4 addon_descriptionText break-all">{{ product.description }}</p>
                                     <div class="flex items-center gap-3 mt-2">

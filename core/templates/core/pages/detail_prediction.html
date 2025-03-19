@@ -56,7 +56,7 @@
 
         <div class="container mx-auto px-4">
             <div class="relative py-4">
-                <p class="text-secondary-400 font-bold">Match Analysis</p>
+                <p class="text-secondary-400 font-bold">{% trans 'Match Analysis' %}</p>
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
             {% if can_view_prediction %}
@@ -79,8 +79,7 @@
                             <h2 class="text-2xl font-bold text-secondary-400 text-center">{% trans "Premium Prediction" %}</h2>
                             <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
                         </div>
-                        <p class=" text-primary-200 mb-4">Subscribe to access our expert predictions for upcoming
-                            matches, featuring detailed analysis and insights.</p>
+                        <p class=" text-primary-200 mb-4">{% trans 'Subscribe to access our expert predictions for upcoming matches, featuring detailed analysis and insights' %}.</p>
                         <div class="space-y-6 mb-4">
                             <div class="flex items-center justify-center space-x-2 text-primary-200">
                                 <div class="w-2 h-2 rounded-full bg-secondary-500"></div>
@@ -93,11 +92,11 @@
                                 <span>{% trans "Detailed Match Analysis" %}</span></div>
                         </div>
                         <a href="{% url 'core:plans' %}"
-                           class="mb-2 w-[150px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
-                            Subscribe
+                           class="mb-2 w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
+                            {% trans 'Subscribe' %}
                             {% svg_icon icon_name="arrowRight" css_classes="w-5 h-5 text-secondary-400" %}
                         </a>
-                        <p class="text-primary-100 text-center text-sm">to access all predictions</p>
+                        <p class="text-primary-100 text-center text-sm">{% trans 'to access all predictions' %}</p>
                         <div class="flex items-center justify-around gap-4 my-4">
                             <div class="h-[1px] w-full bg-secondary-700/20"></div>
                             <p class="border border-secondary-500/50 rounded-full px-4 py-1  bg-secondary-500/10 text-secondary-400 font-bold">
@@ -105,14 +104,14 @@
                             <div class="h-[1px] w-full bg-secondary-500/20"></div>
                         </div>
                         <a href="{% url 'payments:prediction_checkout' prediction_id=prediction.id %}"
-                           class="mb-2 w-[150px] inline-flex  mx-auto items-center justify-center px-6 py-3 text-white rounded-lg font-semibold hover:bg-primary-700/50 border border-secondary-500/50 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200  bg-[#14202d] gap-2">
-                            Unlock
+                           class="mb-2 w-[200px] inline-flex  mx-auto items-center justify-center px-6 py-3 text-white rounded-lg font-semibold hover:bg-primary-700/50 border border-secondary-500/50 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200  bg-[#14202d] gap-2">
+                            {% trans 'Unlock' %}
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                                  fill="currentColor" class="w-5 h-5 text-white">
                                 <path d="M240-160h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Zm0 80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h280v-80q0-83 58.5-141.5T720-920q83 0 141.5 58.5T920-720h-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80h120q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Z"/>
                             </svg>
                         </a>
-                        <p class="text-primary-100  text-center text-sm">this prediction for <span
+                        <p class="text-primary-100  text-center text-sm">{% trans 'this prediction for' %} <span
                                 class="text-secondary-400">$9.99</span></p>
 
                     </div>
@@ -126,7 +125,7 @@
                 <div class="flex items-center justify-between">
                     {% if can_view_prediction %}
                         <div class="flex flex-col items-start justify-start">
-                            <p class="text-primary-400 text-sm">Prediction</p>
+                            <p class="text-primary-400 text-sm">{% trans 'Prediction' %}</p>
                             <div class="flex items-center justify-start gap-2">
                                 <p class="font-bold  {% if prediction.status == 'LOST' %}text-red-500{% elif prediction.status == 'WON' %}text-emerald-500{% else %}text-secondary-400{% endif %}">{{ prediction.prediction }}</p>
                                 {% if prediction.status == "LOST" %}
@@ -139,13 +138,13 @@
                         <div class="flex items-center justify-end gap-1">
                             {% svg_icon icon_name="chevronUp" css_classes="w-5 h-5 text-emerald-400" %}
 
-                            <p class="text-primary-100">Odds</p>
+                            <p class="text-primary-100">{% trans 'Odds' %}</p>
                             <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
                         </div>
                     {% else %}
                         <div class="flex items-center justify-start gap-2">
                             {% svg_icon icon_name="lock" css_classes="w-6 h-6 text-red-500" %}
-                            <p class="text-red-500">Prediction locked</p>
+                            <p class="text-red-500">{% trans 'Prediction locked' %}</p>
                         </div>
                     {% endif %}
                 </div>

@@ -83,23 +83,6 @@ class PredictionAdminForm(forms.ModelForm):
         model = Prediction
         fields = "__all__"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Calculate midnight today in UTC
-        midnight_today = timezone.now().replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
-        start_date = midnight_today - timedelta(days=2)
-        # Filter SportMatch queryset to include only matches on or after today
-        self.fields["match"].queryset = SportMatch.objects.filter(
-            Q(
-                product__name=Product.Names.SOCCER,
-                league__external_id__in=allowed_league_ids,
-            )
-            | Q(product__name=Product.Names.BASKETBALL),
-            kickoff_datetime__gte=start_date,
-        )
-
 
 @admin.register(Prediction)
 class PredictionAdmin(admin.ModelAdmin):
@@ -147,6 +130,11 @@ class PredictionAdmin(admin.ModelAdmin):
 
     class Media:
         css = {"all": ("css/admin/custom_admin.css",)}
+        js = (
+            "admin/js/vendor/jquery/jquery.js",
+            "admin/js/jquery.init.js",
+            "js/admin/prediction_admin.js",
+        )
 
 
 @admin.register(PickOfTheDay)
@@ -182,22 +170,42 @@ class SportMatchAdmin(admin.ModelAdmin):
         "kickoff_datetime",
     ]
 
+    readonly_fields = ["home_team", "away_team", "league"]
+
     ordering = ["-kickoff_datetime"]
 
     def get_search_results(self, request, queryset, search_term):
-        # Filter matches to those on or after midnight today
+        if "term" not in request.GET:
+            return super().get_search_results(request, queryset, search_term)
+
         midnight_today = timezone.now().replace(
             hour=0, minute=0, second=0, microsecond=0
         )
         start_date = midnight_today - timedelta(days=2)
+        queryset = queryset.filter(kickoff_datetime__gte=start_date)
 
-        queryset = queryset.filter(
-            Q(
-                product__name=Product.Names.SOCCER,
-                league__external_id__in=allowed_league_ids,
+        product_id = request.GET.get("product_id")
+
+        if product_id:
+            print("Found product_id")
+            try:
+                product = Product.objects.get(id=product_id)
+            except Product.DoesNotExist:
+                pass
+
+            queryset = queryset.filter(product=product)
+            #
+            # if product.name == Product.Names.SOCCER:
+            #     queryset = queryset.filter(league__external_id__in=allowed_league_ids)
+
+        else:
+            queryset = queryset.filter(
+                Q(
+                    product__name=Product.Names.SOCCER,
+                    league__external_id__in=allowed_league_ids,
+                )
+                | Q(product__name=Product.Names.BASKETBALL),
+                kickoff_datetime__gte=start_date,
             )
-            | Q(product__name=Product.Names.BASKETBALL),
-            kickoff_datetime__gte=start_date,
-        )
-        # Apply the default search filtering
+
         return super().get_search_results(request, queryset, search_term)

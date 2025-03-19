@@ -336,7 +336,18 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
     list_filter = ("status", "frequency", SubscriptionTypeFilter)
 
     fieldsets = (
-        (None, {"fields": ("user", "status", "frequency", "price")}),
+        (
+            None,
+            {
+                "fields": (
+                    "user",
+                    "status",
+                    "frequency",
+                    "price",
+                    "first_chosen_product",
+                )
+            },
+        ),
         ("Dates", {"fields": ("start_date", "end_date")}),
         ("Stripe", {"fields": ("stripe_subscription_id",)}),
         ("Products", {"fields": ("products",)}),

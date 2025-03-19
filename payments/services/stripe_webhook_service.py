@@ -48,6 +48,13 @@ class StripeWebhookService(BaseStripeService):
         stripe_customer_id = event_data["customer"]
         stripe_subscription_id = event_data["subscription"]
         amount_paid_cents = event_data.get("amount_paid", 0)
+        meta_data = self.get_stripe_subscription_by_id(stripe_subscription_id).get(
+            "metadata", {}
+        )
+        first_chosen_product_id = meta_data.get("first_chosen_product_id", None)
+        first_chosen_product = Product.objects.filter(
+            id=first_chosen_product_id
+        ).first()
         logger.info(
             f"Received invoice paid event for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"
         )
@@ -136,6 +143,7 @@ class StripeWebhookService(BaseStripeService):
                 start_date=subscription_start_time,
                 end_date=subscription_end_time,
                 stripe_subscription_id=stripe_subscription_id,
+                first_chosen_product=first_chosen_product,
             )
             new_subscription = True
 
@@ -148,6 +156,8 @@ class StripeWebhookService(BaseStripeService):
             user_subscription.end_date = subscription_end_time
             user_subscription.frequency = internal_frequency_status
             user_subscription.price = stripe_subscription_total_price
+            if first_chosen_product:
+                user_subscription.first_chosen_product = first_chosen_product
             user_subscription.save()
 
         user_subscription.products.set(internal_products)
@@ -224,7 +234,7 @@ class StripeWebhookService(BaseStripeService):
         self.mark_subscription_inactive(stripe_customer_id, stripe_subscription_id)
 
     def mark_subscription_inactive(
-            self, stripe_customer_id: str, stripe_subscription_id: str
+        self, stripe_customer_id: str, stripe_subscription_id: str
     ):
         logger.info(
             f"Deleting internal subscription for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"

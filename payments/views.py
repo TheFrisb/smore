@@ -30,6 +30,7 @@ class CreateSubscriptionCheckoutUrl(APIView):
     class InputSerializer(serializers.Serializer):
         products = serializers.ListField(child=serializers.IntegerField())
         frequency = serializers.ChoiceField(choices=UserSubscription.Frequency)
+        firstProduct = serializers.IntegerField(allow_null=True)
 
     class OutputSerializer(serializers.Serializer):
         url = serializers.CharField()
@@ -39,6 +40,11 @@ class CreateSubscriptionCheckoutUrl(APIView):
         serializer.is_valid(raise_exception=True)
 
         products = Product.objects.filter(id__in=serializer.validated_data["products"])
+        first_chosen_product = Product.objects.filter(
+            id=serializer.validated_data["firstProduct"]
+        ).first()
+
+        logger.info(f"First chosen product: {first_chosen_product}")
 
         if not products.exists():
             raise serializers.ValidationError("No products found.")
@@ -46,10 +52,22 @@ class CreateSubscriptionCheckoutUrl(APIView):
         if len(products) != len(serializer.validated_data["products"]):
             raise serializers.ValidationError("Some products not found.")
 
-        price_ids = self.get_price_ids(products, serializer.validated_data["frequency"])
+        if (
+                serializer.validated_data["firstProduct"]
+                not in serializer.validated_data["products"]
+        ):
+            raise serializers.ValidationError("Invalid 'firstProduct' field.")
+
+        price_ids = self.get_price_ids(
+            products, serializer.validated_data["frequency"], first_chosen_product
+        )
 
         checkout_session = self.service.create_subscription_checkout_session(
-            request.user, price_ids
+            request.user,
+            price_ids,
+            first_chosen_product_id=(
+                first_chosen_product.id if first_chosen_product else None
+            ),
         )
 
         try:
@@ -68,12 +86,9 @@ class CreateSubscriptionCheckoutUrl(APIView):
         """
         Check if the soccer product is present in the list of products and that more than one product is present.
         """
-        return (
-                any(product.name == Product.Names.SOCCER for product in products)
-                and len(products) > 1
-        )
+        return len(products) > 1
 
-    def get_price_ids(self, products, frequency):
+    def get_price_ids(self, products, frequency, first_chosen_product):
         price_ids = []
         use_discounted_prices = self.use_discounted_prices(products)
 
@@ -82,6 +97,14 @@ class CreateSubscriptionCheckoutUrl(APIView):
         )
 
         for product in products:
+            use_discounted_prices = self.use_discounted_prices(products)
+
+            if product == first_chosen_product:
+                logger.info(
+                    f"First chosen product: {product.get_name_display()}, fetching non-discounted price"
+                )
+                use_discounted_prices = False
+
             price = product.get_price_id_for_subscription(
                 frequency, use_discounted_prices
             )
@@ -143,15 +166,13 @@ class UpdateSubscriptionView(APIView):
     class InputSerializer(serializers.Serializer):
         products = serializers.ListField(child=serializers.IntegerField())
         frequency = serializers.ChoiceField(choices=UserSubscription.Frequency)
+        firstProduct = serializers.IntegerField(allow_null=True)
 
     def use_discounted_prices(self, products):
         """
         Check if the soccer product is present in the list of products and that more than one product is present.
         """
-        return (
-                any(product.name == Product.Names.SOCCER for product in products)
-                and len(products) > 1
-        )
+        return len(products) > 1
 
     def post(self, request, *args, **kwargs):
         # Check if the user has an active subscription
@@ -173,18 +194,30 @@ class UpdateSubscriptionView(APIView):
 
         # Fetch requested products
         products = Product.objects.filter(id__in=product_ids)
+        first_chosen_product = Product.objects.filter(
+            id=serializer.validated_data["firstProduct"]
+        ).first()
         if len(products) != len(product_ids):
             return Response(
                 status=400, data={"message": "One or more product IDs are invalid."}
             )
+
+        if (
+                serializer.validated_data["firstProduct"]
+                not in serializer.validated_data["products"]
+        ):
+            return Response(
+                status=400, data={"message": "Invalid 'firstProduct' field."}
+            )
+
+        if not products.exists():
+            return Response(status=400, data={"message": "No products found."})
 
         # Get the user's current subscription
         user_subscription = request.user.subscription
         stripe_subscription = self.service.get_stripe_subscription_by_id(
             user_subscription.stripe_subscription_id
         )
-
-        use_discounted_prices = self.use_discounted_prices(products)
 
         # Build price-to-product mapping
         all_products = Product.objects.all()
@@ -201,6 +234,13 @@ class UpdateSubscriptionView(APIView):
         # Determine desired price IDs based on frequency
         desired_price_ids = {}
         for product in products:
+            use_discounted_prices = self.use_discounted_prices(products)
+
+            if product == first_chosen_product:
+                logger.info(
+                    f"First chosen product: {product.get_name_display()}, fetching non-discounted price"
+                )
+                use_discounted_prices = False
             desired_price_ids[product] = product.get_price_id_for_subscription(
                 desired_frequency, use_discounted_prices
             )
@@ -242,7 +282,6 @@ class UpdateSubscriptionView(APIView):
         for product in set(products) - covered_products:
             items_to_update.append({"price": desired_price_ids[product]})
 
-        # Update Stripe subscription
         self.service.modify_stripe_subscription(
             user_subscription.stripe_subscription_id, items_to_update
         )

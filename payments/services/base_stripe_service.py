@@ -56,6 +56,7 @@ class BaseStripeService:
         subscription.items = items_list
         subscription.payment_behavior = "pending_if_incomplete"
         subscription.proration_behavior = "always_invoice"
+
         subscription.save()
         logger.info(f"Successfully modified subscription with ID: {subscription_id}")
 

@@ -50,14 +50,14 @@ div.g_id_signin > div > div > div {
     visibility: hidden !important;
 }
 
-#aiAssistantMessagesContainer h1, #aiAssistantMessagesContainer h2, #aiAssistantMessagesContainer h3 {
+#aiAssistantMessagesContainer h1, #aiAssistantMessagesContainer h2 {
     @apply text-xl text-secondary-500;
     @apply py-4
 }
 
 
-#aiAssistantMessagesContainer h4, #aiAssistantMessagesContainer h5, #aiAssistantMessagesContainer h6 {
-    @apply text-lg text-secondary-500;
+#aiAssistantMessagesContainer h3, #aiAssistantMessagesContainer h4, #aiAssistantMessagesContainer h5, #aiAssistantMessagesContainer h6 {
+    @apply text-lg text-secondary-500 font-bold;
     @apply py-3;
 }
 

@@ -67,11 +67,6 @@ class Product(BaseProductModel):
     description = models.TextField(blank=True)
 
     def get_price_id_for_subscription(self, frequency, use_discounted_prices: bool):
-        if self.name == Product.Names.SOCCER:
-            if frequency == "monthly":
-                return self.monthly_price_stripe_id
-            return self.yearly_price_stripe_id
-
         if frequency == "monthly":
             return (
                 self.discounted_monthly_price_stripe_id
@@ -198,8 +193,11 @@ class Prediction(BaseInternalModel):
     status = models.CharField(
         max_length=10, choices=Status, default=Status.PENDING, db_index=True
     )
-
     detailed_analysis = CKEditor5Field(blank=True)
+
+    @property
+    def is_sport_prediction(self):
+        return self.product.name == Product.Names.SOCCER
 
     @property
     def result(self):

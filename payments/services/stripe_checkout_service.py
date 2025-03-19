@@ -22,8 +22,22 @@ class StripePortalSessionFlow(Enum):
 class StripeCheckoutService(BaseStripeService):
 
     def create_subscription_checkout_session(
-            self, user: User | AbstractBaseUser, price_ids: List[str]
+        self,
+        user: User | AbstractBaseUser,
+        price_ids: List[str],
+        first_chosen_product_id: int,
     ) -> Session:
+        metadata = (
+            {
+                "first_chosen_product_id": first_chosen_product_id,
+            }
+            if first_chosen_product_id
+            else None
+        )
+        logger.info(
+            f"Metadata: {metadata} for user: {user.id} with first chosen product ID: {first_chosen_product_id}"
+        )
+
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:payment_success')}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:plans')}",
@@ -31,6 +45,7 @@ class StripeCheckoutService(BaseStripeService):
             customer=user.stripe_customer_id,
             line_items=self.get_subscription_line_items(price_ids),
             consent_collection={"terms_of_service": "required"},
+            subscription_data={"metadata": metadata} if metadata else None,
         )
 
         logger.info(
@@ -40,7 +55,7 @@ class StripeCheckoutService(BaseStripeService):
         return checkout_session
 
     def create_onetime_prediction_checkout_session(
-            self, user: User | AbstractBaseUser, prediction: Prediction
+        self, user: User | AbstractBaseUser, prediction: Prediction
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:purchase_payment_success', kwargs={'prediction_pk': prediction.id})}",
@@ -67,9 +82,9 @@ class StripeCheckoutService(BaseStripeService):
         return [{"price": price_id, "quantity": 1} for price_id in price_ids]
 
     def create_portal_session(
-            self,
-            user: User | AbstractBaseUser,
-            portal_flow: StripePortalSessionFlow = StripePortalSessionFlow.MANAGE_SUBSCRIPTION,
+        self,
+        user: User | AbstractBaseUser,
+        portal_flow: StripePortalSessionFlow = StripePortalSessionFlow.MANAGE_SUBSCRIPTION,
     ) -> Session:
         flow = None
 
@@ -108,7 +123,7 @@ class StripeCheckoutService(BaseStripeService):
         ]
 
     def update_subscription_items(
-            self, user: User, new_price_ids: List[str]
+        self, user: User, new_price_ids: List[str]
     ) -> Session:
         subscription_id = user.subscription.stripe_subscription_id
         subscription = self.stripe_client.Subscription.retrieve(subscription_id)

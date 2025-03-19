@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 21:38+0100\n"
+"POT-Creation-Date: 2025-03-19 16:02+0000\n"
 "PO-Revision-Date: 2025-02-01 22:16+0000\n"
 "Last-Translator:   <thefrisb@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,61 +35,56 @@ msgstr "asd"
 msgid "Important dates"
 msgstr "asd"
 
-#: accounts/models.py:127
-#: accounts/templates/accounts/pages/withdrawal_history.html:200
-#: accounts/templates/accounts/pages/withdrawal_history.html:208
-#: core/models.py:60
+#: accounts/models.py:142
+#: accounts/templates/accounts/pages/withdrawal_history.html:194
+#: accounts/templates/accounts/pages/withdrawal_history.html:202
+#: core/models.py:183
 msgid "Pending"
 msgstr ""
 
-#: accounts/models.py:128
-#: accounts/templates/accounts/pages/withdrawal_history.html:220
-#: accounts/templates/accounts/pages/withdrawal_history.html:228
+#: accounts/models.py:143
+#: accounts/templates/accounts/pages/withdrawal_history.html:214
+#: accounts/templates/accounts/pages/withdrawal_history.html:222
 msgid "Approved"
 msgstr ""
 
-#: accounts/models.py:129
-#: accounts/templates/accounts/pages/withdrawal_history.html:241
-#: accounts/templates/accounts/pages/withdrawal_history.html:249
+#: accounts/models.py:144
+#: accounts/templates/accounts/pages/withdrawal_history.html:235
+#: accounts/templates/accounts/pages/withdrawal_history.html:243
 msgid "Processing"
 msgstr ""
 
-#: accounts/models.py:130
+#: accounts/models.py:145
 #: accounts/templates/accounts/pages/withdrawal_history.html:18
-#: accounts/templates/accounts/pages/withdrawal_history.html:263
-#: accounts/templates/accounts/pages/withdrawal_history.html:271
+#: accounts/templates/accounts/pages/withdrawal_history.html:257
+#: accounts/templates/accounts/pages/withdrawal_history.html:265
 msgid "Completed"
 msgstr ""
 
-#: accounts/models.py:131
+#: accounts/models.py:146
 #: accounts/templates/accounts/pages/withdrawal_history.html:50
 msgid "Rejected"
 msgstr ""
 
-#: accounts/models.py:134
+#: accounts/models.py:149
 msgid "Bank"
 msgstr ""
 
-#: accounts/models.py:135
-#: accounts/templates/accounts/pages/request_withdrawal.html:59
-msgid "Payoneer"
-msgstr ""
-
-#: accounts/models.py:136
-#: accounts/templates/accounts/pages/request_withdrawal.html:68
+#: accounts/models.py:150
+#: accounts/templates/accounts/pages/request_withdrawal.html:60
 msgid "Cryptocurrency"
 msgstr ""
 
-#: accounts/models.py:160 core/templates/core/pages/plans.html:20
+#: accounts/models.py:173 core/templates/core/pages/plans.html:19
 msgid "Monthly"
 msgstr ""
 
-#: accounts/models.py:161 core/templates/core/pages/plans.html:205
+#: accounts/models.py:174 core/templates/core/pages/plans.html:246
 msgid "Yearly"
 msgstr ""
 
-#: accounts/templates/accounts/base.html:53
-#: accounts/templates/accounts/base.html:74
+#: accounts/templates/accounts/base.html:81
+#: accounts/templates/accounts/base.html:102
 msgid "Resend email"
 msgstr ""
 
@@ -97,43 +92,41 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: accounts/templates/accounts/includes/sidebar.html:62 accounts/views.py:288
+#: accounts/templates/accounts/includes/sidebar.html:62 accounts/views.py:301
 msgid "My Network"
 msgstr ""
 
-#: accounts/templates/accounts/includes/sidebar.html:80 accounts/views.py:298
+#: accounts/templates/accounts/includes/sidebar.html:80 accounts/views.py:311
 msgid "Manage Plan"
 msgstr ""
 
 #: accounts/templates/accounts/includes/sidebar.html:98
-#: accounts/templates/accounts/pages/request_withdrawal.html:169
-#: accounts/views.py:313
+#: accounts/templates/accounts/pages/request_withdrawal.html:128
+#: accounts/views.py:337
 msgid "Request Withdrawal"
 msgstr ""
 
 #: accounts/templates/accounts/includes/sidebar.html:117
 #: accounts/templates/accounts/pages/withdrawal_history.html:7
-#: accounts/views.py:462
+#: accounts/views.py:486
 msgid "Withdrawal History"
 msgstr ""
 
 #: accounts/templates/accounts/includes/sidebar.html:133
 #: accounts/templates/accounts/pages/contact_us.html:6
 #: core/templates/core/pages/disclaimer.html:169
-#: core/templates/core/pages/home.html:60
+#: core/templates/core/pages/home.html:80
 #: core/templates/core/pages/privacy_policy.html:230
 msgid "Contact Us"
 msgstr ""
 
 #: accounts/templates/accounts/includes/sidebar.html:151
-#: core/templates/core/includes/header.html:91
-#: core/templates/core/includes/header.html:156
-#: core/templates/core/pages/faq.html:10 core/views.py:113
+#: core/templates/core/pages/faq.html:10 core/views.py:200
 msgid "FAQ"
 msgstr ""
 
 #: accounts/templates/accounts/includes/sidebar.html:170
-#: core/templates/core/includes/header.html:173
+#: core/templates/core/includes/header.html:179
 msgid "Sign Out"
 msgstr ""
 
@@ -212,29 +205,32 @@ msgid "Sign in to access your account"
 msgstr ""
 
 #: accounts/templates/accounts/pages/login.html:53
-#: accounts/templates/accounts/pages/my_account.html:20
-#: accounts/templates/accounts/pages/register.html:50
-msgid "Username"
+msgid "Username / Email"
 msgstr ""
 
 #: accounts/templates/accounts/pages/login.html:65
-msgid "Enter your username"
+msgid "Enter your username / email"
 msgstr ""
 
-#: accounts/templates/accounts/pages/login.html:97
-msgid "Forgot your password"
+#: accounts/templates/accounts/pages/login.html:68
+#: accounts/templates/accounts/pages/register.html:114
+msgid "Password"
 msgstr ""
 
 #: accounts/templates/accounts/pages/login.html:108
-#: accounts/templates/accounts/pages/register.html:225
+msgid "Forgot your password"
+msgstr ""
+
+#: accounts/templates/accounts/pages/login.html:119
+#: accounts/templates/accounts/pages/register.html:247
 msgid "Sign in"
 msgstr ""
 
-#: accounts/templates/accounts/pages/login.html:136
+#: accounts/templates/accounts/pages/login.html:147
 msgid "Don't have an account"
 msgstr ""
 
-#: accounts/templates/accounts/pages/login.html:139
+#: accounts/templates/accounts/pages/login.html:150
 msgid "Register now"
 msgstr ""
 
@@ -246,56 +242,60 @@ msgstr ""
 msgid "Your active subscriptions and add-ons"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:30
+#: accounts/templates/accounts/pages/manage_plan.html:31
 msgid "analysis per"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:31
-#: core/templates/core/pages/plans.html:44
-#: core/templates/core/pages/plans.html:72
+#: accounts/templates/accounts/pages/manage_plan.html:32
+#: core/templates/core/pages/plans.html:51
+#: core/templates/core/pages/plans.html:78
+#: core/templates/core/pages/plans.html:186
+#: core/templates/core/pages/plans.html:226
 msgid "month"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:32
-#: core/templates/core/pages/plans.html:45
+#: accounts/templates/accounts/pages/manage_plan.html:33
 msgid "year"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:39
+#: accounts/templates/accounts/pages/manage_plan.html:43
 #: accounts/templates/accounts/pages/referral_program.html:107
 #: accounts/templates/accounts/pages/referral_program.html:114
 msgid "per month"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:45
+#: accounts/templates/accounts/pages/manage_plan.html:52
 msgid "per year"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:52
+#: accounts/templates/accounts/pages/manage_plan.html:59
 msgid "You don't have an active subscription"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:73
+#: accounts/templates/accounts/pages/manage_plan.html:74
+msgid "Next billing date"
+msgstr ""
+
+#: accounts/templates/accounts/pages/manage_plan.html:80
 msgid "Update Subscription"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:74
+#: accounts/templates/accounts/pages/manage_plan.html:81
 msgid ""
 "Want to add more sports or features to your plan? Visit our plans page to "
 "explore all available options"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:76
+#: accounts/templates/accounts/pages/manage_plan.html:83
 msgid "View Available Plans"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:86
-#: accounts/templates/accounts/pages/manage_plan.html:91
-#: core/templates/core/pages/plans.html:232
+#: accounts/templates/accounts/pages/manage_plan.html:93
+#: accounts/templates/accounts/pages/manage_plan.html:98
 msgid "Manage Subscription"
 msgstr ""
 
-#: accounts/templates/accounts/pages/manage_plan.html:87
+#: accounts/templates/accounts/pages/manage_plan.html:94
 msgid "Update your billing method or cancel your subscription"
 msgstr ""
 
@@ -304,9 +304,13 @@ msgid "Account Details"
 msgstr ""
 
 #: accounts/templates/accounts/pages/my_account.html:9
-#: accounts/templates/accounts/pages/request_withdrawal.html:117
 #: accounts/templates/accounts/pages/withdrawal_history.html:135
 msgid "Full Name"
+msgstr ""
+
+#: accounts/templates/accounts/pages/my_account.html:20
+#: accounts/templates/accounts/pages/register.html:50
+msgid "Username"
 msgstr ""
 
 #: accounts/templates/accounts/pages/my_account.html:42
@@ -356,7 +360,7 @@ msgid "Inactive"
 msgstr ""
 
 #: accounts/templates/accounts/pages/my_network.html:75
-#: core/templates/core/pages/plans.html:203
+#: core/templates/core/pages/plans.html:244
 msgid "Total"
 msgstr ""
 
@@ -611,47 +615,43 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:114
-msgid "Password"
-msgstr ""
-
-#: accounts/templates/accounts/pages/register.html:140
+#: accounts/templates/accounts/pages/register.html:151
 msgid "Confirm Password"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:167
+#: accounts/templates/accounts/pages/register.html:189
 msgid "I am 18 years or older"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:173
+#: accounts/templates/accounts/pages/register.html:195
 msgid "I agree to the"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:176
+#: accounts/templates/accounts/pages/register.html:198
 #: core/templates/core/includes/footer.html:108
-#: core/templates/core/pages/terms_of_service.html:19 core/views.py:150
+#: core/templates/core/pages/terms_of_service.html:19 core/views.py:237
 msgid "Terms of Service"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:176
+#: accounts/templates/accounts/pages/register.html:198
 msgid "and"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:178
+#: accounts/templates/accounts/pages/register.html:200
 #: core/templates/core/includes/footer.html:119
-#: core/templates/core/pages/privacy_policy.html:18 core/views.py:159
+#: core/templates/core/pages/privacy_policy.html:18 core/views.py:246
 msgid "Privacy Policy"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:183
+#: accounts/templates/accounts/pages/register.html:205
 msgid "Create Account"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:197
+#: accounts/templates/accounts/pages/register.html:219
 msgid "Or"
 msgstr ""
 
-#: accounts/templates/accounts/pages/register.html:223
+#: accounts/templates/accounts/pages/register.html:245
 msgid "Already have an account"
 msgstr ""
 
@@ -675,54 +675,40 @@ msgstr ""
 msgid "Bank Transfer"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:77
+#: accounts/templates/accounts/pages/request_withdrawal.html:69
 msgid "Full Name (as on bank account)"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:84
+#: accounts/templates/accounts/pages/request_withdrawal.html:76
 msgid "Email"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:91
+#: accounts/templates/accounts/pages/request_withdrawal.html:83
 msgid "Country of Residence"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:98
+#: accounts/templates/accounts/pages/request_withdrawal.html:90
 msgid "IBAN Code"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:111
+#: accounts/templates/accounts/pages/request_withdrawal.html:103
 msgid ""
 "Please ensure your full name matches exactly as it appears on your bank "
 "account. Incorrect details may result in failed transfers that cannot be "
 "refunded"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:124
-msgid "Payoneer Email Address"
-msgstr ""
-
-#: accounts/templates/accounts/pages/request_withdrawal.html:131
-msgid "Payoneer customer ID"
-msgstr ""
-
-#: accounts/templates/accounts/pages/request_withdrawal.html:144
-msgid ""
-"Please verify your Payoneer email address carefully. Funds sent to incorrect "
-"Payoneer accounts cannot be recovered"
-msgstr ""
-
-#: accounts/templates/accounts/pages/request_withdrawal.html:149
+#: accounts/templates/accounts/pages/request_withdrawal.html:108
 msgid "Bitcoin Address"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:163
+#: accounts/templates/accounts/pages/request_withdrawal.html:122
 msgid ""
 "Please carefully verify your Bitcoin address before submitting. We cannot "
 "refund or resend funds if sent to an incorrect address"
 msgstr ""
 
-#: accounts/templates/accounts/pages/request_withdrawal.html:179
+#: accounts/templates/accounts/pages/request_withdrawal.html:138
 msgid ""
 "All withdrawals are processed within 24 hours during business days. Please "
 "review your withdrawal details carefully as we cannot modify or cancel the "
@@ -745,23 +731,23 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: accounts/templates/accounts/pages/withdrawal_history.html:165
+#: accounts/templates/accounts/pages/withdrawal_history.html:159
 msgid "Cryptocurrency Address"
 msgstr ""
 
-#: accounts/templates/accounts/pages/withdrawal_history.html:171
+#: accounts/templates/accounts/pages/withdrawal_history.html:165
 msgid "Withdrawal Progress"
 msgstr ""
 
-#: accounts/templates/accounts/pages/withdrawal_history.html:184
+#: accounts/templates/accounts/pages/withdrawal_history.html:178
 msgid "Rejection Reason"
 msgstr ""
 
-#: accounts/templates/accounts/pages/withdrawal_history.html:188
+#: accounts/templates/accounts/pages/withdrawal_history.html:182
 msgid "No reason provided"
 msgstr ""
 
-#: accounts/templates/accounts/pages/withdrawal_history.html:286
+#: accounts/templates/accounts/pages/withdrawal_history.html:280
 msgid "You haven't made a withdrawal request yet"
 msgstr ""
 
@@ -815,86 +801,96 @@ msgstr ""
 msgid "Send Reset Instructions"
 msgstr ""
 
-#: accounts/views.py:42
+#: accounts/views.py:44
 msgid ""
 "We've sent you an email to verify your account. Please check your inbox."
 msgstr ""
 
-#: accounts/views.py:58
+#: accounts/views.py:61
 msgid "Login"
 msgstr ""
 
-#: accounts/views.py:67
+#: accounts/views.py:70
 msgid "Logout"
 msgstr ""
 
-#: accounts/views.py:118 accounts/views.py:149
+#: accounts/views.py:131 accounts/views.py:162
 msgid "An unexpected error has occured. Please try again or contact support."
 msgstr ""
 
-#: accounts/views.py:186
+#: accounts/views.py:199
 msgid "Invalid referral code. Please enter a valid code."
 msgstr ""
 
-#: accounts/views.py:273 core/templates/core/includes/header.html:167
+#: accounts/views.py:286 core/templates/core/includes/header.html:173
 msgid "My Account"
 msgstr ""
 
-#: accounts/views.py:322 core/templates/core/pages/contact_us.html:88
-#: core/views.py:141
+#: accounts/views.py:346 core/templates/core/pages/contact_us.html:88
+#: core/views.py:228
 msgid "Support"
 msgstr ""
 
-#: accounts/views.py:341 core/templates/core/includes/header.html:82
-#: core/templates/core/includes/header.html:152
+#: accounts/views.py:365 core/templates/core/includes/header.html:89
+#: core/templates/core/includes/header.html:161
 msgid "Referral Program"
 msgstr ""
 
-#: accounts/views.py:350 accounts/views.py:365
+#: accounts/views.py:374 accounts/views.py:389
 msgid "Password Reset Request"
 msgstr ""
 
-#: accounts/views.py:434
+#: accounts/views.py:458
 msgid "Password reset link is invalid or has expired."
 msgstr ""
 
-#: accounts/views.py:445
+#: accounts/views.py:469
 msgid "Your password has been reset."
 msgstr ""
 
-#: accounts/views.py:521
+#: accounts/views.py:545
 msgid "Your email has been confirmed! Welcome aboard."
 msgstr ""
 
-#: accounts/views.py:530
+#: accounts/views.py:554
 msgid "Invalid or expired email confirmation link."
 msgstr ""
 
-#: core/models.py:36 core/templates/core/pages/history.html:21
-#: core/templates/core/pages/history.html:55
-#: core/templates/core/pages/upcoming_matches.html:74
-#: core/templates/core/pages/upcoming_matches.html:124
-msgid "Soccer"
+#: core/models.py:54
+msgid "Subscription"
 msgstr ""
 
-#: core/models.py:37 core/templates/core/pages/history.html:29
-#: core/templates/core/pages/upcoming_matches.html:82
-msgid "Basketball"
-msgstr ""
-
-#: core/models.py:38 core/templates/core/pages/upcoming_matches.html:92
-msgid "NFL"
-msgstr ""
-
-#: core/models.py:47
-msgid "AI Prediction Assistant"
+#: core/models.py:55
+msgid "Addon"
 msgstr ""
 
 #: core/models.py:58
-msgid "Won"
+msgid "Soccer"
 msgstr ""
 
 #: core/models.py:59
+msgid "Basketball"
+msgstr ""
+
+#: core/models.py:60
+msgid "NFL"
+msgstr ""
+
+#: core/models.py:61
+msgid "Tennis"
+msgstr ""
+
+#: core/models.py:62 core/templates/core/includes/header.html:98
+#: core/templates/core/includes/header.html:158
+#: core/templates/core/pages/ai_assistant.html:24 core/views.py:353
+msgid "AI Analyst"
+msgstr ""
+
+#: core/models.py:181
+msgid "Won"
+msgstr ""
+
+#: core/models.py:182
 msgid "Lost"
 msgstr ""
 
@@ -908,15 +904,15 @@ msgstr ""
 msgid "Quick Links"
 msgstr ""
 
-#: core/templates/core/includes/footer.html:58 core/views.py:132
+#: core/templates/core/includes/footer.html:58 core/views.py:219
 #, fuzzy
 #| msgid "About Smore"
 msgid "About Us"
 msgstr "fsadfdsafsad"
 
 #: core/templates/core/includes/footer.html:70
-#: core/templates/core/includes/header.html:87
-#: core/templates/core/includes/header.html:149 core/views.py:92
+#: core/templates/core/includes/header.html:94
+#: core/templates/core/includes/header.html:156 core/views.py:166
 msgid "Plans"
 msgstr ""
 
@@ -925,8 +921,8 @@ msgid "Contact"
 msgstr ""
 
 #: core/templates/core/includes/footer.html:93
-#: core/templates/core/includes/header.html:96
-#: core/templates/core/includes/header.html:160 core/views.py:123
+#: core/templates/core/includes/header.html:103
+#: core/templates/core/includes/header.html:166 core/views.py:210
 msgid "How to Join"
 msgstr ""
 
@@ -935,7 +931,7 @@ msgid "Legal"
 msgstr ""
 
 #: core/templates/core/includes/footer.html:130
-#: core/templates/core/pages/disclaimer.html:20 core/views.py:168
+#: core/templates/core/pages/disclaimer.html:20 core/views.py:255
 msgid "Disclaimer"
 msgstr ""
 
@@ -955,29 +951,99 @@ msgstr ""
 msgid "Cookies"
 msgstr ""
 
-#: core/templates/core/includes/header.html:69
-#: core/templates/core/includes/header.html:141 core/views.py:26
+#: core/templates/core/includes/header.html:76
+#: core/templates/core/includes/header.html:148 core/views.py:27
 msgid "Home"
 msgstr ""
 
-#: core/templates/core/includes/header.html:73
-#: core/templates/core/includes/header.html:143 core/views.py:188
+#: core/templates/core/includes/header.html:80
+#: core/templates/core/includes/header.html:150 core/views.py:289
 msgid "Upcoming Matches"
 msgstr ""
 
-#: core/templates/core/includes/header.html:77
-#: core/templates/core/includes/header.html:146 core/views.py:73
+#: core/templates/core/includes/header.html:84
+#: core/templates/core/includes/header.html:153 core/views.py:71
 msgid "History"
 msgstr ""
 
-#: core/templates/core/includes/header.html:116
-#: core/templates/core/includes/header.html:178
+#: core/templates/core/includes/header.html:123
+#: core/templates/core/includes/header.html:184
 msgid "Sign In"
 msgstr ""
 
-#: core/templates/core/includes/header.html:118
-#: core/templates/core/includes/header.html:181
+#: core/templates/core/includes/header.html:125
+#: core/templates/core/includes/header.html:187
 msgid "Sign Up"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:17
+#, python-format
+msgid ""
+"\n"
+"                        %(name)s"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:23
+msgid "View analysis"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:31
+#, python-format
+msgid ""
+"\n"
+"                    %(name)s"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:47
+#: core/templates/core/pages/detail_prediction.html:147
+msgid "Prediction locked"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:54
+msgid "LOST"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:59
+msgid "WON"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:79
+msgid "Date, Time"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:110
+#: core/templates/core/pages/detail_prediction.html:141
+#: core/templates/core/pages/home.html:196
+msgid "Odds"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:120
+#: core/templates/core/pages/detail_prediction.html:128
+msgid "Prediction"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:127
+#: core/templates/core/pages/detail_prediction.html:96
+msgid "Subscribe"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:130
+#: core/templates/core/pages/detail_prediction.html:99
+msgid "to access all predictions"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:136
+msgid "OR"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:142
+#: core/templates/core/pages/detail_prediction.html:108
+msgid "Unlock"
+msgstr ""
+
+#: core/templates/core/includes/prediction.html:148
+#: core/templates/core/pages/detail_prediction.html:114
+msgid "this prediction for"
 msgstr ""
 
 #: core/templates/core/pages/about_us.html:11
@@ -995,10 +1061,10 @@ msgid ""
 msgstr ""
 
 #: core/templates/core/pages/about_us.html:33
-#: core/templates/core/pages/home.html:33
-#: core/templates/core/pages/home.html:249
+#: core/templates/core/pages/detail_prediction.html:86
+#: core/templates/core/pages/home.html:51
+#: core/templates/core/pages/home.html:285
 #: core/templates/core/pages/subscription_required.html:25
-#: core/templates/core/pages/upcoming_matches.html:40
 msgid "Success Rate"
 msgstr ""
 
@@ -1011,7 +1077,7 @@ msgid "Daily Picks"
 msgstr ""
 
 #: core/templates/core/pages/about_us.html:85
-#: core/templates/core/pages/home.html:321
+#: core/templates/core/pages/home.html:357
 msgid "Expert Support"
 msgstr ""
 
@@ -1112,6 +1178,22 @@ msgstr ""
 #: core/templates/core/pages/about_us.html:194
 #: core/templates/core/pages/how_to_join.html:261
 msgid "Get Started Now"
+msgstr ""
+
+#: core/templates/core/pages/ai_assistant.html:25
+msgid "Ask me anything about sport matches analysis"
+msgstr ""
+
+#: core/templates/core/pages/ai_assistant.html:34
+msgid "Hello! I'm your AI Analyst"
+msgstr ""
+
+#: core/templates/core/pages/ai_assistant.html:34
+msgid "Ask me anything about sport matches analysis and predictions"
+msgstr ""
+
+#: core/templates/core/pages/ai_assistant.html:73
+msgid "Press Enter to send, Shift + Enter for new line"
 msgstr ""
 
 #: core/templates/core/pages/contact_us.html:10
@@ -1248,6 +1330,31 @@ msgstr ""
 
 #: core/templates/core/pages/cookies_policy.html:112
 msgid "User journey analysis"
+msgstr ""
+
+#: core/templates/core/pages/detail_prediction.html:59
+#: core/templates/core/pages/home.html:617
+msgid "Match Analysis"
+msgstr ""
+
+#: core/templates/core/pages/detail_prediction.html:79
+msgid "Premium Prediction"
+msgstr ""
+
+#: core/templates/core/pages/detail_prediction.html:82
+msgid ""
+"Subscribe to access our expert predictions for upcoming matches, featuring "
+"detailed analysis and insights"
+msgstr ""
+
+#: core/templates/core/pages/detail_prediction.html:89
+#: core/templates/core/pages/subscription_required.html:28
+msgid "Daily Expert Predictions"
+msgstr ""
+
+#: core/templates/core/pages/detail_prediction.html:92
+#: core/templates/core/pages/subscription_required.html:31
+msgid "Detailed Match Analysis"
 msgstr ""
 
 #: core/templates/core/pages/disclaimer.html:30
@@ -1389,304 +1496,267 @@ msgstr ""
 msgid "Still have questions? We're here to help."
 msgstr ""
 
-#: core/templates/core/pages/history.html:10
-msgid "Track Record"
+#: core/templates/core/pages/history.html:18
+#: core/templates/core/pages/upcoming_matches.html:25
+#, python-format
+msgid "%(name)s"
 msgstr ""
 
-#: core/templates/core/pages/history.html:11
-msgid "Prediction History"
+#: core/templates/core/pages/history.html:45
+#: core/templates/core/pages/upcoming_matches.html:52
+msgid "All sports"
 msgstr ""
 
-#: core/templates/core/pages/history.html:12
+#: core/templates/core/pages/history.html:54
+#, python-format
 msgid ""
-"Explore our comprehensive track record of predictions across multiple "
-"sports, showcasing our consistent success rate and analytical expertise."
+"\n"
+"                                        %(name)s"
 msgstr ""
 
-#: core/templates/core/pages/history.html:25
-#: core/templates/core/pages/history.html:34
-#: core/templates/core/pages/upcoming_matches.html:78
-#: core/templates/core/pages/upcoming_matches.html:87
-msgid "Soon"
-msgstr ""
-
-#: core/templates/core/pages/history.html:82
-#: core/templates/core/pages/upcoming_matches.html:130
-msgid "Match"
-msgstr ""
-
-#: core/templates/core/pages/history.html:100
-#: core/templates/core/pages/upcoming_matches.html:148
-msgid "Kick-off Date"
-msgstr ""
-
-#: core/templates/core/pages/history.html:104
-#: core/templates/core/pages/upcoming_matches.html:152
-msgid "Kick-off Time"
-msgstr ""
-
-#: core/templates/core/pages/history.html:111
-#: core/templates/core/pages/upcoming_matches.html:160
-msgid "Prediction"
-msgstr ""
-
-#: core/templates/core/pages/history.html:116
-msgid "Result"
-msgstr ""
-
-#: core/templates/core/pages/history.html:124
-#: core/templates/core/pages/home.html:160
-#: core/templates/core/pages/upcoming_matches.html:165
-msgid "Odds"
-msgstr ""
-
-#: core/templates/core/pages/history.html:135
+#: core/templates/core/pages/history.html:87
 msgid "Load More"
 msgstr ""
 
-#: core/templates/core/pages/home.html:21
+#: core/templates/core/pages/home.html:39
 msgid "Smart Predictions for Better Results"
 msgstr ""
 
-#: core/templates/core/pages/home.html:23
+#: core/templates/core/pages/home.html:41
 msgid "The intelligent way to win!"
 msgstr ""
 
-#: core/templates/core/pages/home.html:25
+#: core/templates/core/pages/home.html:43
 msgid ""
 "Behind every winning strategy is a team that truly understands the game. Our "
 "dedicated professionals dive deep into the action to bring you sharp, "
 "insightful sports analyses you can trust"
 msgstr ""
 
-#: core/templates/core/pages/home.html:45
+#: core/templates/core/pages/home.html:63
 msgid "Users"
 msgstr ""
 
-#: core/templates/core/pages/home.html:72
-#: core/templates/core/pages/telegram_landing.html:95 core/views.py:102
+#: core/templates/core/pages/home.html:92
+#: core/templates/core/pages/telegram_landing.html:123 core/views.py:189
 msgid "Free Telegram Channel"
 msgstr ""
 
-#: core/templates/core/pages/home.html:115
+#: core/templates/core/pages/home.html:139
 msgid "Featured Pick"
 msgstr ""
 
-#: core/templates/core/pages/home.html:116
+#: core/templates/core/pages/home.html:140
 msgid "Today's Top Pick"
 msgstr ""
 
-#: core/templates/core/pages/home.html:121
-#: core/templates/core/pages/home.html:137
+#: core/templates/core/pages/home.html:146
+#: core/templates/core/pages/home.html:166
 msgid "Kickoff Time"
 msgstr ""
 
-#: core/templates/core/pages/home.html:132
+#: core/templates/core/pages/home.html:156
 msgid "League"
 msgstr ""
 
-#: core/templates/core/pages/home.html:156
+#: core/templates/core/pages/home.html:192
 msgid "Our Prediction"
 msgstr ""
 
-#: core/templates/core/pages/home.html:168
+#: core/templates/core/pages/home.html:204
 msgid "View more picks"
 msgstr ""
 
-#: core/templates/core/pages/home.html:179
+#: core/templates/core/pages/home.html:215
 msgid "Get a plan to see more picks"
 msgstr ""
 
-#: core/templates/core/pages/home.html:190
+#: core/templates/core/pages/home.html:226
 msgid "Get Full Analysis"
 msgstr ""
 
-#: core/templates/core/pages/home.html:223
+#: core/templates/core/pages/home.html:259
 msgid "Why Choose Us"
 msgstr ""
 
-#: core/templates/core/pages/home.html:224
+#: core/templates/core/pages/home.html:260
 #: core/templates/core/pages/how_to_join.html:197
 msgid "Why Choose"
 msgstr ""
 
-#: core/templates/core/pages/home.html:226
+#: core/templates/core/pages/home.html:262
 msgid ""
 "Join thousands of successful bettors who trust our expert predictions and "
 "analysis"
 msgstr ""
 
-#: core/templates/core/pages/home.html:251
+#: core/templates/core/pages/home.html:287
 msgid "Industry-leading prediction accuracy across all sports categories"
 msgstr ""
 
-#: core/templates/core/pages/home.html:274
+#: core/templates/core/pages/home.html:310
 msgid "Satisfied Clients"
 msgstr ""
 
-#: core/templates/core/pages/home.html:276
+#: core/templates/core/pages/home.html:312
 msgid "Growing community of successful bettors who trust our insights"
 msgstr ""
 
-#: core/templates/core/pages/home.html:299
+#: core/templates/core/pages/home.html:335
 msgid "Monthly Analyses"
 msgstr ""
 
-#: core/templates/core/pages/home.html:301
+#: core/templates/core/pages/home.html:337
 msgid "Fresh predictions and in-depth analysis delivered every day"
 msgstr ""
 
-#: core/templates/core/pages/home.html:323
+#: core/templates/core/pages/home.html:359
 msgid "Round-the-clock assistance from our professional team"
 msgstr ""
 
-#: core/templates/core/pages/home.html:340
+#: core/templates/core/pages/home.html:376
 msgid "Advantages of choosing Smore"
 msgstr ""
 
-#: core/templates/core/pages/home.html:341
+#: core/templates/core/pages/home.html:377
 msgid "Unlock Your Betting Potential"
 msgstr ""
 
-#: core/templates/core/pages/home.html:342
+#: core/templates/core/pages/home.html:378
 msgid ""
 "Experience the power of professional sports analysis with our comprehensive "
 "suite of features"
 msgstr ""
 
-#: core/templates/core/pages/home.html:365
+#: core/templates/core/pages/home.html:401
 msgid "We Do All the Hard Work"
 msgstr ""
 
-#: core/templates/core/pages/home.html:367
+#: core/templates/core/pages/home.html:403
 msgid ""
 "Our expert team analyzes thousands of data points, statistics, and trends to "
 "deliver accurate predictions, so you don't have to spend hours researching"
 msgstr ""
 
-#: core/templates/core/pages/home.html:369
-#: core/templates/core/pages/home.html:420
+#: core/templates/core/pages/home.html:405
+#: core/templates/core/pages/home.html:456
 msgid "Key Benefits"
 msgstr ""
 
-#: core/templates/core/pages/home.html:373
+#: core/templates/core/pages/home.html:409
 msgid "Advanced statistical analysis"
 msgstr ""
 
-#: core/templates/core/pages/home.html:377
+#: core/templates/core/pages/home.html:413
 msgid "Machine learning predictions"
 msgstr ""
 
-#: core/templates/core/pages/home.html:381
+#: core/templates/core/pages/home.html:417
 msgid "Expert human oversight"
 msgstr ""
 
-#: core/templates/core/pages/home.html:385
+#: core/templates/core/pages/home.html:421
 msgid "Real-time data processing"
 msgstr ""
 
-#: core/templates/core/pages/home.html:391
+#: core/templates/core/pages/home.html:427
 msgid "View Our Process"
 msgstr ""
 
-#: core/templates/core/pages/home.html:416
+#: core/templates/core/pages/home.html:452
 msgid "Premium Telegram Channel"
 msgstr ""
 
-#: core/templates/core/pages/home.html:418
+#: core/templates/core/pages/home.html:454
 msgid ""
 "Get instant access to our exclusive Telegram channel with real-time "
 "predictions, live updates, and expert insights delivered straight to your "
 "mobile."
 msgstr ""
 
-#: core/templates/core/pages/home.html:424
+#: core/templates/core/pages/home.html:460
 msgid "Instant predictions delivery"
 msgstr ""
 
-#: core/templates/core/pages/home.html:428
+#: core/templates/core/pages/home.html:464
 msgid "Live match updates"
 msgstr ""
 
-#: core/templates/core/pages/home.html:432
+#: core/templates/core/pages/home.html:468
 msgid "Expert community insights"
 msgstr ""
 
-#: core/templates/core/pages/home.html:436
+#: core/templates/core/pages/home.html:472
 msgid "24/7 support access"
 msgstr ""
 
-#: core/templates/core/pages/home.html:441
+#: core/templates/core/pages/home.html:477
 msgid "Join Channel"
 msgstr ""
 
-#: core/templates/core/pages/home.html:467
+#: core/templates/core/pages/home.html:503
 msgid "Mobile App Coming Soon"
 msgstr ""
 
-#: core/templates/core/pages/home.html:469
+#: core/templates/core/pages/home.html:505
 msgid ""
 "Experience seamless betting predictions with our upcoming mobile app, "
 "featuring push notifications, personalized alerts, and an intuitive "
 "interface."
 msgstr ""
 
-#: core/templates/core/pages/home.html:475
+#: core/templates/core/pages/home.html:511
 msgid "Real-time notifications"
 msgstr ""
 
-#: core/templates/core/pages/home.html:479
+#: core/templates/core/pages/home.html:515
 msgid "Personalized predictions"
 msgstr ""
 
-#: core/templates/core/pages/home.html:483
+#: core/templates/core/pages/home.html:519
 msgid "Match tracking"
 msgstr ""
 
-#: core/templates/core/pages/home.html:487
+#: core/templates/core/pages/home.html:523
 msgid "Performance analytics"
 msgstr ""
 
-#: core/templates/core/pages/home.html:493
+#: core/templates/core/pages/home.html:529
 msgid "You'll receive an email when the application is launched"
 msgstr ""
 
-#: core/templates/core/pages/home.html:497
-#: core/templates/core/pages/home.html:783
+#: core/templates/core/pages/home.html:533
+#: core/templates/core/pages/home.html:819
 msgid "Get started to be notified"
 msgstr ""
 
-#: core/templates/core/pages/home.html:521
+#: core/templates/core/pages/home.html:557
 #: core/templates/core/pages/how_to_join.html:255
 msgid "Ready to Start Winning?"
 msgstr ""
 
-#: core/templates/core/pages/home.html:546
+#: core/templates/core/pages/home.html:582
 msgid "Our Process"
 msgstr ""
 
-#: core/templates/core/pages/home.html:547
+#: core/templates/core/pages/home.html:583
 msgid "How We Create Winning Predictions"
 msgstr ""
 
-#: core/templates/core/pages/home.html:548
+#: core/templates/core/pages/home.html:584
 msgid ""
 "Our comprehensive analysis process combines advanced statistics, expert "
 "insights, and risk management"
 msgstr ""
 
-#: core/templates/core/pages/home.html:580
-#: core/templates/core/pages/home.html:617
-#: core/templates/core/pages/home.html:655
-#: core/templates/core/pages/home.html:692
+#: core/templates/core/pages/home.html:616
+#: core/templates/core/pages/home.html:653
+#: core/templates/core/pages/home.html:691
+#: core/templates/core/pages/home.html:728
 msgid "Step"
 msgstr ""
 
-#: core/templates/core/pages/home.html:581
-msgid "Match Analysis"
-msgstr ""
-
-#: core/templates/core/pages/home.html:584
+#: core/templates/core/pages/home.html:620
 msgid ""
 "At SMORE, we dive deep into match analysis to give you the edge in sports "
 "outcome. By combining recent form, head-to-head stats, injury updates, and "
@@ -1694,11 +1764,11 @@ msgid ""
 "success."
 msgstr ""
 
-#: core/templates/core/pages/home.html:618
+#: core/templates/core/pages/home.html:654
 msgid "Odds analysis"
 msgstr ""
 
-#: core/templates/core/pages/home.html:621
+#: core/templates/core/pages/home.html:657
 msgid ""
 "Odds analysis evaluates betting odds by comparing probabilities with key "
 "factors like team form, player stats, and match dynamics. For soccer, "
@@ -1707,11 +1777,11 @@ msgid ""
 "potential outcomes."
 msgstr ""
 
-#: core/templates/core/pages/home.html:656
+#: core/templates/core/pages/home.html:692
 msgid "Risk Management"
 msgstr ""
 
-#: core/templates/core/pages/home.html:659
+#: core/templates/core/pages/home.html:695
 msgid ""
 "Risk management is at the core of our approach. SMORE identifies, evaluates, "
 "and minimizes uncertainties by analyzing data, setting clear limits, and "
@@ -1720,11 +1790,11 @@ msgid ""
 "consistent and sustainable results."
 msgstr ""
 
-#: core/templates/core/pages/home.html:693
+#: core/templates/core/pages/home.html:729
 msgid "Detailed Report"
 msgstr ""
 
-#: core/templates/core/pages/home.html:696
+#: core/templates/core/pages/home.html:732
 msgid ""
 "SMORE’s detailed reports provide a comprehensive breakdown of key factors "
 "influencing sports outcomes. Our analysis includes team and player "
@@ -1735,66 +1805,65 @@ msgid ""
 "precision, helping you stay ahead with accurate and actionable information."
 msgstr ""
 
-#: core/templates/core/pages/home.html:717
-#: core/templates/core/pages/home.html:797
-#: core/templates/core/pages/plans.html:52
-#: core/templates/core/pages/plans.html:163
+#: core/templates/core/pages/home.html:753
+#: core/templates/core/pages/home.html:833
+#: core/templates/core/pages/plans.html:58
 msgid "Coming Soon"
 msgstr ""
 
-#: core/templates/core/pages/home.html:718
+#: core/templates/core/pages/home.html:754
 msgid "Take Smore"
 msgstr ""
 
-#: core/templates/core/pages/home.html:719
+#: core/templates/core/pages/home.html:755
 msgid "Anywhere"
 msgstr ""
 
-#: core/templates/core/pages/home.html:722
+#: core/templates/core/pages/home.html:758
 msgid ""
 "is now coming to mobile. Get instant access to expert predictions, live "
 "updates, and personalized alerts. Your winning strategy in your pocket."
 msgstr ""
 
-#: core/templates/core/pages/home.html:741
+#: core/templates/core/pages/home.html:777
 msgid "Instant Notifications"
 msgstr ""
 
-#: core/templates/core/pages/home.html:741
+#: core/templates/core/pages/home.html:777
 msgid "Real-time alerts for new predictions"
 msgstr ""
 
-#: core/templates/core/pages/home.html:751
+#: core/templates/core/pages/home.html:787
 msgid "Live Match Updates"
 msgstr ""
 
-#: core/templates/core/pages/home.html:751
+#: core/templates/core/pages/home.html:787
 msgid "Track your predictions in real-time"
 msgstr ""
 
-#: core/templates/core/pages/home.html:763
+#: core/templates/core/pages/home.html:799
 msgid "Access"
 msgstr ""
 
-#: core/templates/core/pages/home.html:763
+#: core/templates/core/pages/home.html:799
 msgid "Premium features on the go"
 msgstr ""
 
-#: core/templates/core/pages/home.html:769
+#: core/templates/core/pages/home.html:805
 msgid "Early Access"
 msgstr ""
 
-#: core/templates/core/pages/home.html:773
+#: core/templates/core/pages/home.html:809
 msgid "Get Notified on Launch"
 msgstr ""
 
-#: core/templates/core/pages/home.html:774
+#: core/templates/core/pages/home.html:810
 msgid ""
 "Join our exclusive early access list and be the first to experience the "
 "future of sports predictions."
 msgstr ""
 
-#: core/templates/core/pages/home.html:777
+#: core/templates/core/pages/home.html:813
 msgid "You'll receive an email when the application is launched."
 msgstr ""
 
@@ -1912,88 +1981,94 @@ msgid ""
 "back guarantee"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:26
+#: core/templates/core/pages/plans.html:25
 msgid "Annual"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:27
+#: core/templates/core/pages/plans.html:26
 #, python-format
 msgid "Save 20%%"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:71
+#: core/templates/core/pages/plans.html:77
+#: core/templates/core/pages/plans.html:225
 msgid "per"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:88
-#: core/templates/core/pages/plans.html:89
+#: core/templates/core/pages/plans.html:95
+#: core/templates/core/pages/plans.html:96
+#: core/templates/core/pages/plans.html:203
+#: core/templates/core/pages/plans.html:204
 msgid "Current plan"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:89
+#: core/templates/core/pages/plans.html:96
+#: core/templates/core/pages/plans.html:204
 #, python-format
 msgid "Upgrade to yearly and save 20%%"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:91
-msgid "Plan expiry"
+#: core/templates/core/pages/plans.html:99
+#: core/templates/core/pages/plans.html:207
+msgid "Current plan expiry date:"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:103
-msgid "analysis per month"
-msgstr ""
-
-#: core/templates/core/pages/plans.html:111
-msgid "High Odds"
+#: core/templates/core/pages/plans.html:106
+#: core/templates/core/pages/plans.html:214
+msgid "Soccer discount"
 msgstr ""
 
 #: core/templates/core/pages/plans.html:119
-msgid "Betting Guidance"
+msgid "analysis per month"
 msgstr ""
 
 #: core/templates/core/pages/plans.html:127
-msgid "Promotions & Giveaways"
+msgid "High Odds"
 msgstr ""
 
 #: core/templates/core/pages/plans.html:135
-msgid "24/7 Client Support"
+msgid "Betting Guidance"
 msgstr ""
 
 #: core/templates/core/pages/plans.html:143
+msgid "Promotions & Giveaways"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:151
+msgid "24/7 Client Support"
+msgstr ""
+
+#: core/templates/core/pages/plans.html:159
 msgid "Affiliate program"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:149
+#: core/templates/core/pages/plans.html:165
 msgid "No products available"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:172
-msgid "Add-on"
-msgstr ""
-
-#: core/templates/core/pages/plans.html:201
+#: core/templates/core/pages/plans.html:242
 msgid "Summary"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:204
-#: core/templates/core/pages/plans.html:205
+#: core/templates/core/pages/plans.html:245
+#: core/templates/core/pages/plans.html:246
 msgid "monthly"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:206
+#: core/templates/core/pages/plans.html:247
 msgid "price"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:217
-#: core/templates/core/pages/plans.html:247 core/views.py:38
+#: core/templates/core/pages/plans.html:259
+#: core/templates/core/pages/plans.html:283
 msgid "Get Started"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:261
+#: core/templates/core/pages/plans.html:297
 msgid "Need help choosing?"
 msgstr ""
 
-#: core/templates/core/pages/plans.html:263
+#: core/templates/core/pages/plans.html:299
 msgid "Contact our team"
 msgstr ""
 
@@ -2165,21 +2240,11 @@ msgstr ""
 msgid "Premium Content"
 msgstr ""
 
-#: core/templates/core/pages/subscription_required.html:28
-#: core/templates/core/pages/upcoming_matches.html:33
-msgid "Daily Expert Predictions"
-msgstr ""
-
-#: core/templates/core/pages/subscription_required.html:31
-msgid "Detailed Match Analysis"
-msgstr ""
-
 #: core/templates/core/pages/subscription_required.html:34
-#: core/templates/core/pages/upcoming_matches.html:51 core/views.py:51
 msgid "View Plans"
 msgstr ""
 
-#: core/templates/core/pages/telegram_landing.html:116
+#: core/templates/core/pages/telegram_landing.html:144
 msgid "Website"
 msgstr ""
 
@@ -2462,44 +2527,37 @@ msgstr ""
 msgid "For any questions regarding these Terms, please contact us at"
 msgstr ""
 
-#: core/templates/core/pages/upcoming_matches.html:24
-msgid "Premium Predictions"
-msgstr ""
-
-#: core/templates/core/pages/upcoming_matches.html:25
-msgid ""
-"Subscribe to access all our expert predictions for upcoming matches, "
-"featuring detailed analysis and insights."
-msgstr ""
-
-#: core/templates/core/pages/upcoming_matches.html:48
-msgid "High odds"
-msgstr ""
-
-#: core/templates/core/pages/upcoming_matches.html:63
+#: core/templates/core/pages/upcoming_matches.html:12
 msgid "Upcoming Predictions"
 msgstr ""
 
-#: core/templates/core/pages/upcoming_matches.html:64
+#: core/templates/core/pages/upcoming_matches.html:13
 msgid "View our expert predictions for upcoming matches"
 msgstr ""
 
-#: core/views.py:45
-msgid "What's New"
+#: core/templates/core/pages/upcoming_matches.html:61
+#, python-format
+msgid ""
+"\n"
+"                                            %(name)s"
 msgstr ""
 
-#: core/views.py:47
+#: core/views.py:39
+msgid "Upcoming matches"
+msgstr ""
+
+#: core/views.py:41
 msgid "View upcoming matches"
 msgstr ""
 
-#: core/views.py:54
-msgid "Choose a plan and get instant access to expert predictions"
+#: core/views.py:112
+msgid "Prediction Details"
 msgstr ""
 
-#: core/views.py:177
+#: core/views.py:264
 msgid "Cookies Policy"
 msgstr ""
 
-#: core/views.py:213
+#: core/views.py:370
 msgid "Subscription Required"
 msgstr ""
