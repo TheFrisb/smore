@@ -2247,7 +2247,7 @@ msgstr "Jährlich"
 #: core/templates/core/pages/plans.html:26
 #, python-format
 msgid "Save 20%%"
-msgstr "Sparen Sie 20%"
+msgstr "Sparen Sie 20%%"
 
 #: core/templates/core/pages/plans.html:77
 #: core/templates/core/pages/plans.html:225
@@ -2265,7 +2265,7 @@ msgstr "Aktueller Plan"
 #: core/templates/core/pages/plans.html:204
 #, python-format
 msgid "Upgrade to yearly and save 20%%"
-msgstr "Wechseln Sie zum Jahresplan und sparen Sie 20%"
+msgstr "Wechseln Sie zum Jahresplan und sparen Sie 20%%"
 
 #: core/templates/core/pages/plans.html:99
 #: core/templates/core/pages/plans.html:207
@@ -2922,7 +2922,6 @@ msgid ""
 msgstr ""
 
 #: core/views.py:39
-#, fuzzy
 #| msgid "Upcoming Matches"
 msgid "Upcoming matches"
 msgstr "Bevorstehende Spiele"
