@@ -16,7 +16,9 @@ function renderMessage(message, isUserMessage) {
   messageWrapper.className = `max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 ${isUserMessage ? "ml-12" : "mr-12"}`;
 
   const messageContent = document.createElement("div");
-  messageContent.className = "whitespace-pre-wrap";
+  if (isUserMessage) {
+    messageContent.className = "whitespace-pre-wrap";
+  }
   messageContent.textContent = message;
 
   if (!isUserMessage && message === "AI Analyst is thinking...") {
@@ -94,12 +96,12 @@ function sendMessage(hasAccess) {
     .then((response) => response.json())
     .then((data) => {
       aiMessage.classList.remove("animate-pulse");
-      const messageContent = aiMessage.querySelector("div.whitespace-pre-wrap");
+      const messageContent = aiMessage.querySelector("div");
       messageContent.innerHTML = marked.parse(data.message);
     })
     .catch((error) => {
       aiMessage.classList.remove("animate-pulse");
-      const messageContent = aiMessage.querySelector("div.whitespace-pre-wrap");
+      const messageContent = aiMessage.querySelector("div");
       messageContent.textContent =
         "An error occurred while processing the message.";
       console.error("An error occurred while processing the message:", error);

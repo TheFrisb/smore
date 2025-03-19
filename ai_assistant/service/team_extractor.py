@@ -37,7 +37,9 @@ class TeamExtractor:
                     logger.debug(
                         f"Extracting teams from history message: '{hist_msg.content}'"
                     )
-                    logger.info(f"Extracting teams from history message: '{hist_msg.content}'")
+                    logger.info(
+                        f"Extracting teams from history message: '{hist_msg.content}'"
+                    )
                     response = self.chain.invoke({"message": hist_msg.content})
                     extracted_names = [
                         name.strip()
