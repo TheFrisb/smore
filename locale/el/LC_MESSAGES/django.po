@@ -213,20 +213,17 @@ msgid "Sign in to access your account"
 msgstr "Συνδεθείτε για να αποκτήσετε πρόσβαση στον λογαριασμό σας"
 
 #: accounts/templates/accounts/pages/login.html:53
-#, fuzzy
 #| msgid "Users"
 msgid "Username / Email"
 msgstr "Χρήστες"
 
 #: accounts/templates/accounts/pages/login.html:65
-#, fuzzy
 #| msgid "Enter your username"
 msgid "Enter your username / email"
 msgstr "Εισαγάγετε το όνομα χρήστη σας"
 
 #: accounts/templates/accounts/pages/login.html:68
 #: accounts/templates/accounts/pages/register.html:114
-#, fuzzy
 #| msgid "New Password"
 msgid "Password"
 msgstr "Νέος Κωδικός Πρόσβασης"
@@ -327,7 +324,6 @@ msgstr "Πλήρες όνομα"
 
 #: accounts/templates/accounts/pages/my_account.html:20
 #: accounts/templates/accounts/pages/register.html:50
-#, fuzzy
 #| msgid "Users"
 msgid "Username"
 msgstr "Χρήστες"
@@ -651,7 +647,6 @@ msgid "Join thousands of successful bettors"
 msgstr "Εγγραφείτε μαζί με χιλιάδες επιτυχημένους παίκτες"
 
 #: accounts/templates/accounts/pages/register.html:62
-#, fuzzy
 #| msgid "Choose a payout method"
 msgid "Choose a username"
 msgstr "πιλέξτε Μέθοδο Πληρωμής"
@@ -661,7 +656,6 @@ msgid "First Name"
 msgstr " Όνομα"
 
 #: accounts/templates/accounts/pages/register.html:78
-#, fuzzy
 #| msgid "First Name"
 msgid "Your First Name"
 msgstr " Όνομα"
@@ -671,7 +665,6 @@ msgid "Last Name"
 msgstr "Επώνυμο"
 
 #: accounts/templates/accounts/pages/register.html:94
-#, fuzzy
 #| msgid "Last Name"
 msgid "Your Last Name"
 msgstr "Επώνυμο"
@@ -942,7 +935,6 @@ msgid "Invalid or expired email confirmation link."
 msgstr "Μη έγκυρος ή ληγμένος σύνδεσμος επιβεβαίωσης email."
 
 #: core/models.py:54
-#, fuzzy
 #| msgid "Subscription Fees"
 msgid "Subscription"
 msgstr "Τέλη Συνδρομής"
@@ -970,7 +962,6 @@ msgstr "Τένις"
 #: core/models.py:62 core/templates/core/includes/header.html:98
 #: core/templates/core/includes/header.html:158
 #: core/templates/core/pages/ai_assistant.html:24 core/views.py:353
-#, fuzzy
 #| msgid "Analytics"
 msgid "AI Analyst"
 msgstr "Αναλυτικά Στοιχεία"
@@ -1074,7 +1065,6 @@ msgid ""
 msgstr ""
 
 #: core/templates/core/includes/prediction.html:23
-#, fuzzy
 #| msgid "View Plans"
 msgid "View analysis"
 msgstr "Προβολή Πλάνων"
@@ -1088,7 +1078,6 @@ msgstr ""
 
 #: core/templates/core/includes/prediction.html:47
 #: core/templates/core/pages/detail_prediction.html:147
-#, fuzzy
 #| msgid "Prediction"
 msgid "Prediction locked"
 msgstr "Πρόβλεψη"
@@ -1118,14 +1107,12 @@ msgstr "Πρόβλεψη"
 
 #: core/templates/core/includes/prediction.html:127
 #: core/templates/core/pages/detail_prediction.html:96
-#, fuzzy
 #| msgid "Subscription Fees"
 msgid "Subscribe"
 msgstr "Τέλη Συνδρομής"
 
 #: core/templates/core/includes/prediction.html:130
 #: core/templates/core/pages/detail_prediction.html:99
-#, fuzzy
 #| msgid "Personalized predictions"
 msgid "to access all predictions"
 msgstr "Προσωποποιημένες Προβλέψεις"
@@ -1141,7 +1128,6 @@ msgstr "Ξεκλείδωμα"
 
 #: core/templates/core/includes/prediction.html:148
 #: core/templates/core/pages/detail_prediction.html:114
-#, fuzzy
 #| msgid "Prediction History"
 msgid "this prediction for"
 msgstr "Ιστορικό Προβλέψεων"
@@ -1205,7 +1191,6 @@ msgstr ""
 "μέσω της δύναμης της επιστήμης δεδομένων και της μηχανικής μάθησης."
 
 #: core/templates/core/pages/about_us.html:102
-#, fuzzy
 #| msgid ""
 #| "What started as a small team of sports enthusiasts and data scientists has "
 #| "grown into a leading platform trusted by over 50000 users worldwide."
@@ -1487,7 +1472,6 @@ msgid "Match Analysis"
 msgstr "Ανάλυση Αγώνα"
 
 #: core/templates/core/pages/detail_prediction.html:79
-#, fuzzy
 #| msgid "Premium Predictions"
 msgid "Premium Prediction"
 msgstr "Προβλέψεις Premium"
@@ -2273,7 +2257,6 @@ msgstr "Αναβαθμίστε σε ετήσιο και εξοικονομήστ
 
 #: core/templates/core/pages/plans.html:99
 #: core/templates/core/pages/plans.html:207
-#, fuzzy
 #| msgid "Current plan"
 msgid "Current plan expiry date:"
 msgstr "Τρέχον πλάνο"
@@ -2938,19 +2921,16 @@ msgid "View upcoming matches"
 msgstr "Επερχόμενοι Αγώνες"
 
 #: core/views.py:112
-#, fuzzy
 #| msgid "Prediction History"
 msgid "Prediction Details"
 msgstr "Ιστορικό Προβλέψεων"
 
 #: core/views.py:264
-#, fuzzy
 #| msgid "Cookie Policy"
 msgid "Cookies Policy"
 msgstr "Πολιτική Cookies"
 
 #: core/views.py:370
-#, fuzzy
 #| msgid "Subscription Fees"
 msgid "Subscription Required"
 msgstr "Τέλη Συνδρομής"

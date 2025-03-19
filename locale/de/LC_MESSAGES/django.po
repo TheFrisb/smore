@@ -213,20 +213,17 @@ msgid "Sign in to access your account"
 msgstr "Melden Sie sich an, um auf Ihr Benutzerkonto zuzugreifen"
 
 #: accounts/templates/accounts/pages/login.html:53
-#, fuzzy
 #| msgid "Username"
 msgid "Username / Email"
 msgstr "Benutzername"
 
 #: accounts/templates/accounts/pages/login.html:65
-#, fuzzy
 #| msgid "Enter your username"
 msgid "Enter your username / email"
 msgstr "Geben Sie Ihren Benutzernamen ein"
 
 #: accounts/templates/accounts/pages/login.html:68
 #: accounts/templates/accounts/pages/register.html:114
-#, fuzzy
 #| msgid "New Password"
 msgid "Password"
 msgstr "Neues Passwort"
@@ -648,7 +645,6 @@ msgid "Join thousands of successful bettors"
 msgstr "Schließen Sie sich tausenden erfolgreichen Wettenden an"
 
 #: accounts/templates/accounts/pages/register.html:62
-#, fuzzy
 #| msgid "Choose a payout method"
 msgid "Choose a username"
 msgstr "Wählen Sie eine Auszahlungsmethode"
@@ -658,7 +654,6 @@ msgid "First Name"
 msgstr "Vorname"
 
 #: accounts/templates/accounts/pages/register.html:78
-#, fuzzy
 #| msgid "First Name"
 msgid "Your First Name"
 msgstr "Vorname"
@@ -668,7 +663,6 @@ msgid "Last Name"
 msgstr "Nachname"
 
 #: accounts/templates/accounts/pages/register.html:94
-#, fuzzy
 #| msgid "Last Name"
 msgid "Your Last Name"
 msgstr "Nachname"
@@ -940,7 +934,6 @@ msgid "Invalid or expired email confirmation link."
 msgstr "Ungültiger oder abgelaufener E-Mail-Bestätigungslink."
 
 #: core/models.py:54
-#, fuzzy
 #| msgid "Subscription Fees"
 msgid "Subscription"
 msgstr "Abonnementgebühren"
@@ -968,7 +961,6 @@ msgstr "Tennis"
 #: core/models.py:62 core/templates/core/includes/header.html:98
 #: core/templates/core/includes/header.html:158
 #: core/templates/core/pages/ai_assistant.html:24 core/views.py:353
-#, fuzzy
 #| msgid "Analytics"
 msgid "AI Analyst"
 msgstr "Analytik"
@@ -1072,7 +1064,6 @@ msgid ""
 msgstr ""
 
 #: core/templates/core/includes/prediction.html:23
-#, fuzzy
 #| msgid "View Plans"
 msgid "View analysis"
 msgstr "Tarife anzeigen"
@@ -1086,7 +1077,6 @@ msgstr ""
 
 #: core/templates/core/includes/prediction.html:47
 #: core/templates/core/pages/detail_prediction.html:147
-#, fuzzy
 #| msgid "Prediction"
 msgid "Prediction locked"
 msgstr "Vorhersage"
@@ -1116,14 +1106,12 @@ msgstr "Vorhersage"
 
 #: core/templates/core/includes/prediction.html:127
 #: core/templates/core/pages/detail_prediction.html:96
-#, fuzzy
 #| msgid "Subscription Fees"
 msgid "Subscribe"
 msgstr "Abonnementgebühren"
 
 #: core/templates/core/includes/prediction.html:130
 #: core/templates/core/pages/detail_prediction.html:99
-#, fuzzy
 #| msgid "Personalized predictions"
 msgid "to access all predictions"
 msgstr "Personalisierte Vorhersagen"
@@ -1139,7 +1127,6 @@ msgstr "Entsperren"
 
 #: core/templates/core/includes/prediction.html:148
 #: core/templates/core/pages/detail_prediction.html:114
-#, fuzzy
 #| msgid "Prediction History"
 msgid "this prediction for"
 msgstr "Vorhersageverlauf"
@@ -1203,7 +1190,6 @@ msgstr ""
 "Data Science und maschinellem Lernen zu revolutionieren."
 
 #: core/templates/core/pages/about_us.html:102
-#, fuzzy
 #| msgid ""
 #| "What started as a small team of sports enthusiasts and data scientists has "
 #| "grown into a leading platform trusted by over 10,000 users worldwide."
@@ -1484,13 +1470,11 @@ msgid "Match Analysis"
 msgstr "Spielanalyse"
 
 #: core/templates/core/pages/detail_prediction.html:79
-#, fuzzy
 #| msgid "Premium Predictions"
 msgid "Premium Prediction"
 msgstr "Premium-Vorhersagen"
 
 #: core/templates/core/pages/detail_prediction.html:82
-#, fuzzy
 #| msgid ""
 #| "Subscribe to access all our expert predictions for upcoming matches, "
 #| "featuring detailed analysis and insights."
@@ -2269,7 +2253,6 @@ msgstr "Wechseln Sie zum Jahresplan und sparen Sie 20%%"
 
 #: core/templates/core/pages/plans.html:99
 #: core/templates/core/pages/plans.html:207
-#, fuzzy
 #| msgid "Current plan"
 msgid "Current plan expiry date:"
 msgstr "Aktueller Plan"
@@ -2931,13 +2914,11 @@ msgid "View upcoming matches"
 msgstr "Bevorstehende Spiele anzeigen"
 
 #: core/views.py:112
-#, fuzzy
 #| msgid "Prediction History"
 msgid "Prediction Details"
 msgstr "Vorhersageverlauf"
 
 #: core/views.py:264
-#, fuzzy
 #| msgid "Cookie Policy"
 msgid "Cookies Policy"
 msgstr "Cookie-Richtlinie"
