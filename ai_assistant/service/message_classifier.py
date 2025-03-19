@@ -69,11 +69,11 @@ class MessageClassifier:
         )
 
     def classify(
-            self, message: str, history: List[Union[HumanMessage, AIMessage]]
+        self, message: str, history: List[Union[HumanMessage, AIMessage]]
     ) -> Tuple[MessageCategory, Optional[str]]:
         try:
             full_message_list = (
-                    [self.system_message] + history + [HumanMessage(content=message)]
+                [self.system_message] + history + [HumanMessage(content=message)]
             )
             response = self.llm.invoke(full_message_list)
             response_text = response.content.strip()

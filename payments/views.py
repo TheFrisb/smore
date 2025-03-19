@@ -69,8 +69,8 @@ class CreateSubscriptionCheckoutUrl(APIView):
         Check if the soccer product is present in the list of products and that more than one product is present.
         """
         return (
-                any(product.name == Product.Names.SOCCER for product in products)
-                and len(products) > 1
+            any(product.name == Product.Names.SOCCER for product in products)
+            and len(products) > 1
         )
 
     def get_price_ids(self, products, frequency):
@@ -149,8 +149,8 @@ class UpdateSubscriptionView(APIView):
         Check if the soccer product is present in the list of products and that more than one product is present.
         """
         return (
-                any(product.name == Product.Names.SOCCER for product in products)
-                and len(products) > 1
+            any(product.name == Product.Names.SOCCER for product in products)
+            and len(products) > 1
         )
 
     def post(self, request, *args, **kwargs):

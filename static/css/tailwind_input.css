@@ -57,7 +57,7 @@ div.g_id_signin > div > div > div {
 
 
 #aiAssistantMessagesContainer h4, #aiAssistantMessagesContainer h5, #aiAssistantMessagesContainer h6 {
-    @apply text-lg text-secondary-500;
+    @apply text-lg text-secondary-500 font-bold;
     @apply py-3;
 }
 

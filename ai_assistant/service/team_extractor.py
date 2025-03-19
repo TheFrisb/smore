@@ -16,7 +16,7 @@ class TeamExtractor:
         self.chain = self.prompt | self.llm
 
     def extract(
-            self, message: str, history: List[Union[HumanMessage, AIMessage]]
+        self, message: str, history: List[Union[HumanMessage, AIMessage]]
     ) -> Tuple[List[SportTeam], List[SportMatch]]:
         try:
             logger.debug(f"Extracting teams from current message: '{message}'")

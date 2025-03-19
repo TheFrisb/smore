@@ -262,8 +262,8 @@ class LLMService:
                             goals = prediction_data["goals"]
                             context += f"    - Predicted goals: Home {goals.get('home', 'N/A')}, Away {goals.get('away', 'N/A')}\n"
                         if (
-                                "under_over" in prediction_data
-                                and prediction_data["under_over"] is not None
+                            "under_over" in prediction_data
+                            and prediction_data["under_over"] is not None
                         ):
                             context += f"    - Under/Over prediction: {prediction_data['under_over']}\n"
                         if "win_or_draw" in prediction_data:
@@ -295,8 +295,8 @@ class LLMService:
                             goals = prediction_data["goals"]
                             context += f"    - Predicted goals: Home {goals.get('home', 'N/A')}, Away {goals.get('away', 'N/A')}\n"
                         if (
-                                "under_over" in prediction_data
-                                and prediction_data["under_over"] is not None
+                            "under_over" in prediction_data
+                            and prediction_data["under_over"] is not None
                         ):
                             context += f"    - Under/Over prediction: {prediction_data['under_over']}\n"
                         if "win_or_draw" in prediction_data:
@@ -311,8 +311,8 @@ class LLMService:
             # Past head-to-head (last 5)
             head_to_head_past = SportMatch.objects.filter(
                 (
-                        Q(home_team=team_a, away_team=team_b)
-                        | Q(home_team=team_b, away_team=team_a)
+                    Q(home_team=team_a, away_team=team_b)
+                    | Q(home_team=team_b, away_team=team_a)
                 ),
                 kickoff_datetime__lt=now,
             ).order_by("-kickoff_datetime")[:5]
@@ -340,8 +340,8 @@ class LLMService:
                             goals = prediction_data["goals"]
                             context += f"    - Predicted goals: Home {goals.get('home', 'N/A')}, Away {goals.get('away', 'N/A')}\n"
                         if (
-                                "under_over" in prediction_data
-                                and prediction_data["under_over"] is not None
+                            "under_over" in prediction_data
+                            and prediction_data["under_over"] is not None
                         ):
                             context += f"    - Under/Over prediction: {prediction_data['under_over']}\n"
                         if "win_or_draw" in prediction_data:
@@ -350,8 +350,8 @@ class LLMService:
             # Future head-to-head (next 2, if they exist)
             head_to_head_future = SportMatch.objects.filter(
                 (
-                        Q(home_team=team_a, away_team=team_b)
-                        | Q(home_team=team_b, away_team=team_a)
+                    Q(home_team=team_a, away_team=team_b)
+                    | Q(home_team=team_b, away_team=team_a)
                 ),
                 kickoff_datetime__gte=now,
             ).order_by("kickoff_datetime")[:2]
@@ -377,8 +377,8 @@ class LLMService:
                             goals = prediction_data["goals"]
                             context += f"    - Predicted goals: Home {goals.get('home', 'N/A')}, Away {goals.get('away', 'N/A')}\n"
                         if (
-                                "under_over" in prediction_data
-                                and prediction_data["under_over"] is not None
+                            "under_over" in prediction_data
+                            and prediction_data["under_over"] is not None
                         ):
                             context += f"    - Under/Over prediction: {prediction_data['under_over']}\n"
                         if "win_or_draw" in prediction_data:
