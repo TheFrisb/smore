@@ -34,6 +34,7 @@ allowed_league_ids = [
     2,  # World UEFA Champions League
     3,  # World UEFA Europa League
     4,  # World EuroChampionship
+    5,  # UEFA Nations League
     848,  # World UEFA Europa Conference League
     135,  # Italy Serie A
     136,  # Italy Serie B
