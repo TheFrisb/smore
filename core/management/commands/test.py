@@ -1,7 +1,9 @@
+from datetime import datetime, timezone
+
 from django.core.management.base import BaseCommand
 
-from core.models import SportMatch, Product
 from core.services.basketball_api_service import BasketballApiService
+from core.services.football_api_service import FootballApiService
 
 
 class Command(BaseCommand):
@@ -9,6 +11,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         basketball_api_service = BasketballApiService()
-        SportMatch.objects.filter(product=Product.objects.get(name=Product.Names.BASKETBALL)).delete()
+        football_api_service = FootballApiService()
 
-        basketball_api_service.populate_upcoming_matches()
+        start_date = datetime(2025, 3, 9, tzinfo=timezone.utc)
+        end_date = datetime(2025, 3, 29, tzinfo=timezone.utc)
+
+        football_api_service.fetch_sport_matches(start_date, end_date)
+        basketball_api_service.fetch_sport_matches(start_date, end_date)

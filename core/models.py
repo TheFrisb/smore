@@ -167,6 +167,9 @@ class SportMatch(BaseInternalModel):
     def league_name(self):
         return self.league.name
 
+    class Meta:
+        unique_together = ("product", "external_id")
+
     def __str__(self):
         return f"[{self.league.name}] {self.home_team.name} vs {self.away_team.name} ({self.kickoff_datetime})"
 
@@ -206,7 +209,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

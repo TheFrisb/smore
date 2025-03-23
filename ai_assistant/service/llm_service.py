@@ -1,6 +1,6 @@
 import logging
 import random
-from typing import List
+from typing import List, Optional
 
 from django.conf import settings
 from django.utils import timezone
@@ -10,10 +10,12 @@ from langchain_openai import ChatOpenAI
 from accounts.models import User
 from ai_assistant.models import Message
 from ai_assistant.service.conversation_history_fetcher import ConversationHistoryFetcher
+from ai_assistant.service.input_extractors.league_extractor import LeagueExtractor
+from ai_assistant.service.input_extractors.team_extractor import TeamExtractor
 from ai_assistant.service.match_context_builder import MatchContextBuilder
 from ai_assistant.service.message_classifier import MessageCategory, MessageClassifier
-from ai_assistant.service.team_extractor import TeamExtractor
 from core.models import SportMatch, Product
+from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +26,7 @@ class LLMService(MatchContextBuilder):
         self.match_context_builder = MatchContextBuilder()
         self.classifier = MessageClassifier(self.llm)
         self.team_extractor = TeamExtractor(self.llm)
+        self.league_extractor = LeagueExtractor(self.llm)
         self.history_fetcher = ConversationHistoryFetcher()
         self.prediction_prompt = SystemMessage(
             content="""
@@ -48,11 +51,13 @@ class LLMService(MatchContextBuilder):
                        - List additional picks as "Other Smart Picks."
                        - Use bullet points or numbered lists for clarity.
 
-                    **Guidelines:**
-                    - Use markdown formatting with headers, <strong> tags, and paragraph tags.
-                    - Incorporate emojis or other formatting to make the text visually appealing.
-                    - Ensure your insights are data-driven and professional.
-                    - Do not include concluding statements about the basis of your analysis or additional advice beyond the prediction.
+                    **Guidelines:** 
+                        - Use headers for sections and subheadings for clarity.
+                        - Employ bold and italic text to emphasize key points.
+                        - Incorporate emojis to make the text engaging.
+                        - Use tables for presenting data, such as team form or head-to-head records.
+                        - Ensure your insights are data-driven and professional.
+                        - Do not include concluding statements about the basis of your analysis or additional advice beyond the prediction.
                 """
         )
 
@@ -78,7 +83,7 @@ class LLMService(MatchContextBuilder):
         handler = self.handlers.get(category)
 
         if handler:
-            response = handler(user, message, history)
+            response = handler(user, message, history, sport_name)
             Message.objects.create(
                 message=response, direction=Message.Direction.INBOUND, user=user
             )
@@ -87,7 +92,9 @@ class LLMService(MatchContextBuilder):
 
         return "I specialize in sport match analysis and predictions. Please provide a specific match or a general sports question."
 
-    def _handle_general_sport(self, user: User, message: str, history: List) -> str:
+    def _handle_general_sport(
+            self, user: User, message: str, history: List, sport: Optional[str]
+    ) -> str:
         """Handle general sports information requests."""
         try:
             system_message = SystemMessage(
@@ -100,16 +107,37 @@ class LLMService(MatchContextBuilder):
             logger.error(f"Error generating general sport response: {e}")
             return "Sorry, I couldn't process your request."
 
-    def _handle_bet_suggestion(self, user: User, message: str, history: List) -> str:
+    def _handle_bet_suggestion(
+            self, user: User, message: str, history: List, sport: Optional[str]
+    ) -> str:
         """Handle general betting suggestion requests."""
         try:
-            # Fetch the next 20 upcoming matches for the sport
+            product_name = sport.upper() if sport else Product.Names.SOCCER
+            # Extract the league from the message and history using LeagueExtractor
+            extracted_league = self.league_extractor.extract(message, history, sport)
             now = timezone.now()
-            upcoming_matches = list(
-                SportMatch.objects.filter(
-                    product__name=Product.Names.SOCCER, kickoff_datetime__gte=now
-                ).order_by("kickoff_datetime")[:20]
-            )
+
+            if extracted_league:
+                upcoming_matches = list(
+                    SportMatch.objects.filter(
+                        league=extracted_league, kickoff_datetime__gte=now
+                    ).order_by("kickoff_datetime")[:20]
+                )
+
+                if not upcoming_matches:
+                    return f"No upcoming matches found for the league: {extracted_league.name} ({extracted_league.country.name})."
+
+            else:
+                upcoming_matches = list(
+                    SportMatch.objects.filter(
+                        product__name=Product.Names.SOCCER,
+                        league__external_id__in=allowed_league_ids,
+                        kickoff_datetime__gte=now,
+                    ).order_by("kickoff_datetime")[:20]
+                )
+
+            if not upcoming_matches:
+                return "No upcoming matches found for the specified sport."
 
             selected_matches = random.sample(
                 upcoming_matches, min(3, len(upcoming_matches))
@@ -162,10 +190,12 @@ class LLMService(MatchContextBuilder):
             logger.error(f"Error generating bet suggestion response: {e}")
             return "Sorry, I couldn't process your request. Something went wrong—let's try again later!"
 
-    def _handle_match_specific(self, user: User, message: str, history: List) -> str:
+    def _handle_match_specific(
+            self, user: User, message: str, history: List, sport: Optional[str]
+    ) -> str:
         """Handle match-specific requests (analysis or predictions)."""
         try:
-            teams = self.team_extractor.extract(message, history)
+            teams = self.team_extractor.extract(message, history, sport)
             if not teams:
                 return "Please provide the sport match you are referring to again, with the full team names."
 

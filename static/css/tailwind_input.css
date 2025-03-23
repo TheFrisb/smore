@@ -62,8 +62,8 @@ div.g_id_signin > div > div > div {
 }
 
 #aiAssistantMessagesContainer ul, #aiAssistantMessagesContainer ol {
-    @apply list-disc list-inside;
-    @apply pb-6;
+    @apply list-disc;
+    @apply pb-6 pl-4;
 }
 
 #aiAssistantMessagesContainer ul > li, #aiAssistantMessagesContainer ol > li {

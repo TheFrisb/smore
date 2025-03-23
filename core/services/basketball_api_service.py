@@ -82,13 +82,19 @@ class BasketballApiService:
             except Exception as e:
                 logger.error(f"Failed to create league: {league_name} - {e}")
 
-    def populate_upcoming_matches(self):
-        start_date = datetime.now()
-        logger.info(f"Fetching sport matches from start_date: {start_date}")
+    def fetch_sport_matches(self, start_date=None, end_date=None):
+        if start_date is None:
+            start_date = datetime.today() - timedelta(days=1)
+        if end_date is None:
+            end_date = start_date + timedelta(days=9)
 
-        for i in range(10):
-            date = start_date + timedelta(days=i)
-            formatted_date = date.strftime("%Y-%m-%d")
+        logger.info(
+            f"Fetching basketball sport matches from start_date: {start_date} to end_date: {end_date}"
+        )
+
+        current_date = start_date
+        while current_date <= end_date:
+            formatted_date = current_date.strftime("%Y-%m-%d")
             endpoint = f"{self.base_url}/games?date={formatted_date}"
             logger.info(f"Fetching basketball sport matches from endpoint: {endpoint}")
             response = requests.get(endpoint, headers=self._get_headers())
@@ -101,7 +107,11 @@ class BasketballApiService:
             for item in data.get("response"):
                 self._process_fixture(item)
 
+            current_date += timedelta(days=1)
+
     def _process_fixture(self, item):
+        product_obj = Product.objects.get(name=Product.Names.BASKETBALL)
+
         external_id = item.get("id")
         kickoff_timestamp = item.get("timestamp")
         kickoff_datetime = datetime.fromtimestamp(kickoff_timestamp, tz=timezone.utc)
@@ -116,9 +126,13 @@ class BasketballApiService:
             away_team_score = ""
 
         logger.info(f"Processing fixture id: {external_id}, league_id: {league_id}")
-        league_obj = SportLeague.objects.get(
-            external_id=league_id, product__name=Product.Names.BASKETBALL
-        )
+        try:
+            league_obj = SportLeague.objects.get(
+                external_id=league_id, product__name=Product.Names.BASKETBALL
+            )
+        except SportLeague.DoesNotExist:
+            logger.error(f"League {league_id} not found")
+            return None
         home_team_obj = self._create_or_update_team(
             item.get("teams").get("home"), league_obj
         )
@@ -126,21 +140,38 @@ class BasketballApiService:
             item.get("teams").get("away"), league_obj
         )
 
-        try:
-            match_obj = SportMatch.objects.create(
-                external_id=external_id,
-                league=league_obj,
-                home_team=home_team_obj,
-                away_team=away_team_obj,
-                home_team_score=home_team_score,
-                away_team_score=away_team_score,
-                kickoff_datetime=kickoff_datetime,
-                product=Product.objects.get(name=Product.Names.BASKETBALL),
-            )
-            logger.info(f"Successfully created {match_obj}")
-        except Exception as e:
-            logger.error(f"Failed to create match: {e}")
-            return None
+        match_obj = SportMatch.objects.filter(
+            external_id=external_id, product=product_obj
+        ).first()
+
+        if match_obj:
+            # Update existing match
+            try:
+                match_obj.home_team_score = home_team_score
+                match_obj.away_team_score = away_team_score
+                match_obj.kickoff_datetime = kickoff_datetime
+                match_obj.save()
+                logger.info(f"Updated existing match: {match_obj}")
+            except Exception as e:
+                logger.error(f"Failed to update match: {e}")
+                return None
+        else:
+            # Create new match
+            try:
+                match_obj = SportMatch.objects.create(
+                    external_id=external_id,
+                    league=league_obj,
+                    home_team=home_team_obj,
+                    away_team=away_team_obj,
+                    home_team_score=home_team_score,
+                    away_team_score=away_team_score,
+                    kickoff_datetime=kickoff_datetime,
+                    product=product_obj,
+                )
+                logger.info(f"Successfully created {match_obj}")
+            except Exception as e:
+                logger.error(f"Failed to create match: {e}")
+                return None
 
         return match_obj
 

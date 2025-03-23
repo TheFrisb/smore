@@ -176,13 +176,19 @@ class FootballApiService:
                     )
                     match_obj.save()
 
-    def populate_upcoming_matches(self):
-        start_date = datetime.now()
-        logger.info(f"Fetching sport matches from start_date: {start_date}")
+    def fetch_sport_matches(self, start_date=None, end_date=None):
+        if start_date is None:
+            start_date = datetime.today() - timedelta(days=1)
+        if end_date is None:
+            end_date = start_date + timedelta(days=9)
 
-        for i in range(10):
-            date = start_date + timedelta(days=i)
-            formatted_date = date.strftime("%Y-%m-%d")
+        logger.info(
+            f"Fetching soccer sport matches from start_date: {start_date} to end_date: {end_date}"
+        )
+
+        current_date = start_date
+        while current_date <= end_date:
+            formatted_date = current_date.strftime("%Y-%m-%d")
             endpoint = f"{self.base_url}/fixtures?date={formatted_date}"
             logger.info(f"Fetching sport matches from endpoint: {endpoint}")
             response = requests.get(endpoint, headers=self._get_headers())
@@ -204,6 +210,8 @@ class FootballApiService:
                     )
                     match_obj.save()
 
+            current_date += timedelta(days=1)
+
     def fetch_match_prediction(self, external_id: int) -> dict:
         logger.info(f"Fetching predictions for match {external_id}")
         endpoint = f"{self.base_url}/predictions?fixture={external_id}"
@@ -224,6 +232,8 @@ class FootballApiService:
         return prediction
 
     def _process_fixture(self, item: dict):
+        product_obj = Product.objects.get(name=Product.Names.SOCCER)
+
         fixture = item.get("fixture")
         league = item.get("league")
         home_team = item.get("teams").get("home")
@@ -261,21 +271,38 @@ class FootballApiService:
 
         kickoff_datetime = datetime.fromtimestamp(kickoff_timestamp, tz=timezone.utc)
 
-        try:
-            match_obj = SportMatch.objects.create(
-                external_id=fixture.get("id"),
-                league=league_obj,
-                home_team=home_team_obj,
-                away_team=away_team_obj,
-                home_team_score=home_team_score,
-                away_team_score=away_team_score,
-                kickoff_datetime=kickoff_datetime,
-                product=Product.objects.get(name=Product.Names.SOCCER),
-            )
-            logger.info(f"Successfully created {match_obj}")
-        except Exception as e:
-            logger.error(f"Failed to create match: {e}")
-            return None
+        match_obj = SportMatch.objects.filter(
+            external_id=fixture.get("id"), product=product_obj
+        ).first()
+
+        if match_obj:
+            # Update existing match with new scores and kickoff datetime
+            try:
+                match_obj.home_team_score = home_team_score
+                match_obj.away_team_score = away_team_score
+                match_obj.kickoff_datetime = kickoff_datetime
+                match_obj.save()
+                logger.info(f"Updated existing match: {match_obj}")
+            except Exception as e:
+                logger.error(f"Failed to update match: {e}")
+                return None
+        else:
+            # Create a new match if it doesn’t exist
+            try:
+                match_obj = SportMatch.objects.create(
+                    external_id=fixture.get("id"),
+                    league=league_obj,
+                    home_team=home_team_obj,
+                    away_team=away_team_obj,
+                    home_team_score=home_team_score,
+                    away_team_score=away_team_score,
+                    kickoff_datetime=kickoff_datetime,
+                    product=product_obj,
+                )
+                logger.info(f"Successfully created {match_obj}")
+            except Exception as e:
+                logger.error(f"Failed to create match: {e}")
+                return None
 
         return match_obj
 
