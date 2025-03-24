@@ -22,7 +22,7 @@ class TeamExtractor:
                     - Note that a team name can also be a country name (e.g., "Spain", "Netherlands", "Denmark").
                     - Be aware that team names may be misspelled or abbreviated in the user's messages. Use the AI's responses to infer the correct team names when necessary.
                     - Do not include any additional text, explanations, or sentences in your response.
-                    - If the message refers to "this match", "the match", "last match", or similar vague phrases, assume it refers to the match that the AI most recently provided a prediction or analysis for in the conversation history.
+                    - If the message refers to "this match", "the match", "last match", or similar vague phrases, assume it refers to the last match mentioned in the conversation history.
                     - If no teams are referred to, respond with "No teams found."
 
                     Conversation History:
@@ -72,7 +72,9 @@ class TeamExtractor:
             )
 
             # Invoke the LLM with the prompt
-            response = self.chain.invoke({"history": history_text, "message": message, "sport": sport})
+            response = self.chain.invoke(
+                {"history": history_text, "message": message, "sport": sport}
+            )
             extracted_names = [
                 name.strip() for name in response.content.split(",") if name.strip()
             ]
