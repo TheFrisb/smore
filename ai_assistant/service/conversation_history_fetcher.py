@@ -8,9 +8,7 @@ from ai_assistant.models import Message
 
 class ConversationHistoryFetcher:
     def fetch(self, user: User) -> List[Union[HumanMessage, AIMessage]]:
-        recent_messages = Message.objects.filter(
-            user=user
-        ).order_by("-created_at")[:10]
+        recent_messages = Message.objects.filter(user=user).order_by("-created_at")[:10]
         direction_map = {
             Message.Direction.OUTBOUND: HumanMessage,
             Message.Direction.INBOUND: AIMessage,

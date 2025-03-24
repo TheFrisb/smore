@@ -20,9 +20,9 @@ class TeamExtractor:
                     **Instructions:**
                     - Respond **only** with the full team names as a comma-separated list (e.g., "Real Madrid, Barcelona").
                     - Note that a team name can also be a country name (e.g., "Spain", "Netherlands", "Denmark").
+                    - Be aware that team names may be misspelled or abbreviated in the user's messages. Use the AI's responses to infer the correct team names when necessary.
                     - Do not include any additional text, explanations, or sentences in your response.
-                    - If the message refers to "this match", "the match", "last match" or similar vague phrases, assume it refers to the most recently mentioned match in the conversation history (as per the timestamp of the user message).
-                    - If there are multiple matches mentioned in the history, prioritize the match mentioned in the most recent user message.
+                    - If the message refers to "this match", "the match", "last match", or similar vague phrases, assume it refers to the match that the AI most recently provided a prediction or analysis for in the conversation history.
                     - If no teams are referred to, respond with "No teams found."
 
                     Conversation History:
@@ -31,22 +31,22 @@ class TeamExtractor:
                     Current Message: {message}
 
                     Examples:
-                    - History: "User: Tell me about Spain vs Netherlands. AI: Here’s the analysis... User: Now Portugal vs Denmark. AI: Portugal is favored."
+                    - History: "User: Tell me about Spain vs Netherlands. AI: Here’s the analysis for Spain vs Netherlands... User: Now Portugal vs Denmark. AI: Here’s the analysis for Portugal vs Denmark..."
                       Current Message: "Can you give me other betting predictions for this match?"
                       Sport: soccer
                       Response: "Portugal, Denmark"
-                    - History: "User: Barcelona vs Manchester United updates? AI: It’s a close match."
-                      Current Message: "Any other picks?"
+                    - History: "User: Give me a prediction for England vs Lativa. AI: Here’s the prediction for England vs Latvia..."
+                      Current Message: "Give me other predictions for that match"
                       Sport: soccer
-                      Response: "Barcelona, Manchester United"
+                      Response: "England, Latvia"
+                    - History: "User: Give me detailed match prediction of Gibraltar vs Lativa. AI: Here’s the prediction for Gibraltar vs Latvia..."
+                      Current Message: "Give me other bets to play for that match"
+                      Sport: soccer
+                      Response: "Gibraltar, Latvia"
                     - History: None
                       Current Message: "real vs barca"
                       Sport: soccer
                       Response: "Real Madrid, Barcelona"
-                    - History: None
-                      Current Message: "Spain vs Netherlands"
-                      Sport: not specified
-                      Response: "Spain, Netherlands"
                     """,
         )
         self.chain = self.prompt | self.llm
