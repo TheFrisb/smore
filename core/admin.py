@@ -174,9 +174,8 @@ class SportMatchAdmin(admin.ModelAdmin):
     list_display = [
         "home_team",
         "away_team",
-        "league",
-        "kickoff_datetime",
-        "is_live",
+        "product",
+        "type",
     ]
 
     readonly_fields = ["home_team", "away_team", "league"]
