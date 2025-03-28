@@ -155,11 +155,13 @@ admin.site.register(SportCountry)
 @admin.register(SportLeague)
 class SportLeagueAdmin(admin.ModelAdmin):
     search_fields = ["name"]
+    list_display = ["name", "product", "type"]
 
 
 @admin.register(SportTeam)
 class SportTeamAdmin(admin.ModelAdmin):
     search_fields = ["name", "league__name"]
+    list_display = ["name", "product", "type"]
 
 
 @admin.register(SportMatch)
