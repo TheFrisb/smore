@@ -122,6 +122,9 @@ class ApiSportModel(BaseInternalModel):
     def __str__(self):
         return f"{self.product.name} - {self.type}"
 
+    class Meta:
+        abstract = True
+
 
 class SportCountry(BaseInternalModel):
     name = models.CharField(max_length=255, unique=True)
@@ -133,6 +136,8 @@ class SportCountry(BaseInternalModel):
 
 
 class SportLeague(ApiSportModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255)
     country = models.ForeignKey(SportCountry, on_delete=models.CASCADE)
     league_type = models.CharField(max_length=255)
@@ -145,6 +150,8 @@ class SportLeague(ApiSportModel):
 
 
 class SportTeam(ApiSportModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255, db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     logo = models.FileField(upload_to="assets/teams/logos/")
@@ -154,6 +161,8 @@ class SportTeam(ApiSportModel):
 
 
 class SportMatch(ApiSportModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     home_team = models.ForeignKey(
         SportTeam, on_delete=models.CASCADE, related_name="home_team"
