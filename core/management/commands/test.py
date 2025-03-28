@@ -1,29 +1,24 @@
-from datetime import datetime, timezone
-
 from django.core.management.base import BaseCommand
 
-from core.services.basketball_api_service import BasketballApiService
-from core.services.football_api_service import FootballApiService
-from core.services.hocker_api_service import HockeyApiService
-from core.services.sport_api_service import SportApiService
+from core.models import SportTeam, Product, ApiSportModel
 
 
 class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        sport_api_service = SportApiService()
+        sport_teams = SportTeam.objects.all()
+        soccer = Product.objects.get(name=Product.Names.SOCCER)
+        basketball = Product.objects.get(name=Product.Names.BASKETBALL)
 
-        self.load_matches()
+        for team in sport_teams:
+            if team.league.product != team.product:
+                print(f"Team {team.name} has different product ({team.product}) than league's: {team.league.product}")
+                team.product = team.league.product
 
-    def load_matches(self):
-        start_date = datetime(2025, 3, 28, tzinfo=timezone.utc)
-        end_date = datetime(2025, 4, 3, tzinfo=timezone.utc)
+                if team.league.product == soccer:
+                    team.type = ApiSportModel.SportType.SOCCER
+                elif team.league.product == basketball:
+                    team.type = ApiSportModel.SportType.BASKETBALL
 
-        basketball_api_service = BasketballApiService()
-        football_api_service = FootballApiService()
-        hockey_api_service = HockeyApiService()
-
-        football_api_service.populate_matches(start_date, end_date)
-        hockey_api_service.populate_matches(start_date, end_date)
-        basketball_api_service.populate_matches(start_date, end_date)
+                team.save()
