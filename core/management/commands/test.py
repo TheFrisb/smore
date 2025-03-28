@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
         sport_api_service.populate_countries(ApiSportModel.SportType.SOCCER)
         sport_api_service.populate_countries(ApiSportModel.SportType.BASKETBALL)
-        sport_api_service.populate_countries(ApiSportModel.SportType.NFL)
+        sport_api_service.populate_countries(ApiSportModel.SportType.NHL)
 
         sport_api_service.populate_leagues(
             ApiSportModel.SportType.SOCCER,
@@ -30,7 +30,7 @@ class Command(BaseCommand):
         )
 
         sport_api_service.populate_leagues(
-            ApiSportModel.SportType.NFL,
+            ApiSportModel.SportType.NHL,
             Product.objects.get(name=Product.Names.NFL_NHL_NCAA),
         )
 
