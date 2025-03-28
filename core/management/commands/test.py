@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
         sport_api_service.populate_countries(ApiSportModel.SportType.NHL)
         sport_api_service.populate_leagues(
-            ApiSportModel.SportType.NHL, Product.objects.get(Product.Names.NFL_NHL_NCAA)
+            ApiSportModel.SportType.NHL, Product.objects.get(name=Product.Names.NFL_NHL_NCAA)
         )
 
         hockey_api_service.populate_matches(start_date, end_date)
