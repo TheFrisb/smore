@@ -122,11 +122,7 @@ class ApiSportModel(BaseInternalModel):
     def __str__(self):
         return f"{self.product.name} - {self.type}"
 
-    class Meta:
-        unique_together = ("type", "external_id")
-        abstract = True
-
-
+    
 class SportCountry(BaseInternalModel):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=255, blank=True)
