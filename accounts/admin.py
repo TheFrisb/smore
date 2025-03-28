@@ -321,6 +321,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         "user",
         "is_active",
         "frequency",
+        "subscribed_sports",
         "price",
         "start_date",
         "end_date",
@@ -333,7 +334,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         "user__stripe_customer_id",
         "stripe_subscription_id",
     )
-    list_filter = ("status", "frequency", SubscriptionTypeFilter)
+    list_filter = ("status", "frequency", SubscriptionTypeFilter, "products")
 
     fieldsets = (
         (
@@ -366,6 +367,24 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
 
     is_custom_subscription.boolean = True
     is_custom_subscription.short_description = "Custom Subscription"
+
+    def subscribed_sports(self, obj):
+        """
+        Return a comma-separated list of subscribed sports (products) for the user.
+        """
+        if hasattr(obj, "products") and obj.products:
+            return ", ".join([product.name for product in obj.products.all()])
+        return None
+
+    subscribed_sports.short_description = "Subscribed Sports"
+    subscribed_sports.admin_order_field = "products"
+
+    def get_queryset(self, request):
+        """
+        Annotate the queryset to include the product names for display.
+        """
+        queryset = super().get_queryset(request)
+        return queryset.prefetch_related("products")
 
 
 class ReferralEarningInline(admin.TabularInline):

@@ -45,10 +45,16 @@ class HockeyApiService(SportApiService):
             return
 
         home_team_obj = self._create_or_update_team(
-            item.get("teams").get("home"), league_obj, ApiSportModel.SportType.NHL, product_obj
+            item.get("teams").get("home"),
+            league_obj,
+            ApiSportModel.SportType.NHL,
+            product_obj,
         )
         away_team_obj = self._create_or_update_team(
-            item.get("teams").get("away"), league_obj, ApiSportModel.SportType.NHL, product_obj
+            item.get("teams").get("away"),
+            league_obj,
+            ApiSportModel.SportType.NHL,
+            product_obj,
         )
 
         match_obj = SportMatch.objects.filter(

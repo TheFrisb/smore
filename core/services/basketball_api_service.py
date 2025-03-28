@@ -46,14 +46,21 @@ class BasketballApiService(SportApiService):
             return
 
         home_team_obj = self._create_or_update_team(
-            item.get("teams").get("home"), league_obj, ApiSportModel.SportType.BASKETBALL, self._get_product(league_obj)
+            item.get("teams").get("home"),
+            league_obj,
+            ApiSportModel.SportType.BASKETBALL,
+            self._get_product(league_obj),
         )
         away_team_obj = self._create_or_update_team(
-            item.get("teams").get("away"), league_obj, ApiSportModel.SportType.BASKETBALL, self._get_product(league_obj)
+            item.get("teams").get("away"),
+            league_obj,
+            ApiSportModel.SportType.BASKETBALL,
+            self._get_product(league_obj),
         )
 
         match_obj = SportMatch.objects.filter(
-            external_id=external_id, type=ApiSportModel.SportType.BASKETBALL,
+            external_id=external_id,
+            type=ApiSportModel.SportType.BASKETBALL,
         ).first()
 
         if match_obj:
