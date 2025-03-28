@@ -57,7 +57,7 @@ class Product(BaseProductModel):
     class Names(models.TextChoices):
         SOCCER = "Soccer", _("Soccer")
         BASKETBALL = "Basketball", _("Basketball")
-        NFL = "NFL", _("NFL")
+        NFL_NHL_NCAA = "NFL_NHL_NCAA", _("NFL + NHL + NCAA")
         TENNIS = "Tennis", _("Tennis")
         AI_ANALYST = "AI Analyst", _("AI Analyst")
 
@@ -108,6 +108,25 @@ class SiteSettings(BaseInternalModel, SingletonModel):
         verbose_name_plural = "Site Settings"
 
 
+class ApiSportModel(BaseInternalModel):
+    class SportType(models.TextChoices):
+        SOCCER = "SOCCER", _("Soccer")
+        BASKETBALL = "BASKETBALL", _("Basketball")
+        NFL = "NFL", _("NFL")
+        NHL = "NHL", _("NHL")
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    external_id = models.IntegerField(db_index=True)
+    type = models.CharField(choices=SportType, max_length=255)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.type}"
+
+    class Meta:
+        unique_together = ("type", "external_id")
+        abstract = True
+
+
 class SportCountry(BaseInternalModel):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=255, blank=True)
@@ -117,7 +136,7 @@ class SportCountry(BaseInternalModel):
         return self.name
 
 
-class SportLeague(BaseInternalModel):
+class SportLeague(ApiSportModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255)
@@ -129,6 +148,9 @@ class SportLeague(BaseInternalModel):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = ("product", "external_id")
 
 
 class SportTeam(BaseInternalModel):
@@ -142,8 +164,9 @@ class SportTeam(BaseInternalModel):
         return f"{self.name}"
 
 
-class SportMatch(BaseInternalModel):
+class SportMatch(ApiSportModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    type = models.CharField(choices=ApiSportModel.SportType, max_length=255)
     external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     home_team = models.ForeignKey(
@@ -209,7 +232,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

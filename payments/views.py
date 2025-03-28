@@ -169,9 +169,7 @@ class UpdateSubscriptionView(APIView):
         firstProduct = serializers.IntegerField(allow_null=True)
 
     def use_discounted_prices(self, products):
-        """
-        Check if the soccer product is present in the list of products and that more than one product is present.
-        """
+
         return len(products) > 1
 
     def post(self, request, *args, **kwargs):

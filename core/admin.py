@@ -1,9 +1,9 @@
+import logging
 from datetime import timedelta
 
 from adminsortable2.admin import SortableAdminMixin
 from django import forms
 from django.contrib import admin
-from django.db.models import Q
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
@@ -18,7 +18,8 @@ from core.models import (
     SportTeam,
     SportMatch,
 )
-from core.services.football_api_service import allowed_league_ids
+
+logger = logging.getLogger(__name__)
 
 
 # Register your models here.
@@ -187,25 +188,8 @@ class SportMatchAdmin(admin.ModelAdmin):
         product_id = request.GET.get("product_id")
 
         if product_id:
-            print("Found product_id")
-            try:
-                product = Product.objects.get(id=product_id)
-            except Product.DoesNotExist:
-                pass
-
-            queryset = queryset.filter(product=product)
-            #
-            # if product.name == Product.Names.SOCCER:
-            #     queryset = queryset.filter(league__external_id__in=allowed_league_ids)
-
-        else:
-            queryset = queryset.filter(
-                Q(
-                    product__name=Product.Names.SOCCER,
-                    league__external_id__in=allowed_league_ids,
-                )
-                | Q(product__name=Product.Names.BASKETBALL),
-                kickoff_datetime__gte=start_date,
-            )
+            product = Product.objects.filter(id=product_id).first()
+            if product:
+                queryset = queryset.filter(product=product)
 
         return super().get_search_results(request, queryset, search_term)

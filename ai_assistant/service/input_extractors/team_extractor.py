@@ -52,10 +52,10 @@ class TeamExtractor:
         self.chain = self.prompt | self.llm
 
     def extract(
-            self,
-            message: str,
-            history: List[Union[HumanMessage, AIMessage]],
-            sport: Optional[str] = None,
+        self,
+        message: str,
+        history: List[Union[HumanMessage, AIMessage]],
+        sport: Optional[str] = None,
     ) -> List[SportTeam]:
         try:
             # Format the conversation history

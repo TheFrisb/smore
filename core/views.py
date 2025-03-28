@@ -57,15 +57,15 @@ class HistoryView(TemplateView):
         context = super().get_context_data(**kwargs)
         filter = self.request.GET.get("filter", "all")
         if filter == "all":
-            context["filter"] = "All sports"
+            context["filter_product"] = None
             context["predictions"] = self.get_history_predictions(None)
         else:
             try:
                 product = Product.objects.get(name=filter)
-                context["filter"] = product.name
+                context["filter_product"] = product
                 context["predictions"] = self.get_history_predictions(filter)
             except Product.DoesNotExist:
-                context["filter"] = "All sports"
+                context["filter_product"] = None
                 context["predictions"] = self.get_history_predictions(None)
 
         context["page_title"] = _("History")
@@ -120,16 +120,16 @@ class DetailedPredictionView(DetailView):
             return True
 
         if (
-            self.request.user.is_authenticated
-            and self.request.user.has_access_to_product(prediction.product)
+                self.request.user.is_authenticated
+                and self.request.user.has_access_to_product(prediction.product)
         ):
             return True
 
         if (
-            self.request.user.is_authenticated
-            and PurchasedPredictions.objects.filter(
-                user=self.request.user, prediction=prediction
-            ).exists()
+                self.request.user.is_authenticated
+                and PurchasedPredictions.objects.filter(
+            user=self.request.user, prediction=prediction
+        ).exists()
         ):
             return True
 
@@ -139,8 +139,8 @@ class DetailedPredictionView(DetailView):
         prediction = self.get_object()
 
         if (
-            prediction.status != Prediction.Status.PENDING
-            or not prediction.has_detailed_analysis
+                prediction.status != Prediction.Status.PENDING
+                or not prediction.has_detailed_analysis
         ):
             logger.info(
                 f"User {request.user} tried to access detailed prediction view for prediction {prediction.id} with status {prediction.status} and has_detailed_analysis {prediction.has_detailed_analysis}. Redirecting to home page."
@@ -265,16 +265,18 @@ class UpcomingMatchesView(TemplateView):
 
         filter = self.request.GET.get("filter", "all")
         if filter == "all":
-            print("All sports")
-            context["filter"] = "All sports"
+            print("all")
+            context["filter_product"] = None
             context["grouped_predictions"] = self.get_grouped_predictions(None)
         else:
+            print(filter)
             try:
                 product = Product.objects.get(name=filter)
-                context["filter"] = product.name
+                print(product.name)
+                context["filter_product"] = product
                 context["grouped_predictions"] = self.get_grouped_predictions(filter)
             except Product.DoesNotExist:
-                context["filter"] = "All sports"
+                context["filter_product"] = None
                 context["grouped_predictions"] = self.get_grouped_predictions(None)
 
         context["pick_of_the_day"] = PickOfTheDay.get_solo()
@@ -346,10 +348,10 @@ class AiAssistantView(TemplateView):
         context["hide_footer"] = True
         context["hide_ai_button"] = True
         context["has_access"] = (
-            self.request.user.is_authenticated
-            and self.request.user.has_access_to_product(
-                Product.objects.get(name=Product.Names.AI_ANALYST)
-            )
+                self.request.user.is_authenticated
+                and self.request.user.has_access_to_product(
+            Product.objects.get(name=Product.Names.AI_ANALYST)
+        )
         )
         return context
 

@@ -1,20 +1,15 @@
 import logging
-import os
-import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 import requests
-from django.conf import settings
 from django.utils import timezone as django_timezone
 
 from core.models import (
-    SportCountry,
     SportLeague,
-    SportTeam,
     SportMatch,
-    Prediction,
     Product,
 )
+from core.services.sport_api_service import SportApiService
 
 logger = logging.getLogger(__name__)
 
@@ -53,169 +48,24 @@ allowed_league_ids = [
 ]
 
 
-class FootballApiService:
-    def __init__(self):
-        self.base_url = settings.RAPIDAPI_HOST
-        self.rapidapi_host = settings.RAPIDAPI_HOST
-        self.rapidapi_key = settings.RAPIDAPI_KEY
+class FootballApiService(SportApiService):
 
-    def _get_headers(self):
-        return {
-            # "x-rapidapi-host": settings.RAPIDAPI_HOST,
-            # "x-rapidapi-key": settings.RAPIDAPI_KEY,
-            "x-apisports-key": settings.RAPIDAPI_KEY,
-        }
-
-    def populate_countries(self):
-        endpoint = f"{self.base_url}/countries"
-        response = requests.get(endpoint, headers=self._get_headers())
-        data = response.json()
-
-        for country in data.get("response", []):
-            name = country.get("name")
-            code = country.get("code")
-            flag_url = country.get("flag")
-
-            if code is None:
-                code = ""
-
-            flag_path = self._download_asset(flag_url, "assets/flags", f"{code}.svg")
-            try:
-                SportCountry.objects.create(name=name, code=code, logo=flag_path)
-                logger.info(f"Created country: {name}")
-            except Exception as e:
-                logger.error(f"Failed to create country: {name} - {e}")
-
-    def populate_leagues(self):
-        endpoint = f"{self.base_url}/leagues"
-        response = requests.get(endpoint, headers=self._get_headers())
-        data = response.json()
-
-        for item in data.get("response"):
-            league = item.get("league")
-            country = item.get("country")
-
-            league_name = league.get("name")
-            league_id = league.get("id")
-
-            league_type = league.get("type")
-            league_logo_url = league.get("logo")
-
-            country_name = country.get("name")
-            country_obj = SportCountry.objects.get(name=country_name)
-
-            league_logo_path = self._download_asset(
-                league_logo_url, f"assets/leagues/logos/", f"{league_id}.png"
-            )
-
-            try:
-                SportLeague.objects.create(
-                    external_id=league_id,
-                    name=league_name,
-                    country=country_obj,
-                    league_type=league_type,
-                    logo=league_logo_path,
-                    product=Product.objects.get(name=Product.Names.SOCCER),
-                )
-                logger.info(f"Created league: {league_name}")
-            except Exception as e:
-                logger.error(f"Failed to create league: {league_name} - {e}")
-
-    def populate_matches_per_league_id(self, league_id: int):
-        start_season = 2022
-        end_season = 2026
-
-        for season in range(start_season, end_season):
-            if season == 2025:
-                logger.info(f"Marking league ID: {league_id} as processed")
-                league_obj = SportLeague.objects.get(
-                    external_id=league_id,
-                    product__name=Product.Names.SOCCER,
-                )
-                league_obj.is_processed = True
-                league_obj.save()
-                break
-            endpoint = f"{self.base_url}/fixtures?league={league_id}&season={season}"
-            logger.info(f"Fetching sport matches from endpoint: {endpoint}")
-            response = requests.get(endpoint, headers=self._get_headers())
-
-            if response.status_code != 200:
-                logger.error(f"Failed to fetch sport matches for url: {endpoint}")
-                continue
-
-            data = response.json()
-            for item in data.get("response"):
-                match_obj = self._process_fixture(item)
-
-                if match_obj is None:
-                    if season < 2024:
-                        match_obj = SportMatch.objects.filter(
-                            external_id=item.get("fixture").get("id")
-                        ).first()
-                        if match_obj:
-                            logger.info(
-                                f"Marking league ID: {league_id} as processed because match {match_obj.external_id} [{match_obj.kickoff_datetime}] already exists"
-                            )
-                            league_obj = SportLeague.objects.get(
-                                external_id=league_id,
-                                product__name=Product.Names.SOCCER,
-                            )
-                            league_obj.is_processed = True
-                            league_obj.save()
-                            logger.info(f"Marked league ID: {league_id} as processed")
-                            break
-
-                    logger.error(
-                        f"Failed to process fixture {item.get('fixture').get('id')}"
-                    )
-                    continue
-
-                if match_obj.kickoff_datetime > django_timezone.now():
-                    match_obj.metadata = self.fetch_match_prediction(
-                        match_obj.external_id
-                    )
-                    match_obj.save()
-
-    def fetch_sport_matches(self, start_date=None, end_date=None):
-        if start_date is None:
-            start_date = datetime.today() - timedelta(days=1)
-        if end_date is None:
-            end_date = start_date + timedelta(days=9)
-
-        logger.info(
-            f"Fetching soccer sport matches from start_date: {start_date} to end_date: {end_date}"
+    def populate_matches(self, start_date: datetime, end_date: datetime) -> None:
+        endpoint = f"{self._get_base_url(SportMatch.SportType.SOCCER)}/fixtures"
+        self.fetch_sport_matches(
+            start_date,
+            end_date,
+            endpoint,
+            SportMatch.SportType.SOCCER,
+            self._process_fixture,
         )
-
-        current_date = start_date
-        while current_date <= end_date:
-            formatted_date = current_date.strftime("%Y-%m-%d")
-            endpoint = f"{self.base_url}/fixtures?date={formatted_date}"
-            logger.info(f"Fetching sport matches from endpoint: {endpoint}")
-            response = requests.get(endpoint, headers=self._get_headers())
-
-            if response.status_code != 200:
-                logger.error(f"Failed to fetch sport matches for url: {endpoint}")
-                continue
-
-            data = response.json()
-            for item in data.get("response"):
-                match_obj = self._process_fixture(item)
-
-                if match_obj is None:
-                    continue
-
-                if match_obj.kickoff_datetime > django_timezone.now():
-                    match_obj.metadata = self.fetch_match_prediction(
-                        match_obj.external_id
-                    )
-                    match_obj.save()
-
-            current_date += timedelta(days=1)
 
     def fetch_match_prediction(self, external_id: int) -> dict:
         logger.info(f"Fetching predictions for match {external_id}")
-        endpoint = f"{self.base_url}/predictions?fixture={external_id}"
-        response = requests.get(endpoint, headers=self._get_headers())
+        endpoint = f"{self._get_base_url(SportMatch.SportType.SOCCER)}/predictions?fixture={external_id}"
+        response = requests.get(
+            endpoint, headers=self._get_headers(SportMatch.SportType.SOCCER)
+        )
 
         if response.status_code != 200:
             logger.error(f"Failed to fetch sport matches for url: {endpoint}")
@@ -276,7 +126,6 @@ class FootballApiService:
         ).first()
 
         if match_obj:
-            # Update existing match with new scores and kickoff datetime
             try:
                 match_obj.home_team_score = home_team_score
                 match_obj.away_team_score = away_team_score
@@ -287,7 +136,6 @@ class FootballApiService:
                 logger.error(f"Failed to update match: {e}")
                 return None
         else:
-            # Create a new match if it doesn’t exist
             try:
                 match_obj = SportMatch.objects.create(
                     external_id=fixture.get("id"),
@@ -304,83 +152,8 @@ class FootballApiService:
                 logger.error(f"Failed to create match: {e}")
                 return None
 
+        if match_obj.kickoff_datetime > django_timezone.now():
+            match_obj.metadata = self.fetch_match_prediction(match_obj.external_id)
+            match_obj.save()
+
         return match_obj
-
-    def update_prediction_scores(self):
-        predictions = Prediction.objects.filter(match__home_team_score="").order_by(
-            "-match__kickoff_datetime"
-        )
-        logger.info(f"Found {predictions.count()} predictions without scores")
-
-        for prediction in predictions:
-            time.sleep(5)
-            sport_match = prediction.match
-            sport_match_external_id = sport_match.external_id
-
-            endpoint = f"{self.base_url}/fixtures?id={sport_match_external_id}"
-            response = requests.get(endpoint, headers=self.get_headers())
-
-            if response.status_code != 200:
-                logger.error(f"Failed to fetch sport matches for url: {endpoint}")
-                continue
-
-            data = response.json()
-            score = data.get("response")[0].get("score").get("fulltime")
-            home_team_score = score.get("home")
-            away_team_score = score.get("away")
-
-            if home_team_score is None or away_team_score is None:
-                logger.info(
-                    f"Skipping match {sport_match_external_id}, as it has no score"
-                )
-                continue
-
-            sport_match.home_team_score = home_team_score
-            sport_match.away_team_score = away_team_score
-
-            sport_match.save()
-            logger.info(
-                f"Successfully updated match {sport_match_external_id} with score {home_team_score} - {away_team_score}"
-            )
-
-    def _create_or_update_team(self, team_data, league_obj):
-        team_id = team_data.get("id")
-        team_name = team_data.get("name")
-        team_logo_url = team_data.get("logo")
-
-        team_logo_path = self._download_asset(
-            team_logo_url, f"assets/teams/logos/", f"{team_id}.png"
-        )
-
-        try:
-            team_obj, created = SportTeam.objects.get_or_create(
-                external_id=team_id,
-                product=Product.objects.get(name=Product.Names.SOCCER),
-                defaults={
-                    "name": team_name,
-                    "league": league_obj,
-                    "logo": team_logo_path,
-                },
-            )
-            return team_obj
-        except Exception as e:
-            logger.error(f"Failed to create team {team_name}: {e}")
-            return None
-
-    def _download_asset(self, asset_url, upload_dir, filename):
-        if not asset_url:
-            return None
-
-        flag_response = requests.get(asset_url, stream=True)
-        if flag_response.status_code == 200:
-            flag_dir = os.path.join(settings.MEDIA_ROOT, upload_dir)
-            os.makedirs(flag_dir, exist_ok=True)
-
-            flag_filename = filename
-            flag_path = os.path.join(upload_dir, flag_filename)
-            full_flag_path = os.path.join(settings.MEDIA_ROOT, flag_path)
-            with open(full_flag_path, "wb") as f:
-                for chunk in flag_response.iter_content(1024):
-                    f.write(chunk)
-
-            return flag_path

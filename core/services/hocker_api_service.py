@@ -6,30 +6,29 @@ from core.services.sport_api_service import SportApiService
 
 logger = logging.getLogger(__name__)
 
-BASKETBALL_NCAA_LEAGUE_IDS = [116, 423]
 
-
-class BasketballApiService(SportApiService):
+class HockeyApiService(SportApiService):
 
     def populate_matches(self, start_date: datetime, end_date: datetime) -> None:
-        endpoint = f"{self._get_base_url(ApiSportModel.SportType.BASKETBALL)}/games"
+        endpoint = f"{self._get_base_url(ApiSportModel.SportType.NHL)}/games"
         self.fetch_sport_matches(
             start_date,
             end_date,
             endpoint,
-            ApiSportModel.SportType.BASKETBALL,
+            ApiSportModel.SportType.NHL,
             self._process_fixture,
         )
 
     def _process_fixture(self, item):
+        product_obj = Product.objects.get(name=Product.Names.NFL_NHL_NCAA)
 
         external_id = item.get("id")
         kickoff_timestamp = item.get("timestamp")
         kickoff_datetime = datetime.fromtimestamp(kickoff_timestamp, tz=timezone.utc)
         league_id = item.get("league").get("id")
 
-        home_team_score = item.get("scores").get("home").get("total")
-        away_team_score = item.get("scores").get("away").get("total")
+        home_team_score = item.get("scores").get("home")
+        away_team_score = item.get("scores").get("away")
 
         if not home_team_score:
             home_team_score = ""
@@ -37,7 +36,7 @@ class BasketballApiService(SportApiService):
             away_team_score = ""
 
         logger.info(f"Processing match ID: {external_id} for league ID: {league_id}")
-        league_obj = self._get_league_obj(league_id, ApiSportModel.SportType.BASKETBALL)
+        league_obj = self._get_league_obj(league_id, ApiSportModel.SportType.NHL)
 
         if not league_obj:
             logger.error(
@@ -53,7 +52,7 @@ class BasketballApiService(SportApiService):
         )
 
         match_obj = SportMatch.objects.filter(
-            external_id=external_id, type=ApiSportModel.SportType.BASKETBALL
+            external_id=external_id, type=ApiSportModel.SportType.NHL
         ).first()
 
         if match_obj:
@@ -62,29 +61,23 @@ class BasketballApiService(SportApiService):
                 match_obj.away_team_score = away_team_score
                 match_obj.kickoff_datetime = kickoff_datetime
                 match_obj.save()
-                logger.info(f"Updated basketball match: {match_obj}")
+                logger.info(f"Updated NHL match: {match_obj}")
             except Exception as e:
-                logger.error(f"Failed to update basketball match: {e}")
+                logger.error(f"Failed to update NHL match: {e}")
                 return
         else:
             try:
                 match_obj = SportMatch.objects.create(
                     external_id=external_id,
-                    type=ApiSportModel.SportType.BASKETBALL,
+                    type=ApiSportModel.SportType.NHL,
                     league=league_obj,
                     home_team=home_team_obj,
                     away_team=away_team_obj,
                     home_team_score=home_team_score,
                     away_team_score=away_team_score,
                     kickoff_datetime=kickoff_datetime,
-                    product=self._get_product(league_obj),
+                    product=product_obj,
                 )
-                logger.info(f"Successfully created basketball match: {match_obj}")
+                logger.info(f"Successfully created NHL match: {match_obj}")
             except Exception as e:
-                logger.error(f"Failed to create basketball match: {e}")
-
-    def _get_product(self, league):
-        if league.external_id in BASKETBALL_NCAA_LEAGUE_IDS:
-            return Product.objects.get(name=Product.Names.NFL_NHL_NCAA)
-        else:
-            return Product.objects.get(name=Product.Names.BASKETBALL)
+                logger.error(f"Failed to create NHL match: {e}")

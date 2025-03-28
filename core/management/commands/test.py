@@ -2,19 +2,42 @@ from datetime import datetime, timezone
 
 from django.core.management.base import BaseCommand
 
+from core.models import ApiSportModel, Product
 from core.services.basketball_api_service import BasketballApiService
 from core.services.football_api_service import FootballApiService
+from core.services.hocker_api_service import HockeyApiService
+from core.services.sport_api_service import SportApiService
 
 
 class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
+        start_date = datetime(2025, 3, 26, tzinfo=timezone.utc)
+        end_date = datetime(2025, 3, 28, tzinfo=timezone.utc)
+
         basketball_api_service = BasketballApiService()
         football_api_service = FootballApiService()
+        hockey_api_service = HockeyApiService()
+        sport_api_service = SportApiService()
 
-        start_date = datetime(2025, 3, 9, tzinfo=timezone.utc)
-        end_date = datetime(2025, 3, 29, tzinfo=timezone.utc)
+        sport_api_service.populate_countries(ApiSportModel.SportType.NFL)
+        sport_api_service.populate_leagues(
+            ApiSportModel.SportType.NFL, Product.objects.get(Product.Names.NFL_NHL_NCAA)
+        )
 
-        football_api_service.fetch_sport_matches(start_date, end_date)
-        basketball_api_service.fetch_sport_matches(start_date, end_date)
+        hockey_api_service.populate_matches(start_date, end_date)
+
+        self.load_matches()
+
+    def load_matches(self):
+        start_date = datetime(2025, 3, 15, tzinfo=timezone.utc)
+        end_date = datetime(2025, 4, 10, tzinfo=timezone.utc)
+
+        basketball_api_service = BasketballApiService()
+        football_api_service = FootballApiService()
+        hockey_api_service = HockeyApiService()
+
+        basketball_api_service.populate_matches(start_date, end_date)
+        football_api_service.populate_matches(start_date, end_date)
+        hockey_api_service.populate_matches(start_date, end_date)
