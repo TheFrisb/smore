@@ -124,6 +124,7 @@ class ApiSportModel(BaseInternalModel):
 
     class Meta:
         abstract = True
+        unique_together = ("external_id", "type")
 
 
 class SportCountry(BaseInternalModel):
