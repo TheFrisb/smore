@@ -177,6 +177,7 @@ class SportApiService:
                 logger.error(
                     f"Failed to fetch {sport_type} matches from endpoint: {query_endpoint}. Status code: {response.status_code}"
                 )
+                current_date += timedelta(days=1)
                 continue
 
             data = response.json()

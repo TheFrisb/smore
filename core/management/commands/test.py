@@ -13,20 +13,13 @@ class Command(BaseCommand):
     help = "Create 20 FAQ items with varying questions and answers."
 
     def handle(self, *args, **kwargs):
-        start_date = datetime(2025, 3, 26, tzinfo=timezone.utc)
-        end_date = datetime(2025, 3, 28, tzinfo=timezone.utc)
-
-        basketball_api_service = BasketballApiService()
-        football_api_service = FootballApiService()
-        hockey_api_service = HockeyApiService()
         sport_api_service = SportApiService()
 
-        sport_api_service.populate_countries(ApiSportModel.SportType.NHL)
+        sport_api_service.populate_countries(ApiSportModel.SportType.BASKETBALL)
         sport_api_service.populate_leagues(
-            ApiSportModel.SportType.NHL, Product.objects.get(name=Product.Names.NFL_NHL_NCAA)
+            ApiSportModel.SportType.BASKETBALL,
+            Product.objects.get(name=Product.Names.BASKETBALL),
         )
-
-        hockey_api_service.populate_matches(start_date, end_date)
 
         self.load_matches()
 
@@ -38,6 +31,6 @@ class Command(BaseCommand):
         football_api_service = FootballApiService()
         hockey_api_service = HockeyApiService()
 
-        basketball_api_service.populate_matches(start_date, end_date)
         football_api_service.populate_matches(start_date, end_date)
         hockey_api_service.populate_matches(start_date, end_date)
+        basketball_api_service.populate_matches(start_date, end_date)
