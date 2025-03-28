@@ -36,12 +36,11 @@ class Command(BaseCommand):
 
     def load_matches(self):
         start_date = datetime(2025, 3, 28, tzinfo=timezone.utc)
-        end_date = datetime(2025, 4, 3, tzinfo=timezone.utc)
+        end_date = datetime(2025, 31, 31, tzinfo=timezone.utc)
 
         basketball_api_service = BasketballApiService()
-        football_api_service = FootballApiService()
         hockey_api_service = HockeyApiService()
+        football_api_service = FootballApiService()
 
-        football_api_service.populate_matches(start_date, end_date)
-        hockey_api_service.populate_matches(start_date, end_date)
         basketball_api_service.populate_matches(start_date, end_date)
+        hockey_api_service.populate_matches(start_date, end_date)
