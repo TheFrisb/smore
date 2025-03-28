@@ -57,7 +57,7 @@ class Product(BaseProductModel):
     class Names(models.TextChoices):
         SOCCER = "Soccer", _("Soccer")
         BASKETBALL = "Basketball", _("Basketball")
-        NFL_NHL_NCAA = "NFL_NHL_NCAA", _("NFL + NHL + NCAA")
+        NFL_NHL_NCAA = "NFL_NHL_NCAA", _("NFL, NHL, NCAA")
         TENNIS = "Tennis", _("Tennis")
         AI_ANALYST = "AI Analyst", _("AI Analyst")
 

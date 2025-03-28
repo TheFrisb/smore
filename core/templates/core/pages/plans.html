@@ -64,13 +64,28 @@
                         {% endif %}
                         <div class="absolute inset-0 bg-gradient-to-br from-secondary-500/0 via-secondary-500/0 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                         <div class="relative">
-                            <div class="flex justify-between items-start mb-6">
+                            <div class="flex justify-between items-start mb-6 gap-4">
                                 <div>
-                                    <div class="flex items-center space-x-2">
-                                        {% svg_icon icon_name=product.name|lower|add:"Icon" css_classes="w-6 h-6 text-secondary-400" %}
-                                        <h3 class="text-xl font-bold text-white">
-                                            {{ product.get_name_display }}
-                                        </h3>
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        {% if product.name != 'NFL_NHL_NCAA' %}
+                                            {% svg_icon icon_name=product.name|lower|add:"Icon" css_classes="w-6 h-6 text-secondary-400" %}
+                                            <h3 class="text-xl font-bold text-white">
+                                                {{ product.get_name_display }}
+                                            </h3>
+                                        {% else %}
+                                            <div class="flex items-center justify-start gap-2">
+                                                {% svg_icon icon_name="nflIcon" css_classes="w-5 h-5 text-secondary-400" %}
+                                                <p class="text-xl font-bold text-white">NFL,</p>
+                                            </div>
+                                            <div class="flex items-center justify-start gap-2">
+                                                {% svg_icon icon_name="nhlIcon" css_classes="w-5 h-5 text-secondary-400" %}
+                                                <p class="text-xl font-bold text-white">NHL, </p>
+                                            </div>
+                                            <div class="flex items-center justify-start gap-2">
+                                                {% svg_icon icon_name="basketballIcon" css_classes="w-5 h-5 text-secondary-400" %}
+                                                <p class="text-xl font-bold text-white">NCAA</p>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="flex items-center gap-3 mt-2">
                                         <p class="text-lg text-primary-400 line-through hidden product__NoDiscountPrice">

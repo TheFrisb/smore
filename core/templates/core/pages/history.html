@@ -9,16 +9,31 @@
             <div class="mx-auto flex flex-col md:flex-row items-center justify-center gap-6 max-w-6xl mb-8">
                 <div class="flex flex-wrap gap-3 relative">
 
-                    <div class="relative min-w-48 flex justify-between items-center ">
+                    <div class="relative min-w-64 flex justify-between items-center ">
                         <button class="sportDropdownButton w-full flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
 
 
                             {% if filter_product %}
-                                {% with iconName=filter_product.name|cut:" "|lower|add:"Icon" %}
-                                    {% svg_icon icon_name=iconName css_classes="w-4 h-4 text-secondary" %}
-                                {% endwith %}
-                                <span>{% blocktranslate with name=filter_product.get_name_display %}
-                                    {{ name }}{% endblocktranslate %}</span>
+                                {% if filter_product.name != "NFL_NHL_NCAA" %}
+                                    {% with iconName=filter_product.name|cut:" "|lower|add:"Icon" %}
+                                        {% svg_icon icon_name=iconName css_classes="w-4 h-4 text-secondary" %}
+                                    {% endwith %}
+                                    <span>{% blocktranslate with name=filter_product.get_name_display %}
+                                        {{ name }}{% endblocktranslate %}</span>
+                                {% else %}
+                                    <div class="flex items-center justify-start gap-2">
+                                        {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4 text-secondary" %}
+                                        <span>NFL,</span>
+                                    </div>
+                                    <div class="flex items-center justify-start gap-2">
+                                        {% svg_icon icon_name="nhlIcon" css_classes="w-4 h-4 text-secondary" %}
+                                        <span>NHL, </span>
+                                    </div>
+                                    <div class="flex items-center justify-start gap-2">
+                                        {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4 text-secondary" %}
+                                        <span>NCAA</span>
+                                    </div>
+                                {% endif %}
                             {% else %}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -43,8 +58,9 @@
 
                         </button>
 
+
                     </div>
-                    <div class="hidden absolute top-full left-0 mt-2 w-48 bg-primary-800/95 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 z-50">
+                    <div class="hidden absolute top-full left-0 mt-2 w-full bg-primary-800/95 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 z-50">
                         <div class="relative">
                             <a href="{% url 'core:history' %}"
                                class="w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if not filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
@@ -65,10 +81,25 @@
                             <div class="relative flex items-center justify-between">
                                 <a {% if product.name != 'Tennis' %}href="{% url 'core:history' %}?filter={{ product.name }}"{% endif %}
                                    class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product == filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'Tennis' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
-                                    {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-4 h-4 text-secondary-400" %}
 
-                                    <span>{% blocktrans with name=product.get_name_display %}
-                                        {{ name }}{% endblocktrans %}</span>
+                                    {% if product.name != 'NFL_NHL_NCAA' %}
+                                        {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-4 h-4 text-secondary-400" %}
+                                        <span>{% blocktrans with name=product.get_name_display %}
+                                            {{ name }}{% endblocktrans %}</span>
+                                    {% else %}
+                                        <div class="flex items-center justify-start gap-2">
+                                            {% svg_icon icon_name="nflIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                                            <span>NFL,</span>
+                                        </div>
+                                        <div class="flex items-center justify-start gap-2">
+                                            {% svg_icon icon_name="nhlIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                                            <span>NHL, </span>
+                                        </div>
+                                        <div class="flex items-center justify-start gap-2">
+                                            {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                                            <span>NCAA</span>
+                                        </div>
+                                    {% endif %}
                                     {% if product.name == 'Tennis' %}
                                         <div class="px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20 ">
                                             <span class="text-xs text-secondary-400 nowrap leading-none">Soon</span>
