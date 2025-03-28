@@ -187,7 +187,11 @@ class SportApiService:
             current_date += timedelta(days=1)
 
     def _create_or_update_team(
-            self, team_data: dict, league_obj: SportLeague
+            self,
+            team_data: dict,
+            league_obj: SportLeague,
+            sport_type: ApiSportModel.SportType,
+            product: Product,
     ) -> Optional[SportTeam]:
         team_id = team_data.get("id")
         team_name = team_data.get("name")
@@ -202,11 +206,12 @@ class SportApiService:
         try:
             team_obj, created = SportTeam.objects.get_or_create(
                 external_id=team_id,
-                product=Product.objects.get(name=Product.Names.BASKETBALL),
+                type=sport_type,
                 defaults={
                     "name": team_name,
                     "league": league_obj,
                     "logo": team_logo_path,
+                    "product": product,
                 },
             )
             return team_obj

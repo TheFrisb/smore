@@ -149,11 +149,8 @@ class SportLeague(ApiSportModel):
     def __str__(self):
         return self.name
 
-    class Meta:
-        unique_together = ("product", "external_id")
 
-
-class SportTeam(BaseInternalModel):
+class SportTeam(ApiSportModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255, db_index=True)
@@ -166,7 +163,6 @@ class SportTeam(BaseInternalModel):
 
 class SportMatch(ApiSportModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    type = models.CharField(choices=ApiSportModel.SportType, max_length=255)
     external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     home_team = models.ForeignKey(
@@ -189,9 +185,6 @@ class SportMatch(ApiSportModel):
     @property
     def league_name(self):
         return self.league.name
-
-    class Meta:
-        unique_together = ("product", "external_id")
 
     def __str__(self):
         return f"[{self.league.name}] {self.home_team.name} vs {self.away_team.name} ({self.kickoff_datetime})"
