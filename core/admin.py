@@ -171,6 +171,14 @@ class SportMatchAdmin(admin.ModelAdmin):
         "kickoff_datetime",
     ]
 
+    list_display = [
+        "home_team",
+        "away_team",
+        "league",
+        "kickoff_datetime",
+        "is_live",
+    ]
+
     readonly_fields = ["home_team", "away_team", "league"]
 
     ordering = ["-kickoff_datetime"]
