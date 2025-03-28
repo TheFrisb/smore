@@ -95,7 +95,7 @@
                     <img src="{% static 'assets/images/vs.png' %}" alt=""
                          class="w-4 md:w-8 h-auto">
                     {% if prediction.status != 'PENDING' %}
-                        <p class="font-bold text-primary-200 absolute {% if prediction.is_sport_prediction %}left-3{% else %}left-0{% endif %} md:left-0  text-sm">{{ prediction.match.away_team_score }}</p>
+                        <p class="font-bold text-primary-200 absolute {% if prediction.is_sport_prediction %}right-3{% else %}right-0{% endif %} md:right-0  text-sm">{{ prediction.match.away_team_score }}</p>
                     {% endif %}
                 </div>
 
