@@ -7,7 +7,7 @@ from django.utils import timezone as django_timezone
 from core.models import (
     SportLeague,
     SportMatch,
-    Product,
+    Product, ApiSportModel,
 )
 from core.services.sport_api_service import SportApiService
 
@@ -103,8 +103,8 @@ class FootballApiService(SportApiService):
             logger.error(f"League {league_id} not found")
             return None
 
-        home_team_obj = self._create_or_update_team(home_team, league_obj)
-        away_team_obj = self._create_or_update_team(away_team, league_obj)
+        home_team_obj = self._create_or_update_team(home_team, league_obj, ApiSportModel.SportType.SOCCER, product_obj)
+        away_team_obj = self._create_or_update_team(away_team, league_obj, ApiSportModel.SportType.SOCCER, product_obj)
 
         home_team_score = goals.get("home")
         away_team_score = goals.get("away")
