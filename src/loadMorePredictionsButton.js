@@ -39,7 +39,7 @@ function initLoadMorePredictionsButton() {
                 <div class="bg-primary-900/80 p-2 rounded-lg">
                     <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite12.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
                 </div>
-                <span class=" text-primary-100">${prediction.match.type}</span> 
+                <span class=" text-primary-100 capitalize">${prediction.match.type}</span> 
             </div>
         </div>
 
@@ -68,10 +68,10 @@ function initLoadMorePredictionsButton() {
                 </div>
                 <div class="flex items-center justify-center relative">
 
-                    <p class="font-bold text-primary-200 absolute ${prediction.match.type === "Soccer" ? "left-3" : "left-0"} md:left-0  text-sm">${prediction.match.home_team_score}</p>
-                    <img src="/assets/images/vs.png" alt=""
+                    <p class="font-bold text-primary-200 absolute ${prediction.match.type === "SOCCER" ? "left-3" : "left-0"} md:left-0  text-sm">${prediction.match.home_team_score}</p>
+                    <img src="/static/assets/images/vs.png" alt=""
                          class="w-4 md:w-8 h-auto">
-                    <p class="font-bold text-primary-200 absolute ${prediction.match.type === "Soccer" ? "right-3" : "right-0"} md:right  text-sm">${prediction.match.away_team_score}</p>
+                    <p class="font-bold text-primary-200 absolute ${prediction.match.type === "SOCCER" ? "right-3" : "right-0"} md:right  text-sm">${prediction.match.away_team_score}</p>
                 </div>
 
                 <div class="flex flex-col items-center justify-center gap-2">
