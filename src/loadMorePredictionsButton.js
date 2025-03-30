@@ -33,8 +33,8 @@ function initLoadMorePredictionsButton() {
         data.results.forEach((prediction) => {
           const predictionHtml = `
           <div class="${prediction.status == "LOST" ? "bg-red-500/10 border-red-500/50 hover:border-red-500" : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500"} backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">
-    <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center justify-between w-full">
+    <div class="flex items-center justify-center mb-6">
+        <div class="flex items-center justify-center w-full">
             <div class="flex  justify-center items-center space-x-3 text-primary-300">
                 <div class="bg-primary-900/80 p-2 rounded-lg">
                     <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite12.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
