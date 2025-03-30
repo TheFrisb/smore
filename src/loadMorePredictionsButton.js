@@ -92,7 +92,7 @@ function initLoadMorePredictionsButton() {
     </div>
         <div class="flex flex-col items-center justify-center">
             <div class="text-sm text-white">Prediction</div>
-            <div class="font-semibold text-xl ${prediction.status === "LOST" ? "text-red-500" : "text-emerald-500"} ">${prediction.prediction}</div>
+            <div class="font-semibold text-center text-xl ${prediction.status === "LOST" ? "text-red-500" : "text-emerald-500"} ">${prediction.prediction}</div>
         </div>
 </div>
 `;
