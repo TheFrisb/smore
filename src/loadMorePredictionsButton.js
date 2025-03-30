@@ -37,7 +37,7 @@ function initLoadMorePredictionsButton() {
         <div class="flex items-center justify-center w-full">
             <div class="flex  justify-center items-center space-x-3 text-primary-300">
                 <div class="bg-primary-900/80 p-2 rounded-lg">
-                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite12.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
+                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite12.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
                 </div>
                 <span class=" text-primary-100 capitalize">${prediction.match.type.toLowerCase()}</span> 
             </div>
