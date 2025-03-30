@@ -35,27 +35,17 @@ function initLoadMorePredictionsButton() {
           <div class="${prediction.status == "LOST" ? "bg-red-500/10 border-red-500/50 hover:border-red-500" : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500"} backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">
     <div class="flex items-center justify-between mb-6">
         <div class="flex items-center justify-between w-full">
-            <div class="flex  justify-start items-center space-x-3 text-primary-300">
+            <div class="flex  justify-center items-center space-x-3 text-primary-300">
                 <div class="bg-primary-900/80 p-2 rounded-lg">
-                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite12.svg#soccerIcon"></use></svg>
+                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite12.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
                 </div>
-                <span class=" text-primary-100">Soccer</span>
+                <span class=" text-primary-100">${prediction.match.type}</span> 
             </div>
-            ${
-              prediction.detailed_analysis !== ""
-                ? `<a href="/predictions/${prediction.id}/"
-               class="text-secondary-400 flex items-center gap-2 group group-hover:text-primary-300 transition-all duration-300">
-                <svg class="w-5 h-5"><use xlink:href="/static/assets/svg/sprite12.svg#arrowRight"></use></svg>
-                <p class="font-bold ">View analysis</p>
-            </a>`
-                : ""
-            }
         </div>
 
     </div>
     <div class="mb-6">
-        <div class="flex items-center justify-between mb-2">
-            <p class="text-sm text-primary-100 ">Match</p>
+        <div class="flex items-center justify-center mb-2">
             ${prediction.status == "LOST" ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite12.svg#circleX"></use></svg></div>' : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite12.svg#circleCheck"></use></svg></div>'}
 
         </div>
@@ -66,28 +56,30 @@ function initLoadMorePredictionsButton() {
                 <p class="text-emerald-500 font-bold">${prediction.match.league.name}</p>
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
-
-            <div class="flex items-center justify-between">
-                <div class="flex flex-col items-start gap-2">
-                    <div class="flex items-center justify-start gap-2">
-                        <img src="${prediction.match.home_team.logo}" width="24" style="height: auto!important">
-                        <p class="text-primary-100 font-bold">${prediction.match.home_team.name}</p>
-                    </div>
-                    <div class="flex items-center justify-start gap-2">
-                        <img src="${prediction.match.away_team.logo}" width="24" style="height: auto!important">
-                        <p class="text-primary-100 font-bold">${prediction.match.away_team.name}</p>
-                    </div>
+            <div class="flex items-center justify-center gap-1">
+                <p class="text-primary-200 text-xs">Date, time:</p>
+                <p class="text-white text-xs dateItem">${formatIsoString(prediction.match.kickoff_datetime)}</p>
+            </div>
+            
+            <div class=" grid grid-cols-3 ">
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="${prediction.match.home_team.logo}" class="h-8 lg:h-12 w-auto">
+                    <p class="text-primary-100 text-sm md:text-base font-bold text-center">${prediction.match.home_team.name}</p>
                 </div>
-                <div class="flex items-center justify-end gap-1">
-                        <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite12.svg#chevronUp"></use></svg>
-                        <p class="text-primary-100">Odds</p>
-                        <span class="text-emerald-400 font-bold">${prediction.odds}</span>
-                    </div>
-            </div>
-            <div class="flex items-center justify-start gap-1">
-                <p class="text-primary-200 text-sm">Date:</p>
-                <p class="text-white text-sm">${formatIsoString(prediction.match.kickoff_datetime)}</p> 
-            </div>
+                <div class="flex items-center justify-center relative">
+
+                    <p class="font-bold text-primary-200 absolute ${prediction.match.type === "Soccer" ? "left-3" : "left-0"} md:left-0  text-sm">${prediction.match.home_team_score}</p>
+                    <img src="/assets/images/vs.png" alt=""
+                         class="w-4 md:w-8 h-auto">
+                    <p class="font-bold text-primary-200 absolute ${prediction.match.type === "Soccer" ? "right-3" : "right-0"} md:right  text-sm">${prediction.match.away_team_score}</p>
+                </div>
+
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="${prediction.match.away_team.logo}" class="h-8 lg:h-12 w-auto">
+                    <p class="text-primary-100 text-sm md:text-base font-bold text-center">${prediction.match.away_team.name}</p>
+                </div>
+            </div> 
+
         </div>
     </div>
         <div class="flex flex-col items-center justify-center">

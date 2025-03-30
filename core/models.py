@@ -38,15 +38,13 @@ class BaseProductModel(BaseInternalModel):
     discounted_yearly_price_stripe_id = models.CharField(
         max_length=255, blank=True, null=True
     )
+    mobile_product_id = models.CharField(max_length=255, blank=True, null=True)
 
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
         abstract = True
         ordering = ["order"]
-
-    def __str__(self):
-        return self.name
 
 
 class Product(BaseProductModel):
@@ -79,6 +77,9 @@ class Product(BaseProductModel):
             if use_discounted_prices
             else self.yearly_price_stripe_id
         )
+
+    def __str__(self):
+        return f"{self.name} ({self.type})"
 
 
 class FrequentlyAskedQuestion(BaseInternalModel):
@@ -225,7 +226,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

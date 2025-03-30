@@ -77,7 +77,10 @@ class ProductSerializer(serializers.ModelSerializer):
             "type",
             "analysis_per_month",
             "monthly_price",
+            "discounted_monthly_price",
             "yearly_price",
+            "discounted_yearly_price",
+            "mobile_product_id",
         ]
 
 

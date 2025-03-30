@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 from django.core.management.base import BaseCommand
 
+from core.models import ApiSportModel, Product
 from core.services.basketball_api_service import BasketballApiService
 from core.services.football_api_service import FootballApiService
 from core.services.hocker_api_service import HockeyApiService
@@ -13,16 +14,21 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         sport_api_service = SportApiService()
+        sport_api_service.populate_countries(ApiSportModel.SportType.SOCCER)
+        sport_api_service.populate_leagues(
+            ApiSportModel.SportType.SOCCER,
+            Product.objects.get(name=Product.Names.SOCCER),
+        )
         self.load_matches()
 
     def load_matches(self):
-        start_date = datetime(2025, 3, 20, tzinfo=timezone.utc)
-        end_date = datetime(2025, 4, 10, tzinfo=timezone.utc)
+        start_date = datetime(2025, 3, 29, tzinfo=timezone.utc)
+        end_date = datetime(2025, 4, 1, tzinfo=timezone.utc)
 
         basketball_api_service = BasketballApiService()
         hockey_api_service = HockeyApiService()
         football_api_service = FootballApiService()
 
-        hockey_api_service.populate_matches(start_date, end_date)
-        basketball_api_service.populate_matches(start_date, end_date)
+        # hockey_api_service.populate_matches(start_date, end_date)
+        # basketball_api_service.populate_matches(start_date, end_date)
         football_api_service.populate_matches(start_date, end_date)

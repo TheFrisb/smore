@@ -58,7 +58,7 @@ class SportMatchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SportMatch
-        fields = ("league", "home_team", "away_team", "kickoff_datetime")
+        fields = ("league", "home_team", "away_team", "kickoff_datetime", "type")
 
 
 class PredictionSerializer(serializers.ModelSerializer):
