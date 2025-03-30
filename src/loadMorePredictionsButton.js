@@ -79,7 +79,15 @@ function initLoadMorePredictionsButton() {
                     <p class="text-primary-100 text-sm md:text-base font-bold text-center">${prediction.match.away_team.name}</p>
                 </div>
             </div> 
-
+            
+                <div class="relative">
+                    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+                </div>
+                <div class="flex items-center justify-center gap-1">
+                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite12.svg#chevronUp"></use></svg>
+                    <p class="text-primary-100">Odds</p>
+                    <span class="text-emerald-400 font-bold">${prediction.odds}</span>
+                </div>
         </div>
     </div>
         <div class="flex flex-col items-center justify-center">
