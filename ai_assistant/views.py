@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from accounts.models import UserSubscription
+from ai_assistant.models import Message
 from ai_assistant.service.llm_service import LLMService
 from core.models import Product
 
@@ -29,6 +30,7 @@ class SendMessageToAiView(APIView):
         """Serializer for formatting the outgoing response."""
 
         message = serializers.CharField()
+        direction = serializers.ChoiceField(choices=Message.Direction)
 
     def post(self, request):
         """Send a message to the AI assistant."""
@@ -51,7 +53,12 @@ class SendMessageToAiView(APIView):
         response = self.llm_service.generate_response(
             user=request.user, message=message
         )
-        return Response({"message": response})
+        return Response(
+            {
+                "message": response,
+                "direction": Message.Direction.INBOUND,
+            }
+        )
 
     def validate_subscription(self, request):
         user = request.user

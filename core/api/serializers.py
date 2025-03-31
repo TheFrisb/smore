@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
 
+from accounts.serializers import ProductSerializer
 from core.models import SportLeague, SportMatch, SportTeam, Prediction, SportCountry
 
 
@@ -71,6 +72,7 @@ class SportMatchSerializer(serializers.ModelSerializer):
 
 class PredictionSerializer(serializers.ModelSerializer):
     match = SportMatchSerializer()
+    product = ProductSerializer()
 
     class Meta:
         model = Prediction
@@ -82,4 +84,5 @@ class PredictionSerializer(serializers.ModelSerializer):
             "result",
             "status",
             "detailed_analysis",
+            "product",
         )
