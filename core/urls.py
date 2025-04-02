@@ -16,10 +16,11 @@ from .views import (
     SubscriptionRequiredView,
     TelegramLandingView,
     DetailedPredictionView,
-    AiAssistantView,
+    AiAssistantView, ReferralTelegramLandingView,
 )
 
 app_name = "core"
+
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("history/", HistoryView.as_view(), name="history"),
@@ -45,4 +46,7 @@ urlpatterns = [
     ),
     path("ai-assistant/", AiAssistantView.as_view(), name="ai_assistant"),
     path("start/", TelegramLandingView.as_view(), name="telegram_landing"),
+    path(
+        "begin/", ReferralTelegramLandingView.as_view(), name="telegram_landing_begin"
+    ),
 ]

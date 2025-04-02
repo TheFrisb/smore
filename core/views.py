@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView, DetailView
 
-from accounts.models import PurchasedPredictions
+from accounts.models import PurchasedPredictions, User
 from core.models import (
     Product,
     PickOfTheDay,
@@ -180,6 +180,19 @@ class TelegramLandingView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = _("Free Telegram Channel")
         return context
+
+
+class ReferralTelegramLandingView(TemplateView):
+    template_name = "core/pages/telegram_landing.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = _("Free Telegram Channel")
+        context["referred_user"] = self._get_user()
+        return context
+
+    def _get_user(self):
+        return User.objects.filter(id=312).first()
 
 
 class FaqView(TemplateView):
