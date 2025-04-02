@@ -1,4 +1,3 @@
-from django.utils.dateparse import parse_date
 from django_filters import rest_framework as filters
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -31,6 +30,7 @@ class PredictionPagination(PageNumberPagination):
 
 class PredictionFilter(filters.FilterSet):
     product = filters.CharFilter(field_name="product__name")
+    date = filters.DateFilter(field_name="match__kickoff_datetime", lookup_expr="date")
 
     class Meta:
         model = Prediction
@@ -42,9 +42,10 @@ class ProductsListView(ListAPIView):
     queryset = Product.objects.all().order_by("order")
 
 
-class PaginatedPredictionView(ListAPIView):
+class PaginatedHistoryPredictionsView(ListAPIView):
     authentication_classes = []
     permission_classes = []
+    filterset_class = PredictionFilter
     queryset = (
         Prediction.objects.filter(
             visibility=Prediction.Visibility.PUBLIC,
@@ -61,26 +62,16 @@ class PaginatedPredictionView(ListAPIView):
     )
     serializer_class = PredictionSerializer
     pagination_class = PredictionPagination
-    filter_backends = (filters.DjangoFilterBackend,)
-    filterset_class = PredictionFilter
 
 
 class PredictionListView(ListAPIView):
     serializer_class = PredictionSerializer
+    filterset_class = PredictionFilter
 
     def get_queryset(self):
-        date_param = self.request.query_params.get("date", None)
-        if not date_param:
-            return Prediction.objects.none()
-
-        parsed_date = parse_date(date_param)
-        if not parsed_date:
-            return Prediction.objects.none()
-
         return (
             Prediction.objects.filter(
                 visibility=Prediction.Visibility.PUBLIC,
-                match__kickoff_datetime__date=parsed_date,
             )
             .prefetch_related(
                 "match",
