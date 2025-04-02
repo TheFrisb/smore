@@ -319,6 +319,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
     list_display = (
         "user",
+        "user_email",
         "is_active",
         "frequency",
         "subscribed_sports",
@@ -342,6 +343,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "user",
+                    "user_email",
                     "status",
                     "frequency",
                     "price",
@@ -354,7 +356,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         ("Products", {"fields": ("products",)}),
     )
     filter_horizontal = ("products",)
-    readonly_fields = ["stripe_subscription_id", "price"]
+    readonly_fields = ["stripe_subscription_id", "price", "user_email"]
 
     def is_active(self, obj):
         return obj.is_active
@@ -378,6 +380,15 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
 
     subscribed_sports.short_description = "Subscribed Sports"
     subscribed_sports.admin_order_field = "products"
+
+    def user_email(self, obj):
+        """
+        Return the email of the user associated with this subscription.
+        """
+        return obj.user.email
+
+    user_email.short_description = "User Email"
+    user_email.admin_order_field = "user__email"
 
     def get_queryset(self, request):
         """
