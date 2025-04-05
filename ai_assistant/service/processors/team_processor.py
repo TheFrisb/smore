@@ -30,7 +30,7 @@ class TeamProcessor(BaseProcessor):
 
         if prompt_context.team_names:
             logger.info(f"Found extracted team names: {prompt_context.team_names}")
-            matched_teams.append(
+            matched_teams.extend(
                 self._find_extracted_team_names(prompt_context.team_names)
             )
 
@@ -46,7 +46,7 @@ class TeamProcessor(BaseProcessor):
                 if not prompt_context.suggested_dates
                 else prompt_context.suggested_dates[0]
             )
-            matched_teams.append(
+            matched_teams.extend(
                 self._get_random_teams(
                     filter_date=filter_date,
                     prompt_type=prompt_type,
@@ -62,7 +62,7 @@ class TeamProcessor(BaseProcessor):
                 if not prompt_context.suggested_dates
                 else prompt_context.suggested_dates[0]
             )
-            matched_teams.append(
+            matched_teams.extend(
                 self._get_random_teams(
                     filter_date=filter_date,
                     filter_by_leagues=[obj.pk for obj in prompt_context.league_objs],
