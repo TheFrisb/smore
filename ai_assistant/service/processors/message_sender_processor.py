@@ -93,6 +93,7 @@ class MessageSenderProcessor(BaseProcessor):
         if prompt_context.history:
             messages.extend(prompt_context.history)
         messages.append({"role": "user", "content": prompt_context.prompt})
+        messages.append({"role": "developer", "content": prompt_context.matches_context})
 
         completion = self.client.chat.completions.create(
             model=self.llm_model,
