@@ -85,7 +85,7 @@ class MessageSenderProcessor(BaseProcessor):
         messages = [
             {
                 "role": "system",
-                "content": self._get_system_message(prompt_context.prompt_type),
+                "content": self._get_system_message(prompt_context),
             }
         ]
         if prompt_context.history:
