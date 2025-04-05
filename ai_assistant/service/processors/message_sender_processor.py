@@ -51,7 +51,7 @@ class MessageSenderProcessor(BaseProcessor):
 
         Your goal is to be informative, accurate, and engaging, making the user feel like they're talking to a true sports aficionado.
         """
-        self.multi_prompt = """
+        self.multi_match_prompt = """
                 You are a professional sports analyst specializing in betting predictions. Your task is to provide betting suggestions for the specified upcoming matches, using the provided data.
                 
                 For each match, provide:
@@ -80,9 +80,7 @@ class MessageSenderProcessor(BaseProcessor):
         """
         Process the message sender.
         """
-        logging.info(
-            f"[{self.name}] Building out response for prompt context: {prompt_context}"
-        )
+        logging.info(f" Building out response for prompt context: {prompt_context}")
 
         messages = [
             {
@@ -93,7 +91,9 @@ class MessageSenderProcessor(BaseProcessor):
         if prompt_context.history:
             messages.extend(prompt_context.history)
         messages.append({"role": "user", "content": prompt_context.prompt})
-        messages.append({"role": "developer", "content": prompt_context.matches_context})
+        messages.append(
+            {"role": "developer", "content": prompt_context.matches_context}
+        )
 
         completion = self.client.chat.completions.create(
             model=self.llm_model,
@@ -103,21 +103,22 @@ class MessageSenderProcessor(BaseProcessor):
         prompt_context.response = completion.choices[0].message.content
         prompt_context.can_proceed = True
 
-        logger.info(f"[{self.name}] Response: {prompt_context.response}")
+        logger.info(f"Response: {prompt_context.response}")
 
-    def _get_system_message(self, prompt_type: PromptType):
+    def _get_system_message(self, prompt_context: PromptContext):
+        prompt_type = prompt_context.prompt_type
+
         if (
-                prompt_type in self.get_multi_match_related_prompt_types()
-                or prompt_type == PromptType.MULTI_RANDOM_MATCH_PREDICTION
+                prompt_type == PromptType.SINGLE_MATCH_PREDICTION
+                or len(prompt_context.team_objs) == 2
+        ):
+            return self.single_match_prompt
+
+        if (
+                prompt_type == PromptType.MULTI_MATCH_PREDICTION
                 or prompt_type in self.get_league_related_prompt_types()
         ):
-            return self.multi_prompt
+            return self.multi_match_prompt
 
         if prompt_type == PromptType.GENERAL_SPORT_QUESTION:
             return self.general_question_prompt
-
-        if (
-                prompt_type in self.get_single_match_related_prompt_types()
-                or prompt_type == PromptType.SINGLE_RANDOM_MATCH_PREDICTION
-        ):
-            return self.single_match_prompt

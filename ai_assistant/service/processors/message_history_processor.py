@@ -10,9 +10,7 @@ logging = logging.getLogger(__name__)
 
 class MessageHistoryProcessor(BaseProcessor):
     def __init__(self):
-        super().__init__(
-            name="MessageHistoryProcessor", llm_model=None
-        )
+        super().__init__(name="MessageHistoryProcessor", llm_model=None)
 
     def process(self, prompt_context: PromptContext):
         """
@@ -22,16 +20,16 @@ class MessageHistoryProcessor(BaseProcessor):
 
         if not user:
             logging.warn(
-                f"[{self.name}] No user found in the prompt context. Skipping message history fetch."
+                f" No user found in the prompt context. Skipping message history fetch."
             )
             return
 
-        logging.info(f"[{self.name}] Processing message history for user {user.id}")
+        logging.info(f" Processing message history for user {user.id}")
 
         messages = self._fetch_user_conversation(user)
 
         logging.info(
-            f"[{self.name}] Fetched {len(messages)} messages for user {user.id}. Messages: {messages}"
+            f" Fetched {len(messages)} messages for user {user.id}. Messages: {messages}"
         )
 
         prompt_context.history = messages
@@ -40,8 +38,12 @@ class MessageHistoryProcessor(BaseProcessor):
         """
         Fetches the user's message history from the database.
         """
-        logging.info(f"[{self.name}] Fetching user conversation for user {user.id}")
-        recent_messages = Message.objects.filter(user=user).order_by("-created_at")[:10]
+        logging.info(f" Fetching user conversation for user {user.id}")
+        recent_messages = (
+            Message.objects.filter(user=user)
+            .only("direction", "message", "created_at")
+            .order_by("-created_at")[:10]
+        )
         direction_map = {
             Message.Direction.OUTBOUND: "user",
             Message.Direction.INBOUND: "assistant",

@@ -1,13 +1,16 @@
 import logging
+from datetime import date
+from typing import Optional
 
 from django.contrib.postgres.lookups import Unaccent
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Value
 from django.db.models.functions import Lower
+from django.utils import timezone
 
-from ai_assistant.service.data import PromptContext
+from ai_assistant.service.data import PromptContext, PromptType
 from ai_assistant.service.processors.base_processor import BaseProcessor
-from core.models import SportTeam
+from core.models import SportTeam, SportMatch, ApiSportModel, SportLeague
 
 logger = logging.getLogger(__name__)
 
@@ -20,31 +23,157 @@ class TeamProcessor(BaseProcessor):
         """
         Load the extracted team names into team objects.
         """
-        logging.info(
-            f"[{self.name}] Processing team names: {prompt_context.team_names}"
+        logging.info(f" Processing team names: {prompt_context.team_names}")
+        prompt_type = prompt_context.prompt_type
+
+        if prompt_context.team_names:
+            logger.info(f"Found extracted team names: {prompt_context.team_names}")
+            prompt_context.team_objs = self._find_extracted_team_names(
+                prompt_context.team_names
+            )
+            return
+
+        if (
+                prompt_type in self.get_match_related_prompt_types()
+                and not prompt_context.team_names
+        ):
+            logger.info(
+                f"No team names found in prompt context: {prompt_context}. Assuming that random teams are needed."
+            )
+            filter_date = (
+                None
+                if not prompt_context.suggested_dates
+                else prompt_context.suggested_dates[0]
+            )
+            prompt_context.team_objs = self._get_random_teams(
+                filter_date=filter_date,
+                prompt_type=prompt_type,
+            )
+            return
+
+        if prompt_type in self.get_league_related_prompt_types():
+            logger.info(
+                f"Fetching random teams for league-related prompt type: {prompt_type}"
+            )
+            filter_date = (
+                None
+                if not prompt_context.suggested_dates
+                else prompt_context.suggested_dates[0]
+            )
+            prompt_context.team_objs.extend(
+                self._get_random_teams(
+                    filter_date=filter_date,
+                    filter_by_leagues=[obj.pk for obj in prompt_context.league_objs],
+                    prompt_type=prompt_type,
+                )
+            )
+            return
+
+    def _get_random_teams(
+            self,
+            filter_date: Optional[date],
+            filter_by_leagues: Optional[list[SportLeague]],
+            prompt_type: PromptType,
+    ):
+        """
+        Fetch a random set of teams from the database.
+        """
+        logger.info("Fetching random teams")
+
+        base_queryset = (
+            SportMatch.objects.filter(
+                type=ApiSportModel.SportType.SOCCER,
+                metadata__isnull=False,
+            )
+            .prefetch_related("home_team", "away_team")
+            .order_by("kickoff_datetime")
         )
+
+        if filter_by_leagues:
+            logger.info(f"Filtering by leagues: {filter_by_leagues}")
+            base_queryset = base_queryset.filter(league__in=filter_by_leagues)
+
+        initial_queryset = base_queryset
+        matched_teams = []
+        if filter_date:
+            logger.info(
+                f"Filter date found: {filter_date}. Attempting to load teams for that date."
+            )
+            initial_queryset = initial_queryset.filter(
+                kickoff_datetime__date=filter_date
+            )[:8]
+        else:
+            initial_queryset = initial_queryset.filter(
+                kickoff_datetime__date__gte=timezone.now()
+            )[:8]
+
+        if initial_queryset.exists():
+            logger.info(
+                f"Found {len(initial_queryset)} sport matches to fetch teams from."
+            )
+            return self._extract_teams_from_matches(
+                initial_queryset, prompt_type=prompt_type
+            )
+
+        return []
+
+    def _extract_teams_from_matches(
+            self, matches: list[SportMatch], prompt_type: PromptType
+    ):
+        """
+        Extract teams from the matches.
+        """
+        logger.info(f"Extracting teams from matches: {matches}")
+
+        teams = set()
+        for match in matches:
+            if prompt_type == PromptType.SINGLE_MATCH_PREDICTION and len(teams) == 2:
+                logger.info(
+                    f"Already extracted 2 teams for prompt type: {prompt_type}. Breaking the loop."
+                )
+                break
+
+            logger.info(
+                f"Extracting teams from match: [{match.kickoff_datetime.strftime('%Y-%m-%d %H:%M')}] {match.home_team.name} vs {match.away_team.name}"
+            )
+
+            teams.add(match.home_team)
+            teams.add(match.away_team)
+
+            logger.info(
+                f"Extracted teams: {match.home_team.name}, {match.away_team.name}"
+            )
+
+        loggable_team_string = ", ".join([team.name for team in teams])
+        logger.info(f"Extracted teams: {loggable_team_string}")
+        return list(teams)
+
+    def _find_extracted_team_names(self, team_names: list[str]):
+        if not team_names:
+            raise ValueError("team_names cannot be empty")
 
         matched_teams = []
 
-        for team_name in prompt_context.team_names:
-            team = self.find_team(team_name)
+        logger.info(f"Finding teams: {team_names}")
+        for team_name in team_names:
+            team = self._find_team_by_name(team_name)
             if team:
                 matched_teams.append(team)
             else:
-                logger.warning(f"[{self.name}] Team not found: {team_name}")
+                logger.warning(f" Team not found: {team_name}")
 
-        if len(prompt_context.team_names) != len(matched_teams):
+        if len(team_names) != len(matched_teams):
             logger.warning(
-                f"[{self.name}] Not all teams were found. Expected: {len(prompt_context.team_names)}, Found: {len(matched_teams)}"
+                f" Not all teams were found. Expected: {len(team_names)}, Found: {len(matched_teams)}"
             )
 
-        prompt_context.team_objs = matched_teams
+        return matched_teams
 
-    def find_team(self, team_name: str):
+    def _find_team_by_name(self, team_name: str):
         """
         Attempt fuzzy matching using trigram similarity.
         """
-        logger.info(f"[{self.name}] Finding team: {team_name}")
+        logger.info(f"Finding team: {team_name}")
 
         teams = (
             SportTeam.objects.annotate(
@@ -57,11 +186,12 @@ class TeamProcessor(BaseProcessor):
         )
 
         logger.info(
-            f"[{self.name}] Returned {len(teams)} for team: {team_name}. Returned teams: {teams}"
+            f" Returned {len(teams)} for team: {team_name}. Returned teams: {teams}"
         )
 
         if teams.exists():
+            logger.info(f"Matched team name: {team_name} to {teams.first().name}")
             return teams.first()
         else:
-            logger.warning(f"[{self.name}] No team found for: {team_name}")
+            logger.warning(f" No team found for: {team_name}")
             return None

@@ -30,12 +30,6 @@ class PromptType(Enum):
     # When the user wants to predict multiple leagues. E.g: "Give me a prediction for the Premier League and La Liga"
     MULTI_LEAGUE_PREDICTION = "MULTI_LEAGUE_PREDICTION"
 
-    # When the user wants the model to suggest a random match to predict. E.g: "Give me a match prediction"
-    SINGLE_RANDOM_MATCH_PREDICTION = "RANDOM_SPORT_PREDICTION"
-
-    # When the user wants the model to suggest multiple random matches to predict. E.g: "Give me some match predictions"
-    MULTI_RANDOM_MATCH_PREDICTION = "RANDOM_SPORT_PREDICTION"
-
     # When the user asks for sport betting ticket builder. E.g: "Give me a betting ticket for the Premier League"
     SPORT_TICKET_BUILDER = "SPORT_TICKET_BUILDER"
 

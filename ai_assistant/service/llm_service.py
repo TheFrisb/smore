@@ -10,7 +10,9 @@ from ai_assistant.service.processors.league_processor import LeagueProcessor
 from ai_assistant.service.processors.message_history_processor import (
     MessageHistoryProcessor,
 )
-from ai_assistant.service.processors.message_sender_processor import MessageSenderProcessor
+from ai_assistant.service.processors.message_sender_processor import (
+    MessageSenderProcessor,
+)
 from ai_assistant.service.processors.prompt_classifier import PromptClassifier
 from ai_assistant.service.processors.sport_match_processor import SportMatchProcessor
 from ai_assistant.service.processors.team_processor import TeamProcessor
@@ -56,5 +58,5 @@ class LLMService:
             TeamProcessor,
             ContextValidationProcessor,
             SportMatchProcessor,
-            MessageSenderProcessor
+            MessageSenderProcessor,
         ]

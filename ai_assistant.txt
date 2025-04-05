@@ -34,3 +34,16 @@ Klasifikacii na prompto:
 - Date object
 
 2. Da se loadira data
+
+---
+
+1. Logikata na fetching ne mu e dobra. U glavno ka treba da odluce sprema random matchovi ili da fetchira po zadadenite timovi.
+- Fetching logikata treba da se optimizira za podobar fetching na timovite.
+- U slucaj na random ka se zimat matchove, treba da se glede dali ima dovolno data za da se grade contexto.
+- Treba da fetche po sport type soccer
+
+2. Treba podobro da se optimizirat promptovite so gi zima, bazirano na selection type
+- Ako e random multiple match picks treba da se zima multimatch prompt
+- Ako e single match treba da se zima single match prompt, i taj prompt treba da kaze oti i sekojpat ka se prava analiza na utakmica ili se pite za betting
+da kaze analizata i od dole
+

@@ -6,10 +6,8 @@ from typing import List, Optional
 from django.db.models import Q, QuerySet
 from django.utils import timezone
 
-from ai_assistant.service.data import PromptType
 from ai_assistant.service.processors.base_processor import BaseProcessor
 from core.models import SportMatch, SportTeam
-from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)
 
@@ -23,63 +21,13 @@ class SportMatchProcessor(BaseProcessor):
         Process the prompt context for sport match related queries.
         """
 
-        logger.info(
-            f"[{self.name}] Fetching sport matches for prompt context: {prompt_context}"
-        )
+        logger.info(f"Fetching sport matches for prompt context: {prompt_context}")
 
         filter_date = (
             None
             if not prompt_context.suggested_dates
             else prompt_context.suggested_dates[0]
         )
-
-        if prompt_context.prompt_type in self.get_league_related_prompt_types():
-            logger.info(f"[{self.name}] Fetching teams for league related prompt.")
-            for league in prompt_context.league_objs:
-                logger.info(f"[{self.name}] Fetching teams for league: {league}")
-                base_qs = SportMatch.objects.filter(
-                    league__in=prompt_context.league_objs,
-                    kickoff_datetime__gte=timezone.now(),
-                ).prefetch_related("home_team", "away_team")
-
-                if filter_date:
-                    base_qs = base_qs.filter(kickoff_datetime__date=filter_date)
-
-                teams = []
-                for match in base_qs[:5]:
-                    if match.home_team not in teams:
-                        teams.append(match.home_team)
-                    if match.away_team not in teams:
-                        teams.append(match.away_team)
-
-                logger.info(f"[{self.name}] Fetched teams: {teams}")
-
-                prompt_context.team_objs.extend(teams)
-
-        if prompt_context.prompt_type in [
-            PromptType.SINGLE_RANDOM_MATCH_PREDICTION,
-            PromptType.MULTI_RANDOM_MATCH_PREDICTION,
-        ]:
-            logger.info(f"[{self.name}] Fetching random match for prediction.")
-            matches = SportMatch.objects.filter(
-                kickoff_datetime__gte=timezone.now(),
-                kickoff_datetime__lt=timezone.now() + timedelta(days=7),
-                league__external_id__in=allowed_league_ids,
-            ).prefetch_related("home_team", "away_team")
-
-            if filter_date:
-                matches = matches.filter(kickoff_datetime__date=filter_date)
-
-            teams = []
-            for match in matches[:5]:
-                if match.home_team not in teams:
-                    teams.append(match.home_team)
-                if match.away_team not in teams:
-                    teams.append(match.away_team)
-
-            logger.info(f"[{self.name}] Fetched teams: {teams}")
-
-            prompt_context.team_objs.extend(teams)
 
         return self._build_match_context(
             prompt_context.team_objs, filter_date=filter_date
@@ -108,13 +56,14 @@ class SportMatchProcessor(BaseProcessor):
             context += self._build_team_section(team, past_matches, future_matches)
 
         # **Head-to-Head Data for All Unique Pairs**
-        if len(teams) >= 2:
+        if len(teams) > 1:
             context += "**Head-to-Head Data:**\n"
             for team_a, team_b in combinations(teams, 2):
                 past_h2h = self._get_head_to_head_past_matches(team_a, team_b, now)
                 future_h2h = self._get_head_to_head_future_matches(
                     team_a, team_b, now, filter_date
                 )
+
                 context += self._build_head_to_head_section(
                     team_a, team_b, past_h2h, future_h2h
                 )
@@ -124,22 +73,27 @@ class SportMatchProcessor(BaseProcessor):
 
     def _get_team_past_matches(self, team: SportTeam, now) -> List[SportMatch]:
         """Fetch past matches for a team (last 5)."""
-        return SportMatch.objects.filter(
-            Q(home_team=team) | Q(away_team=team), kickoff_datetime__lt=now
-        ).order_by("-kickoff_datetime")[:5]
+        return (
+            SportMatch.objects.filter(
+                Q(home_team=team) | Q(away_team=team), kickoff_datetime__lt=now
+            )
+            .prefetch_related("home_team", "away_team")
+            .order_by("-kickoff_datetime")[:5]
+        )
 
     def _get_team_future_matches(
             self, team: SportTeam, now, filter_date: Optional[date]
     ) -> List[SportMatch]:
         """Fetch future matches for a team with date filtering."""
         query = Q(home_team=team) | Q(away_team=team)
-        qs = SportMatch.objects.filter(query, kickoff_datetime__gte=now)
+        qs = SportMatch.objects.filter(
+            query,
+        ).prefetch_related("home_team", "away_team")
 
         if filter_date:
             qs = qs.filter(kickoff_datetime__date=filter_date)
         else:
-            end_date = now + timedelta(days=7)
-            qs = qs.filter(kickoff_datetime__lte=end_date)
+            qs = qs.filter(kickoff_datetime__gte=now)
 
         return list(qs.order_by("kickoff_datetime")[:3])
 
@@ -203,15 +157,15 @@ class SportMatchProcessor(BaseProcessor):
         query = Q(home_team=team_a, away_team=team_b) | Q(
             home_team=team_b, away_team=team_a
         )
-        qs = SportMatch.objects.filter(query, kickoff_datetime__gte=now)
+        qs = SportMatch.objects.filter(query).prefetch_related("home_team", "away_team")
 
         if filter_date:
             qs = qs.filter(kickoff_datetime__date=filter_date)
         else:
-            end_date = now + timedelta(days=7)
-            qs = qs.filter(kickoff_datetime__lte=end_date)
+            end_date = now + timedelta(days=30)
+            qs = qs.filter(kickoff_datetime__gte=now, kickoff_datetime__lte=end_date)
 
-        return list(qs.order_by("kickoff_datetime")[:2])
+        return list(qs.order_by("kickoff_datetime")[:3])
 
     def _build_head_to_head_section(
             self,
@@ -290,8 +244,15 @@ class SportMatchProcessor(BaseProcessor):
         """Format prediction data into a readable string."""
         indent_str = " " * indent
         context = f"{indent_str}Prediction data:\n"
+
+        # check if metadata django json field is empty
+        if not metadata:
+            context += f"{indent_str}  - No prediction data available.\n"
+            return context
+
         if "winner" in metadata and metadata["winner"]:
             winner = metadata["winner"]
+
             context += f"{indent_str}  - Predicted winner: {winner.get('name', 'N/A')} ({winner.get('comment', 'N/A')})\n"
         if "percent" in metadata:
             percent = metadata["percent"]

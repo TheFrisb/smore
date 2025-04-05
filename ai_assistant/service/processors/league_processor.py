@@ -20,23 +20,21 @@ class LeagueProcessor(BaseProcessor):
         """
         Load the extracted league names into league objects.
         """
-        logging.info(
-            f"[{self.name}] Processing league names: {prompt_context.league_names}"
-        )
+        logging.info(f" Processing league names: {prompt_context.league_names}")
 
         matched_leagues = []
 
         for league_names in prompt_context.league_names:
             league = self.find_league(league_names)
             if league:
-                logger.info(f"[{self.name}] Found league: {league}")
+                logger.info(f"Found league: {league}")
                 matched_leagues.append(league)
             else:
-                logger.warning(f"[{self.name}] League not found: {league_names}")
+                logger.warning(f" League not found: {league_names}")
 
         if len(prompt_context.league_names) != len(matched_leagues):
             logger.warning(
-                f"[{self.name}] Not all leagues were found. Expected: {len(prompt_context.league_names)}, Found: {len(matched_leagues)}"
+                f" Not all leagues were found. Expected: {len(prompt_context.league_names)}, Found: {len(matched_leagues)}"
             )
 
         prompt_context.league_objs = matched_leagues
@@ -45,7 +43,7 @@ class LeagueProcessor(BaseProcessor):
         """
         Attempt fuzzy matching using trigram similarity.
         """
-        logger.info(f"[{self.name}] Finding league: {league_name}")
+        logger.info(f"Finding league: {league_name}")
 
         leagues = (
             SportLeague.objects.annotate(
@@ -58,11 +56,11 @@ class LeagueProcessor(BaseProcessor):
         )
 
         logger.info(
-            f"[{self.name}] Returned {len(leagues)} for league: {league_name}. Returned leagues: {leagues}"
+            f" Returned {len(leagues)} for league: {league_name}. Returned leagues: {leagues}"
         )
 
         if leagues.exists():
             return leagues.first()
         else:
-            logger.warning(f"[{self.name}] No league found for: {league_name}")
+            logger.warning(f" No league found for: {league_name}")
             return None
