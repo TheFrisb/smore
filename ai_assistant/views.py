@@ -15,10 +15,6 @@ logger = logging.getLogger(__name__)
 
 
 class SendMessageToAiView(APIView):
-    def __init__(self):
-        super().__init__()
-        self.llm_service = LLMService()
-
     permission_classes = [IsAuthenticated]
 
     class InputSerializer(serializers.Serializer):
@@ -50,9 +46,8 @@ class SendMessageToAiView(APIView):
             f"User ({request.user.id}): {request.user.username} has sent a message to the AI assistant"
         )
 
-        response = self.llm_service.generate_response(
-            user=request.user, message=message
-        )
+        llm_service = LLMService(user=request.user, prompt=message)
+        response = llm_service.process_prompt(message)
         return Response(
             {
                 "message": response,

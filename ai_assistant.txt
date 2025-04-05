@@ -1,0 +1,36 @@
+Current issues:
+1. Outputo ne e bas dobro strukturiran. Moze podobro da se struktuire i da se dava i dati i detali so kak.
+2. Ne se dobro klasificirani moznite promptovi. Primer ti dade predikcija, mu kazas repeat last response, ti vika nebiva.
+3. Ne e nogo chattable. Primer daj predikcija za togajska i togajska, ok pa u kolko igraat i nema da najde za so se prava maabet.
+Treba podobro da mu se loadire konteksto, i pipelineto da e od aspekt prvo load data najnogo so mozas, pa procesiri ga taa data spored intento
+4. Treba da moze da ekstraktira poveke timove i ligi od eden prompt.
+5. Moze da dava poveke info u outputo, primer liga, mesto slicno
+6. Ne praa dobar matching na timi i ligi imina. Isto taka nemoze bas lightweight da matchne ili da utvrde za koo liga e od maabeto, primer "give me some predictions about the world cup".
+7. ako e pitan nesto za vreme, ne go zima u predvid.
+
+Glaven problem e so ne se nadovrzuva dobro na memorijata catpat, mozno e da ne go svaka bas dobro kontekstualno so saka da se kaze za nekoj promptovi,
+i tava so ne prava dobar matching na ligi i timovi bas najdobro so moze. Moze da se izvede poveke matching, i da se fetch-a poveke data.
+
+- Matchingoto na timovi i ligi imena
+- Ekstraktiranje poveke timovi i ligi od eden prompt za context
+- Podobro klasificiranje na promptovi i svakjane na kontekst
+-
+
+How to improve it:
+1. Prvo da se klasificire prompto i da se ekstraktira data od konteksto:
+Klasifikacii na prompto:
+- Single Sport Prediction
+- Multi Sport Prediction
+- Single League Prediction
+- Multi League Prediction
+- Bet suggestion
+- General sport question
+- not supported
+
+- Date if applicable
+- Sport if applicable
+- Team names
+- League names
+- Date object
+
+2. Da se loadira data

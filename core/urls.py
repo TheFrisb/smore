@@ -16,7 +16,8 @@ from .views import (
     SubscriptionRequiredView,
     TelegramLandingView,
     DetailedPredictionView,
-    AiAssistantView, ReferralTelegramLandingView,
+    AiAssistantView,
+    ReferralTelegramLandingView,
 )
 
 app_name = "core"
