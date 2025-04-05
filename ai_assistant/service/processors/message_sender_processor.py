@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class MessageSenderProcessor(BaseProcessor):
     def __init__(self):
-        super().__init__(name="MessageSenderProcessor", llm_model="gpt-4o")
+        super().__init__(name="MessageSenderProcessor", llm_model="gpt-4o-2024-08-06")
         self.single_match_prompt = """
                     You are a professional sports analyst specializing in match analysis and betting predictions. Your task is to provide an engaging and insightful analysis of the specified sports match, tailored for a sports betting audience. Use the provided match data, which includes historical results and prediction metrics, to support your analysis.
 
@@ -90,11 +90,17 @@ class MessageSenderProcessor(BaseProcessor):
         logger.info(f"[{self.name}] Response: {prompt_context.response}")
 
     def _get_system_message(self, prompt_type: PromptType):
-        if prompt_type in self.get_multi_match_related_prompt_types() or prompt_type == PromptType.MULTI_RANDOM_MATCH_PREDICTION:
+        if (
+                prompt_type in self.get_multi_match_related_prompt_types()
+                or prompt_type == PromptType.MULTI_RANDOM_MATCH_PREDICTION
+        ):
             return self.multi_prompt
 
         if prompt_type == PromptType.GENERAL_SPORT_QUESTION:
             return self.general_question_prompt
 
-        if prompt_type in self.get_single_match_related_prompt_types() or prompt_type == PromptType.SINGLE_RANDOM_MATCH_PREDICTION:
+        if (
+                prompt_type in self.get_single_match_related_prompt_types()
+                or prompt_type == PromptType.SINGLE_RANDOM_MATCH_PREDICTION
+        ):
             return self.single_match_prompt
