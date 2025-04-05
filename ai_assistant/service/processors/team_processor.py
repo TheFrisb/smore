@@ -26,12 +26,13 @@ class TeamProcessor(BaseProcessor):
         logging.info(f" Processing team names: {prompt_context.team_names}")
         prompt_type = prompt_context.prompt_type
 
+        matched_teams = []
+
         if prompt_context.team_names:
             logger.info(f"Found extracted team names: {prompt_context.team_names}")
-            prompt_context.team_objs = self._find_extracted_team_names(
-                prompt_context.team_names
+            matched_teams.append(
+                self._find_extracted_team_names(prompt_context.team_names)
             )
-            return
 
         if (
                 prompt_type in self.get_match_related_prompt_types()
@@ -45,11 +46,12 @@ class TeamProcessor(BaseProcessor):
                 if not prompt_context.suggested_dates
                 else prompt_context.suggested_dates[0]
             )
-            prompt_context.team_objs = self._get_random_teams(
-                filter_date=filter_date,
-                prompt_type=prompt_type,
+            matched_teams.append(
+                self._get_random_teams(
+                    filter_date=filter_date,
+                    prompt_type=prompt_type,
+                )
             )
-            return
 
         if prompt_type in self.get_league_related_prompt_types():
             logger.info(
@@ -60,14 +62,15 @@ class TeamProcessor(BaseProcessor):
                 if not prompt_context.suggested_dates
                 else prompt_context.suggested_dates[0]
             )
-            prompt_context.team_objs.extend(
+            matched_teams.append(
                 self._get_random_teams(
                     filter_date=filter_date,
                     filter_by_leagues=[obj.pk for obj in prompt_context.league_objs],
                     prompt_type=prompt_type,
                 )
             )
-            return
+
+        prompt_context.team_objs = matched_teams
 
     def _get_random_teams(
             self,
@@ -95,6 +98,7 @@ class TeamProcessor(BaseProcessor):
 
         initial_queryset = base_queryset
         matched_teams = []
+
         if filter_date:
             logger.info(
                 f"Filter date found: {filter_date}. Attempting to load teams for that date."
@@ -111,11 +115,12 @@ class TeamProcessor(BaseProcessor):
             logger.info(
                 f"Found {len(initial_queryset)} sport matches to fetch teams from."
             )
-            return self._extract_teams_from_matches(
-                initial_queryset, prompt_type=prompt_type
+            matched_teams = self._extract_teams_from_matches(
+                initial_queryset,
+                prompt_type,
             )
 
-        return []
+        return matched_teams
 
     def _extract_teams_from_matches(
             self, matches: list[SportMatch], prompt_type: PromptType
