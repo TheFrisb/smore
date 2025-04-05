@@ -95,6 +95,8 @@ class MessageSenderProcessor(BaseProcessor):
             {"role": "developer", "content": prompt_context.matches_context}
         )
 
+        print("Context: ", prompt_context.matches_context)
+
         completion = self.client.chat.completions.create(
             model=self.llm_model,
             messages=messages,

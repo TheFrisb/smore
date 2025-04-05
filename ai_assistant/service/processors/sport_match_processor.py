@@ -29,7 +29,7 @@ class SportMatchProcessor(BaseProcessor):
             else prompt_context.suggested_dates[0]
         )
 
-        return self._build_match_context(
+        prompt_context.matches_context = self._build_match_context(
             prompt_context.team_objs, filter_date=filter_date
         )
 

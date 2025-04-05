@@ -66,7 +66,7 @@ class PromptContext:
         self.suggested_dates = []
         self.team_objs = []
         self.league_objs = []
-        self.matches_context = []
+        self.matches_context = ''
         self.response = None
         self.can_proceed = True
 
