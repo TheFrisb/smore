@@ -93,6 +93,7 @@ class MessageSenderProcessor(BaseProcessor):
         if (
                 prompt_type in self.get_multi_match_related_prompt_types()
                 or prompt_type == PromptType.MULTI_RANDOM_MATCH_PREDICTION
+                or prompt_type in self.get_league_related_prompt_types()
         ):
             return self.multi_prompt
 
