@@ -64,13 +64,16 @@ class BaseProcessor(ABC):
         """
         return [
             PromptType.SINGLE_MATCH_PREDICTION
-        ], PromptType.SINGLE_RANDOM_MATCH_PREDICTION
+        ]
 
     def get_multi_match_related_prompt_types(self):
         """
         Returns a list of prompt types related to multi match predictions.
         """
-        return [PromptType.MULTI_MATCH_PREDICTION]
+        return [
+            PromptType.MULTI_MATCH_PREDICTION,
+            PromptType.MULTI_RANDOM_MATCH_PREDICTION,
+        ]
 
     def get_bet_suggestions_prompt_types(self):
         """
