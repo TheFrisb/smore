@@ -40,7 +40,6 @@ class SportMatchProcessor(BaseProcessor):
                 base_qs = SportMatch.objects.filter(
                     league__in=prompt_context.league_objs,
                     kickoff_datetime__gte=timezone.now(),
-                    kickoff_datetime__lt=timezone.now() + timedelta(days=7),
                 ).prefetch_related("home_team", "away_team")
 
                 if filter_date:
