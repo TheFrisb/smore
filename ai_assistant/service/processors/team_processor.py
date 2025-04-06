@@ -47,7 +47,7 @@ class TeamProcessor(BaseProcessor):
             matched_teams.extend(
                 self._get_random_teams(
                     filter_date=filter_date,
-                    filter_by_leagues=[obj.pk for obj in prompt_context.league_objs],
+                    filter_by_leagues=[obj.external_id for obj in prompt_context.league_objs],
                     prompt_type=prompt_type,
                 )
             )
@@ -83,7 +83,6 @@ class TeamProcessor(BaseProcessor):
         """
         Fetch a random set of teams from the database.
         """
-        logger.info("Fetching random teams")
 
         base_queryset = (
             SportMatch.objects.filter(
