@@ -27,7 +27,9 @@ class LeagueProcessor(BaseProcessor):
         for league_dict in prompt_context.leagues:
             league = self.find_league(league_dict.league_name, league_dict.country)
             if league:
-                logger.info(f"Found league: {league}")
+                logger.info(
+                    f"Found league (ID: {league.id} - External ID: {league.external_id}): {league}"
+                )
                 matched_leagues.append(league)
             else:
                 logger.warning(f" League not found: {league_dict}")
@@ -57,7 +59,8 @@ class LeagueProcessor(BaseProcessor):
                 .first()
             )
             if country:
-                logger.info(f"Found country: {country.name}")
+                logger.info(
+                    f"Matched country name: {country.name} to SportCountry object with ID: {country.id} and name: {country.name}")
             else:
                 logger.warning(f" No country found for: {country_name}")
 
@@ -69,11 +72,10 @@ class LeagueProcessor(BaseProcessor):
 
         if country:
             logger.info(f"Filtering league by country: {country}")
-            leagues = leagues.filter(country=country)
-
-        leagues.filter(
-            similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER
-        ).order_by("-similarity")
+            leagues.filter(country=country, similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER)
+        else:
+            logger.info(f"Filtering league without country: {country}")
+            leagues.filter(similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER)
 
         logger.info(
             f" Returned {len(leagues)} for league: {league_name}. Returned leagues: {leagues}"
