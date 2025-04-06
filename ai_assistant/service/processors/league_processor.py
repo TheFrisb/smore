@@ -55,8 +55,7 @@ class LeagueProcessor(BaseProcessor):
                         Lower(Unaccent("name")), Lower(Unaccent(Value(country_name)))
                     )
                 )
-                .filter(similarity__gt=0.5)
-                .first()
+                .filter(similarity__gt=0.5).order_by("-similarity").first()
             )
             if country:
                 logger.info(
