@@ -35,6 +35,23 @@ class TeamProcessor(BaseProcessor):
                 self._find_extracted_team_names(prompt_context.team_names)
             )
 
+        if prompt_context.league_objs:
+            logger.info(
+                f"Fetching random teams for league-related prompt type: {prompt_type}"
+            )
+            filter_date = (
+                None
+                if not prompt_context.suggested_dates
+                else prompt_context.suggested_dates[0]
+            )
+            matched_teams.extend(
+                self._get_random_teams(
+                    filter_date=filter_date,
+                    filter_by_leagues=[obj.pk for obj in prompt_context.league_objs],
+                    prompt_type=prompt_type,
+                )
+            )
+
         if (
                 prompt_type in self.get_match_related_prompt_types()
                 and not prompt_context.team_names
@@ -52,23 +69,6 @@ class TeamProcessor(BaseProcessor):
                     filter_date=filter_date,
                     prompt_type=prompt_type,
                     filter_by_leagues=None,
-                )
-            )
-
-        if prompt_type in self.get_league_related_prompt_types():
-            logger.info(
-                f"Fetching random teams for league-related prompt type: {prompt_type}"
-            )
-            filter_date = (
-                None
-                if not prompt_context.suggested_dates
-                else prompt_context.suggested_dates[0]
-            )
-            matched_teams.extend(
-                self._get_random_teams(
-                    filter_date=filter_date,
-                    filter_by_leagues=[obj.pk for obj in prompt_context.league_objs],
-                    prompt_type=prompt_type,
                 )
             )
 
@@ -96,7 +96,9 @@ class TeamProcessor(BaseProcessor):
 
         if filter_by_leagues:
             logger.info(f"Filtering by leagues: {filter_by_leagues}")
-            base_queryset = base_queryset.filter(league__external_id__in=filter_by_leagues)
+            base_queryset = base_queryset.filter(
+                league__external_id__in=filter_by_leagues
+            )
         else:
             base_queryset = base_queryset.filter(
                 league__external_id__in=allowed_league_ids
