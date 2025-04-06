@@ -121,9 +121,7 @@ class MessageSenderProcessor(BaseProcessor):
         if prompt_type == PromptType.GENERAL_SPORT_QUESTION:
             return self.general_question_prompt
 
-        if (
-                prompt_type == PromptType.SINGLE_MATCH_PREDICTION
-        ):
+        if prompt_type == PromptType.SINGLE_MATCH_PREDICTION:
             return self.single_match_prompt
 
         if (

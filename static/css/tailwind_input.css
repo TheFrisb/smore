@@ -75,6 +75,10 @@ div.g_id_signin > div > div > div {
     @apply pb-3;
 }
 
+#aiAssistantMessagesContainer hr {
+    @apply mb-4;
+}
+
 #aiAssistantMessagesContainer strong {
     @apply font-semibold text-secondary-500;
 }

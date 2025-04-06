@@ -18,9 +18,7 @@ class BaseProcessor(ABC):
 
     _client = None  # Class-level client instance
 
-    def __init__(
-            self, name: str, llm_model: Optional[str]
-    ):
+    def __init__(self, name: str, llm_model: Optional[str]):
         self.name = name
         self.llm_model = llm_model
 
