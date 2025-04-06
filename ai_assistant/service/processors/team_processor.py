@@ -47,7 +47,9 @@ class TeamProcessor(BaseProcessor):
             matched_teams.extend(
                 self._get_random_teams(
                     filter_date=filter_date,
-                    filter_by_leagues=[obj.external_id for obj in prompt_context.league_objs],
+                    filter_by_leagues=[
+                        obj.external_id for obj in prompt_context.league_objs
+                    ],
                     prompt_type=prompt_type,
                 )
             )
@@ -125,6 +127,10 @@ class TeamProcessor(BaseProcessor):
             matched_teams = self._extract_teams_from_matches(
                 initial_queryset,
                 prompt_type,
+            )
+        else:
+            logger.info(
+                f"No matches found for queryset: {initial_queryset}."
             )
 
         return matched_teams
