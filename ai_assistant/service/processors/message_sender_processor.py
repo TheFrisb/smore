@@ -118,9 +118,11 @@ class MessageSenderProcessor(BaseProcessor):
     def _get_system_message(self, prompt_context: PromptContext):
         prompt_type = prompt_context.prompt_type
 
+        if prompt_type == PromptType.GENERAL_SPORT_QUESTION:
+            return self.general_question_prompt
+
         if (
                 prompt_type == PromptType.SINGLE_MATCH_PREDICTION
-                or len(prompt_context.team_objs) == 2
         ):
             return self.single_match_prompt
 
@@ -129,6 +131,3 @@ class MessageSenderProcessor(BaseProcessor):
                 or prompt_type in self.get_league_related_prompt_types()
         ):
             return self.multi_match_prompt
-
-        if prompt_type == PromptType.GENERAL_SPORT_QUESTION:
-            return self.general_question_prompt
