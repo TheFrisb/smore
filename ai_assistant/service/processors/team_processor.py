@@ -56,7 +56,7 @@ class TeamProcessor(BaseProcessor):
 
         if (
                 prompt_type in self.get_match_related_prompt_types()
-                and not prompt_context.team_names
+                and not prompt_context.team_names and not prompt_context.leagues
         ):
             logger.info(
                 f"No team names found in prompt context: {prompt_context}. Assuming that random teams are needed."
