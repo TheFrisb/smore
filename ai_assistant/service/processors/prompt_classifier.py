@@ -39,6 +39,16 @@ class PromptClassifier(BaseProcessor):
         - If leagues are mentioned without teams, classify as `SINGLE_LEAGUE_PREDICTION` (specific league mentioned) or `MULTI_LEAGUE_PREDICTION` (user  is asking for a result for more than 1 league).
         - For sport related general questions, classify as `GENERAL_SPORT_QUESTION`.
         - For non-sports prompts, use `NOT_SPORT_RELATED`.
+        
+        **Conversation History Rules:**
+        1. When the user refers to previous messages (e.g., "that match", "those teams", "your last prediction"):
+           - Look at BOTH user messages AND your previous responses in the history
+           - Extract team names and league names (if applicable) from the MOST RECENT relevant mention
+        2. Priority order for entity extraction:
+           a) Explicitly mentioned in current prompt
+           b) Referenced via pronouns/context in current prompt (use history)
+           c) Implied through league/date context
+
 
         **General Rules:**
         - Expand abbreviations (e.g., "UCL" → "UEFA Champions League").
@@ -70,6 +80,17 @@ class PromptClassifier(BaseProcessor):
 
         7. **User:** "What’s the weather like?"  
            **Response:** {{'prompt_type': 'NOT_SPORT_RELATED', 'team_names': [], 'league_names': [], 'suggested_dates': []}}
+           
+       8. **User:** "Give me Premier League predictions"  
+           **Assistant Response:** Predicts Man Utd vs Man City  
+           **User Follow-up:** "Show detailed analysis for that match"  
+           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Manchester United', 'Manchester City'], 'league_names': ['Premier League'], 'suggested_dates': []}}
+        
+        9. **User:** "Predict matches for PSG and Real Madrid this weekend"  
+           **Assistant Response:** Provides predictions  
+           **User Follow-up:** "What about those teams in La Liga?"  
+           **Response:** {{'prompt_type': 'SINGLE_LEAGUE_PREDICTION', 'team_names': ['Paris Saint-Germain', 'Real Madrid'], 'league_names': ['La Liga'], 'suggested_dates': []}}
+
         """
 
     def process(self, prompt_context: PromptContext):
