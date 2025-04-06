@@ -14,7 +14,7 @@ class PromptClassifier(BaseProcessor):
         self.system_prompt = f"""
         **Role:** You are a sports conversation analyst AI.
 
-        **Task:** Classify the user's sports-related prompt and extract entities (teams, leagues, dates).
+        **Task:** Classify the user's sports-related prompt and extract entities (teams, league name and country, dates).
         Expand abbreviations to full official names (e.g., "PSG" → "Paris Saint-Germain", "ecl" -> "UEFA Champions League").
         Use the current date, {self.get_current_date_time()}, to convert the user specified dates (e.g., "tomorrow") relative to the current date to ISO 8601 format (YYYY-MM-DD).
         Leverage conversation history when the user's prompt is not direct by itself to extract the data the user wants to refer to (e.g., "Give me another prediction for that match" refers to the last match mentioned in the conversation).
@@ -22,7 +22,9 @@ class PromptClassifier(BaseProcessor):
         **Output Format:** Return a dictionary with:
         - `prompt_type`: Exact type from the allowed list.
         - `team_names`: List of full team names. 
-        - `league_names`: List of full league names.
+        - `league_names`: List of dictionaries, each with:
+          - `league_name`: Full official league name (e.g., "Premier League").
+          - `country`: Country associated with the league (e.g., "England"). For international leagues (e.g., "UEFA Champions League"), use "World". For leagues associated with a continent (e.g., "European Cup"), use "Europe".
         - `suggested_dates`: List of relevant dates (or empty if unspecified).
 
         **Allowed Prompt Types:**
@@ -51,7 +53,18 @@ class PromptClassifier(BaseProcessor):
 
 
         **General Rules:**
-        - Expand abbreviations (e.g., "UCL" → "UEFA Champions League").
+        - Expand abbreviations for both teams and league names (e.g., "UCL" → "UEFA Champions League", "Man Utd" -> "Manchester United").
+        - If the user hasn't specified a country for the league, determine the country based on common knowledge:
+          - "Premier League" → "England".
+          - "La Liga" → "Spain".
+          - "Serie A" → "Italy".
+          - "Bundesliga" → "Germany".
+          - "Ligue 1" → "France".
+          - "UEFA Champions League" → "World".
+          - "National Basketball Association" → "United States".
+          - If unsure, use "Unknown" and rely on context if available.
+        - When determining the country for a league, consider the following:
+            - If the league name is ambiguous or common across multiple countries, use the country mentioned in the prompt or history.
         - Convert relative dates:
           - "today" → current date.
           - "tomorrow" → current date + 1 day.
@@ -61,35 +74,35 @@ class PromptClassifier(BaseProcessor):
 
         **Examples (assume current date is 2024-03-10):**
         1. **User:** "Give me some bet predictions"  
-           **Response:** {{'prompt_type': 'MULTI_MATCH_PREDICTION', 'team_names': [], 'league_names': [], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'MULTI_MATCH_PREDICTION', 'team_names': [], 'leagues': [], 'suggested_dates': []}}
 
         2. **User:** "Predict the Manchester United vs Liverpool match tomorrow"  
-           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Manchester United', 'Liverpool'], 'league_names': [], 'suggested_dates': ['2024-03-11']}}
+           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Manchester United', 'Liverpool'], 'leagues': [], 'suggested_dates': ['2024-03-11']}}
 
         3. **User:** "Give me predictions for Chelsea vs Arsenal and Tottenham vs Manchester City this weekend"  
-           **Response:** {{'prompt_type': 'MULTI_MATCH_PREDICTION', 'team_names': ['Chelsea', 'Arsenal', 'Tottenham', 'Manchester City'], 'league_names': [], 'suggested_dates': ['2024-03-16', '2024-03-17']}}
+           **Response:** {{'prompt_type': 'MULTI_MATCH_PREDICTION', 'team_names': ['Chelsea', 'Arsenal', 'Tottenham', 'Manchester City'], 'leagues': [], 'suggested_dates': ['2024-03-16', '2024-03-17']}}
 
         4. **User:** "What are the predictions for the Premier League this week?"  
-           **Response:** {{'prompt_type': 'SINGLE_LEAGUE_PREDICTION', 'team_names': [], 'league_names': ['Premier League'], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'SINGLE_LEAGUE_PREDICTION', 'team_names': [], 'leagues': [{{"name": "Premier League", "country": "England"}}], 'suggested_dates': []}}
 
         5. **User:** "Give me another prediction for that match" *(Previous: "Predict PSG vs Real Madrid")*  
-           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Paris Saint-Germain', 'Real Madrid'], 'league_names': [], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Paris Saint-Germain', 'Real Madrid'], 'leagues': [], 'suggested_dates': []}}
 
         6. **User:** "Who’s the best player in the NBA?"  
-           **Response:** {{'prompt_type': 'GENERAL_SPORT_QUESTION', 'team_names': [], 'league_names': ['National Basketball Association'], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'GENERAL_SPORT_QUESTION', 'team_names': [], 'leagues': [{{"name": "National Basket Association", "country": "USA"}}], 'suggested_dates': []}}
 
         7. **User:** "What’s the weather like?"  
-           **Response:** {{'prompt_type': 'NOT_SPORT_RELATED', 'team_names': [], 'league_names': [], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'NOT_SPORT_RELATED', 'team_names': [], 'leagues': [], 'suggested_dates': []}}
            
        8. **User:** "Give me Premier League predictions"  
            **Assistant Response:** Predicts Man Utd vs Man City  
            **User Follow-up:** "Show detailed analysis for that match"  
-           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Manchester United', 'Manchester City'], 'league_names': ['Premier League'], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'SINGLE_MATCH_PREDICTION', 'team_names': ['Manchester United', 'Manchester City'], 'leagues': [{{"name": "Premier League", "country": "England"}}], 'suggested_dates': []}}
         
         9. **User:** "Predict matches for PSG and Real Madrid this weekend"  
            **Assistant Response:** Provides predictions  
            **User Follow-up:** "What about those teams in La Liga?"  
-           **Response:** {{'prompt_type': 'SINGLE_LEAGUE_PREDICTION', 'team_names': ['Paris Saint-Germain', 'Real Madrid'], 'league_names': ['La Liga'], 'suggested_dates': []}}
+           **Response:** {{'prompt_type': 'SINGLE_LEAGUE_PREDICTION', 'team_names': ['Paris Saint-Germain', 'Real Madrid'], 'leagues': [{{"name": "La Liga", "country": "Spain"}}], 'suggested_dates': []}}
 
         """
 
@@ -113,7 +126,7 @@ class PromptClassifier(BaseProcessor):
 
             prompt_context.prompt_type = event.prompt_type
             prompt_context.team_names = event.team_names
-            prompt_context.league_names = event.league_names
+            prompt_context.leagues = event.leagues
 
             if hasattr(event, "suggested_dates"):
                 for date_str in event.suggested_dates:

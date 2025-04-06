@@ -40,6 +40,11 @@ class PromptType(Enum):
     NOT_SPORT_RELATED = "NOT_SPORT_RELATED"
 
 
+class LeagueInfo(BaseModel):
+    league_name: str
+    country: str
+
+
 class PromptClassifierModel(BaseModel):
     """
     Class for classifying the prompt
@@ -47,7 +52,7 @@ class PromptClassifierModel(BaseModel):
 
     prompt_type: PromptType
     team_names: list[str]
-    league_names: list[str]
+    leagues: list[LeagueInfo]
     suggested_dates: list[str]
 
 
@@ -62,11 +67,12 @@ class PromptContext:
         self.history = []
         self.prompt_type = None
         self.team_names = []
-        self.league_names = []
+        self.leagues = []
         self.suggested_dates = []
         self.team_objs = []
+        self.country_name = ""
         self.league_objs = []
-        self.matches_context = ''
+        self.matches_context = ""
         self.response = None
         self.can_proceed = True
 
@@ -74,6 +80,6 @@ class PromptContext:
         return (
             f"<PromptContext user={self.user} prompt={self.prompt} "
             f"prompt_type={self.prompt_type} team_names={self.team_names} "
-            f"league_names={self.league_names} suggested_dates={self.suggested_dates} "
+            f"league_names={self.leagues} suggested_dates={self.suggested_dates} "
             f"response={self.response} can_proceed={self.can_proceed}>"
         )

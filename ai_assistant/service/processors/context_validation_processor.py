@@ -20,14 +20,16 @@ class ContextValidationProcessor(BaseProcessor):
         if prompt_type in self.get_league_related_prompt_types():
             logger.info(f"Processing league related prompt: {prompt_type}")
 
-            if not prompt_context.league_names:
-                logger.info(f"No league names found in prompt context: {prompt_context}")
-                prompt_context.response = "I couldn't find any league names in your message. Please provide the league names you want to know about."
+            if not prompt_context.leagues:
+                logger.info(f"No leagues found in prompt context: {prompt_context}")
+                prompt_context.response = "I couldn't find any leagues in your message. Please provide the league names you want to know about."
                 prompt_context.can_proceed = False
                 return
 
             if not prompt_context.league_objs:
-                logger.info(f"No league objects found in prompt context: {prompt_context}")
+                logger.info(
+                    f"No league objects found in prompt context: {prompt_context}"
+                )
                 prompt_context.response = "I couldn't find the leagues you mentioned. Please provide the full league names and perhaps their country to help me find them."
                 prompt_context.can_proceed = False
                 return
@@ -36,7 +38,9 @@ class ContextValidationProcessor(BaseProcessor):
             logger.info(f"Processing match related prompt: {prompt_type}")
 
             if prompt_context.team_names and not prompt_context.team_objs:
-                logger.info(f"No team objects found in prompt context: {prompt_context}")
+                logger.info(
+                    f"No team objects found in prompt context: {prompt_context}"
+                )
                 prompt_context.response = "I couldn't find the teams you mentioned. Please provide the full team names to help me find them."
                 prompt_context.can_proceed = False
                 return
@@ -45,8 +49,10 @@ class ContextValidationProcessor(BaseProcessor):
                     prompt_type == PromptType.SINGLE_MATCH_PREDICTION
                     and len(prompt_context.team_objs) < 2
             ):
-                logger.info(f"Not enough teams found in prompt context: {prompt_context}")
-                
+                logger.info(
+                    f"Not enough teams found in prompt context: {prompt_context}"
+                )
+
                 prompt_context.response = "I couldn't find the teams you mentioned. Please provide the full team names to help me find them."
                 prompt_context.can_proceed = False
                 return
