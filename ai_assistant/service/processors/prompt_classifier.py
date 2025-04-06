@@ -21,7 +21,7 @@ class PromptClassifier(BaseProcessor):
 
         **Output Format:** Return a dictionary with:
         - `prompt_type`: Exact type from the allowed list.
-        - `team_names`: List of full team names.
+        - `team_names`: List of full team names. 
         - `league_names`: List of full league names.
         - `suggested_dates`: List of relevant dates (or empty if unspecified).
 

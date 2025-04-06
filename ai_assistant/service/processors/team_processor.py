@@ -50,6 +50,7 @@ class TeamProcessor(BaseProcessor):
                 self._get_random_teams(
                     filter_date=filter_date,
                     prompt_type=prompt_type,
+                    filter_by_leagues=None,
                 )
             )
 
