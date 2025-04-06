@@ -90,7 +90,15 @@ class MessageSenderProcessor(BaseProcessor):
         ]
         if prompt_context.history:
             messages.extend(prompt_context.history)
-        messages.append({"role": "user", "content": prompt_context.prompt})
+
+        if prompt_context.prompt_type != PromptType.GENERAL_SPORT_QUESTION:
+            if not prompt_context.matches_context:
+                prompt_context.response = "I couldn't find any matches to analyze. Please ask me something more specific."
+                prompt_context.can_proceed = False
+                return
+
+            messages.append({"role": "user", "content": prompt_context.prompt})
+
         messages.append(
             {"role": "developer", "content": prompt_context.matches_context}
         )
