@@ -60,22 +60,25 @@ class LeagueProcessor(BaseProcessor):
             )
             if country:
                 logger.info(
-                    f"Matched country name: {country.name} to SportCountry object with ID: {country.id} and name: {country.name}")
+                    f"Matched country name: {country.name} to SportCountry object with ID: {country.id} and name: {country.name}"
+                )
             else:
                 logger.warning(f" No country found for: {country_name}")
 
         leagues = SportLeague.objects.annotate(
             similarity=TrigramSimilarity(
-                Lower(Unaccent("name")), Lower(Unaccent(Value(league_name)))
+                Lower(Unaccent("name")), Lower(Unaccent(Value(league_name))).f
             )
         )
 
         if country:
             logger.info(f"Filtering league by country: {country}")
-            leagues.filter(country=country, similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER)
+            leagues.filter(
+                country=country, similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER
+            ).order_by("-similarity")
         else:
             logger.info(f"Filtering league without country: {country}")
-            leagues.filter(similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER)
+            leagues.filter(similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER).order_by("-similarity")
 
         logger.info(
             f" Returned {len(leagues)} for league: {league_name}. Returned leagues: {leagues}"
