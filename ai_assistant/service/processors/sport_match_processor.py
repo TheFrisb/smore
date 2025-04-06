@@ -29,9 +29,16 @@ class SportMatchProcessor(BaseProcessor):
             else prompt_context.suggested_dates[0]
         )
 
-        prompt_context.matches_context = self._build_match_context(
+        matches_context = self._build_match_context(
             prompt_context.team_objs, filter_date=filter_date
         )
+
+        if not matches_context:
+            prompt_context.can_proceed = False
+            prompt_context.response = "No matches found for the given teams."
+            return
+
+        prompt_context.matches_context = matches_context
 
     def _build_match_context(
             self, teams: List[SportTeam], filter_date: Optional[date] = None
