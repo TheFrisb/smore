@@ -7,7 +7,7 @@ from django.db.models.functions import Lower
 
 from ai_assistant.service.data import PromptContext
 from ai_assistant.service.processors.base_processor import BaseProcessor
-from core.models import SportLeague, SportCountry
+from core.models import SportLeague, SportCountry, ApiSportModel
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +71,7 @@ class LeagueProcessor(BaseProcessor):
             logger.info(f"Filtering league by country: {country}")
             leagues = leagues.filter(country=country)
 
-        leagues.filter(similarity__gt=0.5).order_by("-similarity")
+        leagues.filter(similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER).order_by("-similarity")
 
         logger.info(
             f" Returned {len(leagues)} for league: {league_name}. Returned leagues: {leagues}"
