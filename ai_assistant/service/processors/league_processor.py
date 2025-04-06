@@ -58,7 +58,7 @@ class LeagueProcessor(BaseProcessor):
                     )
                 )
                 .filter(similarity__gt=0.5)
-                .order_by("-similarity")
+                .order_by("-similarity")[:1]
                 .first()
             )
             if country:
@@ -78,7 +78,7 @@ class LeagueProcessor(BaseProcessor):
             logger.info(f"Filtering by country: {country.name}")
             leagues = leagues.filter(country=country)
 
-        leagues = leagues.filter(similarity__gt=0.5).order_by("-similarity")
+        leagues = leagues.filter(similarity__gt=0.5).order_by("-similarity")[:5]
 
         logger.info(f"Leagues found: {[l.name for l in leagues]}")
 
