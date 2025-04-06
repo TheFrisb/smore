@@ -35,9 +35,7 @@ class TeamProcessor(BaseProcessor):
                 self._find_extracted_team_names(prompt_context.team_names)
             )
 
-        if (prompt_context.leagues and not prompt_context.team_names) or (
-                prompt_context.leagues and prompt_type == PromptType.GENERAL_SPORT_QUESTION
-        ):
+        if prompt_context.leagues:
             logger.info(
                 f"Fetching random teams for league-related prompt type: {prompt_type}"
             )
