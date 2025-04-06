@@ -35,7 +35,9 @@ class TeamProcessor(BaseProcessor):
                 self._find_extracted_team_names(prompt_context.team_names)
             )
 
-        if prompt_type in self.get_league_related_prompt_types() or prompt_context.league_objs and prompt_type == PromptType.GENERAL_SPORT_QUESTION:
+        if (prompt_context.leagues and not prompt_context.team_names) or (
+                prompt_context.leagues and prompt_type == PromptType.GENERAL_SPORT_QUESTION
+        ):
             logger.info(
                 f"Fetching random teams for league-related prompt type: {prompt_type}"
             )
@@ -53,8 +55,6 @@ class TeamProcessor(BaseProcessor):
                     prompt_type=prompt_type,
                 )
             )
-
-            return
 
         if (
                 prompt_type in self.get_match_related_prompt_types()
@@ -75,8 +75,6 @@ class TeamProcessor(BaseProcessor):
                     filter_by_leagues=None,
                 )
             )
-
-            return
 
         prompt_context.team_objs = matched_teams
 
