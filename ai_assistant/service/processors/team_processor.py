@@ -11,6 +11,7 @@ from django.utils import timezone
 from ai_assistant.service.data import PromptContext, PromptType
 from ai_assistant.service.processors.base_processor import BaseProcessor
 from core.models import SportTeam, SportMatch, ApiSportModel, SportLeague
+from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)
 
@@ -95,7 +96,11 @@ class TeamProcessor(BaseProcessor):
 
         if filter_by_leagues:
             logger.info(f"Filtering by leagues: {filter_by_leagues}")
-            base_queryset = base_queryset.filter(league__in=filter_by_leagues)
+            base_queryset = base_queryset.filter(league__id__in=filter_by_leagues)
+        else:
+            base_queryset = base_queryset.filter(
+                league__external_id__in=allowed_league_ids
+            )
 
         initial_queryset = base_queryset
         matched_teams = []
