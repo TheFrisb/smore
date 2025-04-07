@@ -34,7 +34,7 @@
 
                 {% for product in subscriptions %}
                     <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/30
-                         {% if product.name != "Tennis" or product.name != 'NFL_NHL_NCAA' %}
+                         {% if product.name != "Tennis" and product.name != 'NFL_NHL_NCAA' %}
                          hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product
                          {% endif %}
                          "

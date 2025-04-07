@@ -9,7 +9,7 @@
             <div class="mx-auto flex flex-col md:flex-row items-center justify-center gap-6 max-w-6xl mb-8">
                 <div class="flex flex-wrap gap-3 relative">
 
-                    <div class="relative min-w-64 flex justify-between items-center ">
+                    <div class="relative min-w-72 flex justify-between items-center ">
                         <button class="sportDropdownButton w-full flex items-center space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-secondary-500/10 text-secondary-400 border-secondary-500/20 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
 
 
@@ -79,7 +79,7 @@
                         </div>
                         {% for product in products %}
                             <div class="relative flex items-center justify-between">
-                                <a {% if product.name != 'Tennis' or product.name != 'NFL_NHL_NCAA' %}href="{% url 'core:history' %}?filter={{ product.name }}"{% endif %}
+                                <a {% if product.name != 'Tennis' and product.name != 'NFL_NHL_NCAA' %}href="{% url 'core:history' %}?filter={{ product.name }}"{% endif %}
                                    class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product == filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'Tennis' or product.name == 'NFL_NHL_NCAA' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
 
                                     {% if product.name != 'NFL_NHL_NCAA' %}

@@ -1,6 +1,12 @@
 from django.urls import path
 
-from .views import GetMeView, LoginView, RefreshTokenView, RegisterUserView, PasswordResetView
+from .views import (
+    GetMeView,
+    LoginView,
+    RefreshTokenView,
+    RegisterUserView,
+    PasswordResetView,
+)
 
 app_name = "authentication"
 urlpatterns = [

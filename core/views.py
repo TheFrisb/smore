@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView, DetailView
 
 from accounts.models import PurchasedPredictions, User
+from ai_assistant.models import Message
 from core.models import (
     Product,
     PickOfTheDay,
@@ -360,13 +361,38 @@ class AiAssistantView(TemplateView):
         context["page_title"] = _("AI Analyst")
         context["hide_footer"] = True
         context["hide_ai_button"] = True
-        context["has_access"] = (
-                self.request.user.is_authenticated
-                and self.request.user.has_access_to_product(
-            Product.objects.get(name=Product.Names.AI_ANALYST)
-        )
-        )
+        context["free_messages"] = self.get_free_messages()
         return context
+
+    def _get_has_access(self):
+        """
+        Check if the user has access to the AI Assistant product.
+        """
+        user = self.request.user
+
+        if user.is_authenticated:
+            return user.has_access_to_product(
+                Product.objects.get(name=Product.Names.AI_ANALYST)
+            )
+        return False
+
+    def get_free_messages(self):
+        user = self.request.user
+
+        if not user.is_authenticated:
+            return None
+
+        if self._get_has_access():
+            return None
+
+        msg_count = Message.objects.filter(
+            user=user, direction=Message.Direction.OUTBOUND
+        ).count()
+
+        if msg_count < 3:
+            return 3 - msg_count
+        else:
+            return 0
 
 
 class SubscriptionRequiredView(TemplateView):

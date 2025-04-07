@@ -66,7 +66,14 @@ class SendMessageToAiView(APIView):
             status=UserSubscription.Status.ACTIVE,
         ).first()
 
-        if not user_subscription:
+        msg_count = Message.objects.filter(
+            user=user, direction=Message.Direction.OUTBOUND
+        ).count()
+
+        if not user_subscription and msg_count >= 3:
+            logger.warning(
+                f"User ({user.id}): {user.username} does not have a plan, and has already sent {msg_count} messages."
+            )
             return False
 
         return True

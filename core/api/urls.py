@@ -1,7 +1,11 @@
 from django.urls import path
 
-from core.api.views import PaginatedHistoryPredictionsView, PredictionListView, ProductsListView, \
-    GetFrequentlyAskedQuestionsListView
+from core.api.views import (
+    PaginatedHistoryPredictionsView,
+    PredictionListView,
+    ProductsListView,
+    GetFrequentlyAskedQuestionsListView,
+)
 
 urlpatterns = [
     path(
@@ -11,6 +15,9 @@ urlpatterns = [
     ),
     path("predictions/", PredictionListView.as_view(), name="predictions-list"),
     path("products/", ProductsListView.as_view(), name="products-list"),
-
-    path("frequently-asked-questions/", GetFrequentlyAskedQuestionsListView.as_view(), name="faq-api")
+    path(
+        "frequently-asked-questions/",
+        GetFrequentlyAskedQuestionsListView.as_view(),
+        name="faq-api",
+    ),
 ]

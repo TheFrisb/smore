@@ -4,8 +4,8 @@
   "description": "Frontend",
   "main": "index.js",
   "scripts": {
-    "watch-tailwind": "npx tailwindcss -i ./static/css/tailwind_input.css -o ./static/css/tailwind_output_v28.css --watch",
-    "build-tailwind": "npx tailwindcss -i ./static/css/tailwind_input.css -o ./static/css/tailwind_output_v28.css --minify",
+    "watch-tailwind": "npx tailwindcss -i ./static/css/tailwind_input.css -o ./static/css/tailwind_output_v29.css --watch",
+    "build-tailwind": "npx tailwindcss -i ./static/css/tailwind_input.css -o ./static/css/tailwind_output_v29.css --minify",
     "webpack-watch": "webpack --watch --mode development",
     "webpack-build": "webpack --mode production",
     "lint": "eslint ./src/**/*.js",

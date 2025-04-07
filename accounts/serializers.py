@@ -102,7 +102,7 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
             "end_date",
             "products",
             "first_chosen_product",
-            "provider_type"
+            "provider_type",
         ]
 
 

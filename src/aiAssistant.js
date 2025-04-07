@@ -34,7 +34,7 @@ function renderMessage(message, isUserMessage) {
   return messageContainer;
 }
 
-function renderNoAccessMessage() {
+function renderNoAccessMessage(message) {
   const messageContainer = document.createElement("div");
   messageContainer.className = `flex justify-start`;
 
@@ -43,14 +43,13 @@ function renderNoAccessMessage() {
 
   const messageText = document.createElement("p");
   messageText.className = "whitespace-pre-wrap";
-  messageText.textContent =
-    "You need to subscribe to the AI Assistant product to use this feature.";
+  messageText.textContent = message;
 
   const buttonContainer = document.createElement("div");
   buttonContainer.className = "mt-2 flex items-center justify-center w-full";
   buttonContainer.innerHTML = `
-    <a href="/plans/" class="w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
-      Subscribe
+    <a href="/plans/" class="w-full w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
+      Subscribe 
       <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite12.svg#arrowRight"></use></svg>
     </a>
   `;
@@ -65,7 +64,29 @@ function renderNoAccessMessage() {
   return messageContainer;
 }
 
-function sendMessage(hasAccess) {
+function updateFreeMessagesCountIfExists() {
+  const freeMessageCountEl = document.getElementById(
+    "aiAssistantFreeMessageCounter",
+  );
+
+  if (!freeMessageCountEl) {
+    return;
+  }
+
+  let count = parseInt(freeMessageCountEl.textContent);
+
+  let updatedCount = count - 1;
+  if (updatedCount <= 0) {
+    const parentEl = freeMessageCountEl.parentElement;
+    parentEl.classList.remove("text-success-500");
+    parentEl.classList.add("text-secondary-500");
+    parentEl.innerHTML = `You've used up your 3 free messages. Subscribe now to unlock unlimited access to our AI Analyst!`;
+  } else {
+    freeMessageCountEl.textContent = updatedCount.toString();
+  }
+}
+
+function sendMessage() {
   if (isLoading) {
     return;
   }
@@ -74,11 +95,6 @@ function sendMessage(hasAccess) {
 
   renderMessage(message, true);
   input.value = "";
-
-  if (!hasAccess) {
-    renderNoAccessMessage();
-    return;
-  }
 
   isLoading = true;
   sendButton.disabled = true;
@@ -93,11 +109,23 @@ function sendMessage(hasAccess) {
     },
     body: JSON.stringify({ message }),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      aiMessage.classList.remove("animate-pulse");
-      const messageContent = aiMessage.querySelector("div");
-      messageContent.innerHTML = marked.parse(data.message);
+    .then((response) => {
+      if (response.status === 403) {
+        aiMessage.remove();
+        renderNoAccessMessage(
+          "You've used up your 3 free messages. Subscribe now to unlock unlimited access to our AI Analyst!",
+        );
+      } else if (response.ok) {
+        return response.json().then((data) => {
+          aiMessage.classList.remove("animate-pulse");
+          const messageContent = aiMessage.querySelector("div");
+          messageContent.innerHTML = marked.parse(data.message);
+
+          updateFreeMessagesCountIfExists();
+        });
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     })
     .catch((error) => {
       aiMessage.classList.remove("animate-pulse");
@@ -117,8 +145,6 @@ function initAiAssistant() {
     return;
   }
 
-  const hasAccess = document.querySelector("#hasAccessInput").value === "True";
-
   input.addEventListener("input", () => {
     sendButton.disabled = !input.value.trim();
   });
@@ -126,11 +152,11 @@ function initAiAssistant() {
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      sendMessage(hasAccess);
+      sendMessage();
     }
   });
 
-  sendButton.addEventListener("click", () => sendMessage(hasAccess));
+  sendButton.addEventListener("click", () => sendMessage());
 }
 
 export default initAiAssistant;
