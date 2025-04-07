@@ -326,6 +326,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         "price",
         "start_date",
         "end_date",
+        "provider_type",
         "stripe_subscription_id",
         "is_custom_subscription",
     )
@@ -348,6 +349,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
                     "frequency",
                     "price",
                     "first_chosen_product",
+                    "provider_type",
                 )
             },
         ),
@@ -356,7 +358,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         ("Products", {"fields": ("products",)}),
     )
     filter_horizontal = ("products",)
-    readonly_fields = ["stripe_subscription_id", "price", "user_email"]
+    readonly_fields = ["stripe_subscription_id", "price", "user_email", "provider_type"]
 
     def is_active(self, obj):
         return obj.is_active

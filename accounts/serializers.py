@@ -86,6 +86,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class UserSubscriptionSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
+    first_chosen_product = ProductSerializer()
 
     price = serializers.DecimalField(
         max_digits=10, decimal_places=2, coerce_to_string=False
@@ -93,7 +94,16 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSubscription
-        fields = ["status", "frequency", "price", "start_date", "end_date", "products"]
+        fields = [
+            "status",
+            "frequency",
+            "price",
+            "start_date",
+            "end_date",
+            "products",
+            "first_chosen_product",
+            "provider_type"
+        ]
 
 
 class UserSerializer(serializers.ModelSerializer):
