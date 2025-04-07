@@ -11,8 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Sum, Q, Count
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, FormView, RedirectView, ListView
@@ -25,7 +24,7 @@ from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswo
 from accounts.mixins import RedirectAuthenticatedUserMixin
 from accounts.models import User, Referral, WithdrawalRequest
 from accounts.services.referral_service import ReferralService
-from core.mailer.mailjet_service import MailjetService
+from accounts.services.user_service import UserService
 from core.models import FrequentlyAskedQuestion
 from facebook.services.facebook_pixel import FacebookPixel
 
@@ -238,7 +237,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         return None
 
     def _create_second_level_referral(
-        self, grandparent: User, referred: User, form
+            self, grandparent: User, referred: User, form
     ) -> bool:
         """
         Create row (grandparent->referred, level=2).
@@ -374,7 +373,7 @@ class PasswordResetRequestSuccessView(TemplateView):
 class PasswordResetRequestView(FormView):
     def __init__(self):
         super().__init__()
-        self.mail_service = MailjetService()
+        self.user_service = UserService()
 
     template_name = "accounts/request_reset_password.html"
     form_class = PasswordResetRequestForm
@@ -397,19 +396,7 @@ class PasswordResetRequestView(FormView):
             user = None
 
         if user:
-            token = default_token_generator.make_token(user)
-            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-
-            # Build the password-reset-confirm URL
-            reset_url = self.request.build_absolute_uri(
-                reverse_lazy(
-                    "accounts:password_reset_confirm",
-                    kwargs={"uidb64": uidb64, "token": token},
-                )
-            )
-
-            logger.info(f"Password reset link for {user.username}: {reset_url}")
-            self.mail_service.send_reset_password_email(user, reset_url)
+            self.user_service.send_password_change_link(user)
 
         return super().form_valid(form)
 

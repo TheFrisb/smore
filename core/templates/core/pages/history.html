@@ -79,8 +79,8 @@
                         </div>
                         {% for product in products %}
                             <div class="relative flex items-center justify-between">
-                                <a {% if product.name != 'Tennis' %}href="{% url 'core:history' %}?filter={{ product.name }}"{% endif %}
-                                   class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product == filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'Tennis' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
+                                <a {% if product.name != 'Tennis' or product.name != 'NFL_NHL_NCAA' %}href="{% url 'core:history' %}?filter={{ product.name }}"{% endif %}
+                                   class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product == filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'Tennis' or product.name == 'NFL_NHL_NCAA' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
 
                                     {% if product.name != 'NFL_NHL_NCAA' %}
                                         {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-4 h-4 text-secondary-400" %}
@@ -100,7 +100,7 @@
                                             <span>NCAA</span>
                                         </div>
                                     {% endif %}
-                                    {% if product.name == 'Tennis' %}
+                                    {% if product.name == 'Tennis' or product.name == 'NFL_NHL_NCAA' %}
                                         <div class="px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20 ">
                                             <span class="text-xs text-secondary-400 nowrap leading-none">Soon</span>
                                         </div>

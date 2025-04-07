@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from accounts.models import User
 from accounts.serializers import UserSerializer
+from accounts.services.user_service import UserService
 
 logger = logging.getLogger(__name__)
 
@@ -67,5 +68,31 @@ class RegisterUserView(APIView):
         )
 
         logger.info(f"User {user.username} created.")
+
+        return Response(status=HTTP_204_NO_CONTENT)
+
+
+class PasswordResetView(APIView):
+    permission_classes = [AllowAny]
+
+    def __init__(self):
+        super().__init__()
+        self.user_service = UserService()
+
+    class InputSerializer(serializers.Serializer):
+        email = serializers.EmailField()
+
+    def post(self, request):
+        serializer = self.InputSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        user = User.objects.filter(
+            email=data["email"], provider=User.ProviderType.INTERNAL
+        ).first()
+
+        if user:
+            logger.info(f"Password reset link sent to {user.email}")
+            self.user_service.send_password_change_link(user)
 
         return Response(status=HTTP_204_NO_CONTENT)
