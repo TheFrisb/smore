@@ -4,8 +4,8 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from accounts.serializers import ProductSerializer
-from core.models import Prediction, Product
-from .serializers import PredictionSerializer
+from core.models import Prediction, Product, FrequentlyAskedQuestion
+from .serializers import PredictionSerializer, FrequentlyAskedQuestionSerializer
 
 
 class PredictionPagination(PageNumberPagination):
@@ -82,3 +82,10 @@ class PredictionListView(ListAPIView):
             )
             .order_by("match__kickoff_datetime")
         )
+
+
+class GetFrequentlyAskedQuestionsListView(ListAPIView):
+    serializer_class = FrequentlyAskedQuestionSerializer
+
+    def get_queryset(self):
+        return FrequentlyAskedQuestion.objects.all().order_by("order")

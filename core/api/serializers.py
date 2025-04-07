@@ -2,7 +2,7 @@ from django.conf import settings
 from rest_framework import serializers
 
 from accounts.serializers import ProductSerializer
-from core.models import SportLeague, SportMatch, SportTeam, Prediction, SportCountry
+from core.models import SportLeague, SportMatch, SportTeam, Prediction, SportCountry, FrequentlyAskedQuestion
 
 
 class PredictionSerializer2(serializers.ModelSerializer):
@@ -86,3 +86,9 @@ class PredictionSerializer(serializers.ModelSerializer):
             "detailed_analysis",
             "product",
         )
+
+
+class FrequentlyAskedQuestionSerializer(serializers.Serializer):
+    class Meta:
+        model = FrequentlyAskedQuestion
+        fields = "__all__"
