@@ -223,7 +223,7 @@ function initProducts() {
   }
 
   if (checkoutButton) {
-    checkoutButton.addEventListener("click", () => {
+    checkoutButton.addEventListener("click", async () => {
       if (checkoutButton.disabled) {
         return;
       }
@@ -234,43 +234,49 @@ function initProducts() {
       const csrfToken = getCsrfToken();
       const url = checkoutButton.getAttribute("data-url");
 
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,
-        },
-        body: JSON.stringify({
-          products: selectedProducts.map((product) => product.id),
-          firstProduct: getFirstSelectedSubscriptionProduct(),
-          frequency: frequencyType,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(
-              `Status: ${response.status}. Body: ${response.body}`,
-            );
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.url) {
-            window.location.href = data.url;
-          } else {
-            setTimeout(() => {
-              window.location.href = "/accounts/manage-plan/";
-            }, 5000);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          notyf.error(
-            "Something went wrong. Please contact support if the issue persists.",
-          );
-          checkoutButton.disabled = false;
-          buttonSpinner.classList.add("hidden");
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+          body: JSON.stringify({
+            products: selectedProducts.map((product) => product.id),
+            firstProduct: getFirstSelectedSubscriptionProduct(),
+            frequency: frequencyType,
+          }),
         });
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw {
+            status: response.status,
+            message:
+              responseData.message ||
+              "An unexpected error has occurred. Please try again or contact support if the issue persists.",
+            details: responseData,
+          };
+        }
+
+        if (responseData.url) {
+          window.location.href = responseData.url;
+        } else {
+          notyf.success("Payment successful! Redirecting...");
+          setTimeout(() => {
+            window.location.href = "/accounts/manage-plan/";
+          }, 2000);
+        }
+      } catch (error) {
+        console.error("Error during checkout:", error);
+        checkoutButton.disabled = false;
+        buttonSpinner.classList.add("hidden");
+
+        const errorMessage =
+          error.message ||
+          "An unexpected error has occurred. Please try again or contact support if the issue persists.";
+        notyf.error(errorMessage);
+      }
     });
   }
 }

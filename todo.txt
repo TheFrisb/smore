@@ -1,4 +1,5 @@
-2. Romit - 1 hour
-3. AI -- league implementation - 1 hour
+1. Implement AI
+- Redirect to checkout automatically ak nema plan
+- Update plan
 
-4. Smore Application
+2. Implement cron job

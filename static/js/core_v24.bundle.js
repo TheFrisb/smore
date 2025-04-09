@@ -1,4 +1,4 @@
-/*! For license information please see core_v25.bundle.js.LICENSE.txt */
+/*! For license information please see core_v26.bundle.js.LICENSE.txt */
 (() => {
   var t = {
       629: (t, a, e) => {
@@ -99,10 +99,12 @@
           m = function () {
             return c.Date.now();
           };
+
         function y(t) {
           var a = typeof t;
           return !!t && ("object" == a || "function" == a);
         }
+
         function f(t) {
           if ("number" == typeof t) return t;
           if (
@@ -130,6 +132,7 @@
               ? NaN
               : +t;
         }
+
         t.exports = function (t, a, e) {
           var o,
             n,
@@ -143,15 +146,18 @@
             g = !0;
           if ("function" != typeof t)
             throw new TypeError("Expected a function");
+
           function b(a) {
             var e = o,
               s = n;
             return (o = n = void 0), (l = a), (i = t.apply(s, e));
           }
+
           function v(t) {
             var e = t - d;
             return void 0 === d || e >= a || e < 0 || (u && t - l >= s);
           }
+
           function k() {
             var t = m();
             if (v(t)) return x(t);
@@ -163,9 +169,11 @@
               })(t),
             );
           }
+
           function x(t) {
             return (r = void 0), g && o ? b(t) : ((o = n = void 0), i);
           }
+
           function w() {
             var t = m(),
               e = v(t);
@@ -178,6 +186,7 @@
             }
             return void 0 === r && (r = setTimeout(k, a)), i;
           }
+
           return (
             (a = f(a) || 0),
             y(e) &&
@@ -212,10 +221,12 @@
           y = function () {
             return u.Date.now();
           };
+
         function f(t) {
           var a = typeof t;
           return !!t && ("object" == a || "function" == a);
         }
+
         function g(t) {
           if ("number" == typeof t) return t;
           if (
@@ -243,6 +254,7 @@
               ? NaN
               : +t;
         }
+
         t.exports = function (t, a, e) {
           var n = !0,
             s = !0;
@@ -263,15 +275,18 @@
                 p = !1,
                 b = !0;
               if ("function" != typeof t) throw new TypeError(o);
+
               function v(a) {
                 var e = n,
                   o = s;
                 return (n = s = void 0), (c = a), (r = t.apply(o, e));
               }
+
               function k(t) {
                 var e = t - l;
                 return void 0 === l || e >= a || e < 0 || (p && t - c >= i);
               }
+
               function x() {
                 var t = y();
                 if (k(t)) return w(t);
@@ -283,9 +298,11 @@
                   })(t),
                 );
               }
+
               function w(t) {
                 return (d = void 0), b && n ? v(t) : ((n = s = void 0), r);
               }
+
               function S() {
                 var t = y(),
                   e = k(t);
@@ -298,6 +315,7 @@
                 }
                 return void 0 === d && (d = setTimeout(x, a)), r;
               }
+
               return (
                 (a = g(a) || 0),
                 f(e) &&
@@ -321,6 +339,7 @@
       72: (t) => {
         "use strict";
         var a = [];
+
         function e(t) {
           for (var e = -1, o = 0; o < a.length; o++)
             if (a[o].identifier === t) {
@@ -329,6 +348,7 @@
             }
           return e;
         }
+
         function o(t, o) {
           for (var s = {}, i = [], r = 0; r < t.length; r++) {
             var d = t[r],
@@ -354,6 +374,7 @@
           }
           return i;
         }
+
         function n(t, a) {
           var e = a.domAPI(a);
           return (
@@ -373,6 +394,7 @@
             }
           );
         }
+
         t.exports = function (t, n) {
           var s = o((t = t || []), (n = n || {}));
           return function (t) {
@@ -434,7 +456,10 @@
         "use strict";
         t.exports = function (t) {
           if ("undefined" == typeof document)
-            return { update: function () {}, remove: function () {} };
+            return {
+              update: function () {},
+              remove: function () {},
+            };
           var a = t.insertStyleElement(t);
           return {
             update: function (e) {
@@ -484,12 +509,14 @@
       },
     },
     a = {};
+
   function e(o) {
     var n = a[o];
     if (void 0 !== n) return n.exports;
     var s = (a[o] = { id: o, exports: {} });
     return t[o](s, s.exports, e), s.exports;
   }
+
   (e.n = (t) => {
     var a = t && t.__esModule ? () => t.default : () => t;
     return e.d(a, { a }), a;
@@ -512,6 +539,7 @@
     (e.nc = void 0),
     (() => {
       "use strict";
+
       function t() {
         return (function (t) {
           if (!document.cookie) return null;
@@ -523,6 +551,7 @@
           return null;
         })("csrftoken");
       }
+
       var a,
         o = function () {
           return (
@@ -541,6 +570,7 @@
           function t(t) {
             (this.options = t), (this.listeners = {});
           }
+
           return (
             (t.prototype.on = function (t, a) {
               var e = this.listeners[t] || [];
@@ -563,6 +593,7 @@
           function t() {
             this.notifications = [];
           }
+
           return (
             (t.prototype.push = function (t) {
               this.notifications.push(t),
@@ -629,6 +660,7 @@
               (this.animationEndEventName = this._getAnimationEndEventName()),
               this._createA11yContainer();
           }
+
           return (
             (t.prototype.on = function (t, a) {
               var e;
@@ -858,6 +890,7 @@
                 return a.triggerEvent(s.Click, e);
               });
           }
+
           return (
             (t.prototype.error = function (t) {
               var a = this.normalizeOptions("error", t);
@@ -937,6 +970,7 @@
         g = document.querySelector("#userFirstChosenProductId"),
         b = [],
         v = "monthly";
+
       function k() {
         document.querySelectorAll(".product").forEach(function (t) {
           var a,
@@ -962,12 +996,15 @@
         }),
           S();
       }
+
       function x() {
         return b.length > 0;
       }
+
       function w() {
         return b.length > 0 ? b[0].id : null;
       }
+
       function S() {
         var t = "",
           a = 0;
@@ -997,6 +1034,7 @@
             ".checkoutSummarySection__totalPrice",
           ).textContent = "€".concat(a.toFixed(2)));
       }
+
       var L = e(72),
         _ = e.n(L),
         E = e(825),
@@ -1023,6 +1061,7 @@
         B = e(181),
         D = e.n(B);
       let F = () => {};
+
       function H(t) {
         let a, e, o;
         for (a = 0; a < t.length; a += 1) {
@@ -1031,6 +1070,7 @@
         }
         return !1;
       }
+
       function Z(t) {
         t &&
           t.forEach((t) => {
@@ -1039,6 +1079,7 @@
             if (H(a.concat(e))) return F();
           });
       }
+
       function X() {
         return (
           window.MutationObserver ||
@@ -1046,6 +1087,7 @@
           window.MozMutationObserver
         );
       }
+
       const Y = function () {
           return !!X();
         },
@@ -1067,21 +1109,26 @@
           /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i,
         J =
           /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i;
+
       function K() {
         return navigator.userAgent || navigator.vendor || window.opera || "";
       }
+
       const V = new (class {
           phone() {
             const t = K();
             return !(!G.test(t) && !U.test(t.substr(0, 4)));
           }
+
           mobile() {
             const t = K();
             return !(!Q.test(t) && !J.test(t.substr(0, 4)));
           }
+
           tablet() {
             return this.mobile() && !this.phone();
           }
+
           ie11() {
             return (
               "-ms-scroll-limit" in document.documentElement.style &&
@@ -1279,6 +1326,7 @@
           );
         };
       var yt = document.querySelectorAll(".copyButton");
+
       function ft(t) {
         return (
           (ft =
@@ -1297,6 +1345,7 @@
           ft(t)
         );
       }
+
       function gt() {
         gt = function () {
           return a;
@@ -1314,6 +1363,7 @@
           i = s.iterator || "@@iterator",
           r = s.asyncIterator || "@@asyncIterator",
           d = s.toStringTag || "@@toStringTag";
+
         function l(t, a, e) {
           return (
             Object.defineProperty(t, a, {
@@ -1325,6 +1375,7 @@
             t[a]
           );
         }
+
         try {
           l({}, "");
         } catch (t) {
@@ -1332,12 +1383,14 @@
             return (t[a] = e);
           };
         }
+
         function c(t, a, e, o) {
           var s = a && a.prototype instanceof g ? a : g,
             i = Object.create(s.prototype),
             r = new C(o || []);
           return n(i, "_invoke", { value: E(t, e, r) }), i;
         }
+
         function u(t, a, e) {
           try {
             return { type: "normal", arg: t.call(a, e) };
@@ -1345,15 +1398,20 @@
             return { type: "throw", arg: t };
           }
         }
+
         a.wrap = c;
         var p = "suspendedStart",
           h = "suspendedYield",
           m = "executing",
           y = "completed",
           f = {};
+
         function g() {}
+
         function b() {}
+
         function v() {}
+
         var k = {};
         l(k, i, function () {
           return this;
@@ -1362,6 +1420,7 @@
           w = x && x(x(z([])));
         w && w !== e && o.call(w, i) && (k = w);
         var S = (v.prototype = g.prototype = Object.create(k));
+
         function L(t) {
           ["next", "throw", "return"].forEach(function (a) {
             l(t, a, function (t) {
@@ -1369,6 +1428,7 @@
             });
           });
         }
+
         function _(t, a) {
           function e(n, s, i, r) {
             var d = u(t[n], t, s);
@@ -1395,6 +1455,7 @@
             }
             r(d.arg);
           }
+
           var s;
           n(this, "_invoke", {
             value: function (t, o) {
@@ -1403,10 +1464,12 @@
                   e(t, o, a, n);
                 });
               }
+
               return (s = s ? s.then(n, n) : n());
             },
           });
         }
+
         function E(a, e, o) {
           var n = p;
           return function (s, i) {
@@ -1440,6 +1503,7 @@
             }
           };
         }
+
         function A(a, e) {
           var o = e.method,
             n = a.iterator[o];
@@ -1478,21 +1542,25 @@
               (e.delegate = null),
               f);
         }
+
         function T(t) {
           var a = { tryLoc: t[0] };
           1 in t && (a.catchLoc = t[1]),
             2 in t && ((a.finallyLoc = t[2]), (a.afterLoc = t[3])),
             this.tryEntries.push(a);
         }
+
         function q(t) {
           var a = t.completion || {};
           (a.type = "normal"), delete a.arg, (t.completion = a);
         }
+
         function C(t) {
           (this.tryEntries = [{ tryLoc: "root" }]),
             t.forEach(T, this),
             this.reset(!0);
         }
+
         function z(a) {
           if (a || "" === a) {
             var e = a[i];
@@ -1510,6 +1578,7 @@
           }
           throw new TypeError(ft(a) + " is not iterable");
         }
+
         return (
           (b.prototype = v),
           n(S, "constructor", { value: v, configurable: !0 }),
@@ -1601,6 +1670,7 @@
             dispatchException: function (a) {
               if (this.done) throw a;
               var e = this;
+
               function n(o, n) {
                 return (
                   (r.type = "throw"),
@@ -1610,6 +1680,7 @@
                   !!n
                 );
               }
+
               for (var s = this.tryEntries.length - 1; s >= 0; --s) {
                 var i = this.tryEntries[s],
                   r = i.completion;
@@ -1701,6 +1772,7 @@
           a
         );
       }
+
       function bt(t, a, e, o, n, s, i) {
         try {
           var r = t[s](i),
@@ -1710,10 +1782,12 @@
         }
         r.done ? a(d) : Promise.resolve(d).then(o, n);
       }
+
       var vt,
         kt = document.querySelectorAll(".withdrawalPayoutMethod"),
         xt = document.querySelector("#requestWithdrawalButton"),
         wt = new l({ duration: 5e3, position: { x: "right", y: "top" } });
+
       function St() {
         var a;
         return (
@@ -1794,18 +1868,22 @@
               e = arguments;
             return new Promise(function (o, n) {
               var s = a.apply(t, e);
+
               function i(t) {
                 bt(s, o, n, i, r, "next", t);
               }
+
               function r(t) {
                 bt(s, o, n, i, r, "throw", t);
               }
+
               i(void 0);
             });
           }),
           St.apply(this, arguments)
         );
       }
+
       var Lt = document.querySelectorAll(".faqItemWrapper");
       var _t = document.querySelectorAll(".resendEmailButton"),
         Et = new l({ duration: 5e3, position: { x: "right", y: "top" } }),
@@ -1828,10 +1906,13 @@
         tokenizer: null,
         walkTokens: null,
       };
+
       function $t(t) {
         Rt = t;
       }
+
       const Pt = { exec: () => null };
+
       function It(t, a = "") {
         let e = "string" == typeof t ? t : t.source;
         const o = {
@@ -1843,6 +1924,7 @@
         };
         return o;
       }
+
       const Ot = {
           codeRemoveIndent: /^(?: {1,4}| {0,3}\t)/gm,
           outputLinkReplace: /\\([\[\]])/g,
@@ -2194,6 +2276,7 @@
           "'": "&#39;",
         },
         Ca = (t) => qa[t];
+
       function za(t, a) {
         if (a) {
           if (Ot.escapeTest.test(t)) return t.replace(Ot.escapeReplace, Ca);
@@ -2201,6 +2284,7 @@
           return t.replace(Ot.escapeReplaceNoEncode, Ca);
         return t;
       }
+
       function ja(t) {
         try {
           t = encodeURI(t).replace(Ot.percentDecode, "%");
@@ -2209,6 +2293,7 @@
         }
         return t;
       }
+
       function Na(t, a) {
         const e = t
           .replace(Ot.findPipe, (t, a, e) => {
@@ -2229,6 +2314,7 @@
         for (; o < e.length; o++) e[o] = e[o].trim().replace(Ot.slashPipe, "|");
         return e;
       }
+
       function Ra(t, a, e) {
         const o = t.length;
         if (0 === o) return "";
@@ -2236,6 +2322,7 @@
         for (; n < o && t.charAt(o - n - 1) === a; ) n++;
         return t.slice(0, o - n);
       }
+
       function $a(t, a, e, o, n) {
         const s = a.href,
           i = a.title || null,
@@ -2254,17 +2341,21 @@
         }
         return { type: "image", raw: e, href: s, title: i, text: r };
       }
+
       class Pa {
         options;
         rules;
         lexer;
+
         constructor(t) {
           this.options = t || Rt;
         }
+
         space(t) {
           const a = this.rules.block.newline.exec(t);
           if (a && a[0].length > 0) return { type: "space", raw: a[0] };
         }
+
         code(t) {
           const a = this.rules.block.code.exec(t);
           if (a) {
@@ -2277,6 +2368,7 @@
             };
           }
         }
+
         fences(t) {
           const a = this.rules.block.fences.exec(t);
           if (a) {
@@ -2305,6 +2397,7 @@
             };
           }
         }
+
         heading(t) {
           const a = this.rules.block.heading.exec(t);
           if (a) {
@@ -2325,10 +2418,12 @@
             };
           }
         }
+
         hr(t) {
           const a = this.rules.block.hr.exec(t);
           if (a) return { type: "hr", raw: Ra(a[0], "\n") };
         }
+
         blockquote(t) {
           const a = this.rules.block.blockquote.exec(t);
           if (a) {
@@ -2386,6 +2481,7 @@
             return { type: "blockquote", raw: e, tokens: n, text: o };
           }
         }
+
         list(t) {
           let a = this.rules.block.list.exec(t);
           if (a) {
@@ -2524,6 +2620,7 @@
             return n;
           }
         }
+
         html(t) {
           const a = this.rules.block.html.exec(t);
           if (a)
@@ -2535,6 +2632,7 @@
               text: a[0],
             };
         }
+
         def(t) {
           const a = this.rules.block.def.exec(t);
           if (a) {
@@ -2554,6 +2652,7 @@
             return { type: "def", tag: t, raw: a[0], href: e, title: o };
           }
         }
+
         table(t) {
           const a = this.rules.block.table.exec(t);
           if (!a) return;
@@ -2592,6 +2691,7 @@
             return s;
           }
         }
+
         lheading(t) {
           const a = this.rules.block.lheading.exec(t);
           if (a)
@@ -2603,6 +2703,7 @@
               tokens: this.lexer.inline(a[1]),
             };
         }
+
         paragraph(t) {
           const a = this.rules.block.paragraph.exec(t);
           if (a) {
@@ -2616,6 +2717,7 @@
             };
           }
         }
+
         text(t) {
           const a = this.rules.block.text.exec(t);
           if (a)
@@ -2626,10 +2728,12 @@
               tokens: this.lexer.inline(a[0]),
             };
         }
+
         escape(t) {
           const a = this.rules.inline.escape.exec(t);
           if (a) return { type: "escape", raw: a[0], text: a[1] };
         }
+
         tag(t) {
           const a = this.rules.inline.tag.exec(t);
           if (a)
@@ -2655,6 +2759,7 @@
               }
             );
         }
+
         link(t) {
           const a = this.rules.inline.link.exec(t);
           if (a) {
@@ -2714,6 +2819,7 @@
             );
           }
         }
+
         reflink(t, a) {
           let e;
           if (
@@ -2733,6 +2839,7 @@
             return $a(e, t, e[0], this.lexer, this.rules);
           }
         }
+
         emStrong(t, a, e = "") {
           let o = this.rules.inline.emStrongLDelim.exec(t);
           if (
@@ -2787,6 +2894,7 @@
             }
           }
         }
+
         codespan(t) {
           const a = this.rules.inline.code.exec(t);
           if (a) {
@@ -2801,10 +2909,12 @@
             );
           }
         }
+
         br(t) {
           const a = this.rules.inline.br.exec(t);
           if (a) return { type: "br", raw: a[0] };
         }
+
         del(t) {
           const a = this.rules.inline.del.exec(t);
           if (a)
@@ -2815,6 +2925,7 @@
               tokens: this.lexer.inlineTokens(a[2]),
             };
         }
+
         autolink(t) {
           const a = this.rules.inline.autolink.exec(t);
           if (a) {
@@ -2833,6 +2944,7 @@
             );
           }
         }
+
         url(t) {
           let a;
           if ((a = this.rules.inline.url.exec(t))) {
@@ -2855,6 +2967,7 @@
             };
           }
         }
+
         inlineText(t) {
           const a = this.rules.inline.text.exec(t);
           if (a) {
@@ -2863,12 +2976,14 @@
           }
         }
       }
+
       class Ia {
         tokens;
         options;
         state;
         tokenizer;
         inlineQueue;
+
         constructor(t) {
           (this.tokens = []),
             (this.tokens.links = Object.create(null)),
@@ -2889,15 +3004,19 @@
                 : (a.inline = Ta.gfm)),
             (this.tokenizer.rules = a);
         }
+
         static get rules() {
           return { block: Aa, inline: Ta };
         }
+
         static lex(t, a) {
           return new Ia(a).lex(t);
         }
+
         static lexInline(t, a) {
           return new Ia(a).inlineTokens(t);
         }
+
         lex(t) {
           (t = t.replace(Ot.carriageReturn, "\n")),
             this.blockTokens(t, this.tokens);
@@ -2907,6 +3026,7 @@
           }
           return (this.inlineQueue = []), this.tokens;
         }
+
         blockTokens(t, a = [], e = !1) {
           for (
             this.options.pedantic &&
@@ -3023,9 +3143,11 @@
           }
           return (this.state.top = !0), a;
         }
+
         inline(t, a = []) {
           return this.inlineQueue.push({ src: t, tokens: a }), a;
         }
+
         inlineTokens(t, a = []) {
           let e = t,
             o = null;
@@ -3152,15 +3274,19 @@
           return a;
         }
       }
+
       class Oa {
         options;
         parser;
+
         constructor(t) {
           this.options = t || Rt;
         }
+
         space(t) {
           return "";
         }
+
         code({ text: t, lang: a, escaped: e }) {
           const o = (a || "").match(Ot.notSpaceStart)?.[0],
             n = t.replace(Ot.endingNewline, "") + "\n";
@@ -3172,18 +3298,23 @@
                 "</code></pre>\n"
             : "<pre><code>" + (e ? n : za(n, !0)) + "</code></pre>\n";
         }
+
         blockquote({ tokens: t }) {
           return `<blockquote>\n${this.parser.parse(t)}</blockquote>\n`;
         }
+
         html({ text: t }) {
           return t;
         }
+
         heading({ tokens: t, depth: a }) {
           return `<h${a}>${this.parser.parseInline(t)}</h${a}>\n`;
         }
+
         hr(t) {
           return "<hr>\n";
         }
+
         list(t) {
           const a = t.ordered,
             e = t.start;
@@ -3204,6 +3335,7 @@
             ">\n"
           );
         }
+
         listitem(t) {
           let a = "";
           if (t.task) {
@@ -3229,6 +3361,7 @@
             (a += this.parser.parse(t.tokens, !!t.loose)), `<li>${a}</li>\n`
           );
         }
+
         checkbox({ checked: t }) {
           return (
             "<input " +
@@ -3236,9 +3369,11 @@
             'disabled="" type="checkbox">'
           );
         }
+
         paragraph({ tokens: t }) {
           return `<p>${this.parser.parseInline(t)}</p>\n`;
         }
+
         table(t) {
           let a = "",
             e = "";
@@ -3257,9 +3392,11 @@
             "<table>\n<thead>\n" + a + "</thead>\n" + o + "</table>\n"
           );
         }
+
         tablerow({ text: t }) {
           return `<tr>\n${t}</tr>\n`;
         }
+
         tablecell(t) {
           const a = this.parser.parseInline(t.tokens),
             e = t.header ? "th" : "td";
@@ -3267,21 +3404,27 @@
             (t.align ? `<${e} align="${t.align}">` : `<${e}>`) + a + `</${e}>\n`
           );
         }
+
         strong({ tokens: t }) {
           return `<strong>${this.parser.parseInline(t)}</strong>`;
         }
+
         em({ tokens: t }) {
           return `<em>${this.parser.parseInline(t)}</em>`;
         }
+
         codespan({ text: t }) {
           return `<code>${za(t, !0)}</code>`;
         }
+
         br(t) {
           return "<br>";
         }
+
         del({ tokens: t }) {
           return `<del>${this.parser.parseInline(t)}</del>`;
         }
+
         link({ href: t, title: a, tokens: e }) {
           const o = this.parser.parseInline(e),
             n = ja(t);
@@ -3291,12 +3434,14 @@
             a && (s += ' title="' + za(a) + '"'), (s += ">" + o + "</a>"), s
           );
         }
+
         image({ href: t, title: a, text: e }) {
           const o = ja(t);
           if (null === o) return za(e);
           let n = `<img src="${(t = o)}" alt="${e}"`;
           return a && (n += ` title="${za(a)}"`), (n += ">"), n;
         }
+
         text(t) {
           return "tokens" in t && t.tokens
             ? this.parser.parseInline(t.tokens)
@@ -3305,39 +3450,50 @@
               : za(t.text);
         }
       }
+
       class Ma {
         strong({ text: t }) {
           return t;
         }
+
         em({ text: t }) {
           return t;
         }
+
         codespan({ text: t }) {
           return t;
         }
+
         del({ text: t }) {
           return t;
         }
+
         html({ text: t }) {
           return t;
         }
+
         text({ text: t }) {
           return t;
         }
+
         link({ text: t }) {
           return "" + t;
         }
+
         image({ text: t }) {
           return "" + t;
         }
+
         br() {
           return "";
         }
       }
+
       class Ba {
         options;
         renderer;
         textRenderer;
+
         constructor(t) {
           (this.options = t || Rt),
             (this.options.renderer = this.options.renderer || new Oa()),
@@ -3346,12 +3502,15 @@
             (this.renderer.parser = this),
             (this.textRenderer = new Ma());
         }
+
         static parse(t, a) {
           return new Ba(a).parse(t);
         }
+
         static parseInline(t, a) {
           return new Ba(a).parseInline(t);
         }
+
         parse(t, a = !0) {
           let e = "";
           for (let o = 0; o < t.length; o++) {
@@ -3434,6 +3593,7 @@
           }
           return e;
         }
+
         parseInline(t, a = this.renderer) {
           let e = "";
           for (let o = 0; o < t.length; o++) {
@@ -3502,33 +3662,42 @@
           return e;
         }
       }
+
       class Da {
         options;
         block;
+
         constructor(t) {
           this.options = t || Rt;
         }
+
         static passThroughHooks = new Set([
           "preprocess",
           "postprocess",
           "processAllTokens",
         ]);
+
         preprocess(t) {
           return t;
         }
+
         postprocess(t) {
           return t;
         }
+
         processAllTokens(t) {
           return t;
         }
+
         provideLexer() {
           return this.block ? Ia.lex : Ia.lexInline;
         }
+
         provideParser() {
           return this.block ? Ba.parse : Ba.parseInline;
         }
       }
+
       const Fa = new (class {
         defaults = {
           async: !1,
@@ -3551,9 +3720,11 @@
         Lexer = Ia;
         Tokenizer = Pa;
         Hooks = Da;
+
         constructor(...t) {
           this.use(...t);
         }
+
         walkTokens(t, a) {
           let e = [];
           for (const o of t)
@@ -3585,6 +3756,7 @@
             }
           return e;
         }
+
         use(...t) {
           const a = this.defaults.extensions || {
             renderers: {},
@@ -3706,15 +3878,19 @@
             this
           );
         }
+
         setOptions(t) {
           return (this.defaults = { ...this.defaults, ...t }), this;
         }
+
         lexer(t, a) {
           return Ia.lex(t, a ?? this.defaults);
         }
+
         parser(t, a) {
           return Ba.parse(t, a ?? this.defaults);
         }
+
         parseMarkdown(t) {
           return (a, e) => {
             const o = { ...e },
@@ -3775,6 +3951,7 @@
             }
           };
         }
+
         onError(t, a) {
           return (e) => {
             if (
@@ -3793,9 +3970,11 @@
           };
         }
       })();
+
       function Ha(t, a) {
         return Fa.parse(t, a);
       }
+
       (Ha.options = Ha.setOptions =
         function (t) {
           return (
@@ -3844,6 +4023,7 @@
         Xa = document.getElementById("aiAssistantInput"),
         Ya = document.getElementById("aiAssistantSendButton"),
         Wa = !1;
+
       function Ga(t, a) {
         var e = document.createElement("div");
         e.className = "flex ".concat(a ? "justify-end" : "justify-start");
@@ -3866,6 +4046,7 @@
           e
         );
       }
+
       function Ua(a) {
         if (!Wa) {
           var e = Xa.value;
@@ -3922,6 +4103,7 @@
             })();
         }
       }
+
       var Qa = document.querySelectorAll(".dateItem"),
         Ja = document.querySelectorAll(".peekBtn");
       document.addEventListener("DOMContentLoaded", function () {
@@ -3983,11 +4165,13 @@
           (function () {
             var t = document.querySelector("#mobileMenuButton"),
               a = document.querySelector("#mobileMenuDropdownContainer");
+
             function e() {
               var a = t.querySelector(".closeIcon");
               t.querySelector(".hamburgerIcon").classList.toggle("hidden"),
                 a.classList.toggle("hidden");
             }
+
             t &&
               a &&
               t.addEventListener("click", function () {
@@ -4328,9 +4512,11 @@
           (function () {
             var t = document.querySelector("#userDashboardMenuDropdown"),
               a = document.querySelector("#userDashboardMenu");
+
             function e() {
               t.querySelector(".toggleIcon").classList.toggle("rotate-180");
             }
+
             t &&
               a &&
               t.addEventListener("click", function () {

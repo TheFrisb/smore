@@ -362,6 +362,9 @@ class AiAssistantView(TemplateView):
         context["hide_footer"] = True
         context["hide_ai_button"] = True
         context["free_messages"] = self.get_free_messages()
+        context["ai_assistant_product_id"] = Product.objects.get(
+            name=Product.Names.AI_ANALYST
+        ).id
         return context
 
     def _get_has_access(self):

@@ -28,6 +28,26 @@ class SendMessageToAiView(APIView):
         message = serializers.CharField()
         direction = serializers.ChoiceField(choices=Message.Direction)
 
+    def get_user_subscription(self):
+        if (
+                not self.request.user.is_authenticated
+                or not self.request.user.subscription_is_active
+        ):
+            return None
+
+        return {
+            "products": [
+                product.id for product in self.request.user.subscription.products.all()
+            ],
+            "frequency": self.request.user.subscription.frequency,
+            "firstProduct": self.request.user.subscription.first_chosen_product.id,
+            "productPrice": Product.objects.get(
+                name=Product.Names.AI_ANALYST
+            ).get_price_for_subscription(
+                self.request.user.subscription.frequency, True
+            ),
+        }
+
     def post(self, request):
         """Send a message to the AI assistant."""
         serializer = self.InputSerializer(data=request.data)
@@ -36,7 +56,8 @@ class SendMessageToAiView(APIView):
         if not self.validate_subscription(request):
             return Response(
                 {
-                    "message": "You need to subscribe to the AI Assistant product to use this feature."
+                    "message": "You need to subscribe to the AI Assistant product to use this feature.",
+                    "user_subscription": self.get_user_subscription(),
                 },
                 status=403,
             )

@@ -78,6 +78,18 @@ class Product(BaseProductModel):
             else self.yearly_price_stripe_id
         )
 
+    def get_price_for_subscription(self, frequency, use_discounted_prices: bool):
+        if frequency == "monthly":
+            return (
+                self.discounted_monthly_price
+                if use_discounted_prices
+                else self.monthly_price
+            )
+
+        return (
+            self.discounted_yearly_price if use_discounted_prices else self.yearly_price
+        )
+
     def __str__(self):
         return self.name
 
@@ -226,7 +238,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

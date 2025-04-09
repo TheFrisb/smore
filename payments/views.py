@@ -187,7 +187,6 @@ class UpdateSubscriptionView(APIView):
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         product_ids = serializer.validated_data["products"]
-
         desired_frequency = serializer.validated_data["frequency"]
 
         # Fetch requested products
@@ -280,10 +279,27 @@ class UpdateSubscriptionView(APIView):
         for product in set(products) - covered_products:
             items_to_update.append({"price": desired_price_ids[product]})
 
-        self.service.modify_stripe_subscription(
-            user_subscription.stripe_subscription_id, items_to_update
-        )
-
+        try:
+            self.service.modify_stripe_subscription(
+                user_subscription.stripe_subscription_id, items_to_update
+            )
+        except stripe.error.CardError as e:
+            logger.error(f"Card error while updating subscription: {e}")
+            return Response(
+                status=400,
+                data={
+                    "message": e.user_message
+                               or "Your card was declined. Please update your payment method"
+                },
+            )
+        except stripe.error.StripeError as e:
+            logger.error(f"Stripe error while updating subscription: {e}")
+            return Response(
+                status=500,
+                data={
+                    "message": "An error occurred while processing your payment. Please try again later"
+                },
+            )
         return Response({"message": "Subscription updated successfully."})
 
 

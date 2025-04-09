@@ -54,7 +54,7 @@ class BaseStripeService:
         logger.info(f"Modifying subscription with ID: {subscription_id}")
         subscription = self.stripe_client.Subscription.retrieve(subscription_id)
         subscription.items = items_list
-        subscription.payment_behavior = "pending_if_incomplete"
+        subscription.payment_behavior = "error_if_incomplete"
         subscription.proration_behavior = "always_invoice"
 
         subscription.save()

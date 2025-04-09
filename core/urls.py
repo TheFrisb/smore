@@ -17,7 +17,6 @@ from .views import (
     TelegramLandingView,
     DetailedPredictionView,
     AiAssistantView,
-    ReferralTelegramLandingView,
 )
 
 app_name = "core"
@@ -47,7 +46,7 @@ urlpatterns = [
     ),
     path("ai-assistant/", AiAssistantView.as_view(), name="ai_assistant"),
     path("start/", TelegramLandingView.as_view(), name="telegram_landing"),
-    path(
-        "begin/", ReferralTelegramLandingView.as_view(), name="telegram_landing_begin"
-    ),
+    # path(
+    #     "begin/", ReferralTelegramLandingView.as_view(), name="telegram_landing_begin"
+    # ),
 ]

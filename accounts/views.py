@@ -312,9 +312,6 @@ class ManagePlanView(BaseAccountView, TemplateView):
         return context
 
     def get_view_plans_url(self, request):
-        if request.user.subscription_is_active:
-            return reverse("payments:update_subscription")
-
         return reverse("core:plans")
 
     def _get_user_has_discount(self):
