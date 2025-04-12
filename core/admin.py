@@ -215,9 +215,9 @@ class BetLineInline(admin.TabularInline):
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     inlines = [BetLineInline]
-    list_display = ["product", "status", "visibility"]
+    list_display = ["__str__", "starts_at", "status", "visibility"]
     list_filter = ["product", "status", "visibility"]
-    ordering = ["-id"]
+    ordering = ["-starts_at"]
     readonly_fields = ["created_at", "updated_at", "starts_at"]
     fieldsets = (
         (
