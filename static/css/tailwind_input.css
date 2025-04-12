@@ -105,7 +105,3 @@ div.g_id_signin > div > div > div {
 .betLines--pending::before {
     @apply bg-secondary-800/30 w-[2px] left-[15px];
 }
-
-.betLines--pending:first-of-type {
-    @apply animate-pulse;
-}

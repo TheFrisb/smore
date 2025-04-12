@@ -8,7 +8,7 @@ from django.urls import reverse
 from stripe.checkout import Session
 
 from accounts.models import User
-from core.models import Prediction
+from core.models import Prediction, Ticket
 from payments.services.base_stripe_service import BaseStripeService
 
 logger = logging.getLogger(__name__)
@@ -22,10 +22,10 @@ class StripePortalSessionFlow(Enum):
 class StripeCheckoutService(BaseStripeService):
 
     def create_subscription_checkout_session(
-        self,
-        user: User | AbstractBaseUser,
-        price_ids: List[str],
-        first_chosen_product_id: int,
+            self,
+            user: User | AbstractBaseUser,
+            price_ids: List[str],
+            first_chosen_product_id: int,
     ) -> Session:
         metadata = (
             {
@@ -55,7 +55,7 @@ class StripeCheckoutService(BaseStripeService):
         return checkout_session
 
     def create_onetime_prediction_checkout_session(
-        self, user: User | AbstractBaseUser, prediction: Prediction
+            self, user: User | AbstractBaseUser, prediction: Prediction
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:purchase_payment_success', kwargs={'prediction_pk': prediction.id})}",
@@ -65,7 +65,8 @@ class StripeCheckoutService(BaseStripeService):
             line_items=self.get_onetime_prediction_line_items(prediction),
             payment_intent_data={
                 "metadata": {
-                    "prediction_id": prediction.id,
+                    "purchased_object_id": prediction.id,
+                    "purchased_object_type": "prediction",
                 }
             },
             payment_method_types=["card"],
@@ -73,7 +74,32 @@ class StripeCheckoutService(BaseStripeService):
         )
 
         logger.info(
-            f"Created checkout session for user: {user.id} with session ID: {checkout_session.id}"
+            f"Created one-time prediction checkout session for user: {user.id} with session ID: {checkout_session.id}"
+        )
+
+        return checkout_session
+
+    def create_onetime_ticket_checkout_session(
+            self, user: User | AbstractBaseUser, ticket: Ticket
+    ) -> Session:
+        checkout_session = self.stripe_client.checkout.Session.create(
+            success_url=f"{settings.BASE_URL}{reverse('core:upcoming_tickets')}",
+            cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_tickets')}",
+            mode="payment",
+            customer=user.stripe_customer_id,
+            line_items=self.get_onetime_ticket_line_items(ticket),
+            payment_intent_data={
+                "metadata": {
+                    "purchased_object_id": ticket.id,
+                    "purchased_object_type": "ticket",
+                }
+            },
+            payment_method_types=["card"],
+            consent_collection={"terms_of_service": "required"},
+        )
+
+        logger.info(
+            f"Created one-time ticket checkout session for user: {user.id} with session ID: {checkout_session.id}"
         )
 
         return checkout_session
@@ -82,9 +108,9 @@ class StripeCheckoutService(BaseStripeService):
         return [{"price": price_id, "quantity": 1} for price_id in price_ids]
 
     def create_portal_session(
-        self,
-        user: User | AbstractBaseUser,
-        portal_flow: StripePortalSessionFlow = StripePortalSessionFlow.MANAGE_SUBSCRIPTION,
+            self,
+            user: User | AbstractBaseUser,
+            portal_flow: StripePortalSessionFlow = StripePortalSessionFlow.MANAGE_SUBSCRIPTION,
     ) -> Session:
         flow = None
 
@@ -122,8 +148,22 @@ class StripeCheckoutService(BaseStripeService):
             }
         ]
 
+    def get_onetime_ticket_line_items(self, ticket: Ticket):
+        return [
+            {
+                "price_data": {
+                    "currency": "usd",
+                    "product_data": {
+                        "name": f"{ticket.product.get_name_display()} ticket",
+                    },
+                    "unit_amount": 2699,
+                },
+                "quantity": 1,
+            }
+        ]
+
     def update_subscription_items(
-        self, user: User, new_price_ids: List[str]
+            self, user: User, new_price_ids: List[str]
     ) -> Session:
         subscription_id = user.subscription.stripe_subscription_id
         subscription = self.stripe_client.Subscription.retrieve(subscription_id)

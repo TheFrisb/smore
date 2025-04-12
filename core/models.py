@@ -256,3 +256,73 @@ class PickOfTheDay(BaseInternalModel, SingletonModel):
 
     def __str__(self):
         return f"Pick of the Day: {self.prediction}"
+
+
+class Ticket(BaseInternalModel):
+    class Status(models.TextChoices):
+        WON = "WON", _("Won")
+        LOST = "LOST", _("Lost")
+        PENDING = "PENDING", _("Pending")
+
+    class Visibility(models.TextChoices):
+        PUBLIC = "PUBLIC", "Public"
+        PRIVATE = "PRIVATE", "Private"
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    status = models.CharField(
+        max_length=10, choices=Status, default=Status.PENDING, db_index=True
+    )
+    visibility = models.CharField(
+        max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
+    )
+    starts_at = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def total_odds(self) -> float:
+        """
+        Calculate the total odds for all bet lines associated with this instance.
+
+        This property computes the product of the odds of all related bet lines. It
+        iterates over all bet line objects connected to the instance and multiplies
+        their respective odds to produce the final total odds value.
+
+        @return: The calculated total odds of all related bet lines as a float.
+        """
+        odds = 1
+        for match in self.bet_lines.all():
+            odds *= match.odds
+        return odds
+
+    def __str__(self):
+        # get the first match from the bet lines by date
+        first_match = self.bet_lines.order_by("match__kickoff_datetime").first()
+
+        return f"[{self.product.name}] Ticket starting with {first_match.match.home_team.name} vs {first_match.match.away_team.name} ({self.status})"
+
+
+class BetLine(BaseInternalModel):
+    class Status(models.TextChoices):
+        WON = "WON", _("Won")
+        LOST = "LOST", _("Lost")
+        PENDING = "PENDING", _("Pending")
+
+    status = models.CharField(
+        max_length=10, choices=Status, default=Status.PENDING, db_index=True
+    )
+    ticket = models.ForeignKey(
+        Ticket, on_delete=models.CASCADE, related_name="bet_lines"
+    )
+    match = models.ForeignKey(SportMatch, on_delete=models.CASCADE)
+    bet = models.CharField(max_length=255)
+    bet_type = models.CharField(max_length=255)
+    odds = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return (
+            f"{self.match.home_team.name} vs {self.match.away_team.name} ({self.bet})"
+        )
+
+    class Meta:
+        verbose_name = "Bet Line"
+        verbose_name_plural = "Bet Lines"
+        ordering = ["match__kickoff_datetime"]

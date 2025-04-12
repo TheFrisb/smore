@@ -1,0 +1,155 @@
+{% load util_tags i18n static %}
+<div class=" backdrop-blur-sm rounded-xl p-6 border transition-all duration-300
+        {% if ticket.status == 'WON' %}
+        border-emerald-500/50 hover:border-emerald-500 bg-emerald-500/5
+        {% elif ticket.status == 'LOST' %}
+        border-red-500/50 hover:border-red-500 bg-red-500/5
+        {% else %}
+     border-primary-700/30 hover:border-secondary-500/30 bg-primary-800/50
+        {% endif %}
+"
+>
+    <div class="flex items-center justify-between pb-6 border-b border-primary-700/30">
+        <div class="flex items-center space-x-4">
+            <div class="bg-secondary-500/10 p-3 rounded-lg">
+                {% svg_icon icon_name=ticket.product|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+            </div>
+            <div>
+                <p class="text-sm text-primary-300 dateItem"
+                   data-date="{{ ticket.starts_at|date:'c' }}">{{ ticket.starts_at|date:'Y-m-d, H:i' }} UTC
+                </p>
+                <div class="text-lg font-semibold text-white">
+                    {% blocktrans with product_name=ticket.product.get_name_display %}
+                        {{ product_name }}
+                    {% endblocktrans %}
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <div class="text-sm text-primary-300">Total Odds</div>
+            <div class="text-xl font-bold text-secondary-400">{{ ticket.total_odds|floatformat:2 }}</div>
+        </div>
+    </div>
+    <div class="relative mt-6">
+        {% if ticket.product.id in allowed_ticket_product_ids or ticket.id in purchased_ticket_ids %}
+            {% for bet_line in ticket.bet_lines.all %}
+                <div class="relative betLines betLines--{{ bet_line.status|lower }}">
+                    <div class="flex items-start space-x-4 py-3">
+                        <div class="relative z-10">
+
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center ">
+                                {% with icon_label=bet_line.status|lower|add:'BetIcon' %}
+                                    {% if bet_line.status == 'WON' %}
+                                        {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-green-500 betStatusIcon" %}
+                                    {% elif bet_line.status == 'LOST' %}
+                                        {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-red-500 betStatusIcon" %}
+                                    {% else %}
+                                        {% if bet_line.match.is_live %}
+                                            {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-secondary-800 betStatusIcon animate-pulse" %}
+                                        {% else %}
+                                            {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-secondary-800 betStatusIcon" %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                        <div class="flex items-top flex-col w-full">
+                            <div class="flex items-center justify-between gap-4 pb-4">
+                                <div>
+                                    <div class="text-primary-100 font-bold break-words text-lg">{{ bet_line.bet }}</div>
+                                    <div class="text-primary-200 text-sm font-medium break-words">{{ bet_line.bet_type }}</div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="px-2 py-1 rounded-lg bg-secondary-500/10 text-secondary-400 text-sm font-medium">{{ bet_line.odds|floatformat:2 }}</div>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-lg bg-[#0D151E]/50 flex items-center justify-between gap-2">
+                                {% if bet_line.status == 'PENDING' %}
+                                    <div class="flex flex-col items-start justify-start gap-2 w-full">
+                                        <div class="flex justify-between items-center w-full">
+                                            <div class="flex items-center justify-start gap-4">
+                                                <img src="{{ bet_line.match.home_team.logo.url }}" class="h-4 w-auto">
+                                                <p class="text-primary-300 text-sm break-words text-left">{{ bet_line.match.home_team.name }}</p>
+                                            </div>
+                                            <p class="text-primary-300 text-xs text-end dateItem--short"
+                                               data-date="{{ bet_line.match.kickoff_datetime|date:'c' }}">{{ bet_line.match.kickoff_datetime|date:'D d M' }}</p>
+                                        </div>
+                                        {#                            <p class="text-primary-300">vs</p>#}
+
+                                        <div class="flex justify-between items-center w-full">
+                                            <div class="flex items-center justify-start gap-4">
+                                                <img src="{{ bet_line.match.away_team.logo.url }}" class="h-4 w-auto">
+                                                <p class="text-primary-300 text-sm break-words  text-left">{{ bet_line.match.away_team.name }}</p>
+                                            </div>
+                                            <p class="text-primary-300 text-xs text-end dateItem--hours"
+                                               data-date="{{ bet_line.match.kickoff_datetime|date:'c' }}">{{ bet_line.match.kickoff_datetime|date:'H:i' }}</p>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="flex flex-col items-start justify-start gap-2 w-full">
+                                        <div class="flex justify-between items-center w-full">
+                                            <div class="flex items-center justify-start gap-4">
+                                                <img src="{{ bet_line.match.home_team.logo.url }}" class="h-4 w-auto">
+                                                <p class="text-primary-300 text-sm break-words text-left">{{ bet_line.match.home_team.name }}</p>
+                                            </div>
+                                            <p class="text-primary-300 text-xs text-end">{{ bet_line.match.home_team_score }}
+                                        </div>
+                                        {#                            <p class="text-primary-300">vs</p>#}
+
+                                        <div class="flex justify-between items-center w-full">
+                                            <div class="flex items-center justify-start gap-4">
+                                                <img src="{{ bet_line.match.away_team.logo.url }}" class="h-4 w-auto">
+                                                <p class="text-primary-300 text-sm break-words  text-left">{{ bet_line.match.away_team.name }}</p>
+                                            </div>
+                                            <p class="text-primary-300 text-xs text-end">{{ bet_line.match.away_team_score }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="flex flex-col gap-2 bg-[#0D151E]/50 px-3 py-6 rounded-lg">
+                <div class="flex items-center justify-center gap-2 pb-6 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="lucide lucide-lock w-8 h-8 text-red-500">
+                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <h2 class=" font-bold text-red-500 text-center text-lg">{% trans "Ticket locked" %}</h2>
+                </div>
+                <a href="{% url 'core:plans' %}"
+                   class="w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
+                    {% trans 'Subscribe' %}
+                    {% svg_icon icon_name="arrowRight" css_classes="w-5 h-5 text-secondary-400" %}
+                </a>
+                <p class="text-primary-100 text-center text-sm">{% trans 'to access all tickets' %}</p>
+
+                <div class="flex items-center justify-around gap-4 py-2">
+                    <div class="h-[1px] w-full bg-secondary-700/20"></div>
+                    {#                <p class="border border-secondary-500/50 rounded-full px-4 py-1  bg-secondary-500/10 text-secondary-400 font-bold">#}
+                    {#                    OR</p>#}
+                    <p class="text-secondary-400 font-bold">{% trans 'OR' %}</p>
+                    <div class="h-[1px] w-full bg-secondary-500/20"></div>
+                </div>
+
+                <a href="{% url 'payments:ticket_checkout' ticket_id=ticket.id %}"
+                   class="w-[200px] inline-flex  mx-auto items-center justify-center px-6 py-3 text-white rounded-lg font-semibold hover:bg-primary-700/50 border border-secondary-500/50 hover:shadow-secondary-600/40 transform hover:-translate-y-0.5 transition-all duration-200  bg-[#14202d] gap-2">
+                    {% trans 'Unlock' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                         fill="currentColor" class="w-5 h-5 text-white">
+                        <path d="M240-160h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Zm0 80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h280v-80q0-83 58.5-141.5T720-920q83 0 141.5 58.5T920-720h-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80h120q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Z"/>
+                    </svg>
+                </a>
+                <p class="text-primary-100  text-center text-sm">{% trans 'this ticket for' %} <span
+                        class="text-secondary-400">$26.99</span></p>
+            </div>
+
+        {% endif %}
+    </div>
+</div>

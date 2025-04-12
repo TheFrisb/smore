@@ -1,6 +1,7 @@
 export function initMobileMenu() {
   const menuButton = document.querySelector("#mobileMenuButton");
   const menu = document.querySelector("#mobileMenuDropdownContainer");
+  const mobileMenuDropdowns = document.querySelectorAll(".mobileMenuDropdown");
 
   if (!menuButton || !menu) return;
 
@@ -12,6 +13,35 @@ export function initMobileMenu() {
       showMenu();
       toggleCloseIcon();
     }
+  });
+
+  mobileMenuDropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const target = event.currentTarget;
+      const dropdownContent = target.nextElementSibling;
+      const icon = target.querySelector(".icon");
+
+      if (dropdownContent.classList.contains("max-h-0")) {
+        dropdownContent.classList.remove("max-h-0", "opacity-0");
+        dropdownContent.classList.add(
+          "max-h-64",
+          "opacity-100",
+          "mt-1",
+          "mb-4",
+        );
+      } else {
+        dropdownContent.classList.add("max-h-0", "opacity-0");
+        dropdownContent.classList.remove(
+          "max-h-64",
+          "opacity-100",
+          "mt-1",
+          "mb-4",
+        );
+      }
+
+      icon.classList.toggle("rotate-180");
+    });
   });
 
   function showMenu() {

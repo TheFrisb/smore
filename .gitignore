@@ -44,3 +44,5 @@ node_modules/
 # Bundled JS
 #core_v1.bundle.js
 **/migrations
+
+google_account.json

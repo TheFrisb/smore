@@ -8,6 +8,8 @@ from payments.views import (
     SubscriptionPaymentSuccessView,
     CreatePredictionCheckoutUrl,
     PurchasePaymentSuccessView,
+    CreateTicketCheckoutUrl,
+    VerifyMobilePurchaseView,
 )
 
 app_name = "payments"
@@ -17,6 +19,11 @@ urlpatterns = [
         "prediction/checkout/<int:prediction_id>/",
         CreatePredictionCheckoutUrl.as_view(),
         name="prediction_checkout",
+    ),
+    path(
+        "ticket/checkout/<int:ticket_id>/",
+        CreateTicketCheckoutUrl.as_view(),
+        name="ticket_checkout",
     ),
     path(
         "manage-subscription/",
@@ -39,4 +46,9 @@ urlpatterns = [
         name="purchase_payment_success",
     ),
     path("stripe/webhook/", stripe_webhook, name="stripe_webhook"),
+    path(
+        "mobile/verify-purchase/",
+        VerifyMobilePurchaseView.as_view(),
+        name="verify_mobile_purchase",
+    ),
 ]

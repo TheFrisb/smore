@@ -110,6 +110,7 @@ class UserSerializer(serializers.ModelSerializer):
     user_subscription = UserSubscriptionSerializer(
         source="subscription", read_only=True
     )
+    purchased_prediction_ids = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -121,6 +122,7 @@ class UserSerializer(serializers.ModelSerializer):
             "user_subscription",
             "first_name",
             "last_name",
+            "purchased_prediction_ids",
         ]
         read_only_fields = [
             "id",
@@ -130,4 +132,8 @@ class UserSerializer(serializers.ModelSerializer):
             "user_subscription",
             "first_name",
             "last_name",
+            "purchased_prediction_ids",
         ]
+
+    def get_purchased_prediction_ids(self, obj):
+        return obj.purchased_predictions.values_list("prediction_id", flat=True)

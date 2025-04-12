@@ -4,9 +4,11 @@ from datetime import timedelta
 from adminsortable2.admin import SortableAdminMixin
 from django import forms
 from django.contrib import admin
+from django.db.models import Min
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
+from accounts.models import PurchasedPredictions, PurchasedTickets
 from core.models import (
     Prediction,
     PickOfTheDay,
@@ -17,6 +19,8 @@ from core.models import (
     SportLeague,
     SportTeam,
     SportMatch,
+    BetLine,
+    Ticket,
 )
 
 logger = logging.getLogger(__name__)
@@ -148,10 +152,6 @@ class FrequentlyAskedQuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ["question", "order"]
 
 
-admin.site.register(SiteSettings, SingletonModelAdmin)
-admin.site.register(SportCountry)
-
-
 @admin.register(SportLeague)
 class SportLeagueAdmin(admin.ModelAdmin):
     search_fields = ["name"]
@@ -202,3 +202,62 @@ class SportMatchAdmin(admin.ModelAdmin):
                 queryset = queryset.filter(product=product)
 
         return super().get_search_results(request, queryset, search_term)
+
+
+# Inline admin for TicketMatch
+class BetLineInline(admin.TabularInline):
+    model = BetLine
+    autocomplete_fields = ["match"]
+    fields = ["match", "bet", "bet_type", "odds", "status"]
+    extra = 6
+
+
+# Admin for Ticket
+@admin.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    inlines = [BetLineInline]
+    list_display = ["product", "status", "visibility"]
+    list_filter = ["product", "status", "visibility"]
+    ordering = ["-id"]
+    readonly_fields = ["created_at", "updated_at", "starts_at"]
+    fieldsets = (
+        (
+            "Ticket Details",
+            {
+                "fields": ("product", "status", "visibility"),
+            },
+        ),
+        (
+            "Additional Information",
+            {
+                "fields": ("created_at", "updated_at", "starts_at"),
+            },
+        ),
+    )
+
+    def save_related(self, request, form, formsets, change):
+        """
+        Override save_related to set starts_at based on the earliest match kickoff_datetime
+        from related BetLines after all inlines are saved.
+        """
+        super().save_related(request, form, formsets, change)
+        ticket = form.instance
+        earliest_datetime = ticket.bet_lines.aggregate(Min("match__kickoff_datetime"))[
+            "match__kickoff_datetime__min"
+        ]
+        ticket.starts_at = earliest_datetime
+        ticket.save()
+
+    class Media:
+        css = {"all": ("css/admin/custom_admin.css",)}
+        js = (
+            "admin/js/vendor/jquery/jquery.js",
+            "admin/js/jquery.init.js",
+            "js/admin/ticket_admin.js",
+        )
+
+
+admin.site.register(SiteSettings, SingletonModelAdmin)
+admin.site.register(SportCountry)
+admin.site.register(PurchasedPredictions)
+admin.site.register(PurchasedTickets)

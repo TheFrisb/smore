@@ -6,9 +6,14 @@ from enum import Enum
 from django.db import models
 from django.utils import timezone
 
-from accounts.models import User, UserSubscription, PurchasedPredictions
+from accounts.models import (
+    User,
+    UserSubscription,
+    PurchasedPredictions,
+    PurchasedTickets,
+)
 from accounts.services.referral_service import ReferralService
-from core.models import Product, Prediction
+from core.models import Product, Prediction, Ticket
 from payments.services.base_stripe_service import BaseStripeService
 
 logger = logging.getLogger(__name__)
@@ -171,10 +176,21 @@ class StripeWebhookService(BaseStripeService):
     def process_payment_intent_succeeded(self, event_data):
         logger.info(f"Received payment intent ({event_data['id']}) succeeded event")
         stripe_customer_id = event_data["customer"]
-        prediction_id = event_data["metadata"].get("prediction_id", None)
+        purchased_object_id = event_data["metadata"].get("purchased_object_id", None)
+        purchased_object_type = event_data["metadata"].get(
+            "purchased_object_type", None
+        )
 
-        if not prediction_id:
-            logger.info(f"No prediction ID found in payment intent: {event_data['id']}")
+        if not purchased_object_id:
+            logger.info(
+                f"No purchased object id found in payment intent: {event_data['id']}"
+            )
+            return
+
+        if not purchased_object_type:
+            logger.info(
+                f"No purchased object type found in payment intent: {event_data['id']}"
+            )
             return
 
         customer = User.objects.filter(stripe_customer_id=stripe_customer_id).first()
@@ -182,18 +198,48 @@ class StripeWebhookService(BaseStripeService):
             logger.error(f"No customer found with stripe ID: {stripe_customer_id}")
             return
 
-        prediction = Prediction.objects.filter(id=prediction_id).first()
-        if not prediction:
-            logger.error(f"No prediction found with ID: {prediction_id}")
-            return
+        obj = None
+        if purchased_object_type == "prediction":
+            logger.info(
+                f"Purchased object is a prediction with ID: {purchased_object_id} for customer: {customer.username}"
+            )
+            try:
+                obj = Prediction.objects.get(id=purchased_object_id)
+                purchased_prediction = PurchasedPredictions.objects.create(
+                    user=customer,
+                    prediction=obj,
+                )
+                logger.info(
+                    f"Created purchased prediction: {purchased_prediction.id} for user: {customer.username}."
+                )
+                return
+            except Prediction.DoesNotExist:
+                logger.error(
+                    f"No prediction found with ID: {purchased_object_id} for customer: {customer.username}"
+                )
+                return
+        elif purchased_object_type == "ticket":
+            logger.info(
+                f"Purchased object is a ticket with ID: {purchased_object_id} for customer: {customer.username}"
+            )
+            try:
+                obj = Ticket.objects.get(id=purchased_object_id)
+                purchased_ticket = PurchasedTickets.objects.create(
+                    user=customer,
+                    ticket=obj,
+                )
+                logger.info(
+                    f"Created purchased ticket: {purchased_ticket.id} for user: {customer.username}."
+                )
+                return
+            except Ticket.DoesNotExist:
+                logger.error(
+                    f"No ticket found with ID: {purchased_object_id} for customer: {customer.username}"
+                )
+                return
 
-        purchased_prediction = PurchasedPredictions.objects.create(
-            user=customer,
-            prediction=prediction,
-        )
-
-        logger.info(
-            f"Created purchased prediction: {purchased_prediction.id} for user: {customer.username}."
+        logger.error(
+            f"Purchased object type {purchased_object_type} (ID: {purchased_object_id}) not recognized for customer: {customer.username}"
         )
 
     def process_subscription_updated(self, event_data):

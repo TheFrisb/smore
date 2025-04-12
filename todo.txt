@@ -1,5 +1,1 @@
-1. Implement AI
-- Redirect to checkout automatically ak nema plan
-- Update plan
 
-2. Implement cron job

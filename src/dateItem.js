@@ -1,31 +1,29 @@
-const dateItems = document.querySelectorAll(".dateItem");
-
 function initDateItems() {
-  if (!dateItems) return;
+  const dateElements = document.querySelectorAll(
+    ".dateItem, .dateItem--short, .dateItem--hours",
+  );
 
-  dateItems.forEach(function (item) {
-    // Get the ISO datetime string from the data-date attribute
+  dateElements.forEach((item) => {
     const dateStr = item.getAttribute("data-date");
-
-    // Create a Date object from the string
     const date = new Date(dateStr);
 
-    // Check if the date is valid
-    if (!isNaN(date)) {
-      // Extract date components
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
-      const day = String(date.getDate()).padStart(2, "0");
+    if (isNaN(date)) return;
 
-      // Extract time components
-      const hours = String(date.getHours()).padStart(2, "0");
-      const minutes = String(date.getMinutes()).padStart(2, "0");
-
-      // Format the date and time as "YYYY-MM-DD HH:MM"
-      const formattedDate = `${year}-${month}-${day}, ${hours}:${minutes}`;
-
-      // Update the text content
-      item.textContent = formattedDate;
+    if (item.classList.contains("dateItem")) {
+      // Original format: YYYY-MM-DD, HH:mm
+      item.textContent = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}, ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+    } else if (item.classList.contains("dateItem--short")) {
+      // Short format: Wed 04 Jul (D d M)
+      item.textContent = date
+        .toLocaleDateString("en-US", {
+          weekday: "short",
+          day: "2-digit",
+          month: "short",
+        })
+        .replace(/,/g, "");
+    } else if (item.classList.contains("dateItem--hours")) {
+      // Time format: 15:30 (H:i)
+      item.textContent = `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
     }
   });
 }

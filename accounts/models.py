@@ -246,11 +246,32 @@ class ReferralEarning(BaseInternalModel):
         return f"{self.receiver.username} - {self.amount}"
 
 
+class PlatformType(models.TextChoices):
+    ANDROID = "ANDROID", "Android"
+    IOS = "IOS", "iOS"
+    WEB = "WEB", "Web"
+
+
 class PurchasedPredictions(BaseInternalModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="purchases")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="purchased_predictions"
+    )
     prediction = models.ForeignKey(
         "core.Prediction", on_delete=models.CASCADE, related_name="purchases"
+    )
+    platform = models.CharField(
+        max_length=20, choices=PlatformType, default=PlatformType.WEB
     )
 
     def __str__(self):
         return f"{self.user.username} - {self.prediction.match}"
+
+
+class PurchasedTickets(BaseInternalModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tickets")
+    ticket = models.ForeignKey(
+        "core.Ticket", on_delete=models.CASCADE, related_name="purchases"
+    )
+
+    def __str__(self):
+        return f"{self.user.username} - {self.ticket}"

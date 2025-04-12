@@ -139,7 +139,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
 }
@@ -277,3 +277,8 @@ CKEDITOR_5_CONFIGS = {
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = (
     "staff"  # Possible values: "staff", "authenticated", "any"
 )
+
+MOBILE_APP_PACKAGE_NAME = config("MOBILE_APP_PACKAGE_NAME")
+MOBILE_PREDICTION_PRODUCT_ID = config("MOBILE_PREDICTION_PRODUCT_ID")
+
+GOOGLE_SERVICE_ACCOUNT_KEY_PATH = config("GOOGLE_SERVICE_ACCOUNT_KEY_PATH")

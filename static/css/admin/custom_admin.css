@@ -7,3 +7,7 @@ html[data-theme='dark'] .ck-content td {
     color: #000;
     background-color: #fff;
 }
+
+.field-match span.select2.select2-container.select2-container--admin-autocomplete:nth-of-type(2) {
+    display: none;
+}
