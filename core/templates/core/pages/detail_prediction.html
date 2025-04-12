@@ -7,6 +7,10 @@
             list-style-position: inside !important; /* Markers align with the text */
         }
 
+        .detailedAnalysisContainer * {
+            color: inherit !important;
+        }
+
     </style>
 {% endblock extrahead %}
 {% load util_tags i18n static %}
@@ -64,7 +68,7 @@
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
             {% if can_view_prediction %}
-                <div class="!text-primary-100  py-4 ck-content text-justify"
+                <div class="!text-primary-100  py-4 text-justify detailedAnalysisContainer"
                      style="word-spacing:-1px!important">{{ prediction.detailed_analysis|safe }}</div>
             {% else %}
                 <div class="max-w-2xl mx-auto text-center py-4">
