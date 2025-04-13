@@ -158,7 +158,7 @@ class FootballApiService(SportApiService):
                 logger.error(f"Failed to create match: {e}")
                 return None
 
-        if match_obj.kickoff_datetime > django_timezone.now():
+        if match_obj.kickoff_datetime > django_timezone.now() and not match_obj.metadata:
             match_obj.metadata = self.fetch_match_prediction(match_obj.external_id)
             match_obj.save()
 
