@@ -92,7 +92,7 @@
                                                 <img src="{{ bet_line.match.home_team.logo.url }}" class="h-4 w-auto">
                                                 <p class="text-primary-300 text-sm break-words text-left">{{ bet_line.match.home_team.name }}</p>
                                             </div>
-                                            <p class="text-primary-300 text-xs text-end">{{ bet_line.match.home_team_score }}
+                                            <p class="text-xs text-end p-1 rounded-lg bg-secondary-500/10 text-primary-200">{{ bet_line.match.home_team_score }}
                                         </div>
                                         {#                            <p class="text-primary-300">vs</p>#}
 
@@ -101,7 +101,7 @@
                                                 <img src="{{ bet_line.match.away_team.logo.url }}" class="h-4 w-auto">
                                                 <p class="text-primary-300 text-sm break-words  text-left">{{ bet_line.match.away_team.name }}</p>
                                             </div>
-                                            <p class="text-primary-300 text-xs text-end">{{ bet_line.match.away_team_score }}</p>
+                                            <p class="text-xs text-end p-1 rounded-lg bg-secondary-500/10 text-primary-200">{{ bet_line.match.away_team_score }}</p>
                                         </div>
                                     </div>
                                 {% endif %}

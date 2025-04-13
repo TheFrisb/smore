@@ -187,13 +187,16 @@ class SportMatch(ApiSportModel):
     )
     away_team_score = models.CharField(blank=True)
     kickoff_datetime = models.DateTimeField()
-    metadata = models.JSONField(null=True)
+    metadata = models.JSONField(null=True, blank=True)
 
     @property
     def is_live(self):
         # calculate if the match is live (soccer match)
-        match_end_time = self.kickoff_datetime + timedelta(minutes=105)
-        return self.kickoff_datetime <= timezone.now() <= match_end_time
+        return (
+                self.kickoff_datetime
+                <= timezone.now()
+                <= (self.kickoff_datetime + timedelta(minutes=105))
+        )
 
     @property
     def league_name(self):
@@ -238,7 +241,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "rosetta",
     "django_ckeditor_5",
     "django_filters",
+    "django_crontab",
     # Local apps
     "accounts",
     "core",
@@ -278,7 +279,14 @@ CKEDITOR_5_FILE_UPLOAD_PERMISSION = (
     "staff"  # Possible values: "staff", "authenticated", "any"
 )
 
+# Mobile application related configuration
 MOBILE_APP_PACKAGE_NAME = config("MOBILE_APP_PACKAGE_NAME")
 MOBILE_PREDICTION_PRODUCT_ID = config("MOBILE_PREDICTION_PRODUCT_ID")
 
 GOOGLE_SERVICE_ACCOUNT_KEY_PATH = config("GOOGLE_SERVICE_ACCOUNT_KEY_PATH")
+
+# Cron job configuration
+CRONJOBS = [
+    ("*/20 * * * *", "core.cron.update_scores"),
+    ("0 3 * * *", "core.cron.load_matches"),
+]

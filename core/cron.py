@@ -1,13 +1,28 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
+from core.services.basketball_api_service import BasketballApiService
 from core.services.football_api_service import FootballApiService
 
 logger = logging.getLogger(__name__)
 
 
-def update_prediction_scores():
-    logger.info(f"[CRON | {datetime.now()}] Updating prediction scores")
+def update_scores():
     football_api_service = FootballApiService()
-    football_api_service.update_prediction_scores()
-    logger.info(f"[CRON | {datetime.now()}] Finished updating prediction scores")
+    basketball_api_service = BasketballApiService()
+
+    start_date = datetime.today()
+
+    football_api_service.populate_matches(start_date, start_date)
+    basketball_api_service.populate_matches(start_date, start_date)
+
+
+def load_matches():
+    start_time = datetime.today() - timedelta(days=1)
+    end_time = datetime.today() + timedelta(days=6)
+
+    football_api_service = FootballApiService()
+    basketball_api_service = BasketballApiService()
+
+    football_api_service.populate_matches(start_time, end_time)
+    basketball_api_service.populate_matches(start_time, end_time)
