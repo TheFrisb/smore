@@ -322,6 +322,7 @@ class UpcomingTicketsView(TemplateView):
         sport_tickets = (
             Ticket.objects.filter(
                 visibility=Ticket.Visibility.PUBLIC,
+                status=Ticket.Status.PENDING,
                 starts_at__date__gte=timezone.now().date(),
             )
             .prefetch_related(
@@ -400,21 +401,23 @@ class HistoryTicketsView(TemplateView):
         )
 
     def get_history_tickets(self, filter):
-        sport_tickets = Ticket.objects.filter(
-            visibility=Prediction.Visibility.PUBLIC,
-            status__in=[Ticket.Status.WON, Ticket.Status.LOST],
-        ).prefetch_related(
-            "bet_lines",
-            "bet_lines__match",
-            "bet_lines__match__home_team",
-            "bet_lines__match__away_team",
-            "bet_lines__match__league",
+        sport_tickets = (
+            Ticket.objects.filter(
+                visibility=Prediction.Visibility.PUBLIC,
+                status__in=[Ticket.Status.WON, Ticket.Status.LOST],
+            )
+            .prefetch_related(
+                "bet_lines",
+                "bet_lines__match",
+                "bet_lines__match__home_team",
+                "bet_lines__match__away_team",
+                "bet_lines__match__league",
+            )
+            .order_by("-starts_at")
         )
 
         if filter:
             sport_tickets = sport_tickets.filter(product__name=filter)
-
-        print(sport_tickets)
 
         return sport_tickets[0:20]
 
