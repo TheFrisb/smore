@@ -39,7 +39,7 @@ class SportApiService:
             return f"https://{settings.RAPIDAPI_BASKETBALL_HOST}"
 
         elif sport_type == ApiSportModel.SportType.SOCCER:
-            return f"https://{settings.RAPIDAPI_SOCCER_HOST}"
+            return f"https://{settings.RAPIDAPI_SOCCER_HOST}/v3"
 
         elif sport_type == ApiSportModel.SportType.NHL:
             return f"https://{settings.RAPIDAPI_NHL_HOST}"
@@ -87,7 +87,7 @@ class SportApiService:
                 )
 
     def populate_leagues(
-        self, sport_type: ApiSportModel.SportType, product: Product
+            self, sport_type: ApiSportModel.SportType, product: Product
     ) -> None:
         endpoint = f"{self._get_base_url(sport_type)}/leagues"
         print(f"Endpoint: {endpoint}")
@@ -133,7 +133,7 @@ class SportApiService:
                 logger.error(f"Failed to create league: {league_name} - {e}")
 
     def _get_league_obj(
-        self, external_id: int, sport_type: ApiSportModel.SportType
+            self, external_id: int, sport_type: ApiSportModel.SportType
     ) -> Optional[SportLeague]:
         """
         Get the league object based on sport type and external ID.
@@ -148,12 +148,12 @@ class SportApiService:
             return None
 
     def fetch_sport_matches(
-        self,
-        start_date: Optional[datetime],
-        end_date: Optional[datetime],
-        endpoint: str,
-        sport_type: ApiSportModel.SportType,
-        process_match: callable,
+            self,
+            start_date: Optional[datetime],
+            end_date: Optional[datetime],
+            endpoint: str,
+            sport_type: ApiSportModel.SportType,
+            process_match: callable,
     ) -> None:
         if start_date is None:
             start_date = datetime.today() - timedelta(days=1)
@@ -187,11 +187,11 @@ class SportApiService:
             current_date += timedelta(days=1)
 
     def _create_or_update_team(
-        self,
-        team_data: dict,
-        league_obj: SportLeague,
-        sport_type: ApiSportModel.SportType,
-        product: Product,
+            self,
+            team_data: dict,
+            league_obj: SportLeague,
+            sport_type: ApiSportModel.SportType,
+            product: Product,
     ) -> Optional[SportTeam]:
         team_id = team_data.get("id")
         team_name = team_data.get("name")
@@ -220,7 +220,7 @@ class SportApiService:
             return None
 
     def _download_asset(
-        self, asset_url: str, upload_dir: str, filename: str
+            self, asset_url: str, upload_dir: str, filename: str
     ) -> Optional[str]:
         if not asset_url:
             logger.error("Asset URL is empty.")

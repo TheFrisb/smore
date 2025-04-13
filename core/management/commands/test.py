@@ -22,5 +22,5 @@ class Command(BaseCommand):
         football_api_service = FootballApiService()
         basketball_api_service = BasketballApiService()
 
-        basketball_api_service.populate_matches(start_date, end_date)
+        # basketball_api_service.populate_matches(start_date, end_date)
         football_api_service.populate_matches(start_date, end_date)
