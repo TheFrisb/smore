@@ -91,4 +91,5 @@ class BasketballApiService(SportApiService):
                 logger.error(f"Failed to create basketball match: {e}")
 
     def _get_product(self, league):
+        # sd
         return Product.objects.get(name=Product.Names.BASKETBALL)
