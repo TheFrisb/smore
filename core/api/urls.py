@@ -5,8 +5,10 @@ from core.api.views import (
     PredictionListView,
     ProductsListView,
     GetFrequentlyAskedQuestionsListView,
+    HistoryAPIView,
 )
 
+app_name = "core_api"
 urlpatterns = [
     path(
         "history/predictions/",
@@ -19,5 +21,10 @@ urlpatterns = [
         "frequently-asked-questions/",
         GetFrequentlyAskedQuestionsListView.as_view(),
         name="faq-api",
+    ),
+    path(
+        "history/paginated-predictions/",
+        HistoryAPIView.as_view(),
+        name="paginated-predictions-history",
     ),
 ]

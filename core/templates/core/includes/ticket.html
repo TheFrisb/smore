@@ -45,7 +45,7 @@
     </div>
     {% endif %}
     <div class="relative mt-6">
-        {% if ticket.product.id in allowed_ticket_product_ids or ticket.id in purchased_ticket_ids %}
+        {% if ticket.product.id in allowed_products or ticket.id in purchased_ids %}
             {% for bet_line in ticket.bet_lines.all %}
                 <div class="relative betLines betLines--{{ bet_line.status|lower }}">
                     <div class="flex items-start space-x-4 py-3">

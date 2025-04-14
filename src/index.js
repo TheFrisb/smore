@@ -8,7 +8,6 @@ import initFaq from "./faq/faq";
 import { initUserMobileMenu } from "./menu/userMenu";
 import initWithdrawalHistory from "./withdrawals/withdrawalHistory";
 import { initResendEmailButtons } from "./resendEmailButton";
-import initLoadMorePredictionsButton from "./loadMorePredictionsButton";
 import { initLoginForm } from "./loginForm";
 import { initRegisterForm } from "./registerForm";
 import initLanguageSelectionButton from "./languageSelection";
@@ -18,6 +17,7 @@ import initAiAssistant from "./aiAssistant";
 import { initDateItems } from "./dateItem";
 import { initPeekButtons } from "./passwordPeek";
 import initSportToggler from "./sportToggler";
+import { initLoadMorePredictionsButton } from "./history/loadMoreButton";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initWithdrawalHistory();
   initResendEmailButtons();
+
   initLoadMorePredictionsButton();
 
   initLoginForm();

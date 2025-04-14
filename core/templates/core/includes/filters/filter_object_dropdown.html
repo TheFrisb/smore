@@ -1,0 +1,65 @@
+{% load util_tags i18n static %}
+
+<div class="flex items-center justify-center py-6">
+    <div class="flex flex-wrap gap-3 relative">
+
+        <div class="relative min-w-72 flex justify-between items-center ">
+            <button class="sportDropdownButton w-full flex items-center justify-between space-x-2 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 border bg-primary-900 text-secondary-400 border-secondary-500/50 transform hover:scale-105 hover:shadow-lg hover:shadow-secondary-500/20">
+
+
+                {% if filter_object is None %}
+                    {% svg_icon icon_name="allPredictionsListIcon" css_classes="w-5 h-5" %}
+                    <span>{% trans 'All Predictions' %}</span>
+                {% elif filter_object == 'predictions' %}
+                    {% svg_icon icon_name="singlePickIcon" css_classes="w-5 h-5" %}
+                    <span>{% trans 'Single picks' %}</span>
+                {% else %}
+                    {% svg_icon icon_name="ticketsIcon" css_classes="w-5 h-5" %}
+                    <span>{% trans 'Tickets' %}</span>
+                {% endif %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round"
+                     class="w-5 h-5  transform group-hover:translate-y-0.5 transition-transform duration-300 !ml-auto">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
+
+
+            </button>
+
+
+        </div>
+        <div class="hidden absolute top-full left-0 mt-2 w-full bg-primary-900/80 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 z-[45] ">
+            <div class="relative">
+                <a href="
+                                        {% url base_url %}{% querystring obj=None %}"
+                   class="w-full flex items-center space-x-3 p-4  transition-colors {% if not filter_object %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
+                    {% svg_icon icon_name="allPredictionsListIcon" css_classes="w-5 h-5" %}
+
+                    <span>{% trans 'All Predictions' %}</span>
+                </a>
+
+
+                <a href="
+                                        {% url base_url %}{% querystring obj='predictions' %}"
+                   class="w-full flex items-center space-x-3 p-4  transition-colors {% if filter_object == 'predictions' %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
+                    {% svg_icon icon_name="singlePickIcon" css_classes="w-5 h-5" %}
+                    <span>{% trans 'Single picks' %}</span>
+                </a>
+
+                <a href="
+
+                                        {% url base_url %}{% querystring obj='tickets' %}"
+                   class="w-full flex items-center space-x-3 p-4  transition-colors {% if filter_object == 'tickets' %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
+                    {% svg_icon icon_name="ticketsIcon" css_classes="w-5 h-5" %}
+                    <span>{% trans 'Tickets' %}</span>
+
+
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>

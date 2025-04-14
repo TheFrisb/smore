@@ -9,6 +9,8 @@ from core.models import (
     Prediction,
     SportCountry,
     FrequentlyAskedQuestion,
+    BetLine,
+    Ticket,
 )
 
 
@@ -99,3 +101,61 @@ class FrequentlyAskedQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = FrequentlyAskedQuestion
         fields = ("id", "question", "answer")
+
+
+class BetLineSerializer(serializers.ModelSerializer):
+    match = SportMatchSerializer()
+
+    class Meta:
+        model = BetLine
+        fields = ["match", "bet", "bet_type", "odds", "status"]
+
+
+class TicketHistorySerializer(serializers.ModelSerializer):
+    object_type = serializers.SerializerMethodField()
+    product = ProductSerializer()
+    bet_lines = BetLineSerializer(many=True)
+    total_odds = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Ticket
+        fields = [
+            "id",
+            "object_type",
+            "product",
+            "status",
+            "starts_at",
+            "bet_lines",
+            "total_odds",
+            "visibility",
+        ]
+
+    def get_object_type(self, obj):
+        return "ticket"
+
+    def get_total_odds(self, obj):
+        return float(obj.total_odds)
+
+
+class PredictionHistorySerializer(serializers.ModelSerializer):
+    object_type = serializers.SerializerMethodField()
+    match = SportMatchSerializer()
+    product = ProductSerializer()
+
+    class Meta:
+        model = Prediction
+        fields = [
+            "id",
+            "object_type",
+            "match",
+            "prediction",
+            "odds",
+            "result",
+            "status",
+            "detailed_analysis",
+            "product",
+            "visibility",
+        ]
+
+    def get_object_type(self, obj):
+        return "prediction"

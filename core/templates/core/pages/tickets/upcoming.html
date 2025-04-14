@@ -21,7 +21,7 @@
 
 
                                 {% if filter_product %}
-                                    {% if filter_product.name != "NFL_NHL_NCAA" %}
+                                    {% if filter_product.name != "NFL_NHL" %}
                                         {% with iconName=filter_product.name|cut:" "|lower|add:"Icon" %}
                                             {% svg_icon icon_name=iconName css_classes="w-4 h-4 text-secondary" %}
                                         {% endwith %}
@@ -34,12 +34,9 @@
                                         </div>
                                         <div class="flex items-center justify-start gap-2">
                                             {% svg_icon icon_name="nhlIcon" css_classes="w-4 h-4 text-secondary" %}
-                                            <span>NHL, </span>
+                                            <span>NHL </span>
                                         </div>
-                                        <div class="flex items-center justify-start gap-2">
-                                            {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4 text-secondary" %}
-                                            <span>NCAA</span>
-                                        </div>
+
                                     {% endif %}
                                 {% else %}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -69,7 +66,7 @@
                         </div>
                         <div class="hidden absolute top-full left-0 mt-2 w-full bg-primary-800/95 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 z-40">
                             <div class="relative">
-                                <a href="{% url 'core:upcoming_tickets' %}"
+                                <a href="{% url 'core:upcoming_matches' %}"
                                    class="w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if not filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -86,10 +83,10 @@
                             </div>
                             {% for product in products %}
                                 <div class="relative flex items-center justify-between">
-                                    <a {% if product.name != 'Tennis' and product.name != 'NFL_NHL_NCAA' %}href="{% url 'core:upcoming_tickets' %}?filter={{ product.name }}"{% endif %}
-                                       class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product == filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'Tennis' or product.name == 'NFL_NHL_NCAA' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
+                                    <a {% if product.name != 'Tennis' and product.name != 'NFL_NHL' %}href="{% url 'core:upcoming_matches' %}?filter={{ product.name }}"{% endif %}
+                                       class=" cursor-pointer w-full flex items-center space-x-3 p-4 text-sm transition-colors {% if product == filter_product %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white {% if product.name == 'Tennis' or product.name == 'NFL_NHL' %}cursor-not-allowed opacity-50 !text-primary-300{% endif %}">
 
-                                        {% if product.name != 'NFL_NHL_NCAA' %}
+                                        {% if product.name != 'NFL_NHL' %}
                                             {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-4 h-4 text-secondary-400" %}
                                             <span>{% blocktrans with name=product.get_name_display %}
                                                 {{ name }}{% endblocktrans %}</span>
@@ -100,14 +97,11 @@
                                             </div>
                                             <div class="flex items-center justify-start gap-2">
                                                 {% svg_icon icon_name="nhlIcon" css_classes="w-4 h-4 text-secondary-400" %}
-                                                <span>NHL, </span>
+                                                <span>NHL </span>
                                             </div>
-                                            <div class="flex items-center justify-start gap-2">
-                                                {% svg_icon icon_name="basketballIcon" css_classes="w-4 h-4 text-secondary-400" %}
-                                                <span>NCAA</span>
-                                            </div>
+
                                         {% endif %}
-                                        {% if product.name == 'Tennis' or product.name == 'NFL_NHL_NCAA' %}
+                                        {% if product.name == 'Tennis' or product.name == 'NFL_NHL' %}
                                             <div class="px-2 py-0.5 bg-secondary-500/10 rounded-full border border-secondary-500/20 ">
                                                 <span class="text-xs text-secondary-400 nowrap leading-none">Soon</span>
                                             </div>

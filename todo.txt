@@ -1,1 +1,3 @@
-
+2. Na dropdown ako klikne na strelkata da mu izleze dropdown menito a ako ne direkt da go nose u upcoming
+3. Da moze da bire dali da glede all, tickets, single picks
+4. History tiketto da imat nesto kao premium ticket #1, ovo ono.

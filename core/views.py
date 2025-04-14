@@ -1,6 +1,8 @@
 import logging
+from collections import defaultdict
 from itertools import groupby
 
+from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
@@ -54,50 +56,180 @@ class HomeView(TemplateView):
 
 class HistoryView(TemplateView):
     template_name = "core/pages/history.html"
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        filter = self.request.GET.get("filter", "all")
-        if filter == "all":
-            context["filter_product"] = None
-            context["predictions"] = self.get_history_predictions(None)
-        else:
-            try:
-                product = Product.objects.get(name=filter)
-                context["filter_product"] = product
-                context["predictions"] = self.get_history_predictions(filter)
-            except Product.DoesNotExist:
-                context["filter_product"] = None
-                context["predictions"] = self.get_history_predictions(None)
 
-        context["page_title"] = _("History")
-        context["allowed_prediction_products"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).values_list("id", flat=True)
-        context["products"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).order_by("order")
+        # Get combined and sorted objects
+        combined_objects = self._get_combined_objects()
+
+        # Paginate results
+        paginator = Paginator(combined_objects, self.paginate_by)
+        page_number = self.request.GET.get("page", 1)
+        page_obj = paginator.get_page(page_number)
+
+        context.update(
+            {
+                "filter_product": Product.objects.filter(
+                    name=self._get_product_filter()
+                ).first(),
+                "filter_object": self._get_object_filter(),
+                "pick_of_the_day": PickOfTheDay.get_solo(),
+                "page_title": _("Historical Results"),  # Updated title
+                "allowed_products": self.get_allowed_products(),
+                "purchased_ids": self.get_purchased_ids(),
+                "products": Product.objects.filter(
+                    type=Product.Types.SUBSCRIPTION
+                ).order_by("order"),
+                "base_url": "core:history",
+                "page_obj": page_obj,
+                "object_list": page_obj.object_list,
+            }
+        )
         return context
 
-    def get_history_predictions(self, filter):
+    def _get_combined_objects(self):
+        """Combine and sort predictions/tickets like the API"""
+        predictions, tickets = self._get_filtered_querysets()
+
+        # Create unified object list
+        combined = []
+        for pred in predictions:
+            combined.append(
+                {
+                    "object": pred,
+                    "type": "prediction",
+                    "datetime": pred.match.kickoff_datetime,
+                }
+            )
+
+        for ticket in tickets:
+            combined.append(
+                {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
+            )
+
+        # Sort descending like the API
+        return sorted(combined, key=lambda x: x["datetime"], reverse=True)
+
+    def _get_filtered_querysets(self):
+        """Replicate API's filtering logic"""
+        product_filter = self._get_product_filter()
+        obj_filter = self._get_object_filter()
+
+        predictions = Prediction.objects.none()
+        tickets = Ticket.objects.none()
+
+        if obj_filter in [None, "predictions"]:
+            predictions = Prediction.objects.filter(
+                visibility=Prediction.Visibility.PUBLIC,
+                status__in=[Prediction.Status.WON, Prediction.Status.LOST],
+            ).select_related(
+                "match__home_team", "match__away_team", "match__league", "product"
+            )
+            if product_filter:
+                predictions = predictions.filter(product__name=product_filter)
+
+        if obj_filter in [None, "tickets"]:
+            tickets = Ticket.objects.filter(
+                visibility=Ticket.Visibility.PUBLIC,
+                status__in=[Ticket.Status.WON, Ticket.Status.LOST],
+            ).prefetch_related(
+                "bet_lines__match__home_team",
+                "bet_lines__match__away_team",
+                "bet_lines__match__league",
+            )
+            if product_filter:
+                tickets = tickets.filter(product__name=product_filter)
+
+        return predictions, tickets
+
+    def _get_product_filter(self):
+        """
+        Get the filter from the request.
+        """
+        return self.request.GET.get("filter", None)
+
+    def _get_object_filter(self):
+        """
+        Get the filter for the object.
+        """
+        return self.request.GET.get("obj", None)
+
+    def _get_predictions(self, filter):
+        """
+        Get the predictions based on the filter.
+        """
         predictions = (
             Prediction.objects.filter(
                 visibility=Prediction.Visibility.PUBLIC,
-                status__in=[Prediction.Status.WON, Prediction.Status.LOST],
+                status__in=[
+                    Prediction.Status.WON,
+                    Prediction.Status.LOST,
+                ],
             )
-            .prefetch_related(
+            .select_related(
                 "match",
                 "match__home_team",
                 "match__away_team",
                 "match__league",
+                "product",
             )
-            .order_by("-match__kickoff_datetime")
+            .order_by("match__kickoff_datetime")
         )
 
         if filter:
             predictions = predictions.filter(product__name=filter)
 
-        return predictions[0:20]
+        return predictions
+
+    def _get_tickets(self, filter):
+        """
+        Get the tickets based on the filter.
+        """
+        sport_tickets = (
+            Ticket.objects.filter(
+                visibility=Ticket.Visibility.PUBLIC,
+                status__in=[Ticket.Status.WON, Ticket.Status.LOST],
+            )
+            .prefetch_related(
+                "bet_lines",
+                "bet_lines__match",
+                "bet_lines__match__home_team",
+                "bet_lines__match__away_team",
+                "bet_lines__match__league",
+            )
+            .order_by("starts_at")
+        )
+
+        if filter:
+            sport_tickets = sport_tickets.filter(product__name=filter)
+
+        return sport_tickets
+
+    def get_purchased_ids(self):
+        """
+        Get IDs of purchased predictions for the current user.
+        """
+        if not self.request.user.is_authenticated:
+            return []
+
+        sport_tickets = PurchasedTickets.objects.filter(
+            user=self.request.user
+        ).values_list("ticket_id", flat=True)
+
+        purchased_predictions = PurchasedPredictions.objects.filter(
+            user=self.request.user
+        ).values_list("prediction_id", flat=True)
+
+        return list(sport_tickets) + list(purchased_predictions)
+
+    def get_allowed_products(self):
+        """
+        Get product IDs the user has access to.
+        """
+
+        return Product.objects.all().values_list("id", flat=True)
 
 
 class DetailedPredictionView(DetailView):
@@ -281,44 +413,71 @@ class CookiesPolicyView(TemplateView):
         return context
 
 
-class UpcomingTicketsView(TemplateView):
-    template_name = "core/pages/tickets/upcoming.html"
+class UpcomingMatchesView(TemplateView):
+    template_name = "core/pages/upcoming_matches.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        filter = self.request.GET.get("filter", "all")
-        if filter == "all":
-            context["filter_product"] = None
-            context["grouped_tickets"] = self.get_grouped_tickets(None)
-        else:
-            print(filter)
-            try:
-                product = Product.objects.get(name=filter)
-                print(product.name)
-                context["filter_product"] = product
-                context["grouped_tickets"] = self.get_grouped_tickets(filter)
-            except Product.DoesNotExist:
-                context["filter_product"] = None
-                context["grouped_tickets"] = self.get_grouped_tickets(None)
 
-        context["page_title"] = _("Upcoming Tickets")
-        context["allowed_ticket_product_ids"] = self.get_allowed_products()
-        context["purchased_ticket_ids"] = self.get_purchased_ticket_ids()
+        # Add existing context variables from the original view
+        context["filter_product"] = Product.objects.filter(
+            name=self._get_product_filter()
+        ).first()
+        context["filter_object"] = self._get_object_filter()
+        context["pick_of_the_day"] = PickOfTheDay.get_solo()
+        context["page_title"] = _("Upcoming Matches")
+        context["allowed_products"] = self.get_allowed_products()
+        context["purchased_ids"] = self.get_purchased_ids()
         context["products"] = Product.objects.filter(
             type=Product.Types.SUBSCRIPTION
         ).order_by("order")
+        context["base_url"] = "core:upcoming_matches"
+
+        context["grouped_items"] = self._get_grouped_objects()
 
         return context
 
-    def get_purchased_ticket_ids(self):
-        if not self.request.user.is_authenticated:
-            return []
+    def _get_product_filter(self):
+        """
+        Get the filter from the request.
+        """
+        return self.request.GET.get("filter", None)
 
-        return PurchasedTickets.objects.filter(user=self.request.user).values_list(
-            "ticket_id", flat=True
+    def _get_object_filter(self):
+        """
+        Get the filter for the object.
+        """
+        return self.request.GET.get("obj", None)
+
+    def _get_predictions(self, filter):
+        """
+        Get the predictions based on the filter.
+        """
+        predictions = (
+            Prediction.objects.filter(
+                match__kickoff_datetime__date__gte=timezone.now().date(),
+                visibility=Prediction.Visibility.PUBLIC,
+                status=Prediction.Status.PENDING,
+            )
+            .select_related(
+                "match",
+                "match__home_team",
+                "match__away_team",
+                "match__league",
+                "product",
+            )
+            .order_by("match__kickoff_datetime")
         )
 
-    def get_grouped_tickets(self, filter):
+        if filter:
+            predictions = predictions.filter(product__name=filter)
+
+        return predictions
+
+    def _get_tickets(self, filter):
+        """
+        Get the tickets based on the filter.
+        """
         sport_tickets = (
             Ticket.objects.filter(
                 visibility=Ticket.Visibility.PUBLIC,
@@ -338,90 +497,80 @@ class UpcomingTicketsView(TemplateView):
         if filter:
             sport_tickets = sport_tickets.filter(product__name=filter)
 
-        grouped_tickets = {
-            kickoff_date: list(sport_tickets)
-            for kickoff_date, sport_tickets in groupby(
-                sport_tickets, key=lambda ticket: ticket.starts_at.date()
-            )
-        }
+        return sport_tickets
 
-        logger.info(f"Grouped tickets: {grouped_tickets}")
+    def _get_grouped_objects(self):
+        """
+        Group predictions and sport tickets by date and sort by datetime within each date.
+        """
+        predictions, sport_tickets = None, None
 
-        return grouped_tickets
+        product_filter = self._get_product_filter()
+        obj_filter = self._get_object_filter()
 
-    def get_allowed_products(self):
-        allowed_prediction_products = []
-        products = Product.objects.filter(type=Product.Types.SUBSCRIPTION)
+        if obj_filter is None or obj_filter == "predictions":
+            predictions = self._get_predictions(product_filter)
 
-        if not self.request.user.is_authenticated:
-            return allowed_prediction_products
+        if obj_filter is None or obj_filter == "tickets":
+            sport_tickets = self._get_tickets(product_filter)
 
-        for product in products:
-            if self.request.user.has_access_to_product(product):
-                allowed_prediction_products.append(product.id)
+        # Combine objects with type and datetime information
+        all_objects = []
+        if predictions:
+            for pred in predictions:
+                all_objects.append(
+                    {
+                        "object": pred,
+                        "type": "prediction",
+                        "datetime": pred.match.kickoff_datetime,
+                    }
+                )
 
-        return allowed_prediction_products
+        if sport_tickets:
+            for ticket in sport_tickets:
+                all_objects.append(
+                    {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
+                )
 
+        # Group by date
+        grouped_by_date = defaultdict(list)
+        for item in all_objects:
+            date = item["datetime"].date()
+            grouped_by_date[date].append(item)
 
-class HistoryTicketsView(TemplateView):
-    template_name = "core/pages/tickets/history.html"
+        # Sort each group by datetime
+        for date, items in grouped_by_date.items():
+            grouped_by_date[date] = sorted(items, key=lambda x: x["datetime"])
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        filter = self.request.GET.get("filter", "all")
-        if filter == "all":
-            context["filter_product"] = None
-            context["sport_tickets"] = self.get_history_tickets(None)
-        else:
-            try:
-                product = Product.objects.get(name=filter)
-                context["filter_product"] = product
-                context["sport_tickets"] = self.get_history_tickets(filter)
-            except Product.DoesNotExist:
-                context["filter_product"] = None
-                context["sport_tickets"] = self.get_history_tickets(None)
+        # Create a sorted list of (date, items) for the template
+        sorted_dates = sorted(grouped_by_date.keys())
+        grouped_items = [(date, grouped_by_date[date]) for date in sorted_dates]
 
-        context["page_title"] = _("Upcoming Tickets")
-        context["allowed_ticket_product_ids"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).values_list("id", flat=True)
-        context["purchased_ticket_ids"] = self.get_purchased_ticket_ids()
-        context["products"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).order_by("order")
+        print(grouped_items)
 
-        return context
+        return grouped_items
 
-    def get_purchased_ticket_ids(self):
+    def get_purchased_ids(self):
+        """
+        Get IDs of purchased predictions for the current user.
+        """
         if not self.request.user.is_authenticated:
             return []
 
-        return PurchasedTickets.objects.filter(user=self.request.user).values_list(
-            "ticket_id", flat=True
-        )
+        sport_tickets = PurchasedTickets.objects.filter(
+            user=self.request.user
+        ).values_list("ticket_id", flat=True)
 
-    def get_history_tickets(self, filter):
-        sport_tickets = (
-            Ticket.objects.filter(
-                visibility=Prediction.Visibility.PUBLIC,
-                status__in=[Ticket.Status.WON, Ticket.Status.LOST],
-            )
-            .prefetch_related(
-                "bet_lines",
-                "bet_lines__match",
-                "bet_lines__match__home_team",
-                "bet_lines__match__away_team",
-                "bet_lines__match__league",
-            )
-            .order_by("-starts_at")
-        )
+        purchased_predictions = PurchasedPredictions.objects.filter(
+            user=self.request.user
+        ).values_list("prediction_id", flat=True)
 
-        if filter:
-            sport_tickets = sport_tickets.filter(product__name=filter)
-
-        return sport_tickets[0:20]
+        return list(sport_tickets) + list(purchased_predictions)
 
     def get_allowed_products(self):
+        """
+        Get product IDs the user has access to.
+        """
         allowed_prediction_products = []
         products = Product.objects.filter(type=Product.Types.SUBSCRIPTION)
 
@@ -435,7 +584,7 @@ class HistoryTicketsView(TemplateView):
         return allowed_prediction_products
 
 
-class UpcomingMatchesView(TemplateView):
+class UpcomingMatchesView2(TemplateView):
     template_name = "core/pages/upcoming_matches.html"
 
     def get_context_data(self, **kwargs):

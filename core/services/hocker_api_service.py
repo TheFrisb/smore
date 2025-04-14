@@ -20,7 +20,7 @@ class HockeyApiService(SportApiService):
         )
 
     def _process_fixture(self, item):
-        product_obj = Product.objects.get(name=Product.Names.NFL_NHL_NCAA)
+        product_obj = Product.objects.get(name=Product.Names.NFL_NHL)
 
         external_id = item.get("id")
         kickoff_timestamp = item.get("timestamp")

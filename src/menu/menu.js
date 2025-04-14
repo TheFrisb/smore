@@ -18,7 +18,7 @@ export function initMobileMenu() {
   mobileMenuDropdowns.forEach((dropdown) => {
     dropdown.addEventListener("click", (event) => {
       event.stopPropagation();
-      const target = event.currentTarget;
+      const target = event.currentTarget.parentElement;
       const dropdownContent = target.nextElementSibling;
       const icon = target.querySelector(".icon");
 

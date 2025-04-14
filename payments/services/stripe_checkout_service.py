@@ -83,8 +83,8 @@ class StripeCheckoutService(BaseStripeService):
             self, user: User | AbstractBaseUser, ticket: Ticket
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
-            success_url=f"{settings.BASE_URL}{reverse('core:upcoming_tickets')}",
-            cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_tickets')}",
+            success_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
+            cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
             mode="payment",
             customer=user.stripe_customer_id,
             line_items=self.get_onetime_ticket_line_items(ticket),

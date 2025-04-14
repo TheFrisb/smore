@@ -1,4 +1,4 @@
-/*! For license information please see core_v28.bundle.js.LICENSE.txt */
+/*! For license information please see core_v29.bundle.js.LICENSE.txt */
 (() => {
   var t = {
       629: (t, a, e) => {
@@ -99,10 +99,12 @@
           f = function () {
             return c.Date.now();
           };
+
         function m(t) {
           var a = typeof t;
           return !!t && ("object" == a || "function" == a);
         }
+
         function y(t) {
           if ("number" == typeof t) return t;
           if (
@@ -130,6 +132,7 @@
               ? NaN
               : +t;
         }
+
         t.exports = function (t, a, e) {
           var n,
             o,
@@ -143,15 +146,18 @@
             g = !0;
           if ("function" != typeof t)
             throw new TypeError("Expected a function");
+
           function b(a) {
             var e = n,
               s = o;
             return (n = o = void 0), (l = a), (r = t.apply(s, e));
           }
+
           function v(t) {
             var e = t - d;
             return void 0 === d || e >= a || e < 0 || (u && t - l >= s);
           }
+
           function x() {
             var t = f();
             if (v(t)) return k(t);
@@ -163,9 +169,11 @@
               })(t),
             );
           }
+
           function k(t) {
             return (i = void 0), g && n ? b(t) : ((n = o = void 0), r);
           }
+
           function w() {
             var t = f(),
               e = v(t);
@@ -178,6 +186,7 @@
             }
             return void 0 === i && (i = setTimeout(x, a)), r;
           }
+
           return (
             (a = y(a) || 0),
             m(e) &&
@@ -212,10 +221,12 @@
           m = function () {
             return u.Date.now();
           };
+
         function y(t) {
           var a = typeof t;
           return !!t && ("object" == a || "function" == a);
         }
+
         function g(t) {
           if ("number" == typeof t) return t;
           if (
@@ -243,6 +254,7 @@
               ? NaN
               : +t;
         }
+
         t.exports = function (t, a, e) {
           var o = !0,
             s = !0;
@@ -263,15 +275,18 @@
                 p = !1,
                 b = !0;
               if ("function" != typeof t) throw new TypeError(n);
+
               function v(a) {
                 var e = o,
                   n = s;
                 return (o = s = void 0), (c = a), (i = t.apply(n, e));
               }
+
               function x(t) {
                 var e = t - l;
                 return void 0 === l || e >= a || e < 0 || (p && t - c >= r);
               }
+
               function k() {
                 var t = m();
                 if (x(t)) return w(t);
@@ -283,9 +298,11 @@
                   })(t),
                 );
               }
+
               function w(t) {
                 return (d = void 0), b && o ? v(t) : ((o = s = void 0), i);
               }
+
               function L() {
                 var t = m(),
                   e = x(t);
@@ -298,6 +315,7 @@
                 }
                 return void 0 === d && (d = setTimeout(k, a)), i;
               }
+
               return (
                 (a = g(a) || 0),
                 y(e) &&
@@ -321,6 +339,7 @@
       72: (t) => {
         "use strict";
         var a = [];
+
         function e(t) {
           for (var e = -1, n = 0; n < a.length; n++)
             if (a[n].identifier === t) {
@@ -329,6 +348,7 @@
             }
           return e;
         }
+
         function n(t, n) {
           for (var s = {}, r = [], i = 0; i < t.length; i++) {
             var d = t[i],
@@ -354,6 +374,7 @@
           }
           return r;
         }
+
         function o(t, a) {
           var e = a.domAPI(a);
           return (
@@ -373,6 +394,7 @@
             }
           );
         }
+
         t.exports = function (t, o) {
           var s = n((t = t || []), (o = o || {}));
           return function (t) {
@@ -434,7 +456,10 @@
         "use strict";
         t.exports = function (t) {
           if ("undefined" == typeof document)
-            return { update: function () {}, remove: function () {} };
+            return {
+              update: function () {},
+              remove: function () {},
+            };
           var a = t.insertStyleElement(t);
           return {
             update: function (e) {
@@ -484,12 +509,14 @@
       },
     },
     a = {};
+
   function e(n) {
     var o = a[n];
     if (void 0 !== o) return o.exports;
     var s = (a[n] = { id: n, exports: {} });
     return t[n](s, s.exports, e), s.exports;
   }
+
   (e.n = (t) => {
     var a = t && t.__esModule ? () => t.default : () => t;
     return e.d(a, { a }), a;
@@ -512,6 +539,7 @@
     (e.nc = void 0),
     (() => {
       "use strict";
+
       function t() {
         return (function (t) {
           if (!document.cookie) return null;
@@ -523,6 +551,7 @@
           return null;
         })("csrftoken");
       }
+
       var a,
         n = function () {
           return (
@@ -541,6 +570,7 @@
           function t(t) {
             (this.options = t), (this.listeners = {});
           }
+
           return (
             (t.prototype.on = function (t, a) {
               var e = this.listeners[t] || [];
@@ -563,6 +593,7 @@
           function t() {
             this.notifications = [];
           }
+
           return (
             (t.prototype.push = function (t) {
               this.notifications.push(t),
@@ -629,6 +660,7 @@
               (this.animationEndEventName = this._getAnimationEndEventName()),
               this._createA11yContainer();
           }
+
           return (
             (t.prototype.on = function (t, a) {
               var e;
@@ -858,6 +890,7 @@
                 return a.triggerEvent(s.Click, e);
               });
           }
+
           return (
             (t.prototype.error = function (t) {
               var a = this.normalizeOptions("error", t);
@@ -927,6 +960,7 @@
             t
           );
         })();
+
       function c(t) {
         return (
           (c =
@@ -945,6 +979,7 @@
           c(t)
         );
       }
+
       function u() {
         u = function () {
           return a;
@@ -962,6 +997,7 @@
           r = s.iterator || "@@iterator",
           i = s.asyncIterator || "@@asyncIterator",
           d = s.toStringTag || "@@toStringTag";
+
         function l(t, a, e) {
           return (
             Object.defineProperty(t, a, {
@@ -973,6 +1009,7 @@
             t[a]
           );
         }
+
         try {
           l({}, "");
         } catch (t) {
@@ -980,12 +1017,14 @@
             return (t[a] = e);
           };
         }
+
         function p(t, a, e, n) {
           var s = a && a.prototype instanceof v ? a : v,
             r = Object.create(s.prototype),
             i = new N(n || []);
           return o(r, "_invoke", { value: A(t, e, i) }), r;
         }
+
         function h(t, a, e) {
           try {
             return { type: "normal", arg: t.call(a, e) };
@@ -993,15 +1032,20 @@
             return { type: "throw", arg: t };
           }
         }
+
         a.wrap = p;
         var f = "suspendedStart",
           m = "suspendedYield",
           y = "executing",
           g = "completed",
           b = {};
+
         function v() {}
+
         function x() {}
+
         function k() {}
+
         var w = {};
         l(w, r, function () {
           return this;
@@ -1010,6 +1054,7 @@
           S = L && L(L(z([])));
         S && S !== e && n.call(S, r) && (w = S);
         var E = (k.prototype = v.prototype = Object.create(w));
+
         function _(t) {
           ["next", "throw", "return"].forEach(function (a) {
             l(t, a, function (t) {
@@ -1017,6 +1062,7 @@
             });
           });
         }
+
         function T(t, a) {
           function e(o, s, r, i) {
             var d = h(t[o], t, s);
@@ -1043,6 +1089,7 @@
             }
             i(d.arg);
           }
+
           var s;
           o(this, "_invoke", {
             value: function (t, n) {
@@ -1051,10 +1098,12 @@
                   e(t, n, a, o);
                 });
               }
+
               return (s = s ? s.then(o, o) : o());
             },
           });
         }
+
         function A(a, e, n) {
           var o = f;
           return function (s, r) {
@@ -1088,6 +1137,7 @@
             }
           };
         }
+
         function C(a, e) {
           var n = e.method,
             o = a.iterator[n];
@@ -1126,21 +1176,25 @@
               (e.delegate = null),
               b);
         }
+
         function j(t) {
           var a = { tryLoc: t[0] };
           1 in t && (a.catchLoc = t[1]),
             2 in t && ((a.finallyLoc = t[2]), (a.afterLoc = t[3])),
             this.tryEntries.push(a);
         }
+
         function q(t) {
           var a = t.completion || {};
           (a.type = "normal"), delete a.arg, (t.completion = a);
         }
+
         function N(t) {
           (this.tryEntries = [{ tryLoc: "root" }]),
             t.forEach(j, this),
             this.reset(!0);
         }
+
         function z(a) {
           if (a || "" === a) {
             var e = a[r];
@@ -1158,6 +1212,7 @@
           }
           throw new TypeError(c(a) + " is not iterable");
         }
+
         return (
           (x.prototype = k),
           o(E, "constructor", { value: k, configurable: !0 }),
@@ -1249,6 +1304,7 @@
             dispatchException: function (a) {
               if (this.done) throw a;
               var e = this;
+
               function o(n, o) {
                 return (
                   (i.type = "throw"),
@@ -1258,6 +1314,7 @@
                   !!o
                 );
               }
+
               for (var s = this.tryEntries.length - 1; s >= 0; --s) {
                 var r = this.tryEntries[s],
                   i = r.completion;
@@ -1349,6 +1406,7 @@
           a
         );
       }
+
       function p(t, a, e, n, o, s, r) {
         try {
           var i = t[s](r),
@@ -1358,22 +1416,27 @@
         }
         i.done ? a(d) : Promise.resolve(d).then(n, o);
       }
+
       function h(t) {
         return function () {
           var a = this,
             e = arguments;
           return new Promise(function (n, o) {
             var s = t.apply(a, e);
+
             function r(t) {
               p(s, n, o, r, i, "next", t);
             }
+
             function i(t) {
               p(s, n, o, r, i, "throw", t);
             }
+
             r(void 0);
           });
         };
       }
+
       var f = new l({ duration: 5e3, position: { x: "right", y: "top" } }),
         m = document.querySelectorAll(".product"),
         y = document.querySelector(".checkoutSummarySection"),
@@ -1384,6 +1447,7 @@
         k = document.querySelector("#userFirstChosenProductId"),
         w = [],
         L = "monthly";
+
       function S() {
         document.querySelectorAll(".product").forEach(function (t) {
           var a,
@@ -1409,12 +1473,15 @@
         }),
           T();
       }
+
       function E() {
         return w.length > 0;
       }
+
       function _() {
         return w.length > 0 ? w[0].id : null;
       }
+
       function T() {
         var t = "",
           a = 0;
@@ -1444,6 +1511,7 @@
             ".checkoutSummarySection__totalPrice",
           ).textContent = "€".concat(a.toFixed(2)));
       }
+
       var A = e(72),
         C = e.n(A),
         j = e(825),
@@ -1470,6 +1538,7 @@
         G = e(181),
         Y = e.n(G);
       let Z = () => {};
+
       function X(t) {
         let a, e, n;
         for (a = 0; a < t.length; a += 1) {
@@ -1478,6 +1547,7 @@
         }
         return !1;
       }
+
       function W(t) {
         t &&
           t.forEach((t) => {
@@ -1486,6 +1556,7 @@
             if (X(a.concat(e))) return Z();
           });
       }
+
       function U() {
         return (
           window.MutationObserver ||
@@ -1493,6 +1564,7 @@
           window.MozMutationObserver
         );
       }
+
       const Q = function () {
           return !!U();
         },
@@ -1514,21 +1586,26 @@
           /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i,
         at =
           /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i;
+
       function et() {
         return navigator.userAgent || navigator.vendor || window.opera || "";
       }
+
       const nt = new (class {
           phone() {
             const t = et();
             return !(!K.test(t) && !V.test(t.substr(0, 4)));
           }
+
           mobile() {
             const t = et();
             return !(!tt.test(t) && !at.test(t.substr(0, 4)));
           }
+
           tablet() {
             return this.mobile() && !this.phone();
           }
+
           ie11() {
             return (
               "-ms-scroll-limit" in document.documentElement.style &&
@@ -1726,6 +1803,7 @@
           );
         };
       var vt = document.querySelectorAll(".copyButton");
+
       function xt(t) {
         return (
           (xt =
@@ -1744,6 +1822,7 @@
           xt(t)
         );
       }
+
       function kt() {
         kt = function () {
           return a;
@@ -1761,6 +1840,7 @@
           r = s.iterator || "@@iterator",
           i = s.asyncIterator || "@@asyncIterator",
           d = s.toStringTag || "@@toStringTag";
+
         function l(t, a, e) {
           return (
             Object.defineProperty(t, a, {
@@ -1772,6 +1852,7 @@
             t[a]
           );
         }
+
         try {
           l({}, "");
         } catch (t) {
@@ -1779,12 +1860,14 @@
             return (t[a] = e);
           };
         }
+
         function c(t, a, e, n) {
           var s = a && a.prototype instanceof g ? a : g,
             r = Object.create(s.prototype),
             i = new j(n || []);
           return o(r, "_invoke", { value: _(t, e, i) }), r;
         }
+
         function u(t, a, e) {
           try {
             return { type: "normal", arg: t.call(a, e) };
@@ -1792,15 +1875,20 @@
             return { type: "throw", arg: t };
           }
         }
+
         a.wrap = c;
         var p = "suspendedStart",
           h = "suspendedYield",
           f = "executing",
           m = "completed",
           y = {};
+
         function g() {}
+
         function b() {}
+
         function v() {}
+
         var x = {};
         l(x, r, function () {
           return this;
@@ -1809,6 +1897,7 @@
           w = k && k(k(q([])));
         w && w !== e && n.call(w, r) && (x = w);
         var L = (v.prototype = g.prototype = Object.create(x));
+
         function S(t) {
           ["next", "throw", "return"].forEach(function (a) {
             l(t, a, function (t) {
@@ -1816,6 +1905,7 @@
             });
           });
         }
+
         function E(t, a) {
           function e(o, s, r, i) {
             var d = u(t[o], t, s);
@@ -1842,6 +1932,7 @@
             }
             i(d.arg);
           }
+
           var s;
           o(this, "_invoke", {
             value: function (t, n) {
@@ -1850,10 +1941,12 @@
                   e(t, n, a, o);
                 });
               }
+
               return (s = s ? s.then(o, o) : o());
             },
           });
         }
+
         function _(a, e, n) {
           var o = p;
           return function (s, r) {
@@ -1887,6 +1980,7 @@
             }
           };
         }
+
         function T(a, e) {
           var n = e.method,
             o = a.iterator[n];
@@ -1925,21 +2019,25 @@
               (e.delegate = null),
               y);
         }
+
         function A(t) {
           var a = { tryLoc: t[0] };
           1 in t && (a.catchLoc = t[1]),
             2 in t && ((a.finallyLoc = t[2]), (a.afterLoc = t[3])),
             this.tryEntries.push(a);
         }
+
         function C(t) {
           var a = t.completion || {};
           (a.type = "normal"), delete a.arg, (t.completion = a);
         }
+
         function j(t) {
           (this.tryEntries = [{ tryLoc: "root" }]),
             t.forEach(A, this),
             this.reset(!0);
         }
+
         function q(a) {
           if (a || "" === a) {
             var e = a[r];
@@ -1957,6 +2055,7 @@
           }
           throw new TypeError(xt(a) + " is not iterable");
         }
+
         return (
           (b.prototype = v),
           o(L, "constructor", { value: v, configurable: !0 }),
@@ -2048,6 +2147,7 @@
             dispatchException: function (a) {
               if (this.done) throw a;
               var e = this;
+
               function o(n, o) {
                 return (
                   (i.type = "throw"),
@@ -2057,6 +2157,7 @@
                   !!o
                 );
               }
+
               for (var s = this.tryEntries.length - 1; s >= 0; --s) {
                 var r = this.tryEntries[s],
                   i = r.completion;
@@ -2148,6 +2249,7 @@
           a
         );
       }
+
       function wt(t, a, e, n, o, s, r) {
         try {
           var i = t[s](r),
@@ -2157,10 +2259,12 @@
         }
         i.done ? a(d) : Promise.resolve(d).then(n, o);
       }
+
       var Lt,
         St = document.querySelectorAll(".withdrawalPayoutMethod"),
         Et = document.querySelector("#requestWithdrawalButton"),
         _t = new l({ duration: 5e3, position: { x: "right", y: "top" } });
+
       function Tt() {
         var a;
         return (
@@ -2241,18 +2345,22 @@
               e = arguments;
             return new Promise(function (n, o) {
               var s = a.apply(t, e);
+
               function r(t) {
                 wt(s, n, o, r, i, "next", t);
               }
+
               function i(t) {
                 wt(s, n, o, r, i, "throw", t);
               }
+
               r(void 0);
             });
           }),
           Tt.apply(this, arguments)
         );
       }
+
       var At = document.querySelectorAll(".faqItemWrapper");
       var Ct = document.querySelectorAll(".resendEmailButton"),
         jt = new l({ duration: 5e3, position: { x: "right", y: "top" } }),
@@ -2275,10 +2383,13 @@
         tokenizer: null,
         walkTokens: null,
       };
+
       function Mt(t) {
         It = t;
       }
+
       const Bt = { exec: () => null };
+
       function Dt(t, a = "") {
         let e = "string" == typeof t ? t : t.source;
         const n = {
@@ -2290,6 +2401,7 @@
         };
         return n;
       }
+
       const Ft = {
           codeRemoveIndent: /^(?: {1,4}| {0,3}\t)/gm,
           outputLinkReplace: /\\([\[\]])/g,
@@ -2641,6 +2753,7 @@
           "'": "&#39;",
         },
         Pa = (t) => za[t];
+
       function Oa(t, a) {
         if (a) {
           if (Ft.escapeTest.test(t)) return t.replace(Ft.escapeReplace, Pa);
@@ -2648,6 +2761,7 @@
           return t.replace(Ft.escapeReplaceNoEncode, Pa);
         return t;
       }
+
       function Ra(t) {
         try {
           t = encodeURI(t).replace(Ft.percentDecode, "%");
@@ -2656,6 +2770,7 @@
         }
         return t;
       }
+
       function $a(t, a) {
         const e = t
           .replace(Ft.findPipe, (t, a, e) => {
@@ -2676,6 +2791,7 @@
         for (; n < e.length; n++) e[n] = e[n].trim().replace(Ft.slashPipe, "|");
         return e;
       }
+
       function Ia(t, a, e) {
         const n = t.length;
         if (0 === n) return "";
@@ -2683,6 +2799,7 @@
         for (; o < n && t.charAt(n - o - 1) === a; ) o++;
         return t.slice(0, n - o);
       }
+
       function Ma(t, a, e, n, o) {
         const s = a.href,
           r = a.title || null,
@@ -2701,17 +2818,21 @@
         }
         return { type: "image", raw: e, href: s, title: r, text: i };
       }
+
       class Ba {
         options;
         rules;
         lexer;
+
         constructor(t) {
           this.options = t || It;
         }
+
         space(t) {
           const a = this.rules.block.newline.exec(t);
           if (a && a[0].length > 0) return { type: "space", raw: a[0] };
         }
+
         code(t) {
           const a = this.rules.block.code.exec(t);
           if (a) {
@@ -2724,6 +2845,7 @@
             };
           }
         }
+
         fences(t) {
           const a = this.rules.block.fences.exec(t);
           if (a) {
@@ -2752,6 +2874,7 @@
             };
           }
         }
+
         heading(t) {
           const a = this.rules.block.heading.exec(t);
           if (a) {
@@ -2772,10 +2895,12 @@
             };
           }
         }
+
         hr(t) {
           const a = this.rules.block.hr.exec(t);
           if (a) return { type: "hr", raw: Ia(a[0], "\n") };
         }
+
         blockquote(t) {
           const a = this.rules.block.blockquote.exec(t);
           if (a) {
@@ -2833,6 +2958,7 @@
             return { type: "blockquote", raw: e, tokens: o, text: n };
           }
         }
+
         list(t) {
           let a = this.rules.block.list.exec(t);
           if (a) {
@@ -2971,6 +3097,7 @@
             return o;
           }
         }
+
         html(t) {
           const a = this.rules.block.html.exec(t);
           if (a)
@@ -2982,6 +3109,7 @@
               text: a[0],
             };
         }
+
         def(t) {
           const a = this.rules.block.def.exec(t);
           if (a) {
@@ -3001,6 +3129,7 @@
             return { type: "def", tag: t, raw: a[0], href: e, title: n };
           }
         }
+
         table(t) {
           const a = this.rules.block.table.exec(t);
           if (!a) return;
@@ -3039,6 +3168,7 @@
             return s;
           }
         }
+
         lheading(t) {
           const a = this.rules.block.lheading.exec(t);
           if (a)
@@ -3050,6 +3180,7 @@
               tokens: this.lexer.inline(a[1]),
             };
         }
+
         paragraph(t) {
           const a = this.rules.block.paragraph.exec(t);
           if (a) {
@@ -3063,6 +3194,7 @@
             };
           }
         }
+
         text(t) {
           const a = this.rules.block.text.exec(t);
           if (a)
@@ -3073,10 +3205,12 @@
               tokens: this.lexer.inline(a[0]),
             };
         }
+
         escape(t) {
           const a = this.rules.inline.escape.exec(t);
           if (a) return { type: "escape", raw: a[0], text: a[1] };
         }
+
         tag(t) {
           const a = this.rules.inline.tag.exec(t);
           if (a)
@@ -3102,6 +3236,7 @@
               }
             );
         }
+
         link(t) {
           const a = this.rules.inline.link.exec(t);
           if (a) {
@@ -3161,6 +3296,7 @@
             );
           }
         }
+
         reflink(t, a) {
           let e;
           if (
@@ -3180,6 +3316,7 @@
             return Ma(e, t, e[0], this.lexer, this.rules);
           }
         }
+
         emStrong(t, a, e = "") {
           let n = this.rules.inline.emStrongLDelim.exec(t);
           if (
@@ -3234,6 +3371,7 @@
             }
           }
         }
+
         codespan(t) {
           const a = this.rules.inline.code.exec(t);
           if (a) {
@@ -3248,10 +3386,12 @@
             );
           }
         }
+
         br(t) {
           const a = this.rules.inline.br.exec(t);
           if (a) return { type: "br", raw: a[0] };
         }
+
         del(t) {
           const a = this.rules.inline.del.exec(t);
           if (a)
@@ -3262,6 +3402,7 @@
               tokens: this.lexer.inlineTokens(a[2]),
             };
         }
+
         autolink(t) {
           const a = this.rules.inline.autolink.exec(t);
           if (a) {
@@ -3280,6 +3421,7 @@
             );
           }
         }
+
         url(t) {
           let a;
           if ((a = this.rules.inline.url.exec(t))) {
@@ -3302,6 +3444,7 @@
             };
           }
         }
+
         inlineText(t) {
           const a = this.rules.inline.text.exec(t);
           if (a) {
@@ -3310,12 +3453,14 @@
           }
         }
       }
+
       class Da {
         tokens;
         options;
         state;
         tokenizer;
         inlineQueue;
+
         constructor(t) {
           (this.tokens = []),
             (this.tokens.links = Object.create(null)),
@@ -3336,15 +3481,19 @@
                 : (a.inline = Na.gfm)),
             (this.tokenizer.rules = a);
         }
+
         static get rules() {
           return { block: qa, inline: Na };
         }
+
         static lex(t, a) {
           return new Da(a).lex(t);
         }
+
         static lexInline(t, a) {
           return new Da(a).inlineTokens(t);
         }
+
         lex(t) {
           (t = t.replace(Ft.carriageReturn, "\n")),
             this.blockTokens(t, this.tokens);
@@ -3354,6 +3503,7 @@
           }
           return (this.inlineQueue = []), this.tokens;
         }
+
         blockTokens(t, a = [], e = !1) {
           for (
             this.options.pedantic &&
@@ -3470,9 +3620,11 @@
           }
           return (this.state.top = !0), a;
         }
+
         inline(t, a = []) {
           return this.inlineQueue.push({ src: t, tokens: a }), a;
         }
+
         inlineTokens(t, a = []) {
           let e = t,
             n = null;
@@ -3599,15 +3751,19 @@
           return a;
         }
       }
+
       class Fa {
         options;
         parser;
+
         constructor(t) {
           this.options = t || It;
         }
+
         space(t) {
           return "";
         }
+
         code({ text: t, lang: a, escaped: e }) {
           const n = (a || "").match(Ft.notSpaceStart)?.[0],
             o = t.replace(Ft.endingNewline, "") + "\n";
@@ -3619,18 +3775,23 @@
                 "</code></pre>\n"
             : "<pre><code>" + (e ? o : Oa(o, !0)) + "</code></pre>\n";
         }
+
         blockquote({ tokens: t }) {
           return `<blockquote>\n${this.parser.parse(t)}</blockquote>\n`;
         }
+
         html({ text: t }) {
           return t;
         }
+
         heading({ tokens: t, depth: a }) {
           return `<h${a}>${this.parser.parseInline(t)}</h${a}>\n`;
         }
+
         hr(t) {
           return "<hr>\n";
         }
+
         list(t) {
           const a = t.ordered,
             e = t.start;
@@ -3651,6 +3812,7 @@
             ">\n"
           );
         }
+
         listitem(t) {
           let a = "";
           if (t.task) {
@@ -3676,6 +3838,7 @@
             (a += this.parser.parse(t.tokens, !!t.loose)), `<li>${a}</li>\n`
           );
         }
+
         checkbox({ checked: t }) {
           return (
             "<input " +
@@ -3683,9 +3846,11 @@
             'disabled="" type="checkbox">'
           );
         }
+
         paragraph({ tokens: t }) {
           return `<p>${this.parser.parseInline(t)}</p>\n`;
         }
+
         table(t) {
           let a = "",
             e = "";
@@ -3704,9 +3869,11 @@
             "<table>\n<thead>\n" + a + "</thead>\n" + n + "</table>\n"
           );
         }
+
         tablerow({ text: t }) {
           return `<tr>\n${t}</tr>\n`;
         }
+
         tablecell(t) {
           const a = this.parser.parseInline(t.tokens),
             e = t.header ? "th" : "td";
@@ -3714,21 +3881,27 @@
             (t.align ? `<${e} align="${t.align}">` : `<${e}>`) + a + `</${e}>\n`
           );
         }
+
         strong({ tokens: t }) {
           return `<strong>${this.parser.parseInline(t)}</strong>`;
         }
+
         em({ tokens: t }) {
           return `<em>${this.parser.parseInline(t)}</em>`;
         }
+
         codespan({ text: t }) {
           return `<code>${Oa(t, !0)}</code>`;
         }
+
         br(t) {
           return "<br>";
         }
+
         del({ tokens: t }) {
           return `<del>${this.parser.parseInline(t)}</del>`;
         }
+
         link({ href: t, title: a, tokens: e }) {
           const n = this.parser.parseInline(e),
             o = Ra(t);
@@ -3738,12 +3911,14 @@
             a && (s += ' title="' + Oa(a) + '"'), (s += ">" + n + "</a>"), s
           );
         }
+
         image({ href: t, title: a, text: e }) {
           const n = Ra(t);
           if (null === n) return Oa(e);
           let o = `<img src="${(t = n)}" alt="${e}"`;
           return a && (o += ` title="${Oa(a)}"`), (o += ">"), o;
         }
+
         text(t) {
           return "tokens" in t && t.tokens
             ? this.parser.parseInline(t.tokens)
@@ -3752,39 +3927,50 @@
               : Oa(t.text);
         }
       }
+
       class Ha {
         strong({ text: t }) {
           return t;
         }
+
         em({ text: t }) {
           return t;
         }
+
         codespan({ text: t }) {
           return t;
         }
+
         del({ text: t }) {
           return t;
         }
+
         html({ text: t }) {
           return t;
         }
+
         text({ text: t }) {
           return t;
         }
+
         link({ text: t }) {
           return "" + t;
         }
+
         image({ text: t }) {
           return "" + t;
         }
+
         br() {
           return "";
         }
       }
+
       class Ga {
         options;
         renderer;
         textRenderer;
+
         constructor(t) {
           (this.options = t || It),
             (this.options.renderer = this.options.renderer || new Fa()),
@@ -3793,12 +3979,15 @@
             (this.renderer.parser = this),
             (this.textRenderer = new Ha());
         }
+
         static parse(t, a) {
           return new Ga(a).parse(t);
         }
+
         static parseInline(t, a) {
           return new Ga(a).parseInline(t);
         }
+
         parse(t, a = !0) {
           let e = "";
           for (let n = 0; n < t.length; n++) {
@@ -3881,6 +4070,7 @@
           }
           return e;
         }
+
         parseInline(t, a = this.renderer) {
           let e = "";
           for (let n = 0; n < t.length; n++) {
@@ -3949,33 +4139,42 @@
           return e;
         }
       }
+
       class Ya {
         options;
         block;
+
         constructor(t) {
           this.options = t || It;
         }
+
         static passThroughHooks = new Set([
           "preprocess",
           "postprocess",
           "processAllTokens",
         ]);
+
         preprocess(t) {
           return t;
         }
+
         postprocess(t) {
           return t;
         }
+
         processAllTokens(t) {
           return t;
         }
+
         provideLexer() {
           return this.block ? Da.lex : Da.lexInline;
         }
+
         provideParser() {
           return this.block ? Ga.parse : Ga.parseInline;
         }
       }
+
       const Za = new (class {
         defaults = {
           async: !1,
@@ -3998,9 +4197,11 @@
         Lexer = Da;
         Tokenizer = Ba;
         Hooks = Ya;
+
         constructor(...t) {
           this.use(...t);
         }
+
         walkTokens(t, a) {
           let e = [];
           for (const n of t)
@@ -4032,6 +4233,7 @@
             }
           return e;
         }
+
         use(...t) {
           const a = this.defaults.extensions || {
             renderers: {},
@@ -4153,15 +4355,19 @@
             this
           );
         }
+
         setOptions(t) {
           return (this.defaults = { ...this.defaults, ...t }), this;
         }
+
         lexer(t, a) {
           return Da.lex(t, a ?? this.defaults);
         }
+
         parser(t, a) {
           return Ga.parse(t, a ?? this.defaults);
         }
+
         parseMarkdown(t) {
           return (a, e) => {
             const n = { ...e },
@@ -4222,6 +4428,7 @@
             }
           };
         }
+
         onError(t, a) {
           return (e) => {
             if (
@@ -4240,9 +4447,11 @@
           };
         }
       })();
+
       function Xa(t, a) {
         return Za.parse(t, a);
       }
+
       function Wa(t) {
         return (
           (Wa =
@@ -4261,6 +4470,7 @@
           Wa(t)
         );
       }
+
       function Ua() {
         Ua = function () {
           return a;
@@ -4278,6 +4488,7 @@
           r = s.iterator || "@@iterator",
           i = s.asyncIterator || "@@asyncIterator",
           d = s.toStringTag || "@@toStringTag";
+
         function l(t, a, e) {
           return (
             Object.defineProperty(t, a, {
@@ -4289,6 +4500,7 @@
             t[a]
           );
         }
+
         try {
           l({}, "");
         } catch (t) {
@@ -4296,12 +4508,14 @@
             return (t[a] = e);
           };
         }
+
         function c(t, a, e, n) {
           var s = a && a.prototype instanceof g ? a : g,
             r = Object.create(s.prototype),
             i = new j(n || []);
           return o(r, "_invoke", { value: _(t, e, i) }), r;
         }
+
         function u(t, a, e) {
           try {
             return { type: "normal", arg: t.call(a, e) };
@@ -4309,15 +4523,20 @@
             return { type: "throw", arg: t };
           }
         }
+
         a.wrap = c;
         var p = "suspendedStart",
           h = "suspendedYield",
           f = "executing",
           m = "completed",
           y = {};
+
         function g() {}
+
         function b() {}
+
         function v() {}
+
         var x = {};
         l(x, r, function () {
           return this;
@@ -4326,6 +4545,7 @@
           w = k && k(k(q([])));
         w && w !== e && n.call(w, r) && (x = w);
         var L = (v.prototype = g.prototype = Object.create(x));
+
         function S(t) {
           ["next", "throw", "return"].forEach(function (a) {
             l(t, a, function (t) {
@@ -4333,6 +4553,7 @@
             });
           });
         }
+
         function E(t, a) {
           function e(o, s, r, i) {
             var d = u(t[o], t, s);
@@ -4359,6 +4580,7 @@
             }
             i(d.arg);
           }
+
           var s;
           o(this, "_invoke", {
             value: function (t, n) {
@@ -4367,10 +4589,12 @@
                   e(t, n, a, o);
                 });
               }
+
               return (s = s ? s.then(o, o) : o());
             },
           });
         }
+
         function _(a, e, n) {
           var o = p;
           return function (s, r) {
@@ -4404,6 +4628,7 @@
             }
           };
         }
+
         function T(a, e) {
           var n = e.method,
             o = a.iterator[n];
@@ -4442,21 +4667,25 @@
               (e.delegate = null),
               y);
         }
+
         function A(t) {
           var a = { tryLoc: t[0] };
           1 in t && (a.catchLoc = t[1]),
             2 in t && ((a.finallyLoc = t[2]), (a.afterLoc = t[3])),
             this.tryEntries.push(a);
         }
+
         function C(t) {
           var a = t.completion || {};
           (a.type = "normal"), delete a.arg, (t.completion = a);
         }
+
         function j(t) {
           (this.tryEntries = [{ tryLoc: "root" }]),
             t.forEach(A, this),
             this.reset(!0);
         }
+
         function q(a) {
           if (a || "" === a) {
             var e = a[r];
@@ -4474,6 +4703,7 @@
           }
           throw new TypeError(Wa(a) + " is not iterable");
         }
+
         return (
           (b.prototype = v),
           o(L, "constructor", { value: v, configurable: !0 }),
@@ -4565,6 +4795,7 @@
             dispatchException: function (a) {
               if (this.done) throw a;
               var e = this;
+
               function o(n, o) {
                 return (
                   (i.type = "throw"),
@@ -4574,6 +4805,7 @@
                   !!o
                 );
               }
+
               for (var s = this.tryEntries.length - 1; s >= 0; --s) {
                 var r = this.tryEntries[s],
                   i = r.completion;
@@ -4665,6 +4897,7 @@
           a
         );
       }
+
       function Qa(t, a, e, n, o, s, r) {
         try {
           var i = t[s](r),
@@ -4674,22 +4907,27 @@
         }
         i.done ? a(d) : Promise.resolve(d).then(n, o);
       }
+
       function Ja(t) {
         return function () {
           var a = this,
             e = arguments;
           return new Promise(function (n, o) {
             var s = t.apply(a, e);
+
             function r(t) {
               Qa(s, n, o, r, i, "next", t);
             }
+
             function i(t) {
               Qa(s, n, o, r, i, "throw", t);
             }
+
             r(void 0);
           });
         };
       }
+
       (Xa.options = Xa.setOptions =
         function (t) {
           return (
@@ -4744,6 +4982,7 @@
           position: { x: "right", y: "top" },
           dismissible: !0,
         });
+
       function oe(t, a) {
         var e = document.createElement("div");
         e.className = "flex ".concat(a ? "justify-end" : "justify-start");
@@ -4766,6 +5005,7 @@
           e
         );
       }
+
       function se(a, e) {
         var n = document.createElement("div");
         n.className = "flex justify-start messageContainer";
@@ -4779,7 +5019,7 @@
           ((r.className =
             "mt-2 flex items-center justify-center w-full relative disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none disabled:hover-none"),
           (r.innerHTML =
-            '\n    <span class="w-full inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">\n      Subscribe \n      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite14.svg#arrowRight"></use></svg>\n                                      <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden" \n                                     viewBox=" 0 0 100 101\n                                " fill="none" xmlns="http://www.w3.org/2000/svg">\n                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"\n                                          fill="currentColor"/>\n                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"\n                                          fill="currentFill"/>\n                                </svg>\n    </span>\n  '),
+            '\n    <span class="w-full inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">\n      Subscribe \n      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite15.svg#arrowRight"></use></svg>\n                                      <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden" \n                                     viewBox=" 0 0 100 101\n                                " fill="none" xmlns="http://www.w3.org/2000/svg">\n                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"\n                                          fill="currentColor"/>\n                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"\n                                          fill="currentFill"/>\n                                </svg>\n    </span>\n  '),
           r.addEventListener(
             "click",
             Ja(
@@ -4878,6 +5118,7 @@
           n
         );
       }
+
       function re() {
         var t = document.getElementById("aiAssistantFreeMessageCounter");
         if (t) {
@@ -4891,9 +5132,11 @@
           } else t.textContent = a.toString();
         }
       }
+
       function ie() {
         return de.apply(this, arguments);
       }
+
       function de() {
         return (de = Ja(
           Ua().mark(function a() {
@@ -4990,6 +5233,7 @@
           }),
         )).apply(this, arguments);
       }
+
       var le = document.querySelectorAll(".peekBtn");
       document.addEventListener("DOMContentLoaded", function () {
         var a, e, n;
@@ -5058,11 +5302,13 @@
             var t = document.querySelector("#mobileMenuButton"),
               a = document.querySelector("#mobileMenuDropdownContainer"),
               e = document.querySelectorAll(".mobileMenuDropdown");
+
             function n() {
               var a = t.querySelector(".closeIcon");
               t.querySelector(".hamburgerIcon").classList.toggle("hidden"),
                 a.classList.toggle("hidden");
             }
+
             t &&
               a &&
               (t.addEventListener("click", function () {
@@ -5469,9 +5715,11 @@
           (function () {
             var t = document.querySelector("#userDashboardMenuDropdown"),
               a = document.querySelector("#userDashboardMenu");
+
             function e() {
               t.querySelector(".toggleIcon").classList.toggle("rotate-180");
             }
+
             t &&
               a &&
               t.addEventListener("click", function () {
@@ -5554,7 +5802,7 @@
                                 "LOST" == t.status
                                   ? "bg-red-500/10 border-red-500/50 hover:border-red-500"
                                   : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500",
-                                ' backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n    <div class="flex items-center justify-center mb-6">\n        <div class="flex items-center justify-center w-full">\n            <div class="flex  justify-center items-center space-x-3 text-primary-300">\n                <div class="bg-primary-900/80 p-2 rounded-lg">\n                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite14.svg#',
+                                ' backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n    <div class="flex items-center justify-center mb-6">\n        <div class="flex items-center justify-center w-full">\n            <div class="flex  justify-center items-center space-x-3 text-primary-300">\n                <div class="bg-primary-900/80 p-2 rounded-lg">\n                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite15.svg#',
                               )
                               .concat(
                                 t.match.type.toLowerCase(),
@@ -5566,8 +5814,8 @@
                               )
                               .concat(
                                 "LOST" == t.status
-                                  ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite14.svg#circleX"></use></svg></div>'
-                                  : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite14.svg#circleCheck"></use></svg></div>',
+                                  ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite15.svg#circleX"></use></svg></div>'
+                                  : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite15.svg#circleCheck"></use></svg></div>',
                                 '\n\n        </div>\n        <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">\n            <div class="w-full flex items-center justify-center gap-2 relative pb-4">\n                <img src="',
                               )
                               .concat(
@@ -5632,7 +5880,7 @@
                               )
                               .concat(
                                 t.match.away_team.name,
-                                '</p>\n                </div>\n            </div> \n            \n                <div class="relative">\n                    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>\n                </div>\n                <div class="flex items-center justify-center gap-1">\n                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite14.svg#chevronUp"></use></svg>\n                    <p class="text-primary-100">Odds</p>\n                    <span class="text-emerald-400 font-bold">',
+                                '</p>\n                </div>\n            </div> \n            \n                <div class="relative">\n                    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>\n                </div>\n                <div class="flex items-center justify-center gap-1">\n                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite15.svg#chevronUp"></use></svg>\n                    <p class="text-primary-100">Odds</p>\n                    <span class="text-emerald-400 font-bold">',
                               )
                               .concat(
                                 t.odds,

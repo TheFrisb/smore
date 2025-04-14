@@ -74,11 +74,11 @@
                    href="{% url 'core:home' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                     {% trans "Home" %}</a>
-                <div class="relative flex items-center space-x-1 group {% if request|is_link_active:'core:upcoming_matches' or request|is_link_active:'core:upcoming_tickets' %}text-white{% else %}text-primary-300{% endif %}">
-                    <span class="relative cursor-pointer ">
+                <div class="relative flex items-center space-x-1 group {% if request|is_link_active:'core:upcoming_matches' %}text-white{% else %}text-primary-300{% endif %}">
+                    <a class="relative cursor-pointer " href="{% url 'core:upcoming_matches' %}">
                         <span
                                 class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
-                        {% trans "Upcoming Matches" %}</span>
+                        {% trans "Upcoming Matches" %}</a>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180">
@@ -88,29 +88,49 @@
                     <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                         <div class="bg-primary-800/95 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 min-w-[160px]">
                             <a class="block px-4 py-2 text-sm
-                                    {% if request|is_link_active:'core:upcoming_matches' %}
+                                    {% if filter_object is not None and filter_object == 'predictions' and request|is_link_active:'core:upcoming_matches' %}
                                     text-white bg-primary-700/50
                                     {% else %}
                                     text-primary-300 hover:bg-primary-700/50 hover:text-white
                                     {% endif %}"
-                               href="{% url 'core:upcoming_matches' %}">{% trans 'Solo Picks' %}</a>
+                               href="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                       {% url 'core:upcoming_matches' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                             <a
                                     class="block px-4 py-2 text-sm
-                                    {% if request|is_link_active:'core:upcoming_tickets' %}
+                                    {% if filter_object is not None and filter_object == 'tickets' and request|is_link_active:'core:upcoming_matches' %}
                                     text-white bg-primary-700/50
                                     {% else %}
                                     text-primary-300 hover:bg-primary-700/50 hover:text-white
                                     {% endif %}
-                            " href="{% url 'core:upcoming_tickets' %}">Tickets</a>
+                            " href="{% url 'core:upcoming_matches' %}{% querystring obj='tickets' %}">Tickets</a>
                         </div>
                     </div>
                 </div>
-                <div class="relative flex items-center space-x-1 group {% if request|is_link_active:'core:upcoming_matches' or request|is_link_active:'core:upcoming_tickets' %}text-white{% else %}text-primary-300{% endif %}">
-                    <span class="relative {% if request|is_link_active:'core:history' or request|is_link_active:'core:history_tickets' %}text-white{% else %}text-primary-300{% endif %}"
+                <div class="relative flex items-center space-x-1 group {% if request|is_link_active:'core:upcoming_matches' or request|is_link_active:'core:upcoming_matches' %}text-white{% else %}text-primary-300{% endif %}">
+                    <a class="relative {% if request|is_link_active:'core:history' %}text-white{% else %}text-primary-300{% endif %}"
+                       href="{% url 'core:history' %}"
                     >
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                         {% trans "History" %}
-                    </span>
+                    </a>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180">
@@ -120,20 +140,34 @@
                     <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                         <div class="bg-primary-800/95 backdrop-blur-sm rounded-lg border border-primary-700/30 shadow-lg py-2 min-w-[160px]">
                             <a class="block px-4 py-2 text-sm
-                                    {% if request|is_link_active:'core:history' %}
+                                    {% if filter_object is not None and filter_object == 'predictions' and request|is_link_active:'core:history' %}
                                     text-white bg-primary-700/50
                                     {% else %}
                                     text-primary-300 hover:bg-primary-700/50 hover:text-white
                                     {% endif %}"
-                               href="{% url 'core:history' %}">{% trans 'Solo Picks' %}</a>
+                               href="
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                       {% url 'core:history' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                             <a
                                     class="block px-4 py-2 text-sm
-                                    {% if request|is_link_active:'core:history_tickets' %}
+                                    {% if filter_object is not None and filter_object == 'tickets' and request|is_link_active:'core:history' %}
                                     text-white bg-primary-700/50
                                     {% else %}
                                     text-primary-300 hover:bg-primary-700/50 hover:text-white
                                     {% endif %}"
-                                    href="{% url 'core:history_tickets' %}">Tickets</a>
+                                    href="{% url 'core:history' %}{% querystring obj='tickets' %}">Tickets</a>
                         </div>
                     </div>
 
@@ -203,13 +237,14 @@
             <nav class="py-4 space-y-2 border-t border-primary-700/30">
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:home' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:home' %}">{% trans "Home" %}</a>
-                <div class=" rounded-lg  relative group {% if request|is_link_active:'core:upcoming_matches' or request|is_link_active:'core:upcoming_tickets' %}text-secondary-400{% else %}text-primary-300 {% endif %}">
-                    <div class="flex items-center justify-between  px-4 py-2  mobileMenuDropdown">
-                        <div class="block rounded-lg transition-colors "
-                        >{% trans "Upcoming Matches" %}</div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                <div class=" rounded-lg  relative group {% if request|is_link_active:'core:upcoming_matches' %}text-secondary-400{% else %}text-primary-300 {% endif %}">
+                    <div class="flex items-center justify-between  px-4 py-2  ">
+                        <a class="block rounded-lg transition-colors w-[80%]" href="{% url 'core:upcoming_matches' %}"
+                        >{% trans "Upcoming Matches" %}</a>
+                        <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon ">
+                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon
+                        mobileMenuDropdown">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </div>
@@ -218,31 +253,49 @@
                     <div class="pl-4 space-y-2 overflow-hidden transition-all duration-200 max-h-0 opacity-0">
                         <a
                                 class="block px-4 py-2 rounded-lg transition-colors  border-l
-                                {% if request|is_link_active:'core:upcoming_matches' %}
+                                {% if filter_object is not None and filter_object == 'predictions' and request|is_link_active:'core:upcoming_matches' %}
                                 bg-primary-800/50 text-white border-secondary-400
                                 {% else %}
                                 text-primary-300 hover:bg-primary-800/50 hover:text-white border-primary-700/30
                                 {% endif %}"
 
-                                href="{% url 'core:upcoming_matches' %}">{% trans 'Solo Picks' %}</a>
+                                href="
+
+
+
+
+
+
+
+
+                                        {% url 'core:upcoming_matches' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                         <a
                                 class="block px-4 py-2 rounded-lg transition-colors  border-l
-                                {% if request|is_link_active:'core:upcoming_tickets' %}
+                                {% if filter_object is not None and filter_object == 'tickets' and request|is_link_active:'core:upcoming_matches' %}
                                 bg-primary-800/50 text-white border-secondary-400
                                 {% else %}
                                 text-primary-300 hover:bg-primary-800/50 hover:text-white border-primary-700/30
                                 {% endif %}"
-                                href="{% url 'core:upcoming_tickets' %}">{% trans 'Tickets' %}</a>
+                                href="
+
+
+
+
+
+
+
+
+                                        {% url 'core:upcoming_matches' %}{% querystring obj='tickets' %}">{% trans 'Tickets' %}</a>
                     </div>
                 </div>
 
-                <div class=" rounded-lg  relative group {% if request|is_link_active:'core:history' or request|is_link_active:'core:history_tickets' %}text-secondary-400{% else %}text-primary-300{% endif %}">
-                    <div class="flex items-center justify-between px-4 py-2 mobileMenuDropdown">
-                        <div class="block rounded-lg transition-colors "
-                        >{% trans "History" %}</div>
+                <div class=" rounded-lg  relative group {% if request|is_link_active:'core:history' %}text-secondary-400{% else %}text-primary-300{% endif %}">
+                    <div class="flex items-center justify-between px-4 py-2 ">
+                        <a class="block rounded-lg transition-colors w-[80%]" href="{% url 'core:history' %}"
+                        >{% trans "History" %}</a>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon ">
+                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon mobileMenuDropdown">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </div>
@@ -251,21 +304,29 @@
                     <div class="pl-4 space-y-2 overflow-hidden transition-all duration-200 max-h-0 opacity-0">
                         <a
                                 class="block px-4 py-2 rounded-lg transition-colors  border-l
-                                {% if request|is_link_active:'core:history' %}
+                                {% if filter_object is not None and filter_object == 'predictions' and request|is_link_active:'core:history' %}
                                 bg-primary-800/50 text-white border-secondary-400
                                 {% else %}
                                 text-primary-300 hover:bg-primary-800/50 hover:text-white border-primary-700/30
                                 {% endif %}"
 
-                                href="{% url 'core:history' %}">{% trans 'Solo Picks' %}</a>
+                                href="
+
+
+
+
+
+
+
+                                        {% url 'core:history' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                         <a
                                 class="block px-4 py-2 rounded-lg transition-colors  border-l
-                                {% if request|is_link_active:'core:history_tickets' %}
+                                {% if filter_object is not None and filter_object == 'tickets' and request|is_link_active:'core:history' %}
                                 bg-primary-800/50 text-white border-secondary-400
                                 {% else %}
                                 text-primary-300 hover:bg-primary-800/50 hover:text-white border-primary-700/30
                                 {% endif %}"
-                                href="{% url 'core:history_tickets' %}">{% trans 'Tickets' %}</a>
+                                href="{% url 'core:history' %}{% querystring obj='tickets' %}">{% trans 'Tickets' %}</a>
                     </div>
                 </div>
 
