@@ -204,12 +204,12 @@
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:home' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:home' %}">{% trans "Home" %}</a>
                 <div class=" rounded-lg  relative group {% if request|is_link_active:'core:upcoming_matches' or request|is_link_active:'core:upcoming_tickets' %}text-secondary-400{% else %}text-primary-300 {% endif %}">
-                    <div class="flex items-center justify-between  px-4 py-2  ">
+                    <div class="flex items-center justify-between  px-4 py-2  mobileMenuDropdown">
                         <div class="block rounded-lg transition-colors "
                         >{% trans "Upcoming Matches" %}</div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon mobileMenuDropdown">
+                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon ">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </div>
@@ -237,12 +237,12 @@
                 </div>
 
                 <div class=" rounded-lg  relative group {% if request|is_link_active:'core:history' or request|is_link_active:'core:history_tickets' %}text-secondary-400{% else %}text-primary-300{% endif %}">
-                    <div class="flex items-center justify-between px-4 py-2 ">
+                    <div class="flex items-center justify-between px-4 py-2 mobileMenuDropdown">
                         <div class="block rounded-lg transition-colors "
                         >{% trans "History" %}</div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon mobileMenuDropdown">
+                             class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-200 icon ">
                             <path d="m6 9 6 6 6-6"></path>
                         </svg>
                     </div>
