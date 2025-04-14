@@ -238,7 +238,7 @@ function createSoloPickHtml(prediction) {
 function getQueryUrl() {
   let url = loadMoreButton.dataset.queryUrl;
 
-  if (url.contains("?")) {
+  if (url.includes("?")) {
     url += `&page=${currentPage}&page_size=20`;
   } else {
     url += `?page=${currentPage}&page_size=20`;

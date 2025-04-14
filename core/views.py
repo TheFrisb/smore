@@ -263,16 +263,16 @@ class DetailedPredictionView(DetailView):
             return True
 
         if (
-                self.request.user.is_authenticated
-                and self.request.user.has_access_to_product(prediction.product)
+            self.request.user.is_authenticated
+            and self.request.user.has_access_to_product(prediction.product)
         ):
             return True
 
         if (
-                self.request.user.is_authenticated
-                and PurchasedPredictions.objects.filter(
-            user=self.request.user, prediction=prediction
-        ).exists()
+            self.request.user.is_authenticated
+            and PurchasedPredictions.objects.filter(
+                user=self.request.user, prediction=prediction
+            ).exists()
         ):
             return True
 
@@ -282,8 +282,8 @@ class DetailedPredictionView(DetailView):
         prediction = self.get_object()
 
         if (
-                prediction.status != Prediction.Status.PENDING
-                or not prediction.has_detailed_analysis
+            prediction.status != Prediction.Status.PENDING
+            or not prediction.has_detailed_analysis
         ):
             logger.info(
                 f"User {request.user} tried to access detailed prediction view for prediction {prediction.id} with status {prediction.status} and has_detailed_analysis {prediction.has_detailed_analysis}. Redirecting to home page."
