@@ -99,6 +99,8 @@ class GetFrequentlyAskedQuestionsListView(ListAPIView):
 
 class HistoryAPIView(APIView):
     pagination_class = PredictionPagination
+    authentication_classes = []
+    permission_classes = []
 
     def get_queryset(self):
         # Existing queryset logic remains unchanged
