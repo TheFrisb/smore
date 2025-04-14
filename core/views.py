@@ -540,13 +540,14 @@ class UpcomingMatchesView(TemplateView):
 
         # Sort each group by datetime
         for date, items in grouped_by_date.items():
-            grouped_by_date[date] = sorted(items, key=lambda x: x["datetime"])
+            # Sort by type (ticket comes first) and then by datetime
+            grouped_by_date[date] = sorted(
+                items, key=lambda x: (x["type"] != "ticket", x["datetime"])
+            )
 
         # Create a sorted list of (date, items) for the template
         sorted_dates = sorted(grouped_by_date.keys())
         grouped_items = [(date, grouped_by_date[date]) for date in sorted_dates]
-
-        print(grouped_items)
 
         return grouped_items
 

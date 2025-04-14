@@ -193,9 +193,9 @@ class SportMatch(ApiSportModel):
     def is_live(self):
         # calculate if the match is live (soccer match)
         return (
-                self.kickoff_datetime
-                <= timezone.now()
-                <= (self.kickoff_datetime + timedelta(minutes=105))
+            self.kickoff_datetime
+            <= timezone.now()
+            <= (self.kickoff_datetime + timedelta(minutes=105))
         )
 
     @property
@@ -241,7 +241,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

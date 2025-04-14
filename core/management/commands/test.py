@@ -36,8 +36,8 @@ class Command(BaseCommand):
                 league.product = Product.objects.get(name=Product.Names.BASKETBALL)
                 league.save()
             elif (
-                    league.type == SportLeague.SportType.NHL
-                    or league.type == SportLeague.SportType.NFL
+                league.type == SportLeague.SportType.NHL
+                or league.type == SportLeague.SportType.NFL
             ):
                 print(f"Updating the league's product to NHL_NFL")
                 league.product = Product.objects.get(name=Product.Names.NFL_NHL)
