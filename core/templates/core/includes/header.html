@@ -112,6 +112,10 @@
 
 
 
+
+
+
+
                                        {% url 'core:upcoming_matches' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                             <a
                                     class="block px-4 py-2 text-sm
@@ -120,7 +124,11 @@
                                     {% else %}
                                     text-primary-300 hover:bg-primary-700/50 hover:text-white
                                     {% endif %}
-                            " href="{% url 'core:upcoming_matches' %}{% querystring obj='tickets' %}">Tickets</a>
+                            " href="
+
+
+
+                                    {% url 'core:upcoming_matches' %}{% querystring obj='tickets' %}">{% trans 'Parlays' %}</a>
                         </div>
                     </div>
                 </div>
@@ -159,6 +167,10 @@
 
 
 
+
+
+
+
                                        {% url 'core:history' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                             <a
                                     class="block px-4 py-2 text-sm
@@ -167,7 +179,10 @@
                                     {% else %}
                                     text-primary-300 hover:bg-primary-700/50 hover:text-white
                                     {% endif %}"
-                                    href="{% url 'core:history' %}{% querystring obj='tickets' %}">Tickets</a>
+                                    href="
+
+
+                                            {% url 'core:history' %}{% querystring obj='tickets' %}">{% trans 'Parlays' %}</a>
                         </div>
                     </div>
 
@@ -268,6 +283,10 @@
 
 
 
+
+
+
+
                                         {% url 'core:upcoming_matches' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                         <a
                                 class="block px-4 py-2 rounded-lg transition-colors  border-l
@@ -285,7 +304,11 @@
 
 
 
-                                        {% url 'core:upcoming_matches' %}{% querystring obj='tickets' %}">{% trans 'Tickets' %}</a>
+
+
+
+
+                                        {% url 'core:upcoming_matches' %}{% querystring obj='tickets' %}">{% trans 'Parlays' %}</a>
                     </div>
                 </div>
 
@@ -318,6 +341,10 @@
 
 
 
+
+
+
+
                                         {% url 'core:history' %}{% querystring obj='predictions' %}">{% trans 'Single Picks' %}</a>
                         <a
                                 class="block px-4 py-2 rounded-lg transition-colors  border-l
@@ -326,7 +353,7 @@
                                 {% else %}
                                 text-primary-300 hover:bg-primary-800/50 hover:text-white border-primary-700/30
                                 {% endif %}"
-                                href="{% url 'core:history' %}{% querystring obj='tickets' %}">{% trans 'Tickets' %}</a>
+                                href="{% url 'core:history' %}{% querystring obj='tickets' %}">{% trans 'Parlays' %}</a>
                     </div>
                 </div>
 
