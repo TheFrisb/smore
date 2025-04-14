@@ -236,11 +236,16 @@ function createSoloPickHtml(prediction) {
 }
 
 function getQueryUrl() {
-  const url = loadMoreButton.dataset.queryUrl;
-  const paginatedUrl = `${url}?page=${currentPage}&page_size=20`;
+  let url = loadMoreButton.dataset.queryUrl;
 
-  console.log(`getQueryUrl: ${paginatedUrl}`);
-  return paginatedUrl;
+  if (url.contains("?")) {
+    url += `&page=${currentPage}&page_size=20`;
+  } else {
+    url += `?page=${currentPage}&page_size=20`;
+  }
+
+  console.log(`getQueryUrl: ${url}`);
+  return url;
 }
 
 async function fetchPredictions() {

@@ -15,7 +15,7 @@
                     <span>{% trans 'Single picks' %}</span>
                 {% else %}
                     {% svg_icon icon_name="ticketsIcon" css_classes="w-5 h-5" %}
-                    <span>{% trans 'Tickets' %}</span>
+                    <span>{% trans 'Parlays' %}</span>
                 {% endif %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                      fill="none"
@@ -53,7 +53,7 @@
                                         {% url base_url %}{% querystring obj='tickets' %}"
                    class="w-full flex items-center space-x-3 p-4  transition-colors {% if filter_object == 'tickets' %}bg-secondary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-700/50{% endif %} hover:text-white">
                     {% svg_icon icon_name="ticketsIcon" css_classes="w-5 h-5" %}
-                    <span>{% trans 'Tickets' %}</span>
+                    <span>{% trans 'Parlays' %}</span>
 
 
                 </a>
