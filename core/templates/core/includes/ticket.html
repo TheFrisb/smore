@@ -9,40 +9,40 @@
         {% endif %}
 "
 >
-{% if ticket.product.id in allowed_ticket_product_ids or ticket.id in purchased_ticket_ids %}
-    <div class="flex items-center justify-between pb-6 border-b border-primary-700/30">
-        <div class="flex items-center space-x-4">
-            <div class="bg-secondary-500/10 p-3 rounded-lg">
-                {% svg_icon icon_name=ticket.product|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+    {% if ticket.product.id in allowed_products or ticket.id in purchased_ids %}
+        <div class="flex items-center justify-between pb-6 border-b border-primary-700/30">
+            <div class="flex items-center space-x-4">
+                <div class="bg-secondary-500/10 p-3 rounded-lg">
+                    {% svg_icon icon_name=ticket.product|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+                </div>
+                <div>
+                    <div class="text-lg font-semibold text-white">
+                        {% blocktrans with product_name=ticket.product.get_name_display %}
+                            {{ product_name }}
+                        {% endblocktrans %}
+                    </div>
+                </div>
             </div>
-            <div>
-                <div class="text-lg font-semibold text-white">
-                    {% blocktrans with product_name=ticket.product.get_name_display %}
-                        {{ product_name }}
-                    {% endblocktrans %}
+            <div class="text-right">
+                <div class="text-sm text-primary-300">Total Odds</div>
+                <div class="text-xl font-bold text-secondary-400">{{ ticket.total_odds|floatformat:2 }}</div>
+            </div>
+        </div>
+    {% else %}
+        <div class="flex items-center justify-center pb-6 border-b border-primary-700/30">
+            <div class="flex items-center justify-center space-x-4">
+                <div class="bg-secondary-500/10 p-3 rounded-lg">
+                    {% svg_icon icon_name=ticket.product|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
+                </div>
+                <div>
+                    <div class="text-lg font-semibold text-white">
+                        {% blocktrans with product_name=ticket.product.get_name_display %}
+                            {{ product_name }}
+                        {% endblocktrans %}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="text-right">
-            <div class="text-sm text-primary-300">Total Odds</div>
-            <div class="text-xl font-bold text-secondary-400">{{ ticket.total_odds|floatformat:2 }}</div>
-        </div>
-    </div>
-{% else %}
-    <div class="flex items-center justify-center pb-6 border-b border-primary-700/30">
-        <div class="flex items-center justify-center space-x-4">
-            <div class="bg-secondary-500/10 p-3 rounded-lg">
-                {% svg_icon icon_name=ticket.product|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
-            </div>
-            <div>
-                <div class="text-lg font-semibold text-white">
-                    {% blocktrans with product_name=ticket.product.get_name_display %}
-                        {{ product_name }}
-                    {% endblocktrans %}
-                </div>
-            </div>
-        </div>
-    </div>
     {% endif %}
     <div class="relative mt-6">
         {% if ticket.product.id in allowed_products or ticket.id in purchased_ids %}
