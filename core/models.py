@@ -55,7 +55,7 @@ class Product(BaseProductModel):
     class Names(models.TextChoices):
         SOCCER = "Soccer", _("Soccer")
         BASKETBALL = "Basketball", _("Basketball")
-        NFL_NHL_NCAA = "NFL_NHL_NCAA", _("NFL, NHL, NCAA")
+        NFL_NHL = "NFL_NHL", _("NFL, NHL")
         TENNIS = "Tennis", _("Tennis")
         AI_ANALYST = "AI Analyst", _("AI Analyst")
 
@@ -193,9 +193,9 @@ class SportMatch(ApiSportModel):
     def is_live(self):
         # calculate if the match is live (soccer match)
         return (
-            self.kickoff_datetime
-            <= timezone.now()
-            <= (self.kickoff_datetime + timedelta(minutes=105))
+                self.kickoff_datetime
+                <= timezone.now()
+                <= (self.kickoff_datetime + timedelta(minutes=105))
         )
 
     @property
@@ -241,7 +241,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):
