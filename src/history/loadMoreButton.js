@@ -193,13 +193,13 @@ function createSoloPickHtml(prediction) {
                     </div>
                     <div class="flex items-center justify-center relative">
     
-                        <p class="font-bold text-primary-200 absolute left-3 md:left-0  text-sm">
+                        <p class="font-bold text-primary-200 absolute ${prediction.match.type == "SOCCER" ? "left-3" : "left-0"} md:left-0  text-sm">
                             ${prediction.match.home_team_score}</p>
                         <img src="/static/assets/images/vs.png" alt=""
                              class="w-4 md:w-8 h-auto">
-                        <p class="font-bold text-primary-200 absolute right-3 md:right-0  text-sm">
+                        <p class="font-bold text-primary-200 absolute ${prediction.match.type == "SOCCER" ? "right-3" : "right-0"} md:right-0  text-sm">
                             ${prediction.match.away_team_score}</p>
-                    </div>
+                    </div> 
     
                     <div class="flex flex-col items-center justify-center gap-2">
                         <img src="${prediction.match.away_team.logo}" class="h-8 lg:h-12 w-auto">
