@@ -91,7 +91,4 @@ class BasketballApiService(SportApiService):
                 logger.error(f"Failed to create basketball match: {e}")
 
     def _get_product(self, league):
-        if league.external_id in BASKETBALL_NCAA_LEAGUE_IDS:
-            return Product.objects.get(name=Product.Names.NFL_NHL_NCAA)
-        else:
-            return Product.objects.get(name=Product.Names.BASKETBALL)
+        return Product.objects.get(name=Product.Names.BASKETBALL)
