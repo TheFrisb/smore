@@ -193,9 +193,9 @@ class SportMatch(ApiSportModel):
     def is_live(self):
         # calculate if the match is live (soccer match)
         return (
-            self.kickoff_datetime
-            <= timezone.now()
-            <= (self.kickoff_datetime + timedelta(minutes=105))
+                self.kickoff_datetime
+                <= timezone.now()
+                <= (self.kickoff_datetime + timedelta(minutes=105))
         )
 
     @property
@@ -241,7 +241,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):
@@ -279,6 +279,7 @@ class Ticket(BaseInternalModel):
         max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
     )
     starts_at = models.DateTimeField(null=True, blank=True)
+    label = models.CharField(max_length=255, blank=True)
 
     @property
     def total_odds(self) -> float:
@@ -300,7 +301,7 @@ class Ticket(BaseInternalModel):
         # get the first match from the bet lines by date
         first_match = self.bet_lines.order_by("match__kickoff_datetime").first()
 
-        return f"[{self.product.name}] Ticket starting with {first_match.match.home_team.name} vs {first_match.match.away_team.name} ({self.status})"
+        return f"[{self.product.name}] {self.label} ({self.status})"
 
 
 class BetLine(BaseInternalModel):

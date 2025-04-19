@@ -211,19 +211,18 @@ class BetLineInline(admin.TabularInline):
     extra = 6
 
 
-# Admin for Ticket
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     inlines = [BetLineInline]
-    list_display = ["__str__", "starts_at", "status", "visibility"]
+    list_display = ["__str__", "starts_at", "visibility", "status_display"]
     list_filter = ["product", "status", "visibility"]
     ordering = ["-starts_at"]
-    readonly_fields = ["created_at", "updated_at", "starts_at"]
+    readonly_fields = ["created_at", "updated_at", "starts_at", "label"]
     fieldsets = (
         (
             "Ticket Details",
             {
-                "fields": ("product", "status", "visibility"),
+                "fields": ("product", "status", "visibility", "label"),
             },
         ),
         (
@@ -234,11 +233,19 @@ class TicketAdmin(admin.ModelAdmin):
         ),
     )
 
+    def status_display(self, obj):
+        if obj.status == Ticket.Status.WON:
+            return True
+        elif obj.status == Ticket.Status.LOST:
+            return False
+        else:
+            return None
+
+    status_display.boolean = True
+    status_display.short_description = "Status"
+    status_display.admin_order_field = "status"
+
     def save_related(self, request, form, formsets, change):
-        """
-        Override save_related to set starts_at based on the earliest match kickoff_datetime
-        from related BetLines after all inlines are saved.
-        """
         super().save_related(request, form, formsets, change)
         ticket = form.instance
         earliest_datetime = ticket.bet_lines.aggregate(Min("match__kickoff_datetime"))[
@@ -246,6 +253,13 @@ class TicketAdmin(admin.ModelAdmin):
         ]
         ticket.starts_at = earliest_datetime
         ticket.save()
+
+        tickets_today = Ticket.objects.filter(status=Ticket.Status.PENDING).order_by(
+            "starts_at"
+        )
+        for i, t in enumerate(tickets_today, start=1):
+            t.label = f"Ticket Suggestion #{i}"
+            t.save()
 
     class Media:
         css = {"all": ("css/admin/custom_admin.css",)}

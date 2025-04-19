@@ -1,4 +1,4 @@
-/*! For license information please see core_v34.bundle.js.LICENSE.txt */
+/*! For license information please see core_v35.bundle.js.LICENSE.txt */
 (() => {
   var t = {
       629: (t, a, e) => {
@@ -4094,7 +4094,7 @@
               var o = document.createElement("div");
               (o.className = "mt-2 flex items-center justify-center w-full"),
                 (o.innerHTML =
-                  '\n    <a href="/plans/" class="w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">\n      Subscribe\n      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite15.svg#arrowRight"></use></svg>\n    </a>\n  '),
+                  '\n    <a href="/plans/" class="w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">\n      Subscribe\n      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite16.svg#arrowRight"></use></svg>\n    </a>\n  '),
                 a.appendChild(e),
                 a.appendChild(o),
                 t.appendChild(a),
@@ -4599,21 +4599,21 @@
                                 "LOST" == t.status
                                   ? "bg-red-500/10 border-red-500/50 hover:border-red-500"
                                   : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500",
-                                ' backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n    <div class="flex items-center justify-between mb-6">\n        <div class="flex items-center justify-between w-full">\n            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                <div class="bg-primary-900/80 p-2 rounded-lg">\n                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite15.svg#soccerIcon"></use></svg>\n                </div>\n                <span class=" text-primary-100">Soccer</span>\n            </div>\n            ',
+                                ' backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n    <div class="flex items-center justify-between mb-6">\n        <div class="flex items-center justify-between w-full">\n            <div class="flex  justify-start items-center space-x-3 text-primary-300">\n                <div class="bg-primary-900/80 p-2 rounded-lg">\n                    <svg class="w-4 h-4 text-white"><use xlink:href="/static/assets/svg/sprite16.svg#soccerIcon"></use></svg>\n                </div>\n                <span class=" text-primary-100">Soccer</span>\n            </div>\n            ',
                               )
                               .concat(
                                 "" !== t.detailed_analysis
                                   ? '<a href="/predictions/'.concat(
                                       t.id,
-                                      '/"\n               class="text-secondary-400 flex items-center gap-2 group group-hover:text-primary-300 transition-all duration-300">\n                <svg class="w-5 h-5"><use xlink:href="/static/assets/svg/sprite15.svg#arrowRight"></use></svg>\n                <p class="font-bold ">View analysis</p>\n            </a>',
+                                      '/"\n               class="text-secondary-400 flex items-center gap-2 group group-hover:text-primary-300 transition-all duration-300">\n                <svg class="w-5 h-5"><use xlink:href="/static/assets/svg/sprite16.svg#arrowRight"></use></svg>\n                <p class="font-bold ">View analysis</p>\n            </a>',
                                     )
                                   : "",
                                 '\n        </div>\n\n    </div>\n    <div class="mb-6">\n        <div class="flex items-center justify-between mb-2">\n            <p class="text-sm text-primary-100 ">Match</p>\n            ',
                               )
                               .concat(
                                 "LOST" == t.status
-                                  ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite15.svg#circleX"></use></svg></div>'
-                                  : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite15.svg#circleCheck"></use></svg></div>',
+                                  ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p> <svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite16.svg#circleX"></use></svg></div>'
+                                  : '                <div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite16.svg#circleCheck"></use></svg></div>',
                                 '\n\n        </div>\n        <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">\n            <div class="w-full flex items-center justify-center gap-2 relative pb-4">\n                <img src="',
                               )
                               .concat(
@@ -4638,7 +4638,7 @@
                               )
                               .concat(
                                 t.match.away_team.name,
-                                '</p>\n                    </div>\n                </div>\n                <div class="flex items-center justify-end gap-1">\n                        <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite15.svg#chevronUp"></use></svg>\n                        <p class="text-primary-100">Odds</p>\n                        <span class="text-emerald-400 font-bold">',
+                                '</p>\n                    </div>\n                </div>\n                <div class="flex items-center justify-end gap-1">\n                        <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite16.svg#chevronUp"></use></svg>\n                        <p class="text-primary-100">Odds</p>\n                        <span class="text-emerald-400 font-bold">',
                               )
                               .concat(
                                 t.odds,
