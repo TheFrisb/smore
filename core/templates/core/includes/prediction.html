@@ -75,12 +75,14 @@
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
 
-            <div class="flex items-center justify-center gap-1">
-                <p class="text-primary-200 text-xs">{% trans 'Date, Time' %}:</p>
-                <p class="text-white text-xs dateItem"
-                   data-date="{{ prediction.match.kickoff_datetime|date:'c' }}">{{ prediction.match.kickoff_datetime|date:'Y-m-d, H:i' }}
-                    UTC</p>
-            </div>
+            {% if prediction.status == 'PENDING' %}
+                <div class="flex items-center justify-center gap-1">
+                    <p class="text-primary-200 text-xs">{% trans 'Date, Time' %}:</p>
+                    <p class="text-white text-xs dateItem"
+                       data-date="{{ prediction.match.kickoff_datetime|date:'c' }}">{{ prediction.match.kickoff_datetime|date:'Y-m-d, H:i' }}
+                        UTC</p>
+                </div>
+            {% endif %}
 
             <div class=" grid grid-cols-3 ">
                 <div class="flex flex-col items-center justify-center gap-2">
