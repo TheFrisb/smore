@@ -76,7 +76,7 @@ function createTicketHtml(ticket) {
         </div>
         <div class="text-right">
             <div class="text-sm text-primary-300">Total Odds</div>
-            <div class="text-xl font-bold text-secondary-400">${ticket.total_odds}</div>
+            <div class="text-xl font-bold text-secondary-400">${ticket.total_odds.toFixed(2)}</div>
         </div>
     </div>
     

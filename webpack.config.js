@@ -5,7 +5,7 @@ module.exports = {
     core: "./src/index.js",
   },
   output: {
-    filename: "[name]_v36.bundle.js",
+    filename: "[name]_v37.bundle.js",
     path: path.resolve(__dirname, "static/js"),
   },
   module: {
