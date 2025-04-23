@@ -260,7 +260,7 @@ class TicketAdmin(admin.ModelAdmin):
                 status=Ticket.Status.PENDING, product=product
             ).order_by("starts_at")
             for i, t in enumerate(pending_tickets, start=1):
-                t.label = f"Premium Suggestion #{i}"
+                t.label = f"Premium Parlay #{i}"
                 t.save()
 
     class Media:
