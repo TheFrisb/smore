@@ -36,7 +36,7 @@ def svg_icon(icon_name: str = None, css_classes: str = None) -> SafeString:
     if not icon_name:
         raise ValueError("The 'icon_name' parameter is required.")
 
-    sprite_path: str = static("assets/svg/sprite16.svg")
+    sprite_path: str = static("assets/svg/sprite17.svg")
     svg_markup: str = (
         f'<svg class="{css_classes or ""}"><use xlink:href="{sprite_path}#{icon_name}"></use></svg>'
     )

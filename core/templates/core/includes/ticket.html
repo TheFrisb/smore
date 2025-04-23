@@ -77,7 +77,7 @@
                                         {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-red-500 betStatusIcon" %}
                                     {% else %}
                                         {% if bet_line.match.is_live %}
-                                            {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-secondary-800 betStatusIcon animate-pulse" %}
+                                            {% svg_icon icon_name='pendingLiveBetIcon' css_classes="w-6 h-6 text-secondary-800 betStatusIcon animate-pulse" %}
                                         {% else %}
                                             {% svg_icon icon_name=icon_label css_classes="w-6 h-6 text-secondary-800 betStatusIcon" %}
                                         {% endif %}

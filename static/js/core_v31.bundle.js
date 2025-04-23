@@ -1,4 +1,4 @@
-/*! For license information please see core_v37.bundle.js.LICENSE.txt */
+/*! For license information please see core_v38.bundle.js.LICENSE.txt */
 (() => {
   var t = {
       629: (t, e, a) => {
@@ -5017,7 +5017,7 @@
           ((s.className =
             "mt-2 flex items-center justify-center w-full relative disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none disabled:hover-none"),
           (s.innerHTML =
-            '\n    <span class="w-full inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">\n      Subscribe \n      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite16.svg#arrowRight"></use></svg>\n                                      <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden" \n                                     viewBox=" 0 0 100 101\n                                " fill="none" xmlns="http://www.w3.org/2000/svg">\n                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"\n                                          fill="currentColor"/>\n                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"\n                                          fill="currentFill"/>\n                                </svg>\n    </span>\n  '),
+            '\n    <span class="w-full inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">\n      Subscribe \n      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite17.svg#arrowRight"></use></svg>\n                                      <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden" \n                                     viewBox=" 0 0 100 101\n                                " fill="none" xmlns="http://www.w3.org/2000/svg">\n                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"\n                                          fill="currentColor"/>\n                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"\n                                          fill="currentFill"/>\n                                </svg>\n    </span>\n  '),
           s.addEventListener(
             "click",
             Ue(
@@ -5730,7 +5730,7 @@
                   "LOST" == t.status
                     ? "bg-red-500/10 border-red-500/50 hover:border-red-500"
                     : "border-emerald-500/50 hover:border-emerald-500 bg-emerald-500/5",
-                  ' backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n    \n    <div class="flex items-center justify-between pb-6 border-b border-primary-700/30">\n        <div class="flex items-center space-x-4">\n            <div class="bg-secondary-500/10 p-3 rounded-lg">\n                <svg class="w-5 h-5 text-white">\n                    <use xlink:href="/static/assets/svg/sprite16.svg#',
+                  ' backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n    \n    <div class="flex items-center justify-between pb-6 border-b border-primary-700/30">\n        <div class="flex items-center space-x-4">\n            <div class="bg-secondary-500/10 p-3 rounded-lg">\n                <svg class="w-5 h-5 text-white">\n                    <use xlink:href="/static/assets/svg/sprite17.svg#',
                 )
                 .concat(
                   t.product.name.toLowerCase(),
@@ -5756,7 +5756,7 @@
                     )
                     .concat(
                       "WON" == a.status ? "text-green-500" : "text-red-500",
-                      '">\n                            <use xlink:href="/static/assets/svg/sprite16.svg#',
+                      '">\n                            <use xlink:href="/static/assets/svg/sprite17.svg#',
                     )
                     .concat(
                       a.status.toLowerCase(),
@@ -5809,7 +5809,7 @@
                   "LOST" == t.status
                     ? "bg-red-500/10 border-red-500/50 hover:border-red-500"
                     : "bg-[#14212e] border-emerald-500/50 hover:border-emerald-500",
-                  '\n            backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n        <div class="mb-6">\n    \n            <div class="flex  justify-center items-center space-x-3 text-primary-300">\n                <div class="bg-primary-900/80 p-2 rounded-lg">\n                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite16.svg#',
+                  '\n            backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">\n        <div class="mb-6">\n    \n            <div class="flex  justify-center items-center space-x-3 text-primary-300">\n                <div class="bg-primary-900/80 p-2 rounded-lg">\n                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite17.svg#',
                 )
                 .concat(
                   t.match.type.toLowerCase(),
@@ -5821,8 +5821,8 @@
                 )
                 .concat(
                   "LOST" == t.status
-                    ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p><svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite16.svg#circleX"></use></svg> </div>'
-                    : '<div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite16.svg#circleCheck"></use></svg></div>',
+                    ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p><svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite17.svg#circleX"></use></svg> </div>'
+                    : '<div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite17.svg#circleCheck"></use></svg></div>',
                   '\n            </div>\n            <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">\n                <div class="w-full flex items-center justify-center gap-2 relative pb-4">\n    \n                    <img src="',
                 )
                 .concat(
@@ -5879,7 +5879,7 @@
                 )
                 .concat(
                   t.match.away_team.name,
-                  '</p>\n                    </div>\n                </div>\n    \n                <div class="relative">\n                    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>\n                </div>\n                <div class="flex items-center justify-center gap-1">\n                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite16.svg#chevronUp"></use></svg>\n    \n                    <p class="text-primary-100">Odds</p>\n                    <span class="text-emerald-400 font-bold">',
+                  '</p>\n                    </div>\n                </div>\n    \n                <div class="relative">\n                    <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>\n                </div>\n                <div class="flex items-center justify-center gap-1">\n                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite17.svg#chevronUp"></use></svg>\n    \n                    <p class="text-primary-100">Odds</p>\n                    <span class="text-emerald-400 font-bold">',
                 )
                 .concat(
                   t.odds,

@@ -254,12 +254,14 @@ class TicketAdmin(admin.ModelAdmin):
         ticket.starts_at = earliest_datetime
         ticket.save()
 
-        tickets_today = Ticket.objects.filter(status=Ticket.Status.PENDING).order_by(
-            "starts_at"
-        )
-        for i, t in enumerate(tickets_today, start=1):
-            t.label = f"Ticket Suggestion #{i}"
-            t.save()
+        products = Product.objects.all()
+        for product in products:
+            pending_tickets = Ticket.objects.filter(
+                status=Ticket.Status.PENDING, product=product
+            ).order_by("starts_at")
+            for i, t in enumerate(pending_tickets, start=1):
+                t.label = f"Premium Suggestion #{i}"
+                t.save()
 
     class Media:
         css = {"all": ("css/admin/custom_admin.css",)}
