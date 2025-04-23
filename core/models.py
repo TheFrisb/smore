@@ -59,8 +59,10 @@ class Product(BaseProductModel):
         TENNIS = "Tennis", _("Tennis")
         AI_ANALYST = "AI Analyst", _("AI Analyst")
 
-    name = models.CharField(max_length=255, choices=Names, default=Names.SOCCER)
-    type = models.CharField(choices=Types, max_length=255, default=Types.SUBSCRIPTION)
+    name = models.CharField(
+        max_length=255, choices=Names, default=Names.SOCCER, db_index=True
+    )
+    type = models.CharField(choices=Types, max_length=255, default=Types.SUBSCRIPTION, db_index=True)
     analysis_per_month = models.CharField(max_length=12, blank=True)
     description = models.TextField(blank=True)
 

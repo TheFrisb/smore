@@ -455,7 +455,7 @@ class UpcomingMatchesView(TemplateView):
         """
         predictions = (
             Prediction.objects.filter(
-                match__kickoff_datetime__date__gte=timezone.now().date(),
+                # match__kickoff_datetime__date__gte=timezone.now().date(),
                 visibility=Prediction.Visibility.PUBLIC,
                 status=Prediction.Status.PENDING,
             )
