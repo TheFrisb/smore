@@ -105,6 +105,20 @@ class HistoryView(TemplateView):
             )
 
         for ticket in tickets:
+            bet_lines = list(ticket.bet_lines.all())
+            for i, bet_line in enumerate(bet_lines):
+                # Add grouping flags to bet line instance
+                bet_line.same_as_previous = False
+                bet_line.same_as_next = False
+
+                if i > 0 and bet_lines[i - 1].match == bet_line.match:
+                    bet_line.same_as_previous = True
+
+                if (
+                        i < len(bet_lines) - 1
+                        and bet_lines[i + 1].match == bet_line.match
+                ):
+                    bet_line.same_as_next = True
             combined.append(
                 {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
             )
@@ -204,6 +218,28 @@ class HistoryView(TemplateView):
 
         if filter:
             sport_tickets = sport_tickets.filter(product__name=filter)
+
+        """
+            Loop over all tickets and their bet lines.
+            If a bet line has the same match as the next bet line, add has_same_next=True,
+            If a bet line has the same match as the previous bet line, add has_same_previous=True.
+        """
+
+        for ticket in sport_tickets:
+            for i, bet_line in enumerate(ticket.bet_lines.all()):
+                if i < len(ticket.bet_lines.all()) - 1:
+                    next_bet_line = ticket.bet_lines.all()[i + 1]
+                    if bet_line.match == next_bet_line.match:
+                        bet_line.has_same_next = True
+                    else:
+                        bet_line.has_same_next = False
+
+                if i > 0:
+                    previous_bet_line = ticket.bet_lines.all()[i - 1]
+                    if bet_line.match == previous_bet_line.match:
+                        bet_line.has_same_previous = True
+                    else:
+                        bet_line.has_same_previous = False
 
         return sport_tickets
 
@@ -497,6 +533,22 @@ class UpcomingMatchesView(TemplateView):
         if filter:
             sport_tickets = sport_tickets.filter(product__name=filter)
 
+        for ticket in sport_tickets:
+            for i, bet_line in enumerate(ticket.bet_lines.all()):
+                if i < len(ticket.bet_lines.all()) - 1:
+                    next_bet_line = ticket.bet_lines.all()[i + 1]
+                    if bet_line.match == next_bet_line.match:
+                        bet_line.has_same_next = True
+                    else:
+                        bet_line.has_same_next = False
+
+                if i > 0:
+                    previous_bet_line = ticket.bet_lines.all()[i - 1]
+                    if bet_line.match == previous_bet_line.match:
+                        bet_line.has_same_previous = True
+                    else:
+                        bet_line.has_same_previous = False
+
         return sport_tickets
 
     def _get_grouped_objects(self):
@@ -528,6 +580,22 @@ class UpcomingMatchesView(TemplateView):
 
         if sport_tickets:
             for ticket in sport_tickets:
+                # Process bet lines for match grouping
+                bet_lines = list(ticket.bet_lines.all())
+                for i, bet_line in enumerate(bet_lines):
+                    # Add grouping flags to bet line instance
+                    bet_line.same_as_previous = False
+                    bet_line.same_as_next = False
+
+                    if i > 0 and bet_lines[i - 1].match == bet_line.match:
+                        bet_line.same_as_previous = True
+
+                    if (
+                            i < len(bet_lines) - 1
+                            and bet_lines[i + 1].match == bet_line.match
+                    ):
+                        bet_line.same_as_next = True
+
                 all_objects.append(
                     {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
                 )
