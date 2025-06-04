@@ -114,10 +114,7 @@ class HistoryView(TemplateView):
                 if i > 0 and bet_lines[i - 1].match == bet_line.match:
                     bet_line.same_as_previous = True
 
-                if (
-                        i < len(bet_lines) - 1
-                        and bet_lines[i + 1].match == bet_line.match
-                ):
+                if i < len(bet_lines) - 1 and bet_lines[i + 1].match == bet_line.match:
                     bet_line.same_as_next = True
             combined.append(
                 {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
@@ -299,16 +296,16 @@ class DetailedPredictionView(DetailView):
             return True
 
         if (
-                self.request.user.is_authenticated
-                and self.request.user.has_access_to_product(prediction.product)
+            self.request.user.is_authenticated
+            and self.request.user.has_access_to_product(prediction.product)
         ):
             return True
 
         if (
-                self.request.user.is_authenticated
-                and PurchasedPredictions.objects.filter(
-            user=self.request.user, prediction=prediction
-        ).exists()
+            self.request.user.is_authenticated
+            and PurchasedPredictions.objects.filter(
+                user=self.request.user, prediction=prediction
+            ).exists()
         ):
             return True
 
@@ -318,8 +315,8 @@ class DetailedPredictionView(DetailView):
         prediction = self.get_object()
 
         if (
-                prediction.status != Prediction.Status.PENDING
-                or not prediction.has_detailed_analysis
+            prediction.status != Prediction.Status.PENDING
+            or not prediction.has_detailed_analysis
         ):
             logger.info(
                 f"User {request.user} tried to access detailed prediction view for prediction {prediction.id} with status {prediction.status} and has_detailed_analysis {prediction.has_detailed_analysis}. Redirecting to home page."
@@ -591,8 +588,8 @@ class UpcomingMatchesView(TemplateView):
                         bet_line.same_as_previous = True
 
                     if (
-                            i < len(bet_lines) - 1
-                            and bet_lines[i + 1].match == bet_line.match
+                        i < len(bet_lines) - 1
+                        and bet_lines[i + 1].match == bet_line.match
                     ):
                         bet_line.same_as_next = True
 

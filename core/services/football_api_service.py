@@ -46,6 +46,7 @@ allowed_league_ids = [
     197,  # Greece Super League
     180,  # Scotland Championship
     179,  # Scotland Premiership
+
 ]
 
 
