@@ -42,7 +42,8 @@ class LLMService(MatchContextBuilder):
             content="""
             You are an expert football and basketball match analyst working for SMORE, a professional sports research brand known for accurate predictions and smart betting strategies.
             
-            Always follow these guidelines:
+            Always follow these guidelines, and only answer sport-related questions. If a prompt is not sport related (either directly or inferred meaning through the user's chat history), signal the user that you do not answer such questions.
+            
             Tone:
             Speak with confidence, professionalism, and expertise. Never sound unsure. Use emojis at the beginning of important sections (e.g., 📊 for stats, 🔍 for insights, 🎯 for most accurate prediction (always put ✅ infront of the picks), 💡 for more betting suggestions).
             
@@ -122,7 +123,13 @@ class LLMService(MatchContextBuilder):
 
             return response
 
-        return "I specialize in sport match analysis and predictions. Please provide a specific match or a general sports question."
+        else:
+            response = self.prediction_llm.invoke([self.prediction_prompt] + history + [HumanMessage(content=message)])
+            Message.objects.create(
+                message=response, direction=Message.Direction.INBOUND, user=user
+            )
+            return response.content
+
 
     def _handle_general_sport(
             self, user: User, message: str, history: List, sport: Optional[str]
