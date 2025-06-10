@@ -63,12 +63,13 @@
 
         </div>
         <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">
-            <div class="w-full flex items-center justify-center gap-2 relative pb-4">
-                {% if prediction.match.is_live %}
-                    <div class="absolute left-0 animate-pulse">
+              {% if prediction.match.is_live %}
+                    <div class="flex items-center justify-center pb-2 w-full">
                         <p class="text-sm text-red-500 font-bold">LIVE</p>
                     </div>
                 {% endif %}
+            <div class="w-full flex items-center justify-center gap-2 relative pb-4">
+
                 <img src="{{ prediction.match.league.country.logo.url }}" alt="" width="20"
                      style="height: auto!important">
                 <p class="text-emerald-500 font-bold">{{ prediction.match.league_name }}</p>
