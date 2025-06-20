@@ -258,7 +258,8 @@ class TicketAdmin(admin.ModelAdmin):
         for product in products:
             pending_tickets = Ticket.objects.filter(
                 status=Ticket.Status.PENDING, product=product
-            ).order_by("starts_at")
+            ).order_by("product__name", "starts_at")
+
             for i, t in enumerate(pending_tickets, start=1):
                 t.label = f"Premium Parlay #{i}"
                 t.save()
