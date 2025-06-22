@@ -70,7 +70,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "prediction",
                 }
             },
-            payment_method_types=["card"],
+            payment_method_types=["card", "revolut_pay"],
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -95,7 +95,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "ticket",
                 }
             },
-            payment_method_types=["card"],
+            payment_method_types=["card", "revolut_pay"],
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -155,7 +155,7 @@ class StripeCheckoutService(BaseStripeService):
                 "price_data": {
                     "currency": "usd",
                     "product_data": {
-                        "name": f"{ticket.product.get_name_display()} ticket",
+                        "name": f"{ticket.product.get_name_display()} parlay",
                     },
                     "unit_amount": 999,
                 },
@@ -168,7 +168,7 @@ class StripeCheckoutService(BaseStripeService):
             {
                 "price_data": {
                     "currency": "usd",
-                    "product_data": {"name": f"Unlock Smore's predictions for: {timezone.now().strftime('%m/%d/%Y')}"},
+                    "product_data": {"name": f"Unlock SMORE's predictions for: {timezone.now().strftime('%m/%d/%Y')}"},
                     "unit_amount": 2499
                 },
                 "quantity": 1,
@@ -198,7 +198,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "daily_offer",
                 }
             },
-            payment_method_types=["card"],
+            payment_method_types=["card", "revolut_pay"],
             consent_collection={"terms_of_service": "required"},
         )
 
