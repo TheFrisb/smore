@@ -162,6 +162,18 @@ class StripeCheckoutService(BaseStripeService):
             }
         ]
 
+    def get_onetime_daily_offer_item(self):
+        return [
+            {
+                "price_data": {
+                    "currency": "usd",
+                    "product_data": {"name": "Access to Today's Picks"},
+                    "unit_amount": 2499,
+                },
+                "quantity": 1,
+            }
+        ]
+
     def update_subscription_items(
         self, user: User, new_price_ids: List[str]
     ) -> Session:
@@ -171,3 +183,26 @@ class StripeCheckoutService(BaseStripeService):
         subscription.items = items
         subscription.save()
         return subscription
+
+    def create_onetime_daily_offer_checkout_session(self, user, daily_offer):
+        checkout_session = self.stripe_client.checkout.Session.create(
+            success_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
+            cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
+            mode="payment",
+            customer=user.stripe_customer_id,
+            line_items=self.get_onetime_daily_offer_item(),
+            payment_intent_data={
+                "metadata": {
+                    "purchased_object_id": daily_offer.id,
+                    "purchased_object_type": "daily_offer",
+                }
+            },
+            payment_method_types=["card"],
+            consent_collection={"terms_of_service": "required"},
+        )
+
+        logger.info(
+            f"Created one-time daily offer checkout session for user: {user.id} with session ID: {checkout_session.id}"
+        )
+
+        return checkout_session

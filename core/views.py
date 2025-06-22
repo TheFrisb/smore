@@ -9,7 +9,12 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView, DetailView
 
-from accounts.models import PurchasedPredictions, User, PurchasedTickets
+from accounts.models import (
+    PurchasedPredictions,
+    User,
+    PurchasedTickets,
+    PurchasedDailyOffer,
+)
 from ai_assistant.models import Message
 from core.models import (
     Product,
@@ -295,6 +300,13 @@ class DetailedPredictionView(DetailView):
         if prediction.status != Prediction.Status.PENDING:
             return True
 
+        if PurchasedDailyOffer.objects.filter(
+            user=self.request.user if self.request.user.is_authenticated else None,
+            status=PurchasedDailyOffer.Status.PURCHASED,
+            for_date=timezone.now().date(),
+        ).exists():
+            return True
+
         if (
             self.request.user.is_authenticated
             and self.request.user.has_access_to_product(prediction.product)
@@ -467,7 +479,11 @@ class UpcomingMatchesView(TemplateView):
         context["base_url"] = "core:upcoming_matches"
 
         context["grouped_items"] = self._get_grouped_objects()
-
+        context["has_daily_offer"] = PurchasedDailyOffer.objects.filter(
+            user=self.request.user if self.request.user.is_authenticated else None,
+            status=PurchasedDailyOffer.Status.PURCHASED,
+            for_date=timezone.now().date(),
+        ).exists()
         return context
 
     def _get_product_filter(self):

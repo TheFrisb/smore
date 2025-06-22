@@ -9,7 +9,7 @@
         {% endif %}
 "
 >
-    {% if ticket.product.id in allowed_products or ticket.id in purchased_ids %}
+    {% if ticket.product.id in allowed_products or ticket.id in purchased_ids or has_daily_offer %}
         {% if ticket.status == 'PENDING' %}
             <div class=" mb-6 py-2 px-4 rounded-lg  w-fit m-auto bg-[#0D151E]/50">
                 <div class="flex items-center justify-center gap-2">
@@ -63,7 +63,7 @@
         </div>
     {% endif %}
     <div class="relative mt-6">
-        {% if ticket.product.id in allowed_products or ticket.id in purchased_ids %}
+        {% if ticket.product.id in allowed_products or ticket.id in purchased_ids or has_daily_offer %}
             {% for bet_line in ticket.bet_lines.all %}
                 <div class="relative betLines {% if not bet_line.same_as_previous or bet_line.same_as_next %}betLines--{{ bet_line.status|lower }}{% endif %}">
                     <!-- If the previous match was the same as the current match, but the next match is different, do not add betLines--{{ bet_line.status|lower }}-->
@@ -188,7 +188,7 @@
                     </svg>
                 </a>
                 <p class="text-primary-100  text-center text-sm">{% trans 'this ticket for' %} <span
-                        class="text-secondary-400">$26.99</span></p>
+                        class="text-secondary-400">$9.99</span></p>
             </div>
 
         {% endif %}

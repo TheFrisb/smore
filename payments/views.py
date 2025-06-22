@@ -1,9 +1,11 @@
 import logging
+from urllib import request
 
 import stripe
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import RedirectView
 from google.oauth2 import service_account
@@ -12,7 +14,12 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from accounts.models import UserSubscription, PlatformType, PurchasedPredictions
+from accounts.models import (
+    UserSubscription,
+    PlatformType,
+    PurchasedPredictions,
+    PurchasedDailyOffer,
+)
 from backend import settings
 from core.models import Product, Prediction, Ticket
 from facebook.services.facebook_pixel import FacebookPixel
@@ -56,8 +63,8 @@ class CreateSubscriptionCheckoutUrl(APIView):
             raise serializers.ValidationError("Some products not found.")
 
         if (
-                serializer.validated_data["firstProduct"]
-                not in serializer.validated_data["products"]
+            serializer.validated_data["firstProduct"]
+            not in serializer.validated_data["products"]
         ):
             raise serializers.ValidationError("Invalid 'firstProduct' field.")
 
@@ -167,7 +174,7 @@ class CreateTicketCheckoutUrl(RedirectView):
 
         try:
             fb_pixel = FacebookPixel(self.request)
-            fb_pixel.initiate_checkout(ticket.product, 26.99)
+            fb_pixel.initiate_checkout(ticket.product, 9.99)
         except Exception as e:
             logger.error(
                 f"Error while sending InitiateCheckout Facebook Pixel event: {e}"
@@ -232,8 +239,8 @@ class UpdateSubscriptionView(APIView):
             )
 
         if (
-                serializer.validated_data["firstProduct"]
-                not in serializer.validated_data["products"]
+            serializer.validated_data["firstProduct"]
+            not in serializer.validated_data["products"]
         ):
             return Response(
                 status=400, data={"message": "Invalid 'firstProduct' field."}
@@ -321,7 +328,7 @@ class UpdateSubscriptionView(APIView):
                 status=400,
                 data={
                     "message": e.user_message
-                               or "Your card was declined. Please update your payment method"
+                    or "Your card was declined. Please update your payment method"
                 },
             )
         except stripe.error.StripeError as e:
@@ -514,3 +521,43 @@ class VerifyMobilePurchaseView(APIView):
         except Prediction.DoesNotExist:
             logger.error(f"Prediction with ID {prediction_id} does not exist.")
             return None
+
+
+class CreateDailyOfferCheckoutUrl(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return reverse("accounts:login")
+
+        today_date = timezone.now().date()
+
+        if PurchasedDailyOffer.objects.filter(
+            user=self.request.user,
+            for_date=today_date,
+            status=PurchasedDailyOffer.Status.PURCHASED,
+        ).exists():
+            raise PermissionError(
+                f"You've already purchased the daily offer for: {today_date}"
+            )
+
+        daily_offer = PurchasedDailyOffer.objects.create(
+            user=self.request.user,
+            for_date=today_date,
+            status=PurchasedDailyOffer.Status.PENDING,
+        )
+
+        service = StripeCheckoutService()
+        checkout_session = service.create_onetime_daily_offer_checkout_session(
+            self.request.user, daily_offer
+        )
+
+        try:
+            fb_pixel = FacebookPixel(self.request)
+            fb_pixel.initiate_checkout(
+                Product.objects.filter(name=Product.Names.SOCCER).first(), 24.99
+            )
+        except Exception as e:
+            logger.error(
+                f"Error while sending InitiateCheckout Facebook Pixel event: {e}"
+            )
+
+        return checkout_session.url

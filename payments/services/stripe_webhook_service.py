@@ -11,6 +11,7 @@ from accounts.models import (
     UserSubscription,
     PurchasedPredictions,
     PurchasedTickets,
+    PurchasedDailyOffer,
 )
 from accounts.services.referral_service import ReferralService
 from core.models import Product, Prediction, Ticket
@@ -235,6 +236,27 @@ class StripeWebhookService(BaseStripeService):
             except Ticket.DoesNotExist:
                 logger.error(
                     f"No ticket found with ID: {purchased_object_id} for customer: {customer.username}"
+                )
+                return
+        elif purchased_object_type == "daily_offer":
+            logger.info(
+                f"Purchased object is a daily_offer with ID: {purchased_object_id} for customer: {customer.username}"
+            )
+
+            try:
+                obj = PurchasedDailyOffer.objects.get(
+                    id=purchased_object_id, user=customer
+                )
+                obj.status = PurchasedDailyOffer.Status.PURCHASED
+                obj.save()
+
+                logger.info(
+                    f"Created purchased daily offer with id: {purchased_object_id} for user: {customer.username}."
+                )
+                return
+            except PurchasedDailyOffer.DoesNotExist:
+                logger.error(
+                    f"No daily offer with ID: {purchased_object_id} for customer: {customer.username} was found."
                 )
                 return
 

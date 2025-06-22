@@ -252,6 +252,16 @@ class PlatformType(models.TextChoices):
     WEB = "WEB", "Web"
 
 
+class PurchasedDailyOffer(BaseInternalModel):
+    class Status(models.TextChoices):
+        PENDING = "PENDING", _("Pending")
+        PURCHASED = "PURCHASED", _("Purchased")
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="offers")
+    for_date = models.DateField()
+    status = models.CharField(max_length=10, choices=Status, default=Status.PENDING)
+
+
 class PurchasedPredictions(BaseInternalModel):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="purchased_predictions"

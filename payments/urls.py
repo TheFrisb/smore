@@ -10,6 +10,7 @@ from payments.views import (
     PurchasePaymentSuccessView,
     CreateTicketCheckoutUrl,
     VerifyMobilePurchaseView,
+    CreateDailyOfferCheckoutUrl
 )
 
 app_name = "payments"
@@ -20,6 +21,7 @@ urlpatterns = [
         CreatePredictionCheckoutUrl.as_view(),
         name="prediction_checkout",
     ),
+    path("daily-offer/checkout/", CreateDailyOfferCheckoutUrl.as_view(), name="daily_offer_checkout"),
     path(
         "ticket/checkout/<int:ticket_id>/",
         CreateTicketCheckoutUrl.as_view(),

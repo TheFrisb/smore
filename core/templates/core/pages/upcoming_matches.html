@@ -116,6 +116,43 @@
                     </div>
                 </div>
 
+                {% if not has_daily_offer %}
+                    <div class="max-w-4xl mx-auto my-8">
+                        <div class="relative rounded-lg overflow-hidden group border border-secondary-500/20 hover:border-secondary-500/40 transition-all duration-300 shadow-2xl shadow-primary-900/50">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-900/30 opacity-40"></div>
+                            <div class="absolute inset-0 bg-squares-pattern opacity-5"></div>
+                            <div class="relative p-6">
+                                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                                    <div class="flex-1 text-center md:text-left">
+                                        <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
+                                            {% svg_icon icon_name='diamondIcon' css_classes='w-7 h-7 text-secondary-400' %}
+                                            <h3 class="text-2xl font-bold text-white">{% trans "All Picks for Today" %}</h3>
+                                        </div>
+                                        <p class="text-primary-200 ">{% trans "Exclusive access to today’s parlays & predictions" %}</p>
+                                    </div>
+                                    <div class="flex-shrink-0 flex flex-col items-center gap-4">
+                                        <p class="text-4xl font-extrabold  tracking-tight text-secondary-400">
+                                            $24.99
+                                        </p>
+                                        <a href="{% url 'payments:daily_offer_checkout' %}"
+                                           class="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white rounded-lg transition-all duration-300
+                                              bg-secondary-500 hover:bg-secondary-600 shadow-lg hover:shadow-secondary-500/40
+                                              transform hover:-translate-y-1">
+                                            {% trans "Unlock Now" %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                                 viewBox="0 -960 960 960" width="24px"
+                                                 fill="currentColor" class="w-5 h-5 text-white ml-2">
+                                                <path d="M240-160h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Zm0 80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h280v-80q0-83 58.5-141.5T720-920q83 0 141.5 58.5T920-720h-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80h120q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
                 {% for date, items in grouped_items %}
                     <div class="space-y-8 pb-24">
                         <div class="flex items-center justify-center space-x-4">

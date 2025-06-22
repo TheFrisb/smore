@@ -411,3 +411,8 @@ class ReferralAdmin(admin.ModelAdmin):
     autocomplete_fields = ["referrer", "referred"]
     search_fields = ["referrer__username", "referred__username"]
     inlines = [ReferralEarningInline]
+
+
+@admin.register(PurchasedDailyOffer)
+class PurchasedDailyOfferAdmin(admin.ModelAdmin):
+    list_display = ('user', 'status', 'for_date')
