@@ -5,6 +5,7 @@ from typing import List
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.urls import reverse
+from django.utils import timezone
 from stripe.checkout import Session
 
 from accounts.models import User
@@ -156,7 +157,7 @@ class StripeCheckoutService(BaseStripeService):
                     "product_data": {
                         "name": f"{ticket.product.get_name_display()} ticket",
                     },
-                    "unit_amount": 2699,
+                    "unit_amount": 999,
                 },
                 "quantity": 1,
             }
@@ -167,7 +168,7 @@ class StripeCheckoutService(BaseStripeService):
             {
                 "price_data": {
                     "currency": "usd",
-                    "product_data": {"name": "Access to Today's Picks"},
+                    "product_data": {"name": f"Unlock Smore's predictions for: {timezone.now().strftime('%m/%d/%Y')}"
                     "unit_amount": 2499,
                 },
                 "quantity": 1,
