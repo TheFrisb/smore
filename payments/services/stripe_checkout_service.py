@@ -70,7 +70,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "prediction",
                 }
             },
-            payment_method_types=["card", "revolut_pay"],
+            payment_method_types=["card"],
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -95,7 +95,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "ticket",
                 }
             },
-            payment_method_types=["card", "revolut_pay"],
+            payment_method_types=["card"],
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -198,7 +198,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "daily_offer",
                 }
             },
-            payment_method_types=["card", "revolut_pay"],
+            payment_method_types=["card"],
             consent_collection={"terms_of_service": "required"},
         )
 
