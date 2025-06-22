@@ -168,8 +168,8 @@ class StripeCheckoutService(BaseStripeService):
             {
                 "price_data": {
                     "currency": "usd",
-                    "product_data": {"name": f"Unlock Smore's predictions for: {timezone.now().strftime('%m/%d/%Y')}"
-                    "unit_amount": 2499,
+                    "product_data": {"name": f"Unlock Smore's predictions for: {timezone.now().strftime('%m/%d/%Y')}"},
+                    "unit_amount": 2499
                 },
                 "quantity": 1,
             }
