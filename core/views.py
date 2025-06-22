@@ -484,6 +484,16 @@ class UpcomingMatchesView(TemplateView):
             status=PurchasedDailyOffer.Status.PURCHASED,
             for_date=timezone.now().date(),
         ).exists()
+
+        can_not_view_at_least_one = any(
+            item["object"].product.id not in context["allowed_products"]
+            and item["object"].id not in context["purchased_ids"]
+            for date, items in context["grouped_items"]
+            for item in items
+        )
+        context["can_not_view_at_least_one_prediction"] = can_not_view_at_least_one
+
+
         return context
 
     def _get_product_filter(self):

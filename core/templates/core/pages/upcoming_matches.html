@@ -116,7 +116,7 @@
                     </div>
                 </div>
 
-                {% if grouped_items and not has_daily_offer %}
+                {% if grouped_items and not has_daily_offer and can_not_view_at_least_one_prediction %}
                     <div class="max-w-4xl mx-auto my-8">
                         <div class="relative rounded-lg overflow-hidden group border border-secondary-500/20 hover:border-secondary-500/40 transition-all duration-300 shadow-2xl shadow-primary-900/50">
                             <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-900/30 opacity-40"></div>
