@@ -70,7 +70,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "prediction",
                 }
             },
-            payment_method_types=["card"],
+            payment_method_types=["card", 'revolut_pay'],
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -95,7 +95,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "ticket",
                 }
             },
-            payment_method_types=["card"],
+            payment_method_types=["card", 'revolut_pay'],
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -139,7 +139,7 @@ class StripeCheckoutService(BaseStripeService):
         return [
             {
                 "price_data": {
-                    "currency": "usd",
+                    "currency": "eur",
                     "product_data": {
                         "name": f"Premium prediction: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
                     },
@@ -153,7 +153,7 @@ class StripeCheckoutService(BaseStripeService):
         return [
             {
                 "price_data": {
-                    "currency": "usd",
+                    "currency": "eur",
                     "product_data": {
                         "name": f"{ticket.product.get_name_display()} parlay",
                     },
@@ -167,7 +167,7 @@ class StripeCheckoutService(BaseStripeService):
         return [
             {
                 "price_data": {
-                    "currency": "usd",
+                    "currency": "eur",
                     "product_data": {"name": f"Unlock SMORE's predictions for: {timezone.now().strftime('%m/%d/%Y')}"},
                     "unit_amount": 2499
                 },
@@ -198,7 +198,7 @@ class StripeCheckoutService(BaseStripeService):
                     "purchased_object_type": "daily_offer",
                 }
             },
-            payment_method_types=["card"],
+            payment_method_types=["card", 'revolut_pay'],
             consent_collection={"terms_of_service": "required"},
         )
 
