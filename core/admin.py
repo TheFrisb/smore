@@ -187,50 +187,53 @@ class SportMatchAdmin(admin.ModelAdmin):
     ordering = ["-kickoff_datetime"]
 
     def get_search_results(self, request, queryset, search_term):
-        # Apply existing filters when "term" is present (e.g., autocomplete context)
+        # Only apply custom trigram logic when our JS autocomplete ‘term’ param is present
         if "term" in request.GET:
-            midnight_today = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            # 1) apply your date window
+            midnight_today = timezone.now().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
             start_date = midnight_today - timedelta(days=2)
             queryset = queryset.filter(kickoff_datetime__gte=start_date)
 
+            # 2) apply your existing product filter
             product_id = request.GET.get("product_id")
             if product_id:
-                product = Product.objects.filter(id=product_id).first()
-                if product:
-                    queryset = queryset.filter(product=product)
+                queryset = queryset.filter(product_id=product_id)
 
-        # If no search term, return the filtered queryset without further modification
-        if not search_term:
-            return queryset, False
-
-        # Define fields for trigram similarity
-        trigram_fields = ["home_team__name", "away_team__name", "league__name"]
-
-        # Annotate queryset with similarity scores for each field
-        annotations = {}
-        for field in trigram_fields:
-            annotations[field + "_similarity"] = TrigramSimilarity(
-                Lower(Unaccent(F(field))),
-                Lower(Unaccent(Value(search_term)))
+            # 3) annotate three separate trigram similarities
+            qs = queryset.annotate(
+                home_sim=TrigramSimilarity(
+                    Lower(Unaccent("home_team__name")),
+                    Lower(Unaccent(Value(search_term)))
+                ),
+                away_sim=TrigramSimilarity(
+                    Lower(Unaccent("away_team__name")),
+                    Lower(Unaccent(Value(search_term)))
+                ),
+                league_sim=TrigramSimilarity(
+                    Lower(Unaccent("league__name")),
+                    Lower(Unaccent(Value(search_term)))
+                ),
             )
-        queryset = queryset.annotate(**annotations)
 
-        # Create a filter to include results where any similarity exceeds the threshold
-        trigram_filter = Q()
-        for field in trigram_fields:
-            trigram_filter |= Q(**{field + "_similarity__gt": 0.1})
+            # 4) filter to only “reasonably similar” matches
+            qs = qs.filter(
+                Q(home_sim__gt=0.3) |
+                Q(away_sim__gt=0.3) |
+                Q(league_sim__gt=0.3)
+            )
 
-        # Apply the filter to the queryset
-        queryset = queryset.filter(trigram_filter)
+            # 5) order by the greatest of the three
+            qs = qs.annotate(
+                best_sim=Greatest("home_sim", "away_sim", "league_sim")
+            ).order_by("-best_sim")
 
-        # Order by the maximum similarity score across all fields
-        max_similarity = Greatest(*[field + "_similarity" for field in trigram_fields])
-        queryset = queryset.annotate(max_similarity=max_similarity).order_by("-max_similarity")
+            # 6) finally pass this into the default admin search handling
+            return super().get_search_results(request, qs, search_term)
 
-        # Return the filtered and ordered queryset
-        # The second argument (use_distinct) is set to True to indicate custom filtering
-        return queryset, True
-
+        # Fallback: exactly as before
+        return super().get_search_results(request, queryset, search_term)
 
 # Inline admin for TicketMatch
 class BetLineInline(admin.TabularInline):
