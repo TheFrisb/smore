@@ -4,7 +4,10 @@ from datetime import timedelta
 from adminsortable2.admin import SortableAdminMixin
 from django import forms
 from django.contrib import admin
-from django.db.models import Min
+from django.contrib.postgres.lookups import Unaccent
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models import Min, Value, F, Q
+from django.db.models.functions import Lower, Greatest
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
@@ -184,23 +187,49 @@ class SportMatchAdmin(admin.ModelAdmin):
     ordering = ["-kickoff_datetime"]
 
     def get_search_results(self, request, queryset, search_term):
-        if "term" not in request.GET:
-            return super().get_search_results(request, queryset, search_term)
+        # Apply existing filters when "term" is present (e.g., autocomplete context)
+        if "term" in request.GET:
+            midnight_today = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            start_date = midnight_today - timedelta(days=2)
+            queryset = queryset.filter(kickoff_datetime__gte=start_date)
 
-        midnight_today = timezone.now().replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
-        start_date = midnight_today - timedelta(days=2)
-        queryset = queryset.filter(kickoff_datetime__gte=start_date)
+            product_id = request.GET.get("product_id")
+            if product_id:
+                product = Product.objects.filter(id=product_id).first()
+                if product:
+                    queryset = queryset.filter(product=product)
 
-        product_id = request.GET.get("product_id")
+        # If no search term, return the filtered queryset without further modification
+        if not search_term:
+            return queryset, False
 
-        if product_id:
-            product = Product.objects.filter(id=product_id).first()
-            if product:
-                queryset = queryset.filter(product=product)
+        # Define fields for trigram similarity
+        trigram_fields = ["home_team__name", "away_team__name", "league__name"]
 
-        return super().get_search_results(request, queryset, search_term)
+        # Annotate queryset with similarity scores for each field
+        annotations = {}
+        for field in trigram_fields:
+            annotations[field + "_similarity"] = TrigramSimilarity(
+                Lower(Unaccent(F(field))),
+                Lower(Unaccent(Value(search_term)))
+            )
+        queryset = queryset.annotate(**annotations)
+
+        # Create a filter to include results where any similarity exceeds the threshold
+        trigram_filter = Q()
+        for field in trigram_fields:
+            trigram_filter |= Q(**{field + "_similarity__gt": 0.1})
+
+        # Apply the filter to the queryset
+        queryset = queryset.filter(trigram_filter)
+
+        # Order by the maximum similarity score across all fields
+        max_similarity = Greatest(*[field + "_similarity" for field in trigram_fields])
+        queryset = queryset.annotate(max_similarity=max_similarity).order_by("-max_similarity")
+
+        # Return the filtered and ordered queryset
+        # The second argument (use_distinct) is set to True to indicate custom filtering
+        return queryset, True
 
 
 # Inline admin for TicketMatch
