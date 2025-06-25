@@ -198,7 +198,7 @@ class TeamProcessor(BaseProcessor):
                     Lower(Unaccent("name")), Lower(Unaccent(Value(team_name)))
                 )
             )
-            .filter(similarity__gt=0.5)
+            .filter(similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER)
             .order_by("-similarity")
         )
 
