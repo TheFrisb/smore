@@ -358,7 +358,7 @@ class SubscriptionPaymentSuccessView(RedirectView):
         if has_sports_product:
             messages.success(
                 self.request,
-                'You are now subscribed. We\'ve sent a link to your email to join our Telegram Channel.',
+                'Welcome to SMORE Premium. Your invitation link for the Premium Channel will be ready soon. Please check your e mail address in 30-60 minutes.',
             )
         else:
             messages.success(
