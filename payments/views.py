@@ -344,10 +344,27 @@ class UpdateSubscriptionView(APIView):
 
 class SubscriptionPaymentSuccessView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        messages.success(
-            self.request,
-            'You are now subscribed. You can manage your plan in the "Manage Plan" section.',
-        )
+        has_sports_product = False
+
+        for product in self.request.user.subscription.products.all():
+            if product.name == Product.Names.SOCCER:
+                has_sports_product = True
+                break
+
+            if product.name == Product.Names.BASKETBALL:
+                has_sports_product = True
+                break
+
+        if has_sports_product:
+            messages.success(
+                self.request,
+                'You are now subscribed. We''ve sent a link to your email to join our Telegram Channel. You can manage your plan in the "Manage Plan" section.',
+            )
+        else:
+            messages.success(
+                self.request,
+                'You are now subscribed. You can manage your plan in the "Manage Plan" section.',
+            )
 
         try:
             fb_pixel = FacebookPixel(self.request)

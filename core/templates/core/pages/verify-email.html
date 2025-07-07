@@ -1,0 +1,108 @@
+{% extends 'core/base.html' %}
+{% load i18n util_tags %}
+{% block content %}
+    <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+        <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+        <div class="container mx-auto px-4 min-h-[60vh] flex items-center justify-center">
+            <div class="max-w-2xl mx-auto text-center py-4">
+                <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-primary-700/30">
+                    <div class="flex flex-col items-center justify-center gap-2 pb-2 relative mb-4">
+                        <div class="w-16 h-16 bg-secondary-500/10 rounded-2xl flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="lucide lucide-lock w-10 h-10 text-white">
+                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-secondary-400 text-center">{% trans "Verify your email to continue" %}</h2>
+                        <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
+                    </div>
+                    <p class=" text-primary-200 mb-4">{% trans "We've sent an email verification link to" %} {{ request.user.email }}</p>
+                    <button
+                            class="resendEmailButton mb-2 mt-2 w-[200px] inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
+                        {% trans 'Resend link' %}
+                        {% svg_icon icon_name="arrowRight" css_classes="w-5 h-5 text-secondary-400" %}
+                    </button>
+                    <div class="flex items-center justify-around gap-4 mt-8 mb-4">
+                        <p class="text-primary-200 text-sm font-bold">{% trans 'Still having issues?' %}</p>
+                    </div>
+                    <div class="flex gap-2 flex-col w-full">
+                        <a href="https://t.me/smoreltd" target="_blank"
+                           rel="noopener noreferrer"
+                           class="w-full contactAction group bg-primary-900/50 rounded-xl p-6 border border-primary-700/30 hover:border-primary-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="lucide lucide-send w-6 h-6 text-secondary-500">
+                                        <path d="m22 2-7 20-4-9-9-4Z"></path>
+                                        <path d="M22 2 11 13"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col items-start justify-start text-left">
+                                    <h3 class="text-white font-semibold text-lg">Telegram</h3>
+                                    <p class="text-secondary-400">{% trans "Message us on Telegram" %}</p>
+
+                                </div>
+                            </div>
+
+                        </a>
+
+                        <a href="https://wa.me/+359884108275"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="contactAction group bg-primary-900/50 rounded-xl p-6 border border-primary-700/30 hover:border-primary-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="lucide lucide-message-circle w-6 h-6 text-secondary-500">
+                                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col items-start justify-start text-left">
+                                    <h3 class="text-white font-semibold text-lg">WhatsApp</h3>
+                                    <p class="text-secondary-400">{% trans "Message us on WhatsApp" %}</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://wa.me/+359884108275"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="contactAction group bg-primary-900/50 rounded-xl p-6 border border-primary-700/30 hover:border-primary-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="lucide lucide-mail w-5 h-5 text-secondary-500">
+                                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col items-start justify-start text-left">
+                                    <h3 class="text-white font-semibold text-lg">Email</h3>
+                                    <p class="text-secondary-400">smore1x2@gmail.com</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock content %}

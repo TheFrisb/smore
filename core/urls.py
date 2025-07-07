@@ -17,7 +17,7 @@ from .views import (
     TelegramLandingView,
     DetailedPredictionView,
     AiAssistantView,
-    ReferralTelegramLandingView,
+    ReferralTelegramLandingView, VerifyEmailView,
 )
 
 app_name = "core"
@@ -40,6 +40,7 @@ urlpatterns = [
         SubscriptionRequiredView.as_view(),
         name="subscription_required",
     ),
+    path('verify-email/', VerifyEmailView.as_view(), name='verify_email'),
     path(
         "predictions/<int:pk>/",
         DetailedPredictionView.as_view(),

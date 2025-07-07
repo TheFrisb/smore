@@ -809,3 +809,12 @@ class SubscriptionRequiredView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = _("Subscription Required")
         return context
+
+
+class VerifyEmailView(TemplateView):
+    template_name = "core/pages/verify-email.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = _("Verify your email")
+        return context
