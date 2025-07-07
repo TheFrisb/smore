@@ -358,7 +358,7 @@ class SubscriptionPaymentSuccessView(RedirectView):
         if has_sports_product:
             messages.success(
                 self.request,
-                'You are now subscribed. We''ve sent a link to your email to join our Telegram Channel. You can manage your plan in the "Manage Plan" section.',
+                'You are now subscribed. We\'ve sent a link to your email to join our Telegram Channel.',
             )
         else:
             messages.success(
