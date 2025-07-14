@@ -1,3 +1,7 @@
-2. Na dropdown ako klikne na strelkata da mu izleze dropdown menito a ako ne direkt da go nose u upcoming
-3. Da moze da bire dali da glede all, tickets, single picks
-4. History tiketto da imat nesto kao premium ticket #1, ovo ono.
+1. Build metadata for predictions - 30 mins
+2. Tool to fetch random matches - 15 mins
+3. Optimize prompts - 1 hour
+-- Add FewShot examples
+4. Manage Memory - 2 hours
+
+Total: 3 hours 45 mins
