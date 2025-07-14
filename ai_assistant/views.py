@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from accounts.models import UserSubscription
 from ai_assistant.models import Message
-from ai_assistant.service.llm_service import LLMService
+from ai_assistant.v2.ai_service import AiService
 from core.models import Product
 
 # Configure logging
@@ -30,8 +30,8 @@ class SendMessageToAiView(APIView):
 
     def get_user_subscription(self):
         if (
-            not self.request.user.is_authenticated
-            or not self.request.user.subscription_is_active
+                not self.request.user.is_authenticated
+                or not self.request.user.subscription_is_active
         ):
             return None
 
@@ -67,8 +67,8 @@ class SendMessageToAiView(APIView):
             f"User ({request.user.id}): {request.user.username} has sent a message to the AI assistant"
         )
 
-        llm_service = LLMService(user=request.user, prompt=message)
-        response = llm_service.process_prompt(message)
+        ai_service = AiService()
+        response = ai_service.run(message)
         return Response(
             {
                 "message": response,

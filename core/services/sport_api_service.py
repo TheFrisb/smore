@@ -6,7 +6,7 @@ from typing import Optional
 import requests
 from django.conf import settings
 
-from core.models import ApiSportModel, SportLeague, SportCountry, Product, SportTeam
+from core.models import ApiSportModel, SportLeague, SportCountry, Product, SportTeam, SportMatch
 
 logger = logging.getLogger(__name__)
 
@@ -87,7 +87,7 @@ class SportApiService:
                 )
 
     def populate_leagues(
-        self, sport_type: ApiSportModel.SportType, product: Product
+            self, sport_type: ApiSportModel.SportType, product: Product
     ) -> None:
         endpoint = f"{self._get_base_url(sport_type)}/leagues"
         print(f"Endpoint: {endpoint}")
@@ -133,7 +133,7 @@ class SportApiService:
                 logger.error(f"Failed to create league: {league_name} - {e}")
 
     def _get_league_obj(
-        self, external_id: int, sport_type: ApiSportModel.SportType
+            self, external_id: int, sport_type: ApiSportModel.SportType
     ) -> Optional[SportLeague]:
         """
         Get the league object based on sport type and external ID.
@@ -147,13 +147,40 @@ class SportApiService:
             )
             return None
 
+    def populate_matches_for_league(self,
+                                    start_year=2020,
+                                    end_year=2025,
+                                    league_external_id=78,
+                                    callback=None) -> None:
+
+        while start_year <= end_year:
+            endpoint = f"{self._get_base_url(SportMatch.SportType.SOCCER)}/fixtures?season={start_year}&league={league_external_id}"
+            headers = self._get_headers(ApiSportModel.SportType.SOCCER)
+            response = requests.get(endpoint, headers=headers)
+
+            if response.status_code != 200:
+                logger.error(
+                    f"Failed to fetch matches for league {league_external_id} in year {start_year}. Status code: {response.status_code}"
+                )
+                start_year += 1
+                continue
+
+            data = response.json()
+            for item in data.get("response", []):
+                if callback:
+                    callback(item)
+                else:
+                    logger.info(f"Match data: {item}")
+
+            start_year += 1
+
     def fetch_sport_matches(
-        self,
-        start_date: Optional[datetime],
-        end_date: Optional[datetime],
-        endpoint: str,
-        sport_type: ApiSportModel.SportType,
-        process_match: callable,
+            self,
+            start_date: Optional[datetime],
+            end_date: Optional[datetime],
+            endpoint: str,
+            sport_type: ApiSportModel.SportType,
+            process_match: callable,
     ) -> None:
         if start_date is None:
             start_date = datetime.today() - timedelta(days=1)
@@ -187,11 +214,11 @@ class SportApiService:
             current_date += timedelta(days=1)
 
     def _create_or_update_team(
-        self,
-        team_data: dict,
-        league_obj: SportLeague,
-        sport_type: ApiSportModel.SportType,
-        product: Product,
+            self,
+            team_data: dict,
+            league_obj: SportLeague,
+            sport_type: ApiSportModel.SportType,
+            product: Product,
     ) -> Optional[SportTeam]:
         team_id = team_data.get("id")
         team_name = team_data.get("name")
@@ -220,7 +247,7 @@ class SportApiService:
             return None
 
     def _download_asset(
-        self, asset_url: str, upload_dir: str, filename: str
+            self, asset_url: str, upload_dir: str, filename: str
     ) -> Optional[str]:
         if not asset_url:
             logger.error("Asset URL is empty.")

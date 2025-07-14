@@ -83,6 +83,9 @@ class FootballApiService(SportApiService):
         prediction = data_response[0].get("predictions")
         return prediction
 
+    def fetch_matches_for_league(self):
+        return self.populate_matches_for_league(callback=self._process_fixture)
+
     def _process_fixture(self, item: dict):
         product_obj = Product.objects.get(name=Product.Names.SOCCER)
 
@@ -160,8 +163,8 @@ class FootballApiService(SportApiService):
                 return None
 
         if (
-            match_obj.kickoff_datetime > django_timezone.now()
-            and not match_obj.metadata
+                match_obj.kickoff_datetime > django_timezone.now()
+                and not match_obj.metadata
         ):
             match_obj.metadata = self.fetch_match_prediction(match_obj.external_id)
             match_obj.save()

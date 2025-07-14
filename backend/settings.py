@@ -291,3 +291,5 @@ CRONJOBS = [
     ("*/20 * * * *", "core.cron.update_scores"),
     ("0 3 * * *", "core.cron.load_matches"),
 ]
+
+TAVILY_API_KEY = config("TAVILY_API_KEY")
