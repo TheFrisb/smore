@@ -6,6 +6,7 @@ from ai_assistant.v2.tools.leagues import get_league_info
 from ai_assistant.v2.tools.matches import get_matches_by_league, get_matches_by_team, get_matches_by_team_list, \
     get_match_insights_by_external_id, get_random_matches
 from ai_assistant.v2.tools.teams import get_team_info, get_team_infos_by_league
+from ai_assistant.v2.tools.utils import get_current_time
 from backend import settings
 
 tools = [
@@ -19,7 +20,8 @@ tools = [
     get_matches_by_team,
     get_matches_by_team_list,
     get_match_insights_by_external_id,
-    get_random_matches
+    get_random_matches,
+    get_current_time
 ]
 
 prompt = """
