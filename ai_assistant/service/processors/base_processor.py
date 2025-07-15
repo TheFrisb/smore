@@ -4,6 +4,7 @@ from typing import Optional
 
 from django.conf import settings
 from django.utils import timezone
+from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
 from ai_assistant.service.data import PromptContext, PromptType
@@ -23,12 +24,14 @@ class BaseProcessor(ABC):
         self.llm_model = llm_model
 
     @classmethod
-    def get_client(cls) -> OpenAI:
+    def get_client(cls) -> ChatOpenAI:
         """Lazy-load singleton client instance with thread-safe initialization"""
         if cls._client is None:
-            cls._client = OpenAI(
+            cls._client = ChatOpenAI(
                 api_key=settings.OPENAI_API_KEY,
+                model='gpt-4.1-2025-04-14'
             )
+            cls._client.bind_tools([{"type": "web_search_preview"}])
             logger.info(f"Initialized OpenAI client for {cls.__name__} processors")
         return cls._client
 
