@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field, ConfigDict
 
 from ai_assistant.v2.service.MatchInsightBuilder import MatchInsightBuilder
 from ai_assistant.v2.types import SportLeagueOutputModel, SportMatchOutputModel, SportMatchInsightOutputModel
-from core.models import SportMatch
+from core.models import SportMatch, ApiSportModel
 from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)
@@ -113,7 +113,8 @@ def get_random_matches(random_match_input: RandomMatchInput) -> List[SportMatchO
     query = _add_date_filters_if_needed(query, query_datetime, future_only)
 
     matches = list(
-        query.filter(league__external_id__in=allowed_league_ids).exclude(metadata={}).order_by("kickoff_datetime")[
+        query.filter(league__external_id__in=allowed_league_ids, type=ApiSportModel.SportType.SOCCER).exclude(
+            metadata={}).order_by("kickoff_datetime")[
         :random_match_input.number_of_matches
         ])
     if not matches:
