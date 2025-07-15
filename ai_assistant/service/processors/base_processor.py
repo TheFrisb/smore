@@ -29,7 +29,7 @@ class BaseProcessor(ABC):
         if cls._client is None:
             cls._client = ChatOpenAI(
                 api_key=settings.OPENAI_API_KEY,
-                model='gpt-4.1-2025-04-14'
+                model='o3-2025-04-16'
             )
             cls._client.bind_tools([{"type": "web_search_preview"}])
             logger.info(f"Initialized OpenAI client for {cls.__name__} processors")
