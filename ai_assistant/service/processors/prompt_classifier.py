@@ -115,7 +115,7 @@ class PromptClassifier(BaseProcessor):
                 messages.extend(prompt_context.history)
             messages.append({"role": "user", "content": prompt_context.prompt})
 
-            completion = self.client.beta.chat.completions.parse(
+            completion = self.client.chat.completions.parse(
                 model=self.llm_model,
                 messages=messages,
                 response_format=PromptClassifierModel,
