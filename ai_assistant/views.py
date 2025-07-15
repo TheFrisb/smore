@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from accounts.models import UserSubscription
 from ai_assistant.models import Message
-from ai_assistant.v2.ai_service import AiService
+from ai_assistant.service.llm_service import LLMService
 from core.models import Product
 
 # Configure logging
@@ -67,8 +67,10 @@ class SendMessageToAiView(APIView):
             f"User ({request.user.id}): {request.user.username} has sent a message to the AI assistant"
         )
 
-        ai_service = AiService()
-        response = ai_service.run(message, request.user)
+        # ai_service = AiService()
+        # response = ai_service.run(message, request.user)
+        llm_service = LLMService(user=request.user, prompt=message)
+        response = llm_service.process_prompt(message)
 
         logger.info(
             f"AI Response for User ({request.user.id}): {request.user.username} - {response}"

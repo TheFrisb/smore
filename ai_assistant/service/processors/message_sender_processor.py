@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class MessageSenderProcessor(BaseProcessor):
     def __init__(self):
-        super().__init__(name="MessageSenderProcessor", llm_model="gpt-4o-2024-08-06")
+        super().__init__(name="MessageSenderProcessor", llm_model="o3-mini-2025-01-31")
         self.single_match_prompt = """
                     You are a professional sports analyst specializing in match analysis and betting predictions. Your task is to provide an engaging and insightful analysis of the specified sports match, tailored for a sports betting audience. Use the provided match data, which includes historical results and prediction metrics, to support your analysis.
 
