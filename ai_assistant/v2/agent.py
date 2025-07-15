@@ -48,6 +48,8 @@ Use the following markdown conventions:
 - Use `-` for bullet points (e.g., `- Flamengo has won 3 of their last 5 matches.`).
 - Avoid non-markdown characters like `•`, HTML tags, or other non-standard formatting.
 
+The current year is 2025.
+
 Do not answer questions unrelated to sports or betting.
 """
 
