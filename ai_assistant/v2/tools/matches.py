@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from ai_assistant.v2.service.MatchInsightBuilder import MatchInsightBuilder
 from ai_assistant.v2.types import SportLeagueOutputModel, SportMatchOutputModel, SportMatchInsightOutputModel
 from core.models import SportMatch
+from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)
 
@@ -72,10 +73,62 @@ class GetMatchByExternalIdInput(BaseModel):
     )
 
 
+class RandomMatchInput(BaseModel):
+    kickoff_datetime: Union[None, datetime] = Field(
+        None,
+        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+    )
+    future_only: Optional[bool] = Field(
+        False,
+        description="If True and datetime is not provided, only return matches in the future relative to the current time"
+    )
+    number_of_matches: Optional[int] = Field(
+        10,
+        description="Number of random matches to return, default is 10"
+    )
+
+    model_config = ConfigDict(
+        from_attributes=True
+    )
+
+
+@tool
+def get_random_matches(random_match_input: RandomMatchInput) -> List[SportMatchOutputModel]:
+    """
+    Fetches random matches with available betting stats, optionally filtered by a datetime or future-only matches.
+
+    Args:
+        random_match_input (RandomMatchInput): Input containing optional datetime, future_only flag, and number of matches to return.
+
+    Returns:
+        List[SportMatchOutputModel]: A list containing a single random match, filtered by the provided criteria.
+    """
+    query_datetime = random_match_input.kickoff_datetime
+    future_only = random_match_input.future_only
+
+    logger.info(f"Fetching a random match with query datetime: {query_datetime}, future_only: {future_only}")
+
+    query = SportMatch.objects.select_related('league__country', 'home_team', 'away_team')
+
+    query = _add_date_filters_if_needed(query, query_datetime, future_only)
+
+    matches = list(
+        query.filter(league__external_id__in=allowed_league_ids).exclude(metadata={}).order_by("kickoff_datetime")[
+        :random_match_input.number_of_matches
+        ])
+    if not matches:
+        logger.warning("No matches found for the given criteria.")
+        return []
+
+    logger.info(
+        f"Found {len(matches)} random matches with query datetime: {query_datetime}, future_only: {future_only}")
+    return [SportMatchOutputModel.model_validate(match) for match in matches]
+
+
 @tool
 def get_matches_by_league(league_input: GetMatchesByLeagueInput) -> List[SportMatchOutputModel]:
     """
-    Fetches matches for a given league, optionally filtered by a datetime or future-only matches.
+    Fetches matches for a given league, optionally filtered by a datetime or upcoming matches.
 
     Args:
         league_input (GetMatchesByLeagueInput): Input containing the league, optional datetime, and future_only flag.
@@ -185,10 +238,6 @@ def get_match_insights_by_external_id(match_input: GetMatchByExternalIdInput) ->
     match = SportMatch.objects.filter(external_id=external_id).select_related(
         'league__country', 'home_team', 'away_team'
     ).first()
-
-    if not match:
-        logger.error(f"No match found with external ID: {external_id}")
-        return
 
     logger.info(f"Found match with external ID: {external_id}")
     match_insight_builder = MatchInsightBuilder(match)

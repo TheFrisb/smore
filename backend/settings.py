@@ -179,7 +179,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "root": {
+        "": {  # ← empty string = real root logger
             "handlers": ["console", "file"],
             "level": config("DJANGO_LOG_LEVEL", default="INFO"),
             "propagate": False,

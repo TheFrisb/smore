@@ -68,7 +68,12 @@ class SendMessageToAiView(APIView):
         )
 
         ai_service = AiService()
-        response = ai_service.run(message)
+        response = ai_service.run(message, request.user)
+
+        logger.info(
+            f"AI Response for User ({request.user.id}): {request.user.username} - {response}"
+        )
+
         return Response(
             {
                 "message": response,
