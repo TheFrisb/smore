@@ -1,7 +1,4 @@
-1. Build metadata for predictions - 30 mins
-2. Tool to fetch random matches - 15 mins
-3. Optimize prompts - 1 hour
--- Add FewShot examples
-4. Manage Memory - 2 hours
-
-Total: 3 hours 45 mins
+1. Dump match data
+2. Analyze IB AI
+3. Analyze tool usage
+4. Add tools to add
