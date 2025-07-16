@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         output_file = kwargs['output_file']
-        total_matches = SportMatch.objects.count()
+        total_matches = SportMatch.objects.filter(type=ApiSportModel.SportType.SOCCER).count()
         processed = 0
 
         with open(output_file, 'w') as f:
