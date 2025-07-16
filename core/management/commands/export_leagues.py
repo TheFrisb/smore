@@ -3,7 +3,7 @@ import json
 from django.core.management.base import BaseCommand
 from django.core.serializers.json import DjangoJSONEncoder
 
-from core.models import SportLeague
+from core.models import SportLeague, ApiSportModel
 
 BATCH_SIZE = 5000
 
@@ -24,7 +24,7 @@ class Command(BaseCommand):
             first = True
 
             while processed < total_leagues:
-                leagues = SportLeague.objects.select_related(
+                leagues = SportLeague.objects.filter(type=ApiSportModel.SportType.SOCCER).select_related(
                     'product', 'country'
                 ).only(
                     'external_id',

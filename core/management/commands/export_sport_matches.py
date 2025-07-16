@@ -3,7 +3,7 @@ import json
 from django.core.management.base import BaseCommand
 from django.core.serializers.json import DjangoJSONEncoder
 
-from core.models import SportMatch  # Replace 'your_app' with your app name
+from core.models import SportMatch, ApiSportModel  # Replace 'your_app' with your app name
 
 BATCH_SIZE = 5000  # Adjust based on your memory constraints
 
@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
             first = True
             while processed < total_matches:
-                matches = SportMatch.objects.select_related(
+                matches = SportMatch.objects.filter(type=ApiSportModel.SportType.SOCCER).select_related(
                     'league', 'home_team', 'away_team'
                 ).only(
                     'external_id',
