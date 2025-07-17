@@ -99,7 +99,7 @@ class TeamProcessor(BaseProcessor):
         if filter_by_leagues:
             logger.info(f"Filtering by leagues: {filter_by_leagues}")
             base_queryset = base_queryset.filter(
-                leagues__external_id__in=filter_by_leagues
+                league__external_id__in=filter_by_leagues
             )
         else:
             base_queryset = base_queryset.filter(
