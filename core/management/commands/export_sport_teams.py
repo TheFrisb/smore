@@ -39,8 +39,8 @@ class Command(BaseCommand):
                 for team in teams:
                     batch_data.append({
                         'external_id': team.external_id,
-                        'name': team.first_name,
-                        'logo': team.logo.first_name if team.logo else None,
+                        'name': team.name,
+                        'logo': team.logo.name if team.logo else None,
                         'product_id': team.product_id,
                         'league_external_id': team.league.external_id,
                         'type': team.type
