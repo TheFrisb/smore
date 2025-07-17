@@ -1,3 +1,5 @@
+from time import sleep
+
 from core.models import SportLeague, ApiSportModel, SportTeam, SportLeagueTeam
 from core.services.api.in_progress.BaseApiFootballService import BaseApiFootballService
 from core.services.api.team_standings import TeamStandingsService
@@ -30,6 +32,8 @@ class LeagueService(BaseApiFootballService):
                                                    current_season_year__isnull=False)
 
         for league in sport_leagues:
+            # sleep to avoid hitting API rate limits
+            sleep(0.5)
             query_params = {
                 "league": league.external_id,
                 "season": league.current_season_year
