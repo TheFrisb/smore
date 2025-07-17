@@ -288,7 +288,7 @@ GOOGLE_SERVICE_ACCOUNT_KEY_PATH = config("GOOGLE_SERVICE_ACCOUNT_KEY_PATH")
 
 # Cron job configuration
 CRONJOBS = [
-    ("*/20 * * * *", "core.cron.update_scores"),
+    ("0 */3 * * *", "core.cron.update_scores"),
     ("0 3 * * *", "core.cron.load_matches"),
     ("0 0 * * *", "core.cron.update_league_season_year"),
 ]
