@@ -103,7 +103,7 @@ class TeamProcessor(BaseProcessor):
             )
         else:
             base_queryset = base_queryset.filter(
-                leagues__external_id__in=allowed_league_ids
+                league__external_id__in=allowed_league_ids
             )
 
         initial_queryset = base_queryset
