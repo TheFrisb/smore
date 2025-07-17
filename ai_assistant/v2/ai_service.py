@@ -38,7 +38,7 @@ class AiService:
 
         # Get AI response
         response = self.agent.invoke({"messages": all_messages})
-        # self._log_response(response)
+        self._log_response(response)
         ai_response = self._extract_response(response)
 
         self._store_message(ai_response, Message.Direction.OUTBOUND, user)
