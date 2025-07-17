@@ -130,14 +130,14 @@ class SportMatchInsightOutputModel(BaseModel):
         None,
         description="Prediction statistics for the match, if available"
     )
-    home_team_standings: Optional["TeamStandingOutputModel"] = Field(
-        None,
-        description="Standings and performance statistics for the home team, if available"
-    )
-    away_team_standings: Optional["TeamStandingOutputModel"] = Field(
-        None,
-        description="Standings and performance statistics for the away team, if available"
-    )
+    # home_team_standings: Optional["TeamStandingOutputModel"] = Field(
+    #     None,
+    #     description="Standings and performance statistics for the home team, if available"
+    # )
+    # away_team_standings: Optional["TeamStandingOutputModel"] = Field(
+    #     None,
+    #     description="Standings and performance statistics for the away team, if available"
+    # )
 
     model_config = ConfigDict(
         from_attributes=True

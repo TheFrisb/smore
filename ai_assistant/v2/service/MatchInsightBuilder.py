@@ -44,7 +44,7 @@ class MatchInsightBuilder:
             team1=self.sport_match.home_team,
             team2=self.sport_match.away_team
         )
-        home_team_standings, away_team_standings = self.get_standings()
+        # home_team_standings, away_team_standings = self.get_standings()
 
         return SportMatchInsightOutputModel(
             match=SportMatchOutputModel.model_validate(self.sport_match),
@@ -54,8 +54,8 @@ class MatchInsightBuilder:
             away_team_upcoming_matches=away_future,
             head_to_head_matches=head2head,
             prediction_statistics=self.fetch_prediction_statistics(),
-            home_team_standings=home_team_standings,
-            away_team_standings=away_team_standings
+            # home_team_standings=home_team_standings,
+            # away_team_standings=away_team_standings
 
         )
 
