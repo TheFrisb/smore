@@ -27,6 +27,10 @@ class GetMatchesByLeagueInput(BaseModel):
         False,
         description="If True and datetime is not provided, only return matches in the future relative to the current time"
     )
+    number_of_matches: Optional[int] = Field(
+        10,
+        description="Number of matches to return, default is 10"
+    )
 
     model_config = ConfigDict(
         from_attributes=True
@@ -43,6 +47,10 @@ class GetMatchesByTeamInput(BaseModel):
         False,
         description="If True and datetime is not provided, only return matches in the future relative to the current time"
     )
+    number_of_matches: Optional[int] = Field(
+        10,
+        description="Number of matches to return, default is 10"
+    )
 
     model_config = ConfigDict(
         from_attributes=True
@@ -58,6 +66,10 @@ class GetMatchesByTeamList(BaseModel):
     upcoming_only: Optional[bool] = Field(
         False,
         description="If True and datetime is not provided, only return matches in the future relative to the current time"
+    )
+    number_of_matches: Optional[int] = Field(
+        30,
+        description="Number of random matches to return, default is 30"
     )
 
     model_config = ConfigDict(
@@ -83,13 +95,62 @@ class RandomMatchInput(BaseModel):
         description="If True and datetime is not provided, only return matches in the future relative to the current time"
     )
     number_of_matches: Optional[int] = Field(
-        10,
-        description="Number of random matches to return, default is 10"
+        20,
+        description="Number of random matches to return, default is 20"
     )
 
     model_config = ConfigDict(
         from_attributes=True
     )
+
+
+class HeadToHeadInput(BaseModel):
+    home_team_external_id: int = Field(..., description="External ID of the home team")
+    away_team_external_id: int = Field(..., description="External ID of the away team")
+    kickoff_datetime: Union[None, datetime] = Field(
+        None,
+        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+    )
+    number_of_matches: Optional[int] = Field(
+        10,
+        description="Number of matches to return, default is 10"
+    )
+
+    model_config = ConfigDict(
+        from_attributes=True
+    )
+
+
+@tool
+def get_head_to_head_matches(head_to_head_input: HeadToHeadInput) -> List[SportMatchOutputModel]:
+    """
+    Fetches head-to-head matches between two teams, optionally filtered by a datetime or future-only matches.
+
+    Args:
+        head_to_head_input (HeadToHeadInput): Input containing home team ID, away team ID, optional datetime.
+
+    Returns:
+        List[SportMatchOutputModel]: A list of head-to-head matches between the specified teams, filtered by the provided criteria.
+    """
+    home_team_id = head_to_head_input.home_team_external_id
+    away_team_id = head_to_head_input.away_team_external_id
+    query_datetime = head_to_head_input.kickoff_datetime
+
+    logger.info(
+        f"Fetching head-to-head matches for home team ID: {home_team_id} and away team ID: {away_team_id}, "
+        f"query datetime: {query_datetime}")
+
+    query = SportMatch.objects.filter(
+        Q(home_team__external_id=home_team_id, away_team__external_id=away_team_id) |
+        Q(home_team__external_id=away_team_id, away_team__external_id=home_team_id)
+    ).select_related('league__country', 'home_team', 'away_team')
+
+    query = _add_date_filters_if_needed(query, query_datetime, future_only=False)
+
+    matches = query.all().order_by('kickoff_datetime')
+
+    logger.info(f"Found {len(matches)} head-to-head matches for teams with IDs: {home_team_id} and {away_team_id}")
+    return [SportMatchOutputModel.model_validate(match) for match in matches]
 
 
 @tool
@@ -214,7 +275,7 @@ def get_matches_by_team_list(team_list_input: GetMatchesByTeamList) -> List[Spor
 
     query = _add_date_filters_if_needed(query, query_datetime, future_only)
 
-    matches = query.all().order_by('kickoff_datetime')
+    matches = query.all().order_by('kickoff_datetime')[:team_list_input.number_of_matches]
 
     logger.info(
         f"Found {len(matches)} matches for team IDs: {external_team_ids}, and query datetime: {query_datetime}, future_only: {future_only}")

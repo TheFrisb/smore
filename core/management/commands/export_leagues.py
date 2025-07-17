@@ -42,10 +42,10 @@ class Command(BaseCommand):
                 for league in leagues:
                     batch_data.append({
                         'external_id': league.external_id,
-                        'name': league.name,
-                        'logo': league.logo.name if league.logo else None,
+                        'name': league.first_name,
+                        'logo': league.logo.first_name if league.logo else None,
                         'product_id': league.product_id,
-                        'country_name': league.country.name,
+                        'country_name': league.country.first_name,
                         'league_type': league.league_type,
                         'current_season_id': league.current_season_id,
                         'is_processed': league.is_processed,

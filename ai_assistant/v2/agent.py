@@ -1,18 +1,15 @@
-from langchain_tavily import TavilySearch
 from langgraph.prebuilt import create_react_agent
 
 from ai_assistant.v2.models import openai_o3_model
+from ai_assistant.v2.tools.api.match_injuries import get_match_injuries
 from ai_assistant.v2.tools.leagues import get_league_info
 from ai_assistant.v2.tools.matches import get_matches_by_league, get_matches_by_team, get_matches_by_team_list, \
-    get_match_insights_by_external_id, get_random_matches
+    get_match_insights_by_external_id, get_random_matches, get_head_to_head_matches
 from ai_assistant.v2.tools.teams import get_team_info, get_team_infos_by_league
 from ai_assistant.v2.tools.utils import get_current_time
-from backend import settings
 
 tools = [
-    TavilySearch(tavily_api_key=settings.TAVILY_API_KEY, topic="news",
-                 description="Search for sports-related news and updates"),
-    # {"type": "web_search_preview"},
+    {"type": "web_search_preview"},
     get_team_info,
     get_team_infos_by_league,
     get_league_info,
@@ -21,7 +18,9 @@ tools = [
     get_matches_by_team_list,
     get_match_insights_by_external_id,
     get_random_matches,
-    get_current_time
+    get_current_time,
+    get_head_to_head_matches,
+    get_match_injuries
 ]
 
 prompt = """
@@ -48,7 +47,9 @@ Use the following markdown conventions:
 - Use `-` for bullet points (e.g., `- Flamengo has won 3 of their last 5 matches.`).
 - Avoid non-markdown characters like `•`, HTML tags, or other non-standard formatting.
 
-The current year is 2025.
+The current year is 2025. 
+
+If the user asks for information about our website or its features, such as how to create an account, or what the plans pricing is, say that you are unable to assist with that and suggest they visit the website directly for more information or contact support.
 
 Do not answer questions unrelated to sports or betting.
 """

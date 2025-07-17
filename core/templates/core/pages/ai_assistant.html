@@ -1,203 +1,211 @@
 {% extends 'core/base.html' %}
 {% load util_tags i18n %}
 {% block content %}
-    <input type="hidden" id="aiAssistantProductId" value="{{ ai_assistant_product_id }}">
-    <div class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 flex flex-col relative">
+  <style>
 
-        {% if not request.user.is_authenticated %}
-            <style>
-                @media (max-width: 320px) {
-                    #noAccessSection {
-                        min-width: 18rem !important;
-                    }
+  </style>
+  <input type="hidden" id="aiAssistantProductId" value="{{ ai_assistant_product_id }}">
+  <div class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 flex flex-col relative">
 
-                    .supersmall {
-                        display: block !important;
-                    }
-                }
-            </style>
-            <div class="absolute top-0 left-0 w-full h-full bg-primary-900/70 z-[49] flex items-center justify-center">
-                <div class="max-w-xl min-w-[22rem] mx-auto text-center " id="noAccessSection">
-                    <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl py-8 px-2 md:p-12 border border-primary-700/30">
-                        <div class="w-20 h-20 bg-secondary-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                 class="lucide lucide-lock w-10 h-10 text-secondary-400">
-                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                        </div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">{% trans "AI Analyst" %}</h2>
-                        <p class="text-primary-200 mb-8 text">{% trans 'Sign up now and claim' %} <br
-                                class="supersmall hidden"> <span
-                                class="text-secondary-500">{% trans 'your 3 free AI-powered ' %}</span><br
-                                class="md:hidden">
-                            {% trans 'soccer predictions' %}!</p>
-                        <div class="space-y-4 mb-8">
-                            <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span>{% trans "Professional Analysis for any Soccer match" %}</span>
-                            </div>
+    {% if not request.user.is_authenticated %}
+      <style>
+          @media (max-width: 320px) {
+              #noAccessSection {
+                  min-width: 18rem !important;
+              }
 
-                            <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span>{% trans "Most Accurate Betting Suggestions" %}</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span>{% trans "Advanced Soccer Reasoning" %}</span>
-                            </div>
-
-                            <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span>{% trans "AI-Powered Predictions" %}</span>
-                            </div>
-
-
-                            <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                <span>{% trans "Statistical Deep Dives" %}</span>
-                            </div>
-
-
-                        </div>
-                        <a class="formSubmitButton group relative w-full flex items-center justify-center py-3 px-4 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800"
-                           href="{% url 'accounts:register' %}">
-                            {% trans "Sign up" %}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 class="lucide lucide-chevron-right ml-2 h-5 w-5 text-primary-300 group-hover:text-primary-200 group-hover:translate-x-1 transition-transform">
-                                <path d="m9 18 6-6-6-6"></path>
-                            </svg>
-                        </a>
-
-                        <div class="text-center mt-4 text-sm">
-                            <p class="text-primary-300">{% trans "Already have an account" %}?
-                                <a
-                                        class="font-medium text-secondary-500 hover:text-secondary-400 inline-flex items-center group ml-1"
-                                        href="{% url 'accounts:login' %}">{% trans "Sign in" %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round"
-                                         class="lucide lucide-arrow-right w-4 h-4 ml-1">
-                                        <path d="M5 12h14"></path>
-                                        <path d="m12 5 7 7-7 7"></path>
-                                    </svg>
-                                </a></p>
-                        </div>
-                    </div>
-                </div>
+              .supersmall {
+                  display: block !important;
+              }
+          }
+      </style>
+      <div class="absolute top-0 left-0 w-full h-full bg-primary-900/70 z-[49] flex items-center justify-center">
+        <div class="max-w-xl min-w-[22rem] mx-auto text-center " id="noAccessSection">
+          <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl py-8 px-2 md:p-12 border border-primary-700/30">
+            <div class="w-20 h-20 bg-secondary-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="lucide lucide-lock w-10 h-10 text-secondary-400">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
             </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">{% trans "AI Analyst" %}</h2>
+            <p class="text-primary-200 mb-8 text">{% trans 'Sign up now and claim' %} <br
+              class="supersmall hidden"> <span
+              class="text-secondary-500">{% trans 'your 3 free AI-powered ' %}</span><br
+              class="md:hidden">
+              {% trans 'soccer predictions' %}!</p>
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                <span>{% trans "Professional Analysis for any Soccer match" %}</span>
+              </div>
+
+              <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                <span>{% trans "Most Accurate Betting Suggestions" %}</span>
+              </div>
+              <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                <span>{% trans "Advanced Soccer Reasoning" %}</span>
+              </div>
+
+              <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                <span>{% trans "AI-Powered Predictions" %}</span>
+              </div>
+
+
+              <div class="flex items-center justify-center space-x-2 text-primary-200 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                <span>{% trans "Statistical Deep Dives" %}</span>
+              </div>
+
+
+            </div>
+            <a
+              class="formSubmitButton group relative w-full flex items-center justify-center py-3 px-4 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800"
+              href="{% url 'accounts:register' %}">
+              {% trans "Sign up" %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round"
+                   class="lucide lucide-chevron-right ml-2 h-5 w-5 text-primary-300 group-hover:text-primary-200 group-hover:translate-x-1 transition-transform">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </a>
+
+            <div class="text-center mt-4 text-sm">
+              <p class="text-primary-300">{% trans "Already have an account" %}?
+                <a
+                  class="font-medium text-secondary-500 hover:text-secondary-400 inline-flex items-center group ml-1"
+                  href="{% url 'accounts:login' %}">{% trans "Sign in" %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                       stroke-linejoin="round"
+                       class="lucide lucide-arrow-right w-4 h-4 ml-1">
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="bg-primary-800/50 backdrop-blur-sm border-b border-primary-700/30 p-4">
+      <div class="container mx-auto flex items-center">
+
+        <div class="flex w-full items-center justify-center gap-4">
+          <div
+            class="w-12 h-12 bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-full shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 flex items-center justify-center transform hover:scale-110 transition-all duration-200 z-40">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="lucide lucide-bot w-8 h-8 text-white">
+              <path d="M12 8V4H8"></path>
+              <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+              <path d="M2 14h2"></path>
+              <path d="M20 14h2"></path>
+              <path d="M15 13v2"></path>
+              <path d="M9 13v2"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-white">{% trans 'AI Analyst' %}</h1>
+            <p class="text-primary-300 text-sm">{% trans 'Ask me anything about sport matches analysis' %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-1 overflow-y-auto p-4 pb-44 relative">
+
+      <div class="container mx-auto max-w-4xl space-y-6 leading-7" id="aiAssistantMessagesContainer">
+        <div class="flex justify-start">
+          <div
+            class="max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 mr-12 aiChatSection">
+            <p
+              class=" text-left">{% trans "Hello! I'm your AI Analyst" %}.<br>{% trans 'Ask me anything about sport matches analysis and predictions' %}.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="fixed bottom-28 right-2 xl:right-0 xl:bottom-64 w-full pointer-events-none">
+        <div class="container mx-auto max-w-4xl space-y-6 flex items-center justify-end">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="lucide lucide-bot w- h-48 xl:w-64 xl:h-64 text-secondary-400 opacity-10 transition-all duration-200">
+            <path d="M12 8V4H8"></path>
+            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+            <path d="M2 14h2"></path>
+            <path d="M20 14h2"></path>
+            <path d="M15 13v2"></path>
+            <path d="M9 13v2"></path>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+    <div class="bg-primary-800/50 backdrop-blur-sm border-t border-primary-700/30 p-4 fixed bottom-0 w-full">
+      <div class="container mx-auto max-w-4xl">
+        {% if free_messages is not None %}
+          {% if free_messages > 0 %}
+            <p class="text-success-500 font-bold mb-2 text-sm"
+               id="aiAssistantFreeMessageContainer">{% trans 'Free messages' %}:
+              <span
+                id="aiAssistantFreeMessageCounter" class="">{{ free_messages }}</span></p>
+          {% else %}
+            <p class="text-secondary-500 font-bold mb-2 text-sm"
+               id="aiAssistantFreeMessageContainer">{% trans "You've used all your free messages" %}.
+              {% trans "Subscribe to get unlimited access" %}!</p>
+          {% endif %}
         {% endif %}
 
-        <div class="bg-primary-800/50 backdrop-blur-sm border-b border-primary-700/30 p-4">
-            <div class="container mx-auto flex items-center">
 
-                <div class="flex w-full items-center justify-center gap-4">
-                    <div
-                            class="w-12 h-12 bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-full shadow-lg shadow-secondary-600/20 hover:shadow-secondary-600/40 flex items-center justify-center transform hover:scale-110 transition-all duration-200 z-40">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-bot w-8 h-8 text-white">
-                            <path d="M12 8V4H8"></path>
-                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-                            <path d="M2 14h2"></path>
-                            <path d="M20 14h2"></path>
-                            <path d="M15 13v2"></path>
-                            <path d="M9 13v2"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-white">{% trans 'AI Analyst' %}</h1>
-                        <p class="text-primary-300 text-sm">{% trans 'Ask me anything about sport matches analysis' %}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-1 overflow-y-auto p-4 pb-44 relative">
-
-            <div class="container mx-auto max-w-4xl space-y-6 leading-7" id="aiAssistantMessagesContainer">
-                <div class="flex justify-start">
-                    <div class="max-w-[80%] rounded-2xl p-4 bg-primary-800/50 border border-secondary-700/30 text-primary-200 mr-12 aiChatSection">
-                        <p class=" text-left">{% trans "Hello! I'm your AI Analyst" %}.<br>{% trans 'Ask me anything about sport matches analysis and predictions' %}.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="fixed bottom-28 right-2 xl:right-0 xl:bottom-64 w-full pointer-events-none">
-                <div class="container mx-auto max-w-4xl space-y-6 flex items-center justify-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="lucide lucide-bot w- h-48 xl:w-64 xl:h-64 text-secondary-400 opacity-10 transition-all duration-200">
-                        <path d="M12 8V4H8"></path>
-                        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-                        <path d="M2 14h2"></path>
-                        <path d="M20 14h2"></path>
-                        <path d="M15 13v2"></path>
-                        <path d="M9 13v2"></path>
-                    </svg>
-                </div>
-            </div>
-
-        </div>
-        <div class="bg-primary-800/50 backdrop-blur-sm border-t border-primary-700/30 p-4 fixed bottom-0 w-full">
-            <div class="container mx-auto max-w-4xl">
-                {% if free_messages is not None %}
-                    {% if free_messages > 0 %}
-                        <p class="text-success-500 font-bold mb-2 text-sm"
-                           id="aiAssistantFreeMessageContainer">{% trans 'Free messages' %}:
-                            <span
-                                    id="aiAssistantFreeMessageCounter" class="">{{ free_messages }}</span></p>
-                    {% else %}
-                        <p class="text-secondary-500 font-bold mb-2 text-sm"
-                           id="aiAssistantFreeMessageContainer">{% trans "You've used all your free messages" %}.
-                            {% trans "Subscribe to get unlimited access" %}!</p>
-                    {% endif %}
-                {% endif %}
-
-
-                <div class="flex items-center gap-4">
-                    <div class="flex-1 bg-primary-900/50 rounded-xl border border-primary-700/30 focus-within:border-secondary-500/50 transition-colors">
+        <div class="flex items-center gap-4">
+          <div
+            class="flex-1 bg-primary-900/50 rounded-xl border border-primary-700/30 focus-within:border-secondary-500/50 transition-colors">
                         <textarea placeholder="Type your message..." id="aiAssistantInput"
                                   class="overflow-y-auto w-full bg-transparent border-none focus:ring-0 text-white placeholder-primary-500 p-4 min-h-[52px] max-h-32 resize-none focus:outline-none no-scrollbar"
                                   rows="1"></textarea>
-                    </div>
-                    <button disabled="" id="aiAssistantSendButton"
-                            class="bg-secondary-600 text-white p-4 rounded-xl hover:bg-secondary-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-send w-5 h-5">
-                            <path d="m22 2-7 20-4-9-9-4Z"></path>
-                            <path d="M22 2 11 13"></path>
-                        </svg>
-                    </button>
-                </div>
-                <p class="text-primary-400 text-sm mt-2 hidden md:block">{% trans 'Press Enter to send, Shift + Enter for new line' %}</p>
-            </div>
+          </div>
+          <button disabled="" id="aiAssistantSendButton"
+                  class="bg-secondary-600 text-white p-4 rounded-xl hover:bg-secondary-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="lucide lucide-send w-5 h-5">
+              <path d="m22 2-7 20-4-9-9-4Z"></path>
+              <path d="M22 2 11 13"></path>
+            </svg>
+          </button>
         </div>
-
+        <p
+          class="text-primary-400 text-sm mt-2 hidden md:block">{% trans 'Press Enter to send, Shift + Enter for new line' %}</p>
+      </div>
     </div>
+
+  </div>
 {% endblock content %}

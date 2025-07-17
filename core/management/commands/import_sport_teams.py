@@ -4,6 +4,7 @@ import os
 from django.core.files import File
 from django.core.management.base import BaseCommand
 
+from backend import settings
 from core.models import SportTeam, SportLeague, Product
 
 BATCH_SIZE = 2000
@@ -19,7 +20,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         input_file = kwargs['input_file']
-        media_root = kwargs['media_root']
+        media_root = settings.MEDIA_ROOT
 
         # Preload leagues
         leagues = SportLeague.objects.values('id', 'external_id')

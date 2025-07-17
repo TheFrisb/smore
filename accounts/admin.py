@@ -191,7 +191,7 @@ class UserAdmin(UserAdmin):
         """
         if hasattr(obj, "subscription") and obj.subscription:
             return ", ".join(
-                [product.name for product in obj.subscription.products.all()]
+                [product.first_name for product in obj.subscription.products.all()]
             )
         return None
 
@@ -377,7 +377,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         Return a comma-separated list of subscribed sports (products) for the user.
         """
         if hasattr(obj, "products") and obj.products:
-            return ", ".join([product.name for product in obj.products.all()])
+            return ", ".join([product.first_name for product in obj.products.all()])
         return None
 
     subscribed_sports.short_description = "Subscribed Sports"

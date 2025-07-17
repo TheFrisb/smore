@@ -1,6 +1,7 @@
 import json
 import os
 
+from django.conf import settings
 from django.core.files import File
 from django.core.management.base import BaseCommand
 
@@ -19,7 +20,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         input_file = kwargs['input_file']
-        media_root = kwargs['media_root']
+        media_root = settings.MEDIA_ROOT
 
         # Preload countries
         countries = SportCountry.objects.values('id', 'name')

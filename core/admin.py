@@ -6,7 +6,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.postgres.lookups import Unaccent
 from django.contrib.postgres.search import TrigramSimilarity
-from django.db.models import Min, Value, F, Q
+from django.db.models import Min, Value, Q
 from django.db.models.functions import Lower, Greatest
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
@@ -22,7 +22,7 @@ from core.models import (
     SportTeam,
     SportMatch,
     BetLine,
-    Ticket,
+    Ticket, TeamStanding,
 )
 
 logger = logging.getLogger(__name__)
@@ -235,6 +235,7 @@ class SportMatchAdmin(admin.ModelAdmin):
         # Fallback: exactly as before
         return super().get_search_results(request, queryset, search_term)
 
+
 # Inline admin for TicketMatch
 class BetLineInline(admin.TabularInline):
     model = BetLine
@@ -309,3 +310,4 @@ admin.site.register(SiteSettings, SingletonModelAdmin)
 admin.site.register(SportCountry)
 # admin.site.register(PurchasedPredictions)
 # admin.site.register(PurchasedTickets)
+admin.site.register(TeamStanding)

@@ -55,6 +55,11 @@ div.g_id_signin > div > div > div {
     @apply py-4
 }
 
+#aiAssistantMessagesContainer a {
+    @apply text-secondary-400;
+    @apply underline;
+}
+
 
 #aiAssistantMessagesContainer h3, #aiAssistantMessagesContainer h4, #aiAssistantMessagesContainer h5, #aiAssistantMessagesContainer h6 {
     @apply text-lg text-secondary-500 font-bold;

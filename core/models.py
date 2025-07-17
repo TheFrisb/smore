@@ -129,6 +129,7 @@ class ApiSportModel(BaseInternalModel):
         BASKETBALL = "BASKETBALL", _("Basketball")
         NFL = "NFL", _("NFL")
         NHL = "NHL", _("NHL")
+        TEMP_FIX = "TEMP_FIX", _("Temporary Fix")
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
@@ -139,7 +140,7 @@ class ApiSportModel(BaseInternalModel):
 
     class Meta:
         abstract = True
-        unique_together = ("external_id", "type")
+        unique_together = ("external_id", "type",)
 
 
 class SportCountry(BaseInternalModel):
@@ -158,8 +159,15 @@ class SportLeague(ApiSportModel):
     country = models.ForeignKey(SportCountry, on_delete=models.CASCADE)
     league_type = models.CharField(max_length=255)
     logo = models.FileField(upload_to="assets/leagues/logos/")
-    current_season_id = models.IntegerField(blank=True, null=True)
-    is_processed = models.BooleanField(default=False)
+    current_season_year = models.IntegerField(
+        blank=True, null=True, db_index=True
+    )
+    api_coverage_data = models.JSONField(null=True, blank=True)
+    teams = models.ManyToManyField(
+        "SportTeam",
+        through='SportLeagueTeam',
+        related_name='leagues'
+    )
 
     def __str__(self):
         return self.name
@@ -169,11 +177,33 @@ class SportTeam(ApiSportModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255, db_index=True)
-    league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     logo = models.FileField(upload_to="assets/teams/logos/")
+
+    @property
+    def leagues_list(self):
+        return list(self.leagues.all())
 
     def __str__(self):
         return f"{self.name}"
+
+
+class TeamStanding(BaseInternalModel):
+    league_team = models.OneToOneField(
+        'SportLeagueTeam', on_delete=models.CASCADE, related_name='standings', primary_key=True
+    )
+    data = models.JSONField(null=True, blank=True)
+
+
+class SportLeagueTeam(models.Model):
+    league = models.ForeignKey(SportLeague, on_delete=models.CASCADE, related_name='league_teams')
+    team = models.ForeignKey(SportTeam, on_delete=models.CASCADE, related_name='team_leagues')
+    season = models.IntegerField(db_index=True)
+
+    class Meta:
+        unique_together = [('league', 'team', 'season')]
+
+    def __str__(self):
+        return f"{self.team} in {self.league} ({self.season})"
 
 
 class SportMatch(ApiSportModel):
@@ -332,3 +362,19 @@ class BetLine(BaseInternalModel):
         verbose_name = "Bet Line"
         verbose_name_plural = "Bet Lines"
         ordering = ["match__kickoff_datetime"]
+
+
+class Player(ApiSportModel):
+    full_name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name = models.CharField(max_length=255, blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
+    birth_date = models.DateField(blank=True, null=True)
+    birth_place = models.CharField(max_length=255, null=True, blank=True)
+    birth_country = models.CharField(max_length=255, null=True, blank=True)
+    nationality = models.CharField(max_length=255, null=True, blank=True)
+    height = models.CharField(max_length=255, null=True, blank=True)
+    weight = models.CharField(max_length=255, null=True, blank=True)
+    number = models.CharField(max_length=255, null=True, blank=True)
+    position = models.CharField(max_length=255, null=True, blank=True)
+    photo = models.FileField(upload_to="assets/players/photos/", null=True, blank=True)

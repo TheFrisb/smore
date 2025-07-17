@@ -1,6 +1,7 @@
 import logging
 from typing import List
 
+from langchain.load.dump import dumps
 from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
 
 from ai_assistant.models import Message
@@ -37,14 +38,23 @@ class AiService:
 
         # Get AI response
         response = self.agent.invoke({"messages": all_messages})
-        ai_response = response["messages"][-1].content
+        # self._log_response(response)
+        ai_response = self._extract_response(response)
 
-        # Store the outbound message
         self._store_message(ai_response, Message.Direction.OUTBOUND, user)
 
-        logger.info(f"AI response: {ai_response}")
-
         return ai_response
+
+    def _log_response(self, response):
+        """
+        Log the response from the AI agent in a structured format.
+
+        :param response: The response dictionary returned by the agent.
+        """
+        logger.info(
+            "AI Response: %s",
+            dumps(response, indent=2, ensure_ascii=False)
+        )
 
     def _get_message_history(self, user) -> List[BaseMessage]:
         """
@@ -108,6 +118,6 @@ class AiService:
         :param response: The response dictionary returned by the agent.
         :return: The AI's response as a string.
         """
-        message = response["messages"][-1].content
-
+        # message = response["messages"][-1].content
+        message = response['messages'][-1].content[0]["text"]
         return message

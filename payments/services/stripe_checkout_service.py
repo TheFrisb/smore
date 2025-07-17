@@ -23,10 +23,10 @@ class StripePortalSessionFlow(Enum):
 class StripeCheckoutService(BaseStripeService):
 
     def create_subscription_checkout_session(
-        self,
-        user: User | AbstractBaseUser,
-        price_ids: List[str],
-        first_chosen_product_id: int,
+            self,
+            user: User | AbstractBaseUser,
+            price_ids: List[str],
+            first_chosen_product_id: int,
     ) -> Session:
         metadata = (
             {
@@ -56,7 +56,7 @@ class StripeCheckoutService(BaseStripeService):
         return checkout_session
 
     def create_onetime_prediction_checkout_session(
-        self, user: User | AbstractBaseUser, prediction: Prediction
+            self, user: User | AbstractBaseUser, prediction: Prediction
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:purchase_payment_success', kwargs={'prediction_pk': prediction.id})}",
@@ -81,7 +81,7 @@ class StripeCheckoutService(BaseStripeService):
         return checkout_session
 
     def create_onetime_ticket_checkout_session(
-        self, user: User | AbstractBaseUser, ticket: Ticket
+            self, user: User | AbstractBaseUser, ticket: Ticket
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
@@ -109,9 +109,9 @@ class StripeCheckoutService(BaseStripeService):
         return [{"price": price_id, "quantity": 1} for price_id in price_ids]
 
     def create_portal_session(
-        self,
-        user: User | AbstractBaseUser,
-        portal_flow: StripePortalSessionFlow = StripePortalSessionFlow.MANAGE_SUBSCRIPTION,
+            self,
+            user: User | AbstractBaseUser,
+            portal_flow: StripePortalSessionFlow = StripePortalSessionFlow.MANAGE_SUBSCRIPTION,
     ) -> Session:
         flow = None
 
@@ -141,7 +141,7 @@ class StripeCheckoutService(BaseStripeService):
                 "price_data": {
                     "currency": "eur",
                     "product_data": {
-                        "name": f"Premium prediction: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
+                        "name": f"Premium prediction: {prediction.match.home_team.first_name} vs {prediction.match.away_team.first_name}",
                     },
                     "unit_amount": 999,
                 },
@@ -176,7 +176,7 @@ class StripeCheckoutService(BaseStripeService):
         ]
 
     def update_subscription_items(
-        self, user: User, new_price_ids: List[str]
+            self, user: User, new_price_ids: List[str]
     ) -> Session:
         subscription_id = user.subscription.stripe_subscription_id
         subscription = self.stripe_client.Subscription.retrieve(subscription_id)

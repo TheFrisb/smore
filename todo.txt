@@ -1,4 +1,12 @@
-1. Dump match data
-2. Analyze IB AI
-3. Analyze tool usage
-4. Add tools to add
+TODO:
+3. Fetch player statistics for match
+4. Fetch team players for match
+
+7. Add mechanism to appoint team to multiple leagues
+
+
+TODO:
+1. Fetch team statistics for match
+2. Add FewShot examples
+3. Test out different models
+5. Make frontend more responsive

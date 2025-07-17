@@ -45,7 +45,7 @@ def get_team_info(team_input: TeamInput) -> SportTeamOutputModel:
                 Lower(Unaccent("name")), Lower(Unaccent(Value(query)))
             )
         )
-        .prefetch_related("league")
+        .prefetch_related("leagues")
         .filter(similarity__gt=0.5, type=ApiSportModel.SportType.SOCCER)
         .order_by("-similarity")
     )
@@ -56,7 +56,10 @@ def get_team_info(team_input: TeamInput) -> SportTeamOutputModel:
         return SportTeamOutputModel(
             external_id=team.external_id,
             name=team.name,
-            league=SportLeagueOutputModel.from_orm(team.league)
+            leagues_list=[
+                SportLeagueOutputModel.model_validate(league)
+                for league in team.leagues_list
+            ]
         )
 
     else:
@@ -81,9 +84,10 @@ def get_team_infos_by_league(team_league_input: TeamLeagueInput) -> list[SportTe
     teams = (
         SportTeam.objects.filter(
             league__external_id=team_league_input.league_external_id,
-            type=ApiSportModel.SportType.SOCCER
+            type=ApiSportModel.SportType.SOCCER,
+            leagues__in=team_league_input.league_external_id
         )
-        .prefetch_related("league")
+        .prefetch_related("leagues")
         .order_by("name")
     )
 

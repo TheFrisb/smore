@@ -2,8 +2,8 @@ from django.db.models import Q
 from django.utils import timezone
 
 from ai_assistant.v2.types import SportMatchInsightOutputModel, PredictionStatisticsOutputModel, SportTeamOutputModel, \
-    SportMatchOutputModel
-from core.models import SportMatch, SportTeam
+    SportMatchOutputModel, TeamStandingOutputModel
+from core.models import SportMatch, SportTeam, TeamStanding
 
 
 class MatchInsightBuilder:
@@ -44,6 +44,7 @@ class MatchInsightBuilder:
             team1=self.sport_match.home_team,
             team2=self.sport_match.away_team
         )
+        home_team_standings, away_team_standings = self.get_standings()
 
         return SportMatchInsightOutputModel(
             match=SportMatchOutputModel.model_validate(self.sport_match),
@@ -53,6 +54,9 @@ class MatchInsightBuilder:
             away_team_upcoming_matches=away_future,
             head_to_head_matches=head2head,
             prediction_statistics=self.fetch_prediction_statistics(),
+            home_team_standings=home_team_standings,
+            away_team_standings=away_team_standings
+
         )
 
     def fetch_matches_by_kickoff_datetime(self, team: SportTeam, history: bool, matches_to_fetch=10) -> \
@@ -161,3 +165,24 @@ class MatchInsightBuilder:
         if not s or not s.endswith("%"):
             return None
         return float(s[:-1])
+
+    def get_standings(self) -> tuple[TeamStandingOutputModel | None, TeamStandingOutputModel | None]:
+        """
+        Get the standings for the home and away teams in the match.
+
+        Returns:
+            tuple: A tuple containing the standings for the home team and away team.
+        """
+        home_team_standing = TeamStanding.objects.filter(
+            league_team__team=self.sport_match.home_team,
+            league_team__league=self.sport_match.league,
+        ).first()
+        away_team_standing = TeamStanding.objects.filter(
+            league_team__team=self.sport_match.away_team,
+            league_team__league=self.sport_match.league,
+        ).first()
+
+        return (
+            TeamStandingOutputModel.from_django(home_team_standing) if home_team_standing else None,
+            TeamStandingOutputModel.from_django(away_team_standing) if away_team_standing else None
+        )

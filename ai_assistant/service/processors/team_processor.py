@@ -161,7 +161,7 @@ class TeamProcessor(BaseProcessor):
                 f"Extracted teams: {match.home_team.name}, {match.away_team.name}"
             )
 
-        loggable_team_string = ", ".join([team.name for team in teams])
+        loggable_team_string = ", ".join([team.first_name for team in teams])
         logger.info(f"Extracted teams: {loggable_team_string}")
         return list(teams)
 

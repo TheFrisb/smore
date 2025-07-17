@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime, timedelta
 
+from core.services.api.league_service import LeagueService
 from core.services.basketball_api_service import BasketballApiService
 from core.services.football_api_service import FootballApiService
 
@@ -26,3 +27,8 @@ def load_matches():
 
     football_api_service.populate_matches(start_time, end_time)
     # basketball_api_service.populate_matches(start_time, end_time)
+
+
+def update_league_season_year():
+    league_service = LeagueService()
+    league_service.update_league_season_year()
