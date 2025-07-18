@@ -112,8 +112,8 @@ class HeadToHeadInput(BaseModel):
         description="Optional kick-off date to filter matches (matches on the same day as this date)"
     )
     number_of_matches: Optional[int] = Field(
-        10,
-        description="Number of matches to return, default is 10"
+        30,
+        description="Number of matches to return, default is 30"
     )
 
     model_config = ConfigDict(
@@ -148,7 +148,7 @@ def get_head_to_head_matches(head_to_head_input: HeadToHeadInput) -> List[SportM
 
     query = _add_date_filters_if_needed(query, query_date, future_only=False)
 
-    matches = query.all().order_by('kickoff_datetime')
+    matches = query.all().order_by('kickoff_datetime')[:head_to_head_input.number_of_matches]
 
     logger.info(f"Found {len(matches)} head-to-head matches for teams with IDs: {home_team_id} and {away_team_id}")
     return [SportMatchOutputModel.model_validate(match) for match in matches]
@@ -218,7 +218,7 @@ def get_matches_by_league(league_input: GetMatchesByLeagueInput) -> List[SportMa
 
     query = _add_date_filters_if_needed(query, query_date, future_only)
 
-    matches = query.all().order_by('kickoff_datetime')
+    matches = query.all().order_by('kickoff_datetime')[:league_input.number_of_matches]
 
     logger.info(
         f"Found {len(matches)} matches for league: {league.name} (ID: {league.external_id}), and query date: {query_date}, future_only: {future_only}")
@@ -251,7 +251,7 @@ def get_matches_by_team(team_input: GetMatchesByTeamInput) -> List[SportMatchOut
 
     query = _add_date_filters_if_needed(query, query_date, future_only)
 
-    matches = query.all().order_by('kickoff_datetime')
+    matches = query.all().order_by('kickoff_datetime')[:team_input.number_of_matches]
 
     logger.info(
         f"Found {len(matches)} matches for team ID: {external_team_id}, and query date: {query_date}, future_only: {future_only}")
