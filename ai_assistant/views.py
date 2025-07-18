@@ -68,9 +68,12 @@ class SendMessageToAiView(APIView):
         )
 
         ai_service = AiService()
-        response = ai_service.run(message, request.user)
-        # llm_service = LLMService(user=request.user, prompt=message)
-        # response = llm_service.process_prompt(message)
+        try:
+            response = ai_service.run(message, request.user)
+        except Exception as e:
+            logger.exception(
+                f"Error processing AI request for User ({request.user.id}): {request.user.username}", exc_info=True
+            )
 
         logger.info(
             f"AI Response for User ({request.user.id}): {request.user.username} - {response}"
