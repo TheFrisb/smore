@@ -52,7 +52,7 @@ class PlayerService(BaseApiFootballService):
                     product=product,
                     type=ApiSportModel.SportType.TEMP_FIX,
                     external_id=data["id"],
-                    name=data["name"],
+                    full_name=data["name"],
                     first_name=data["firstname"],
                     last_name=data["lastname"],
                     age=data["age"],
