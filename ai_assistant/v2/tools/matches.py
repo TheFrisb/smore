@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from datetime import timedelta, datetime
+from datetime import date
 from typing import Optional, List, Union
 
 from django.db.models import QuerySet, Q
@@ -19,9 +19,9 @@ logger = logging.getLogger(__name__)
 
 class GetMatchesByLeagueInput(BaseModel):
     league: SportLeagueOutputModel = Field(..., description="The league for which to fetch matches")
-    kickoff_datetime: Union[None, datetime] = Field(
+    kickoff_date: Union[None, date] = Field(
         None,
-        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+        description="Optional kick-off date to filter matches (matches on the same day as this date)"
     )
     upcoming_only: Optional[bool] = Field(
         False,
@@ -39,9 +39,9 @@ class GetMatchesByLeagueInput(BaseModel):
 
 class GetMatchesByTeamInput(BaseModel):
     external_team_id: int = Field(..., description="The external ID of the team for which to fetch matches")
-    kickoff_datetime: Union[None, datetime] = Field(
+    kickoff_date: Union[None, date] = Field(
         None,
-        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+        description="Optional kick-off date to filter matches (matches on the same day as this date)"
     )
     upcoming_only: Optional[bool] = Field(
         False,
@@ -59,9 +59,9 @@ class GetMatchesByTeamInput(BaseModel):
 
 class GetMatchesByTeamList(BaseModel):
     external_team_ids: List[int] = Field(..., description="List of external team IDs for which to fetch matches")
-    kickoff_datetime: Union[None, datetime] = Field(
+    kickoff_date: Union[None, date] = Field(
         None,
-        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+        description="Optional kick-off date to filter matches (matches on the same day as this date)"
     )
     upcoming_only: Optional[bool] = Field(
         False,
@@ -86,9 +86,9 @@ class GetMatchByExternalIdInput(BaseModel):
 
 
 class RandomMatchInput(BaseModel):
-    kickoff_datetime: Union[None, datetime] = Field(
+    kickoff_date: Union[None, date] = Field(
         None,
-        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+        description="Optional kick-off date to filter matches (matches on the same day as this date)"
     )
     future_only: Optional[bool] = Field(
         False,
@@ -107,9 +107,9 @@ class RandomMatchInput(BaseModel):
 class HeadToHeadInput(BaseModel):
     home_team_external_id: int = Field(..., description="External ID of the home team")
     away_team_external_id: int = Field(..., description="External ID of the away team")
-    kickoff_datetime: Union[None, datetime] = Field(
+    kickoff_date: Union[None, date] = Field(
         None,
-        description="Optional kick-off datetime to filter matches (matches on the same day as this datetime)"
+        description="Optional kick-off date to filter matches (matches on the same day as this date)"
     )
     number_of_matches: Optional[int] = Field(
         10,
@@ -134,18 +134,19 @@ def get_head_to_head_matches(head_to_head_input: HeadToHeadInput) -> List[SportM
     """
     home_team_id = head_to_head_input.home_team_external_id
     away_team_id = head_to_head_input.away_team_external_id
-    query_datetime = head_to_head_input.kickoff_datetime
+    query_date = head_to_head_input.kickoff_date
 
     logger.info(
         f"Fetching head-to-head matches for home team ID: {home_team_id} and away team ID: {away_team_id}, "
-        f"query datetime: {query_datetime}")
+        f"query date: {query_date}")
 
     query = SportMatch.objects.filter(
         Q(home_team__external_id=home_team_id, away_team__external_id=away_team_id) |
-        Q(home_team__external_id=away_team_id, away_team__external_id=home_team_id)
+        Q(home_team__external_id=away_team_id, away_team__external_id=home_team_id),
+        type=ApiSportModel.SportType.SOCCER
     ).select_related('league__country', 'home_team', 'away_team')
 
-    query = _add_date_filters_if_needed(query, query_datetime, future_only=False)
+    query = _add_date_filters_if_needed(query, query_date, future_only=False)
 
     matches = query.all().order_by('kickoff_datetime')
 
@@ -164,14 +165,14 @@ def get_random_matches(random_match_input: RandomMatchInput) -> List[SportMatchO
     Returns:
         List[SportMatchOutputModel]: A list containing a single random match, filtered by the provided criteria.
     """
-    query_datetime = random_match_input.kickoff_datetime
+    query_date = random_match_input.kickoff_date
     future_only = random_match_input.future_only
 
-    logger.info(f"Fetching a random match with query datetime: {query_datetime}, future_only: {future_only}")
+    logger.info(f"Fetching a random match with query date: {query_date}, future_only: {future_only}")
 
     query = SportMatch.objects.select_related('league__country', 'home_team', 'away_team')
 
-    query = _add_date_filters_if_needed(query, query_datetime, future_only)
+    query = _add_date_filters_if_needed(query, query_date, future_only)
 
     matches = list(
         query.filter(league__external_id__in=allowed_league_ids, type=ApiSportModel.SportType.SOCCER).exclude(
@@ -179,11 +180,15 @@ def get_random_matches(random_match_input: RandomMatchInput) -> List[SportMatchO
         :random_match_input.number_of_matches
         ])
     if not matches:
-        logger.warning("No matches found for the given criteria.")
-        return []
+        logger.warning("No matches found for the external IDs in allowed_league_ids")
+        matches = list(
+            query.filter(type=ApiSportModel.SportType.SOCCER).exclude(
+                metadata={}).order_by("kickoff_datetime")[
+            :random_match_input.number_of_matches
+            ])
 
     logger.info(
-        f"Found {len(matches)} random matches with query datetime: {query_datetime}, future_only: {future_only}")
+        f"Found {len(matches)} random matches with query date: {query_date}, future_only: {future_only}")
     return [SportMatchOutputModel.model_validate(match) for match in matches]
 
 
@@ -199,23 +204,24 @@ def get_matches_by_league(league_input: GetMatchesByLeagueInput) -> List[SportMa
         List[SportMatchOutputModel]: A list of matches in the specified league, filtered by the provided criteria.
     """
     league = league_input.league
-    query_datetime = league_input.kickoff_datetime
+    query_date = league_input.kickoff_date
     future_only = league_input.upcoming_only
 
     logger.info(
-        f"Fetching matches for league: {league.name} (ID: {league.external_id}) and query datetime: {query_datetime}, future_only: {future_only}")
+        f"Fetching matches for league: {league.name} (ID: {league.external_id}) and query date: {query_date}, future_only: {future_only}")
 
     # Start building the query
-    query = SportMatch.objects.filter(league__external_id=league.external_id).select_related(
+    query = SportMatch.objects.filter(league__external_id=league.external_id,
+                                      type=ApiSportModel.SportType.SOCCER).select_related(
         'league__country', 'home_team', 'away_team'
     )
 
-    query = _add_date_filters_if_needed(query, query_datetime, future_only)
+    query = _add_date_filters_if_needed(query, query_date, future_only)
 
     matches = query.all().order_by('kickoff_datetime')
 
     logger.info(
-        f"Found {len(matches)} matches for league: {league.name} (ID: {league.external_id}), and query datetime: {query_datetime}, future_only: {future_only}")
+        f"Found {len(matches)} matches for league: {league.name} (ID: {league.external_id}), and query date: {query_date}, future_only: {future_only}")
     return [SportMatchOutputModel.model_validate(match) for match in matches]
 
 
@@ -231,23 +237,24 @@ def get_matches_by_team(team_input: GetMatchesByTeamInput) -> List[SportMatchOut
         List[SportMatchOutputModel]: A list of matches involving the specified team, filtered by the provided criteria.
     """
     external_team_id = team_input.external_team_id
-    query_datetime = team_input.kickoff_datetime
+    query_date = team_input.kickoff_date
     future_only = team_input.upcoming_only
 
     logger.info(
-        f"Fetching matches for team ID: {external_team_id} and query datetime: {query_datetime}, future_only: {future_only}")
+        f"Fetching matches for team ID: {external_team_id} and query date: {query_date}, future_only: {future_only}")
 
     query = SportMatch.objects.filter(
-        Q(home_team__external_id=external_team_id) | Q(away_team__external_id=external_team_id)).select_related(
+        Q(home_team__external_id=external_team_id) | Q(away_team__external_id=external_team_id),
+        type=ApiSportModel.SportType.SOCCER).select_related(
         'league__country', 'home_team', 'away_team'
     )
 
-    query = _add_date_filters_if_needed(query, query_datetime, future_only)
+    query = _add_date_filters_if_needed(query, query_date, future_only)
 
     matches = query.all().order_by('kickoff_datetime')
 
     logger.info(
-        f"Found {len(matches)} matches for team ID: {external_team_id}, and query datetime: {query_datetime}, future_only: {future_only}")
+        f"Found {len(matches)} matches for team ID: {external_team_id}, and query date: {query_date}, future_only: {future_only}")
     return [SportMatchOutputModel.model_validate(match) for match in matches]
 
 
@@ -263,22 +270,23 @@ def get_matches_by_team_list(team_list_input: GetMatchesByTeamList) -> List[Spor
         List[SportMatchOutputModel]: A list of matches involving the specified teams, filtered by the provided criteria.
     """
     external_team_ids = team_list_input.external_team_ids
-    query_datetime = team_list_input.kickoff_datetime
+    query_date = team_list_input.kickoff_date
     future_only = team_list_input.upcoming_only
 
     logger.info(
-        f"Fetching matches for team IDs: {external_team_ids} and query datetime: {query_datetime}, future_only: {future_only}")
+        f"Fetching matches for team IDs: {external_team_ids} and query date: {query_date}, future_only: {future_only}")
 
     query = SportMatch.objects.filter(
-        Q(home_team__external_id__in=external_team_ids) | Q(away_team__external_id__in=external_team_ids)
+        Q(home_team__external_id__in=external_team_ids) | Q(away_team__external_id__in=external_team_ids),
+        type=ApiSportModel.SportType.SOCCER
     ).select_related('league__country', 'home_team', 'away_team')
 
-    query = _add_date_filters_if_needed(query, query_datetime, future_only)
+    query = _add_date_filters_if_needed(query, query_date, future_only)
 
     matches = query.all().order_by('kickoff_datetime')[:team_list_input.number_of_matches]
 
     logger.info(
-        f"Found {len(matches)} matches for team IDs: {external_team_ids}, and query datetime: {query_datetime}, future_only: {future_only}")
+        f"Found {len(matches)} matches for team IDs: {external_team_ids}, and query date: {query_date}, future_only: {future_only}")
     return [SportMatchOutputModel.model_validate(match) for match in matches]
 
 
@@ -297,7 +305,7 @@ def get_match_insights_by_external_id(match_input: GetMatchByExternalIdInput) ->
 
     logger.info(f"Fetching match insights for external ID: {external_id}")
 
-    match = SportMatch.objects.filter(external_id=external_id).select_related(
+    match = SportMatch.objects.filter(external_id=external_id, type=ApiSportModel.SportType.SOCCER).select_related(
         'league__country', 'home_team', 'away_team'
     ).first()
 
@@ -307,25 +315,21 @@ def get_match_insights_by_external_id(match_input: GetMatchByExternalIdInput) ->
 
 
 def _add_date_filters_if_needed(queryset: QuerySet,
-                                kickoff_datetime: Optional[datetime],
+                                kickoff_date: Optional[date],
                                 future_only: bool) -> QuerySet:
     """    Adds date filters to the queryset based on the provided kickoff_datetime and future_only flag.
     Args:
         queryset (QuerySet): The initial queryset to filter.
-        kickoff_datetime (Optional[datetime]): The datetime to filter matches by.
+        kickoff_date (Optional[date]): Optional date to filter matches that occur on the same day.
         future_only (bool): If True, only return matches in the future relative to the current time.
     Returns:
         QuerySet: The filtered queryset.
     """
 
-    if kickoff_datetime:
-        if not timezone.is_aware(kickoff_datetime):
-            kickoff_datetime = timezone.make_aware(kickoff_datetime)
-
-        start_of_day = kickoff_datetime.replace(hour=0, minute=0, second=0, microsecond=0)
-        end_of_day = start_of_day + timedelta(days=1)
-        queryset = queryset.filter(kickoff_datetime__gte=start_of_day, kickoff_datetime__lt=end_of_day)
-    elif future_only:
+    if kickoff_date:
+        logger.info(f"Filtering matches for kickoff date: {kickoff_date}")
+        queryset = queryset.filter(kickoff_datetime__date=kickoff_date)
+    elif future_only and kickoff_date is None:
         queryset = queryset.filter(kickoff_datetime__gt=timezone.now())
 
     return queryset
