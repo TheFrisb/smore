@@ -76,6 +76,7 @@ class LeagueService(BaseApiFootballService):
 
         team_standing_service = TeamStandingsService()
         for league in sport_leagues:
+            sleep(0.5)  # sleep to avoid hitting API rate limits
             team_standing_service.update_team_standings(league.external_id, league.current_season_year)
 
     def _find_active_season_with_coverage(self, seasons) -> dict:

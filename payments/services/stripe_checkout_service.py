@@ -141,7 +141,7 @@ class StripeCheckoutService(BaseStripeService):
                 "price_data": {
                     "currency": "eur",
                     "product_data": {
-                        "name": f"Premium prediction: {prediction.match.home_team.first_name} vs {prediction.match.away_team.first_name}",
+                        "name": f"Premium prediction: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
                     },
                     "unit_amount": 999,
                 },
