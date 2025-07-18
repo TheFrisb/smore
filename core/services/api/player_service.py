@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from time import sleep
 
 from core.models import Player, Product, ApiSportModel
 from core.services.api.in_progress.BaseApiFootballService import BaseApiFootballService
@@ -18,6 +19,7 @@ class PlayerService(BaseApiFootballService):
         product = Product.objects.filter(name=Product.Names.SOCCER).first()
 
         while current_page <= max_pages:
+            sleep(0.5)
             response = self.get_endpoint(endpoint=endpoint, query_params={"page": current_page})
             paging = response.get("paging", {})
             body = response.get("response", [])

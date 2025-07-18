@@ -1,3 +1,5 @@
+from time import sleep
+
 from core.models import SportLeagueTeam, TeamStanding, SportLeague, SportTeam
 from core.services.api.in_progress.BaseApiFootballService import BaseApiFootballService
 
@@ -26,6 +28,7 @@ class TeamStandingsService(BaseApiFootballService):
 
         for data in standings[0]:
             team_external_id = data.get("team", {}).get("id")
+            sleep(0.5)
 
             try:
                 sport_league_team = SportLeagueTeam.objects.filter(
