@@ -2,7 +2,6 @@ import logging
 from collections import defaultdict
 from itertools import groupby
 
-from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -16,7 +15,7 @@ from accounts.models import (
     PurchasedTickets,
     PurchasedDailyOffer,
 )
-from ai_assistant.models import Message
+from ai_assistant.models import Message, SuggestedMessage
 from core.models import (
     Product,
     PickOfTheDay,
@@ -302,23 +301,23 @@ class DetailedPredictionView(DetailView):
             return True
 
         if PurchasedDailyOffer.objects.filter(
-            user=self.request.user if self.request.user.is_authenticated else None,
-            status=PurchasedDailyOffer.Status.PURCHASED,
-            for_date=timezone.now().date(),
+                user=self.request.user if self.request.user.is_authenticated else None,
+                status=PurchasedDailyOffer.Status.PURCHASED,
+                for_date=timezone.now().date(),
         ).exists():
             return True
 
         if (
-            self.request.user.is_authenticated
-            and self.request.user.has_access_to_product(prediction.product)
+                self.request.user.is_authenticated
+                and self.request.user.has_access_to_product(prediction.product)
         ):
             return True
 
         if (
-            self.request.user.is_authenticated
-            and PurchasedPredictions.objects.filter(
-                user=self.request.user, prediction=prediction
-            ).exists()
+                self.request.user.is_authenticated
+                and PurchasedPredictions.objects.filter(
+            user=self.request.user, prediction=prediction
+        ).exists()
         ):
             return True
 
@@ -328,8 +327,8 @@ class DetailedPredictionView(DetailView):
         prediction = self.get_object()
 
         if (
-            prediction.status != Prediction.Status.PENDING
-            or not prediction.has_detailed_analysis
+                prediction.status != Prediction.Status.PENDING
+                or not prediction.has_detailed_analysis
         ):
             logger.info(
                 f"User {request.user} tried to access detailed prediction view for prediction {prediction.id} with status {prediction.status} and has_detailed_analysis {prediction.has_detailed_analysis}. Redirecting to home page."
@@ -494,7 +493,6 @@ class UpcomingMatchesView(TemplateView):
         )
         context["can_not_view_at_least_one_prediction"] = can_not_view_at_least_one
 
-
         return context
 
     def _get_product_filter(self):
@@ -615,8 +613,8 @@ class UpcomingMatchesView(TemplateView):
                         bet_line.same_as_previous = True
 
                     if (
-                        i < len(bet_lines) - 1
-                        and bet_lines[i + 1].match == bet_line.match
+                            i < len(bet_lines) - 1
+                            and bet_lines[i + 1].match == bet_line.match
                     ):
                         bet_line.same_as_next = True
 
@@ -770,7 +768,31 @@ class AiAssistantView(TemplateView):
         context["ai_assistant_product_id"] = Product.objects.get(
             name=Product.Names.AI_ANALYST
         ).id
+        context["has_access"] = self._can_text_ai_assistant()
+        context["suggested_messages"] = self._get_suggested_messages()
         return context
+
+    def _can_text_ai_assistant(self):
+        """
+        Check if the user can text the AI Assistant.
+        """
+        user = self.request.user
+
+        if not user.is_authenticated:
+            return False
+
+        if self._get_has_access():
+            return True
+
+        # Check if the user has free messages left
+        free_messages = self.get_free_messages()
+        if free_messages is not None and free_messages > 0:
+            return True
+
+        return False
+
+    def _get_suggested_messages(self):
+        return SuggestedMessage.objects.all().order_by("order")
 
     def _get_has_access(self):
         """

@@ -2,65 +2,65 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Smore - {{ page_title }}</title>
-    <link rel="preload" href="{% static 'js/core_v38.bundle.js' %}" as="script">
-    <link rel="stylesheet" href="{% static 'css/tailwind_output_v37.css' %}">
-    <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
-    <script src="https://accounts.google.com/gsi/client?hl=en" async></script>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Smore - {{ page_title }}</title>
+  <link rel="preload" href="{% static 'js/core_v39.bundle.js' %}" as="script">
+  <link rel="stylesheet" href="{% static 'css/tailwind_output_v39.css' %}">
+  <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+  <script src="https://accounts.google.com/gsi/client?hl=en" async></script>
 
-    <!-- Meta Pixel Code -->
-    <script>
-      !function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod ?
-            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
-      }(window, document, 'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '480381268269305');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=480381268269305&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, "script",
+      "https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init", "480381268269305");
+    fbq("track", "PageView");
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id=480381268269305&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 
-    {% block extrahead %}{% endblock extrahead %}
+  {% block extrahead %}{% endblock extrahead %}
 
 </head>
 <body class="min-h-screen bg-primary-950">
 {% include 'core/includes/header.html' %}
 <main class="pt-20">
 
-    {% block content %}{% endblock content %}
+  {% block content %}{% endblock content %}
 
 </main>
 {% if not hide_footer %}
-    {% include 'core/includes/footer.html' %}
+  {% include 'core/includes/footer.html' %}
 {% endif %}
 
 
 
-<script src="{% static 'js/core_v38.bundle.js' %}"></script>
+<script src="{% static 'js/core_v39.bundle.js' %}"></script>
 {% block scripts %}{% endblock scripts %}
 </body>
 </html>
