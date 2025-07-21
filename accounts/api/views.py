@@ -64,3 +64,13 @@ class PostSendConfirmEmailMailView(APIView):
             self.mail_service.send_email_confirmation_email(user, confirmation_link)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class DeleteMyAccountView(APIView):
+    def delete(self, request):
+        user = request.user
+        user.is_active = False
+        user.save()
+        
+        messages.success(request, "Your account has been deleted successfully.")
+        return Response(status=status.HTTP_204_NO_CONTENT)

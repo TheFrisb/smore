@@ -1,6 +1,6 @@
 from django.urls import path
 
-from accounts.api.views import CreateWithdrawalRequestView, PostSendConfirmEmailMailView
+from accounts.api.views import CreateWithdrawalRequestView, PostSendConfirmEmailMailView, DeleteMyAccountView
 
 urlpatterns = [
     path(
@@ -13,6 +13,9 @@ urlpatterns = [
         PostSendConfirmEmailMailView.as_view(),
         name="resend_email_confirmation",
     ),
-
-
+    path(
+        "delete/",
+        DeleteMyAccountView.as_view(),
+        name="delete_my_account",
+    )
 ]
