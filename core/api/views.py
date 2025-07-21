@@ -94,6 +94,7 @@ class PredictionListView(ListAPIView):
 
 class GetFrequentlyAskedQuestionsListView(ListAPIView):
     serializer_class = FrequentlyAskedQuestionSerializer
+    permission_classes = []
 
     def get_queryset(self):
         return FrequentlyAskedQuestion.objects.all().order_by("order")
