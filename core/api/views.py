@@ -73,6 +73,7 @@ class PaginatedHistoryPredictionsView(ListAPIView):
 class PredictionListView(ListAPIView):
     serializer_class = PredictionSerializer
     filterset_class = PredictionFilter
+    permission_classes = []
 
     def get_queryset(self):
         return (
