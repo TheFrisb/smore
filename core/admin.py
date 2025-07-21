@@ -126,6 +126,10 @@ class PredictionAdmin(admin.ModelAdmin):
         ("Additional Information", {"fields": ("created_at", "updated_at")}),
     )
 
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.exclude(id=1024)
+
     def get_result(self, obj):
         return obj.result
 
