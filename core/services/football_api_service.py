@@ -90,6 +90,7 @@ class FootballApiService(SportApiService):
         product_obj = Product.objects.get(name=Product.Names.SOCCER)
 
         fixture = item.get("fixture")
+        status = fixture.get("status").get("short")
         league = item.get("league")
         home_team = item.get("teams").get("home")
         away_team = item.get("teams").get("away")
@@ -134,11 +135,14 @@ class FootballApiService(SportApiService):
             external_id=fixture.get("id"), product=product_obj
         ).first()
 
+        match_status = self._get_status(status)
+
         if match_obj:
             try:
                 match_obj.home_team_score = home_team_score
                 match_obj.away_team_score = away_team_score
                 match_obj.kickoff_datetime = kickoff_datetime
+                match_obj.status = match_status
                 match_obj.save()
                 logger.info(f"Updated existing match: {match_obj}")
             except Exception as e:
@@ -156,6 +160,7 @@ class FootballApiService(SportApiService):
                     kickoff_datetime=kickoff_datetime,
                     product=product_obj,
                     type=SportMatch.SportType.SOCCER,
+                    status=match_status,
                 )
                 logger.info(f"Successfully created {match_obj}")
             except Exception as e:
@@ -170,3 +175,26 @@ class FootballApiService(SportApiService):
             match_obj.save()
 
         return match_obj
+
+    def _get_status(self, status: str) -> SportMatch.Status:
+        if status in [
+            'TBD',
+            'NS',
+            'SUSP',
+            'PST',
+            'ABD'
+        ]:
+            return SportMatch.Status.SCHEDULED
+        elif status in [
+            '1H',
+            'HT',
+            '2H',
+            'ET',
+            'BT',
+            'P',
+            'INT',
+            'LIVE'
+        ]:
+            return SportMatch.Status.IN_PROGRESS
+        else:
+            return SportMatch.Status.FINISHED

@@ -32,3 +32,8 @@ def load_matches():
 def update_league_season_year():
     league_service = LeagueService()
     league_service.update_league_season_year()
+
+
+def update_standings():
+    league_service = LeagueService()
+    league_service.fetch_and_update_team_standings()

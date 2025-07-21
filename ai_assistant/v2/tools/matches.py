@@ -5,7 +5,6 @@ from datetime import date
 from typing import Optional, List, Union
 
 from django.db.models import QuerySet, Q
-from django.utils import timezone
 from langchain_core.tools import tool
 from pydantic import BaseModel, Field, ConfigDict
 
@@ -25,7 +24,7 @@ class GetMatchesByLeagueInput(BaseModel):
     )
     upcoming_only: Optional[bool] = Field(
         False,
-        description="If True and datetime is not provided, only return matches in the future relative to the current time"
+        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         10,
@@ -45,7 +44,7 @@ class GetMatchesByTeamInput(BaseModel):
     )
     upcoming_only: Optional[bool] = Field(
         False,
-        description="If True and datetime is not provided, only return matches in the future relative to the current time"
+        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         10,
@@ -65,7 +64,7 @@ class GetMatchesByTeamList(BaseModel):
     )
     upcoming_only: Optional[bool] = Field(
         False,
-        description="If True and datetime is not provided, only return matches in the future relative to the current time"
+        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         30,
@@ -92,7 +91,7 @@ class RandomMatchInput(BaseModel):
     )
     future_only: Optional[bool] = Field(
         False,
-        description="If True and datetime is not provided, only return matches in the future relative to the current time"
+        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         20,
@@ -110,6 +109,10 @@ class HeadToHeadInput(BaseModel):
     kickoff_date: Union[None, date] = Field(
         None,
         description="Optional kick-off date to filter matches (matches on the same day as this date)"
+    )
+    future_only: Optional[bool] = Field(
+        False,
+        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         30,
@@ -146,7 +149,7 @@ def get_head_to_head_matches(head_to_head_input: HeadToHeadInput) -> List[SportM
         type=ApiSportModel.SportType.SOCCER
     ).select_related('league__country', 'home_team', 'away_team')
 
-    query = _add_date_filters_if_needed(query, query_date, future_only=False)
+    query = _add_date_filters_if_needed(query, query_date, future_only=head_to_head_input.future_only)
 
     matches = query.all().order_by('kickoff_datetime')[:head_to_head_input.number_of_matches]
 
@@ -321,7 +324,7 @@ def _add_date_filters_if_needed(queryset: QuerySet,
     Args:
         queryset (QuerySet): The initial queryset to filter.
         kickoff_date (Optional[date]): Optional date to filter matches that occur on the same day.
-        future_only (bool): If True, only return matches in the future relative to the current time.
+        future_only (bool): If True, only return upcoming matches that are not yet finished.
     Returns:
         QuerySet: The filtered queryset.
     """
@@ -329,7 +332,10 @@ def _add_date_filters_if_needed(queryset: QuerySet,
     if kickoff_date:
         logger.info(f"Filtering matches for kickoff date: {kickoff_date}")
         queryset = queryset.filter(kickoff_datetime__date=kickoff_date)
-    elif future_only and kickoff_date is None:
-        queryset = queryset.filter(kickoff_datetime__gt=timezone.now())
+    elif future_only:
+        queryset = queryset.filter(status__in=[
+            SportMatch.Status.SCHEDULED,
+            SportMatch.Status.IN_PROGRESS
+        ])
 
     return queryset

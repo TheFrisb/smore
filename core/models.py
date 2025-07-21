@@ -207,6 +207,14 @@ class SportLeagueTeam(models.Model):
 
 
 class SportMatch(ApiSportModel):
+    class Status(models.TextChoices):
+        SCHEDULED = "SCHEDULED", _("Scheduled")
+        IN_PROGRESS = "IN_PROGRESS", _("In Progress")
+        FINISHED = "FINISHED", _("Finished")
+
+    status = models.CharField(
+        max_length=12, choices=Status.choices, db_index=True
+    )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)

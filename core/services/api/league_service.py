@@ -76,7 +76,15 @@ class LeagueService(BaseApiFootballService):
 
         team_standing_service = TeamStandingsService()
         for league in sport_leagues:
-            sleep(0.5)  # sleep to avoid hitting API rate limits
+            metadata = league.api_coverage_data
+
+            if metadata is None or not metadata['standings']:
+                self.log.info(f"No standings data available for league {league.external_id}. Skipping.")
+                continue
+
+            sleep(0.5)
+            
+            self.log.info(f"Updating standings for league {league.external_id} in season {league.current_season_year}.")
             team_standing_service.update_team_standings(league.external_id, league.current_season_year)
 
     def _find_active_season_with_coverage(self, seasons) -> dict:
