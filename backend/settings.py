@@ -70,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "core.middleware.GeoIpSwitzerlandDetector"
     # "core.middleware.EmailVerificationMiddleware"
 ]
 
@@ -295,3 +296,5 @@ CRONJOBS = [
 ]
 
 TAVILY_API_KEY = config("TAVILY_API_KEY")
+
+GEOIP_PATH = BASE_DIR / "geoip.mmdb"
