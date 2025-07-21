@@ -41,8 +41,8 @@
                   <div class="text-right">
                     <div class="text-xl font-bold text-secondary-400">
                       {% if user_has_discount and request.user.subscription.first_chosen_product != product %}
-                        €{{ product.discounted_monthly_price }}{% else %}
-                        €{{ product.monthly_price }}{% endif %}
+                        {{ request|get_currency_symbol }}{{ product.discounted_monthly_price }}{% else %}
+                        {{ request|get_currency_symbol }}{{ product.monthly_price }}{% endif %}
                     </div>
                     <div class="text-sm text-primary-300">{% trans "per month" %}</div>
                   </div>
@@ -50,8 +50,8 @@
                   <div class="text-right">
                     <div class="text-xl font-bold text-secondary-400">
                       {% if user_has_discount and request.user.subscription.first_chosen_product != product %}
-                        €{{ product.discounted_yearly_price }}{% else %}
-                        €{{ product.yearly_price }}{% endif %}
+                        {{ request|get_currency_symbol }}{{ product.discounted_yearly_price }}{% else %}
+                        {{ request|get_currency_symbol }}{{ product.yearly_price }}{% endif %}
                     </div>
                     <div class="text-sm text-primary-300">{% trans "per year" %}</div>
                   </div>
