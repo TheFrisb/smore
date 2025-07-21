@@ -26,7 +26,7 @@ def load_matches():
     basketball_api_service = BasketballApiService()
 
     football_api_service.populate_matches(start_time, end_time)
-    # basketball_api_service.populate_matches(start_time, end_time)
+    basketball_api_service.populate_matches(start_time, end_time)
 
 
 def update_league_season_year():

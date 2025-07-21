@@ -212,7 +212,9 @@ async function sendMessage() {
   sendButton.disabled = true;
 
   const aiMessage = renderMessage("AI Analyst is thinking...", false);
-  suggestedMessagesSection.classList.add("hidden");
+  if (suggestedMessagesSection) {
+    suggestedMessagesSection.classList.add("hidden");
+  }
 
   try {
     const response = await fetch(apiUrl, {

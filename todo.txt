@@ -1,12 +1,4 @@
-TODO:
-3. Fetch player statistics for match
-4. Fetch team players for match
-
-7. Add mechanism to appoint team to multiple leagues
-
-
-TODO:
-1. Fetch team statistics for match
-2. Add FewShot examples
-3. Test out different models
-5. Make frontend more responsive
+1. Optimize AI match selection tool and store status for soccer matches
+2. Optimize cron jobs, and add new team standings job
+3. Optimize match prediction fetching for league
+4. Add twint for CH
