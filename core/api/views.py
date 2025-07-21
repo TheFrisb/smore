@@ -78,6 +78,7 @@ class PredictionListView(ListAPIView):
         return (
             Prediction.objects.filter(
                 visibility=Prediction.Visibility.PUBLIC,
+                status=Prediction.Status.PENDING,
             )
             .prefetch_related(
                 "match",
