@@ -1,101 +1,103 @@
 {% extends 'accounts/base.html' %}
 {% load util_tags i18n %}
 {% block dashboard %}
-    <div class="space-y-8">
-        <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6"><h2
-                    class="text-2xl font-bold text-white">{% trans "Withdrawal History" %}</h2>
-                <div class="text-right">
-                    <div class="text-sm text-primary-300">{% trans "Total withdrawn amount" %}</div>
-                    <div class="text-2xl font-bold text-secondary-400">
-                        ${{ withdrawal_stats.total_withdrawn_amount }}</div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-primary-900/50 rounded-xl p-4 border border-primary-700/50">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-sm text-primary-300">{% trans "Completed" %}</div>
-                            <div class="text-lg font-semibold text-secondary-400">{{ withdrawal_stats.total_completed }}</div>
-                        </div>
-                        <div class="bg-secondary-500/10 p-2 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="lucide lucide-check-circle2 w-5 h-5 text-secondary-500">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="m9 12 2 2 4-4"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-primary-900/50 rounded-xl p-4 border border-primary-700/50">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-sm text-primary-300">{% trans "In Progress" %}</div>
-                            <div class="text-lg font-semibold text-yellow-400">{{ withdrawal_stats.total_in_progress }}</div>
-                        </div>
-                        <div class="bg-yellow-500/10 p-2 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="lucide lucide-clock w-5 h-5 text-yellow-500">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-primary-900/50 rounded-xl p-4 border border-primary-700/50">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-sm text-primary-300">{% trans "Rejected" %}</div>
-                            <div class="text-lg font-semibold text-red-400">{{ withdrawal_stats.total_rejected }}</div>
-                        </div>
-                        <div class="bg-red-500/10 p-2 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="lucide lucide-xcircle w-5 h-5 text-red-500">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="m15 9-6 6"></path>
-                                <path d="m9 9 6 6"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="space-y-8">
+    <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6"><h2
+        class="text-2xl font-bold text-white">{% trans "Withdrawal History" %}</h2>
+        <div class="text-right">
+          <div class="text-sm text-primary-300">{% trans "Total withdrawn amount" %}</div>
+          <div class="text-2xl font-bold text-secondary-400">
+            {{ request|get_currency_symbol }}{{ withdrawal_stats.total_withdrawn_amount }}</div>
         </div>
-        <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
-            <div class="space-y-4">
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-primary-900/50 rounded-xl p-4 border border-primary-700/50">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm text-primary-300">{% trans "Completed" %}</div>
+              <div class="text-lg font-semibold text-secondary-400">{{ withdrawal_stats.total_completed }}</div>
+            </div>
+            <div class="bg-secondary-500/10 p-2 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" class="lucide lucide-check-circle2 w-5 h-5 text-secondary-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="bg-primary-900/50 rounded-xl p-4 border border-primary-700/50">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm text-primary-300">{% trans "In Progress" %}</div>
+              <div class="text-lg font-semibold text-yellow-400">{{ withdrawal_stats.total_in_progress }}</div>
+            </div>
+            <div class="bg-yellow-500/10 p-2 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" class="lucide lucide-clock w-5 h-5 text-yellow-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="bg-primary-900/50 rounded-xl p-4 border border-primary-700/50">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm text-primary-300">{% trans "Rejected" %}</div>
+              <div class="text-lg font-semibold text-red-400">{{ withdrawal_stats.total_rejected }}</div>
+            </div>
+            <div class="bg-red-500/10 p-2 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" class="lucide lucide-xcircle w-5 h-5 text-red-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m15 9-6 6"></path>
+                <path d="m9 9 6 6"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border border-primary-700/30">
+      <div class="space-y-4">
 
-                {% for withdrawal in withdrawals %}
-                    <div class="bg-primary-900/50 rounded-xl border border-primary-700/50 hover:border-secondary-500/30 transition-all duration-300 cursor-pointer withdrawalRequestItem">
-                        <div class="p-4 sm:p-6">
-                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-secondary-500/10 p-3 rounded-lg">
-                                        {% if withdrawal.payout_type == 'BANK' %}
-                                            {% svg_icon icon_name="bankIcon" css_classes="w-5 h-5 text-secondary-500" %}
+        {% for withdrawal in withdrawals %}
+          <div
+            class="bg-primary-900/50 rounded-xl border border-primary-700/50 hover:border-secondary-500/30 transition-all duration-300 cursor-pointer withdrawalRequestItem">
+            <div class="p-4 sm:p-6">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative">
+                <div class="flex items-center space-x-4">
+                  <div class="bg-secondary-500/10 p-3 rounded-lg">
+                    {% if withdrawal.payout_type == 'BANK' %}
+                      {% svg_icon icon_name="bankIcon" css_classes="w-5 h-5 text-secondary-500" %}
 
-                                        {% elif withdrawal.payout_type == 'CRYPTOCURRENCY' %}
-                                            {% svg_icon icon_name="bitcoinIcon" css_classes="w-5 h-5 text-secondary-500" %}
+                    {% elif withdrawal.payout_type == 'CRYPTOCURRENCY' %}
+                      {% svg_icon icon_name="bitcoinIcon" css_classes="w-5 h-5 text-secondary-500" %}
 
-                                        {% else %}
-                                            <!-- make a circle here -->
-                                            <div class="w-5 h-5 border-2 border-secondary-500 rounded-full"></div>
-                                        {% endif %}
-                                    </div>
-                                    <div>
-                                        <div class="text-lg font-semibold text-white">${{ withdrawal.amount }}</div>
-                                        <div class="text-sm text-primary-300">{{ withdrawal.get_payout_type_display }}
-                                            {% trans "Transfer" %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto md:pr-8">
-                                    <div class="flex items-center space-x-2 text-primary-300 text-sm">
-                                        {% svg_icon icon_name="calendarIcon" css_classes="w-4 h-4" %}
-                                        <span>{{ withdrawal.created_at|date:"M j, Y, h:i A" }}</span>
-                                    </div>
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center w-full  md:w-auto
+                    {% else %}
+                      <!-- make a circle here -->
+                      <div class="w-5 h-5 border-2 border-secondary-500 rounded-full"></div>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <div class="text-lg font-semibold text-white">
+                      {{ request|get_currency_symbol }}{{ withdrawal.amount }}</div>
+                    <div class="text-sm text-primary-300">{{ withdrawal.get_payout_type_display }}
+                      {% trans "Transfer" %}
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto md:pr-8">
+                  <div class="flex items-center space-x-2 text-primary-300 text-sm">
+                    {% svg_icon icon_name="calendarIcon" css_classes="w-4 h-4" %}
+                    <span>{{ withdrawal.created_at|date:"M j, Y, h:i A" }}</span>
+                  </div>
+                  <div class="inline-flex items-center px-3 py-1 rounded-full border justify-center w-full  md:w-auto
                                     {% if withdrawal.status == WithdrawalStatus.PROCESSING or withdrawal.status == WithdrawalStatus.COMPLETED %}
                                     bg-blue-500/10 text-blue-400 border-blue-500/20
                                     {% elif withdrawal.status == WithdrawalStatus.PENDING %}
@@ -107,180 +109,188 @@
                                     {% endif %}">
 
 
-                                        {% if withdrawal.status == WithdrawalStatus.APPROVED or withdrawal.status == WithdrawalStatus.COMPLETED %}
-                                            {% svg_icon icon_name="checkCircleIcon" css_classes="w-4 h-4 mr-2" %}
-                                        {% elif withdrawal.status == WithdrawalStatus.PENDING or withdrawal.status == WithdrawalStatus.PROCESSING %}
-                                            {% svg_icon icon_name="clockIcon" css_classes="w-4 h-4 mr-2" %}
-                                        {% elif withdrawal.status == WithdrawalStatus.REJECTED %}
-                                            {% svg_icon icon_name="xCircleIcon" css_classes="w-4 h-4 mr-2" %}
-                                        {% endif %}
+                    {% if withdrawal.status == WithdrawalStatus.APPROVED or withdrawal.status == WithdrawalStatus.COMPLETED %}
+                      {% svg_icon icon_name="checkCircleIcon" css_classes="w-4 h-4 mr-2" %}
+                    {% elif withdrawal.status == WithdrawalStatus.PENDING or withdrawal.status == WithdrawalStatus.PROCESSING %}
+                      {% svg_icon icon_name="clockIcon" css_classes="w-4 h-4 mr-2" %}
+                    {% elif withdrawal.status == WithdrawalStatus.REJECTED %}
+                      {% svg_icon icon_name="xCircleIcon" css_classes="w-4 h-4 mr-2" %}
+                    {% endif %}
 
-                                        <span class="text-sm font-medium">{{ withdrawal.get_status_display }}</span>
-                                    </div>
-                                </div>
-                                <div class="absolute right-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round"
-                                         class="lucide lucide-chevron-down w-5 h-5 text-primary-400 transition-transform duration-200 ml-auto sm:ml-0 transform rotate-180 withdrawalRequestItem__icon">
-                                        <path d="m6 9 6 6 6-6"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="mt-4 pt-4 border-t border-primary-700/30 hidden withdrawalRequestItem__content">
-                                <div>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {% if withdrawal.full_name %}
-                                            <div>
-                                                <div class="text-sm text-primary-300">{% trans "Full Name" %}</div>
-                                                <div class="text-white">{{ withdrawal.full_name }}</div>
-                                            </div>
-                                        {% endif %}
-                                        {% if withdrawal.email %}
-                                            <div>
-                                                <div class="text-sm text-primary-300">Email</div>
-                                                <div class="text-white">{{ withdrawal.email }}</div>
-                                            </div>
-                                        {% endif %}
-                                        {% if withdrawal.country %}
-                                            <div>
-                                                <div class="text-sm text-primary-300">{% trans "Country" %}</div>
-                                                <div class="text-white">{{ withdrawal.country }}</div>
-                                            </div>
-                                        {% endif %}
-                                        {% if withdrawal.iban %}
-                                            <div>
-                                                <div class="text-sm text-primary-300">IBAN</div>
-                                                <div class="text-white font-mono text-sm">{{ withdrawal.iban }}</div>
-                                            </div>
-                                        {% endif %}
-                                        {% if withdrawal.cryptocurrency_address %}
-                                            <div>
-                                                <div class="text-sm text-primary-300">{% trans "Cryptocurrency Address" %}</div>
-                                                <div class="text-white font-mono text-sm">{{ withdrawal.cryptocurrency_address }}</div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="mt-6 pt-6 border-t border-primary-700/30"><h4
-                                            class="text-sm font-medium text-primary-300 mb-4">{% trans "Withdrawal Progress" %}</h4>
-                                        <div class="space-y-4">
-                                            {% if withdrawal.status == WithdrawalStatus.REJECTED %}
-                                                <div class="bg-red-500/10 rounded-lg p-4 flex items-start space-x-3 border border-red-500/20">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                         class="lucide lucide-xcircle w-5 h-5 text-red-400 flex-shrink-0 mt-0.5">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <path d="m15 9-6 6"></path>
-                                                        <path d="m9 9 6 6"></path>
-                                                    </svg>
-                                                    <div><h4
-                                                            class="text-red-400 font-medium mb-1">{% trans "Rejection Reason" %}</h4>
-                                                        {% if withdrawal.rejection_reason %}
-                                                            <p class="text-primary-200">{{ withdrawal.rejection_reason }}</p>
-                                                        {% else %}
-                                                            <p class="text-primary-200">{% trans "No reason provided" %}</p>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            {% else %}
-                                                <div class="flex items-center gap-3">
-                                                    {% if withdrawal.status >= WithdrawalStatus.PENDING %}
-
-                                                        <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
-                                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <div class="text-sm font-medium text-secondary-400">{% trans "Pending" %}
-                                                            </div>
-                                                        </div>
-                                                    {% else %}
-                                                        <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
-                                                            <div class="flex-1">
-                                                                <div class="text-sm font-medium text-primary-400">
-                                                                    {% trans "Pending" %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="flex items-center gap-3">
-                                                    {% if withdrawal.status >= WithdrawalStatus.APPROVED %}
-                                                        <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
-                                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <div class="text-sm font-medium text-secondary-400">{% trans "Approved" %}
-                                                            </div>
-                                                        </div>
-                                                    {% else %}
-                                                        <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
-                                                            <div class="flex-1">
-                                                                <div class="text-sm font-medium text-primary-400">
-                                                                    {% trans "Approved" %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="flex items-center gap-3">
-                                                    {% if withdrawal.status >= WithdrawalStatus.PROCESSING %}
-                                                        <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
-                                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <div class="text-sm font-medium text-secondary-400">
-                                                                {% trans "Processing" %}
-                                                            </div>
-                                                        </div>
-                                                    {% else %}
-                                                        <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
-                                                            <div class="flex-1">
-                                                                <div class="text-sm font-medium text-primary-400">
-                                                                    {% trans "Processing" %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="flex items-center gap-3">
-                                                    {% if withdrawal.status >= WithdrawalStatus.COMPLETED %}
-                                                        <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
-                                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
-                                                        </div>
-
-                                                        <div class="flex-1">
-                                                            <div class="text-sm font-medium text-secondary-400">
-                                                                {% trans "Completed" %}
-                                                            </div>
-                                                        </div>
-                                                    {% else %}
-                                                        <div class="flex items-center gap-3">
-                                                            <div class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
-                                                            <div class="flex-1">
-                                                                <div class="text-sm font-medium text-primary-400">
-                                                                    {% trans "Completed" %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <span class="text-sm font-medium">{{ withdrawal.get_status_display }}</span>
+                  </div>
+                </div>
+                <div class="absolute right-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                       stroke-linejoin="round"
+                       class="lucide lucide-chevron-down w-5 h-5 text-primary-400 transition-transform duration-200 ml-auto sm:ml-0 transform rotate-180 withdrawalRequestItem__icon">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="mt-4 pt-4 border-t border-primary-700/30 hidden withdrawalRequestItem__content">
+                <div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {% if withdrawal.full_name %}
+                      <div>
+                        <div class="text-sm text-primary-300">{% trans "Full Name" %}</div>
+                        <div class="text-white">{{ withdrawal.full_name }}</div>
+                      </div>
+                    {% endif %}
+                    {% if withdrawal.email %}
+                      <div>
+                        <div class="text-sm text-primary-300">Email</div>
+                        <div class="text-white">{{ withdrawal.email }}</div>
+                      </div>
+                    {% endif %}
+                    {% if withdrawal.country %}
+                      <div>
+                        <div class="text-sm text-primary-300">{% trans "Country" %}</div>
+                        <div class="text-white">{{ withdrawal.country }}</div>
+                      </div>
+                    {% endif %}
+                    {% if withdrawal.iban %}
+                      <div>
+                        <div class="text-sm text-primary-300">IBAN</div>
+                        <div class="text-white font-mono text-sm">{{ withdrawal.iban }}</div>
+                      </div>
+                    {% endif %}
+                    {% if withdrawal.cryptocurrency_address %}
+                      <div>
+                        <div class="text-sm text-primary-300">{% trans "Cryptocurrency Address" %}</div>
+                        <div class="text-white font-mono text-sm">{{ withdrawal.cryptocurrency_address }}</div>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="mt-6 pt-6 border-t border-primary-700/30"><h4
+                    class="text-sm font-medium text-primary-300 mb-4">{% trans "Withdrawal Progress" %}</h4>
+                    <div class="space-y-4">
+                      {% if withdrawal.status == WithdrawalStatus.REJECTED %}
+                        <div class="bg-red-500/10 rounded-lg p-4 flex items-start space-x-3 border border-red-500/20">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                               class="lucide lucide-xcircle w-5 h-5 text-red-400 flex-shrink-0 mt-0.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="m15 9-6 6"></path>
+                            <path d="m9 9 6 6"></path>
+                          </svg>
+                          <div><h4
+                            class="text-red-400 font-medium mb-1">{% trans "Rejection Reason" %}</h4>
+                            {% if withdrawal.rejection_reason %}
+                              <p class="text-primary-200">{{ withdrawal.rejection_reason }}</p>
+                            {% else %}
+                              <p class="text-primary-200">{% trans "No reason provided" %}</p>
+                            {% endif %}
+                          </div>
                         </div>
+                      {% else %}
+                        <div class="flex items-center gap-3">
+                          {% if withdrawal.status >= WithdrawalStatus.PENDING %}
+
+                            <div
+                              class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
+                              {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                            </div>
+                            <div class="flex-1">
+                              <div class="text-sm font-medium text-secondary-400">{% trans "Pending" %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="flex items-center gap-3">
+                              <div
+                                class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                              <div class="flex-1">
+                                <div class="text-sm font-medium text-primary-400">
+                                  {% trans "Pending" %}
+                                </div>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                        <div class="flex items-center gap-3">
+                          {% if withdrawal.status >= WithdrawalStatus.APPROVED %}
+                            <div
+                              class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
+                              {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                            </div>
+                            <div class="flex-1">
+                              <div class="text-sm font-medium text-secondary-400">{% trans "Approved" %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="flex items-center gap-3">
+                              <div
+                                class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                              <div class="flex-1">
+                                <div class="text-sm font-medium text-primary-400">
+                                  {% trans "Approved" %}
+                                </div>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                        <div class="flex items-center gap-3">
+                          {% if withdrawal.status >= WithdrawalStatus.PROCESSING %}
+                            <div
+                              class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
+                              {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                            </div>
+                            <div class="flex-1">
+                              <div class="text-sm font-medium text-secondary-400">
+                                {% trans "Processing" %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="flex items-center gap-3">
+                              <div
+                                class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                              <div class="flex-1">
+                                <div class="text-sm font-medium text-primary-400">
+                                  {% trans "Processing" %}
+                                </div>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                        <div class="flex items-center gap-3">
+                          {% if withdrawal.status >= WithdrawalStatus.COMPLETED %}
+                            <div
+                              class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center bg-primary-800 border-2 border-secondary-500">
+                              {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-secondary-400" %}
+                            </div>
+
+                            <div class="flex-1">
+                              <div class="text-sm font-medium text-secondary-400">
+                                {% trans "Completed" %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="flex items-center gap-3">
+                              <div
+                                class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center bg-primary-800 border-2 border-primary-700"></div>
+                              <div class="flex-1">
+                                <div class="text-sm font-medium text-primary-400">
+                                  {% trans "Completed" %}
+                                </div>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endif %}
                     </div>
-
-                {% empty %}
-                    <p class="text-white text-sm">{% trans "You haven't made a withdrawal request yet" %}.</p>
-                {% endfor %}
-
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+
+        {% empty %}
+          <p class="text-white text-sm">{% trans "You haven't made a withdrawal request yet" %}.</p>
+        {% endfor %}
+
+      </div>
     </div>
+  </div>
 {% endblock dashboard %}

@@ -79,3 +79,14 @@ def extract_obj_filter(request) -> str:
 def divide(value, arg):
     # divide, to 2 decimal places
     return round(value / arg, 2)
+
+
+@register.filter(name="get_currency_symbol")
+def get_currency_symbol(request):
+    """
+    Returns the currency symbol based on the user's country.
+    """
+    if request.session.get("is_switzerland", False):
+        return "₣"
+    else:
+        return "€"
