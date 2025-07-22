@@ -88,7 +88,7 @@ class StripeCheckoutService(BaseStripeService):
             cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
             mode="payment",
             customer=user.stripe_customer_id,
-            line_items=self.get_onetime_ticket_line_items(is_switzerland),
+            line_items=self.get_onetime_ticket_line_items(ticket, is_switzerland),
             payment_intent_data={
                 "metadata": {
                     "purchased_object_id": ticket.id,
