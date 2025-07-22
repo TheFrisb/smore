@@ -245,7 +245,7 @@ class SportMatch(ApiSportModel):
         SportTeam, on_delete=models.CASCADE, related_name="away_team"
     )
     away_team_score = models.CharField(blank=True)
-    kickoff_datetime = models.DateTimeField()
+    kickoff_datetime = models.DateTimeField(db_index=True)
     metadata = models.JSONField(null=True, blank=True)
 
     @property
