@@ -333,7 +333,8 @@ def _add_date_filters_if_needed(queryset: QuerySet,
     if kickoff_date:
         logger.info(f"Filtering matches for kickoff date: {kickoff_date}")
         queryset = queryset.filter(kickoff_datetime__date=kickoff_date)
-    elif future_only:
+
+    if future_only:
         queryset = queryset.filter(status__in=[
             SportMatch.Status.SCHEDULED,
             SportMatch.Status.IN_PROGRESS
