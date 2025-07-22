@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import logging
-from datetime import date
+from datetime import date, timedelta
 from typing import Optional, List, Union
 
 from django.db.models import QuerySet, Q
+from django.utils import timezone
 from langchain_core.tools import tool
 from pydantic import BaseModel, Field, ConfigDict
 
@@ -335,8 +336,10 @@ def _add_date_filters_if_needed(queryset: QuerySet,
         queryset = queryset.filter(kickoff_datetime__date=kickoff_date)
 
     if future_only:
+        future_time = timezone.now() + timedelta(hours=2)
         queryset = queryset.filter(status__in=[
             SportMatch.Status.SCHEDULED,
-        ])
+        ],
+            kickoff_datetime__gt=future_time)
 
     return queryset
