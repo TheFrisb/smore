@@ -12,6 +12,14 @@ const products = document.querySelectorAll(".product");
 const checkoutSummarySection = document.querySelector(
   ".checkoutSummarySection",
 );
+const userCurrencyInput = document.querySelector("#userCurrency");
+
+function getUserCurrency() {
+  if (userCurrencyInput) {
+    return userCurrencyInput.value;
+  }
+  return "€";
+}
 
 const checkoutSummaryItemsSection = document.querySelector(
   ".checkoutSummary__items",
@@ -132,7 +140,7 @@ function updatePrices() {
       productNoDiscountPriceEl.classList.remove("hidden");
     }
 
-    priceEl.textContent = `€${price}`;
+    priceEl.textContent = `${getUserCurrency()}${price}`;
   });
 
   updateCheckoutSummaryUI();
@@ -324,13 +332,13 @@ function updateCheckoutSummaryUI() {
     const productName = productEl.getAttribute("data-product-name");
     const productPrice = getProductTotalPrice(productEl);
 
-    total_price += parseFloat(productPrice.replace("€", ""));
+    total_price += parseFloat(productPrice.replace(getUserCurrency(), ""));
 
     checkoutSummary += `
     <div class="space-y-4 mb-8 divide-y divide-primary-700/30">
     <div class="flex justify-between items-center text-primary-200 py-3">
     <span class="capitalize">${productName}</span>
-    <span>€${productPrice}</span>
+    <span>${getUserCurrency()}${productPrice}</span>
     </div>
     </div>
     `;
@@ -348,7 +356,7 @@ function updateCheckoutSummaryUI() {
   let totalPriceEl = document.querySelector(
     ".checkoutSummarySection__totalPrice",
   );
-  totalPriceEl.textContent = `€${total_price.toFixed(2)}`;
+  totalPriceEl.textContent = `${getUserCurrency()}${total_price.toFixed(2)}`;
 }
 
 function pushOrRemoveProduct(id, productType) {

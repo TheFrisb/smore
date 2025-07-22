@@ -110,6 +110,10 @@ class StripeWebhookService(BaseStripeService):
             | models.Q(yearly_price_stripe_id__in=stripe_price_ids)
             | models.Q(discounted_monthly_price_stripe_id__in=stripe_price_ids)
             | models.Q(discounted_yearly_price_stripe_id__in=stripe_price_ids)
+            | models.Q(monthly_switzerland_price_stripe_id__in=stripe_price_ids)
+            | models.Q(yearly_switzerland_price_stripe_id__in=stripe_price_ids)
+            | models.Q(discounted_switzerland_monthly_price_stripe_id__in=stripe_price_ids)
+            | models.Q(discounted_switzerland_yearly_price_stripe_id__in=stripe_price_ids)
         )
 
         if not internal_products.exists():
@@ -302,7 +306,7 @@ class StripeWebhookService(BaseStripeService):
         self.mark_subscription_inactive(stripe_customer_id, stripe_subscription_id)
 
     def mark_subscription_inactive(
-        self, stripe_customer_id: str, stripe_subscription_id: str
+            self, stripe_customer_id: str, stripe_subscription_id: str
     ):
         logger.info(
             f"Deleting internal subscription for subscription: {stripe_subscription_id} and customer {stripe_customer_id}"

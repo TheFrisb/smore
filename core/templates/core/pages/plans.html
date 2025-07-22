@@ -6,6 +6,7 @@
     {% if request.user.subscription.first_chosen_product is not None %}
       <input type="hidden" id="userFirstChosenProductId"
              value="{{ request.user.subscription.first_chosen_product.id }}">
+      <input type="hidden" id="userCurrency" value="{{ request|get_currency_symbol }}">
     {% endif %}
   {% endif %}
 

@@ -44,8 +44,6 @@ class GeoIpSwitzerlandDetector(MiddlewareMixin):
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         if 'is_switzerland' in request.session:
-            # Already cached
-            request.is_switzerland = request.session['is_switzerland']
             return None
 
         ip_addr = self._get_client_ip(request)
@@ -54,12 +52,10 @@ class GeoIpSwitzerlandDetector(MiddlewareMixin):
         try:
             country = g.country(ip_addr)
             is_switzerland = (country['country_code'] == 'CH')
-            request.is_switzerland = is_switzerland
             request.session['is_switzerland'] = is_switzerland
             self.log.info(f"GeoIP lookup for IP {ip_addr}: {country['country_name']} ({country['country_code']})")
         except Exception as e:
             self.log.error(f"GeoIP lookup failed for IP {ip_addr}: {e}")
-            request.is_switzerland = False
             request.session['is_switzerland'] = False
 
         return None

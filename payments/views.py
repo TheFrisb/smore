@@ -1,5 +1,4 @@
 import logging
-from urllib import request
 
 import stripe
 from django.contrib import messages
@@ -55,6 +54,7 @@ class CreateSubscriptionCheckoutUrl(APIView):
         ).first()
 
         logger.info(f"First chosen product: {first_chosen_product}")
+        is_switzerland = request.session.get("is_switzerland", False)
 
         if not products.exists():
             raise serializers.ValidationError("No products found.")
@@ -63,13 +63,13 @@ class CreateSubscriptionCheckoutUrl(APIView):
             raise serializers.ValidationError("Some products not found.")
 
         if (
-            serializer.validated_data["firstProduct"]
-            not in serializer.validated_data["products"]
+                serializer.validated_data["firstProduct"]
+                not in serializer.validated_data["products"]
         ):
             raise serializers.ValidationError("Invalid 'firstProduct' field.")
 
         price_ids = self.get_price_ids(
-            products, serializer.validated_data["frequency"], first_chosen_product
+            products, serializer.validated_data["frequency"], first_chosen_product, is_switzerland
         )
 
         checkout_session = self.service.create_subscription_checkout_session(
@@ -98,7 +98,7 @@ class CreateSubscriptionCheckoutUrl(APIView):
         """
         return len(products) > 1
 
-    def get_price_ids(self, products, frequency, first_chosen_product):
+    def get_price_ids(self, products, frequency, first_chosen_product, is_switzerland):
         price_ids = []
         use_discounted_prices = self.use_discounted_prices(products)
 
@@ -116,7 +116,7 @@ class CreateSubscriptionCheckoutUrl(APIView):
                 use_discounted_prices = False
 
             price = product.get_price_id_for_subscription(
-                frequency, use_discounted_prices
+                frequency, use_discounted_prices, is_switzerland
             )
             logger.info(
                 f"Fetched price: {price}, for product: {product.get_name_display()}"
@@ -140,7 +140,7 @@ class CreatePredictionCheckoutUrl(RedirectView):
 
         service = StripeCheckoutService()
         checkout_session = service.create_onetime_prediction_checkout_session(
-            self.request.user, prediction
+            self.request.user, prediction, self.request.session.get("is_switzerland", False)
         )
 
         try:
@@ -169,7 +169,7 @@ class CreateTicketCheckoutUrl(RedirectView):
 
         service = StripeCheckoutService()
         checkout_session = service.create_onetime_ticket_checkout_session(
-            self.request.user, ticket
+            self.request.user, ticket, self.request.session.get("is_switzerland", False)
         )
 
         try:
@@ -239,8 +239,8 @@ class UpdateSubscriptionView(APIView):
             )
 
         if (
-            serializer.validated_data["firstProduct"]
-            not in serializer.validated_data["products"]
+                serializer.validated_data["firstProduct"]
+                not in serializer.validated_data["products"]
         ):
             return Response(
                 status=400, data={"message": "Invalid 'firstProduct' field."}
@@ -328,7 +328,7 @@ class UpdateSubscriptionView(APIView):
                 status=400,
                 data={
                     "message": e.user_message
-                    or "Your card was declined. Please update your payment method"
+                               or "Your card was declined. Please update your payment method"
                 },
             )
         except stripe.error.StripeError as e:
@@ -548,9 +548,9 @@ class CreateDailyOfferCheckoutUrl(RedirectView):
         today_date = timezone.now().date()
 
         if PurchasedDailyOffer.objects.filter(
-            user=self.request.user,
-            for_date=today_date,
-            status=PurchasedDailyOffer.Status.PURCHASED,
+                user=self.request.user,
+                for_date=today_date,
+                status=PurchasedDailyOffer.Status.PURCHASED,
         ).exists():
             raise PermissionError(
                 f"You've already purchased the daily offer for: {today_date}"
@@ -564,7 +564,7 @@ class CreateDailyOfferCheckoutUrl(RedirectView):
 
         service = StripeCheckoutService()
         checkout_session = service.create_onetime_daily_offer_checkout_session(
-            self.request.user, daily_offer
+            self.request.user, daily_offer, self.request.session.get("is_switzerland", False)
         )
 
         try:

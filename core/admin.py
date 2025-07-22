@@ -41,7 +41,7 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
         (
             "Monthly Pricing",
             {
-                "fields": ("monthly_price", "monthly_price_stripe_id"),
+                "fields": ("monthly_price", "monthly_price_stripe_id", "monthly_switzerland_price_stripe_id"),
             },
         ),
         (
@@ -50,13 +50,14 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
                 "fields": (
                     "discounted_monthly_price",
                     "discounted_monthly_price_stripe_id",
+                    "discounted_switzerland_monthly_price_stripe_id"
                 ),
             },
         ),
         (
             "Yearly Pricing",
             {
-                "fields": ("yearly_price", "yearly_price_stripe_id"),
+                "fields": ("yearly_price", "yearly_price_stripe_id", "yearly_switzerland_price_stripe_id"),
             },
         ),
         (
@@ -65,6 +66,7 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
                 "fields": (
                     "discounted_yearly_price",
                     "discounted_yearly_price_stripe_id",
+                    "discounted_switzerland_yearly_price_stripe_id"
                 ),
             },
         ),

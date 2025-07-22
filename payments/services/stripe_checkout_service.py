@@ -56,21 +56,21 @@ class StripeCheckoutService(BaseStripeService):
         return checkout_session
 
     def create_onetime_prediction_checkout_session(
-            self, user: User | AbstractBaseUser, prediction: Prediction
+            self, user: User | AbstractBaseUser, prediction: Prediction, is_switzerland: bool
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:purchase_payment_success', kwargs={'prediction_pk': prediction.id})}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:detailed_prediction', kwargs={'pk': prediction.id})}",
             mode="payment",
             customer=user.stripe_customer_id,
-            line_items=self.get_onetime_prediction_line_items(prediction),
+            line_items=self.get_onetime_prediction_line_items(prediction, is_switzerland),
             payment_intent_data={
                 "metadata": {
                     "purchased_object_id": prediction.id,
                     "purchased_object_type": "prediction",
                 }
             },
-            payment_method_types=["card", 'revolut_pay'],
+            payment_method_types=self._get_payment_methods(is_switzerland),
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -81,21 +81,21 @@ class StripeCheckoutService(BaseStripeService):
         return checkout_session
 
     def create_onetime_ticket_checkout_session(
-            self, user: User | AbstractBaseUser, ticket: Ticket
+            self, user: User | AbstractBaseUser, ticket: Ticket, is_switzerland: bool
     ) -> Session:
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
             mode="payment",
             customer=user.stripe_customer_id,
-            line_items=self.get_onetime_ticket_line_items(ticket),
+            line_items=self.get_onetime_ticket_line_items(is_switzerland),
             payment_intent_data={
                 "metadata": {
                     "purchased_object_id": ticket.id,
                     "purchased_object_type": "ticket",
                 }
             },
-            payment_method_types=["card", 'revolut_pay'],
+            payment_method_types=self._get_payment_methods(is_switzerland),
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -135,11 +135,11 @@ class StripeCheckoutService(BaseStripeService):
 
         return portal_session
 
-    def get_onetime_prediction_line_items(self, prediction):
+    def get_onetime_prediction_line_items(self, prediction, is_switzerland):
         return [
             {
                 "price_data": {
-                    "currency": "eur",
+                    "currency": "eur" if not is_switzerland else "chf",
                     "product_data": {
                         "name": f"Premium prediction: {prediction.match.home_team.name} vs {prediction.match.away_team.name}",
                     },
@@ -149,11 +149,11 @@ class StripeCheckoutService(BaseStripeService):
             }
         ]
 
-    def get_onetime_ticket_line_items(self, ticket: Ticket):
+    def get_onetime_ticket_line_items(self, ticket: Ticket, is_switzerland: bool):
         return [
             {
                 "price_data": {
-                    "currency": "eur",
+                    "currency": "eur" if not is_switzerland else "chf",
                     "product_data": {
                         "name": f"{ticket.product.get_name_display()} parlay",
                     },
@@ -163,11 +163,11 @@ class StripeCheckoutService(BaseStripeService):
             }
         ]
 
-    def get_onetime_daily_offer_item(self):
+    def get_onetime_daily_offer_item(self, is_switzerland: bool):
         return [
             {
                 "price_data": {
-                    "currency": "eur",
+                    "currency": "eur" if not is_switzerland else "chf",
                     "product_data": {"name": f"Unlock SMORE's predictions for: {timezone.now().strftime('%m/%d/%Y')}"},
                     "unit_amount": 2499
                 },
@@ -185,20 +185,20 @@ class StripeCheckoutService(BaseStripeService):
         subscription.save()
         return subscription
 
-    def create_onetime_daily_offer_checkout_session(self, user, daily_offer):
+    def create_onetime_daily_offer_checkout_session(self, user, daily_offer, is_switzerland: bool):
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:upcoming_matches')}",
             mode="payment",
             customer=user.stripe_customer_id,
-            line_items=self.get_onetime_daily_offer_item(),
+            line_items=self.get_onetime_daily_offer_item(is_switzerland),
             payment_intent_data={
                 "metadata": {
                     "purchased_object_id": daily_offer.id,
                     "purchased_object_type": "daily_offer",
                 }
             },
-            payment_method_types=["card", 'revolut_pay'],
+            payment_method_types=self._get_payment_methods(is_switzerland),
             consent_collection={"terms_of_service": "required"},
         )
 
@@ -207,3 +207,9 @@ class StripeCheckoutService(BaseStripeService):
         )
 
         return checkout_session
+
+    def _get_payment_methods(self, is_switzerland: bool) -> list[str]:
+        if not is_switzerland:
+            return ["card", 'revolut_pay']
+
+        return ["card", 'twint']
