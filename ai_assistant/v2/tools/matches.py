@@ -184,9 +184,10 @@ def get_random_matches(random_match_input: RandomMatchInput) -> List[SportMatchO
         ])
     if not matches:
         logger.warning("No matches found for the external IDs in allowed_league_ids")
+        new_qs = SportMatch.objects.select_related('league__country', 'home_team', 'away_team')
+        new_qs = _add_date_filters_if_needed(new_qs, query_date, future_only)
         matches = list(
-            query.filter(type=ApiSportModel.SportType.SOCCER).exclude(
-                metadata={}).order_by("kickoff_datetime")[
+            new_qs.filter(type=ApiSportModel.SportType.SOCCER).exclude(metadata={}).order_by("kickoff_datetime")[
             :random_match_input.number_of_matches
             ])
 
