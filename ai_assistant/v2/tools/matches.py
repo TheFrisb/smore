@@ -24,7 +24,7 @@ class GetMatchesByLeagueInput(BaseModel):
     )
     upcoming_only: Optional[bool] = Field(
         False,
-        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
+        description="If True, only matches that are not started will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         10,
@@ -44,7 +44,7 @@ class GetMatchesByTeamInput(BaseModel):
     )
     upcoming_only: Optional[bool] = Field(
         False,
-        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
+        description="If True, only matches that are not started will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         10,
@@ -64,7 +64,7 @@ class GetMatchesByTeamList(BaseModel):
     )
     upcoming_only: Optional[bool] = Field(
         False,
-        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
+        description="If True, only matches that are not started will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         30,
@@ -91,7 +91,7 @@ class RandomMatchInput(BaseModel):
     )
     future_only: Optional[bool] = Field(
         False,
-        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
+        description="If True, only matches that are not started will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         20,
@@ -112,7 +112,7 @@ class HeadToHeadInput(BaseModel):
     )
     future_only: Optional[bool] = Field(
         False,
-        description="If True, only matches that are not finished will be returned (i.e., matches in the future relative to the current time)"
+        description="If True, only matches that are not started will be returned (i.e., matches in the future relative to the current time)"
     )
     number_of_matches: Optional[int] = Field(
         30,
@@ -325,7 +325,7 @@ def _add_date_filters_if_needed(queryset: QuerySet,
     Args:
         queryset (QuerySet): The initial queryset to filter.
         kickoff_date (Optional[date]): Optional date to filter matches that occur on the same day.
-        future_only (bool): If True, only return upcoming matches that are not yet finished.
+        future_only (bool): If True, only return upcoming matches that are not yet started.
     Returns:
         QuerySet: The filtered queryset.
     """
@@ -337,7 +337,6 @@ def _add_date_filters_if_needed(queryset: QuerySet,
     if future_only:
         queryset = queryset.filter(status__in=[
             SportMatch.Status.SCHEDULED,
-            SportMatch.Status.IN_PROGRESS
         ])
 
     return queryset
