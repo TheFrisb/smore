@@ -87,6 +87,6 @@ def get_currency_symbol(request):
     Returns the currency symbol based on the user's country.
     """
     if request.session.get("is_switzerland", False):
-        return "₣"
+        return "CHF "
     else:
         return "€"
