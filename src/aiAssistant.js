@@ -1,4 +1,4 @@
-import { getCsrfToken } from "./utils";
+import { getCsrfToken, getUserTimezoneString } from "./utils";
 import { marked } from "marked";
 import { Notyf } from "notyf";
 
@@ -216,6 +216,11 @@ async function sendMessage() {
     suggestedMessagesSection.classList.add("hidden");
   }
 
+  const data = {
+    message: message,
+    timezone: getUserTimezoneString(),
+  };
+
   try {
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -223,7 +228,7 @@ async function sendMessage() {
         "Content-Type": "application/json",
         "X-CSRFToken": getCsrfToken(),
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify(data),
     });
 
     if (response.status === 403) {

@@ -60,7 +60,16 @@ function formatIsoString(isoString) {
   return `${year}-${month}-${day} ${hour}:${minute}`;
 }
 
+function getUserTimezoneString() {
+  const userCurrentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  console.log(userCurrentTimezone);
+
+  return userCurrentTimezone;
+}
+
 export {
+  getUserTimezoneString,
   getCookie,
   getCsrfToken,
   formatTime,

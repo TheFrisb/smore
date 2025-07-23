@@ -342,4 +342,6 @@ def _add_date_filters_if_needed(queryset: QuerySet,
         ],
             kickoff_datetime__gt=future_time)
 
+    logger.info(f"Current datetime: {timezone.now()}, Timezone: {timezone.get_current_timezone()}")
+
     return queryset

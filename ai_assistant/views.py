@@ -1,5 +1,6 @@
 import logging
 
+from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -21,6 +22,7 @@ class SendMessageToAiView(APIView):
         """Serializer for validating incoming message data."""
 
         message = serializers.CharField()
+        timezone = serializers.CharField()
 
     class OutputSerializer(serializers.Serializer):
         """Serializer for formatting the outgoing response."""
@@ -62,6 +64,8 @@ class SendMessageToAiView(APIView):
                 status=403,
             )
 
+        timezone.activate(serializer.validated_data["timezone"])
+
         message = serializer.validated_data["message"]
         logger.info(
             f"User ({request.user.id}): {request.user.username} has sent a message to the AI assistant"
@@ -78,6 +82,8 @@ class SendMessageToAiView(APIView):
         logger.info(
             f"AI Response for User ({request.user.id}): {request.user.username} - {response}"
         )
+
+        timezone.deactivate()
 
         return Response(
             {
