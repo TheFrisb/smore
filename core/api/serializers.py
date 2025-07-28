@@ -108,7 +108,7 @@ class BetLineSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BetLine
-        fields = ["match", "bet", "bet_type", "odds", "status"]
+        fields = ["id", "match", "bet", "bet_type", "odds", "status"]
 
 
 class TicketHistorySerializer(serializers.ModelSerializer):

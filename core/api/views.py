@@ -225,6 +225,6 @@ class UpcomingAPIView(APIView):
 
         # Sort by type (ticket comes first) and then by datetime
         # This matches the UpcomingMatchesView sorting logic
-        combined.sort(key=lambda x: (x["type"] != "ticket", x["datetime"]))
+        combined.sort(key=lambda x: (x["object_type"] != "ticket", x["datetime"]))
 
         return Response(combined)
