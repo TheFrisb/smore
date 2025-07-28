@@ -1,9 +1,9 @@
+from django.utils import timezone
 from django_filters import rest_framework as filters
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.utils import timezone
 
 from accounts.serializers import ProductSerializer
 from core.models import Prediction, Product, FrequentlyAskedQuestion, Ticket
@@ -183,7 +183,7 @@ class UpcomingAPIView(APIView):
             ).select_related(
                 "match__home_team", "match__away_team", "match__league", "product"
             ).exclude(id=1024).order_by("match__kickoff_datetime")
-            
+
             if product_filter:
                 predictions = predictions.filter(product__name=product_filter)
 
@@ -198,7 +198,7 @@ class UpcomingAPIView(APIView):
                 "bet_lines__match__league",
                 "product",
             ).order_by("product__name", "starts_at")
-            
+
             if product_filter:
                 tickets = tickets.filter(product__name=product_filter)
 
@@ -214,12 +214,12 @@ class UpcomingAPIView(APIView):
         # Combine and add metadata for sorting
         combined = []
         for p in prediction_data:
-            p["type"] = "prediction"
+            p["object_type"] = "prediction"
             p["datetime"] = p["match"]["kickoff_datetime"]
             combined.append(p)
 
         for t in ticket_data:
-            t["type"] = "ticket"
+            t["object_type"] = "ticket"
             t["datetime"] = t["starts_at"]
             combined.append(t)
 
