@@ -128,6 +128,7 @@ class TicketHistorySerializer(serializers.ModelSerializer):
             "bet_lines",
             "total_odds",
             "visibility",
+            "label"
         ]
 
     def get_object_type(self, obj):
