@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.utils import timezone
 
 from accounts.serializers import ProductSerializer
 from core.models import Prediction, Product, FrequentlyAskedQuestion, Ticket
@@ -162,3 +163,68 @@ class HistoryAPIView(APIView):
         paginator = self.pagination_class()
         page = paginator.paginate_queryset(combined, request)
         return paginator.get_paginated_response(page)
+
+
+class UpcomingAPIView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get_queryset(self):
+        product_filter = self.request.query_params.get("filter")
+        obj_filter = self.request.query_params.get("obj")
+
+        predictions = []
+        tickets = []
+
+        if obj_filter is None or obj_filter == "predictions":
+            predictions = Prediction.objects.filter(
+                visibility=Prediction.Visibility.PUBLIC,
+                status=Prediction.Status.PENDING,
+            ).select_related(
+                "match__home_team", "match__away_team", "match__league", "product"
+            ).exclude(id=1024).order_by("match__kickoff_datetime")
+            
+            if product_filter:
+                predictions = predictions.filter(product__name=product_filter)
+
+        if obj_filter is None or obj_filter == "tickets":
+            tickets = Ticket.objects.filter(
+                visibility=Ticket.Visibility.PUBLIC,
+                status=Ticket.Status.PENDING,
+                starts_at__date__gte=timezone.now().date(),
+            ).prefetch_related(
+                "bet_lines__match__home_team",
+                "bet_lines__match__away_team",
+                "bet_lines__match__league",
+                "product",
+            ).order_by("product__name", "starts_at")
+            
+            if product_filter:
+                tickets = tickets.filter(product__name=product_filter)
+
+        return predictions, tickets
+
+    def get(self, request):
+        predictions, tickets = self.get_queryset()
+
+        # Serialize data
+        prediction_data = PredictionSerializer(predictions, many=True).data
+        ticket_data = TicketHistorySerializer(tickets, many=True).data
+
+        # Combine and add metadata for sorting
+        combined = []
+        for p in prediction_data:
+            p["type"] = "prediction"
+            p["datetime"] = p["match"]["kickoff_datetime"]
+            combined.append(p)
+
+        for t in ticket_data:
+            t["type"] = "ticket"
+            t["datetime"] = t["starts_at"]
+            combined.append(t)
+
+        # Sort by type (ticket comes first) and then by datetime
+        # This matches the UpcomingMatchesView sorting logic
+        combined.sort(key=lambda x: (x["type"] != "ticket", x["datetime"]))
+
+        return Response(combined)

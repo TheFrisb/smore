@@ -141,6 +141,7 @@ class PredictionHistorySerializer(serializers.ModelSerializer):
     object_type = serializers.SerializerMethodField()
     match = SportMatchSerializer()
     product = ProductSerializer()
+    has_analysis = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
@@ -159,3 +160,6 @@ class PredictionHistorySerializer(serializers.ModelSerializer):
 
     def get_object_type(self, obj):
         return "prediction"
+
+    def has_analysis(self, obj):
+        return obj.has_detailed_analysis
