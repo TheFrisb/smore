@@ -231,16 +231,36 @@ class SportApiService:
         )
 
         try:
+            # Create or get the team (without league relationship)
             team_obj, created = SportTeam.objects.get_or_create(
                 external_id=team_id,
                 type=sport_type,
                 defaults={
                     "name": team_name,
-                    "league": league_obj,
                     "logo": team_logo_path,
                     "product": product,
                 },
             )
+            
+            # Update team name and logo if team already exists
+            if not created:
+                team_obj.name = team_name
+                if team_logo_path:
+                    team_obj.logo = team_logo_path
+                team_obj.save()
+            
+            # Create the league-team relationship if it doesn't exist
+            if league_obj.current_season_year:
+                from core.models import SportLeagueTeam
+                SportLeagueTeam.objects.get_or_create(
+                    league=league_obj,
+                    team=team_obj,
+                    season=league_obj.current_season_year,
+                )
+                logger.info(f"Created/updated league-team relationship: {team_name} in {league_obj.name} for season {league_obj.current_season_year}")
+            else:
+                logger.warning(f"League {league_obj.name} has no current_season_year, skipping league-team relationship")
+            
             return team_obj
         except Exception as e:
             logger.error(f"Failed to create team {team_name}: {e}")

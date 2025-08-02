@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from payments.views import (
     CreateSubscriptionCheckoutUrl,
@@ -53,4 +53,5 @@ urlpatterns = [
         VerifyMobilePurchaseView.as_view(),
         name="verify_mobile_purchase",
     ),
+    path('revenuecat/', include('payments.mobile.urls'))
 ]

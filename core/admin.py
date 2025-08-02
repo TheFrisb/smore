@@ -11,6 +11,7 @@ from django.db.models.functions import Lower, Greatest
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
+from accounts.models import PurchasedPredictions, PurchasedTickets
 from core.models import (
     Prediction,
     PickOfTheDay,
@@ -314,6 +315,6 @@ class TicketAdmin(admin.ModelAdmin):
 
 admin.site.register(SiteSettings, SingletonModelAdmin)
 admin.site.register(SportCountry)
-# admin.site.register(PurchasedPredictions)
-# admin.site.register(PurchasedTickets)
+admin.site.register(PurchasedPredictions)
+admin.site.register(PurchasedTickets)
 admin.site.register(TeamStanding)

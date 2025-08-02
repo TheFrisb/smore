@@ -187,8 +187,7 @@ class UserSubscription(BaseInternalModel):
 
     class ProviderType(models.TextChoices):
         STRIPE = "STRIPE", "Stripe"
-        GOOGLE = "GOOGLE", "Google"
-        APPLE = "APPLE", "Apple"
+        REVENUECAT = "REVENUECAT", "RevenueCat"
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="subscription"
@@ -247,8 +246,7 @@ class ReferralEarning(BaseInternalModel):
 
 
 class PlatformType(models.TextChoices):
-    ANDROID = "ANDROID", "Android"
-    IOS = "IOS", "iOS"
+    MOBILE = "MOBILE", "Mobile"
     WEB = "WEB", "Web"
 
 
@@ -272,15 +270,24 @@ class PurchasedPredictions(BaseInternalModel):
     platform = models.CharField(
         max_length=20, choices=PlatformType, default=PlatformType.WEB
     )
+    revenuecat_transaction_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
 
     def __str__(self):
         return f"{self.user.username} - {self.prediction.match}"
 
 
 class PurchasedTickets(BaseInternalModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tickets")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="purchased_tickets")
     ticket = models.ForeignKey(
         "core.Ticket", on_delete=models.CASCADE, related_name="purchases"
+    )
+    platform = models.CharField(
+        max_length=20, choices=PlatformType, default=PlatformType.WEB
+    )
+    revenuecat_transaction_id = models.CharField(
+        max_length=255, blank=True, null=True, db_index=True
     )
 
     def __str__(self):

@@ -35,7 +35,9 @@ class SportCountrySerializer(serializers.ModelSerializer):
         fields = ("name", "logo")
 
     def get_logo(self, obj):
-        return f"{settings.BASE_URL}{obj.logo.url}"
+        if obj.logo and obj.logo.url:
+            return f"{settings.BASE_URL}{obj.logo.url}"
+        return None
 
 
 class SportTeamSerializer(serializers.ModelSerializer):
@@ -46,7 +48,9 @@ class SportTeamSerializer(serializers.ModelSerializer):
         fields = ("name", "logo")
 
     def get_logo(self, obj):
-        return f"{settings.BASE_URL}{obj.logo.url}"
+        if obj.logo and obj.logo.url:
+            return f"{settings.BASE_URL}{obj.logo.url}"
+        return None
 
 
 class SportLeagueSerializer(serializers.ModelSerializer):
@@ -58,7 +62,9 @@ class SportLeagueSerializer(serializers.ModelSerializer):
         fields = ("name", "logo", "country")
 
     def get_logo(self, obj):
-        return f"{settings.BASE_URL}{obj.logo.url}"
+        if obj.logo and obj.logo.url:
+            return f"{settings.BASE_URL}{obj.logo.url}"
+        return None
 
 
 class SportMatchSerializer(serializers.ModelSerializer):
