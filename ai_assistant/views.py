@@ -55,14 +55,14 @@ class SendMessageToAiView(APIView):
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        if not self.validate_subscription(request):
-            return Response(
-                {
-                    "message": "You need to subscribe to the AI Assistant product to use this feature.",
-                    "user_subscription": self.get_user_subscription(),
-                },
-                status=403,
-            )
+        # if not self.validate_subscription(request):
+        #     return Response(
+        #         {
+        #             "message": "You need to subscribe to the AI Assistant product to use this feature.",
+        #             "user_subscription": self.get_user_subscription(),
+        #         },
+        #         status=403,
+        #     )
 
         timezone.activate(serializer.validated_data["timezone"])
 
@@ -91,6 +91,62 @@ class SendMessageToAiView(APIView):
                 "direction": Message.Direction.INBOUND,
             }
         )
+
+    def validate_subscription(self, request):
+        user = request.user
+        if not user.is_authenticated:
+            return False
+
+        user_subscription = UserSubscription.objects.filter(
+            user=request.user,
+            products__name=Product.Names.AI_ANALYST,
+            status=UserSubscription.Status.ACTIVE,
+        ).first()
+
+        msg_count = Message.objects.filter(
+            user=user, direction=Message.Direction.OUTBOUND
+        ).count()
+
+        if not user_subscription and msg_count >= 3:
+            logger.warning(
+                f"User ({user.id}): {user.username} does not have a plan, and has already sent {msg_count} messages."
+            )
+            return False
+
+        return True
+
+
+class GetSentMessagesCount(APIView):
+    class OutputSerializer(serializers.Serializer):
+        """Serializer for formatting the outgoing response."""
+
+        count = serializers.IntegerField()
+        can_send = serializers.BooleanField()
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            data = {
+                "count": 0,
+                "can_send": False,
+            }
+            serializer = self.OutputSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+
+            return Response(serializer.data, status=200)
+
+        count = Message.objects.filter(
+            user=request.user, direction=Message.Direction.OUTBOUND
+        ).count()
+        can_send = self.validate_subscription(request)
+
+        data = {
+            "count": count,
+            "can_send": can_send,
+        }
+
+        serializer = self.OutputSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=200)
 
     def validate_subscription(self, request):
         user = request.user
