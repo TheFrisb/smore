@@ -523,7 +523,7 @@ class UpcomingMatchesView(TemplateView):
                 "match__away_team",
                 "match__league",
                 "product",
-            ).exclude(id=1024)
+            ).exclude(id=1053)
             .order_by("match__kickoff_datetime")
         )
 

@@ -131,7 +131,7 @@ class PredictionAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        return queryset.exclude(id=1024)
+        return queryset.exclude(id=1053)
 
     def get_result(self, obj):
         return obj.result

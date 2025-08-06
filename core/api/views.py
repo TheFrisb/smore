@@ -182,7 +182,7 @@ class UpcomingAPIView(APIView):
                 status=Prediction.Status.PENDING,
             ).select_related(
                 "match__home_team", "match__away_team", "match__league", "product"
-            ).exclude(id=1024).order_by("match__kickoff_datetime")
+            ).exclude(id=1053).order_by("match__kickoff_datetime")
 
             if product_filter:
                 predictions = predictions.filter(product__name=product_filter)
