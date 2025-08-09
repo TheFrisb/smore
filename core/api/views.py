@@ -122,7 +122,7 @@ class HistoryAPIView(APIView):
                 "match__home_team", "match__away_team", "match__league", "product"
             )
             if product_filter:
-                predictions = predictions.filter(product__name=product_filter)
+                predictions = predictions.filter(product__name__iexact=product_filter)
 
         if obj_filter is None or obj_filter == "tickets":
             tickets = Ticket.objects.filter(
@@ -135,7 +135,7 @@ class HistoryAPIView(APIView):
                 "product",
             )
             if product_filter:
-                tickets = tickets.filter(product__name=product_filter)
+                tickets = tickets.filter(product__name__iexact=product_filter)
 
         return predictions, tickets
 
@@ -185,7 +185,7 @@ class UpcomingAPIView(APIView):
             ).exclude(id=1053).order_by("match__kickoff_datetime")
 
             if product_filter:
-                predictions = predictions.filter(product__name=product_filter)
+                predictions = predictions.filter(product__name__iexact=product_filter)
 
         if obj_filter is None or obj_filter == "tickets":
             tickets = Ticket.objects.filter(
@@ -200,7 +200,7 @@ class UpcomingAPIView(APIView):
             ).order_by("product__name", "starts_at")
 
             if product_filter:
-                tickets = tickets.filter(product__name=product_filter)
+                tickets = tickets.filter(product__name__iexact=product_filter)
 
         return predictions, tickets
 
