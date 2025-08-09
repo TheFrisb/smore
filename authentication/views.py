@@ -11,6 +11,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from accounts.models import User
 from accounts.serializers import UserSerializer
 from accounts.services.user_service import UserService
+from authentication.serializers import CustomTokenObtainPairSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 class LoginView(TokenObtainPairView):
     permission_classes = [AllowAny]
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class RefreshTokenView(TokenRefreshView):
