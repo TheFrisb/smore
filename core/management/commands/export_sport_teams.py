@@ -9,7 +9,7 @@ BATCH_SIZE = 5000
 
 
 class Command(BaseCommand):
-    help = 'Export sport teams to JSON file'
+    help = 'Export sport teams with league relationships and standings to JSON'
 
     def add_arguments(self, parser):
         parser.add_argument('output_file', type=str, help='Output JSON file path')
@@ -24,26 +24,33 @@ class Command(BaseCommand):
             first = True
 
             while processed < total_teams:
-                teams = SportTeam.objects.filter(type=ApiSportModel.SportType.SOCCER).select_related(
-                    'product', 'league'
-                ).only(
-                    'external_id',
-                    'name',
-                    'logo',
-                    'product__id',
-                    'league__external_id',
-                    'type'
-                ).order_by('id')[processed:processed + BATCH_SIZE]
+                teams = (
+                    SportTeam.objects
+                    .filter(type=ApiSportModel.SportType.SOCCER)
+                    .prefetch_related(
+                        'team_leagues__league',
+                        'team_leagues__standings'
+                    )
+                    .order_by('id')[processed:processed + BATCH_SIZE]
+                )
 
                 batch_data = []
                 for team in teams:
+                    leagues_data = []
+                    for lt in team.team_leagues.all():
+                        leagues_data.append({
+                            'league_external_id': lt.league.external_id,
+                            'season': lt.season,
+                            'standings_data': lt.standings.data if hasattr(lt, 'standings') and lt.standings else None
+                        })
+
                     batch_data.append({
                         'external_id': team.external_id,
                         'name': team.name,
                         'logo': team.logo.name if team.logo else None,
                         'product_id': team.product_id,
-                        'league_external_id': team.league.external_id,
-                        'type': team.type
+                        'type': team.type,
+                        'leagues': leagues_data
                     })
 
                 json_batch = json.dumps(batch_data, cls=DjangoJSONEncoder)[1:-1]
