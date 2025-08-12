@@ -204,7 +204,7 @@ class SportTeam(ApiSportModel):
 
     def __str__(self):
         return f"{self.name}"
-
+ 
 
 class TeamStanding(BaseInternalModel):
     league_team = models.OneToOneField(

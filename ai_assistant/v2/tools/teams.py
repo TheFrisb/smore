@@ -75,7 +75,7 @@ def get_team_infos_by_league(team_league_input: TeamLeagueInput) -> list[SportTe
     Args:
         team_league_input (TeamLeagueInput): Input model containing the league's external ID to filter teams by.
 
-    Returns:
+    Returns: 
         list[SportTeamOutputModel]: A list of output models containing each team's information.
     """
 

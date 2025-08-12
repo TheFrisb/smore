@@ -46,7 +46,7 @@ class TeamWithInjuryOutputModel(BaseModel):
     model_config = ConfigDict(
         from_attributes=True
     )
-
+ 
 
 @tool
 def get_match_injuries(match_injury_input: MatchInjuryInput) -> Optional[list[TeamWithInjuryOutputModel]]:

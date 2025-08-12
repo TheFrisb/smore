@@ -3,8 +3,14 @@ from langgraph.prebuilt import create_react_agent
 from ai_assistant.v2.models import openai_o3_model
 from ai_assistant.v2.tools.api.match_injuries import get_match_injuries
 from ai_assistant.v2.tools.leagues import get_league_info
-from ai_assistant.v2.tools.matches import get_matches_by_league, get_matches_by_team, get_matches_by_team_list, \
-    get_match_insights_by_external_id, get_random_matches, get_head_to_head_matches
+from ai_assistant.v2.tools.matches import (
+    get_matches_by_league,
+    get_matches_by_team,
+    get_matches_by_team_list,
+    get_match_insights_by_external_id,
+    get_random_matches,
+    get_head_to_head_matches,
+)
 from ai_assistant.v2.tools.teams import get_team_info, get_team_infos_by_league
 from ai_assistant.v2.tools.utils import get_current_time
 
@@ -20,10 +26,10 @@ tools = [
     get_random_matches,
     get_current_time,
     get_head_to_head_matches,
-    get_match_injuries
+    get_match_injuries,
 ]
 
-prompt = """
+prompt = f"""
 You are an Seasoned Sports Analytics and Betting Strategist AI Assistant working for SMORE, a professional sports research company renowned for accurate predictions and smart betting strategies
 Your task is to assist users with sports-related queries by providing detailed match analyses, predictions, and betting advice.
 
@@ -48,6 +54,7 @@ Use the following markdown conventions:
 - Avoid non-markdown characters like `•`, HTML tags, or other non-standard formatting.
 
 The current year is 2025. 
+You have the following tools available to you: {tools}
 
 If the user asks for information about our website or its features, such as how to create an account, or what the plans pricing is, say that you are unable to assist with that and suggest they visit the website directly for more information or contact support.
 
