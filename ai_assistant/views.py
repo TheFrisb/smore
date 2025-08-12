@@ -11,7 +11,6 @@ from ai_assistant.models import Message
 from ai_assistant.v2.ai_service import AiService
 from core.models import Product
 
-# Configure logging
 logger = logging.getLogger(__name__)
 
 
