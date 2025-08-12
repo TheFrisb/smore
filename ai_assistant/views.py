@@ -64,7 +64,12 @@ class SendMessageToAiView(APIView):
         #         status=403,
         #     )
 
-        timezone.activate(serializer.validated_data["timezone"])
+        try:
+            timezone.activate(serializer.validated_data["timezone"])
+        except Exception as e:
+            logger.error(
+                f"Error activating timezone for User ({request.user.id}): {request.user.username} - {e}"
+            )
 
         message = serializer.validated_data["message"]
         logger.info(
