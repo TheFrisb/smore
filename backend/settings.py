@@ -172,18 +172,20 @@ LOGGING = {
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "simple",
+            "level": "ERROR",
         },
         "file": {
             "class": "logging.FileHandler",
             "filename": BASE_DIR / "logs/logs.log",
             "formatter": "simple",
+            "level": "ERROR",
         },
     },
     "loggers": {
-        "": {  # ← empty string = real root logger
+        "": {
             "handlers": ["console", "file"],
-            "level": config("DJANGO_LOG_LEVEL", default="INFO"),
-            "propagate": False,
+            "level": "ERROR",
+            "propagate": True,
         },
     },
 }

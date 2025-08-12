@@ -74,10 +74,9 @@ class SendMessageToAiView(APIView):
         ai_service = AiService()
         try:
             response = ai_service.run(message, request.user)
-        except Exception as e:
+        except Exception:
             logger.exception(
                 f"Error processing AI request for User ({request.user.id}): {request.user.username}",
-                exc_info=True,
             )
             raise
 
