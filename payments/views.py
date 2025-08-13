@@ -69,7 +69,10 @@ class CreateSubscriptionCheckoutUrl(APIView):
             raise serializers.ValidationError("Invalid 'firstProduct' field.")
 
         price_ids = self.get_price_ids(
-            products, serializer.validated_data["frequency"], first_chosen_product, is_switzerland
+            products,
+            serializer.validated_data["frequency"],
+            first_chosen_product,
+            is_switzerland,
         )
 
         checkout_session = self.service.create_subscription_checkout_session(
@@ -140,7 +143,9 @@ class CreatePredictionCheckoutUrl(RedirectView):
 
         service = StripeCheckoutService()
         checkout_session = service.create_onetime_prediction_checkout_session(
-            self.request.user, prediction, self.request.session.get("is_switzerland", False)
+            self.request.user,
+            prediction,
+            self.request.session.get("is_switzerland", False),
         )
 
         try:
@@ -255,6 +260,8 @@ class UpdateSubscriptionView(APIView):
             user_subscription.stripe_subscription_id
         )
 
+        is_switzerland = request.session.get("is_switzerland", False)
+
         # Build price-to-product mapping
         all_products = Product.objects.all()
         price_to_product = {}
@@ -278,7 +285,7 @@ class UpdateSubscriptionView(APIView):
                 )
                 use_discounted_prices = False
             desired_price_ids[product] = product.get_price_id_for_subscription(
-                desired_frequency, use_discounted_prices
+                desired_frequency, use_discounted_prices, is_switzerland
             )
 
         # Process current subscription items
@@ -358,7 +365,7 @@ class SubscriptionPaymentSuccessView(RedirectView):
         if has_sports_product:
             messages.success(
                 self.request,
-                'Welcome to SMORE Premium. Your invitation link for the Premium Channel will be ready soon. Please check your e mail address in 30-60 minutes.',
+                "Welcome to SMORE Premium. Your invitation link for the Premium Channel will be ready soon. Please check your e mail address in 30-60 minutes.",
             )
         else:
             messages.success(
@@ -564,7 +571,9 @@ class CreateDailyOfferCheckoutUrl(RedirectView):
 
         service = StripeCheckoutService()
         checkout_session = service.create_onetime_daily_offer_checkout_session(
-            self.request.user, daily_offer, self.request.session.get("is_switzerland", False)
+            self.request.user,
+            daily_offer,
+            self.request.session.get("is_switzerland", False),
         )
 
         try:
