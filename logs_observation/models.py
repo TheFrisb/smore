@@ -9,7 +9,7 @@ class Log(BaseInternalModel):
     """
     Model to store logs for observation purposes.
     """
- 
+
     class Level(models.TextChoices):
         INFO = "INFO", "Info"
         WARNING = "WARNING", "Warning"
