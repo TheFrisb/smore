@@ -6,6 +6,9 @@ from logs_observation.serializers import LogSerializer
 
 
 class LogCreateView(APIView):
+    permission_classes = []
+    authentication_classes = []
+
     def post(self, request):
         serializer = LogSerializer(data=request.data)
         if serializer.is_valid():
