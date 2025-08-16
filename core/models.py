@@ -42,7 +42,9 @@ class BaseProductModel(BaseInternalModel):
     discounted_yearly_price_stripe_id = models.CharField(
         max_length=255, blank=True, null=True
     )
-    discounted_switzerland_yearly_price_stripe_id = models.CharField(max_length=255, blank=True, null=True)
+    discounted_switzerland_yearly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
     mobile_product_id = models.CharField(max_length=255, blank=True, null=True)
 
     order = models.PositiveIntegerField(default=0)
@@ -67,11 +69,15 @@ class Product(BaseProductModel):
     name = models.CharField(
         max_length=255, choices=Names, default=Names.SOCCER, db_index=True
     )
-    type = models.CharField(choices=Types, max_length=255, default=Types.SUBSCRIPTION, db_index=True)
+    type = models.CharField(
+        choices=Types, max_length=255, default=Types.SUBSCRIPTION, db_index=True
+    )
     analysis_per_month = models.CharField(max_length=12, blank=True)
     description = models.TextField(blank=True)
 
-    def get_price_id_for_subscription(self, frequency, use_discounted_prices: bool, is_switzerland):
+    def get_price_id_for_subscription(
+        self, frequency, use_discounted_prices: bool, is_switzerland
+    ):
         if frequency == "monthly":
             if not is_switzerland:
                 return (
@@ -159,7 +165,10 @@ class ApiSportModel(BaseInternalModel):
 
     class Meta:
         abstract = True
-        unique_together = ("external_id", "type",)
+        unique_together = (
+            "external_id",
+            "type",
+        )
 
 
 class SportCountry(BaseInternalModel):
@@ -178,14 +187,10 @@ class SportLeague(ApiSportModel):
     country = models.ForeignKey(SportCountry, on_delete=models.CASCADE)
     league_type = models.CharField(max_length=255)
     logo = models.FileField(upload_to="assets/leagues/logos/")
-    current_season_year = models.IntegerField(
-        blank=True, null=True, db_index=True
-    )
+    current_season_year = models.IntegerField(blank=True, null=True, db_index=True)
     api_coverage_data = models.JSONField(null=True, blank=True)
     teams = models.ManyToManyField(
-        "SportTeam",
-        through='SportLeagueTeam',
-        related_name='leagues'
+        "SportTeam", through="SportLeagueTeam", related_name="leagues"
     )
 
     def __str__(self):
@@ -204,22 +209,29 @@ class SportTeam(ApiSportModel):
 
     def __str__(self):
         return f"{self.name}"
- 
+
 
 class TeamStanding(BaseInternalModel):
     league_team = models.OneToOneField(
-        'SportLeagueTeam', on_delete=models.CASCADE, related_name='standings', primary_key=True
+        "SportLeagueTeam",
+        on_delete=models.CASCADE,
+        related_name="standings",
+        primary_key=True,
     )
     data = models.JSONField(null=True, blank=True)
 
 
 class SportLeagueTeam(models.Model):
-    league = models.ForeignKey(SportLeague, on_delete=models.CASCADE, related_name='league_teams')
-    team = models.ForeignKey(SportTeam, on_delete=models.CASCADE, related_name='team_leagues')
+    league = models.ForeignKey(
+        SportLeague, on_delete=models.CASCADE, related_name="league_teams"
+    )
+    team = models.ForeignKey(
+        SportTeam, on_delete=models.CASCADE, related_name="team_leagues"
+    )
     season = models.IntegerField(db_index=True)
 
     class Meta:
-        unique_together = [('league', 'team', 'season')]
+        unique_together = [("league", "team", "season")]
 
     def __str__(self):
         return f"{self.team} in {self.league} ({self.season})"
@@ -231,9 +243,7 @@ class SportMatch(ApiSportModel):
         IN_PROGRESS = "IN_PROGRESS", _("In Progress")
         FINISHED = "FINISHED", _("Finished")
 
-    status = models.CharField(
-        max_length=12, choices=Status.choices, db_index=True
-    )
+    status = models.CharField(max_length=12, choices=Status.choices, db_index=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
@@ -252,9 +262,9 @@ class SportMatch(ApiSportModel):
     def is_live(self):
         # calculate if the match is live (soccer match)
         return (
-                self.kickoff_datetime
-                <= timezone.now()
-                <= (self.kickoff_datetime + timedelta(minutes=105))
+            self.kickoff_datetime
+            <= timezone.now()
+            <= (self.kickoff_datetime + timedelta(minutes=105))
         )
 
     @property
@@ -300,7 +310,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):

@@ -35,6 +35,7 @@ urlpatterns = [
     path("facebook/", include("facebook.urls")),
     path("api/ai-assistant/", include("ai_assistant.urls")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
+    path("api/logs/", include("logs_observation.urls")),
 ]
 
 if settings.DEBUG:

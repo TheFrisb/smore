@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 
 class TeamInput(BaseModel):
     team_name: str = Field(
-        description="The official name of the team, e.g., 'Manchester United' or 'Real Madrid' to look up.")
+        description="The official name of the team, e.g., 'Manchester United' or 'Real Madrid' to look up."
+    )
 
 
 class TeamLeagueInput(BaseModel):
@@ -59,7 +60,7 @@ def get_team_info(team_input: TeamInput) -> SportTeamOutputModel:
             leagues_list=[
                 SportLeagueOutputModel.model_validate(league)
                 for league in team.leagues_list
-            ]
+            ],
         )
 
     else:
@@ -68,24 +69,28 @@ def get_team_info(team_input: TeamInput) -> SportTeamOutputModel:
 
 
 @tool
-def get_team_infos_by_league(team_league_input: TeamLeagueInput) -> list[SportTeamOutputModel]:
+def get_team_infos_by_league(
+    team_league_input: TeamLeagueInput,
+) -> list[SportTeamOutputModel]:
     """
     Fetches all teams in a specific league based on the provided league external ID.
 
     Args:
         team_league_input (TeamLeagueInput): Input model containing the league's external ID to filter teams by.
 
-    Returns: 
+    Returns:
         list[SportTeamOutputModel]: A list of output models containing each team's information.
     """
 
-    logger.info(f"Fetching teams for league with external ID: {team_league_input.league_external_id}")
+    logger.info(
+        f"Fetching teams for league with external ID: {team_league_input.league_external_id}"
+    )
 
     teams = (
         SportTeam.objects.filter(
             league__external_id=team_league_input.league_external_id,
             type=ApiSportModel.SportType.SOCCER,
-            leagues__in=team_league_input.league_external_id
+            leagues__in=team_league_input.league_external_id,
         )
         .prefetch_related("leagues")
         .order_by("name")
@@ -95,5 +100,9 @@ def get_team_infos_by_league(team_league_input: TeamLeagueInput) -> list[SportTe
         return [SportTeamOutputModel.model_validate(team) for team in teams]
 
     else:
-        logger.warning(f"No teams found for league with external ID: {team_league_input.league_external_id}")
-        raise ValueError(f"No teams found for league with external ID: {team_league_input.league_external_id}")
+        logger.warning(
+            f"No teams found for league with external ID: {team_league_input.league_external_id}"
+        )
+        raise ValueError(
+            f"No teams found for league with external ID: {team_league_input.league_external_id}"
+        )

@@ -24,7 +24,7 @@ def get_league_info(league_input: LeagueInput) -> SportLeagueOutputModel:
     """
     Fetches information about a sports league based on the provided league name.
 
-    Args: 
+    Args:
         league_input (LeagueInput): Input model containing the official full league name to search for.
 
     Returns:

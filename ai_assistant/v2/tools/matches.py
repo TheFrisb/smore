@@ -120,7 +120,7 @@ class HeadToHeadInput(BaseModel):
 
 @tool
 def get_head_to_head_matches(
-        head_to_head_input: HeadToHeadInput,
+    head_to_head_input: HeadToHeadInput,
 ) -> List[SportMatchOutputModel]:
     """
     Fetches head-to-head matches between two teams, optionally filtered by a datetime or future-only matches.
@@ -151,8 +151,8 @@ def get_head_to_head_matches(
     )
 
     matches = query.all().order_by("kickoff_datetime")[
-              : head_to_head_input.number_of_matches
-              ]
+        : head_to_head_input.number_of_matches
+    ]
 
     logger.info(
         f"Found {len(matches)} head-to-head matches for teams with IDs: {home_team_id} and {away_team_id}"
@@ -162,7 +162,7 @@ def get_head_to_head_matches(
 
 @tool
 def get_random_matches(
-        random_match_input: RandomMatchInput,
+    random_match_input: RandomMatchInput,
 ) -> List[SportMatchOutputModel]:
     """
     Fetches random matches with available betting stats, optionally filtered by a datetime or future-only matches.
@@ -214,7 +214,7 @@ def get_random_matches(
 
 @tool
 def get_matches_by_league(
-        league_input: GetMatchesByLeagueInput,
+    league_input: GetMatchesByLeagueInput,
 ) -> List[SportMatchOutputModel]:
     """
     Fetches matches for a given league, optionally filtered by a datetime or upcoming matches.
@@ -250,12 +250,12 @@ def get_matches_by_league(
 
 @tool
 def get_matches_by_team(
-        team_input: GetMatchesByTeamInput,
+    team_input: GetMatchesByTeamInput,
 ) -> List[SportMatchOutputModel]:
     """
     Fetches matches for a given team, optionally filtered by a datetime or future-only matches.
 
-    Args: 
+    Args:
         team_input (GetMatchesByTeamInput): Input containing the external team ID, optional datetime, and upcoming_only flag.
 
     Returns:
@@ -287,7 +287,7 @@ def get_matches_by_team(
 
 @tool
 def get_matches_by_team_list(
-        team_list_input: GetMatchesByTeamList,
+    team_list_input: GetMatchesByTeamList,
 ) -> List[SportMatchOutputModel]:
     """
     Fetches matches for a list of teams, optionally filtered by a datetime or future-only matches.
@@ -315,8 +315,8 @@ def get_matches_by_team_list(
     query = _add_date_filters_if_needed(query, query_date, future_only)
 
     matches = query.all().order_by("kickoff_datetime")[
-              : team_list_input.number_of_matches
-              ]
+        : team_list_input.number_of_matches
+    ]
 
     logger.info(
         f"Found {len(matches)} matches for team IDs: {external_team_ids}, and query date: {query_date}, future_only: {future_only}"
@@ -326,7 +326,7 @@ def get_matches_by_team_list(
 
 @tool
 def get_match_insights_by_external_id(
-        match_input: GetMatchByExternalIdInput,
+    match_input: GetMatchByExternalIdInput,
 ) -> SportMatchInsightOutputModel:
     """
     Fetches match insights for a given match by its external ID.
@@ -355,7 +355,7 @@ def get_match_insights_by_external_id(
 
 
 def _add_date_filters_if_needed(
-        queryset: QuerySet, kickoff_date: Optional[date], future_only: bool
+    queryset: QuerySet, kickoff_date: Optional[date], future_only: bool
 ) -> QuerySet:
     """Adds date filters to the queryset based on the provided kickoff_datetime and future_only flag.
     Args:

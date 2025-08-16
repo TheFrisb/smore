@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "scripts",
     "authentication",
     "ai_assistant",
+    "logs_observation",
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "core.middleware.GeoIpSwitzerlandDetector",
-    "core.middleware.ErrorLoggingMiddleware"
+    "core.middleware.ErrorLoggingMiddleware",
     # "core.middleware.EmailVerificationMiddleware"
 ]
 

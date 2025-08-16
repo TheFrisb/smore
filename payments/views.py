@@ -63,8 +63,8 @@ class CreateSubscriptionCheckoutUrl(APIView):
             raise serializers.ValidationError("Some products not found.")
 
         if (
-                serializer.validated_data["firstProduct"]
-                not in serializer.validated_data["products"]
+            serializer.validated_data["firstProduct"]
+            not in serializer.validated_data["products"]
         ):
             raise serializers.ValidationError("Invalid 'firstProduct' field.")
 
@@ -244,8 +244,8 @@ class UpdateSubscriptionView(APIView):
             )
 
         if (
-                serializer.validated_data["firstProduct"]
-                not in serializer.validated_data["products"]
+            serializer.validated_data["firstProduct"]
+            not in serializer.validated_data["products"]
         ):
             return Response(
                 status=400, data={"message": "Invalid 'firstProduct' field."}
@@ -335,7 +335,7 @@ class UpdateSubscriptionView(APIView):
                 status=400,
                 data={
                     "message": e.user_message
-                               or "Your card was declined. Please update your payment method"
+                    or "Your card was declined. Please update your payment method"
                 },
             )
         except stripe.error.StripeError as e:
@@ -555,9 +555,9 @@ class CreateDailyOfferCheckoutUrl(RedirectView):
         today_date = timezone.now().date()
 
         if PurchasedDailyOffer.objects.filter(
-                user=self.request.user,
-                for_date=today_date,
-                status=PurchasedDailyOffer.Status.PURCHASED,
+            user=self.request.user,
+            for_date=today_date,
+            status=PurchasedDailyOffer.Status.PURCHASED,
         ).exists():
             raise PermissionError(
                 f"You've already purchased the daily offer for: {today_date}"

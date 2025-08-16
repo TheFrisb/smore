@@ -5,30 +5,37 @@ from django.core.files import File
 from django.core.management.base import BaseCommand
 
 from backend import settings
-from core.models import SportTeam, SportLeague, Product, SportLeagueTeam, TeamStanding, ApiSportModel
+from core.models import (
+    SportTeam,
+    SportLeague,
+    Product,
+    SportLeagueTeam,
+    TeamStanding,
+    ApiSportModel,
+)
 
 BATCH_SIZE = 2000
 
 
 class Command(BaseCommand):
-    help = 'Import sport teams with league relationships and standings from JSON'
+    help = "Import sport teams with league relationships and standings from JSON"
 
     def add_arguments(self, parser):
-        parser.add_argument('input_file', type=str, help='Input JSON file path')
+        parser.add_argument("input_file", type=str, help="Input JSON file path")
 
     def handle(self, *args, **kwargs):
-        input_file = kwargs['input_file']
+        input_file = kwargs["input_file"]
         media_root = settings.MEDIA_ROOT
 
-        leagues = SportLeague.objects.values('id', 'external_id')
-        league_map = {l['external_id']: l['id'] for l in leagues}
+        leagues = SportLeague.objects.values("id", "external_id")
+        league_map = {l["external_id"]: l["id"] for l in leagues}
 
-        with open(input_file, 'r') as f:
+        with open(input_file, "r") as f:
             teams_data = json.load(f)
 
         product_id = Product.objects.get(name=Product.Names.SOCCER).id
         total = len(teams_data)
-        self.stdout.write(f'Importing {total} teams...')
+        self.stdout.write(f"Importing {total} teams...")
 
         teams_to_create = []
         league_links = []
@@ -36,26 +43,28 @@ class Command(BaseCommand):
 
         for i, team_data in enumerate(teams_data, 1):
             team_obj = SportTeam(
-                external_id=team_data['external_id'],
-                name=team_data['name'],
+                external_id=team_data["external_id"],
+                name=team_data["name"],
                 product_id=product_id,
-                type=ApiSportModel.SportType.SOCCER
+                type=ApiSportModel.SportType.SOCCER,
             )
 
             # Handle logo
-            if team_data['logo']:
-                logo_path = os.path.join(media_root, team_data['logo'])
+            if team_data["logo"]:
+                logo_path = os.path.join(media_root, team_data["logo"])
                 if os.path.exists(logo_path):
-                    with open(logo_path, 'rb') as logo_file:
+                    with open(logo_path, "rb") as logo_file:
                         team_obj.logo.save(
-                            os.path.basename(team_data['logo']),
+                            os.path.basename(team_data["logo"]),
                             File(logo_file),
-                            save=False
+                            save=False,
                         )
                 else:
-                    self.stdout.write(self.style.WARNING(
-                        f"Team {team_data['name']}: Logo file {logo_path} not found"
-                    ))
+                    self.stdout.write(
+                        self.style.WARNING(
+                            f"Team {team_data['name']}: Logo file {logo_path} not found"
+                        )
+                    )
 
             teams_to_create.append(team_obj)
 
@@ -70,35 +79,42 @@ class Command(BaseCommand):
 
                 # Create leagues & standings
                 for t_data in teams_to_create:
-                    for l_data in next(td for td in teams_data if td['external_id'] == t_data.external_id)['leagues']:
-                        league_id = league_map.get(l_data['league_external_id'])
+                    for l_data in next(
+                        td
+                        for td in teams_data
+                        if td["external_id"] == t_data.external_id
+                    )["leagues"]:
+                        league_id = league_map.get(l_data["league_external_id"])
                         if league_id:
                             slt = SportLeagueTeam(
                                 league_id=league_id,
                                 team_id=created_map[t_data.external_id],
-                                season=l_data['season']
+                                season=l_data["season"],
                             )
                             league_links.append(slt)
 
-                            if l_data.get('standings_data'):
+                            if l_data.get("standings_data"):
                                 standings_to_create.append(
                                     TeamStanding(
-                                        league_team=slt,
-                                        data=l_data['standings_data']
+                                        league_team=slt, data=l_data["standings_data"]
                                     )
                                 )
                         else:
-                            self.stdout.write(self.style.WARNING(
-                                f"League {l_data['league_external_id']} not found for team {t_data.name}"
-                            ))
+                            self.stdout.write(
+                                self.style.WARNING(
+                                    f"League {l_data['league_external_id']} not found for team {t_data.name}"
+                                )
+                            )
 
                 SportLeagueTeam.objects.bulk_create(league_links, batch_size=BATCH_SIZE)
-                TeamStanding.objects.bulk_create(standings_to_create, batch_size=BATCH_SIZE)
+                TeamStanding.objects.bulk_create(
+                    standings_to_create, batch_size=BATCH_SIZE
+                )
 
-                self.stdout.write(f'Imported {i}/{total} teams...')
+                self.stdout.write(f"Imported {i}/{total} teams...")
 
                 teams_to_create = []
                 league_links = []
                 standings_to_create = []
 
-        self.stdout.write(self.style.SUCCESS(f'Finished importing {total} teams'))
+        self.stdout.write(self.style.SUCCESS(f"Finished importing {total} teams"))
