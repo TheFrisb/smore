@@ -53,15 +53,15 @@ class SendMessageToAiView(APIView):
         """Send a message to the AI assistant."""
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
- 
-        if not self.validate_subscription(request):
-            return Response(
-                {
-                    "message": "You need to subscribe to the AI Assistant product to use this feature.",
-                    "user_subscription": self.get_user_subscription(),
-                },
-                status=403,
-            )
+
+        # if not self.validate_subscription(request):
+        #     return Response(
+        #         {
+        #             "message": "You need to subscribe to the AI Assistant product to use this feature.",
+        #             "user_subscription": self.get_user_subscription(),
+        #         },
+        #         status=403,
+        #     )
 
         try:
             timezone.activate(serializer.validated_data["timezone"])
