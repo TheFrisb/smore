@@ -25,6 +25,7 @@ class User(BaseInternalModel, AbstractUser):
     class ProviderType(models.TextChoices):
         INTERNAL = "internal", "Internal"
         GOOGLE = "google", "Google"
+        APPLE = "apple", "Apple"
 
     referral_code = models.CharField(max_length=12, unique=True, blank=True, null=True)
     stripe_customer_id = models.CharField(max_length=255, blank=True, null=True)
@@ -34,6 +35,7 @@ class User(BaseInternalModel, AbstractUser):
         max_length=20, choices=ProviderType, default=ProviderType.INTERNAL
     )
     google_sub = models.CharField(max_length=255, blank=True)
+    apple_sub = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.username
@@ -270,16 +272,16 @@ class PurchasedPredictions(BaseInternalModel):
     platform = models.CharField(
         max_length=20, choices=PlatformType, default=PlatformType.WEB
     )
-    revenuecat_transaction_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
+    revenuecat_transaction_id = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.prediction.match}"
 
 
 class PurchasedTickets(BaseInternalModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="purchased_tickets")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="purchased_tickets"
+    )
     ticket = models.ForeignKey(
         "core.Ticket", on_delete=models.CASCADE, related_name="purchases"
     )

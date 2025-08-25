@@ -15,6 +15,7 @@ cffi==1.17.1
 charset-normalizer==3.4.1
 click==8.1.8
 coincurve==21.0.0
+cryptography==45.0.6
 curlify==2.2.1
 dataclasses-json==0.6.7
 distro==1.9.0

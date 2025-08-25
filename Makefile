@@ -8,4 +8,4 @@ clean-volumes:
 	sudo docker compose down -v
 
 ngrok:
-	ngrok http --url=magical-rat-merely.ngrok-free.app 8000
+	ngrok http --domain magical-rat-merely.ngrok-free.app 8000

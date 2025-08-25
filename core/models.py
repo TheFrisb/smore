@@ -298,6 +298,9 @@ class Prediction(BaseInternalModel):
         max_length=10, choices=Status, default=Status.PENDING, db_index=True
     )
     detailed_analysis = CKEditor5Field(blank=True)
+    stake = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.00, blank=True
+    )
 
     @property
     def is_sport_prediction(self):

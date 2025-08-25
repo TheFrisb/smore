@@ -31,8 +31,8 @@ class SendMessageToAiView(APIView):
 
     def get_user_subscription(self):
         if (
-                not self.request.user.is_authenticated
-                or not self.request.user.subscription_is_active
+            not self.request.user.is_authenticated
+            or not self.request.user.subscription_is_active
         ):
             return None
 

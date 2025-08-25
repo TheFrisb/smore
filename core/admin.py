@@ -23,7 +23,8 @@ from core.models import (
     SportTeam,
     SportMatch,
     BetLine,
-    Ticket, TeamStanding,
+    Ticket,
+    TeamStanding,
 )
 
 logger = logging.getLogger(__name__)
@@ -42,7 +43,11 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
         (
             "Monthly Pricing",
             {
-                "fields": ("monthly_price", "monthly_price_stripe_id", "monthly_switzerland_price_stripe_id"),
+                "fields": (
+                    "monthly_price",
+                    "monthly_price_stripe_id",
+                    "monthly_switzerland_price_stripe_id",
+                ),
             },
         ),
         (
@@ -51,14 +56,18 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
                 "fields": (
                     "discounted_monthly_price",
                     "discounted_monthly_price_stripe_id",
-                    "discounted_switzerland_monthly_price_stripe_id"
+                    "discounted_switzerland_monthly_price_stripe_id",
                 ),
             },
         ),
         (
             "Yearly Pricing",
             {
-                "fields": ("yearly_price", "yearly_price_stripe_id", "yearly_switzerland_price_stripe_id"),
+                "fields": (
+                    "yearly_price",
+                    "yearly_price_stripe_id",
+                    "yearly_switzerland_price_stripe_id",
+                ),
             },
         ),
         (
@@ -67,7 +76,7 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
                 "fields": (
                     "discounted_yearly_price",
                     "discounted_yearly_price_stripe_id",
-                    "discounted_switzerland_yearly_price_stripe_id"
+                    "discounted_switzerland_yearly_price_stripe_id",
                 ),
             },
         ),
@@ -125,6 +134,7 @@ class PredictionAdmin(admin.ModelAdmin):
             "Prediction Details",
             {"fields": ("prediction", "odds", "result", "detailed_analysis")},
         ),
+        ("Stake Information", {"fields": ["stake"]}),
         ("Status and Visibility", {"fields": ("status", "visibility")}),
         ("Additional Information", {"fields": ("created_at", "updated_at")}),
     )
@@ -212,23 +222,20 @@ class SportMatchAdmin(admin.ModelAdmin):
             qs = queryset.annotate(
                 home_sim=TrigramSimilarity(
                     Lower(Unaccent("home_team__name")),
-                    Lower(Unaccent(Value(search_term)))
+                    Lower(Unaccent(Value(search_term))),
                 ),
                 away_sim=TrigramSimilarity(
                     Lower(Unaccent("away_team__name")),
-                    Lower(Unaccent(Value(search_term)))
+                    Lower(Unaccent(Value(search_term))),
                 ),
                 league_sim=TrigramSimilarity(
-                    Lower(Unaccent("league__name")),
-                    Lower(Unaccent(Value(search_term)))
+                    Lower(Unaccent("league__name")), Lower(Unaccent(Value(search_term)))
                 ),
             )
 
             # 4) filter to only “reasonably similar” matches
             qs = qs.filter(
-                Q(home_sim__gt=0.3) |
-                Q(away_sim__gt=0.3) |
-                Q(league_sim__gt=0.3)
+                Q(home_sim__gt=0.3) | Q(away_sim__gt=0.3) | Q(league_sim__gt=0.3)
             )
 
             # 5) order by the greatest of the three

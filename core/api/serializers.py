@@ -17,14 +17,7 @@ from core.models import (
 class PredictionSerializer2(serializers.ModelSerializer):
     class Meta:
         model = Prediction
-        fields = [
-            "id",
-            "product",
-            "status",
-            "prediction",
-            "result",
-            "odds",
-        ]
+        fields = ["id", "product", "status", "prediction", "result", "odds", "stake"]
 
 
 class SportCountrySerializer(serializers.ModelSerializer):
@@ -100,6 +93,7 @@ class PredictionSerializer(serializers.ModelSerializer):
             "status",
             "detailed_analysis",
             "product",
+            "stake",
         )
 
 
@@ -134,7 +128,7 @@ class TicketHistorySerializer(serializers.ModelSerializer):
             "bet_lines",
             "total_odds",
             "visibility",
-            "label"
+            "label",
         ]
 
     def get_object_type(self, obj):
@@ -163,6 +157,7 @@ class PredictionHistorySerializer(serializers.ModelSerializer):
             "detailed_analysis",
             "product",
             "visibility",
+            "stake",
         ]
 
     def get_object_type(self, obj):
