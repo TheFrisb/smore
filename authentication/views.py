@@ -1,9 +1,10 @@
 import logging
+from urllib.parse import urlencode, quote
 
 import jwt
 import requests as rq
 from django.contrib.auth.hashers import make_password
-from django.shortcuts import redirect
+from django.http import HttpResponse
 from google.auth.transport import requests
 from google.oauth2 import id_token
 from jwt import PyJWKClient
@@ -131,10 +132,19 @@ class AppleReceiverView(APIView):
             )
 
         try:
-            if code and not id_token_client:
-                # Android/Web: exchange code for id_token
-                id_token_client = self._exchange_code_for_token(code)
+            if code:
+                # Android/Web: forward Apple's params to deep link (do not process here)
+                params = urlencode(request.data, quote_via=quote)
+                deep_link = (
+                    f"intent://callback?{params}#"
+                    f"Intent;package=com.smoreltd.smore;"
+                    f"scheme=signinwithapple;end"
+                )
+                # Use HTML refresh to avoid browser hanging on direct redirect
+                html = f'<html><head><meta http-equiv="refresh" content="0;url={deep_link}"></head></html>'
+                return HttpResponse(html, content_type="text/html")
 
+            # iOS/native: process id_token (no code present)
             # Validate token
             decoded = self._verify_token(id_token_client)
 
@@ -144,27 +154,18 @@ class AppleReceiverView(APIView):
             # Generate JWTs
             refresh = RefreshToken.for_user(user)
 
-            # iOS: return JSON
-            if id_token_client and not code:
-                return Response(
-                    {
-                        "access": str(refresh.access_token),
-                        "refresh": str(refresh),
-                        "user": {
-                            "id": user.id,
-                            "email": user.email,
-                            "username": user.username,
-                        },
-                    }
-                )
-            # Android/Web: redirect to deep link
-            deep_link = (
-                f"intent://callback?"
-                f"access={refresh.access_token}&refresh={str(refresh)}#"
-                f"Intent;package=com.smore;"
-                f"scheme=signinwithapple;end"
+            # Return JSON
+            return Response(
+                {
+                    "access": str(refresh.access_token),
+                    "refresh": str(refresh),
+                    "user": {
+                        "id": user.id,
+                        "email": user.email,
+                        "username": user.username,
+                    },
+                }
             )
-            return redirect(deep_link)
 
         except Exception as e:
             logger.exception("Apple Sign-In failed")
