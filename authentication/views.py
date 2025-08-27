@@ -1,7 +1,9 @@
 import logging
 
 import jwt
+import requests as rq
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import redirect
 from google.auth.transport import requests
 from google.oauth2 import id_token
 from jwt import PyJWKClient
@@ -21,6 +23,8 @@ from authentication.utils import generate_apple_client_secret
 from backend import settings
 
 logger = logging.getLogger(__name__)
+APPLE_TOKEN_URL = "https://appleid.apple.com/auth/token"
+APPLE_KEYS_URL = "https://appleid.apple.com/auth/keys"
 
 
 # Create your views here.
@@ -107,90 +111,110 @@ class PasswordResetView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-APPLE_TOKEN_URL = "https://appleid.apple.com/auth/token"
-APPLE_KEYS_URL = "https://appleid.apple.com/auth/keys"
-
-
 class AppleReceiverView(APIView):
     """
-    Handles Apple Sign-In for both iOS (direct id_token) and Android/web (authorization code).
+    Handles Apple Sign-In for:
+    - iOS native flow (id_token)
+    - Android/Web flow (authorization code)
     """
 
     permission_classes = [AllowAny]
 
-    def post(self, request, *args, **kwargs):
-        """
-        Expects either:
-        - `id_token` (iOS)
-        - `code` (Android / web)
-        """
-        id_token_internal = request.data.get("id_token")
+    def post(self, request):
+        id_token_client = request.data.get("id_token")
         code = request.data.get("code")
 
-        if not id_token_internal and not code:
+        if not id_token_client and not code:
             return Response(
                 {"error": "Missing id_token or code"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if code and not id_token_internal:
-            try:
-                response = requests.post(
-                    APPLE_TOKEN_URL,
-                    data={
-                        "grant_type": "authorization_code",
-                        "code": code,
-                        "redirect_uri": settings.APPLE_REDIRECT_URI,
-                        "client_id": settings.APPLE_CLIENT_ID,
-                        "client_secret": generate_apple_client_secret(),
-                    },
-                    headers={"Content-Type": "application/x-www-form-urlencoded"},
-                )
-
-                if response.status_code != 200:
-                    logger.error(f"Apple token exchange failed: {response.text}")
-                    return Response(
-                        {"error": "Failed to exchange code for id_token"},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
-
-                token_data = response.json()
-                id_token_internal = token_data.get("id_token")
-
-                if not id_token_internal:
-                    return Response(
-                        {"error": "Apple response missing id_token"},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
-
-            except Exception as e:
-                logger.exception("Error exchanging Apple code for id_token")
-                return Response({"error": "Failed to verify Apple code"}, status=400)
-
-        # Validate the id_token
         try:
-            jwks_client = PyJWKClient(APPLE_KEYS_URL)
-            signing_key = jwks_client.get_signing_key_from_jwt(id_token_internal)
-            decoded = jwt.decode(
-                id_token_internal,
-                signing_key.key,
-                algorithms=["RS256"],
-                audience=settings.APPLE_CLIENT_ID,
-                issuer="https://appleid.apple.com",
-            )
-        except Exception as e:
-            logger.exception("Invalid Apple ID token")
-            return Response(
-                {"error": "Invalid Apple token"}, status=status.HTTP_400_BAD_REQUEST
-            )
+            if code and not id_token_client:
+                # Android/Web: exchange code for id_token
+                id_token_client = self._exchange_code_for_token(code)
 
+            # Validate token
+            decoded = self._verify_token(id_token_client)
+
+            # Get or create user
+            user, created = self._get_or_create_user(decoded)
+
+            # Generate JWTs
+            refresh = RefreshToken.for_user(user)
+
+            # iOS: return JSON
+            if id_token_client and not code:
+                return Response(
+                    {
+                        "access": str(refresh.access_token),
+                        "refresh": str(refresh),
+                        "user": {
+                            "id": user.id,
+                            "email": user.email,
+                            "username": user.username,
+                        },
+                    }
+                )
+            # Android/Web: redirect to deep link
+            deep_link = (
+                f"intent://callback?"
+                f"access={refresh.access_token}&refresh={str(refresh)}#"
+                f"Intent;package=com.smore;"
+                f"scheme=signinwithapple;end"
+            )
+            return redirect(deep_link)
+
+        except Exception as e:
+            logger.exception("Apple Sign-In failed")
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    def _exchange_code_for_token(self, code: str) -> str:
+        """
+        Exchange authorization code for id_token via Apple API
+        """
+        response = rq.post(
+            "https://appleid.apple.com/auth/token",
+            data={
+                "grant_type": "authorization_code",
+                "code": code,
+                "redirect_uri": settings.APPLE_REDIRECT_URI,
+                "client_id": settings.APPLE_CLIENT_ID,
+                "client_secret": generate_apple_client_secret(),
+            },
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+        )
+        response.raise_for_status()
+        token_data = response.json()
+        id_token_client = token_data.get("id_token")
+        if not id_token_client:
+            raise ValueError("Apple response missing id_token")
+        return id_token_client
+
+    def _verify_token(self, id_token_client: str) -> dict:
+        """
+        Verify the Apple JWT using Apple's public keys
+        """
+        jwks_client = PyJWKClient(APPLE_KEYS_URL)
+        signing_key = jwks_client.get_signing_key_from_jwt(id_token_client)
+        decoded = jwt.decode(
+            id_token_client,
+            signing_key.key,
+            algorithms=["RS256"],
+            audience=settings.APPLE_CLIENT_ID,
+            issuer="https://appleid.apple.com",
+        )
+        if "sub" not in decoded:
+            raise ValueError("Apple token missing 'sub'")
+        return decoded
+
+    def _get_or_create_user(self, decoded: dict):
+        """
+        Get existing user by email or Apple sub, or create new one
+        """
         sub = decoded.get("sub")
         email = decoded.get("email") or f"{sub}@privaterelay.appleid.com"
-
-        if not sub:
-            return Response(
-                {"error": "Apple token missing sub"}, status=status.HTTP_400_BAD_REQUEST
-            )
 
         user, created = User.objects.get_or_create(
             email=email,
@@ -201,25 +225,7 @@ class AppleReceiverView(APIView):
                 "is_email_verified": True,
             },
         )
-
-        if created:
-            logger.info(f"User {user.username} created via Apple OAuth")
-        else:
-            logger.info(f"User {user.username} logged in via Apple OAuth")
-
-        refresh = RefreshToken.for_user(user)
-
-        return Response(
-            {
-                "refresh": str(refresh),
-                "access": str(refresh.access_token),
-                "user": {
-                    "id": user.id,
-                    "email": user.email,
-                    "username": user.username,
-                },
-            }
-        )
+        return user, created
 
 
 class GoogleReceiverView(APIView):
