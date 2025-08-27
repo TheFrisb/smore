@@ -133,28 +133,21 @@ class AppleReceiverView(APIView):
 
         try:
             if code:
-                # Android/Web: forward Apple's params to deep link (do not process here)
                 params = urlencode(request.data, quote_via=quote)
                 deep_link = (
                     f"intent://callback?{params}#"
-                    f"Intent;package=com.smoreltd.smore;"
+                    f"Intent;package=com.smore;"
                     f"scheme=signinwithapple;end"
                 )
-                # Use HTML refresh to avoid browser hanging on direct redirect
                 html = f'<html><head><meta http-equiv="refresh" content="0;url={deep_link}"></head></html>'
                 return HttpResponse(html, content_type="text/html")
 
-            # iOS/native: process id_token (no code present)
-            # Validate token
             decoded = self._verify_token(id_token_client)
 
-            # Get or create user
             user, created = self._get_or_create_user(decoded)
 
-            # Generate JWTs
             refresh = RefreshToken.for_user(user)
 
-            # Return JSON
             return Response(
                 {
                     "access": str(refresh.access_token),
