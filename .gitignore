@@ -46,3 +46,5 @@ node_modules/
 **/migrations
 
 google_account.json
+
+secrets

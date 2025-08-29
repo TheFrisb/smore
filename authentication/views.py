@@ -45,6 +45,21 @@ class GetMeView(APIView):
         return Response(serializer.data, status=HTTP_200_OK)
 
 
+class UpdateFCMTokenView(APIView):
+    def post(self, request):
+        fcm_token = request.data.get("fcm_token")
+        if not fcm_token:
+            return Response(
+                {"error": "Missing fcm_token"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        user = request.user
+        user.fcm_token = fcm_token
+        user.save()
+
+        return Response({"status": "FCM token updated"}, status=HTTP_200_OK)
+
+
 class RegisterUserView(APIView):
     permission_classes = [AllowAny]
 

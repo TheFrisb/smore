@@ -269,7 +269,7 @@ class TicketAdmin(admin.ModelAdmin):
         (
             "Ticket Details",
             {
-                "fields": ("product", "status", "visibility", "label"),
+                "fields": ("product", "status", "visibility", "label", "stake"),
             },
         ),
         (

@@ -36,6 +36,7 @@ class User(BaseInternalModel, AbstractUser):
     )
     google_sub = models.CharField(max_length=255, blank=True)
     apple_sub = models.CharField(max_length=255, blank=True)
+    fcm_token = models.CharField(max_length=512, blank=True, null=True, db_index=True)
 
     def __str__(self):
         return self.username

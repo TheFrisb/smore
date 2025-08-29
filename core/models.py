@@ -76,7 +76,7 @@ class Product(BaseProductModel):
     description = models.TextField(blank=True)
 
     def get_price_id_for_subscription(
-        self, frequency, use_discounted_prices: bool, is_switzerland
+            self, frequency, use_discounted_prices: bool, is_switzerland
     ):
         if frequency == "monthly":
             if not is_switzerland:
@@ -262,9 +262,9 @@ class SportMatch(ApiSportModel):
     def is_live(self):
         # calculate if the match is live (soccer match)
         return (
-            self.kickoff_datetime
-            <= timezone.now()
-            <= (self.kickoff_datetime + timedelta(minutes=105))
+                self.kickoff_datetime
+                <= timezone.now()
+                <= (self.kickoff_datetime + timedelta(minutes=105))
         )
 
     @property
@@ -313,7 +313,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):
@@ -352,6 +352,7 @@ class Ticket(BaseInternalModel):
     )
     starts_at = models.DateTimeField(null=True, blank=True)
     label = models.CharField(max_length=255, blank=True)
+    stake = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     @property
     def total_odds(self) -> float:

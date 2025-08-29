@@ -1,6 +1,5 @@
 # utils/apple.py
 import time
-from pathlib import Path
 
 import jwt
 from django.conf import settings
@@ -9,10 +8,9 @@ from django.conf import settings
 def generate_apple_client_secret() -> str:
     """
     Generates an Apple client secret JWT for Sign in with Apple.
-    Reads the private key from secrets/AuthKey_Q4TJWDV95P.p8
     """
     # Path to your .p8 private key
-    key_path = Path(settings.BASE_DIR) / "secrets" / "AuthKey_Q4TJWDV95P.p8"
+    key_path = settings.APPLE_SIGN_IN_KEY_PATH
 
     with open(key_path, "r") as f:
         private_key = f.read()

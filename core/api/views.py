@@ -1,4 +1,3 @@
-from django.utils import timezone
 from django_filters import rest_framework as filters
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -191,7 +190,6 @@ class UpcomingAPIView(APIView):
             tickets = Ticket.objects.filter(
                 visibility=Ticket.Visibility.PUBLIC,
                 status=Ticket.Status.PENDING,
-                starts_at__date__gte=timezone.now().date(),
             ).prefetch_related(
                 "bet_lines__match__home_team",
                 "bet_lines__match__away_team",

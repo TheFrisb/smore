@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
+import firebase_admin
 from decouple import config, Csv
+from firebase_admin import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,6 +61,7 @@ INSTALLED_APPS = [
     "authentication",
     "ai_assistant",
     "logs_observation",
+    "notifications",
 ]
 
 MIDDLEWARE = [
@@ -310,3 +313,8 @@ APPLE_CLIENT_ID = config("APPLE_CLIENT_ID")
 APPLE_SERVICE_KEY_ID = config("APPLE_SERVICE_KEY_ID")
 APPLE_TEAM_ID = config("APPLE_TEAM_ID")
 APPLE_REDIRECT_URI = config("APPLE_REDIRECT_URI")
+APPLE_SIGN_IN_KEY_PATH = Path(config("APPLE_SIGN_IN_KEY_PATH"))
+
+# Firebase Admin SDK Initialization
+cred = credentials.Certificate(config("FIREBASE_ADMIN_SDK_CREDENTIALS_PATH"))
+firebase_admin.initialize_app(cred)

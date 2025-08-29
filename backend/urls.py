@@ -36,6 +36,7 @@ urlpatterns = [
     path("api/ai-assistant/", include("ai_assistant.urls")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
     path("api/logs/", include("logs_observation.urls")),
+    path("api/notifications/", include("notifications.urls")),
 ]
 
 if settings.DEBUG:
