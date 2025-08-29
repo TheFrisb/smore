@@ -1,0 +1,88 @@
+{% load i18n util_tags %}
+
+<!-- Stake Modal -->
+<div id="stakeModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="stakeModalBackdrop"></div>
+    
+    <!-- Modal Container -->
+    <div class="relative flex items-center justify-center min-h-screen p-4">
+        <div class="relative w-full max-w-2xl max-h-[90vh] bg-[#0D151E] rounded-2xl border border-primary-700/30 shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300">
+            <!-- Close Button -->
+            <button id="stakeModalClose" class="absolute top-4 right-4 z-10 p-2 text-primary-300 hover:text-white transition-colors rounded-lg hover:bg-primary-800/50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Modal Content -->
+            <div class="overflow-y-auto max-h-[90vh] p-6">
+                <!-- Handle Bar -->
+                <div class="flex justify-center mb-8">
+                    <div class="w-12 h-1 bg-primary-600/40 rounded-full"></div>
+                </div>
+                
+                <!-- What is Stake section -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-3">
+                        <div class="p-2 bg-secondary-500/20 rounded-lg mr-3">
+                            {% svg_icon icon_name="info" css_classes="w-4 h-4 text-secondary-400" %}
+                        </div>
+                        <h3 class="text-lg font-bold text-white tracking-wide">{% trans "What is Stake" %}</h3>
+                    </div>
+                    <div class="p-4 bg-[#15212E]/80 rounded-xl border border-secondary-500/10">
+                        <p class="text-white text-sm leading-relaxed tracking-wide">
+                            {% trans "In SMORE, Stake refers to the amount of money you invest in a particular bet based on your total betting budget. Instead of betting randomly, we recommend a strategic percentage of your bankroll to help you manage risk and maximize long-term success." %}
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- How Does Stake Work section -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-3">
+                        <div class="p-2 bg-secondary-500/20 rounded-lg mr-3">
+                            {% svg_icon icon_name="scale" css_classes="w-4 h-4 text-secondary-400" %}
+                        </div>
+                        <h3 class="text-lg font-bold text-white tracking-wide">{% trans "How Does Stake Work?" %}</h3>
+                    </div>
+                    <div class="p-4 bg-[#15212E]/80 rounded-xl border border-secondary-500/10">
+                        <p class="text-white text-sm leading-relaxed tracking-wide">
+                            {% trans "Your total betting budget (bankroll) should be a fixed amount you're comfortable investing over time. SMORE suggests bets based on a percentage of that budget, which we call your Stake." %}
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Examples section -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-secondary-500/20 rounded-lg mr-3">
+                            {% svg_icon icon_name="search" css_classes="w-4 h-4 text-secondary-400" %}
+                        </div>
+                        <h3 class="text-lg font-bold text-white tracking-wide">{% trans "Examples" %}</h3>
+                    </div>
+                    
+                    <!-- Example 1: Conservative Betting -->
+                    <div class="mb-4 p-4 rounded-xl border border-secondary-500/20" style="background: linear-gradient(135deg, rgba(11, 94, 236, 0.1) 0%, rgba(11, 94, 236, 0.05) 100%);">
+                        <h4 class="text-white font-bold text-base tracking-wide mb-3">💎 {% trans "Conservative Betting" %}</h4>
+                        <div class="text-white text-sm leading-relaxed tracking-wide">
+                            <p>{% trans "• You have a bankroll of" %} <span class="font-bold">€1,000</span>.</p>
+                            <p>{% trans "• We recommend a" %} <span id="stakePercent1" class="text-secondary-400 font-bold"></span> {% trans "Stake on a prediction." %}</p>
+                            <p>{% trans "• You place" %} <span id="stakeAmount1" class="text-emerald-400 font-bold"></span> {% trans "on the bet" %} (<span id="stakePercent2" class="text-secondary-400 font-bold"></span> {% trans "of €1,000" %}).</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Example 2: Aggressive Betting -->
+                    <div class="p-4 rounded-xl border border-secondary-500/20" style="background: linear-gradient(135deg, rgba(0, 222, 162, 0.1) 0%, rgba(0, 222, 162, 0.05) 100%);">
+                        <h4 class="text-white font-bold text-base tracking-wide mb-3">🚀 {% trans "Aggressive Betting" %}</h4>
+                        <div class="text-white text-sm leading-relaxed tracking-wide">
+                            <p>{% trans "• Your bankroll is" %} <span class="font-bold">€5,000</span>.</p>
+                            <p>{% trans "• We suggest a" %} <span id="stakePercent3" class="text-secondary-400 font-bold"></span> {% trans "Stake for a high-confidence bet." %}</p>
+                            <p>{% trans "• You place" %} <span id="stakeAmount2" class="text-emerald-400 font-bold"></span> {% trans "on that prediction." %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

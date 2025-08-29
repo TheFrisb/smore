@@ -1,4 +1,4 @@
-1. Optimize AI match selection tool and store status for soccer matches
-2. Optimize cron jobs, and add new team standings job
-3. Optimize match prediction fetching for league
-4. Add twint for CH
+1. Stake u analiza
+2. Stake na tiket i predikcija
+3. Logoto hover efekto so e cuden na safari
+4. Istorijata tiketto so ne se redat eden pod drug kak so treba

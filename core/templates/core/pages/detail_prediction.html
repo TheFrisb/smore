@@ -64,7 +64,17 @@
 
         <div class="container mx-auto px-4">
             <div class="relative py-4">
+                {% if prediction.can_view_stake and can_view_prediction %}
+                    <div class="flex items-center gap-2">
+                         <p class="text-secondary-400 font-bold">{% trans 'Stake' %}: <span class="text-white">{{ prediction.formatted_stake }}%</span></p>
+                        <div class="stakeButton cursor-pointer"
+                             data-stake="{{ prediction.formatted_stake }}">
+                         {% svg_icon icon_name="info" css_classes="w-4 h-4 text-secondary-400" %}
+                        </div>
+                    </div>
+                {% else %}
                 <p class="text-secondary-400 font-bold">{% trans 'Match Analysis' %}</p>
+                {% endif %}
                 <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
             </div>
             {% if can_view_prediction %}
@@ -159,4 +169,7 @@
 
             </div>
     </section>
+    
+    <!-- Include Stake Modal -->
+    {% include 'core/includes/stake_modal.html' %}
 {% endblock content %}

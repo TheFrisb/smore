@@ -18,6 +18,7 @@ import { initDateItems } from "./dateItem";
 import { initPeekButtons } from "./passwordPeek";
 import initSportToggler from "./sportToggler";
 import { initLoadMorePredictionsButton } from "./history/loadMoreButton";
+import { initStakeButtons } from "./stakeModal";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPeekButtons();
 
   initSportToggler();
+  initStakeButtons();
 
   const container = document.querySelector("#aiAssistantRelativeContainer");
   const aiAssistant = document.querySelector("#aiAssistantIcon");
