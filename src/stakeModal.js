@@ -10,9 +10,11 @@ function initStakeButtons() {
     // Get modal elements
     const modal = document.getElementById('stakeModal');
     const backdrop = document.getElementById('stakeModalBackdrop');
+    const modalContainer = document.getElementById('stakeModalContainer');
+    const modalContent = document.getElementById('stakeModalContent');
     const closeButton = document.getElementById('stakeModalClose');
     
-    if (!modal || !backdrop || !closeButton) {
+    if (!modal || !backdrop || !modalContainer || !modalContent || !closeButton) {
         console.warn('Stake modal elements not found');
         return;
     }
@@ -46,19 +48,16 @@ function initStakeButtons() {
         }
     });
     
-    // Prevent modal content clicks from closing the modal
-    const modalContent = modal.querySelector('.relative');
-    if (modalContent) {
-        modalContent.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    }
-    
-    // Also add click listener to the modal container itself for better coverage
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
+    // Close modal when clicking on the modal container (outside the content)
+    modalContainer.addEventListener('click', function(e) {
+        if (e.target === modalContainer) {
             closeStakeModal();
         }
+    });
+    
+    // Prevent modal content clicks from closing the modal
+    modalContent.addEventListener('click', function(e) {
+        e.stopPropagation();
     });
 }
 
