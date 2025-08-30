@@ -65,7 +65,7 @@
         <div class="container mx-auto px-4">
             <div class="relative py-4">
                 {% if prediction.can_view_stake and can_view_prediction %}
-                    <div class="flex items-center gap-2 justify-center lg:justify-start">
+                    <div class="flex items-center gap-2 justify-center">
                          <p class="text-secondary-400 font-bold">{% trans 'Stake' %}: <span class="text-white">{{ prediction.formatted_stake }}%</span></p>
                         <div class="stakeButton cursor-pointer"
                              data-stake="{{ prediction.formatted_stake }}">
