@@ -110,3 +110,8 @@ div.g_id_signin > div > div > div {
 .betLines--pending::before {
     @apply bg-secondary-800/30 w-[2px] left-[15px];
 }
+
+.stakeButton {
+    @apply transition-all duration-200 ease-in-out;
+    @apply hover:scale-105 hover:opacity-80;
+}

@@ -95,8 +95,9 @@ class UserAdmin(UserAdmin):
                     "first_name",
                     "last_name",
                     "email",
-                    "stripe_customer_id",
                     "referral_link",
+                    "stripe_customer_id",
+                    "fcm_token",
                 )
             },
         ),
@@ -415,4 +416,4 @@ class ReferralAdmin(admin.ModelAdmin):
 
 @admin.register(PurchasedDailyOffer)
 class PurchasedDailyOfferAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status', 'for_date')
+    list_display = ("user", "status", "for_date")
