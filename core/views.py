@@ -507,14 +507,20 @@ class UpcomingMatchesView(TemplateView):
         """
         return self.request.GET.get("obj", None)
 
+    def _get_visibility_filter(self):
+        visibility = [Prediction.Visibility.PUBLIC]
+        if self.request.user.is_superuser:
+            visibility.append(Prediction.Visibility.ADMIN)
+
+        return visibility
+
     def _get_predictions(self, filter):
         """
         Get the predictions based on the filter.
         """
         predictions = (
             Prediction.objects.filter(
-                # match__kickoff_datetime__date__gte=timezone.now().date(),
-                visibility=Prediction.Visibility.PUBLIC,
+                visibility__in=self._get_visibility_filter(),
                 status=Prediction.Status.PENDING,
             )
             .select_related(
@@ -523,7 +529,8 @@ class UpcomingMatchesView(TemplateView):
                 "match__away_team",
                 "match__league",
                 "product",
-            ).exclude(id=1053)
+            )
+            .exclude(id=1053)
             .order_by("match__kickoff_datetime")
         )
 
@@ -538,7 +545,7 @@ class UpcomingMatchesView(TemplateView):
         """
         sport_tickets = (
             Ticket.objects.filter(
-                visibility=Ticket.Visibility.PUBLIC,
+                visibility__in=self._get_visibility_filter(),
                 status=Ticket.Status.PENDING,
                 starts_at__date__gte=timezone.now().date(),
             )

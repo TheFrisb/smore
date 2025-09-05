@@ -165,7 +165,6 @@ class HistoryAPIView(APIView):
 
 
 class UpcomingAPIView(APIView):
-    authentication_classes = []
     permission_classes = []
 
     def get_queryset(self):
@@ -176,31 +175,47 @@ class UpcomingAPIView(APIView):
         tickets = []
 
         if obj_filter is None or obj_filter == "predictions":
-            predictions = Prediction.objects.filter(
-                visibility=Prediction.Visibility.PUBLIC,
-                status=Prediction.Status.PENDING,
-            ).select_related(
-                "match__home_team", "match__away_team", "match__league", "product"
-            ).exclude(id=1053).order_by("match__kickoff_datetime")
+            predictions = (
+                Prediction.objects.filter(
+                    visibility__in=self._get_visibility_filter(),
+                    status=Prediction.Status.PENDING,
+                )
+                .select_related(
+                    "match__home_team", "match__away_team", "match__league", "product"
+                )
+                .exclude(id=1053)
+                .order_by("match__kickoff_datetime")
+            )
 
             if product_filter:
                 predictions = predictions.filter(product__name__iexact=product_filter)
 
         if obj_filter is None or obj_filter == "tickets":
-            tickets = Ticket.objects.filter(
-                visibility=Ticket.Visibility.PUBLIC,
-                status=Ticket.Status.PENDING,
-            ).prefetch_related(
-                "bet_lines__match__home_team",
-                "bet_lines__match__away_team",
-                "bet_lines__match__league",
-                "product",
-            ).order_by("product__name", "starts_at")
+            tickets = (
+                Ticket.objects.filter(
+                    visibility__in=self._get_visibility_filter(),
+                    status=Ticket.Status.PENDING,
+                )
+                .prefetch_related(
+                    "bet_lines__match__home_team",
+                    "bet_lines__match__away_team",
+                    "bet_lines__match__league",
+                    "product",
+                )
+                .order_by("product__name", "starts_at")
+            )
 
             if product_filter:
                 tickets = tickets.filter(product__name__iexact=product_filter)
 
         return predictions, tickets
+
+    def _get_visibility_filter(self):
+        visibility = [Prediction.Visibility.PUBLIC]
+        if self.request.user.is_superuser:
+            visibility.append(Prediction.Visibility.ADMIN)
+
+        return visibility
 
     def get(self, request):
         predictions, tickets = self.get_queryset()
