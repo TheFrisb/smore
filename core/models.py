@@ -77,7 +77,7 @@ class Product(BaseProductModel):
     description = models.TextField(blank=True)
 
     def get_price_id_for_subscription(
-        self, frequency, use_discounted_prices: bool, is_switzerland
+            self, frequency, use_discounted_prices: bool, is_switzerland
     ):
         if frequency == "monthly":
             if not is_switzerland:
@@ -263,9 +263,9 @@ class SportMatch(ApiSportModel):
     def is_live(self):
         # calculate if the match is live (soccer match)
         return (
-            self.kickoff_datetime
-            <= timezone.now()
-            <= (self.kickoff_datetime + timedelta(minutes=105))
+                self.kickoff_datetime
+                <= timezone.now()
+                <= (self.kickoff_datetime + timedelta(minutes=105))
         )
 
     @property
@@ -285,6 +285,7 @@ class Prediction(BaseInternalModel):
     class Visibility(models.TextChoices):
         PUBLIC = "PUBLIC", "Public"
         PRIVATE = "PRIVATE", "Private"
+        ADMIN = "ADMIN", "Admin Only"
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     visibility = models.CharField(
@@ -339,7 +340,7 @@ class Prediction(BaseInternalModel):
     @property
     def has_detailed_analysis(self):
         return (
-            self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
+                self.detailed_analysis != "" and self.detailed_analysis != "<p>&nbsp;</p>"
         )
 
     def __str__(self):
@@ -368,6 +369,7 @@ class Ticket(BaseInternalModel):
     class Visibility(models.TextChoices):
         PUBLIC = "PUBLIC", "Public"
         PRIVATE = "PRIVATE", "Private"
+        ADMIN = "ADMIN", "Admin Only"
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     status = models.CharField(

@@ -61,6 +61,9 @@ class NotificationRequestAdmin(admin.ModelAdmin):
 
     readonly_fields = ("created_at", "updated_at")
 
+    class Media:
+        css = {"all": ("css/admin/custom_admin.css",)}
+
 
 @admin.register(UserNotification)
 class UserNotificationAdmin(admin.ModelAdmin):

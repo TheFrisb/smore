@@ -1,4 +1,5 @@
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 
 from core.models import BaseInternalModel
 
@@ -45,7 +46,7 @@ class NotificationRequest(BaseInternalModel):
 
     title = models.CharField(max_length=255)
     preview = models.CharField(max_length=512, blank=True, null=True)
-    message = models.TextField()
+    message = CKEditor5Field(blank=True)
 
     class Meta:
         verbose_name = "Notification Request"
