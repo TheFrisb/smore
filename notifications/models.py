@@ -17,10 +17,34 @@ class NotificationTopic(BaseInternalModel):
 
 
 class NotificationRequest(BaseInternalModel):
+    class IconNames(models.TextChoices):
+        SOCCER = "SOCCER", "Soccer"
+        BASKETBALL = "BASKETBALL", "Basketball"
+        TROPHY = "TROPHY", "Trophy"
+        CHECKMARK = "CHECKMARK", "Checkmark"
+        XMARK = "XMARK", "X Mark"
+
     topic = models.ForeignKey(
         NotificationTopic, on_delete=models.CASCADE, related_name="requests"
     )
+    user = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.CASCADE,
+        related_name="notification_requests",
+        null=True,
+        blank=True,
+    )
+    icon = models.CharField(
+        max_length=20,
+        choices=IconNames.choices,
+        default=None,
+        blank=True,
+        null=True,
+    )
+    is_important = models.BooleanField(default=False)
+
     title = models.CharField(max_length=255)
+    preview = models.CharField(max_length=512, blank=True, null=True)
     message = models.TextField()
 
     class Meta:
@@ -32,6 +56,13 @@ class NotificationRequest(BaseInternalModel):
 
 
 class UserNotification(BaseInternalModel):
+    class IconNames(models.TextChoices):
+        SOCCER = "SOCCER", "Soccer"
+        BASKETBALL = "BASKETBALL", "Basketball"
+        TROPHY = "TROPHY", "Trophy"
+        CHECKMARK = "CHECKMARK", "Checkmark"
+        XMARK = "XMARK", "X Mark"
+
     user = models.ForeignKey(
         "accounts.User", on_delete=models.CASCADE, related_name="notifications"
     )
@@ -44,6 +75,14 @@ class UserNotification(BaseInternalModel):
         null=True,
         related_name="user_notifications",
     )
+    icon = models.CharField(
+        max_length=20,
+        choices=IconNames.choices,
+        default=IconNames.TROPHY,
+        blank=True,
+        null=True,
+    )
+    is_important = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "User Notification"

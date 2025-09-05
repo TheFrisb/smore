@@ -1,17 +1,10 @@
-from rest_framework import serializers
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import UserNotification
-
-
-class UserNotificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserNotification
-        fields = ["id", "title", "message", "is_read", "created_at"]
-        read_only_fields = ["id", "title", "message", "created_at"]
+from .serializers import UserNotificationSerializer
 
 
 class ListNotificationsView(APIView):
@@ -40,7 +33,7 @@ class MarkNotificationReadView(APIView):
         notification.save()
         serializer = UserNotificationSerializer(notification)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+ 
 
 class MarkAllNotificationsReadView(APIView):
     permission_classes = [IsAuthenticated]

@@ -1,1 +1,13 @@
+1. Predictions backend
+-- Add icon support
+-- Serialize object in body
+-- Send to separate user if needed
+
+
+
+
+
+
+
+
 4. Istorijata tiketto so ne se redat eden pod drug kak so treba
