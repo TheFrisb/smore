@@ -396,6 +396,27 @@ class Ticket(BaseInternalModel):
             odds *= match.odds
         return odds
 
+    @property
+    def formatted_stake(self):
+        if self.stake is None:
+            return None
+
+        stake = Decimal(self.stake).quantize(Decimal("0.01"))  # round to 2 decimals
+        # Convert to string while removing trailing zeros
+        normalized = stake.normalize()
+
+        # If it's an integer (like 5.0), return as int
+        if normalized == normalized.to_integral():
+            return str(int(normalized))
+
+        # If it has exactly 1 decimal place (like 5.50 -> 5.5), keep 1 decimal
+        s = format(normalized, "f")
+        if "." in s and len(s.split(".")[1]) == 1:
+            return s
+
+        # Otherwise, keep up to 2 decimals (like 10.25)
+        return f"{stake:.2f}".rstrip("0").rstrip(".")
+
     def __str__(self):
         # get the first match from the bet lines by date
         first_match = self.bet_lines.order_by("match__kickoff_datetime").first()

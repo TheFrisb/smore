@@ -798,6 +798,14 @@ video {
   grid-column: span 2 / span 2;
 }
 
+.col-start-1 {
+  grid-column-start: 1;
+}
+
+.col-start-3 {
+  grid-column-start: 3;
+}
+
 .m-0 {
   margin: 0px;
 }
@@ -824,6 +832,11 @@ video {
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .\!ml-auto {
@@ -3804,10 +3817,6 @@ div.g_id_signin > div > div > div {
 
   .lg\:items-center {
     align-items: center;
-  }
-
-  .lg\:justify-start {
-    justify-content: flex-start;
   }
 
   .lg\:gap-24 {

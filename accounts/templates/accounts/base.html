@@ -2,124 +2,124 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Smore - {{ page_title }}</title>
-  <link rel="preload" href="{% static 'js/core_v43.bundle.js' %}" as="script">
-  <link rel="stylesheet" href="{% static 'css/tailwind_output_v40.css' %}">
-  <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
-  <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
-  <script src="https://accounts.google.com/gsi/client?hl=en" async></script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smore - {{ page_title }}</title>
+    <link rel="preload" href="{% static 'js/core_v44.bundle.js' %}" as="script">
+    <link rel="stylesheet" href="{% static 'css/tailwind_output_v41.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+    <script src="https://accounts.google.com/gsi/client?hl=en" async></script>
 
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function() {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = "2.0";
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    }(window, document, "script",
-      "https://connect.facebook.net/en_US/fbevents.js");
-    fbq("init", "480381268269305");
-    fbq("track", "PageView");
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-                 src="https://www.facebook.com/tr?id=480381268269305&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      }(window, document, "script",
+        "https://connect.facebook.net/en_US/fbevents.js");
+      fbq("init", "480381268269305");
+      fbq("track", "PageView");
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=480381268269305&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 
 </head>
 <body class="min-h-screen bg-primary-950">
 {% include 'core/includes/header.html' %}
 <main class="pt-20">
-  <div class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 pt-24 pb-16">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-col lg:flex-row gap-8">
-        {% include 'accounts/includes/sidebar.html' %}
-        <div class="flex-1 min-h-[calc(100vh-8rem)]">
+    <div class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-8">
+                {% include 'accounts/includes/sidebar.html' %}
+                <div class="flex-1 min-h-[calc(100vh-8rem)]">
 
-          {% if messages %}
-            {% for message in messages %}
-              <div
-                class="mb-8 bg-secondary-500/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-500/30  animate-fadeIn message-{{ message.id }}">
-                <div class="flex items-center justify-between ">
-                  <div class="flex items-center space-x-3">
-                    <div class="bg-secondary-500/20 rounded-full p-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                           viewBox="0 0 24 24"
-                           fill="none" stroke="currentColor" stroke-width="2"
-                           stroke-linecap="round"
-                           stroke-linejoin="round"
-                           class="lucide lucide-check-circle2 w-5 h-5 text-secondary-400">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="m9 12 2 2 4-4"></path>
-                      </svg>
-                    </div>
-                    <p class="text-secondary-400">{{ message }}</p>
-                  </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div
+                                    class="mb-8 bg-secondary-500/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-500/30  animate-fadeIn message-{{ message.id }}">
+                                <div class="flex items-center justify-between ">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="bg-secondary-500/20 rounded-full p-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round"
+                                                 class="lucide lucide-check-circle2 w-5 h-5 text-secondary-400">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <path d="m9 12 2 2 4-4"></path>
+                                            </svg>
+                                        </div>
+                                        <p class="text-secondary-400">{{ message }}</p>
+                                    </div>
 
 
-                  <div class="flex items-center justify-end gap-6">
+                                    <div class="flex items-center justify-end gap-6">
 
-                    {% if 'email-verification' in message.tags %}
-                      <button
-                        class="text-primary-300 hover:text-white transition-colors resendEmailButton hidden md:block">
-                        {% trans "Resend email" %}
-                      </button>
+                                        {% if 'email-verification' in message.tags %}
+                                            <button
+                                                    class="text-primary-300 hover:text-white transition-colors resendEmailButton hidden md:block">
+                                                {% trans "Resend email" %}
+                                            </button>
+                                        {% endif %}
+
+                                        <button class="text-primary-300 hover:text-white transition-colors closeButton"
+                                                data-close-element-selector=".message-{{ message.id }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round" class="w-5 h-5">
+                                                <path d="M18 6 6 18"></path>
+                                                <path d="m6 6 12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {% if 'email-verification' in message.tags %}
+                                    <div class="flex items-center justify-center md:hidden">
+                                        <button class="text-primary-300 hover:text-white transition-colors resendEmailButton p-4 ">
+                                            {% trans "Resend email" %}
+                                        </button>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        {% endfor %}
                     {% endif %}
 
-                    <button class="text-primary-300 hover:text-white transition-colors closeButton"
-                            data-close-element-selector=".message-{{ message.id }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                           viewBox="0 0 24 24"
-                           fill="none" stroke="currentColor" stroke-width="2"
-                           stroke-linecap="round"
-                           stroke-linejoin="round" class="w-5 h-5">
-                        <path d="M18 6 6 18"></path>
-                        <path d="m6 6 12 12"></path>
-                      </svg>
-                    </button>
-                  </div>
+                    {% block dashboard %}
+
+                    {% endblock dashboard %}
                 </div>
-
-                {% if 'email-verification' in message.tags %}
-                  <div class="flex items-center justify-center md:hidden">
-                    <button class="text-primary-300 hover:text-white transition-colors resendEmailButton p-4 ">
-                      {% trans "Resend email" %}
-                    </button>
-                  </div>
-                {% endif %}
-
-              </div>
-            {% endfor %}
-          {% endif %}
-
-          {% block dashboard %}
-
-          {% endblock dashboard %}
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </main>
 {% include 'core/includes/footer.html' %}
 
-<script src="{% static 'js/core_v43.bundle.js' %}"></script>
+<script src="{% static 'js/core_v44.bundle.js' %}"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
         {% if prediction.has_detailed_analysis and prediction.status == 'PENDING' %}
             <div class="flex items-center justify-between w-full">
                 <div class="flex  justify-start items-center space-x-3 text-primary-300">
-                    <div class="bg-primary-900/80 p-2 rounded-lg">
+                    <div class="bg-primary-900/80 p-3 rounded-lg">
                         {% svg_icon icon_name=prediction.match.type|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
 
                     </div>
@@ -25,7 +25,7 @@
             </div>
         {% else %}
             <div class="flex  justify-center items-center space-x-3 text-primary-300">
-                <div class="bg-primary-900/80 p-2 rounded-lg">
+                <div class="bg-primary-900/80 p-3 rounded-lg">
                     {% svg_icon icon_name=prediction.match.type|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
                 </div>
                 <span class=" text-primary-100">{% blocktrans with name=prediction.match.get_type_display %}
@@ -63,11 +63,11 @@
 
         </div>
         <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">
-              {% if prediction.match.is_live %}
-                    <div class="flex items-center justify-center pb-2 w-full">
-                        <p class="text-sm text-red-500 font-bold">LIVE</p>
-                    </div>
-                {% endif %}
+            {% if prediction.match.is_live %}
+                <div class="flex items-center justify-center pb-2 w-full">
+                    <p class="text-sm text-red-500 font-bold">LIVE</p>
+                </div>
+            {% endif %}
             <div class="w-full flex items-center justify-center gap-2 relative pb-4">
 
                 <img src="{{ prediction.match.league.country.logo.url }}" alt="" width="20"
@@ -112,12 +112,26 @@
                 <div class="relative">
                     <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
                 </div>
-                <div class="flex items-center justify-center gap-1">
-                    {% svg_icon icon_name="chevronUp" css_classes="w-5 h-5 text-emerald-400" %}
+                {% if prediction.status == 'PENDING' and prediction.stake > 0 %}
+                    <div class="grid grid-cols-3">
+                        <div class="flex items-center justify-center gap-1 col-start-1 stakeButton cursor-pointer"
+                             data-stake="{{ prediction.formatted_stake }}">
+                            <p class="text-secondary-400 font-bold">{% trans 'Stake:' %}</p>
+                            <span class="text-white font-bold">{{ prediction.formatted_stake }}%</span>
+                        </div>
+                        <div class="flex items-center justify-center gap-1 col-start-3">
+                            <p class="text-primary-100">{% trans 'Odds' %}</p>
+                            <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
+                        </div>
+                    </div>
 
-                    <p class="text-primary-100">{% trans 'Odds' %}</p>
-                    <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
-                </div>
+
+                {% else %}
+                    <div class="flex items-center justify-center gap-1">
+                        <p class="text-primary-100">{% trans 'Odds' %}</p>
+                        <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
+                    </div>
+                {% endif %}
             {% endif %}
 
         </div>
