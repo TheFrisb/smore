@@ -168,14 +168,14 @@
                             <span class="text-white">{{ ticket.formatted_stake }}%</span>
                         </div>
                         <div class="flex items-center justify-center gap-1 col-start-3">
-                            <p class="text-primary-100">{% trans 'Odds' %}</p>
+                            <p class="text-primary-100">{% trans 'Total Odds' %}</p>
                             <span class="text-emerald-400 font-bold">{{ ticket.total_odds|floatformat:2 }}</span>
                         </div>
                     </div>
 
                 {% else %}
                     <div class="flex items-center justify-center gap-1">
-                        <p class="text-primary-100">{% trans 'Odds' %}</p>
+                        <p class="text-primary-100">{% trans 'Total Odds' %}</p>
                         <span class="text-emerald-400 font-bold">{{ ticket.total_odds|floatformat:2 }}</span>
                     </div>
                 {% endif %}
