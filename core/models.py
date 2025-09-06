@@ -6,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
+from model_utils import FieldTracker
 from solo.models import SingletonModel
 
 
@@ -303,6 +304,7 @@ class Prediction(BaseInternalModel):
     stake = models.DecimalField(
         max_digits=10, decimal_places=2, default=0.00, blank=True
     )
+    tracker = FieldTracker()
 
     @property
     def can_view_stake(self):
@@ -381,7 +383,8 @@ class Ticket(BaseInternalModel):
     starts_at = models.DateTimeField(null=True, blank=True)
     label = models.CharField(max_length=255, blank=True)
     stake = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-
+    tracker = FieldTracker()
+    
     @property
     def total_odds(self) -> float:
         """

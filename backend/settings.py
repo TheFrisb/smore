@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_ckeditor_5",
     "django_filters",
     "django_crontab",
+    "model_utils",
     # Local apps
     "accounts",
     "core",
