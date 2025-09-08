@@ -3,7 +3,7 @@ from django.dispatch import receiver
 
 from accounts.models import User
 from notifications.models import NotificationRequest, UserNotification
-from notifications.service import FCMService
+from notifications.services.fcm_service import FCMService
 
 
 @receiver(post_save, sender=NotificationRequest)
