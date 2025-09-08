@@ -71,7 +71,8 @@
                                                     <p class="text-primary-300 text-sm break-words text-left">{{ bet_line.match.home_team.name }}</p>
                                                 </div>
                                                 <p class="text-primary-300 text-xs text-end dateItem--short"
-                                                   data-date="{{ bet_line.match.kickoff_datetime|date:'c' }}">{{ bet_line.match.kickoff_datetime|date:'D d M' }}</p>
+                                                   data-date="{{ bet_line.match.kickoff_datetime|date:'c' }}">{{ bet_line.match.kickoff_datetime|date:"M d, H:i" }}
+                                                </p>
                                             </div>
                                             {#                            <p class="text-primary-300">vs</p>#}
 
@@ -81,8 +82,13 @@
                                                          class="h-4 w-auto">
                                                     <p class="text-primary-300 text-sm break-words  text-left">{{ bet_line.match.away_team.name }}</p>
                                                 </div>
-                                                <p class="text-primary-300 text-xs text-end dateItem--hours"
-                                                   data-date="{{ bet_line.match.kickoff_datetime|date:'c' }}">{{ bet_line.match.kickoff_datetime|date:'H:i' }}</p>
+                                                <div class="text-primary-300 text-xs text-end flex items-center justify-end gap-2">
+                                                    <img src="{{ bet_line.match.league.country.logo.url }}" alt=""
+                                                         width="20"
+                                                         style="height: auto!important">
+                                                    <p class="">{{ bet_line.match.league_name }}</p>
+
+                                                </div>
                                             </div>
                                         </div>
                                     {% else %}
@@ -167,7 +173,7 @@
                             <p class="text-secondary-400 font-bold">{% trans 'Stake:' %}</p>
                             <span class="text-white">{{ ticket.formatted_stake }}%</span>
                         </div>
-                        <div class="flex items-center justify-center gap-1 col-start-3">
+                        <div class="flex items-center justify-end gap-1 col-start-3 text-nowrap">
                             <p class="text-primary-100">{% trans 'Total Odds' %}</p>
                             <span class="text-emerald-400 font-bold">{{ ticket.total_odds|floatformat:2 }}</span>
                         </div>

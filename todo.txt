@@ -1,8 +1,4 @@
-Web:
-1. Odds da se prekrste u Total Odds kaj tiketto
-2. Stake u detail analysis da se klika cel
-5. Da e rich text editor tava za notifikacija message i da se renderire u app
-6. Prediction/Ticket admin visibility
+
 -- Work: 1hour
 
 
