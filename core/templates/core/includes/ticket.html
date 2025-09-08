@@ -1,5 +1,5 @@
 {% load util_tags i18n static %}
-<div class=" backdrop-blur-sm rounded-xl p-6 border transition-all duration-300
+<div class=" backdrop-blur-sm rounded-xl p-4 border transition-all duration-300
         {% if ticket.status == 'WON' %}
         border-emerald-500/50 hover:border-emerald-500 bg-emerald-500/5
         {% elif ticket.status == 'LOST' %}
@@ -10,7 +10,7 @@
 "
 >
     <div>
-        <div class="flex items-center justify-center space-x-4">
+        <div class="flex items-center justify-center space-x-2">
             <div class="bg-primary-900/80 p-3 rounded-lg">
                 {% svg_icon icon_name=ticket.product|lower|add:"Icon" css_classes="w-5 h-5 text-white" %}
             </div>
@@ -30,7 +30,7 @@
             {% for bet_line in ticket.bet_lines.all %}
                 <div class="relative betLines {% if not bet_line.same_as_previous or bet_line.same_as_next %}betLines--{{ bet_line.status|lower }}{% endif %}">
                     <!-- If the previous match was the same as the current match, but the next match is different, do not add betLines--{{ bet_line.status|lower }}-->
-                    <div class="flex items-start space-x-4 py-3">
+                    <div class="flex items-start space-x-2 py-3">
                         <div class="relative z-10">
 
                             <div class="w-8 h-8 rounded-full flex items-center justify-center ">
@@ -65,7 +65,7 @@
                                     {% if bet_line.status == 'PENDING' %}
                                         <div class="flex flex-col items-start justify-start gap-2 w-full">
                                             <div class="flex justify-between items-center w-full">
-                                                <div class="flex items-center justify-start gap-4">
+                                                <div class="flex items-center justify-start gap-2">
                                                     <img src="{{ bet_line.match.home_team.logo.url }}"
                                                          class="h-4 w-auto">
                                                     <p class="text-primary-300 text-sm break-words text-left">{{ bet_line.match.home_team.name }}</p>
@@ -77,7 +77,7 @@
                                             {#                            <p class="text-primary-300">vs</p>#}
 
                                             <div class="flex justify-between items-center w-full">
-                                                <div class="flex items-center justify-start gap-4">
+                                                <div class="flex items-center justify-start gap-2">
                                                     <img src="{{ bet_line.match.away_team.logo.url }}"
                                                          class="h-4 w-auto">
                                                     <p class="text-primary-300 text-sm break-words  text-left">{{ bet_line.match.away_team.name }}</p>
@@ -86,7 +86,7 @@
                                                     <img src="{{ bet_line.match.league.country.logo.url }}" alt=""
                                                          width="20"
                                                          style="height: auto!important">
-                                                    <p class="">{{ bet_line.match.league_name }}</p>
+                                                    <span style="max-width:100px">{{ bet_line.match.league_name }}</span>
 
                                                 </div>
                                             </div>

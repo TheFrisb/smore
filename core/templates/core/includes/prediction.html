@@ -4,7 +4,7 @@
         {% if prediction.status == 'LOST' %}bg-red-500/10 border-red-500/50 hover:border-red-500
         {% elif prediction.status == 'WON' %}bg-[#14212e] border-emerald-500/50 hover:border-emerald-500
         {% else %}bg-primary-800/50 border-primary-700/30 hover:border-emerald-500/50{% endif %}
-        backdrop-blur-sm rounded-lg p-6 border   transition-all duration-300 group transform animate-fadeIn">
+        backdrop-blur-sm rounded-lg p-4 border   transition-all duration-300 group transform animate-fadeIn">
     <div class="mb-6">
 
         {% if prediction.has_detailed_analysis and prediction.status == 'PENDING' %}
