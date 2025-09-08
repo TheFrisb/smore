@@ -114,12 +114,12 @@
                 </div>
                 {% if prediction.status == 'PENDING' and prediction.stake > 0 %}
                     <div class="grid grid-cols-3">
-                        <div class="flex items-center justify-center gap-1 col-start-1 stakeButton cursor-pointer"
+                        <div class="flex items-center justify-center gap-1 col-start-1 stakeButton cursor-pointer text-sm"
                              data-stake="{{ prediction.formatted_stake }}">
                             <p class="text-secondary-400 font-bold">{% trans 'Stake:' %}</p>
                             <span class="text-white">{{ prediction.formatted_stake }}%</span>
                         </div>
-                        <div class="flex items-center justify-center gap-1 col-start-3">
+                        <div class="flex items-center justify-center gap-1 col-start-3 text-sm">
                             <p class="text-primary-100">{% trans 'Odds' %}</p>
                             <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
                         </div>
@@ -127,7 +127,7 @@
 
 
                 {% else %}
-                    <div class="flex items-center justify-center gap-1">
+                    <div class="flex items-center justify-center gap-1 text-sm">
                         <p class="text-primary-100">{% trans 'Odds' %}</p>
                         <span class="text-emerald-400 font-bold">{{ prediction.odds }}</span>
                     </div>
