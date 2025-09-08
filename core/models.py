@@ -186,6 +186,7 @@ class SportLeague(ApiSportModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255)
+    friendly_name = models.CharField(max_length=255, blank=True, null=True)
     country = models.ForeignKey(SportCountry, on_delete=models.CASCADE)
     league_type = models.CharField(max_length=255)
     logo = models.FileField(upload_to="assets/leagues/logos/")
@@ -194,6 +195,13 @@ class SportLeague(ApiSportModel):
     teams = models.ManyToManyField(
         "SportTeam", through="SportLeagueTeam", related_name="leagues"
     )
+
+    @property
+    def readable_name(self):
+        if not self.friendly_name:
+            return self.name
+
+        return self.friendly_name
 
     def __str__(self):
         return self.name
