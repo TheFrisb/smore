@@ -299,6 +299,7 @@ CRONJOBS = [
     ("0 3 * * *", "core.cron.load_matches"),
     ("0 0 * * *", "core.cron.update_league_season_year"),
     ("0 */3 * * *", "core.cron.update_standings"),
+    ("*/10 * * * *", "notifications.cron.send_daily_picks_notification"),
 ]
 
 GEOIP_PATH = BASE_DIR / "geoip.mmdb"
