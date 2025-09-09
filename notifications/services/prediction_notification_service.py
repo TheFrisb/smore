@@ -33,38 +33,8 @@ class PredictionNotificationService:
         bet_lines = ticket.bet_lines.all()
 
         for i, line in enumerate(bet_lines):
-            # Add margin bottom to all lines except the last one
-            margin_bottom = "0px"
-
             lines.append(
-                f'<p style="margin: 0 0 {margin_bottom} 0;"><strong>Match:</strong> <strong>{line.match.home_team.name}</strong> vs <strong>{line.match.away_team.name}</strong></p>'
-            )
-            lines.append(
-                f'<p style="margin: 0 0 {margin_bottom} 0;"><strong>League:</strong> {line.match.league.name}</p>'
-            )
-            lines.append(
-                f'<p style="margin: 0 0 {margin_bottom} 0;"><strong>Bet:</strong> {line.bet} ({line.bet_type})</p>'
-            )
-            lines.append(
-                f'<p style="margin: 0 0 {margin_bottom} 0;"><strong>Odds:</strong> {line.odds:.2f}</p>'
-            )
-            lines.append(
-                f'<p style="margin: 0 0 {margin_bottom} 0;"><strong>Status:</strong> WON ✅</p>'
-            )
-
-            lines.append(
-                f'<hr style="margin: 8px 0; border: 0; border-top: 0.5px solid #36bffa;">'
-            )
-
-        # Add total odds and stake
-        lines.append("<br>")
-        lines.append(
-            f'<p style="margin: 0;"><strong>Total Odds:</strong> {ticket.total_odds:.2f}</p>'
-        )
-
-        if ticket.formatted_stake:
-            lines.append(
-                f'<p style="margin: 0;"><strong>Stake:</strong> {ticket.formatted_stake}%</p>'
+                f"<p style='margin:0'><strong>{line.match.home_team.name}</strong> vs <strong>{line.match.away_team.name}</strong> - {line.bet} ({line.bet_type})</p>"
             )
 
         return "".join(lines)
@@ -72,7 +42,7 @@ class PredictionNotificationService:
     def send_prediction_won_notification(self, prediction: Prediction):
         title = "Single Pick Status: WIN ✅"
         preview = f"{prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
-        message = self._build_prediction_message(prediction)
+        message = f"<strong>{prediction.match.home_team}</strong> vs <strong>{prediction.match.away_team}</strong> - {prediction.prediction}"
 
         topic = self.get_default_topic()
         icon = self._get_icon(prediction.product.name)
@@ -85,25 +55,6 @@ class PredictionNotificationService:
             icon=icon,
             is_important=False,
         )
-
-    def _build_prediction_message(self, prediction: Prediction) -> str:
-        lines = []
-
-        lines.append(
-            f'<p style="margin: 0 0 0 0;"><strong>Match:</strong> {prediction.match.home_team.name} vs {prediction.match.away_team.name}</p>'
-        )
-        lines.append(
-            f'<p style="margin: 0 0 0 0;"><strong>League:</strong> {prediction.match.league.name}</p>'
-        )
-        lines.append(
-            f'<p style="margin: 0 0 0 0;"><strong>Prediction:</strong> {prediction.prediction}</p>'
-        )
-        lines.append(
-            f'<p style="margin: 0 0 0 0;"><strong>Odds:</strong> {prediction.odds:.2f}</p>'
-        )
-        lines.append(f'<p style="margin: 0;"><strong>Status:</strong> WON ✅</p>')
-
-        return "".join(lines)
 
     def get_default_topic(self) -> NotificationTopic:
         topic, created = NotificationTopic.objects.get_or_create(name="ALL")

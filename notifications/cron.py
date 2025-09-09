@@ -14,7 +14,7 @@ def send_daily_picks_notification():
     today = now.date()
 
     if NotificationRequest.objects.filter(
-            title="Daily picks are in!", created_at__date=today
+        title="Daily picks are in!", created_at__date=today
     ).exists():
         return
 
