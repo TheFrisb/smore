@@ -12,7 +12,7 @@ class PredictionNotificationService:
     def send_ticket_won_notification(self, ticket: Ticket):
         first_bet_line = ticket.bet_lines.first()
 
-        title = "✅ Parlay Status: WIN ✅"
+        title = "Parlay Status: WIN ✅"
         preview = f"{self._get_emoji(ticket.product.name)} {first_bet_line.match.home_team} vs {first_bet_line.match.away_team} - {first_bet_line.bet} ({first_bet_line.bet_type})"
         message = self._build_ticket_message(ticket)
 
@@ -40,7 +40,7 @@ class PredictionNotificationService:
         return "".join(lines)
 
     def send_prediction_won_notification(self, prediction: Prediction):
-        title = "✅ Single Pick WIN ✅"
+        title = "Single Pick WIN ✅"
         preview = f"{self._get_emoji(prediction.product.name)} {prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
         message = f"<strong>{self._get_emoji(prediction.product.name)} {prediction.match.home_team}</strong> vs <strong>{prediction.match.away_team}</strong> - {prediction.prediction}"
 
