@@ -40,7 +40,7 @@ class PredictionNotificationService:
         return "".join(lines)
 
     def send_prediction_won_notification(self, prediction: Prediction):
-        title = "Single Pick WIN ✅"
+        title = "Single Pick: WIN ✅"
         preview = f"{self._get_emoji(prediction.product.name)} {prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
         message = f"<strong>{self._get_emoji(prediction.product.name)} {prediction.match.home_team}</strong> vs <strong>{prediction.match.away_team}</strong> - {prediction.prediction}"
 
