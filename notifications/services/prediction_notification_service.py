@@ -61,7 +61,9 @@ class PredictionNotificationService:
         return topic
 
     def get_topic(self, product_name: Product.Names) -> NotificationTopic:
-        topic, created = NotificationTopic.objects.get_or_create(name=product_name)
+        topic, created = NotificationTopic.objects.get_or_create(
+            name=product_name.upper()
+        )
 
         return topic
 
