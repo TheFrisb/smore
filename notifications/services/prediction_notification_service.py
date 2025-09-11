@@ -11,6 +11,7 @@ class PredictionNotificationService:
 
     def send_ticket_won_notification(self, ticket: Ticket):
         first_bet_line = ticket.bet_lines.first()
+        emoji = self._get_emoji(ticket.product.name)
 
         title = "Parlay Status: WIN ✅"
         preview = f"{self._get_emoji(ticket.product.name)} {first_bet_line.match.home_team} vs {first_bet_line.match.away_team} - {first_bet_line.bet} ({first_bet_line.bet_type})"
@@ -31,18 +32,21 @@ class PredictionNotificationService:
     def _build_ticket_message(self, ticket: Ticket) -> str:
         lines = []
         bet_lines = ticket.bet_lines.all()
+        emoji = self._get_emoji(ticket.product.name)
 
         for i, line in enumerate(bet_lines):
             lines.append(
-                f"<p><strong>{self._get_emoji(ticket.product.name)} {line.match.home_team.name}</strong> vs <strong>{line.match.away_team.name}</strong> - {line.bet} ({line.bet_type})</p>"
+                f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{line.match.home_team.name}</strong> vs <strong class='sport-title'>{line.match.away_team.name}</strong> - {line.bet} ({line.bet_type})</p>"
             )
 
         return "".join(lines)
 
     def send_prediction_won_notification(self, prediction: Prediction):
+        emoji = self._get_emoji(prediction.product.name)
+
         title = "Single Pick: WIN ✅"
         preview = f"{self._get_emoji(prediction.product.name)} {prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
-        message = f"<strong>{self._get_emoji(prediction.product.name)} {prediction.match.home_team}</strong> vs <strong>{prediction.match.away_team}</strong> - {prediction.prediction}"
+        message = f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong> - {prediction.prediction}</p>"
 
         topic = self.get_default_topic()
         icon = self._get_icon(prediction.product.name)
@@ -90,7 +94,7 @@ class PredictionNotificationService:
             preview=preview,
             message=message,
             icon=icon,
-            is_important=True,
+            is_important=False,
         )
 
     def _build_daily_picks_message(self, product_name: Product.Names) -> str:
@@ -131,14 +135,14 @@ class PredictionNotificationService:
 
         # Start with the intro sentence
         lines.append(
-            f"<p>We've got {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today.</p>"
+            f"<div><p>We've got {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today.</p></div>"
         )
 
         # List all single picks with emoji
         if single_pick_count > 0:
             for prediction in predictions:
                 lines.append(
-                    f"<p><strong>{emoji} {prediction.match.home_team.name}</strong> vs <strong>{prediction.match.away_team.name}</strong><p>"
+                    f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong><p>"
                 )
 
         return "".join(lines)

@@ -15,7 +15,7 @@ def handle_prediction_status_change(sender, instance, **kwargs):
     Send notification when Prediction status changes from PENDING to WON
     """
     if instance.status == Prediction.Status.WON and instance.tracker.has_changed(
-            "status"
+        "status"
     ):
         previous_status = instance.tracker.previous("status")
         if previous_status == Prediction.Status.PENDING:
