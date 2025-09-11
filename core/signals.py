@@ -22,7 +22,7 @@ def handle_prediction_status_change(sender, instance, **kwargs):
             prediction_notification_service = PredictionNotificationService()
             prediction_notification_service.send_prediction_won_notification(instance)
 
-            mark_important_notifications_as_unimportant_if_needed(instance.created_at)
+            mark_important_notifications_as_unimportant_if_needed(instance)
 
 
 @receiver(post_save, sender=Ticket)
@@ -36,7 +36,7 @@ def handle_ticket_status_change(sender, instance, **kwargs):
             prediction_notification_service = PredictionNotificationService()
             prediction_notification_service.send_ticket_won_notification(instance)
 
-            mark_important_notifications_as_unimportant_if_needed(instance.created_at)
+            mark_important_notifications_as_unimportant_if_needed(instance)
 
 
 def mark_important_notifications_as_unimportant_if_needed(instance):
@@ -50,13 +50,13 @@ def mark_important_notifications_as_unimportant_if_needed(instance):
     pending_tickets = Ticket.objects.filter(
         product__name=product_name,
         status=Ticket.Status.PENDING,
-        created_at__date=created_at.date()
+        created_at__date=created_at.date(),
     ).exists()
 
     pending_predictions = Prediction.objects.filter(
         product__name=product_name,
         status=Prediction.Status.PENDING,
-        created_at__date=created_at.date()
+        created_at__date=created_at.date(),
     ).exists()
 
     if pending_tickets or pending_predictions:
@@ -71,7 +71,5 @@ def mark_important_notifications_as_unimportant_if_needed(instance):
     title = title_map.get(product_name)
     if title:
         UserNotification.objects.filter(
-            title=title,
-            created_at__date=created_at.date(),
-            is_important=True
+            title=title, created_at__date=created_at.date(), is_important=True
         ).update(is_important=False)
