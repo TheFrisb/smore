@@ -44,7 +44,7 @@ class PredictionNotificationService:
     def send_prediction_won_notification(self, prediction: Prediction):
         emoji = self._get_emoji(prediction.product.name)
 
-        title = "Single Pick: WIN ✅"
+        title = "Single Pick Status: WIN ✅"
         preview = f"{self._get_emoji(prediction.product.name)} {prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
         message = f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong> - {prediction.prediction}</p>"
 

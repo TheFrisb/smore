@@ -23,6 +23,7 @@ class NotificationRequest(BaseInternalModel):
         BASKETBALL = "BASKETBALL", "Basketball"
         TROPHY = "TROPHY", "Trophy"
         CHECKMARK = "CHECKMARK", "Checkmark"
+        MONEY = "MONEY", "Money"
         XMARK = "XMARK", "X Mark"
 
     topic = models.ForeignKey(
@@ -62,6 +63,7 @@ class UserNotification(BaseInternalModel):
         BASKETBALL = "BASKETBALL", "Basketball"
         TROPHY = "TROPHY", "Trophy"
         CHECKMARK = "CHECKMARK", "Checkmark"
+        MONEY = "MONEY", "Money"
         XMARK = "XMARK", "X Mark"
 
     user = models.ForeignKey(
