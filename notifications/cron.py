@@ -26,9 +26,15 @@ def _send_daily_picks_notification(product_name, title, delay_minutes=30):
         product__name=product_name, created_at__date=today
     ).aggregate(Max("created_at"))["created_at__max"]
 
-    latest_times = [
-        t for t in [latest_prediction_time, latest_ticket_time] if t is not None
-    ]
+    if product_name == Product.Names.SOCCER:
+        # For soccer: only tickets matter
+        filterable_list = [latest_ticket_time]
+    else:
+        # For others: predictions + tickets matter
+        filterable_list = [latest_prediction_time, latest_ticket_time]
+
+    latest_times = [t for t in filterable_list if t is not None]
+
     if not latest_times:
         return False
 
@@ -37,15 +43,22 @@ def _send_daily_picks_notification(product_name, title, delay_minutes=30):
     if now - latest_time < timedelta(minutes=delay_minutes):
         return False
 
-    newer_predictions = Prediction.objects.filter(
-        product__name=product_name, created_at__gt=latest_time
-    ).exists()
+    if product_name == Product.Names.SOCCER:
+        # Only care about newer tickets
+        newer_activity = Ticket.objects.filter(
+            product__name=product_name, created_at__gt=latest_time
+        ).exists()
+    else:
+        # Care about both newer predictions and newer tickets
+        newer_predictions = Prediction.objects.filter(
+            product__name=product_name, created_at__gt=latest_time
+        ).exists()
+        newer_tickets = Ticket.objects.filter(
+            product__name=product_name, created_at__gt=latest_time
+        ).exists()
+        newer_activity = newer_predictions or newer_tickets
 
-    newer_tickets = Ticket.objects.filter(
-        product__name=product_name, created_at__gt=latest_time
-    ).exists()
-
-    if newer_predictions or newer_tickets:
+    if newer_activity:
         return False
 
     prediction_notification_service = PredictionNotificationService()

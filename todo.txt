@@ -1,5 +1,5 @@
-
--- Work: 1hour
-
+1. Da aktiviram da se trgnuvat od  betting instructions notifikaciite
+3. Show More da go sredam da e pocitko
+4. Telegram i Contact us gore levo ikonki
 
 4. Istorijata tiketto so ne se redat eden pod drug kak so treba
