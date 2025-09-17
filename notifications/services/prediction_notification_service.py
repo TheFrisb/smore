@@ -29,6 +29,26 @@ class PredictionNotificationService:
             is_important=False,
         )
 
+    def send_ticket_lost_notification(self, ticket: Ticket):
+        first_bet_line = ticket.bet_lines.first()
+        emoji = self._get_emoji(ticket.product.name)
+
+        title = "Parlay Status: LOSE ❌"
+        preview = f"{self._get_emoji(ticket.product.name)} {first_bet_line.match.home_team} vs {first_bet_line.match.away_team} - {first_bet_line.bet} ({first_bet_line.bet_type})"
+        message = self._build_ticket_message(ticket)
+
+        topic = self.get_default_topic()
+        icon = self._get_icon(ticket.product.name)
+
+        NotificationRequest.objects.create(
+            topic=topic,
+            title=title,
+            preview=preview,
+            message=message,
+            icon=icon,
+            is_important=False,
+        )
+
     def _build_ticket_message(self, ticket: Ticket) -> str:
         lines = []
         bet_lines = ticket.bet_lines.all()
@@ -45,6 +65,25 @@ class PredictionNotificationService:
         emoji = self._get_emoji(prediction.product.name)
 
         title = "Single Pick Status: WIN ✅"
+        preview = f"{self._get_emoji(prediction.product.name)} {prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
+        message = f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong> - {prediction.prediction}</p>"
+
+        topic = self.get_default_topic()
+        icon = self._get_icon(prediction.product.name)
+
+        NotificationRequest.objects.create(
+            topic=topic,
+            title=title,
+            preview=preview,
+            message=message,
+            icon=icon,
+            is_important=False,
+        )
+
+    def send_prediction_lost_notification(self, prediction: Prediction):
+        emoji = self._get_emoji(prediction.product.name)
+
+        title = "Single Pick Status: LOSE ❌"
         preview = f"{self._get_emoji(prediction.product.name)} {prediction.match.home_team} vs {prediction.match.away_team} - {prediction.prediction}"
         message = f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong> - {prediction.prediction}</p>"
 

@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from core.models import Product, SportMatch, ApiSportModel
 from core.services.sport_api_service import SportApiService
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("cron")
 
 BASKETBALL_NCAA_LEAGUE_IDS = [116, 423]
 

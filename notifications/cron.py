@@ -78,3 +78,5 @@ def send_soccer_daily_picks_notification():
         "Soccer daily picks are in!",
         delay_minutes=30,  # Changed from 1 second to 30 minutes for consistency
     )
+
+

@@ -12,15 +12,20 @@ from .models import Prediction, Ticket, Product
 @receiver(post_save, sender=Prediction)
 def handle_prediction_status_change(sender, instance, **kwargs):
     """
-    Send notification when Prediction status changes from PENDING to WON
+    Send notification when Prediction status changes from PENDING to WON or LOST
     """
-    if instance.status == Prediction.Status.WON and instance.tracker.has_changed(
-        "status"
-    ):
+    if instance.tracker.has_changed("status"):
         previous_status = instance.tracker.previous("status")
         if previous_status == Prediction.Status.PENDING:
             prediction_notification_service = PredictionNotificationService()
-            prediction_notification_service.send_prediction_won_notification(instance)
+            if instance.status == Prediction.Status.WON:
+                prediction_notification_service.send_prediction_won_notification(
+                    instance
+                )
+            elif instance.status == Prediction.Status.LOST:
+                prediction_notification_service.send_prediction_lost_notification(
+                    instance
+                )
 
             mark_important_notifications_as_unimportant_if_needed(instance)
 
@@ -28,13 +33,16 @@ def handle_prediction_status_change(sender, instance, **kwargs):
 @receiver(post_save, sender=Ticket)
 def handle_ticket_status_change(sender, instance, **kwargs):
     """
-    Send notification when Ticket status changes from PENDING to WON
+    Send notification when Ticket status changes from PENDING to WON or LOST
     """
-    if instance.status == Ticket.Status.WON and instance.tracker.has_changed("status"):
+    if instance.tracker.has_changed("status"):
         previous_status = instance.tracker.previous("status")
         if previous_status == Ticket.Status.PENDING:
             prediction_notification_service = PredictionNotificationService()
-            prediction_notification_service.send_ticket_won_notification(instance)
+            if instance.status == Ticket.Status.WON:
+                prediction_notification_service.send_ticket_won_notification(instance)
+            elif instance.status == Ticket.Status.LOST:
+                prediction_notification_service.send_ticket_lost_notification(instance)
 
             mark_important_notifications_as_unimportant_if_needed(instance)
 

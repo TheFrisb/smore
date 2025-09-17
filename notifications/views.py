@@ -12,7 +12,9 @@ class ListNotificationsView(APIView):
 
     def get(self, request):
         """List all notifications for the authenticated user."""
-        notifications = UserNotification.objects.filter(user=request.user)
+        notifications = UserNotification.objects.filter(
+            user=request.user, is_visible=True
+        ).order_by("-created_at")
         serializer = UserNotificationSerializer(notifications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -33,16 +35,16 @@ class MarkNotificationReadView(APIView):
         notification.save()
         serializer = UserNotificationSerializer(notification)
         return Response(serializer.data, status=status.HTTP_200_OK)
- 
+
 
 class MarkAllNotificationsReadView(APIView):
     permission_classes = [IsAuthenticated]
 
     def patch(self, request):
         """Mark all notifications for the authenticated user as read."""
-        updated_count = UserNotification.objects.filter(user=request.user).update(
-            is_read=True
-        )
+        updated_count = UserNotification.objects.filter(
+            user=request.user, is_read=False, is_visible=True
+        ).update(is_read=True)
         return Response(
             {"status": "success", "updated_count": updated_count},
             status=status.HTTP_200_OK,

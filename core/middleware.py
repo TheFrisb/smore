@@ -24,15 +24,15 @@ class EmailVerificationMiddleware:
 
             # Apply logic only to 'core' and 'accounts' apps, excluding specified paths
             if (app_name == "core" and url_name != "verify_email") or (
-                app_name == "accounts"
-                and url_name
-                not in [
-                    "verify_email",
-                    "google_receiver",
-                    "password_reset_confirm",
-                    "password_reset",
-                    "logout",
-                ]
+                    app_name == "accounts"
+                    and url_name
+                    not in [
+                        "verify_email",
+                        "google_receiver",
+                        "password_reset_confirm",
+                        "password_reset",
+                        "logout",
+                    ]
             ):
                 # Redirect if user is authenticated but email is not verified
                 if request.user.is_authenticated and not request.user.is_email_verified:
@@ -44,7 +44,6 @@ class EmailVerificationMiddleware:
 class GeoIpSwitzerlandDetector(MiddlewareMixin):
     def __init__(self, get_response):
         super().__init__(get_response)
-        self.log = logging.getLogger(self.__class__.__name__)
 
     def _get_client_ip(self, request):
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
@@ -63,11 +62,11 @@ class GeoIpSwitzerlandDetector(MiddlewareMixin):
             country = g.country(ip_addr)
             is_switzerland = country["country_code"] == "CH"
             request.session["is_switzerland"] = is_switzerland
-            self.log.info(
+            logger.info(
                 f"GeoIP lookup for IP {ip_addr}: {country['country_name']} ({country['country_code']})"
             )
         except Exception as e:
-            self.log.error(f"GeoIP lookup failed for IP {ip_addr}: {e}")
+            logger.debug(f"GeoIP lookup failed for IP {ip_addr}: {e}")
             request.session["is_switzerland"] = False
 
         return None

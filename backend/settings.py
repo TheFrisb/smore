@@ -180,16 +180,30 @@ LOGGING = {
             "formatter": "simple",
         },
         "file": {
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs/logs.log",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": BASE_DIR / "logs" / "django.log",
+            "maxBytes": 10 * 1024 * 1024,  # 10 MB
+            "backupCount": 200,
+            "formatter": "simple",
+        },
+        "cron_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": BASE_DIR / "logs" / "cron.log",
+            "maxBytes": 10 * 1024 * 1024,  # 10 MB
+            "backupCount": 200,
             "formatter": "simple",
         },
     },
     "loggers": {
-        "": {  # ← empty string = real root logger
+        "": {  # Root logger for everything else, including Django's default logs
             "handlers": ["console", "file"],
             "level": config("DJANGO_LOG_LEVEL", default="INFO"),
             "propagate": True,
+        },
+        "cron": {  # Separate logger for cron jobs
+            "handlers": ["cron_file"],
+            "level": config("DJANGO_LOG_LEVEL", default="INFO"),
+            "propagate": False,  # Do not propagate to root logger
         },
     },
 }

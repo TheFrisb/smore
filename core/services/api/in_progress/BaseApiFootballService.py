@@ -11,7 +11,7 @@ from backend import settings
 
 class BaseApiFootballService(ABC):
     def __init__(self):
-        self.log = logging.getLogger(self.__class__.__name__)
+        self.log = logging.getLogger("cron")
 
     def _get_headers(self):
         return {
@@ -24,17 +24,23 @@ class BaseApiFootballService(ABC):
 
     def get_endpoint(self, endpoint: str, query_params: dict = None) -> dict:
         query = urlencode(query_params, doseq=True) if query_params else ""
-        url = f"{self._get_base_url()}/{endpoint}?{query}" if query else f"{self._get_base_url()}/{endpoint}"
+        url = (
+            f"{self._get_base_url()}/{endpoint}?{query}"
+            if query
+            else f"{self._get_base_url()}/{endpoint}"
+        )
         response = requests.get(url=url, headers=self._get_headers())
 
         if response.status_code != 200:
-            self.log.error(f"Error fetching data from {url}: {response.status_code} - {response.text}")
+            self.log.error(
+                f"Error fetching data from {url}: {response.status_code} - {response.text}"
+            )
             response.raise_for_status()
 
         return response.json()
 
     def _download_asset(
-            self, asset_url: str, upload_dir: str, filename: str
+        self, asset_url: str, upload_dir: str, filename: str
     ) -> Optional[str]:
         if not asset_url:
             self.log.error("Asset URL is empty.")

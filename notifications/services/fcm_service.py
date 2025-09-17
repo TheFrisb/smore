@@ -50,11 +50,17 @@ class FCMService:
         notification = messaging.Notification(title=title, body=body)
         if token:
             return messaging.Message(
-                notification=notification, data=data or {}, token=token
+                notification=notification,
+                data=data or {},
+                token=token,
+                android=self._get_andorid_config(),
             )
         elif topic:
             return messaging.Message(
-                notification=notification, data=data or {}, topic=topic
+                notification=notification,
+                data=data or {},
+                topic=topic,
+                android=self._get_andorid_config(),
             )
         else:
             raise ValueError("Either topic or token must be provided")
@@ -92,3 +98,45 @@ class FCMService:
             }
         except Exception as e:
             return {"status": "error", "message": f"Unexpected error: {str(e)}"}
+
+    def send_silent_notification(
+            self,
+            additional_data: Optional[Dict] = None,
+    ) -> dict:
+        """
+        Send a data-only message to the 'ALL' topic to trigger notification refetch
+        in client apps without displaying a visible notification.
+        """
+        topic = "ALL"
+        if not NotificationTopic.objects.filter(name=topic).exists():
+            return {"status": "error", "message": f"Topic '{topic}' does not exist"}
+
+        default_data = {"type": "refetch_notifications", "silent": "true"}
+        if additional_data:
+            default_data.update(additional_data)
+
+        try:
+            message = messaging.Message(
+                data=default_data, topic=topic, android=self._get_andorid_config()
+            )
+            message_id = messaging.send(message)
+            return {
+                "status": "success",
+                "message_id": message_id,
+                "topic": topic,
+            }
+        except FirebaseError as e:
+            return {
+                "status": "error",
+                "message": f"Firebase error: {str(e)}",
+                "error_code": getattr(e, "code", "unknown"),
+            }
+        except Exception as e:
+            return {"status": "error", "message": f"Unexpected error: {str(e)}"}
+
+    def _get_andorid_config(self):
+        android_config = messaging.AndroidConfig(
+            priority="high",
+        )
+
+        return android_config

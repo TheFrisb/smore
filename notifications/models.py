@@ -69,6 +69,13 @@ class UserNotification(BaseInternalModel):
     user = models.ForeignKey(
         "accounts.User", on_delete=models.CASCADE, related_name="notifications"
     )
+    request = models.ForeignKey(
+        NotificationRequest,
+        on_delete=models.SET_NULL,  # Or CASCADE if you want auto-delete
+        null=True,
+        blank=True,
+        related_name="user_notifications",
+    )
     title = models.CharField(max_length=255)
     message = models.TextField()
     is_read = models.BooleanField(default=False)
@@ -86,6 +93,7 @@ class UserNotification(BaseInternalModel):
         null=True,
     )
     is_important = models.BooleanField(default=False)
+    is_visible = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "User Notification"

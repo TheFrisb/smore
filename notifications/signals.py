@@ -56,12 +56,14 @@ def handle_notification_request(sender, instance, created, **kwargs):
 
         if response.get("status") == "success":
             UserNotification.objects.create(
+                request=instance,
                 user=instance.user,
                 title=instance.title,
                 message=instance.message,
                 topic=instance.topic,
                 icon=instance.icon,
                 is_important=instance.is_important,
+                is_visible=True,
             )
     else:
         # Broadcast to topic
@@ -77,12 +79,14 @@ def handle_notification_request(sender, instance, created, **kwargs):
             UserNotification.objects.bulk_create(
                 [
                     UserNotification(
+                        request=instance,
                         user=user,
                         title=instance.title,
                         message=instance.message,
                         topic=instance.topic,
                         icon=instance.icon,
                         is_important=instance.is_important,
+                        is_visible=True,
                     )
                     for user in users
                 ]

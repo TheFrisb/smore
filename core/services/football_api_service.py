@@ -12,7 +12,7 @@ from core.models import (
 )
 from core.services.sport_api_service import SportApiService
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("cron")
 
 allowed_league_ids = [
     39,  # Premier League
@@ -46,7 +46,6 @@ allowed_league_ids = [
     197,  # Greece Super League
     180,  # Scotland Championship
     179,  # Scotland Premiership
-
 ]
 
 
@@ -168,8 +167,8 @@ class FootballApiService(SportApiService):
                 return None
 
         if (
-                match_obj.kickoff_datetime > django_timezone.now()
-                and not match_obj.metadata
+            match_obj.kickoff_datetime > django_timezone.now()
+            and not match_obj.metadata
         ):
             match_obj.metadata = self.fetch_match_prediction(match_obj.external_id)
             match_obj.save()
@@ -177,24 +176,9 @@ class FootballApiService(SportApiService):
         return match_obj
 
     def _get_status(self, status: str) -> SportMatch.Status:
-        if status in [
-            'TBD',
-            'NS',
-            'SUSP',
-            'PST',
-            'ABD'
-        ]:
+        if status in ["TBD", "NS", "SUSP", "PST", "ABD"]:
             return SportMatch.Status.SCHEDULED
-        elif status in [
-            '1H',
-            'HT',
-            '2H',
-            'ET',
-            'BT',
-            'P',
-            'INT',
-            'LIVE'
-        ]:
+        elif status in ["1H", "HT", "2H", "ET", "BT", "P", "INT", "LIVE"]:
             return SportMatch.Status.IN_PROGRESS
         else:
             return SportMatch.Status.FINISHED

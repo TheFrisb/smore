@@ -1,10 +1,15 @@
-from django.contrib import admin
+import logging
+
+from django.contrib import admin, messages
 
 from notifications.models import (
     UserNotification,
     NotificationRequest,
     NotificationTopic,
 )
+from notifications.services.fcm_service import FCMService
+
+logger = logging.getLogger(__name__)
 
 
 # Register your models here.
@@ -61,6 +66,50 @@ class NotificationRequestAdmin(admin.ModelAdmin):
 
     readonly_fields = ("created_at", "updated_at")
 
+    def _hide_related_notifications(self, request, notification_requests):
+        """Helper to hide related UserNotifications for single or bulk deletes."""
+        if not notification_requests:  # Handle empty queryset
+            logger.info(
+                "No NotificationRequests provided for hiding related notifications."
+            )
+            return
+        try:
+            # Use a single query to update all related UserNotifications
+            logger.info(
+                f"Hiding related notifications for NotificationRequests: {notification_requests}"
+            )
+            UserNotification.objects.filter(request__in=notification_requests).update(
+                is_visible=False
+            )
+
+            fcm_result = FCMService().send_silent_notification()
+            if fcm_result["status"] == "success":
+                logger.info("Refetch data message sent successfully to 'ALL' topic")
+            else:
+                logger.warning(
+                    f"Failed to send refetch message: {fcm_result['message']}"
+                )
+        except Exception as e:
+            # Log error or notify admin (optional, adjust based on your needs)
+            self.message_user(
+                request,
+                f"Error hiding related notifications: {str(e)}",
+                level=messages.ERROR,
+            )
+
+    def delete_queryset(self, request, queryset):
+        """Handle bulk deletion in admin."""
+        self._hide_related_notifications(request, queryset)
+
+        super().delete_queryset(request, queryset)
+
+    def delete_model(self, request, obj):
+        """Handle single object deletion in admin."""
+        # Pass as a single-item queryset for consistency
+        self._hide_related_notifications(request, [obj])
+
+        super().delete_model(request, obj)
+
     class Media:
         css = {"all": ("css/admin/custom_admin.css",)}
 
@@ -73,6 +122,7 @@ class UserNotificationAdmin(admin.ModelAdmin):
         "topic",
         "icon",
         "is_important",
+        "is_visible",
         "is_read",
         "created_at",
     )
