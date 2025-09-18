@@ -8,7 +8,7 @@ from django.conf import settings
 
 from core.models import ApiSportModel, SportLeague, SportCountry, Product, SportTeam, SportMatch
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('cron')
 
 
 class SportApiService:
@@ -241,14 +241,14 @@ class SportApiService:
                     "product": product,
                 },
             )
-            
+
             # Update team name and logo if team already exists
             if not created:
                 team_obj.name = team_name
                 if team_logo_path:
                     team_obj.logo = team_logo_path
                 team_obj.save()
-            
+
             # Create the league-team relationship if it doesn't exist
             if league_obj.current_season_year:
                 from core.models import SportLeagueTeam
@@ -257,10 +257,12 @@ class SportApiService:
                     team=team_obj,
                     season=league_obj.current_season_year,
                 )
-                logger.info(f"Created/updated league-team relationship: {team_name} in {league_obj.name} for season {league_obj.current_season_year}")
+                logger.info(
+                    f"Created/updated league-team relationship: {team_name} in {league_obj.name} for season {league_obj.current_season_year}")
             else:
-                logger.warning(f"League {league_obj.name} has no current_season_year, skipping league-team relationship")
-            
+                logger.warning(
+                    f"League {league_obj.name} has no current_season_year, skipping league-team relationship")
+
             return team_obj
         except Exception as e:
             logger.error(f"Failed to create team {team_name}: {e}")

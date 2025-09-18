@@ -55,9 +55,11 @@
                                     <div class="text-primary-100 font-bold break-words text-lg">{{ bet_line.bet }}</div>
                                     <div class="text-primary-200 text-sm font-medium break-words">{{ bet_line.bet_type }}</div>
                                 </div>
-                                <div class="flex items-center">
-                                    <div class="px-2 py-1 rounded-lg bg-secondary-500/10 text-secondary-400 text-sm font-medium">{{ bet_line.odds|floatformat:2 }}</div>
-                                </div>
+                                {% if bet_line.odds %}
+                                    <div class="flex items-center">
+                                        <div class="px-2 py-1 rounded-lg bg-secondary-500/10 text-secondary-400 text-sm font-medium">{{ bet_line.odds|floatformat:2 }}</div>
+                                    </div>
+                                {% endif %}
                             </div>
                             {% if not bet_line.same_as_next %}
                                 <div class="p-4 rounded-lg bg-[#0D151E]/50 flex items-center justify-between gap-2">
