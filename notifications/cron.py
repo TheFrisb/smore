@@ -1,4 +1,5 @@
 # notifications/cron.py
+import logging
 from datetime import timedelta
 
 from django.db.models import Max
@@ -9,6 +10,8 @@ from notifications.models import NotificationRequest
 from notifications.services.prediction_notification_service import (
     PredictionNotificationService,
 )
+
+logger = logging.getLogger("cron")
 
 
 def _send_daily_picks_notification(product_name, title, delay_minutes=30):
@@ -80,3 +83,41 @@ def send_soccer_daily_picks_notification():
     )
 
 
+def mark_notifications_as_not_important_for_product(product_name):
+    now = timezone.now()
+    today = now.date()
+
+    predictions = Prediction.objects.filter(
+        status=Prediction.Status.PENDING,
+        match__kickoff_datetime__date=today,
+        product__name=product_name,
+    )
+
+    tickets = Ticket.objects.filter(
+        status=Ticket.Status.PENDING,
+        starts_at__date=today,
+        product__name=product_name,
+    )
+
+    start_times = [pred.match.kickoff_datetime for pred in predictions] + [
+        ticket.starts_at for ticket in tickets if ticket.starts_at
+    ]
+
+    if not start_times:
+        return
+
+    max_start_time = max(start_times)
+
+    if now >= max_start_time:
+        prediction_notification_service = PredictionNotificationService()
+        prediction_notification_service.mark_notifications_as_not_important(
+            product_name
+        )
+
+
+def mark_soccer_notifications_as_not_important():
+    mark_notifications_as_not_important_for_product(Product.Names.SOCCER)
+
+
+def mark_basketball_notifications_as_not_important():
+    mark_notifications_as_not_important_for_product(Product.Names.BASKETBALL)

@@ -195,3 +195,9 @@ class PredictionNotificationService:
             Product.Names.AI_ANALYST: "🤖",  # Default for AI Analyst
         }
         return emoji_map.get(product_name, "🎯")  # Default emoji if not found
+
+    def mark_notifications_as_not_important(self, product_name: Product.Names):
+        topic = self.get_topic(product_name)
+        NotificationRequest.objects.filter(topic=topic, is_important=True).update(
+            is_important=False
+        )

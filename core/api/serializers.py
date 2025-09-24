@@ -49,10 +49,11 @@ class SportTeamSerializer(serializers.ModelSerializer):
 class SportLeagueSerializer(serializers.ModelSerializer):
     logo = serializers.SerializerMethodField()
     country = SportCountrySerializer()
+    friendly_name = serializers.CharField(source="readable_name", read_only=True)
 
     class Meta:
         model = SportLeague
-        fields = ("name", "logo", "country")
+        fields = ("name", "logo", "country", "friendly_name")
 
     def get_logo(self, obj):
         if obj.logo and obj.logo.url:
