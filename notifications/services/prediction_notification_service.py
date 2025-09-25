@@ -188,7 +188,7 @@ class PredictionNotificationService:
                 )
 
         lines.append(
-            "<div><p>Don’t forget to check the parlays we selected and to read the betting instructions. Always respect the bank roll and play at the recommended Stakes (Units)</p></div>"
+            "<br><div><p>Don’t forget to check the parlays we selected and to read the betting instructions. Always respect the bank roll and play at the recommended Stakes (Units)</p></div>"
         )
 
         return "".join(lines)
