@@ -6,7 +6,7 @@ from django.db.models import Max
 from django.utils import timezone
 
 from core.models import Prediction, Ticket, Product
-from notifications.models import NotificationRequest
+from notifications.models import NotificationRequest, UserNotification
 from notifications.services.prediction_notification_service import (
     PredictionNotificationService,
 )
@@ -121,3 +121,13 @@ def mark_soccer_notifications_as_not_important():
 
 def mark_basketball_notifications_as_not_important():
     mark_notifications_as_not_important_for_product(Product.Names.BASKETBALL)
+
+
+def delete_older_notifications():
+    today_date = timezone.now().date()
+    older_than_three_days = today_date - timedelta(days=3)
+    deleted_count, _ = (
+        UserNotification.objects.filter(created_at__date__lt=older_than_three_days)
+        .all()
+        .delete()
+    )

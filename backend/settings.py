@@ -316,7 +316,14 @@ CRONJOBS = [
     ("*/10 * * * *", "notifications.cron.send_basketball_daily_picks_notification"),
     ("*/10 * * * *", "notifications.cron.send_soccer_daily_picks_notification"),
     ("*/10 * * * *", "notifications.cron.mark_soccer_notifications_as_not_important"),
-    ("*/10 * * * *", "notifications.cron.mark_basketball_notifications_as_not_important"),
+    (
+        "*/10 * * * *",
+        "notifications.cron.mark_basketball_notifications_as_not_important",
+    ),
+    (
+        "0 0 * * *",
+        "notifications.cron.delete_older_notifications",
+    ),
 ]
 
 GEOIP_PATH = BASE_DIR / "geoip.mmdb"

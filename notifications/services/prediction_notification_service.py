@@ -120,7 +120,10 @@ class PredictionNotificationService:
 
     def send_daily_picks_notification(self, product_name: Product.Names):
         # Convert product name to sentence case for the title
-        title = f"{product_name.capitalize()} daily picks are in!"
+        current_date = timezone.now().date()
+        formatted_date = current_date.strftime("%d.%m.%Y")
+
+        title = f"{product_name.capitalize()} selection for {formatted_date} is out!"
         preview = "Tap to see today's top picks"
         message = self._build_daily_picks_message(product_name)
 
@@ -173,9 +176,9 @@ class PredictionNotificationService:
         emoji = self._get_emoji(product_name)
 
         # Start with the intro sentence
-        lines.append(
-            f"<div><p>We've got {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today.</p></div>"
-        )
+        # lines.append(
+        #     f"<div><p>We've got {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today.</p></div>"
+        # )
 
         # List all single picks with emoji
         if single_pick_count > 0:
@@ -183,6 +186,10 @@ class PredictionNotificationService:
                 lines.append(
                     f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong><p>"
                 )
+
+        lines.append(
+            "<div><p>Don’t forget to check the parlays we selected and to read the betting instructions. Always respect the bank roll and play at the recommended Stakes (Units)</p></div>"
+        )
 
         return "".join(lines)
 
