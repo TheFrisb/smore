@@ -70,15 +70,24 @@ def _send_daily_picks_notification(product_name, title, delay_minutes=30):
 
 
 def send_basketball_daily_picks_notification():
+    current_date = timezone.now().date()
+    formatted_date = current_date.strftime("%d.%m.%Y")
+
+    title = f"Basketball selection for {formatted_date} is out!"
     return _send_daily_picks_notification(
-        Product.Names.BASKETBALL, "Basketball daily picks are in!", delay_minutes=30
+        Product.Names.BASKETBALL, title, delay_minutes=30
     )
 
 
 def send_soccer_daily_picks_notification():
+    current_date = timezone.now().date()
+    formatted_date = current_date.strftime("%d.%m.%Y")
+
+    title = f"Soccer selection for {formatted_date} is out!"
+
     return _send_daily_picks_notification(
         Product.Names.SOCCER,
-        "Soccer daily picks are in!",
+        title,
         delay_minutes=30,  # Changed from 1 second to 30 minutes for consistency
     )
 
