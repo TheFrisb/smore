@@ -186,9 +186,9 @@ class PredictionNotificationService:
                 lines.append(
                     f"<p><span class='sport-emoji'>{emoji}</span> <strong class='sport-title'>{prediction.match.home_team.name}</strong> vs <strong class='sport-title'>{prediction.match.away_team.name}</strong><p>"
                 )
-
+        lines.append("<div class='empty-line'</div>")
         lines.append(
-            "<br><div><p>Don’t forget to check the parlays we selected and to read the betting instructions. Always respect the bank roll and play at the recommended Stakes (Units)</p></div>"
+            "<div><p>Don’t forget to check the parlays we selected and to read the betting instructions. Always respect the bank roll and play at the recommended Stakes (Units)</p></div>"
         )
 
         return "".join(lines)
