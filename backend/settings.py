@@ -155,8 +155,9 @@ REST_FRAMEWORK = {
 
 # JWT Configuration
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=20),  # Access token lifetime
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # Refresh token lifetime
+    "SIGNING_KEY": config("DJANGO_JWT_SIGNING_KEY"),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=24),  # Access token lifetime
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),  # Refresh token lifetime
     "ROTATE_REFRESH_TOKENS": True,  # Rotate refresh tokens
     "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens
     "UPDATE_LAST_LOGIN": True,  # Update last login time
