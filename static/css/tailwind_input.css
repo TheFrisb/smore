@@ -115,3 +115,15 @@ div.g_id_signin > div > div > div {
     @apply transition-all duration-200 ease-in-out;
     @apply hover:scale-105 hover:opacity-80;
 }
+
+.managePlanProductTabButton.active {
+    @apply bg-secondary-400;
+}
+
+.toggleableProductContent {
+    @apply hidden;
+}
+
+.toggleableProductContent.active {
+    @apply block;
+}

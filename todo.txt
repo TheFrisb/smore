@@ -1,5 +1,26 @@
-1. Da aktiviram da se trgnuvat od  betting instructions notifikaciite
-3. Show More da go sredam da e pocitko
-4. Telegram i Contact us gore levo ikonki
+1. User Subscriptions
+- Update website frontend
 
-4. Istorijata tiketto so ne se redat eden pod drug kak so treba
+- Update app to handle new periods
+- Make app send subscription id on purchase
+
+- Make backend fetch and load revenuecat data
+- Add backend cron job sync
+- Improve backend stripe logic
+
+2. Notifications:
+- Handle proper token subscription and resubscription in the application
+- Do not send soccer/basketball topics to users who do not have them in their subscription
+- 30 mins
+
+-- Total: 180 mins / 3 hours
+
+3. Protect AI on backend
+
+4. Send token through app
+
+5. Protect API models
+- mozas hide na session auth samo
+
+6. Istorija tiketto so ne se redat eden pod drug kak so treba
+

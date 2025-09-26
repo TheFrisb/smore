@@ -37,7 +37,26 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
         (
             "Basic Information",
             {
-                "fields": ("name", "type", "analysis_per_month", "stripe_product_id"),
+                "fields": (
+                    "name", 
+                    "type",
+                    "analysis_per_month",
+                    "stripe_product_id",
+                    "is_active",
+                ),
+            },
+        ),
+        (
+            "Weekly Pricing",
+            {
+                "fields": (
+                    "weekly_price",
+                    "weekly_price_stripe_id",
+                    "weekly_switzerland_price_stripe_id",
+                    "discounted_weekly_price",
+                    "discounted_weekly_price_stripe_id",
+                    "discounted_switzerland_weekly_price_stripe_id",
+                ),
             },
         ),
         (
@@ -47,16 +66,22 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
                     "monthly_price",
                     "monthly_price_stripe_id",
                     "monthly_switzerland_price_stripe_id",
+                    "discounted_monthly_price",
+                    "discounted_monthly_price_stripe_id",
+                    "discounted_switzerland_monthly_price_stripe_id",
                 ),
             },
         ),
         (
-            "Discounted Monthly Pricing",
+            "Three Pricing",
             {
                 "fields": (
-                    "discounted_monthly_price",
-                    "discounted_monthly_price_stripe_id",
-                    "discounted_switzerland_monthly_price_stripe_id",
+                    "three_monthly_price",
+                    "three_monthly_price_stripe_id",
+                    "three_monthly_switzerland_price_stripe_id",
+                    "discounted_three_monthly_price",
+                    "discounted_three_monthly_price_stripe_id",
+                    "discounted_switzerland_three_monthly_price_stripe_id",
                 ),
             },
         ),
@@ -67,13 +92,6 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
                     "yearly_price",
                     "yearly_price_stripe_id",
                     "yearly_switzerland_price_stripe_id",
-                ),
-            },
-        ),
-        (
-            "Discounted Yearly Pricing",
-            {
-                "fields": (
                     "discounted_yearly_price",
                     "discounted_yearly_price_stripe_id",
                     "discounted_switzerland_yearly_price_stripe_id",

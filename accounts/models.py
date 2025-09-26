@@ -185,7 +185,9 @@ class UserSubscription(BaseInternalModel):
         INACTIVE = "inactive", "Inactive"
 
     class Frequency(models.TextChoices):
+        WEEKLY = "weekly", _("Weekly")
         MONTHLY = "monthly", _("Monthly")
+        THREE_MONTHLY = "three_monthly", _("Three Monthly")
         YEARLY = "yearly", _("Yearly")
 
     class ProviderType(models.TextChoices):
@@ -199,7 +201,7 @@ class UserSubscription(BaseInternalModel):
         max_length=20, choices=ProviderType, default=ProviderType.STRIPE
     )
     status = models.CharField(max_length=10, choices=Status, default=Status.INACTIVE)
-    frequency = models.CharField(max_length=10, choices=Frequency)
+    frequency = models.CharField(max_length=24, choices=Frequency)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()

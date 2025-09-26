@@ -21,6 +21,21 @@ class BaseInternalModel(models.Model):
 
 class BaseProductModel(BaseInternalModel):
     stripe_product_id = models.CharField(max_length=255)
+
+    weekly_price = models.DecimalField(max_digits=10, decimal_places=2)
+    weekly_price_stripe_id = models.CharField(max_length=255)
+    weekly_switzerland_price_stripe_id = models.CharField(max_length=255)
+
+    discounted_weekly_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+    discounted_weekly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
+    discounted_switzerland_weekly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
+
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
     monthly_price_stripe_id = models.CharField(max_length=255)
     monthly_switzerland_price_stripe_id = models.CharField(max_length=255)
@@ -32,6 +47,20 @@ class BaseProductModel(BaseInternalModel):
         max_length=255, blank=True, null=True
     )
     discounted_switzerland_monthly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
+
+    three_monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
+    three_monthly_price_stripe_id = models.CharField(max_length=255)
+    three_monthly_switzerland_price_stripe_id = models.CharField(max_length=255)
+
+    discounted_three_monthly_price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
+    discounted_three_monthly_price_stripe_id = models.CharField(
+        max_length=255, blank=True, null=True
+    )
+    discounted_switzerland_three_monthly_price_stripe_id = models.CharField(
         max_length=255, blank=True, null=True
     )
 
@@ -48,7 +77,7 @@ class BaseProductModel(BaseInternalModel):
         max_length=255, blank=True, null=True
     )
     mobile_product_id = models.CharField(max_length=255, blank=True, null=True)
-
+    is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:

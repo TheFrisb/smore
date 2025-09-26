@@ -1,371 +1,137 @@
 {% extends 'core/base.html' %}
 {% load util_tags i18n %}
 {% block content %}
-  {% if request.user.is_authenticated and request.user.subscription_is_active %}
-    <input type="hidden" id="userSubscriptionType" value="{{ request.user.subscription.frequency }}">
-    {% if request.user.subscription.first_chosen_product is not None %}
-      <input type="hidden" id="userFirstChosenProductId"
-             value="{{ request.user.subscription.first_chosen_product.id }}">
-    {% endif %}
-  {% endif %}
-
-  <input type="hidden" id="userCurrency" value="{{ request|get_currency_symbol }}">
+    <input type="hidden" id="userCurrency" value="{{ request|get_currency_symbol }}">
 
 
-  <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
-    <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
-    <div
-      class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
-    <div class="absolute inset-0 pointer-events-none">
-      <div
-        class="absolute inset-0 bg-gradient-radial from-secondary-500/5 via-transparent to-transparent opacity-30"></div>
-      <div class="absolute right-0 top-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
-      <div class="absolute left-0 bottom-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
-    </div>
-    <div class="container mx-auto px-4">
-
-      <div class="flex justify-center items-center space-x-4 mb-12"><span
-        class="text-sm font-medium text-white monthlyLabel">{% trans "Monthly" %}</span>
-        <button
-          class="relative w-16 h-8 rounded-full bg-primary-800/50 border-2 border-primary-700/30 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50"
-          id="chooseSubscriptionFrequencyButton">
-          <div
-            class="absolute top-1 w-5 h-5 rounded-full bg-secondary-500 transition-all duration-300 left-1 toggleButton"></div>
-        </button>
-        <div class="flex items-center space-x-2"><span
-          class="text-sm font-medium text-primary-300 annualLabel">{% trans "Annual" %}</span><span
-          class="px-2 py-1 text-xs font-semibold rounded-full bg-secondary-500/10 text-secondary-400">{% trans "Save 20%" %}</span>
-        </div>
-      </div>
-      <div class="max-w-5xl mx-auto grid lg:grid-cols-3 gap-8 mb-12 relative">
-
-        {% for product in subscriptions %}
-          <div class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/30
-                         {% if product.name != "Tennis" and product.name != 'NFL_NHL' %}
-                         hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product
-                         {% endif %}
-                         "
-               data-product-id="{{ product.id }}"
-               data-product-type="{{ product.type }}"
-               data-product-monthly-price="{{ product.monthly_price }}"
-            {% if product.discounted_monthly_price %}
-               data-product-monthly-discounted-price="{{ product.discounted_monthly_price }}"
-            {% endif %}
-               data-product-annual-price="{{ product.yearly_price }}"
-            {% if product.discounted_yearly_price %}
-               data-product-annual-discounted-price="{{ product.discounted_yearly_price }}"
-               data-product-annual-discounted-monthly-price="{{ product.discounted_yearly_price|divide:12 }}"
-            {% endif %}
-               data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
-               data-product-name="{{ product.get_name_display }}"
-               data-product-name-untranslated="{{ product.name }}"
-               data-translated-mode-month="{% trans 'month' %}">
-            {% if product.name == "Tennis" or product.name == 'NFL_NHL' %}
-              <div
-                class="absolute w-full h-full z-10 bg-primary-800 blur bg-opacity-90 top-0 left-0 flex items-center justify-center">
-              </div>
-              <div class="absolute w-full h-full top-0 left-0 z-20 flex items-center justify-center">
-                <p data-aos="zoom-in" data-aos-duration="500" data-aos-delay="100"
-                   class="inline-block px-4 py-2 rounded-full bg-secondary-500/40 text-secondary-400 text-sm font-semibold mb-4 z-20">
-                  {% trans "Coming Soon" %}</p>
-              </div>
-            {% endif %}
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-secondary-500/0 via-secondary-500/0 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-            <div class="relative">
-              <div class="flex justify-between items-start mb-6 gap-4">
-                <div>
-                  <div class="flex items-center gap-2 flex-wrap">
-                    {% if product.name != 'NFL_NHL' %}
-                      {% svg_icon icon_name=product.name|lower|add:"Icon" css_classes="w-6 h-6 text-secondary-400" %}
-                      <h3 class="text-xl font-bold text-white">
-                        {{ product.get_name_display }}
-                      </h3>
-                    {% else %}
-                      <div class="flex items-center justify-start gap-2">
-                        {% svg_icon icon_name="nflIcon" css_classes="w-5 h-5 text-secondary-400" %}
-                        <p class="text-xl lg:text-base font-bold text-white">NFL,</p>
-                      </div>
-                      <div class="flex items-center justify-start gap-2">
-                        {% svg_icon icon_name="nhlIcon" css_classes="w-5 h-5 text-secondary-400" %}
-                        <p class="text-xl lg:text-base font-bold text-white">NHL </p>
-                      </div>
-
-                    {% endif %}
-                  </div>
-                  <div class="flex items-center gap-3 mt-2">
-                    <p class="text-lg text-primary-400 line-through hidden product__NoDiscountPrice">
-                      {{ request|get_currency_symbol }}{{ product.monthly_price }}</p>
-                    <p class="text-2xl font-bold text-secondary-400  product__price">
-                      {{ request|get_currency_symbol }}{{ product.monthly_price }}</p>
-                  </div>
-                  <p class="text-sm text-primary-300">{% trans "per" %} <span
-                    class="product__subscriptionMode">{% trans "month" %}</span>
-                  </p>
-                  {#                                    <p class="text-sm text-secondary-500/80 product__discountSection hidden">#}
-                  {#                                        ${{ product.discount }} off with another#}
-                  {#                                        sport</p>#}
-
-
-                </div>
-                <div
-                  class="w-6 h-6 rounded-full border-2 transition-colors border-primary-600 group-hover:border-primary-500 product__checkboxContainer">
-                  {% svg_icon icon_name="checkboxIcon" css_classes="hidden w-5 h-5 text-white product__checkboxIcon" %}
-                </div>
-              </div>
-              <div class="flex flex-col items-start justify-start gap-2 ">
-                {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
-                  <div class="">
-                    <div
-                      class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
-                      <p class="text-sm font-medium product__currentPlanDisclaimer"
-                         data-product-id="{{ product.id }}"
-                         data-current-plan="{% trans 'Current plan' %}"
-                         data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
-                    </div>
-                    <p class="text-sm font-medium text-primary-300">
-                      {% trans "Current plan expiry date:" %} {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
-                  </div>
-                {% endif %}
-                <div class="product__sportPlanDisclaimer
-                                        {% if not user_has_discount %} hidden {% endif %}"
-                     data-product-id="{{ product.id }}">
-                  <div
-                    class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2 ">
-                    <p class="text-sm font-medium">{% trans "Discount" %}</p>
-                  </div>
-                </div>
-              </div>
-
-              <ul class="space-y-3 pt-6">
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span
-                    class="text-primary-200">{{ product.analysis_per_month }} {% trans "analysis per month" %}</span>
-                </li>
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span class="text-primary-200">{% trans " Daily Ticket Suggestions" %}</span>
-                </li>
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span class="text-primary-200">{% trans "High Odds" %}</span>
-                </li>
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span class="text-primary-200">{% trans "Betting Guidance" %}</span>
-                </li>
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span class="text-primary-200">{% trans "Promotions & Giveaways" %}</span>
-                </li>
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span class="text-primary-200">{% trans "24/7 Client Support" %}</span>
-                </li>
-                <li class="flex items-center space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                       stroke-linejoin="round" class="w-5 h-5 text-secondary-500">
-                    <path d="M20 6 9 17l-5-5"></path>
-                  </svg>
-                  <span class="text-primary-200">{% trans "Affiliate program" %}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        {% empty %}
-          <div class="text-center text-primary-200">{% trans "No products available" %}</div>
-        {% endfor %}
-
-      </div>
-      <div class="max-w-5xl mx-auto mb-12">
-        {% for product in addons %}
-          <div
-            class="relative group cursor-pointer rounded-2xl p-6 transition-all duration-300 bg-primary-800/50 border-2 border-primary-700/10 hover:border-secondary-500/30 hover:shadow-lg hover:shadow-secondary-500/10 product__hoverEffect product"
-            data-product-id="{{ product.id }}"
-            data-product-type="{{ product.type }}"
-            data-product-monthly-price="{{ product.monthly_price }}"
-            {% if product.discounted_monthly_price %}
-            data-product-monthly-discounted-price="{{ product.discounted_monthly_price }}"
-            {% endif %}
-            data-product-annual-price="{{ product.yearly_price }}"
-            {% if product.discounted_yearly_price %}
-            data-product-annual-discounted-price="{{ product.discounted_yearly_price }}"
-            data-product-annual-discounted-monthly-price="{{ product.discounted_yearly_price|divide:12 }}"
-            {% endif %}
-            data-product-annual-monthly-price="{{ product.yearly_price|divide:12 }}"
-            data-product-name="{{ product.get_name_display }}"
-            data-product-name-untranslated="{{ product.name }}"
-            data-translated-mode-month="{% trans 'month' %}"
-          >
-
-            <div class="relative">
-              <div class="flex justify-between items-start">
-                <div class="flex-1">
-                  <div class="flex items-center space-x-2 mb-2">
-                    {% svg_icon icon_name=product.name|cut:" "|lower|add:"Icon" css_classes="w-6 h-6 text-secondary-400" %}
-                    <h3 class="text-xl font-bold text-white">{{ product.get_name_display }}</h3>
-                    {#                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-primary-500/10 text-secondary-400">{% trans "Add-on" %}</span>#}
-
-                  </div>
-                  <div class="flex flex-col items-start justify-start gap-2 ">
-                    {% if request.user.is_authenticated and request.user.subscription_is_active and product in request.user.subscription.products.all %}
-                      <div class="last-of-type:mb-6">
-                        <div
-                          class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-blue-500/10 text-secondary-400 border-blue-500/20 mb-2">
-                          <p class="text-sm font-medium product__currentPlanDisclaimer"
-                             data-product-id="{{ product.id }}"
-                             data-current-plan="{% trans 'Current plan' %}"
-                             data-upgrade-plan="{% trans 'Upgrade to yearly and save 20%' %}">{% trans "Current plan" %}</p>
-                        </div>
-                        <p class="text-sm font-medium text-primary-300">
-                          {% trans "Current plan expiry date:" %} {{ request.user.subscription.end_date|date:"F d, Y" }}</p>
-                      </div>
-                    {% endif %}
-                    <div class="last-of-type:mb-6 product__sportPlanDisclaimer
-                                        {% if not user_has_discount %} hidden {% endif %}"
-                         data-product-id="{{ product.id }}">
-                      <div
-                        class="inline-flex items-center px-3 py-1 rounded-full border justify-center bg-green-500/10 text-green-400 border-green-500/20 mb-2">
-                        <p class="text-sm font-medium">{% trans "Discount" %}</p>
-                      </div>
-                    </div>
-
-                  </div>
-                  <p class="text-primary-200 mb-4 addon_descriptionText break-all">{{ product.description }}</p>
-                  <div class="flex items-center gap-3 mt-2">
-                    <p class="text-lg text-primary-400 line-through hidden product__NoDiscountPrice">
-                      {{ request|get_currency_symbol }}{{ product.monthly_price }}</p>
-                    <p class="text-2xl font-bold text-secondary-400  product__price">
-                      {{ request|get_currency_symbol }}{{ product.monthly_price }}</p>
-                    <p class="text-sm text-primary-300">{% trans "per" %} <span
-                      class="product__subscriptionMode">{% trans "month" %}</span>
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="w-6 h-6 rounded-full border-2 transition-colors border-primary-600 group-hover:border-primary-500 product__checkboxContainer">
-                  {% svg_icon icon_name="checkboxIcon" css_classes="hidden w-5 h-5 text-white product__checkboxIcon" %}
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="max-w-3xl mx-auto">
+    <section class="py-10 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
+        <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
         <div
-          class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-primary-700/30 shadow-lg shadow-primary-500/5 checkoutSummarySection">
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-secondary-500/5 to-transparent opacity-20 rounded-2xl"></div>
-          <div class="flex justify-between items-center mb-6"><h3 class="text-xl font-bold text-white">
-            {% trans "Summary" %}</h3>
-            <div class="text-right">
-              <p class="text-sm text-primary-300 mb-1">{% trans "Total" %} <span
-                id="subscriptionMode" data-translated-monthly="{% trans 'monthly' %}"
-                data-translated-yearly="{% trans 'Yearly'|lower %}">{% trans "monthly" %}</span>
-                {% trans "price" %}</p>
-              <p
-                class="text-3xl font-bold bg-gradient-to-r from-secondary-400 to-secondary-300 bg-clip-text text-transparent checkoutSummarySection__totalPrice">
-                {{ request|get_currency_symbol }}0.00</p></div>
-          </div>
-          <div class="space-y-4 mb-8 divide-y divide-primary-700/30 checkoutSummary__items"></div>
-          {% if request.user.is_authenticated %}
-            <button
-              class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
-              id="checkoutButton"
-              data-url="{% if request.user.subscription_is_active %} {% url 'payments:update_subscription' %} {% else %} {% url 'payments:checkout' %} {% endif %}"
-              disabled="">
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-              <div class=" flex items-center"><span
-                class="text-lg">{% trans "Get Started" %}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                     stroke-linejoin="round"
-                     class="lucide lucide-chevron-right w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
-                  <path d="m9 18 6-6-6-6"></path>
-                </svg>
+                class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute inset-0 bg-gradient-radial from-secondary-500/5 via-transparent to-transparent opacity-30"></div>
+            <div class="absolute right-0 top-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
+            <div class="absolute left-0 bottom-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
+        </div>
 
-                <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden"
-                     viewBox=" 0 0 100 101
-                                " fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                    fill="currentColor" />
-                  <path
-                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                    fill="currentFill" />
-                </svg>
-              </div>
-            </button>
-          {% else %}
-            <a href="{% url 'accounts:register' %}"
-               class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
-               disabled="">
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-              <div class="relative flex items-center"><span
-                class="text-lg">{% trans "Get Started" %}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                     stroke-linejoin="round"
-                     class="lucide lucide-chevron-right w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
-                  <path d="m9 18 6-6-6-6"></path>
-                </svg>
-              </div>
-            </a>
-          {% endif %}
-          {#                    <p class="text-primary-300 text-sm text-center mt-4 animate-pulse">Please select at least one sport#}
-          {#                        to continue</p>#}
+        <div class="px-4 space-y-8  max-w-xl mx-auto">
+            <h1 class="text-center text-2xl text-white font-bold">Pick your plan</h1>
+            <div class="rounded-full bg-[#0D151E] grid grid-cols-3 border border-gray-600">
+                {% for product in available_products %}
+                    <div class="managePlanProductTabButton px-4 py-4 rounded-full {% if forloop.first %}active{% endif %} cursor-pointer">
+                        <p class="text-white text-center">{{ product.name }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% for product in available_products %}
+                <div class="toggleableProductContent toggleableProductContent--{{ product.name }} {% if forloop.first %}active{% endif %}">
+                    <div class="flex items-start justify-start flex-col gap-2 mb-6">
+                        {% for benefit in product.benefits %}
+                            <div class="flex items-center justify-start gap-2">
+                                {% svg_icon icon_name="checkCheck" css_classes="w-5 h-5 text-secondary-500" %}
+                                <span class="text-white">{{ benefit }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        {% if product.weekly_price_stripe_id %}
+                            <div class=" p-4 rounded-lg bg-[#2b3a4b] border border-gray-600">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-3 text-start">
+                                        <div class="w-6 h-6 rounded-full border border-white"></div>
+                                        <p class="font-bold text-white">{% trans 'One week access' %}</p>
+                                    </div>
+                                    <div class="flex flex-col items-end justify-center text-end">
+                                        <p class="text-xl font-bold text-secondary-400">
+                                            {{ request|get_currency_symbol }}{{ product.weekly_price }}</p>
+                                        <p class="text-sm text-secondary-400">{% trans 'per week' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if product.monthly_price %}
+                            <div class=" p-4 rounded-lg bg-[#2b3a4b] border border-gray-600">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-3 text-start">
+                                        <div class="w-6 h-6 rounded-full border border-white"></div>
+                                        <p class="font-bold text-white">{% trans 'One month access' %}</p>
+                                    </div>
+                                    <div class="flex flex-col items-end justify-center text-end">
+                                        <p class="text-xl font-bold text-secondary-400">
+                                            {{ request|get_currency_symbol }}{{ product.monthly_price }}</p>
+                                        <p class="text-sm text-secondary-400">{% trans 'per month' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if product.three_monthly_price %}
+                            <div class=" p-4 rounded-lg bg-[#2b3a4b] border border-gray-600">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-3 text-start">
+                                        <div class="w-6 h-6 rounded-full border border-white"></div>
+                                        <p class="font-bold text-white">{% trans 'Three months access' %}</p>
+                                    </div>
+                                    <div class="flex flex-col items-end justify-center text-end">
+                                        <p class="text-xl font-bold text-secondary-400">
+                                            {{ request|get_currency_symbol }}{{ product.three_monthly_price }}</p>
+                                        <p class="text-sm text-secondary-400">{% trans 'every three months' %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="bg-primary-800/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-primary-700/30 shadow-lg shadow-primary-500/5 checkoutSummarySection">
+                <div class="absolute inset-0 bg-gradient-to-br from-secondary-500/5 to-transparent opacity-20 rounded-2xl"></div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-white">{% trans 'Summary' %}</h3>
+                    <div class="text-right">
+                        <p class="text-3xl font-bold bg-gradient-to-r from-secondary-400 to-secondary-300 bg-clip-text text-transparent checkoutSummarySection__totalPrice">{{ request|get_currency_symbol }}0.00</p>
+                    </div>
+                </div>
+                <div class="space-y-4 mb-8 divide-y divide-primary-700/30 checkoutSummary__items">
+{#                    <div class="space-y-4 mb-8 divide-y divide-primary-700/30">#}
+{#                        <div class="flex justify-between items-center text-primary-200 py-3">#}
+{#                            <span class="capitalize">Soccer</span>#}
+{#                            <span>€480.00</span>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+
+                <button class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+                        id="checkoutButton" data-url=" /api/payments/update-subscription/" disabled>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <div class=" flex items-center"><span class="text-lg">Get Started</span>
+
+                        {% svg_icon icon_name='arrowRight' css_classes='w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300' %}
+                        {% svg_icon icon_name='spinner' css_classes='w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden' %}
+                    </div>
+                </button>
+
+
+            </div>
         </div>
-        <div class="text-center mt-8">
-          <p class="text-primary-300 text-sm">{% trans "Need help choosing?" %}
-            <a href="{% url 'core:contact_us' %}"
-               class="text-secondary-400 hover:text-primary-300 transition-colors">{% trans "Contact our team" %}
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>{% endblock content %}
+    </section>
+{% endblock content %}
 
 {% block scripts %}
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("{% url 'facebook:view_content_pixel_event' %}", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": "{{ csrf_token }}"
-        }
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("{% url 'facebook:view_content_pixel_event' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+          }
+        });
+
       });
 
-    });
-
-  </script>
+    </script>
 {% endblock scripts %}

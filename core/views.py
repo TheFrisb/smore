@@ -343,16 +343,45 @@ class PlansView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["subscriptions"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).order_by("order")
-        context["addons"] = Product.objects.filter(type=Product.Types.ADDON).order_by(
-            "order"
-        )
-        context["user_has_discount"] = self._get_user_has_discount()
         context["page_title"] = _("Plans")
+        context["available_products"] = self._get_products_with_benefits()
+        # context["user_has_discount"] = self._get_user_has_discount()
+
 
         return context
+
+
+    def _get_products_with_benefits(self):
+        products = Product.objects.filter(is_active=True).order_by("order")
+
+        for product in products:
+            product.benefits = self._construct_benefit_list(product)
+
+        return products
+
+
+    def _construct_benefit_list(self, product):
+        benefits = []
+
+        if product.name == Product.Names.AI_ANALYST:
+            benefits.append(_("AI Bet Builder"))
+            benefits.append(_("Deep Match Analysis"))
+            benefits.append(_("Real-Time News"))
+            benefits.append(_("Tailored Ticket Generator"))
+
+            return benefits
+
+        analysis_per_month_label = _("analyses per month")
+
+        benefits.append(f"{product.analysis_per_month} {analysis_per_month_label}")
+        benefits.append(_("Daily Ticket Suggestions"))
+        benefits.append(_("High Odds"))
+        benefits.append(_("Betting Guidance"))
+        benefits.append(_("Promotions & Giveaways"))
+        benefits.append(_("24/7 Client Support"))
+        benefits.append(_("Affiliate Program"))
+
+        return benefits
 
     def _get_user_has_discount(self):
         if not self.request.user.is_authenticated:
