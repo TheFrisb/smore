@@ -122,6 +122,8 @@ class SendMessageToAiView(APIView):
 
 
 class GetSentMessagesCount(APIView):
+    permission_classes = []
+    authentication_classes = []
     class OutputSerializer(serializers.Serializer):
         """Serializer for formatting the outgoing response."""
 
