@@ -22,6 +22,7 @@ from accounts.models import (
 from backend import settings
 from core.models import Product, Prediction, Ticket
 from facebook.services.facebook_pixel import FacebookPixel
+from payments.serializers import SubscriptionInputSerializer
 from payments.services.stripe_checkout_service import (
     StripeCheckoutService,
 )
@@ -36,98 +37,58 @@ class CreateSubscriptionCheckoutUrl(APIView):
         super().__init__()
         self.service = StripeCheckoutService()
 
-    class InputSerializer(serializers.Serializer):
-        products = serializers.ListField(child=serializers.IntegerField())
-        frequency = serializers.ChoiceField(choices=UserSubscription.Frequency)
-        firstProduct = serializers.IntegerField(allow_null=True)
-
     class OutputSerializer(serializers.Serializer):
         url = serializers.CharField()
 
     def post(self, request):
-        serializer = self.InputSerializer(data=request.data)
+        serializer = SubscriptionInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        products = Product.objects.filter(id__in=serializer.validated_data["products"])
-        first_chosen_product = Product.objects.filter(
-            id=serializer.validated_data["firstProduct"]
-        ).first()
+        for item in serializer.validated_data['products']:
+            print(item)
 
-        logger.info(f"First chosen product: {first_chosen_product}")
-        is_switzerland = request.session.get("is_switzerland", False)
 
-        if not products.exists():
-            raise serializers.ValidationError("No products found.")
-
-        if len(products) != len(serializer.validated_data["products"]):
-            raise serializers.ValidationError("Some products not found.")
-
-        if (
-            serializer.validated_data["firstProduct"]
-            not in serializer.validated_data["products"]
-        ):
-            raise serializers.ValidationError("Invalid 'firstProduct' field.")
-
-        price_ids = self.get_price_ids(
-            products,
-            serializer.validated_data["frequency"],
-            first_chosen_product,
-            is_switzerland,
-        )
-
-        checkout_session = self.service.create_subscription_checkout_session(
-            request.user,
+        price_ids, total_amount = self._process_products(serializer.validated_data['products'])
+        checkout_url = self.service.create_subscription_checkout_session(
+            self.request.user,
             price_ids,
-            first_chosen_product_id=(
-                first_chosen_product.id if first_chosen_product else None
-            ),
-        )
+            serializer.validated_data['products'][0]['product'].id if serializer.validated_data['products'] else None,
+        ).url
 
+        print(checkout_url)
+
+        output_serializer = self.OutputSerializer(data={"url": checkout_url})
+        output_serializer.is_valid(raise_exception=True)
+        return Response(output_serializer.data)
+
+
+    def _process_products(self, products):
+        if not products:
+            raise serializers.ValidationError("No products provided.")
+
+        is_switzerland = self.request.session.get("is_switzerland", False)
+
+        total_amount = 0
+        price_ids = []
+
+        for item in products:
+            product = item['product']
+            frequency = item['frequency']
+
+            price_id, amount = product.get_price_id_and_amount(frequency, is_switzerland)
+            price_ids.append(price_id)
+            total_amount += amount
+
+        return price_ids, total_amount
+
+    def _send_facebook_pixel_event(self, request, first_product, total_amount):
         try:
             fb_pixel = FacebookPixel(request)
-            fb_pixel.initiate_checkout(products.first(), checkout_session.amount_total)
+            fb_pixel.initiate_checkout(first_product, total_amount)
         except Exception as e:
             logger.error(
                 f"Error while sending InitiateCheckout Facebook Pixel event: {e}"
             )
-
-        output_serializer = self.OutputSerializer(data={"url": checkout_session.url})
-        output_serializer.is_valid(raise_exception=True)
-        return Response(output_serializer.data)
-
-    def use_discounted_prices(self, products):
-        """
-        Check if the soccer product is present in the list of products and that more than one product is present.
-        """
-        return len(products) > 1
-
-    def get_price_ids(self, products, frequency, first_chosen_product, is_switzerland):
-        price_ids = []
-        use_discounted_prices = self.use_discounted_prices(products)
-
-        logger.info(
-            f"Gathering price ids with discounted prices: {use_discounted_prices}"
-        )
-
-        for product in products:
-            use_discounted_prices = self.use_discounted_prices(products)
-
-            if product == first_chosen_product:
-                logger.info(
-                    f"First chosen product: {product.get_name_display()}, fetching non-discounted price"
-                )
-                use_discounted_prices = False
-
-            price = product.get_price_id_for_subscription(
-                frequency, use_discounted_prices, is_switzerland
-            )
-            logger.info(
-                f"Fetched price: {price}, for product: {product.get_name_display()}"
-            )
-            price_ids.append(price)
-
-        return price_ids
-
 
 class CreatePredictionCheckoutUrl(RedirectView):
     def get_redirect_url(self, *args, **kwargs):

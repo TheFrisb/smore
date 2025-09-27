@@ -2,7 +2,7 @@
 {% load util_tags i18n %}
 {% block content %}
     <input type="hidden" id="userCurrency" value="{{ request|get_currency_symbol }}">
-
+    <input type="hidden" id="availableProductIds" value="{{ available_product_ids|join:',' }}">
 
     <section class="py-10 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
@@ -15,17 +15,22 @@
         </div>
 
         <div class="px-4 space-y-8  max-w-xl mx-auto">
-            <h1 class="text-center text-2xl text-white font-bold">Pick your plan</h1>
+            <div class="space-y-2">
+                <h1 class="text-center text-2xl text-white font-bold">Pick your plan</h1>
+        <h2 class="text-center text-secondary-400 text-sm ">Get a <span class="font-bold ">20% discount</span> if you select more than 1 plan</h2>
+            </div>
             <div class="rounded-full bg-[#0D151E] grid grid-cols-3 border border-gray-600">
                 {% for product in available_products %}
-                    <div class="managePlanProductTabButton px-4 py-4 rounded-full {% if forloop.first %}active{% endif %} cursor-pointer">
+                    <div class="managePlanProductTabButton px-4 py-4 rounded-full {% if forloop.first %}active{% endif %} cursor-pointer"
+                         data-product-id="{{ product.id }}">
                         <p class="text-white text-center">{{ product.name }}</p>
                     </div>
                 {% endfor %}
             </div>
 
             {% for product in available_products %}
-                <div class="toggleableProductContent toggleableProductContent--{{ product.name }} {% if forloop.first %}active{% endif %}">
+                <div class="toggleableProductContent {% if forloop.first %}active{% endif %}"
+                     data-product-id="{{ product.id }}">
                     <div class="flex items-start justify-start flex-col gap-2 mb-6">
                         {% for benefit in product.benefits %}
                             <div class="flex items-center justify-start gap-2">
@@ -37,10 +42,13 @@
 
                     <div class="flex flex-col gap-4">
                         {% if product.weekly_price_stripe_id %}
-                            <div class=" p-4 rounded-lg bg-[#2b3a4b] border border-gray-600">
+                            <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600"
+                                 data-product-id="{{ product.id }}" data-frequency="weekly" data-price="{{ product.weekly_price }}" data-product-name="{{ product.name }}">
                                 <div class="flex items-center justify-between gap-2">
                                     <div class="flex items-center gap-3 text-start">
-                                        <div class="w-6 h-6 rounded-full border border-white"></div>
+                                        <div class="w-6 h-6 rounded-full border border-white checkInput flex items-center justify-center">
+                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-white hidden checkInput--icon" %}
+                                        </div>
                                         <p class="font-bold text-white">{% trans 'One week access' %}</p>
                                     </div>
                                     <div class="flex flex-col items-end justify-center text-end">
@@ -53,10 +61,13 @@
                         {% endif %}
 
                         {% if product.monthly_price %}
-                            <div class=" p-4 rounded-lg bg-[#2b3a4b] border border-gray-600">
+                            <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600"
+                                 data-product-id="{{ product.id }}" data-frequency="monthly" data-price="{{ product.monthly_price }}" data-product-name="{{ product.name }}">
                                 <div class="flex items-center justify-between gap-2">
                                     <div class="flex items-center gap-3 text-start">
-                                        <div class="w-6 h-6 rounded-full border border-white"></div>
+                                        <div class="w-6 h-6 rounded-full border border-white checkInput flex items-center justify-center">
+                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-white hidden checkInput--icon" %}
+                                        </div>
                                         <p class="font-bold text-white">{% trans 'One month access' %}</p>
                                     </div>
                                     <div class="flex flex-col items-end justify-center text-end">
@@ -69,10 +80,13 @@
                         {% endif %}
 
                         {% if product.three_monthly_price %}
-                            <div class=" p-4 rounded-lg bg-[#2b3a4b] border border-gray-600">
+                            <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600"
+                                 data-product-id="{{ product.id }}" data-frequency="three_monthly" data-price="{{ product.three_monthly_price }}" data-product-name="{{ product.name }}">
                                 <div class="flex items-center justify-between gap-2">
                                     <div class="flex items-center gap-3 text-start">
-                                        <div class="w-6 h-6 rounded-full border border-white"></div>
+                                        <div class="w-6 h-6 rounded-full border border-white checkInput flex items-center justify-center">
+                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-white hidden checkInput--icon" %}
+                                        </div>
                                         <p class="font-bold text-white">{% trans 'Three months access' %}</p>
                                     </div>
                                     <div class="flex flex-col items-end justify-center text-end">
@@ -92,25 +106,36 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-xl font-bold text-white">{% trans 'Summary' %}</h3>
                     <div class="text-right">
-                        <p class="text-3xl font-bold bg-gradient-to-r from-secondary-400 to-secondary-300 bg-clip-text text-transparent checkoutSummarySection__totalPrice">{{ request|get_currency_symbol }}0.00</p>
+                        <p class="text-3xl font-bold bg-gradient-to-r from-secondary-400 to-secondary-300 bg-clip-text text-transparent">{{ request|get_currency_symbol }}<span id="checkoutSummarySection__totalPrice">0.00</span></p>
                     </div>
                 </div>
                 <div class="space-y-4 mb-8 divide-y divide-primary-700/30 checkoutSummary__items">
-{#                    <div class="space-y-4 mb-8 divide-y divide-primary-700/30">#}
-{#                        <div class="flex justify-between items-center text-primary-200 py-3">#}
-{#                            <span class="capitalize">Soccer</span>#}
-{#                            <span>€480.00</span>#}
-{#                        </div>#}
-{#                    </div>#}
+                    {#                    <div class="space-y-4 mb-8 divide-y divide-primary-700/30">#}
+                    {#                        <div class="flex justify-between items-center text-primary-200 py-3">#}
+                    {#                            <span class="capitalize">Soccer</span>#}
+                    {#                            <span>€480.00</span>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                 </div>
 
                 <button class="w-full group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-secondary-600/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
-                        id="checkoutButton" data-url=" /api/payments/update-subscription/" disabled>
+                        id="checkoutButton"
+                        {% if request.user.is_anonymous %}
+                        data-url="{% url 'accounts:login' %}"
+                        data-method="GET"
+                        {% elif request.user.subscription_is_active %}
+                        data-url="{% url 'payments:update_subscription' %}"
+                        data-method="POST"
+                        {% else %}
+                        data-url="{% url 'payments:checkout' %}"
+                        data-method="POST"
+                        {% endif %}
+                        disabled>
                     <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div class=" flex items-center"><span class="text-lg">Get Started</span>
-
-                        {% svg_icon icon_name='arrowRight' css_classes='w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300' %}
-                        {% svg_icon icon_name='spinner' css_classes='w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden' %}
+                    <div class=" flex items-center">
+                        <span class="text-lg">{{ button_text }}</span>
+                        {% svg_icon icon_name='arrowRight' css_classes='w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300 arrowRightIcon' %}
+                        {% svg_icon icon_name='spinner' css_classes='w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinnerIcon hidden' %}
                     </div>
                 </button>
 

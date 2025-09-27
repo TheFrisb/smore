@@ -78,14 +78,6 @@ class Command(BaseCommand):
             currency="eur",
         )
 
-        # Create EUR discounted price
-        eur_discount = stripe_price_service.create_price(
-            product=product,
-            nickname=f"Discounted {interval_label} - {product_label}",
-            amount=discounted_cents,
-            interval=interval,
-            currency="eur",
-        )
 
         # Create CHF base price
         chf_base = stripe_price_service.create_price(
@@ -96,14 +88,6 @@ class Command(BaseCommand):
             currency="chf",
         )
 
-        # Create CHF discounted price
-        chf_discount = stripe_price_service.create_price(
-            product=product,
-            nickname=f"Discounted {interval_label} - {product_label}",
-            amount=discounted_cents,
-            interval=interval,
-            currency="chf",
-        )
 
         # Convert cents to Decimal (major currency unit)
         base_decimal = Decimal(base_cents) / Decimal(100)

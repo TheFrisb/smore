@@ -26,56 +26,18 @@ class BaseProductModel(BaseInternalModel):
     weekly_price_stripe_id = models.CharField(max_length=255)
     weekly_switzerland_price_stripe_id = models.CharField(max_length=255)
 
-    discounted_weekly_price = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True
-    )
-    discounted_weekly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
-    discounted_switzerland_weekly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
-
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
     monthly_price_stripe_id = models.CharField(max_length=255)
     monthly_switzerland_price_stripe_id = models.CharField(max_length=255)
-
-    discounted_monthly_price = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True
-    )
-    discounted_monthly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
-    discounted_switzerland_monthly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
 
     three_monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
     three_monthly_price_stripe_id = models.CharField(max_length=255)
     three_monthly_switzerland_price_stripe_id = models.CharField(max_length=255)
 
-    discounted_three_monthly_price = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True
-    )
-    discounted_three_monthly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
-    discounted_switzerland_three_monthly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
-
     yearly_price = models.DecimalField(max_digits=10, decimal_places=2)
     yearly_price_stripe_id = models.CharField(max_length=255)
     yearly_switzerland_price_stripe_id = models.CharField(max_length=255)
-    discounted_yearly_price = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True
-    )
-    discounted_yearly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
-    discounted_switzerland_yearly_price_stripe_id = models.CharField(
-        max_length=255, blank=True, null=True
-    )
+
     mobile_product_id = models.CharField(max_length=255, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
@@ -106,47 +68,33 @@ class Product(BaseProductModel):
     analysis_per_month = models.CharField(max_length=12, blank=True)
     description = models.TextField(blank=True)
 
-    def get_price_id_for_subscription(
-        self, frequency, use_discounted_prices: bool, is_switzerland
-    ):
-        if frequency == "monthly":
-            if not is_switzerland:
+    def get_price_id_and_amount(self, frequency: str, is_switzerland):
+        if frequency == "weekly":
+            if is_switzerland:
+                return self.weekly_switzerland_price_stripe_id, self.weekly_price
+            return self.weekly_price_stripe_id, self.weekly_price
+        elif frequency == "monthly":
+            if is_switzerland:
+                return self.monthly_switzerland_price_stripe_id, self.monthly_price
+            return self.monthly_price_stripe_id, self.monthly_price
+        elif frequency == "three_monthly":
+            if is_switzerland:
                 return (
-                    self.discounted_monthly_price_stripe_id
-                    if use_discounted_prices
-                    else self.monthly_price_stripe_id
+                    self.three_monthly_switzerland_price_stripe_id,
+                    self.three_monthly_price,
                 )
-            else:
+            return self.three_monthly_price_stripe_id, self.three_monthly_price
+
+        elif frequency == "yearly":
+            if is_switzerland:
                 return (
-                    self.discounted_switzerland_monthly_price_stripe_id
-                    if use_discounted_prices
-                    else self.monthly_switzerland_price_stripe_id
+                    self.yearly_switzerland_price_stripe_id,
+                    self.yearly_price,
                 )
+            return self.yearly_price_stripe_id, self.yearly_price
 
-        if not is_switzerland:
-            return (
-                self.discounted_yearly_price_stripe_id
-                if use_discounted_prices
-                else self.yearly_price_stripe_id
-            )
+        raise ValueError("Invalid frequency")
 
-        return (
-            self.discounted_switzerland_yearly_price_stripe_id
-            if use_discounted_prices
-            else self.yearly_switzerland_price_stripe_id
-        )
-
-    def get_price_for_subscription(self, frequency, use_discounted_prices: bool):
-        if frequency == "monthly":
-            return (
-                self.discounted_monthly_price
-                if use_discounted_prices
-                else self.monthly_price
-            )
-
-        return (
-            self.discounted_yearly_price if use_discounted_prices else self.yearly_price
-        )
 
     def __str__(self):
         return self.name

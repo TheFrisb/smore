@@ -674,10 +674,6 @@ video {
   left: 0px;
 }
 
-.left-1 {
-  left: 0.25rem;
-}
-
 .left-1\/2 {
   left: 50%;
 }
@@ -696,10 +692,6 @@ video {
 
 .right-0 {
   right: 0px;
-}
-
-.right-1 {
-  right: 0.25rem;
 }
 
 .right-1\/2 {
@@ -1727,11 +1719,6 @@ video {
   border-color: rgb(147 173 201 / var(--tw-border-opacity, 1));
 }
 
-.border-primary-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(75 118 165 / var(--tw-border-opacity, 1));
-}
-
 .border-primary-500\/20 {
   border-color: rgb(75 118 165 / 0.2);
 }
@@ -1812,13 +1799,13 @@ video {
   border-color: transparent;
 }
 
-.border-yellow-500\/20 {
-  border-color: rgb(234 179 8 / 0.2);
-}
-
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+
+.border-yellow-500\/20 {
+  border-color: rgb(234 179 8 / 0.2);
 }
 
 .bg-\[\#0D151E\] {
@@ -1842,6 +1829,11 @@ video {
 
 .bg-\[\#15212E\]\/80 {
   background-color: rgb(21 33 46 / 0.8);
+}
+
+.bg-\[\#2b3a4b\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(43 58 75 / var(--tw-bg-opacity, 1));
 }
 
 .bg-black\/80 {
@@ -1992,37 +1984,6 @@ video {
   background-color: rgb(234 179 8 / 0.1);
 }
 
-.bg-gray-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
-}
-
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
-}
-
-.bg-gray-800\/80 {
-  background-color: rgb(31 41 55 / 0.8);
-}
-
-.bg-gray-600\/50 {
-  background-color: rgb(75 85 99 / 0.5);
-}
-
-.bg-gray-600\/20 {
-  background-color: rgb(75 85 99 / 0.2);
-}
-
-.bg-gray-600\/40 {
-  background-color: rgb(75 85 99 / 0.4);
-}
-
-.bg-\[\#2b3a4b\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(43 58 75 / var(--tw-bg-opacity, 1));
-}
-
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
 }
@@ -2057,6 +2018,12 @@ video {
 
 .bg-squares-pattern {
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=');
+}
+
+.from-primary-400 {
+  --tw-gradient-from: #6f92b7 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(111 146 183 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-primary-800 {
@@ -2137,12 +2104,6 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-primary-400 {
-  --tw-gradient-from: #6f92b7 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(111 146 183 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .via-emerald-500\/50 {
   --tw-gradient-to: rgb(16 185 129 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), rgb(16 185 129 / 0.5) var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -2218,6 +2179,10 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
+.to-primary-300 {
+  --tw-gradient-to: #93adc9 var(--tw-gradient-to-position);
+}
+
 .to-primary-500 {
   --tw-gradient-to: #4b76a5 var(--tw-gradient-to-position);
 }
@@ -2272,10 +2237,6 @@ video {
 
 .to-white {
   --tw-gradient-to: #fff var(--tw-gradient-to-position);
-}
-
-.to-primary-300 {
-  --tw-gradient-to: #93adc9 var(--tw-gradient-to-position);
 }
 
 .bg-contain {
@@ -2782,6 +2743,10 @@ video {
   opacity: 1;
 }
 
+.opacity-20 {
+  opacity: 0.2;
+}
+
 .opacity-30 {
   opacity: 0.3;
 }
@@ -2808,10 +2773,6 @@ video {
 
 .opacity-80 {
   opacity: 0.8;
-}
-
-.opacity-20 {
-  opacity: 0.2;
 }
 
 .shadow-2xl {
@@ -2844,6 +2805,11 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-primary-500\/5 {
+  --tw-shadow-color: rgb(75 118 165 / 0.05);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 .shadow-primary-600\/20 {
   --tw-shadow-color: rgb(60 95 132 / 0.2);
   --tw-shadow: var(--tw-shadow-colored);
@@ -2861,11 +2827,6 @@ video {
 
 .shadow-secondary-600\/20 {
   --tw-shadow-color: rgb(2 132 199 / 0.2);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.shadow-primary-500\/5 {
-  --tw-shadow-color: rgb(75 118 165 / 0.05);
   --tw-shadow: var(--tw-shadow-colored);
 }
 
@@ -3156,6 +3117,83 @@ div.g_id_signin > div > div > div {
 
 .toggleableProductContent.active {
   display: block;
+}
+
+/* Plan Product Filter Hover Effects */
+
+.managePlanProductTabButton {
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  border-width: 1px;
+  border-color: transparent;
+  transform: translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.managePlanProductTabButton:not(.active):hover {
+  background-color: rgb(45 71 99 / 0.3);
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: rgb(75 118 165 / 0.2);
+  --tw-shadow: var(--tw-shadow-colored);
+  border-color: rgb(75 118 165 / 0.3);
+}
+
+/* Plan Cards Hover Effects */
+
+.planCard {
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.planCard:hover {
+  border-color: rgb(11 165 236 / 0.3);
+  --tw-bg-opacity: 1;
+  background-color: rgb(58 75 92 / var(--tw-bg-opacity, 1));
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: rgb(11 165 236 / 0.1);
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-translate-y: -0.25rem;
+  --tw-scale-x: 1.02;
+  --tw-scale-y: 1.02;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.planCard {
+  cursor: pointer;
+}
+
+.planCard.active .checkInput {
+  --tw-bg-opacity: 1;
+  background-color: rgb(54 191 250 / var(--tw-bg-opacity, 1));
+}
+
+.planCard.active .checkInput--icon {
+  display: block;
+}
+
+/* Checkout Summary Hover Effects */
+
+.checkoutSummarySection {
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkoutSummarySection:hover {
+  border-color: rgb(11 165 236 / 0.4);
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: rgb(11 165 236 / 0.1);
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-scale-x: 1.01;
+  --tw-scale-y: 1.01;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .before\:bg-transparent::before {

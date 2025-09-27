@@ -39,6 +39,12 @@ class StripeCheckoutService(BaseStripeService):
             f"Metadata: {metadata} for user: {user.id} with first chosen product ID: {first_chosen_product_id}"
         )
 
+        subscription_data = {
+            "billing_mode": {"type": "flexible"},
+        }
+        if metadata:
+            subscription_data["metadata"] = metadata
+
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:payment_success')}",
             cancel_url=f"{settings.BASE_URL}{reverse('core:plans')}",
@@ -46,7 +52,7 @@ class StripeCheckoutService(BaseStripeService):
             customer=user.stripe_customer_id,
             line_items=self.get_subscription_line_items(price_ids),
             consent_collection={"terms_of_service": "required"},
-            subscription_data={"metadata": metadata} if metadata else None,
+            subscription_data=subscription_data,
         )
 
         logger.info(

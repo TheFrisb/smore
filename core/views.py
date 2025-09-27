@@ -345,6 +345,10 @@ class PlansView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = _("Plans")
         context["available_products"] = self._get_products_with_benefits()
+        context["available_product_ids"] = [
+            product.id for product in context["available_products"]
+        ]
+        context["button_text"] = self._get_button_text()
         # context["user_has_discount"] = self._get_user_has_discount()
 
 
@@ -388,6 +392,14 @@ class PlansView(TemplateView):
             return False
 
         return self.request.user.has_sport_discount()
+
+    def _get_button_text(self):
+        if self.request.user.is_anonymous:
+            return _("Get Started")
+        elif self.request.user.subscription_is_active:
+            return _("Update Plan")
+        else:
+            return _("Subscribe Now")
 
 
 class TelegramLandingView(TemplateView):

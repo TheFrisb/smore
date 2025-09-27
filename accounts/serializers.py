@@ -7,7 +7,7 @@ from core.models import Product, Prediction, Ticket
 
 
 class WithdrawalRequestSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault()) 
 
     class Meta:
         model = WithdrawalRequest

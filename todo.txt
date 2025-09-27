@@ -1,26 +1,21 @@
-1. User Subscriptions
+1. User subscriptions
 - Update website frontend
+- Improve backend stripe logic and add sync
 
+2. Revenue Cat Subscriptions
 - Update app to handle new periods
 - Make app send subscription id on purchase
-
-- Make backend fetch and load revenuecat data
-- Add backend cron job sync
-- Improve backend stripe logic
-
-2. Notifications:
-- Handle proper token subscription and resubscription in the application
-- Do not send soccer/basketball topics to users who do not have them in their subscription
-- 30 mins
-
--- Total: 180 mins / 3 hours
+- Add revenuecat subscription sync
 
 3. Protect AI on backend
+4. Make application responsive
 
-4. Send token through app
 
-5. Protect API models
+---
+3. Protect API models
 - mozas hide na session auth samo
+4. Be able to know if request is from app or website
+
 
 6. Istorija tiketto so ne se redat eden pod drug kak so treba
 

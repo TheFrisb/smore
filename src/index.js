@@ -1,5 +1,4 @@
 import { initMobileMenu } from "./menu/menu";
-import initProducts from "./products/products";
 import Aos from "aos/src/js/aos";
 import { initCopyButtons } from "./referral/copyButton";
 import { initCloseButtons } from "./closeButton";
@@ -19,14 +18,16 @@ import { initPeekButtons } from "./passwordPeek";
 import initSportToggler from "./sportToggler";
 import { initLoadMorePredictionsButton } from "./history/loadMoreButton";
 import { initStakeButtons } from "./stakeModal";
+import { initPlanPage } from "./plans/planPage";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
   initDateItems();
   initMobileMenu();
-  initProducts();
   initCopyButtons();
   initCloseButtons();
+
+  initPlanPage();
 
   initWithdrawalRequest();
   initFaq();
