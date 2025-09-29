@@ -165,22 +165,27 @@ class PredictionNotificationService:
             "bet_lines__match__league",
         )
 
-        # Count single picks and tickets
         single_pick_count = predictions.count()
         ticket_count = tickets.count()
 
-        parlay_label = "Premium Parlay" if ticket_count == 1 else "Premium Parlays"
-        single_label = "match" if single_pick_count == 1 else "matches"
+        single_label = "single pick" if single_pick_count == 1 else "single picks"
+        parlay_label = "parlay" if ticket_count == 1 else "parlays"
 
-        # Get emoji for the product
+        if single_pick_count == 0 and ticket_count == 0:
+            intro = "No single picks or parlays have been prepared for today."
+        elif single_pick_count == 0:
+            intro = f"We have {ticket_count} {parlay_label} and no single picks prepared for today."
+        elif ticket_count == 0:
+            intro = f"We have {single_pick_count} {single_label} and no parlays prepared for today."
+        else:
+            intro = f"We have {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today."
+
         emoji = self._get_emoji(product_name)
+        # <div><p>We have 1 single pick and 1 parlay prepared for today.</p></div>
+        lines.append(
+            f"<div><p>{intro}</p></div>"
+        )
 
-        # Start with the intro sentence
-        # lines.append(
-        #     f"<div><p>We've got {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today.</p></div>"
-        # )
-
-        # List all single picks with emoji
         if single_pick_count > 0:
             for prediction in predictions:
                 lines.append(

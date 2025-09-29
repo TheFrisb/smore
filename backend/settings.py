@@ -10,12 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from datetime import timedelta
-from pathlib import Path
-
 import firebase_admin
+from datetime import timedelta
 from decouple import config, Csv
 from firebase_admin import credentials
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +23,7 @@ BASE_URL = config("DJANGO_BASE_URL")
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-s#*4g6u(*7up$x*%r7xg9kt3j8x_-=w$o#n9pt#gb73px^j2^m"
+SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DJANGO_DEBUG_ENABLED", default=False, cast=bool)
