@@ -35,6 +35,7 @@ class LoginView(TokenObtainPairView):
 
 
 class RefreshTokenView(TokenRefreshView):
+    authentication_classes = []
     permission_classes = [AllowAny]
 
 

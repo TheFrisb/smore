@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-import firebase_admin
 from datetime import timedelta
+from pathlib import Path
+
+import firebase_admin
 from decouple import config, Csv
 from firebase_admin import credentials
-from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
     "drf_standardized_errors",
     "adminsortable2",
     "solo",
@@ -155,8 +157,8 @@ REST_FRAMEWORK = {
 # JWT Configuration
 SIMPLE_JWT = {
     "SIGNING_KEY": config("DJANGO_JWT_SIGNING_KEY"),
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=24),  # Access token lifetime
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),  # Refresh token lifetime
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=config("DJANGO_JWT_ACCESS_TOKEN_EXPIRATION_HOURS", cast=int)),  # Access token lifetime
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=config("DJANGO_JWT_REFRESH_TOKEN_EXPIRATION_DAYS", cast=int)),  # Refresh token lifetime
     "ROTATE_REFRESH_TOKENS": True,  # Rotate refresh tokens
     "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens
     "UPDATE_LAST_LOGIN": True,  # Update last login time

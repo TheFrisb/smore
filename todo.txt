@@ -1,5 +1,5 @@
-1. Da aktiviram da se trgnuvat od  betting instructions notifikaciite
-3. Show More da go sredam da e pocitko
-4. Telegram i Contact us gore levo ikonki
-
-4. Istorijata tiketto so ne se redat eden pod drug kak so treba
+1. Remake Stripe Payments with per-plan
+2. Verify RevenueCat subscriptions
+3. Handle access/refresh token
+4. Protect backend api
+5. Istorijata tiketto so ne se redat eden pod drug kak so treba
