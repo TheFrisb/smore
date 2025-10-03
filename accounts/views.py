@@ -312,7 +312,7 @@ class ManagePlanView(BaseAccountView, TemplateView):
         return context
 
     def get_view_plans_url(self, request):
-        return reverse("core:plans")
+        return reverse("subscriptions:plans")
 
     def _get_user_has_discount(self):
         if not self.request.user.is_authenticated:

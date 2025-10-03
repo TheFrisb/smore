@@ -3,7 +3,6 @@ from django.urls import path
 from .views import (
     HomeView,
     HistoryView,
-    PlansView,
     FaqView,
     HowToJoinView,
     AboutUsView,
@@ -17,7 +16,8 @@ from .views import (
     TelegramLandingView,
     DetailedPredictionView,
     AiAssistantView,
-    ReferralTelegramLandingView, VerifyEmailView,
+    ReferralTelegramLandingView,
+    VerifyEmailView,
 )
 
 app_name = "core"
@@ -25,7 +25,6 @@ app_name = "core"
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("history/", HistoryView.as_view(), name="history"),
-    path("plans/", PlansView.as_view(), name="plans"),
     path("frequently-asked-questions/", FaqView.as_view(), name="faq"),
     path("how-to-join/", HowToJoinView.as_view(), name="how_to_join"),
     path("about-us/", AboutUsView.as_view(), name="about_us"),
@@ -40,7 +39,7 @@ urlpatterns = [
         SubscriptionRequiredView.as_view(),
         name="subscription_required",
     ),
-    path('verify-email/', VerifyEmailView.as_view(), name='verify_email'),
+    path("verify-email/", VerifyEmailView.as_view(), name="verify_email"),
     path(
         "predictions/<int:pk>/",
         DetailedPredictionView.as_view(),
