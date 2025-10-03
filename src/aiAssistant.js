@@ -71,7 +71,7 @@ function renderNoAccessMessage(message, userSubscription) {
   buttonContainer.innerHTML = `
     <span class="w-full inline-flex mx-auto gap-2 items-center justify-center px-6 py-3 bg-primary-800/50 text-secondary-400 rounded-lg font-semibold hover:bg-primary-700/50 transition-colors border border-primary-700/50 hover:border-secondary-500/30 ">
       Subscribe 
-      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite21.svg#arrowRight"></use></svg>
+      <svg class="w-5 h-5 text-secondary-400"><use xlink:href="/static/assets/svg/sprite22.svg#arrowRight"></use></svg>
                                       <svg class="w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinner hidden" 
                                      viewBox=" 0 0 100 101
                                 " fill="none" xmlns="http://www.w3.org/2000/svg">

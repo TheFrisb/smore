@@ -115,3 +115,52 @@ div.g_id_signin > div > div > div {
     @apply transition-all duration-200 ease-in-out;
     @apply hover:scale-105 hover:opacity-80;
 }
+
+
+.managePlanProductTabButton.active {
+    @apply bg-secondary-400;
+}
+
+.toggleableProductContent {
+    @apply hidden;
+}
+
+.toggleableProductContent.active {
+    @apply block;
+}
+
+/* Plan Product Filter Hover Effects */
+.managePlanProductTabButton {
+    @apply transition-all duration-200 ease-in-out;
+    @apply border border-transparent;
+    @apply transform-gpu;
+}
+
+.managePlanProductTabButton:not(.active):hover {
+    @apply bg-primary-700/30;
+    @apply shadow-sm shadow-primary-500/20;
+    @apply border-primary-500/30;
+}
+
+/* Plan Cards Hover Effects */
+.planCard {
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:bg-[#3a4b5c] hover:border-secondary-500/30;
+    @apply hover:shadow-lg hover:shadow-secondary-500/10;
+    @apply hover:scale-[1.02] hover:-translate-y-1;
+    @apply cursor-pointer;
+}
+
+.planCard.active .checkInput {
+    @apply bg-secondary-400;
+}
+.planCard.active .checkInput--icon {
+    @apply block;
+}
+
+/* Checkout Summary Hover Effects */
+.checkoutSummarySection {
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:border-secondary-500/40 hover:shadow-xl hover:shadow-secondary-500/10;
+    @apply hover:scale-[1.01];
+}

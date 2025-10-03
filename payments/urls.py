@@ -1,17 +1,19 @@
 from django.urls import path, include
 
-from payments.views import (
-    CreateSubscriptionCheckoutUrl,
-    stripe_webhook,
+from payments.nviews import (
     ManageSubscriptionView,
-    UpdateSubscriptionView,
     SubscriptionPaymentSuccessView,
     CreatePredictionCheckoutUrl,
     PurchasePaymentSuccessView,
     CreateTicketCheckoutUrl,
     VerifyMobilePurchaseView,
-    CreateDailyOfferCheckoutUrl
+    CreateDailyOfferCheckoutUrl,
 )
+from payments.views.checkout import (
+    CreateSubscriptionCheckoutUrl,
+    UpdateSubscriptionView,
+)
+from payments.views.stripe_webhook import stripe_webhook
 
 app_name = "payments"
 urlpatterns = [
@@ -21,7 +23,11 @@ urlpatterns = [
         CreatePredictionCheckoutUrl.as_view(),
         name="prediction_checkout",
     ),
-    path("daily-offer/checkout/", CreateDailyOfferCheckoutUrl.as_view(), name="daily_offer_checkout"),
+    path(
+        "daily-offer/checkout/",
+        CreateDailyOfferCheckoutUrl.as_view(),
+        name="daily_offer_checkout",
+    ),
     path(
         "ticket/checkout/<int:ticket_id>/",
         CreateTicketCheckoutUrl.as_view(),
@@ -53,5 +59,5 @@ urlpatterns = [
         VerifyMobilePurchaseView.as_view(),
         name="verify_mobile_purchase",
     ),
-    path('revenuecat/', include('payments.mobile.urls'))
+    path("revenuecat/", include("payments.mobile.urls")),
 ]

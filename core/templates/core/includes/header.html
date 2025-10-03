@@ -196,8 +196,8 @@
                             class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                         {% trans "Referral Program" %}</a>
                 {% endif %}
-                <a class="relative group {% if request|is_link_active:'core:plans' %}text-white{% else %}text-primary-300{% endif %}"
-                   href="{% url 'core:plans' %}"><span
+                <a class="relative group {% if request|is_link_active:'subscriptions:plans' %}text-white{% else %}text-primary-300{% endif %}"
+                   href="{% url 'subscriptions:plans' %}"><span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
                     {% trans "Plans" %}</a>
                 <a class="relative group {% if request|is_link_active:'core:ai_assistant' %}text-white{% else %}text-primary-300{% endif %}"
@@ -360,8 +360,8 @@
                     </div>
                 </div>
 
-                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:plans' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
-                   href="{% url 'core:plans' %}">{% trans "Plans" %}</a>
+                <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'subscriptions:plans' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
+                   href="{% url 'subscriptions:plans' %}">{% trans "Plans" %}</a>
                 <a class="block px-4 py-2 rounded-lg transition-colors {% if request|is_link_active:'core:ai_assistant' %}bg-primary-500/10 text-secondary-400{% else %}text-primary-300 hover:bg-primary-800/50 hover:text-white{% endif %}"
                    href="{% url 'core:ai_assistant' %}">{% trans "AI Analyst" %}</a>
                 {% if request.user.is_authenticated %}

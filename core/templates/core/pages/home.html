@@ -210,7 +210,7 @@
                                         </svg>
                                     </a>
                                 {% elif request.user.is_authenticated and not request.user.subscription_is_active %}
-                                    <a href="{% url 'core:plans' %}"
+                                    <a href="{% url 'subscriptions:plans' %}"
                                        class="bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-500 transition-colors flex items-center space-x-2 shadow-lg shadow-secondary-600/20">
                                         <span>{% trans "Get a plan to see more picks" %}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

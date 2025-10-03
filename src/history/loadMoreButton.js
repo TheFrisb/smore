@@ -65,7 +65,7 @@ function createTicketHtml(ticket) {
         <div class="flex items-center space-x-4">
             <div class="bg-secondary-500/10 p-3 rounded-lg">
                 <svg class="w-5 h-5 text-white">
-                    <use xlink:href="/static/assets/svg/sprite21.svg#${ticket.product.name.toLowerCase()}Icon"></use>
+                    <use xlink:href="/static/assets/svg/sprite22.svg#${ticket.product.name.toLowerCase()}Icon"></use>
                 </svg>
             </div>
             <div>
@@ -94,7 +94,7 @@ function createTicketHtml(ticket) {
     
                     <div class="w-8 h-8 rounded-full flex items-center justify-center ">
                         <svg class="w-6 h-6 betStatusIcon ${bet_line.status == "WON" ? "text-green-500" : "text-red-500"}">
-                            <use xlink:href="/static/assets/svg/sprite21.svg#${bet_line.status.toLowerCase()}BetIcon"></use>
+                            <use xlink:href="/static/assets/svg/sprite22.svg#${bet_line.status.toLowerCase()}BetIcon"></use>
                         </svg>
                     </div>
                 </div>
@@ -158,7 +158,7 @@ function createSoloPickHtml(prediction) {
     
             <div class="flex  justify-center items-center space-x-3 text-primary-300">
                 <div class="bg-primary-900/80 p-2 rounded-lg">
-                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite21.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
+                    <svg class="w-5 h-5 text-white"><use xlink:href="/static/assets/svg/sprite22.svg#${prediction.match.type.toLowerCase()}Icon"></use></svg>
                 </div>
                 <span class=" text-primary-100 capitalize">${prediction.match.type.toLowerCase()}</span> 
             </div>
@@ -167,7 +167,7 @@ function createSoloPickHtml(prediction) {
     
         <div class="mb-6">
             <div class="flex items-center justify-center mb-2">
-                ${prediction.status == "LOST" ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p><svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite21.svg#circleX"></use></svg> </div>' : '<div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite21.svg#circleCheck"></use></svg></div>'}
+                ${prediction.status == "LOST" ? '<div class="flex items-center justify-end gap-2"><p class="text-red-500 font-bold">LOST</p><svg class="w-5 h-5 text-red-500"><use xlink:href="/static/assets/svg/sprite22.svg#circleX"></use></svg> </div>' : '<div class="flex items-center justify-end gap-2"><p class="text-emerald-500 font-bold">WON</p><svg class="w-5 h-5 text-emerald-500"><use xlink:href="/static/assets/svg/sprite22.svg#circleCheck"></use></svg></div>'}
             </div>
             <div class="bg-[#0D151E] border-primary-700/50 rounded-lg border p-4 shadow-lg relative group-hover:border-secondary-500/30 transition-all duration-300 flex flex-col gap-4">
                 <div class="w-full flex items-center justify-center gap-2 relative pb-4">
@@ -213,7 +213,7 @@ function createSoloPickHtml(prediction) {
                     <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary-500/50 to-transparent"></div>
                 </div>
                 <div class="flex items-center justify-center gap-1">
-                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite21.svg#chevronUp"></use></svg>
+                    <svg class="w-5 h-5 text-emerald-400"><use xlink:href="/static/assets/svg/sprite22.svg#chevronUp"></use></svg>
     
                     <p class="text-primary-100">Odds</p>
                     <span class="text-emerald-400 font-bold">${prediction.odds}</span>
