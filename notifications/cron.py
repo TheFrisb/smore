@@ -120,7 +120,7 @@ def mark_notifications_as_not_important_for_product(product_name):
     if now >= max_start_time:
         prediction_notification_service = PredictionNotificationService()
         prediction_notification_service.mark_notifications_as_not_important(
-            product_name
+            product_name, max_start_time
         )
 
 
@@ -135,8 +135,6 @@ def mark_basketball_notifications_as_not_important():
 def delete_older_notifications():
     today_date = timezone.now().date()
     older_than_three_days = today_date - timedelta(days=3)
-    deleted_count, _ = (
-        UserNotification.objects.filter(created_at__date__lt=older_than_three_days)
-        .all()
-        .delete()
+    UserNotification.objects.filter(created_at__date__lt=older_than_three_days).update(
+        is_visible=False
     )
