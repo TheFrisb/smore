@@ -164,3 +164,11 @@ div.g_id_signin > div > div > div {
     @apply hover:border-secondary-500/40 hover:shadow-xl hover:shadow-secondary-500/10;
     @apply hover:scale-[1.01];
 }
+
+.currentPlanDisclaimer {
+    @apply hidden;
+}
+
+.planCard--owned .currentPlanDisclaimer{
+    @apply !block;
+}

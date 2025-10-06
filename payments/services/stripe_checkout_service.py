@@ -11,6 +11,7 @@ from stripe.checkout import Session
 from accounts.models import User
 from core.models import Prediction, Ticket
 from payments.services.base_stripe_service import BaseStripeService
+from subscriptions.models import PriceCoupon
 
 logger = logging.getLogger(__name__)
 
@@ -23,9 +24,7 @@ class StripePortalSessionFlow(Enum):
 class StripeCheckoutService(BaseStripeService):
 
     def create_subscription_checkout_session(
-        self,
-        user: User | AbstractBaseUser,
-        price_id: str,
+        self, user: User | AbstractBaseUser, price_id: str, coupon: PriceCoupon
     ) -> Session:
         metadata = {}
         checkout_session = self.stripe_client.checkout.Session.create(
@@ -36,6 +35,7 @@ class StripeCheckoutService(BaseStripeService):
             line_items=self.get_subscription_line_items([price_id]),
             consent_collection={"terms_of_service": "required"},
             subscription_data={"metadata": metadata} if metadata else None,
+            discounts=[{"coupon": coupon.provider_coupon_id}],
         )
 
         logger.info(

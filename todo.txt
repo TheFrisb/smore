@@ -1,28 +1,17 @@
 1. Remake Stripe Payments with per-plan
--- Add plan update functionality
--- Add manage plan functionality
-
-2. Mark unread notifications fix signal
--- 15 mins
-
-3. Add Budu-M to about us
-
-4. Plan improvement
--- Add plan discount functionality
--- Preserve existing prices functionality
+-- Ensure data is stable
+-- Migrate existing subscriptions
+	-- Remove update subscriptions from striep customer poltar
 
 
-Start: 22:12
-Total: 5:30 hrs
---
-1. Verify RevenueCat subscriptions
+2. Verify RevenueCat subscriptions
 -- Sync revenue cat subscriptions
 -- API to store revenue cat subscription
+
+3. Protect backend api
 -- 2 hours
 
-2. Protect backend api
--- 2 hours
+4. Istorijata tiketto so ne se redat eden pod drug kak so treba
 
-3. Istorijata tiketto so ne se redat eden pod drug kak so treba
-
-
+5. Render plan discount
+-- Add plan discount functionality

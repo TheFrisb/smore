@@ -58,6 +58,7 @@ class ProductPrice(BaseInternalModel):
         choices=BillingInterval.choices,
     )
     interval_count = models.PositiveIntegerField(default=1)
+    version = models.IntegerField(default=1)
 
     class Meta:
         unique_together = ("provider", "provider_price_id")
@@ -88,3 +89,9 @@ class UserSubscription(BaseInternalModel):
 
     def __str__(self):
         return f"Subscription of {self.user.email} to {self.product_price.product.name}"
+
+
+class PriceCoupon(BaseInternalModel):
+    provider = models.CharField(max_length=20, choices=BillingProvider.choices)
+    provider_coupon_id = models.CharField(max_length=255, unique=True)
+    is_active = models.BooleanField(default=True)

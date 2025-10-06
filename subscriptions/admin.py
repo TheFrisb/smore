@@ -2,7 +2,7 @@
 from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 
-from .models import Product, ProductPrice, UserSubscription
+from .models import Product, ProductPrice, UserSubscription, PriceCoupon
 
 
 class ProductPriceInline(admin.TabularInline):
@@ -67,3 +67,8 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
     def product_name(self, obj):
         product = getattr(getattr(obj, "product_price", None), "product", None)
         return getattr(product, "name", "-")
+
+
+@admin.register(PriceCoupon)
+class PriceCouponAdmin(admin.ModelAdmin):
+    list_display = ["provider", "provider_coupon_id", "is_active"]

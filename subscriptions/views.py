@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.db.models import QuerySet
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
@@ -21,6 +24,7 @@ class PlansView(TemplateView):
         ]
         context["user_subscriptions"] = user_subscriptions
         context["owned_price_ids"] = self._get_owned_price_ids(user_subscriptions)
+        context["owned_product_ids"] = self._get_owned_product_ids(user_subscriptions)
         context["button_text"] = self._get_button_text()
         return context
 
@@ -41,6 +45,16 @@ class PlansView(TemplateView):
             price_ids.append(subscription.product_price.id)
 
         return price_ids
+
+    def _get_owned_product_ids(
+        self, user_subscriptions: QuerySet[UserSubscription, UserSubscription]
+    ):
+        product_ids = []
+
+        for subscription in user_subscriptions:
+            product_ids.append(subscription.product_price.product.id)
+
+        return product_ids
 
     def _get_button_text(self):
         if self.request.user.is_anonymous:
@@ -84,6 +98,13 @@ class PlansView(TemplateView):
     def _get_products_with_ordered_prices(self):
         currency = "CHF" if is_request_from_switzerland(self.request) else "€"
         prices_query = ProductPrice.objects.filter(currency=currency).order_by("amount")
+
+        v1_threshold_datetime = timezone.make_aware(datetime(2025, 9, 1))
+
+        if self.request.user.created_at > v1_threshold_datetime:
+            prices_query = prices_query.filter(version=2)
+        else:
+            prices_query = prices_query.filter(version=1)
 
         return (
             Product.objects.all()

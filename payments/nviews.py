@@ -21,6 +21,7 @@ from facebook.services.facebook_pixel import FacebookPixel
 from payments.services.stripe_checkout_service import (
     StripeCheckoutService,
 )
+from subscriptions.models import UserSubscription
 
 logger = logging.getLogger(__name__)
 
@@ -87,7 +88,9 @@ class CreateTicketCheckoutUrl(RedirectView):
 class ManageSubscriptionView(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
-        if not self.request.user.subscription_is_active:
+        if not UserSubscription.objects.filter(
+            user=self.request.user, is_active=True
+        ).exists():
             logger.info(
                 f"User: {self.request.user.id} attempted to manage subscription without having an active subscription."
             )
@@ -101,15 +104,19 @@ class ManageSubscriptionView(RedirectView):
 class SubscriptionPaymentSuccessView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         has_sports_product = False
+        sport_product_names = [Product.Names.SOCCER, Product.Names.BASKETBALL]
 
-        for product in self.request.user.subscription.products.all():
-            if product.name == Product.Names.SOCCER:
-                has_sports_product = True
-                break
+        subscribed_products = []
+        total_price = 0
 
-            if product.name == Product.Names.BASKETBALL:
+        for subscription in UserSubscription.objects.filter(
+            user=self.request.user, is_active=True
+        ):
+            if subscription.product_price.product.name in sport_product_names:
                 has_sports_product = True
-                break
+
+            subscribed_products.append(subscription.product_price.product)
+            total_price += subscription.product_price.amount
 
         if has_sports_product:
             messages.success(

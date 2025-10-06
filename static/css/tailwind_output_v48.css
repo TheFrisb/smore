@@ -642,8 +642,8 @@ video {
   bottom: -0.25rem;
 }
 
-.-top-2 {
-  top: -0.5rem;
+.-top-3 {
+  top: -0.75rem;
 }
 
 .-top-4 {
@@ -760,10 +760,6 @@ video {
 
 .top-full {
   top: 100%;
-}
-
-.-top-3 {
-  top: -0.75rem;
 }
 
 .z-10 {
@@ -1855,9 +1851,9 @@ video {
   background-color: rgb(16 185 129 / 0.05);
 }
 
-.bg-green-800 {
+.bg-green-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(22 101 52 / var(--tw-bg-opacity, 1));
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
 }
 
 .bg-primary-500 {
@@ -1985,11 +1981,6 @@ video {
 
 .bg-yellow-500\/10 {
   background-color: rgb(234 179 8 / 0.1);
-}
-
-.bg-green-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-10 {
@@ -3193,6 +3184,14 @@ div.g_id_signin > div > div > div {
   --tw-scale-x: 1.01;
   --tw-scale-y: 1.01;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.currentPlanDisclaimer {
+  display: none;
+}
+
+.planCard--owned .currentPlanDisclaimer {
+  display: block !important;
 }
 
 .before\:bg-transparent::before {
