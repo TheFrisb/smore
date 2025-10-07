@@ -3,13 +3,13 @@ from rest_framework import serializers
 
 from accounts.serializers import ProductSerializer
 from core.models import (
+    BetLine,
+    FrequentlyAskedQuestion,
+    Prediction,
+    SportCountry,
     SportLeague,
     SportMatch,
     SportTeam,
-    Prediction,
-    SportCountry,
-    FrequentlyAskedQuestion,
-    BetLine,
     Ticket,
 )
 

@@ -7,7 +7,7 @@ from django.db.models.functions import Lower
 from langchain_core.tools import tool
 from pydantic import BaseModel, Field
 
-from ai_assistant.v2.types import SportLeagueOutputModel, SportCountryOutputModel
+from ai_assistant.v2.types import SportCountryOutputModel, SportLeagueOutputModel
 from core.models import ApiSportModel, SportLeague
 
 logger = logging.getLogger(__name__)

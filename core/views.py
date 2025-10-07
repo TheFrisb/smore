@@ -7,20 +7,20 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import DetailView, TemplateView
 
 from accounts.models import (
-    PurchasedPredictions,
-    User,
-    PurchasedTickets,
     PurchasedDailyOffer,
+    PurchasedPredictions,
+    PurchasedTickets,
+    User,
 )
 from ai_assistant.models import Message, SuggestedMessage
 from core.models import (
-    Product,
+    FrequentlyAskedQuestion,
     PickOfTheDay,
     Prediction,
-    FrequentlyAskedQuestion,
+    Product,
     Ticket,
 )
 

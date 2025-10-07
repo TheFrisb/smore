@@ -1,11 +1,7 @@
 from django.utils import timezone
 
 from core.models import Ticket, Prediction, Product
-from notifications.models import (
-    NotificationRequest,
-    NotificationTopic,
-    UserNotification,
-)
+from notifications.models import NotificationRequest, NotificationTopic
 from notifications.services.fcm_service import FCMService
 
 
@@ -186,7 +182,9 @@ class PredictionNotificationService:
 
         emoji = self._get_emoji(product_name)
         # <div><p>We have 1 single pick and 1 parlay prepared for today.</p></div>
-        lines.append(f"<div><p>{intro}</p></div>")
+        lines.append(
+            f"<div><p>{intro}</p></div>"
+        )
 
         if single_pick_count > 0:
             for prediction in predictions:
@@ -209,13 +207,8 @@ class PredictionNotificationService:
         }
         return emoji_map.get(product_name, "🎯")  # Default emoji if not found
 
-    def mark_notifications_as_not_important(
-        self, product_name: Product.Names, created_at
-    ):
+    def mark_notifications_as_not_important(self, product_name: Product.Names):
         topic = self.get_topic(product_name)
-        NotificationRequest.objects.filter(
-            topic=topic, is_important=True, created_at__lt=created_at
-        ).update(is_important=False)
-        UserNotification.objects.filter(
-            topic=topic, is_important=True, created_at__lt=created_at
-        ).update(is_important=False)
+        NotificationRequest.objects.filter(topic=topic, is_important=True).update(
+            is_important=False
+        )

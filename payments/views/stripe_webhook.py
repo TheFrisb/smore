@@ -1,10 +1,10 @@
-import stripe
 import logging
+
+import stripe
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from payments.services.stripe_webhook_service import StripeWebhookService
-
+from payments.services.stripe.stripe_webhook_service import StripeWebhookService
 
 logger = logging.getLogger(__name__)
 

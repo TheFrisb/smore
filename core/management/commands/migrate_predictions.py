@@ -6,7 +6,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management import BaseCommand
 
-from core.models import Product, SportLeague, SportTeam, SportMatch, Prediction
+from core.models import Prediction, Product, SportLeague, SportMatch, SportTeam
 
 logger = logging.getLogger(__name__)
 

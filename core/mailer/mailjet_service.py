@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 from mailjet_rest import Client
 
-from accounts.models import WithdrawalRequest, UserSubscription
+from accounts.models import UserSubscription, WithdrawalRequest
 from core.models import SiteSettings
 
 logger = logging.getLogger(__name__)

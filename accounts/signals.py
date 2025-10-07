@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode
 
 from accounts.models import User, UserBalance
 from core.mailer.mailjet_service import MailjetService
-from payments.services.base_stripe_service import BaseStripeService
+from payments.services.stripe.base_stripe_service import BaseStripeService
 
 logger = logging.getLogger(__name__)
 

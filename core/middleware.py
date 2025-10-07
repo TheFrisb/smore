@@ -24,15 +24,15 @@ class EmailVerificationMiddleware:
 
             # Apply logic only to 'core' and 'accounts' apps, excluding specified paths
             if (app_name == "core" and url_name != "verify_email") or (
-                    app_name == "accounts"
-                    and url_name
-                    not in [
-                        "verify_email",
-                        "google_receiver",
-                        "password_reset_confirm",
-                        "password_reset",
-                        "logout",
-                    ]
+                app_name == "accounts"
+                and url_name
+                not in [
+                    "verify_email",
+                    "google_receiver",
+                    "password_reset_confirm",
+                    "password_reset",
+                    "logout",
+                ]
             ):
                 # Redirect if user is authenticated but email is not verified
                 if request.user.is_authenticated and not request.user.is_email_verified:

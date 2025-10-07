@@ -6,12 +6,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from facebook.services.facebook_pixel import FacebookPixel
-from payments.services.stripe_checkout_service import StripeCheckoutService
+from payments.services.stripe.stripe_checkout_service import StripeCheckoutService
 from subscriptions.models import (
-    ProductPrice,
     BillingProvider,
-    UserSubscription,
     PriceCoupon,
+    ProductPrice,
+    UserSubscription,
 )
 
 logger = logging.getLogger(__name__)

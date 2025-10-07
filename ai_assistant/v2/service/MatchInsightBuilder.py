@@ -1,8 +1,13 @@
 from django.db.models import Q
 from django.utils import timezone
 
-from ai_assistant.v2.types import SportMatchInsightOutputModel, PredictionStatisticsOutputModel, SportTeamOutputModel, \
-    SportMatchOutputModel, TeamStandingOutputModel
+from ai_assistant.v2.types import (
+    PredictionStatisticsOutputModel,
+    SportMatchInsightOutputModel,
+    SportMatchOutputModel,
+    SportTeamOutputModel,
+    TeamStandingOutputModel,
+)
 from core.models import SportMatch, SportTeam, TeamStanding
 
 
@@ -41,8 +46,7 @@ class MatchInsightBuilder:
             team=self.sport_match.away_team, history=False
         )
         head2head = self.fetch_head_to_head_matches(
-            team1=self.sport_match.home_team,
-            team2=self.sport_match.away_team
+            team1=self.sport_match.home_team, team2=self.sport_match.away_team
         )
         # home_team_standings, away_team_standings = self.get_standings()
 
@@ -56,11 +60,11 @@ class MatchInsightBuilder:
             prediction_statistics=self.fetch_prediction_statistics(),
             # home_team_standings=home_team_standings,
             # away_team_standings=away_team_standings
-
         )
 
-    def fetch_matches_by_kickoff_datetime(self, team: SportTeam, history: bool, matches_to_fetch=10) -> \
-            list[SportMatchOutputModel]:
+    def fetch_matches_by_kickoff_datetime(
+        self, team: SportTeam, history: bool, matches_to_fetch=10
+    ) -> list[SportMatchOutputModel]:
         """
         Fetches the last 'matches_to_fetch' matches for the given team.
 
@@ -73,21 +77,22 @@ class MatchInsightBuilder:
             list[SportMatch]: A list of SportMatch instances representing the team's match history.
         """
 
-        queryset = SportMatch.objects.filter(
-            Q(home_team=team) | Q(away_team=team)
-        )
+        queryset = SportMatch.objects.filter(Q(home_team=team) | Q(away_team=team))
 
         if not history:
-            queryset = queryset.filter(kickoff_datetime__gt=timezone.now()).order_by("kickoff_datetime")[
-                       :matches_to_fetch]
+            queryset = queryset.filter(kickoff_datetime__gt=timezone.now()).order_by(
+                "kickoff_datetime"
+            )[:matches_to_fetch]
         else:
-            queryset = queryset.filter(kickoff_datetime__lt=timezone.now()).order_by("-kickoff_datetime")[
-                       :matches_to_fetch]
+            queryset = queryset.filter(kickoff_datetime__lt=timezone.now()).order_by(
+                "-kickoff_datetime"
+            )[:matches_to_fetch]
 
         return [SportMatchOutputModel.model_validate(m) for m in queryset]
 
-    def fetch_head_to_head_matches(self, team1: SportTeam, team2: SportTeam, matches_to_fetch=10) -> list[
-        SportMatchOutputModel]:
+    def fetch_head_to_head_matches(
+        self, team1: SportTeam, team2: SportTeam, matches_to_fetch=10
+    ) -> list[SportMatchOutputModel]:
         """
         Fetches the last 'matches_to_fetch' head-to-head matches between two teams.
 
@@ -101,11 +106,14 @@ class MatchInsightBuilder:
         """
         current_match_kickoff = self.sport_match.kickoff_datetime
 
-        queryset = SportMatch.objects.filter(
-            kickoff_datetime__lt=current_match_kickoff
-        ).filter(
-            Q(home_team=team1, away_team=team2) | Q(home_team=team2, away_team=team1)
-        ).order_by("-kickoff_datetime")[:matches_to_fetch]
+        queryset = (
+            SportMatch.objects.filter(kickoff_datetime__lt=current_match_kickoff)
+            .filter(
+                Q(home_team=team1, away_team=team2)
+                | Q(home_team=team2, away_team=team1)
+            )
+            .order_by("-kickoff_datetime")[:matches_to_fetch]
+        )
 
         return [SportMatchOutputModel.model_validate(m) for m in queryset]
 
@@ -166,7 +174,9 @@ class MatchInsightBuilder:
             return None
         return float(s[:-1])
 
-    def get_standings(self) -> tuple[TeamStandingOutputModel | None, TeamStandingOutputModel | None]:
+    def get_standings(
+        self,
+    ) -> tuple[TeamStandingOutputModel | None, TeamStandingOutputModel | None]:
         """
         Get the standings for the home and away teams in the match.
 
@@ -183,6 +193,14 @@ class MatchInsightBuilder:
         ).first()
 
         return (
-            TeamStandingOutputModel.from_django(home_team_standing) if home_team_standing else None,
-            TeamStandingOutputModel.from_django(away_team_standing) if away_team_standing else None
+            (
+                TeamStandingOutputModel.from_django(home_team_standing)
+                if home_team_standing
+                else None
+            ),
+            (
+                TeamStandingOutputModel.from_django(away_team_standing)
+                if away_team_standing
+                else None
+            ),
         )

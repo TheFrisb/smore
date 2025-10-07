@@ -12,13 +12,13 @@ from rest_framework.views import APIView
 
 from accounts.models import (
     PlatformType,
-    PurchasedPredictions,
     PurchasedDailyOffer,
+    PurchasedPredictions,
 )
 from backend import settings
-from core.models import Product, Prediction, Ticket
+from core.models import Prediction, Product, Ticket
 from facebook.services.facebook_pixel import FacebookPixel
-from payments.services.stripe_checkout_service import (
+from payments.services.stripe.stripe_checkout_service import (
     StripeCheckoutService,
 )
 from subscriptions.models import UserSubscription

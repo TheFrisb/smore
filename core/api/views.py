@@ -5,11 +5,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from accounts.serializers import ProductSerializer
-from core.models import Prediction, Product, FrequentlyAskedQuestion, Ticket
+from core.models import FrequentlyAskedQuestion, Prediction, Product, Ticket
+
 from .serializers import (
-    PredictionSerializer,
     FrequentlyAskedQuestionSerializer,
     PredictionHistorySerializer,
+    PredictionSerializer,
     TicketHistorySerializer,
 )
 

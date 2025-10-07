@@ -8,9 +8,9 @@ from django.db import transaction
 from django.db.models import Sum
 
 from accounts.models import (
-    User,
     Referral,
     ReferralEarning,
+    User,
     UserSubscription,
 )
 

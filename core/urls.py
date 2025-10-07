@@ -1,22 +1,22 @@
 from django.urls import path
 
 from .views import (
-    HomeView,
-    HistoryView,
-    FaqView,
-    HowToJoinView,
     AboutUsView,
+    AiAssistantView,
     ContactUsView,
-    DisclaimerView,
-    TermsOfServiceView,
-    PrivacyPolicyView,
     CookiesPolicyView,
-    UpcomingMatchesView,
+    DetailedPredictionView,
+    DisclaimerView,
+    FaqView,
+    HistoryView,
+    HomeView,
+    HowToJoinView,
+    PrivacyPolicyView,
+    ReferralTelegramLandingView,
     SubscriptionRequiredView,
     TelegramLandingView,
-    DetailedPredictionView,
-    AiAssistantView,
-    ReferralTelegramLandingView,
+    TermsOfServiceView,
+    UpcomingMatchesView,
     VerifyEmailView,
 )
 

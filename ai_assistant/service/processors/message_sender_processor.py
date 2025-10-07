@@ -125,7 +125,7 @@ class MessageSenderProcessor(BaseProcessor):
             return self.single_match_prompt
 
         if (
-                prompt_type == PromptType.MULTI_MATCH_PREDICTION
-                or prompt_type in self.get_league_related_prompt_types()
+            prompt_type == PromptType.MULTI_MATCH_PREDICTION
+            or prompt_type in self.get_league_related_prompt_types()
         ):
             return self.multi_match_prompt

@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime, timezone
 
-from core.models import Product, SportMatch, ApiSportModel
+from core.models import ApiSportModel, Product, SportMatch
 from core.services.sport_api_service import SportApiService
 
 logger = logging.getLogger("cron")

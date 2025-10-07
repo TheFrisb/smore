@@ -1,17 +1,16 @@
-1. Remake Stripe Payments with per-plan
--- Ensure data is stable
+1. Stripe Payments
+-- Remove old code, and ensure all works
 -- Migrate existing subscriptions
-	-- Remove update subscriptions from striep customer poltar
-
 
 2. Verify RevenueCat subscriptions
--- Sync revenue cat subscriptions
--- API to store revenue cat subscription
+-- Sync revenue cat subscriptions -- cron
+-- Webhook to sync revenuecat subscriptions
 
-3. Protect backend api
--- 2 hours
+3. Protect Backend API
+-- Hide browseable API
+-- Return NULLs/empty strings where applicable
 
-4. Istorijata tiketto so ne se redat eden pod drug kak so treba
-
-5. Render plan discount
+4. Render plan discount
 -- Add plan discount functionality
+
+5. Istroija tiketo so ne se rede kak so treba

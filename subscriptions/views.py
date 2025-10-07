@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
 from core.utils import is_request_from_switzerland
+
 from .models import *
 
 

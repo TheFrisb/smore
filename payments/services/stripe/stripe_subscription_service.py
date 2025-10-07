@@ -6,8 +6,8 @@ from stripe import Subscription
 
 from accounts.models import User
 from accounts.services.referral_service import ReferralService
-from payments.services.base_stripe_service import BaseStripeService
-from subscriptions.models import UserSubscription, BillingProvider, ProductPrice
+from payments.services.stripe.base_stripe_service import BaseStripeService
+from subscriptions.models import BillingProvider, ProductPrice, UserSubscription
 
 logger = logging.getLogger(__name__)
 

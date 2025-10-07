@@ -2,7 +2,7 @@
 from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 
-from .models import Product, ProductPrice, UserSubscription, PriceCoupon
+from .models import PriceCoupon, Product, ProductPrice, UserSubscription
 
 
 class ProductPriceInline(admin.TabularInline):

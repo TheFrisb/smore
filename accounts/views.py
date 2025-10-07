@@ -8,13 +8,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.exceptions import PermissionDenied
-from django.db.models import Sum, Q, Count
+from django.db.models import Count, Q, Sum
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, FormView, RedirectView, ListView
+from django.views.generic import FormView, ListView, RedirectView, TemplateView
 from google.auth.transport import requests
 from google.oauth2 import id_token
 
@@ -22,7 +22,7 @@ from accounts.forms.login_form import LoginForm
 from accounts.forms.register_form import RegisterForm
 from accounts.forms.reset_password import PasswordResetRequestForm, SetNewPasswordForm
 from accounts.mixins import RedirectAuthenticatedUserMixin
-from accounts.models import User, Referral, WithdrawalRequest
+from accounts.models import Referral, User, WithdrawalRequest
 from accounts.services.referral_service import ReferralService
 from accounts.services.user_service import UserService
 from core.models import FrequentlyAskedQuestion

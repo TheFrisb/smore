@@ -4,18 +4,18 @@ from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.status import (
-    HTTP_422_UNPROCESSABLE_ENTITY,
     HTTP_200_OK,
     HTTP_204_NO_CONTENT,
+    HTTP_422_UNPROCESSABLE_ENTITY,
 )
 from rest_framework.views import APIView
 
 from accounts.models import (
-    User,
-    PurchasedPredictions,
     PlatformType,
-    PurchasedTickets,
     PurchasedDailyOffer,
+    PurchasedPredictions,
+    PurchasedTickets,
+    User,
     UserSubscription,
 )
 from core.exception import UnprocessableEntity

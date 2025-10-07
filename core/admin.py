@@ -6,25 +6,25 @@ from django import forms
 from django.contrib import admin
 from django.contrib.postgres.lookups import Unaccent
 from django.contrib.postgres.search import TrigramSimilarity
-from django.db.models import Min, Value, Q
-from django.db.models.functions import Lower, Greatest
+from django.db.models import Min, Q, Value
+from django.db.models.functions import Greatest, Lower
 from django.utils import timezone
 from solo.admin import SingletonModelAdmin
 
 from accounts.models import PurchasedPredictions, PurchasedTickets
 from core.models import (
-    Prediction,
-    PickOfTheDay,
-    Product,
+    BetLine,
     FrequentlyAskedQuestion,
+    PickOfTheDay,
+    Prediction,
+    Product,
     SiteSettings,
     SportCountry,
     SportLeague,
-    SportTeam,
     SportMatch,
-    BetLine,
-    Ticket,
+    SportTeam,
     TeamStanding,
+    Ticket,
 )
 
 logger = logging.getLogger(__name__)

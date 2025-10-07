@@ -7,14 +7,14 @@ openai_web_search_tool = {
         "properties": {
             "query": {
                 "type": "string",
-                "description": "The search query to find relevant sports news and updates."
+                "description": "The search query to find relevant sports news and updates.",
             },
             "count": {
                 "type": "integer",
                 "default": 5,
-                "description": "The number of search results to return."
-            }
+                "description": "The number of search results to return.",
+            },
         },
-        "required": ["query"]
-    }
+        "required": ["query"],
+    },
 }

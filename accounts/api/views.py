@@ -71,6 +71,6 @@ class DeleteMyAccountView(APIView):
         user = request.user
         user.is_active = False
         user.save()
-        
+
         messages.success(request, "Your account has been deleted successfully.")
         return Response(status=status.HTTP_204_NO_CONTENT)

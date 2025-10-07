@@ -3,7 +3,7 @@ import json
 from django.core.management.base import BaseCommand
 from django.core.serializers.json import DjangoJSONEncoder
 
-from core.models import SportTeam, ApiSportModel
+from core.models import ApiSportModel, SportTeam
 
 BATCH_SIZE = 5000
 

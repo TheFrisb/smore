@@ -1,13 +1,13 @@
-from django.urls import path, include
+from django.urls import include, path
 
 from payments.nviews import (
-    ManageSubscriptionView,
-    SubscriptionPaymentSuccessView,
-    CreatePredictionCheckoutUrl,
-    PurchasePaymentSuccessView,
-    CreateTicketCheckoutUrl,
-    VerifyMobilePurchaseView,
     CreateDailyOfferCheckoutUrl,
+    CreatePredictionCheckoutUrl,
+    CreateTicketCheckoutUrl,
+    ManageSubscriptionView,
+    PurchasePaymentSuccessView,
+    SubscriptionPaymentSuccessView,
+    VerifyMobilePurchaseView,
 )
 from payments.views.checkout import (
     CreateSubscriptionCheckoutUrl,

@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta, date
+from datetime import date, timedelta
 from itertools import combinations
 from typing import List, Optional
 
@@ -34,7 +34,7 @@ class SportMatchProcessor(BaseProcessor):
         )
 
     def _build_match_context(
-            self, teams: List[SportTeam], filter_date: Optional[date] = None
+        self, teams: List[SportTeam], filter_date: Optional[date] = None
     ) -> str:
         """
         Build a context string from team data for sports match analysis and betting predictions.
@@ -82,7 +82,7 @@ class SportMatchProcessor(BaseProcessor):
         )
 
     def _get_team_future_matches(
-            self, team: SportTeam, now, filter_date: Optional[date]
+        self, team: SportTeam, now, filter_date: Optional[date]
     ) -> List[SportMatch]:
         """Fetch future matches for a team with date filtering."""
         query = Q(home_team=team) | Q(away_team=team)
@@ -98,10 +98,10 @@ class SportMatchProcessor(BaseProcessor):
         return list(qs.order_by("kickoff_datetime")[:3])
 
     def _build_team_section(
-            self,
-            team: SportTeam,
-            past_matches: List[SportMatch],
-            future_matches: List[SportMatch],
+        self,
+        team: SportTeam,
+        past_matches: List[SportMatch],
+        future_matches: List[SportMatch],
     ) -> str:
         """Build context section for a single team."""
         context = f"**Team {team.name}:**\n"
@@ -139,19 +139,19 @@ class SportMatchProcessor(BaseProcessor):
         return context
 
     def _get_head_to_head_past_matches(
-            self, team_a: SportTeam, team_b: SportTeam, now
+        self, team_a: SportTeam, team_b: SportTeam, now
     ) -> QuerySet[SportMatch]:
         """Fetch past head-to-head matches between two teams (last 5)."""
         return SportMatch.objects.filter(
             (
-                    Q(home_team=team_a, away_team=team_b)
-                    | Q(home_team=team_b, away_team=team_a)
+                Q(home_team=team_a, away_team=team_b)
+                | Q(home_team=team_b, away_team=team_a)
             ),
             kickoff_datetime__lt=now,
         ).order_by("-kickoff_datetime")[:5]
 
     def _get_head_to_head_future_matches(
-            self, team_a: SportTeam, team_b: SportTeam, now, filter_date: Optional[date]
+        self, team_a: SportTeam, team_b: SportTeam, now, filter_date: Optional[date]
     ) -> List[SportMatch]:
         """Fetch future head-to-head matches with date filtering."""
         query = Q(home_team=team_a, away_team=team_b) | Q(
@@ -168,11 +168,11 @@ class SportMatchProcessor(BaseProcessor):
         return list(qs.order_by("kickoff_datetime")[:3])
 
     def _build_head_to_head_section(
-            self,
-            team_a: SportTeam,
-            team_b: SportTeam,
-            past_matches: List[SportMatch],
-            future_matches: List[SportMatch],
+        self,
+        team_a: SportTeam,
+        team_b: SportTeam,
+        past_matches: List[SportMatch],
+        future_matches: List[SportMatch],
     ) -> str:
         """Build context section for head-to-head between two teams."""
         context = f"\n- **{team_a.name} vs {team_b.name}:**\n"
@@ -204,12 +204,12 @@ class SportMatchProcessor(BaseProcessor):
         return match.away_team if match.home_team == team else match.home_team
 
     def _format_match_line(
-            self,
-            match: SportMatch,
-            opponent: Optional[SportTeam],
-            result: str,
-            label: str,
-            indent: int,
+        self,
+        match: SportMatch,
+        opponent: Optional[SportTeam],
+        result: str,
+        label: str,
+        indent: int,
     ) -> str:
         """Format a past match line for the context."""
         indent_str = " " * indent
@@ -225,7 +225,7 @@ class SportMatchProcessor(BaseProcessor):
         return line
 
     def _format_future_match_line(
-            self, match: SportMatch, opponent: Optional[SportTeam], label: str, indent: int
+        self, match: SportMatch, opponent: Optional[SportTeam], label: str, indent: int
     ) -> str:
         """Format a future match line for the context."""
         indent_str = " " * indent
@@ -295,7 +295,7 @@ class SportMatchProcessor(BaseProcessor):
         return f"{wins}W-{draws}D-{losses}L, Avg Goals Scored: {avg_scored:.1f}, Conceded: {avg_conceded:.1f}"
 
     def _calculate_head_to_head(
-            self, matches: List[SportMatch], team_a: SportTeam, team_b: SportTeam
+        self, matches: List[SportMatch], team_a: SportTeam, team_b: SportTeam
     ) -> str:
         """Calculate head-to-head summary between two teams based on the last 5 matches."""
         a_wins = b_wins = draws = 0

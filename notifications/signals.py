@@ -80,7 +80,7 @@ def handle_notification_request(sender, instance, created, **kwargs):
                 users = User.objects.filter(
                     fcm_token__isnull=False,
                     subscription__status=UserSubscription.Status.ACTIVE,
-                    subscription__products__name=product_name
+                    subscription__products__name=product_name,
                 ).distinct()
             else:
                 users = User.objects.filter(fcm_token__isnull=False)

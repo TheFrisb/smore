@@ -5,7 +5,7 @@ from datetime import timedelta
 from django.db.models import Max
 from django.utils import timezone
 
-from core.models import Prediction, Ticket, Product
+from core.models import Prediction, Product, Ticket
 from notifications.models import NotificationRequest, UserNotification
 from notifications.services.prediction_notification_service import (
     PredictionNotificationService,

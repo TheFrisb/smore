@@ -2,20 +2,20 @@ from __future__ import annotations
 
 import logging
 from datetime import date, timedelta
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
-from django.db.models import QuerySet, Q
+from django.db.models import Q, QuerySet
 from django.utils import timezone
 from langchain_core.tools import tool
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from ai_assistant.v2.service.MatchInsightBuilder import MatchInsightBuilder
 from ai_assistant.v2.types import (
     SportLeagueOutputModel,
-    SportMatchOutputModel,
     SportMatchInsightOutputModel,
+    SportMatchOutputModel,
 )
-from core.models import SportMatch, ApiSportModel
+from core.models import ApiSportModel, SportMatch
 from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)

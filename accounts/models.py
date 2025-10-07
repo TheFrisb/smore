@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.models import BaseInternalModel, Product
+from core.models import BaseInternalModel
 
 logger = logging.getLogger(__name__)
 
@@ -41,40 +41,12 @@ class User(BaseInternalModel, AbstractUser):
     def __str__(self):
         return self.username
 
-    def has_access_to_product(self, product):
-        """
-        Check if the user can view predictions for the given product.
-        """
-        if not self.subscription_is_active:
-            return False
-
-        return product in self.subscription.products.all()
-
-    def has_sport_discount(self):
-        if not self.subscription_is_active:
-            return False
-
-        return self.subscription.products.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).exists()
-
     @property
     def referral_link(self):
         """
         Generate a referral link for the user
         """
         return f"{settings.BASE_URL}/?ref={self.referral_code}"
-
-    @property
-    def subscription_is_active(self):
-        """
-        Check if the user has an active subscription.
-        """
-        user_subscription = getattr(self, "subscription", None)
-        if not user_subscription:
-            return False
-
-        return user_subscription.is_active
 
     @property
     def available_balance(self):
@@ -177,57 +149,6 @@ class WithdrawalRequest(BaseInternalModel):
 
     def __str__(self):
         return f"{self.user.username} - {self.amount} - {self.status}"
-
-
-class UserSubscription(BaseInternalModel):
-    class Status(models.TextChoices):
-        ACTIVE = "active", "Active"
-        INACTIVE = "inactive", "Inactive"
-
-    class Frequency(models.TextChoices):
-        MONTHLY = "monthly", _("Monthly")
-        YEARLY = "yearly", _("Yearly")
-
-    class ProviderType(models.TextChoices):
-        STRIPE = "STRIPE", "Stripe"
-        REVENUECAT = "REVENUECAT", "RevenueCat"
-
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name="subscription"
-    )
-    provider_type = models.CharField(
-        max_length=20, choices=ProviderType, default=ProviderType.STRIPE
-    )
-    status = models.CharField(max_length=10, choices=Status, default=Status.INACTIVE)
-    frequency = models.CharField(max_length=10, choices=Frequency)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    stripe_subscription_id = models.CharField(max_length=255, blank=True)
-    products = models.ManyToManyField("core.Product", related_name="subscriptions")
-
-    first_chosen_product = models.ForeignKey(
-        "core.Product", on_delete=models.SET_NULL, null=True
-    )
-
-    @property
-    def is_active(self):
-        return self.status == self.Status.ACTIVE
-
-    @property
-    def is_monthly(self):
-        return self.frequency == self.Frequency.MONTHLY
-
-    @property
-    def has_soccer_access(self):
-        return self.products.filter(name=Product.Names.SOCCER).exists()
-
-    @property
-    def next_billing_date(self):
-        return self.end_date
-
-    def __str__(self):
-        return f"{self.get_status_display()} {self.get_frequency_display()} subscription for {self.user.username}"
 
 
 class ReferralEarning(BaseInternalModel):

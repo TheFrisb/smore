@@ -6,9 +6,16 @@ from typing import Optional
 import requests
 from django.conf import settings
 
-from core.models import ApiSportModel, SportLeague, SportCountry, Product, SportTeam, SportMatch
+from core.models import (
+    ApiSportModel,
+    Product,
+    SportCountry,
+    SportLeague,
+    SportMatch,
+    SportTeam,
+)
 
-logger = logging.getLogger('cron')
+logger = logging.getLogger("cron")
 
 
 class SportApiService:
@@ -87,7 +94,7 @@ class SportApiService:
                 )
 
     def populate_leagues(
-            self, sport_type: ApiSportModel.SportType, product: Product
+        self, sport_type: ApiSportModel.SportType, product: Product
     ) -> None:
         endpoint = f"{self._get_base_url(sport_type)}/leagues"
         print(f"Endpoint: {endpoint}")
@@ -133,7 +140,7 @@ class SportApiService:
                 logger.error(f"Failed to create league: {league_name} - {e}")
 
     def _get_league_obj(
-            self, external_id: int, sport_type: ApiSportModel.SportType
+        self, external_id: int, sport_type: ApiSportModel.SportType
     ) -> Optional[SportLeague]:
         """
         Get the league object based on sport type and external ID.
@@ -147,11 +154,9 @@ class SportApiService:
             )
             return None
 
-    def populate_matches_for_league(self,
-                                    start_year=2020,
-                                    end_year=2025,
-                                    league_external_id=78,
-                                    callback=None) -> None:
+    def populate_matches_for_league(
+        self, start_year=2020, end_year=2025, league_external_id=78, callback=None
+    ) -> None:
 
         while start_year <= end_year:
             endpoint = f"{self._get_base_url(SportMatch.SportType.SOCCER)}/fixtures?season={start_year}&league={league_external_id}"
@@ -175,12 +180,12 @@ class SportApiService:
             start_year += 1
 
     def fetch_sport_matches(
-            self,
-            start_date: Optional[datetime],
-            end_date: Optional[datetime],
-            endpoint: str,
-            sport_type: ApiSportModel.SportType,
-            process_match: callable,
+        self,
+        start_date: Optional[datetime],
+        end_date: Optional[datetime],
+        endpoint: str,
+        sport_type: ApiSportModel.SportType,
+        process_match: callable,
     ) -> None:
         if start_date is None:
             start_date = datetime.today() - timedelta(days=1)
@@ -214,11 +219,11 @@ class SportApiService:
             current_date += timedelta(days=1)
 
     def _create_or_update_team(
-            self,
-            team_data: dict,
-            league_obj: SportLeague,
-            sport_type: ApiSportModel.SportType,
-            product: Product,
+        self,
+        team_data: dict,
+        league_obj: SportLeague,
+        sport_type: ApiSportModel.SportType,
+        product: Product,
     ) -> Optional[SportTeam]:
         team_id = team_data.get("id")
         team_name = team_data.get("name")
@@ -252,16 +257,19 @@ class SportApiService:
             # Create the league-team relationship if it doesn't exist
             if league_obj.current_season_year:
                 from core.models import SportLeagueTeam
+
                 SportLeagueTeam.objects.get_or_create(
                     league=league_obj,
                     team=team_obj,
                     season=league_obj.current_season_year,
                 )
                 logger.info(
-                    f"Created/updated league-team relationship: {team_name} in {league_obj.name} for season {league_obj.current_season_year}")
+                    f"Created/updated league-team relationship: {team_name} in {league_obj.name} for season {league_obj.current_season_year}"
+                )
             else:
                 logger.warning(
-                    f"League {league_obj.name} has no current_season_year, skipping league-team relationship")
+                    f"League {league_obj.name} has no current_season_year, skipping league-team relationship"
+                )
 
             return team_obj
         except Exception as e:
@@ -269,7 +277,7 @@ class SportApiService:
             return None
 
     def _download_asset(
-            self, asset_url: str, upload_dir: str, filename: str
+        self, asset_url: str, upload_dir: str, filename: str
     ) -> Optional[str]:
         if not asset_url:
             logger.error("Asset URL is empty.")

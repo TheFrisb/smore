@@ -14,7 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import firebase_admin
-from decouple import config, Csv
+from decouple import Csv, config
 from firebase_admin import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

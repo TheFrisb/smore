@@ -6,12 +6,12 @@ from django.core.management.base import BaseCommand
 
 from backend import settings
 from core.models import (
-    SportTeam,
-    SportLeague,
-    Product,
-    SportLeagueTeam,
-    TeamStanding,
     ApiSportModel,
+    Product,
+    SportLeague,
+    SportLeagueTeam,
+    SportTeam,
+    TeamStanding,
 )
 
 BATCH_SIZE = 2000

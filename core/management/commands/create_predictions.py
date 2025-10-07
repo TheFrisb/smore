@@ -1,5 +1,5 @@
 import random
-from datetime import timedelta, time
+from datetime import time, timedelta
 
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now

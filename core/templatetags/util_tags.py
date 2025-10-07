@@ -2,7 +2,7 @@ from django import template
 from django.conf import settings
 from django.templatetags.static import static
 from django.urls import reverse
-from django.utils.safestring import mark_safe, SafeString
+from django.utils.safestring import SafeString, mark_safe
 
 register = template.Library()
 

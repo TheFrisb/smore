@@ -13,23 +13,21 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         login = attrs.get("username")
         password = attrs.get("password")
 
-        user = User.objects.filter(username=login).first() \
-               or User.objects.filter(email=login).first()
+        user = (
+            User.objects.filter(username=login).first()
+            or User.objects.filter(email=login).first()
+        )
 
         if not user:
-            raise serializers.ValidationError(_("No active account found with the given credentials"))
+            raise serializers.ValidationError(
+                _("No active account found with the given credentials")
+            )
 
-        credentials = {
-            User.USERNAME_FIELD: user.username,
-            "password": password
-        }
+        credentials = {User.USERNAME_FIELD: user.username, "password": password}
         user = authenticate(**credentials)
 
         if not user:
             raise serializers.ValidationError(_("Invalid credentials"))
 
-        data = super().validate({
-            "username": user.username,
-            "password": password
-        })
+        data = super().validate({"username": user.username, "password": password})
         return data

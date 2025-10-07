@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from notifications.services.prediction_notification_service import (
     PredictionNotificationService,
 )
+
 from .models import Prediction, Ticket
 
 

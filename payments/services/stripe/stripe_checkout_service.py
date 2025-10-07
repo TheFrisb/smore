@@ -10,7 +10,7 @@ from stripe.checkout import Session
 
 from accounts.models import User
 from core.models import Prediction, Ticket
-from payments.services.base_stripe_service import BaseStripeService
+from payments.services.stripe.base_stripe_service import BaseStripeService
 from subscriptions.models import PriceCoupon
 
 logger = logging.getLogger(__name__)
