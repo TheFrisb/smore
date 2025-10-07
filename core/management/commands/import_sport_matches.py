@@ -3,7 +3,8 @@ import json
 from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_datetime
 
-from core.models import ApiSportModel, Product, SportLeague, SportMatch, SportTeam
+from core.models import ApiSportModel, SportLeague, SportMatch, SportTeam
+from subscriptions.models import Product
 
 BATCH_SIZE = 2000
 

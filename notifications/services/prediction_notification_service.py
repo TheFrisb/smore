@@ -1,8 +1,9 @@
 from django.utils import timezone
 
-from core.models import Ticket, Prediction, Product
+from core.models import Prediction, Ticket
 from notifications.models import NotificationRequest, NotificationTopic
 from notifications.services.fcm_service import FCMService
+from subscriptions.models import Product
 
 
 class PredictionNotificationService:
@@ -182,9 +183,7 @@ class PredictionNotificationService:
 
         emoji = self._get_emoji(product_name)
         # <div><p>We have 1 single pick and 1 parlay prepared for today.</p></div>
-        lines.append(
-            f"<div><p>{intro}</p></div>"
-        )
+        lines.append(f"<div><p>{intro}</p></div>")
 
         if single_pick_count > 0:
             for prediction in predictions:

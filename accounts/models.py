@@ -7,7 +7,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.models import BaseInternalModel
+from core.utils import BaseInternalModel
+from subscriptions.models import Product
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +59,22 @@ class User(BaseInternalModel, AbstractUser):
             return 0
 
         return user_balance.balance
+
+    def has_access_to_product(self, product_name: Product.Names) -> bool:
+        """
+        Returns True if the user has at least one active subscription
+        to a product with the given name.
+        """
+        return self.subscriptions.filter(
+            is_active=True, product_price__product__name=product_name
+        ).exists()
+
+    @property
+    def has_active_subscription(self):
+        """
+        Returns True if the user has any active subscription.
+        """
+        return self.subscriptions.filter(is_active=True).exists()
 
     def generate_referral_code(self):
         """

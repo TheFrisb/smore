@@ -5,11 +5,18 @@ from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from stripe import Price
 
-from accounts.models import UserSubscription
 from ai_assistant.models import Message
+from ai_assistant.utils import AIUsagePolicy
 from ai_assistant.v2.ai_service import AiService
-from core.models import Product
+from subscriptions.models import (
+    UserSubscription,
+    Product,
+    BillingProvider,
+    ProductPrice,
+    BillingInterval,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -18,50 +25,63 @@ class SendMessageToAiView(APIView):
     permission_classes = [IsAuthenticated]
 
     class InputSerializer(serializers.Serializer):
-        """Serializer for validating incoming message data."""
-
         message = serializers.CharField()
         timezone = serializers.CharField()
 
     class OutputSerializer(serializers.Serializer):
-        """Serializer for formatting the outgoing response."""
-
         message = serializers.CharField()
         direction = serializers.ChoiceField(choices=Message.Direction)
 
-    def get_user_subscription(self):
-        if (
-            not self.request.user.is_authenticated
-            or not self.request.user.subscription_is_active
-        ):
+    def get_user_subscription_summary(self, user):
+        """
+        Returns a minimal subscription summary for the client.
+        Because your new UserSubscription model doesn't define `frequency` or
+        `first_chosen_product`, we only return product ids from active subscriptions.
+        If you still need `frequency` and `firstProduct`, add those fields to the new model
+        or compute them here from your business rules.
+        """
+        if not user or not user.is_authenticated:
             return None
 
+        active_subs = user.subscriptions.filter(is_active=True).select_related(
+            "product_price__product"
+        )
         return {
-            "products": [
-                product.id for product in self.request.user.subscription.products.all()
-            ],
-            "frequency": self.request.user.subscription.frequency,
-            "firstProduct": self.request.user.subscription.first_chosen_product.id,
-            "productPrice": Product.objects.get(
-                name=Product.Names.AI_ANALYST
-            ).get_price_for_subscription(
-                self.request.user.subscription.frequency, True
-            ),
+            "products": [s.product_price.product.id for s in active_subs],
+            "active_subscription_count": active_subs.count(),
+            "productPrice": ProductPrice.objects.filter(
+                product__name=Product.Names.AI_ANALYST,
+                interval=BillingInterval.MONTH,
+                interval_count=1,
+                provider=BillingProvider.STRIPE,
+            )
+            .first()
+            .amount,
+            "frequency": "monthly",
         }
 
     def post(self, request):
-        """Send a message to the AI assistant."""
         serializer = self.InputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # if not self.validate_subscription(request):
-        #     return Response(
-        #         {
-        #             "message": "You need to subscribe to the AI Assistant product to use this feature.",
-        #             "user_subscription": self.get_user_subscription(),
-        #         },
-        #         status=403,
-        #     )
+        # validate usage
+        can_use, current_count = AIUsagePolicy.can_use_ai(request.user)
+        if not can_use:
+            return Response(
+                {
+                    "message": "You need to subscribe to the AI Assistant product to use this feature.",
+                    "user_subscription": self.get_user_subscription_summary(
+                        request.user
+                    ),
+                    "outbound_messages_sent": current_count,
+                    "free_message_limit": (
+                        AIUsagePolicy.FREE_MESSAGES_LIMIT
+                        if hasattr(AIUsagePolicy, "FREE_MESSAGES_LIMIT")
+                        else 3
+                    ),
+                },
+                status=403,
+            )
 
         try:
             timezone.activate(serializer.validated_data["timezone"])
@@ -70,17 +90,17 @@ class SendMessageToAiView(APIView):
                 f"Error activating timezone for User ({request.user.id}): {request.user.username} - {e}"
             )
 
-        message = serializer.validated_data["message"]
+        message_text = serializer.validated_data["message"]
         logger.info(
             f"User ({request.user.id}): {request.user.username} has sent a message to the AI assistant"
         )
 
         ai_service = AiService()
         try:
-            response = ai_service.run(message, request.user)
+            response = ai_service.run(message_text, request.user)
         except Exception:
             logger.exception(
-                f"Error processing AI request for User ({request.user.id}): {request.user.username}",
+                f"Error processing AI request for User ({request.user.id}): {request.user.username}"
             )
             raise
 
@@ -90,35 +110,7 @@ class SendMessageToAiView(APIView):
 
         timezone.deactivate()
 
-        return Response(
-            {
-                "message": response,
-                "direction": Message.Direction.INBOUND,
-            }
-        )
-
-    def validate_subscription(self, request):
-        user = request.user
-        if not user.is_authenticated:
-            return False
-
-        user_subscription = UserSubscription.objects.filter(
-            user=request.user,
-            products__name=Product.Names.AI_ANALYST,
-            status=UserSubscription.Status.ACTIVE,
-        ).first()
-
-        msg_count = Message.objects.filter(
-            user=user, direction=Message.Direction.OUTBOUND
-        ).count()
-
-        if not user_subscription and msg_count >= 3:
-            logger.warning(
-                f"User ({user.id}): {user.username} does not have a plan, and has already sent {msg_count} messages."
-            )
-            return False
-
-        return True
+        return Response({"message": response, "direction": Message.Direction.INBOUND})
 
 
 class GetSentMessagesCount(APIView):
@@ -126,55 +118,22 @@ class GetSentMessagesCount(APIView):
     authentication_classes = []
 
     class OutputSerializer(serializers.Serializer):
-        """Serializer for formatting the outgoing response."""
-
         count = serializers.IntegerField()
         can_send = serializers.BooleanField()
 
     def get(self, request):
         if not request.user.is_authenticated:
-            data = {
-                "count": 0,
-                "can_send": False,
-            }
+            data = {"count": 0, "can_send": False}
             serializer = self.OutputSerializer(data=data)
             serializer.is_valid(raise_exception=True)
-
-            return Response(serializer.data, status=200)
+            return Response(serializer.data)
 
         count = Message.objects.filter(
             user=request.user, direction=Message.Direction.OUTBOUND
         ).count()
-        can_send = self.validate_subscription(request)
+        can_send, _ = AIUsagePolicy.can_use_ai(request.user)
 
-        data = {
-            "count": count,
-            "can_send": can_send,
-        }
-
+        data = {"count": count, "can_send": can_send}
         serializer = self.OutputSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        return Response(serializer.data, status=200)
-
-    def validate_subscription(self, request):
-        user = request.user
-        if not user.is_authenticated:
-            return False
-
-        user_subscription = UserSubscription.objects.filter(
-            user=request.user,
-            products__name=Product.Names.AI_ANALYST,
-            status=UserSubscription.Status.ACTIVE,
-        ).first()
-
-        msg_count = Message.objects.filter(
-            user=user, direction=Message.Direction.OUTBOUND
-        ).count()
-
-        if not user_subscription and msg_count >= 3:
-            logger.warning(
-                f"User ({user.id}): {user.username} does not have a plan, and has already sent {msg_count} messages."
-            )
-            return False
-
-        return True
+        return Response(serializer.data)

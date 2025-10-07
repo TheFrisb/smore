@@ -7,12 +7,12 @@ from django.core.management.base import BaseCommand
 from backend import settings
 from core.models import (
     ApiSportModel,
-    Product,
     SportLeague,
     SportLeagueTeam,
     SportTeam,
     TeamStanding,
 )
+from subscriptions.models import Product
 
 BATCH_SIZE = 2000
 

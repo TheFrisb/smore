@@ -16,10 +16,7 @@ from accounts.models import (
     PurchasedPredictions,
     PurchasedTickets,
     User,
-    UserSubscription,
 )
-from core.exception import UnprocessableEntity
-from core.models import Product
 from payments.mobile.permissions import RevenuecatTokenPermission
 from payments.mobile.services import verify_transaction
 
@@ -182,47 +179,47 @@ class SubscriptionWebhookView(APIView):
 
     def post(self, request, *args, **kwargs):
         logger.info("Received subscription webhook: %s", request.data)
-        event_data = request.data.get("event", {})
-        serializer = self.InputSerializer(data=event_data)
-        serializer.is_valid(raise_exception=True)
-
-        if serializer.validated_data["type"] == "EXPIRATION":
-            self._deactivate_subscription(serializer.validated_data["app_user_id"])
-        else:
-            products = self._get_products_from_entitlements(
-                serializer.validated_data["entitlement_ids"]
-            )
+        # event_data = request.data.get("event", {})
+        # serializer = self.InputSerializer(data=event_data)
+        # serializer.is_valid(raise_exception=True)
+        #
+        # if serializer.validated_data["type"] == "EXPIRATION":
+        #     self._deactivate_subscription(serializer.validated_data["app_user_id"])
+        # else:
+        #     products = self._get_products_from_entitlements(
+        #         serializer.validated_data["entitlement_ids"]
+        #     )
 
         return Response(
             status=HTTP_200_OK,
             data={"detail": "Subscription webhook processed successfully"},
         )
 
-    def _get_products_from_entitlements(self, entitlement_ids):
-        product_names = []
-        for entitlement_id in entitlement_ids:
-            logger.info("Processing entitlement_id: %s", entitlement_id)
-            if not entitlement_id.startswith("monthly_", "yearly_"):
-                continue
-
-            product_name = entitlement_id.split("_", 1)[1].upper().replace("_", " ")
-            product_names.append(product_name)
-
-        logger.info("Extracted product names from entitlements: %s", product_names)
-        return Product.objects.filter(name__in=product_names)
-
-    def get_user_subscriptions(self, app_user_id):
-        try:
-            return UserSubscription.objects.get(
-                user_id=int(app_user_id),
-                provider_type=UserSubscription.ProviderType.REVENUECAT,
-            )
-        except UserSubscription.DoesNotExist:
-            logger.error("User subscription not found for app_user_id: %s", app_user_id)
-            raise UnprocessableEntity()
-
-    def _deactivate_subscription(self, app_user_id):
-        logger.info("Deactivating subscription for app_user_id: %s", app_user_id)
-        user_subscription = self.get_user_subscriptions(app_user_id)
-        user_subscription.status = UserSubscription.Status.INACTIVE
-        user_subscription.save()
+    # def _get_products_from_entitlements(self, entitlement_ids):
+    #     product_names = []
+    #     for entitlement_id in entitlement_ids:
+    #         logger.info("Processing entitlement_id: %s", entitlement_id)
+    #         if not entitlement_id.startswith("monthly_", "yearly_"):
+    #             continue
+    #
+    #         product_name = entitlement_id.split("_", 1)[1].upper().replace("_", " ")
+    #         product_names.append(product_name)
+    #
+    #     logger.info("Extracted product names from entitlements: %s", product_names)
+    #     return Product.objects.filter(name__in=product_names)
+    #
+    # def get_user_subscriptions(self, app_user_id):
+    #     try:
+    #         return UserSubscription.objects.get(
+    #             user_id=int(app_user_id),
+    #             provider_type=UserSubscription.ProviderType.REVENUECAT,
+    #         )
+    #     except UserSubscription.DoesNotExist:
+    #         logger.error("User subscription not found for app_user_id: %s", app_user_id)
+    #         raise UnprocessableEntity()
+    #
+    # def _deactivate_subscription(self, app_user_id):
+    #     logger.info("Deactivating subscription for app_user_id: %s", app_user_id)
+    #     user_subscription = self.get_user_subscriptions(app_user_id)
+    #     user_subscription.status = UserSubscription.Status.INACTIVE
+    #     user_subscription.save()

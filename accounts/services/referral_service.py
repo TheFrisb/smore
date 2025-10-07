@@ -1,5 +1,3 @@
-# accounts/services/referral_service.py
-
 import logging
 from collections import defaultdict
 from decimal import Decimal
@@ -11,7 +9,6 @@ from accounts.models import (
     Referral,
     ReferralEarning,
     User,
-    UserSubscription,
 )
 
 logger = logging.getLogger(__name__)
@@ -46,10 +43,11 @@ class ReferralService:
             referrer = ref.referrer
 
             # Skip if not active
-            if not referrer.subscription_is_active:
+            if not referrer.has_active_subscription:
                 logger.info(
                     f"User: {referrer.username} does not have an active subscription. Referral level: {ref.level}"
                 )
+                continue
 
                 # Determine rate from the referral level
             commission_rate = level_to_rate.get(ref.level)
@@ -230,18 +228,16 @@ class ReferralService:
           - referrals without an active subscription
         for the given user (as the referrer).
         """
-        # 1) All referral rows where `user` is the referrer (direct or indirect),
-        #    because your `Referral` table includes level=1 and level=2 rows.
         total_referrals = Referral.objects.filter(referrer=user).count()
 
-        # 2) Referrals for which the referred user has an active subscription.
-        #    We'll look at the referred__subscription__status field in the DB.
-        #    `UserSubscription.Status.ACTIVE` is just the string "active".
-        total_with_active_subscription = Referral.objects.filter(
-            referrer=user, referred__subscription__status=UserSubscription.Status.ACTIVE
-        ).count()
+        total_with_active_subscription = (
+            Referral.objects.filter(
+                referrer=user, referred__subscriptions__is_active=True
+            )
+            .distinct()
+            .count()
+        )
 
-        # 3) Everything else doesn't have an active subscription
         total_without_active_subscription = (
             total_referrals - total_with_active_subscription
         )

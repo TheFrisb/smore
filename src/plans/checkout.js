@@ -17,7 +17,7 @@ const ownedProductIds = getListOfOwnedProductIds();
 let selectedPriceId = null;
 
 function initCheckoutJs() {
-  if (!planCards) {
+  if (!planCards || !checkoutButton) {
     return;
   }
 

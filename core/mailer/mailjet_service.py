@@ -3,8 +3,9 @@ import logging
 from django.conf import settings
 from mailjet_rest import Client
 
-from accounts.models import UserSubscription, WithdrawalRequest
+from accounts.models import WithdrawalRequest
 from core.models import SiteSettings
+from subscriptions.models import UserSubscription
 
 logger = logging.getLogger(__name__)
 
@@ -113,9 +114,9 @@ class MailjetService:
             f"Sending new subscription email for user: {user.username} to {site_settings.notification_email}"
         )
 
-        subscribed_products = ", ".join(
-            product.name for product in subscription.products.all()
-        )
+        subscribed_product_price = subscription.product_price
+        readable_frequency = f"{subscribed_product_price.interval_count} {subscribed_product_price.interval} {subscribed_product_price.product.name}"
+
         data = {
             "Messages": [
                 {
@@ -127,7 +128,7 @@ class MailjetService:
                     "TemplateLanguage": True,
                     "Subject": f"New subscription for {user.username}",
                     "Variables": {
-                        "content": f"User: {user.username} with email: {user.email} has subscribed for a {subscription.get_frequency_display()} subscription for the following products: {subscribed_products}",
+                        "content": f"User: {user.username} with email: {user.email} has subscribed for a {readable_frequency}",
                     },
                 }
             ]

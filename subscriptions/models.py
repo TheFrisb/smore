@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.models import BaseInternalModel
+from core.utils import BaseInternalModel
 
 
 class BillingProvider(models.TextChoices):

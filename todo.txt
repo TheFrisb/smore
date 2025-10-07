@@ -1,14 +1,14 @@
 1. Stripe Payments
--- Remove old code, and ensure all works
+-- Fix AI count
+-- Migrate oldProduct data to new product
 -- Migrate existing subscriptions
 
-2. Verify RevenueCat subscriptions
--- Sync revenue cat subscriptions -- cron
--- Webhook to sync revenuecat subscriptions
+2. RevenueCat
+-- Verify revenue cat subscriptions, service level per id, and cron and webhook
 
-3. Protect Backend API
--- Hide browseable API
--- Return NULLs/empty strings where applicable
+3.
+-- Protect Backend API, hide browseable API, return null/empty strings where applicable
+
 
 4. Render plan discount
 -- Add plan discount functionality

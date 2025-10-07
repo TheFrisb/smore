@@ -7,43 +7,12 @@ from django.db.models.functions import Coalesce
 from django.utils import dateformat
 from django.utils.translation import gettext_lazy as _
 
-# from accounts.admin_filters import (
-#     SubscriptionTypeFilter,
-#     UserActiveStatusFilter,
-#     UserSubscriptionTypeFilter,
-# ) #noqa
+from accounts.admin_filters import (
+    UserActiveStatusFilter,
+    UserSubscriptionTypeFilter,
+)
 from accounts.models import *
 from accounts.services.referral_service import ReferralService
-
-
-class UserSubscriptionInline(admin.StackedInline):
-    """
-    Inline admin for UserSubscription.
-    Displayed only if the user has a subscription.
-    """
-
-    model = UserSubscription
-    can_delete = False
-    readonly_fields = [
-        "status",
-        "frequency",
-        "price",
-        "start_date",
-        "end_date",
-        "stripe_subscription_id",
-        "products",
-    ]
-
-    extra = 0  # Prevent adding new inline rows in this case
-    verbose_name = "Subscription"
-    verbose_name_plural = "Subscription"
-
-    def has_add_permission(self, request, obj=None):
-        """
-        Prevent adding a new subscription through the inline.
-        Subscriptions are created elsewhere in the system.
-        """
-        return False
 
 
 # Register your models here.
@@ -58,7 +27,7 @@ class UserAdmin(UserAdmin):
         "last_name",
     ]
     ordering = ["-created_at"]
-    # list_filter = [UserActiveStatusFilter, UserSubscriptionTypeFilter]
+    list_filter = [UserActiveStatusFilter, UserSubscriptionTypeFilter]
     list_display = [
         "username",
         "email",
@@ -179,7 +148,7 @@ class UserAdmin(UserAdmin):
         """
         Display whether the user is subscribed (Active).
         """
-        return obj.subscription_is_active
+        return obj.has_active_subscription
 
     def is_custom_subscription(self, obj):
         if hasattr(obj, "subscription") and obj.subscription:
@@ -215,11 +184,11 @@ class UserAdmin(UserAdmin):
     is_custom_subscription.short_description = "Custom Subscription"
 
     subscribed_sports.short_description = "Subscribed Sports"
-
-    def get_inlines(self, request, obj):
-        if hasattr(obj, "subscription") and obj.subscription:
-            return [UserSubscriptionInline]
-        return []
+    #
+    # def get_inlines(self, request, obj):
+    #     if hasattr(obj, "subscription") and obj.subscription:
+    #         return [UserSubscriptionInline]
+    #     return []
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         extra_context = extra_context or {}

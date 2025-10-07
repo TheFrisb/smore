@@ -1,7 +1,7 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 
-from core.models import BaseInternalModel
+from core.utils import BaseInternalModel
 
 
 # Create your models here.

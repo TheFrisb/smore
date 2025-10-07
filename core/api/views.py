@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from accounts.serializers import ProductSerializer
-from core.models import FrequentlyAskedQuestion, Prediction, Product, Ticket
+from core.models import FrequentlyAskedQuestion, Prediction, Ticket
+from subscriptions.models import Product
 
 from .serializers import (
     FrequentlyAskedQuestionSerializer,

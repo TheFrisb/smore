@@ -6,7 +6,8 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management import BaseCommand
 
-from core.models import Prediction, Product, SportLeague, SportMatch, SportTeam
+from core.models import Prediction, SportLeague, SportMatch, SportTeam
+from subscriptions.models import Product
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +19,7 @@ class Command(BaseCommand):
         json_path = self.get_json_path("data.json")
         self.stdout.write(f"Reading data from {json_path}")
 
-        soccer = Product.objects.get(name="Soccer")
+        soccer = Product.objects.get(name=Product.Names.SOCCER)
         # Read data from JSON file
         with open(json_path, "r") as file:
             data = json.load(file)

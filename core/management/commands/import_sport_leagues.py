@@ -5,7 +5,8 @@ from django.conf import settings
 from django.core.files import File
 from django.core.management.base import BaseCommand
 
-from core.models import Product, SportCountry, SportLeague
+from core.models import SportCountry, SportLeague
+from subscriptions.models import Product
 
 BATCH_SIZE = 2000
 

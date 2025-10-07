@@ -16,12 +16,12 @@ from accounts.models import (
     PurchasedPredictions,
 )
 from backend import settings
-from core.models import Prediction, Product, Ticket
+from core.models import Prediction, Ticket
 from facebook.services.facebook_pixel import FacebookPixel
 from payments.services.stripe.stripe_checkout_service import (
     StripeCheckoutService,
 )
-from subscriptions.models import UserSubscription
+from subscriptions.models import UserSubscription, Product
 
 logger = logging.getLogger(__name__)
 

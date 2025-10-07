@@ -5,10 +5,13 @@ from accounts.forms.withdrawal_request_form import is_valid_btc_address
 from accounts.models import (
     PurchasedDailyOffer,
     User,
-    UserSubscription,
     WithdrawalRequest,
 )
-from core.models import Prediction, Product, Ticket
+from core.models import Prediction, OldProduct, Ticket
+from subscriptions.serializers import (
+    ProductSerializer,
+    AggregatedUserSubscriptionSerializer,
+)
 
 
 class WithdrawalRequestSerializer(serializers.ModelSerializer):
@@ -74,48 +77,33 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
         return data
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = [
-            "id",
-            "name",
-            "type",
-            "analysis_per_month",
-            "monthly_price",
-            "discounted_monthly_price",
-            "yearly_price",
-            "discounted_yearly_price",
-            "mobile_product_id",
-        ]
-
-
-class UserSubscriptionSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True)
-    first_chosen_product = ProductSerializer()
-
-    price = serializers.DecimalField(
-        max_digits=10, decimal_places=2, coerce_to_string=False
-    )
-
-    class Meta:
-        model = UserSubscription
-        fields = [
-            "status",
-            "frequency",
-            "price",
-            "start_date",
-            "end_date",
-            "products",
-            "first_chosen_product",
-            "provider_type",
-        ]
+# class UserSubscriptionSerializer(serializers.ModelSerializer):
+#     products = ProductSerializer(many=True)
+#     first_chosen_product = ProductSerializer()
+#
+#     price = serializers.DecimalField(
+#         max_digits=10, decimal_places=2, coerce_to_string=False
+#     )
+#
+#     class Meta:
+#         model = UserSubscription
+#         fields = [
+#             "status",
+#             "frequency",
+#             "price",
+#             "start_date",
+#             "end_date",
+#             "products",
+#             "first_chosen_product",
+#             "provider_type",
+#         ]
 
 
 class UserSerializer(serializers.ModelSerializer):
-    user_subscription = UserSubscriptionSerializer(
-        source="subscription", read_only=True
-    )
+    # user_subscription = UserSubscriptionSerializer(
+    #     source="subscription", read_only=True
+    # )
+    user_subscription = AggregatedUserSubscriptionSerializer(source="*", read_only=True)
     purchased_prediction_ids = serializers.SerializerMethodField()
     purchased_ticket_ids = serializers.SerializerMethodField()
 

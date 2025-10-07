@@ -13,5 +13,6 @@ ngrok:
 	ngrok http --domain magical-rat-merely.ngrok-free.app 8000
 
 
-ruff:
+format:
+	black .
 	ruff check . --select I,F401 --fix

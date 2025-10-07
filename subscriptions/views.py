@@ -30,6 +30,9 @@ class PlansView(TemplateView):
         return context
 
     def _get_user_subscriptions(self):
+        if not self.request.user.is_authenticated:
+            return UserSubscription.objects.none()
+
         return UserSubscription.objects.filter(
             user=self.request.user, is_active=True
         ).select_related(
@@ -60,7 +63,7 @@ class PlansView(TemplateView):
     def _get_button_text(self):
         if self.request.user.is_anonymous:
             return _("Get Started")
-        elif self.request.user.subscription_is_active:
+        elif self.request.user.has_active_subscription:
             return _("Update Plan")
         else:
             return _("Subscribe Now")
@@ -102,7 +105,10 @@ class PlansView(TemplateView):
 
         v1_threshold_datetime = timezone.make_aware(datetime(2025, 9, 1))
 
-        if self.request.user.created_at > v1_threshold_datetime:
+        if (
+            not self.request.user.is_authenticated
+            or self.request.user.created_at > v1_threshold_datetime
+        ):
             prices_query = prices_query.filter(version=2)
         else:
             prices_query = prices_query.filter(version=1)

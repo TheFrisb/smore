@@ -1,7 +1,7 @@
 from django.db import models
 
 from accounts.models import User
-from core.models import BaseInternalModel
+from core.utils import BaseInternalModel
 
 
 # Create your models here.

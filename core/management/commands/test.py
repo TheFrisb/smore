@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 
-from core.models import Product, SportLeague
+from core.models import SportLeague
+from subscriptions.models import Product
 from core.services.basketball_api_service import BASKETBALL_NCAA_LEAGUE_IDS
 
 

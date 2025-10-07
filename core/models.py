@@ -8,14 +8,11 @@ from django_ckeditor_5.fields import CKEditor5Field
 from model_utils import FieldTracker
 from solo.models import SingletonModel
 
+from core.utils import BaseInternalModel
+from subscriptions.models import Product
+
 
 # Create your models here.
-class BaseInternalModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
 
 
 class BaseProductModel(BaseInternalModel):
@@ -55,7 +52,7 @@ class BaseProductModel(BaseInternalModel):
         ordering = ["order"]
 
 
-class Product(BaseProductModel):
+class OldProduct(BaseProductModel):
     class Types(models.TextChoices):
         SUBSCRIPTION = "SUBSCRIPTION", _("Subscription")
         ADDON = "ADDON", _("Addon")
@@ -157,7 +154,7 @@ class ApiSportModel(BaseInternalModel):
         NHL = "NHL", _("NHL")
         TEMP_FIX = "TEMP_FIX", _("Temporary Fix")
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey("subscriptions.Product", on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     type = models.CharField(choices=SportType, max_length=255)
 
@@ -182,7 +179,7 @@ class SportCountry(BaseInternalModel):
 
 
 class SportLeague(ApiSportModel):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey("subscriptions.Product", on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255)
     friendly_name = models.CharField(max_length=255, blank=True, null=True)
@@ -207,7 +204,7 @@ class SportLeague(ApiSportModel):
 
 
 class SportTeam(ApiSportModel):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey("subscriptions.Product", on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     name = models.CharField(max_length=255, db_index=True)
     logo = models.FileField(upload_to="assets/teams/logos/")
@@ -253,7 +250,7 @@ class SportMatch(ApiSportModel):
         FINISHED = "FINISHED", _("Finished")
 
     status = models.CharField(max_length=12, choices=Status.choices, db_index=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey("subscriptions.Product", on_delete=models.CASCADE)
     external_id = models.IntegerField(db_index=True)
     league = models.ForeignKey(SportLeague, on_delete=models.CASCADE)
     home_team = models.ForeignKey(
@@ -295,7 +292,7 @@ class Prediction(BaseInternalModel):
         PRIVATE = "PRIVATE", "Private"
         ADMIN = "ADMIN", "Admin Only"
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey("subscriptions.Product", on_delete=models.CASCADE)
     visibility = models.CharField(
         max_length=10, choices=Visibility, default=Visibility.PUBLIC, db_index=True
     )
@@ -380,7 +377,7 @@ class Ticket(BaseInternalModel):
         PRIVATE = "PRIVATE", "Private"
         ADMIN = "ADMIN", "Admin Only"
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey("subscriptions.Product", on_delete=models.CASCADE)
     status = models.CharField(
         max_length=10, choices=Status, default=Status.PENDING, db_index=True
     )

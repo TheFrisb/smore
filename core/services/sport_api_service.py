@@ -8,12 +8,12 @@ from django.conf import settings
 
 from core.models import (
     ApiSportModel,
-    Product,
     SportCountry,
     SportLeague,
     SportMatch,
     SportTeam,
 )
+from subscriptions.models import Product
 
 logger = logging.getLogger("cron")
 

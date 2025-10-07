@@ -2,8 +2,9 @@ import json
 from datetime import datetime
 from time import sleep
 
-from core.models import ApiSportModel, Player, Product
+from core.models import ApiSportModel, Player
 from core.services.api.in_progress.BaseApiFootballService import BaseApiFootballService
+from subscriptions.models import Product
 
 
 class PlayerService(BaseApiFootballService):

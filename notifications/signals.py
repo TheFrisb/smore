@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.html import strip_tags
 
-from accounts.models import User, UserSubscription
+from accounts.models import User
 from notifications.models import NotificationRequest, UserNotification
 from notifications.services.fcm_service import FCMService
 
@@ -79,8 +79,8 @@ def handle_notification_request(sender, instance, created, **kwargs):
                 product_name = instance.topic.name.capitalize()
                 users = User.objects.filter(
                     fcm_token__isnull=False,
-                    subscription__status=UserSubscription.Status.ACTIVE,
-                    subscription__products__name=product_name,
+                    subscriptions__is_active=True,
+                    subscriptions__product_price__product__name=product_name,
                 ).distinct()
             else:
                 users = User.objects.filter(fcm_token__isnull=False)
