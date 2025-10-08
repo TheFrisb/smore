@@ -64,7 +64,7 @@ class ProductPrice(BaseInternalModel):
         unique_together = ("provider", "provider_price_id")
 
     def __str__(self):
-        return f"{self.product.name} - {self.currency}{self.amount} every {self.interval_count} {self.interval}(s)"
+        return f"[{self.provider} v{self.version}] {self.product.name} - {self.interval_count} {self.interval}"
 
 
 class UserSubscription(BaseInternalModel):

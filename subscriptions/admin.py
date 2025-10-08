@@ -60,7 +60,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
     ordering = ("-start_date",)
     date_hierarchy = "start_date"
     list_select_related = ("product_price", "product_price__product", "user")
-    autocomplete_fields = ["user"]
+    autocomplete_fields = ["user", "product_price"]
 
     @admin.display(description="Product", ordering="product_price__product__name")
     def product_name(self, obj):
