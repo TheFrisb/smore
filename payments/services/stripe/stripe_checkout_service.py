@@ -35,7 +35,7 @@ class StripeCheckoutService(BaseStripeService):
             line_items=self.get_subscription_line_items([price_id]),
             consent_collection={"terms_of_service": "required"},
             subscription_data={"metadata": metadata} if metadata else None,
-            discounts=[{"coupon": coupon.provider_coupon_id}],
+            discounts=[{"coupon": coupon.provider_coupon_id}] if coupon else None,
         )
 
         logger.info(
