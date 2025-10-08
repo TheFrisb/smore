@@ -101,7 +101,9 @@ class PlansView(TemplateView):
 
     def _get_products_with_ordered_prices(self):
         currency = "CHF" if is_request_from_switzerland(self.request) else "€"
-        prices_query = ProductPrice.objects.filter(currency=currency).order_by("amount")
+        prices_query = ProductPrice.objects.filter(
+            currency=currency, provider=BillingProvider.STRIPE
+        ).order_by("amount")
 
         v1_threshold_datetime = timezone.make_aware(datetime(2025, 9, 1))
 
