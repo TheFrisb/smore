@@ -153,7 +153,7 @@ class ApiSportModel(BaseInternalModel):
         NHL = "NHL", _("NHL")
         TEMP_FIX = "TEMP_FIX", _("Temporary Fix")
 
-    new_product = models.ForeignKey(
+    product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
     external_id = models.IntegerField(db_index=True)
@@ -180,7 +180,7 @@ class SportCountry(BaseInternalModel):
 
 
 class SportLeague(ApiSportModel):
-    new_product = models.ForeignKey(
+    product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
     external_id = models.IntegerField(db_index=True)
@@ -207,7 +207,7 @@ class SportLeague(ApiSportModel):
 
 
 class SportTeam(ApiSportModel):
-    new_product = models.ForeignKey(
+    product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
     external_id = models.IntegerField(db_index=True)
@@ -255,7 +255,7 @@ class SportMatch(ApiSportModel):
         FINISHED = "FINISHED", _("Finished")
 
     status = models.CharField(max_length=12, choices=Status.choices, db_index=True)
-    new_product = models.ForeignKey(
+    product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
     external_id = models.IntegerField(db_index=True)
@@ -299,7 +299,7 @@ class Prediction(BaseInternalModel):
         PRIVATE = "PRIVATE", "Private"
         ADMIN = "ADMIN", "Admin Only"
 
-    new_product = models.ForeignKey(
+    product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
     visibility = models.CharField(
@@ -386,7 +386,7 @@ class Ticket(BaseInternalModel):
         PRIVATE = "PRIVATE", "Private"
         ADMIN = "ADMIN", "Admin Only"
 
-    new_product = models.ForeignKey(
+    product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
     status = models.CharField(
