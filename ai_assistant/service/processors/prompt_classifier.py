@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from typing import Optional
 
-from ai_assistant.service.data import PromptContext, PromptClassifierModel, PromptType
+from ai_assistant.service.data import PromptClassifierModel, PromptContext, PromptType
 from ai_assistant.service.processors.base_processor import BaseProcessor
 
 logger = logging.getLogger(__name__)

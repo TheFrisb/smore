@@ -2,7 +2,7 @@ import logging
 from typing import List
 
 from langchain.load.dump import dumps
-from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 
 from ai_assistant.models import Message
 from ai_assistant.v2.agent import agent_executor
@@ -51,10 +51,7 @@ class AiService:
 
         :param response: The response dictionary returned by the agent.
         """
-        logger.info(
-            "AI Response: %s",
-            dumps(response, indent=2, ensure_ascii=False)
-        )
+        logger.info("AI Response: %s", dumps(response, indent=2, ensure_ascii=False))
 
     def _get_message_history(self, user) -> List[BaseMessage]:
         """
@@ -63,7 +60,7 @@ class AiService:
         :param user: The user object to fetch messages for.
         :return: List of LangChain message objects.
         """
-        messages = Message.objects.filter(user=user).order_by('-created_at')[:10]
+        messages = Message.objects.filter(user=user).order_by("-created_at")[:10]
 
         # Reverse to get chronological order (oldest first)
         messages = list(reversed(messages))
@@ -77,7 +74,9 @@ class AiService:
 
         return langchain_messages
 
-    def _store_message(self, content: str, direction: Message.Direction, user) -> Message:
+    def _store_message(
+        self, content: str, direction: Message.Direction, user
+    ) -> Message:
         """
         Store a message in the database.
 
@@ -87,9 +86,7 @@ class AiService:
         :return: The created Message object.
         """
         message = Message.objects.create(
-            message=content,
-            direction=direction,
-            user=user
+            message=content, direction=direction, user=user
         )
         return message
 
@@ -119,5 +116,5 @@ class AiService:
         :return: The AI's response as a string.
         """
         # message = response["messages"][-1].content
-        message = response['messages'][-1].content[0]["text"]
+        message = response["messages"][-1].content[0]["text"]
         return message

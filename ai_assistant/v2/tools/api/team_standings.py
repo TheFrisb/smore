@@ -11,22 +11,19 @@ from core.models import TeamStanding
 
 class TeamStandingInput(BaseModel):
     external_league_id: int = Field(
-        ...,
-        description="External ID of the league to fetch team standings for."
+        ..., description="External ID of the league to fetch team standings for."
     )
     external_team_id: int = Field(
-        ...,
-        description="External ID of the team to fetch standings for."
+        ..., description="External ID of the team to fetch standings for."
     )
     season_year: int = Field(
-        ...,
-        description="Season year for which the standings are to be fetched."
+        ..., description="Season year for which the standings are to be fetched."
     )
 
 
 @tool
 def get_team_standing(
-        input_data: TeamStandingInput
+    input_data: TeamStandingInput,
 ) -> Optional[TeamStandingOutputModel]:
     """
     Fetches the current standing and performance statistics of a specific team external id in a given league external id for a specific season year.

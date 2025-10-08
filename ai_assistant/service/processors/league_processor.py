@@ -7,7 +7,7 @@ from django.db.models.functions import Lower
 
 from ai_assistant.service.data import PromptContext
 from ai_assistant.service.processors.base_processor import BaseProcessor
-from core.models import SportLeague, SportCountry, ApiSportModel
+from core.models import ApiSportModel, SportCountry, SportLeague
 
 logger = logging.getLogger(__name__)
 

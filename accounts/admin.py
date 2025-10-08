@@ -2,48 +2,17 @@ from decimal import Decimal
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.db.models import Count, Q, F, Value
+from django.db.models import Count, F, Q, Value
 from django.db.models.functions import Coalesce
 from django.utils import dateformat
 from django.utils.translation import gettext_lazy as _
 
 from accounts.admin_filters import (
-    SubscriptionTypeFilter,
     UserActiveStatusFilter,
     UserSubscriptionTypeFilter,
 )
 from accounts.models import *
 from accounts.services.referral_service import ReferralService
-
-
-class UserSubscriptionInline(admin.StackedInline):
-    """
-    Inline admin for UserSubscription.
-    Displayed only if the user has a subscription.
-    """
-
-    model = UserSubscription
-    can_delete = False
-    readonly_fields = [
-        "status",
-        "frequency",
-        "price",
-        "start_date",
-        "end_date",
-        "stripe_subscription_id",
-        "products",
-    ]
-
-    extra = 0  # Prevent adding new inline rows in this case
-    verbose_name = "Subscription"
-    verbose_name_plural = "Subscription"
-
-    def has_add_permission(self, request, obj=None):
-        """
-        Prevent adding a new subscription through the inline.
-        Subscriptions are created elsewhere in the system.
-        """
-        return False
 
 
 # Register your models here.
@@ -179,7 +148,7 @@ class UserAdmin(UserAdmin):
         """
         Display whether the user is subscribed (Active).
         """
-        return obj.subscription_is_active
+        return obj.has_active_subscription
 
     def is_custom_subscription(self, obj):
         if hasattr(obj, "subscription") and obj.subscription:
@@ -215,11 +184,11 @@ class UserAdmin(UserAdmin):
     is_custom_subscription.short_description = "Custom Subscription"
 
     subscribed_sports.short_description = "Subscribed Sports"
-
-    def get_inlines(self, request, obj):
-        if hasattr(obj, "subscription") and obj.subscription:
-            return [UserSubscriptionInline]
-        return []
+    #
+    # def get_inlines(self, request, obj):
+    #     if hasattr(obj, "subscription") and obj.subscription:
+    #         return [UserSubscriptionInline]
+    #     return []
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         extra_context = extra_context or {}
@@ -313,92 +282,6 @@ class WithdrawalRequestAdmin(admin.ModelAdmin):
                 fieldsets.append(self.get_bank_fieldset())
 
         return fieldsets
-
-
-@admin.register(UserSubscription)
-class UserSubscriptionAdmin(admin.ModelAdmin):
-    autocomplete_fields = ["user"]
-    list_display = (
-        "user",
-        "user_email",
-        "is_active",
-        "frequency",
-        "subscribed_sports",
-        "price",
-        "start_date",
-        "end_date",
-        "provider_type",
-        "stripe_subscription_id",
-        "is_custom_subscription",
-    )
-    search_fields = (
-        "user__username",
-        "user__email",
-        "user__stripe_customer_id",
-        "stripe_subscription_id",
-    )
-    list_filter = ("status", "frequency", SubscriptionTypeFilter, "products")
-
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    "user",
-                    "user_email",
-                    "status",
-                    "frequency",
-                    "price",
-                    "first_chosen_product",
-                    "provider_type",
-                )
-            },
-        ),
-        ("Dates", {"fields": ("start_date", "end_date")}),
-        ("Stripe", {"fields": ("stripe_subscription_id",)}),
-        ("Products", {"fields": ("products",)}),
-    )
-    filter_horizontal = ("products",)
-    readonly_fields = ["stripe_subscription_id", "price", "user_email", "provider_type"]
-
-    def is_active(self, obj):
-        return obj.is_active
-
-    is_active.boolean = True
-    is_active.short_description = "Active"
-
-    def is_custom_subscription(self, obj):
-        return not obj.stripe_subscription_id
-
-    is_custom_subscription.boolean = True
-    is_custom_subscription.short_description = "Custom Subscription"
-
-    def subscribed_sports(self, obj):
-        """
-        Return a comma-separated list of subscribed sports (products) for the user.
-        """
-        if hasattr(obj, "products") and obj.products:
-            return ", ".join([product.name for product in obj.products.all()])
-        return None
-
-    subscribed_sports.short_description = "Subscribed Sports"
-    subscribed_sports.admin_order_field = "products"
-
-    def user_email(self, obj):
-        """
-        Return the email of the user associated with this subscription.
-        """
-        return obj.user.email
-
-    user_email.short_description = "User Email"
-    user_email.admin_order_field = "user__email"
-
-    def get_queryset(self, request):
-        """
-        Annotate the queryset to include the product names for display.
-        """
-        queryset = super().get_queryset(request)
-        return queryset.prefetch_related("products")
 
 
 class ReferralEarningInline(admin.TabularInline):

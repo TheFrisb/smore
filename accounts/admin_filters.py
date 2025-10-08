@@ -1,25 +1,7 @@
 from django.contrib.admin import SimpleListFilter
 from django.db.models import Q
 
-from accounts.models import UserSubscription
-
-
-class SubscriptionTypeFilter(SimpleListFilter):
-    title = "Subscription Type"
-    parameter_name = "subscription_type"
-
-    def lookups(self, request, model_admin):
-        return (
-            ("paid", "Paid"),
-            ("custom", "Custom"),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == "paid":
-            return queryset.exclude(stripe_subscription_id="")
-        if self.value() == "custom":
-            return queryset.filter(stripe_subscription_id="")
-        return queryset
+from subscriptions.models import BillingProvider
 
 
 class UserSubscriptionTypeFilter(SimpleListFilter):
@@ -29,19 +11,29 @@ class UserSubscriptionTypeFilter(SimpleListFilter):
     def lookups(self, request, model_admin):
         return (
             ("paid", "Paid Subscription"),
-            ("custom", "Custom Subscription"),
+            ("custom", "Customer (internal)"),
         )
 
     def queryset(self, request, queryset):
         if self.value() == "paid":
-            return queryset.exclude(subscription__stripe_subscription_id="")
+            return (
+                queryset.filter(subscriptions__is_active=True)
+                .filter(~Q(subscriptions__provider=BillingProvider.INTERNAL))
+                .distinct()
+            )
+
         if self.value() == "custom":
-            return queryset.filter(subscription__stripe_subscription_id="")
+            return (
+                queryset.filter(subscriptions__is_active=True)
+                .filter(subscriptions__provider=BillingProvider.INTERNAL)
+                .distinct()
+            )
+
         return queryset
 
 
 class UserActiveStatusFilter(SimpleListFilter):
-    """Filter users based on their subscription status (Active/Inactive)."""
+    """Filter users based on whether they have at least one active subscription."""
 
     title = "Subscription Status"
     parameter_name = "active_status"
@@ -54,11 +46,7 @@ class UserActiveStatusFilter(SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == "active":
-            return queryset.filter(subscription__status=UserSubscription.Status.ACTIVE)
+            return queryset.filter(subscriptions__is_active=True).distinct()
         if self.value() == "inactive":
-            # Filter users with an inactive subscription or no subscription
-            return queryset.filter(
-                Q(subscription__status=UserSubscription.Status.INACTIVE)
-                | Q(subscription__isnull=True)
-            )
+            return queryset.exclude(subscriptions__is_active=True)
         return queryset

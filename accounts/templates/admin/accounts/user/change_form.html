@@ -4,7 +4,7 @@
 {% block extrahead %}
     {{ block.super }}
     <!-- Add your Tailwind output -->
-    <link rel="stylesheet" href="{% static 'css/tailwind_output_v48.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tailwind_output_v50.css' %}">
 
 {% endblock %}
 {% block after_field_sets %}
@@ -56,7 +56,7 @@
                                         <a href="{% url 'admin:accounts_user_change' direct_referral.user.pk %}"
                                            class="text-white font-medium text-lg truncate flex items-center">{{ direct_referral.user.username }}
 
-                                            {% if direct_referral.user.subscription_is_active %}
+                                            {% if direct_referral.user.has_active_subscription %}
                                                 <span class="ml-4 text-base text-emerald-500 ">Active Subscription</span>
                                             {% else %}
                                                 <span class="ml-4 text-base text-red-500">Inactive Subscription</span>
@@ -111,7 +111,7 @@
                                                            class="text-white font-medium truncate flex items-center">
                                                             {{ indirect_referral.user.username }}
 
-                                                            {% if indirect_referral.user.subscription_is_active %}
+                                                            {% if indirect_referral.user.has_active_subscription %}
                                                                 <span class="ml-4 text-sm text-emerald-500  ">Active Subscription</span>
                                                             {% else %}
                                                                 <span class="ml-4 text-sm text-red-500 ">Inactive Subscription</span>

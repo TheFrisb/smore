@@ -10,7 +10,7 @@ from django.utils import timezone
 
 from ai_assistant.service.data import PromptContext, PromptType
 from ai_assistant.service.processors.base_processor import BaseProcessor
-from core.models import SportTeam, SportMatch, ApiSportModel, SportLeague
+from core.models import ApiSportModel, SportLeague, SportMatch, SportTeam
 from core.services.football_api_service import allowed_league_ids
 
 logger = logging.getLogger(__name__)
@@ -55,9 +55,9 @@ class TeamProcessor(BaseProcessor):
             )
 
         if (
-                prompt_type in self.get_match_related_prompt_types()
-                and not prompt_context.team_names
-                and not prompt_context.leagues
+            prompt_type in self.get_match_related_prompt_types()
+            and not prompt_context.team_names
+            and not prompt_context.leagues
         ):
             logger.info(
                 f"No team names found in prompt context: {prompt_context}. Assuming that random teams are needed."
@@ -78,10 +78,10 @@ class TeamProcessor(BaseProcessor):
         prompt_context.team_objs = matched_teams
 
     def _get_random_teams(
-            self,
-            filter_date: Optional[date],
-            filter_by_leagues: Optional[list[SportLeague]],
-            prompt_type: PromptType,
+        self,
+        filter_date: Optional[date],
+        filter_by_leagues: Optional[list[SportLeague]],
+        prompt_type: PromptType,
     ):
         """
         Fetch a random set of teams from the database.
@@ -135,7 +135,7 @@ class TeamProcessor(BaseProcessor):
         return matched_teams
 
     def _extract_teams_from_matches(
-            self, matches: list[SportMatch], prompt_type: PromptType
+        self, matches: list[SportMatch], prompt_type: PromptType
     ):
         """
         Extract teams from the matches.

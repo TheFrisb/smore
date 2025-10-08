@@ -14,7 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import firebase_admin
-from decouple import config, Csv
+from decouple import Csv, config
 from firebase_admin import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "ai_assistant",
     "logs_observation",
     "notifications",
+    "subscriptions",
 ]
 
 MIDDLEWARE = [
@@ -143,12 +144,23 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Rest Framework Configuration
+DEFAULT_RENDERER_CLASSES = ["rest_framework.renderers.JSONRenderer"]
+
+DEFAULT_AUTHENTICATION_CLASSES = [
+    "rest_framework.authentication.SessionAuthentication",
+    "rest_framework_simplejwt.authentication.JWTAuthentication",
+]
+
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES.append("rest_framework.renderers.BrowsableAPIRenderer")
+    DEFAULT_AUTHENTICATION_CLASSES.append(
+        "rest_framework.authentication.BasicAuthentication"
+    )
+
+
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.BasicAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": DEFAULT_AUTHENTICATION_CLASSES,
+    "DEFAULT_RENDERER_CLASSES": DEFAULT_RENDERER_CLASSES,
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
@@ -157,8 +169,12 @@ REST_FRAMEWORK = {
 # JWT Configuration
 SIMPLE_JWT = {
     "SIGNING_KEY": config("DJANGO_JWT_SIGNING_KEY"),
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=config("DJANGO_JWT_ACCESS_TOKEN_EXPIRATION_HOURS", cast=int)),  # Access token lifetime
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=config("DJANGO_JWT_REFRESH_TOKEN_EXPIRATION_DAYS", cast=int)),  # Refresh token lifetime
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        hours=config("DJANGO_JWT_ACCESS_TOKEN_EXPIRATION_HOURS", cast=int)
+    ),  # Access token lifetime
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=config("DJANGO_JWT_REFRESH_TOKEN_EXPIRATION_DAYS", cast=int)
+    ),  # Refresh token lifetime
     "ROTATE_REFRESH_TOKENS": True,  # Rotate refresh tokens
     "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens
     "UPDATE_LAST_LOGIN": True,  # Update last login time

@@ -1,13 +1,14 @@
 from django.urls import path
 
 from .views import (
+    AppleReceiverView,
     GetMeView,
+    GoogleReceiverView,
     LoginView,
+    PasswordResetView,
     RefreshTokenView,
     RegisterUserView,
-    PasswordResetView,
-    AppleReceiverView,
-    GoogleReceiverView, UpdateFCMTokenView,
+    UpdateFCMTokenView,
 )
 
 app_name = "authentication"

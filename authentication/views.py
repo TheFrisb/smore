@@ -1,5 +1,5 @@
 import logging
-from urllib.parse import urlencode, quote
+from urllib.parse import quote, urlencode
 
 import jwt
 import requests as rq

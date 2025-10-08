@@ -2,8 +2,15 @@ from django.utils import timezone
 from rest_framework import serializers
 
 from accounts.forms.withdrawal_request_form import is_valid_btc_address
-from accounts.models import WithdrawalRequest, UserSubscription, User, PurchasedDailyOffer
-from core.models import Product, Prediction, Ticket
+from accounts.models import (
+    PurchasedDailyOffer,
+    User,
+    WithdrawalRequest,
+)
+from core.models import Prediction, Ticket
+from subscriptions.serializers import (
+    AggregatedUserSubscriptionSerializer,
+)
 
 
 class WithdrawalRequestSerializer(serializers.ModelSerializer):
@@ -69,48 +76,33 @@ class WithdrawalRequestSerializer(serializers.ModelSerializer):
         return data
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = [
-            "id",
-            "name",
-            "type",
-            "analysis_per_month",
-            "monthly_price",
-            "discounted_monthly_price",
-            "yearly_price",
-            "discounted_yearly_price",
-            "mobile_product_id",
-        ]
-
-
-class UserSubscriptionSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True)
-    first_chosen_product = ProductSerializer()
-
-    price = serializers.DecimalField(
-        max_digits=10, decimal_places=2, coerce_to_string=False
-    )
-
-    class Meta:
-        model = UserSubscription
-        fields = [
-            "status",
-            "frequency",
-            "price",
-            "start_date",
-            "end_date",
-            "products",
-            "first_chosen_product",
-            "provider_type",
-        ]
+# class UserSubscriptionSerializer(serializers.ModelSerializer):
+#     products = ProductSerializer(many=True)
+#     first_chosen_product = ProductSerializer()
+#
+#     price = serializers.DecimalField(
+#         max_digits=10, decimal_places=2, coerce_to_string=False
+#     )
+#
+#     class Meta:
+#         model = UserSubscription
+#         fields = [
+#             "status",
+#             "frequency",
+#             "price",
+#             "start_date",
+#             "end_date",
+#             "products",
+#             "first_chosen_product",
+#             "provider_type",
+#         ]
 
 
 class UserSerializer(serializers.ModelSerializer):
-    user_subscription = UserSubscriptionSerializer(
-        source="subscription", read_only=True
-    )
+    # user_subscription = UserSubscriptionSerializer(
+    #     source="subscription", read_only=True
+    # )
+    user_subscription = AggregatedUserSubscriptionSerializer(source="*", read_only=True)
     purchased_prediction_ids = serializers.SerializerMethodField()
     purchased_ticket_ids = serializers.SerializerMethodField()
 
@@ -125,7 +117,7 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "purchased_prediction_ids",
-            "purchased_ticket_ids"
+            "purchased_ticket_ids",
         ]
         read_only_fields = [
             "id",
@@ -136,32 +128,42 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "purchased_prediction_ids",
-            "purchased_ticket_ids"
+            "purchased_ticket_ids",
         ]
 
     def get_purchased_prediction_ids(self, obj):
-        purchased_predictions = obj.purchased_predictions.values_list("prediction_id", flat=True)
+        purchased_predictions = obj.purchased_predictions.values_list(
+            "prediction_id", flat=True
+        )
 
-        daily_offer = PurchasedDailyOffer.objects.filter(user_id=obj.id, for_date=timezone.now(),
-                                                         status=PurchasedDailyOffer.Status.PURCHASED).first()
+        daily_offer = PurchasedDailyOffer.objects.filter(
+            user_id=obj.id,
+            for_date=timezone.now(),
+            status=PurchasedDailyOffer.Status.PURCHASED,
+        ).first()
         if daily_offer:
             purchased_predictions = purchased_predictions.union(
                 Prediction.objects.filter(
                     created_at__date=timezone.now().date(),
-                ).values_list("id", flat=True))
+                ).values_list("id", flat=True)
+            )
 
         return purchased_predictions
 
     def get_purchased_ticket_ids(self, obj):
         purchased_tickets = obj.purchased_tickets.values_list("ticket_id", flat=True)
 
-        daily_offer = PurchasedDailyOffer.objects.filter(user_id=obj.id, for_date=timezone.now(),
-                                                         status=PurchasedDailyOffer.Status.PURCHASED).first()
+        daily_offer = PurchasedDailyOffer.objects.filter(
+            user_id=obj.id,
+            for_date=timezone.now(),
+            status=PurchasedDailyOffer.Status.PURCHASED,
+        ).first()
 
         if daily_offer:
             purchased_tickets = purchased_tickets.union(
                 Ticket.objects.filter(
                     created_at__date=timezone.now().date(),
-                ).values_list("id", flat=True))
+                ).values_list("id", flat=True)
+            )
 
         return purchased_tickets

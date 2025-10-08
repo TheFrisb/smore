@@ -1,10 +1,11 @@
 import random
-from datetime import timedelta, time
+from datetime import time, timedelta
 
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
-from core.models import Prediction, Product
+from core.models import Prediction
+from subscriptions.models import Product
 
 
 class Command(BaseCommand):

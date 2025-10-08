@@ -1,9 +1,9 @@
 from django.urls import path
 
 from core.api.views import (
-    ProductsListView,
     GetFrequentlyAskedQuestionsListView,
     HistoryAPIView,
+    ProductsListView,
     UpcomingAPIView,
 )
 

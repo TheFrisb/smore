@@ -28,7 +28,6 @@ class BaseProcessor(ABC):
         if cls._client is None:
             cls._client = OpenAI(
                 api_key=settings.OPENAI_API_KEY,
-
             )
             logger.info(f"Initialized OpenAI client for {cls.__name__} processors")
         return cls._client

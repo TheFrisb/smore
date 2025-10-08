@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.models import BaseInternalModel
+from core.utils import BaseInternalModel
 
 
 # Create your models here.

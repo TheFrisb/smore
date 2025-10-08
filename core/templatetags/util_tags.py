@@ -2,7 +2,7 @@ from django import template
 from django.conf import settings
 from django.templatetags.static import static
 from django.urls import reverse
-from django.utils.safestring import mark_safe, SafeString
+from django.utils.safestring import SafeString, mark_safe
 
 register = template.Library()
 
@@ -36,7 +36,7 @@ def svg_icon(icon_name: str = None, css_classes: str = None) -> SafeString:
     if not icon_name:
         raise ValueError("The 'icon_name' parameter is required.")
 
-    sprite_path: str = static("assets/svg/sprite21.svg")
+    sprite_path: str = static("assets/svg/sprite25.svg")
     svg_markup: str = (
         f'<svg class="{css_classes or ""}"><use xlink:href="{sprite_path}#{icon_name}"></use></svg>'
     )

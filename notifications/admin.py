@@ -3,9 +3,9 @@ import logging
 from django.contrib import admin, messages
 
 from notifications.models import (
-    UserNotification,
     NotificationRequest,
     NotificationTopic,
+    UserNotification,
 )
 from notifications.services.fcm_service import FCMService
 

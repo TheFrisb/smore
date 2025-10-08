@@ -1,28 +1,27 @@
 import logging
 from collections import defaultdict
-from itertools import groupby
 
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import DetailView, TemplateView
 
 from accounts.models import (
-    PurchasedPredictions,
-    User,
-    PurchasedTickets,
     PurchasedDailyOffer,
+    PurchasedPredictions,
+    PurchasedTickets,
+    User,
 )
 from ai_assistant.models import Message, SuggestedMessage
 from core.models import (
-    Product,
+    FrequentlyAskedQuestion,
     PickOfTheDay,
     Prediction,
-    FrequentlyAskedQuestion,
     Ticket,
 )
+from subscriptions.models import Product
 
 logger = logging.getLogger(__name__)
 
@@ -85,7 +84,12 @@ class HistoryView(TemplateView):
                 "allowed_products": self.get_allowed_products(),
                 "purchased_ids": self.get_purchased_ids(),
                 "products": Product.objects.filter(
-                    type=Product.Types.SUBSCRIPTION
+                    name__in=[
+                        Product.Names.SOCCER,
+                        Product.Names.BASKETBALL,
+                        Product.Names.NFL_NHL,
+                        Product.Names.TENNIS,
+                    ]
                 ).order_by("order"),
                 "base_url": "core:history",
                 "page_obj": page_obj,
@@ -338,29 +342,6 @@ class DetailedPredictionView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class PlansView(TemplateView):
-    template_name = "core/pages/plans.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["subscriptions"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).order_by("order")
-        context["addons"] = Product.objects.filter(type=Product.Types.ADDON).order_by(
-            "order"
-        )
-        context["user_has_discount"] = self._get_user_has_discount()
-        context["page_title"] = _("Plans")
-
-        return context
-
-    def _get_user_has_discount(self):
-        if not self.request.user.is_authenticated:
-            return False
-
-        return self.request.user.has_sport_discount()
-
-
 class TelegramLandingView(TemplateView):
     template_name = "core/pages/telegram_landing.html"
 
@@ -474,7 +455,12 @@ class UpcomingMatchesView(TemplateView):
         context["allowed_products"] = self.get_allowed_products()
         context["purchased_ids"] = self.get_purchased_ids()
         context["products"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
+            name__in=[
+                Product.Names.SOCCER,
+                Product.Names.BASKETBALL,
+                Product.Names.NFL_NHL,
+                Product.Names.TENNIS,
+            ]
         ).order_by("order")
         context["base_url"] = "core:upcoming_matches"
 
@@ -669,98 +655,19 @@ class UpcomingMatchesView(TemplateView):
         """
         Get product IDs the user has access to.
         """
-        allowed_prediction_products = []
-        products = Product.objects.filter(type=Product.Types.SUBSCRIPTION)
+        user = self.request.user
 
-        if not self.request.user.is_authenticated:
+        if not user.is_authenticated:
             return []
 
-        for product in products:
-            if self.request.user.has_access_to_product(product):
-                allowed_prediction_products.append(product.id)
-
-        return allowed_prediction_products
-
-
-class UpcomingMatchesView2(TemplateView):
-    template_name = "core/pages/upcoming_matches.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        filter = self.request.GET.get("filter", "all")
-        if filter == "all":
-            context["filter_product"] = None
-            context["grouped_predictions"] = self.get_grouped_predictions(None)
-        else:
-            print(filter)
-            try:
-                product = Product.objects.get(name=filter)
-                print(product.name)
-                context["filter_product"] = product
-                context["grouped_predictions"] = self.get_grouped_predictions(filter)
-            except Product.DoesNotExist:
-                context["filter_product"] = None
-                context["grouped_predictions"] = self.get_grouped_predictions(None)
-
-        context["pick_of_the_day"] = PickOfTheDay.get_solo()
-        context["page_title"] = _("Upcoming Matches")
-        context["allowed_prediction_products"] = self.get_allowed_prediction_products()
-        context["purchased_prediction_ids"] = self.get_purchased_prediction_ids()
-        context["products"] = Product.objects.filter(
-            type=Product.Types.SUBSCRIPTION
-        ).order_by("order")
-        return context
-
-    def get_purchased_prediction_ids(self):
-        if not self.request.user.is_authenticated:
-            return []
-
-        return PurchasedPredictions.objects.filter(user=self.request.user).values_list(
-            "prediction_id", flat=True
+        return (
+            Product.objects.filter(
+                prices__user_subscriptions__user=user,
+                prices__user_subscriptions__is_active=True,
+            )
+            .distinct()
+            .values_list("id", flat=True)
         )
-
-    def get_grouped_predictions(self, filter):
-        predictions = (
-            Prediction.objects.filter(
-                match__kickoff_datetime__date__gte=timezone.now().date(),
-                visibility=Prediction.Visibility.PUBLIC,
-                status=Prediction.Status.PENDING,
-            )
-            .select_related(
-                "match",
-                "match__home_team",
-                "match__away_team",
-                "match__league",
-                "product",
-            )
-            .order_by("match__kickoff_datetime")
-        )
-
-        if filter:
-            predictions = predictions.filter(product__name=filter)
-
-        grouped_predictions = {
-            kickoff_date: list(predictions)
-            for kickoff_date, predictions in groupby(
-                predictions, key=lambda p: p.match.kickoff_datetime.date()
-            )
-        }
-
-        return grouped_predictions
-
-    def get_allowed_prediction_products(self):
-        allowed_prediction_products = []
-        products = Product.objects.filter(type=Product.Types.SUBSCRIPTION)
-
-        if not self.request.user.is_authenticated:
-            return allowed_prediction_products
-
-        for product in products:
-            if self.request.user.has_access_to_product(product):
-                allowed_prediction_products.append(product.id)
-
-        return allowed_prediction_products
 
 
 class AiAssistantView(TemplateView):
@@ -808,9 +715,7 @@ class AiAssistantView(TemplateView):
         user = self.request.user
 
         if user.is_authenticated:
-            return user.has_access_to_product(
-                Product.objects.get(name=Product.Names.AI_ANALYST)
-            )
+            return user.has_access_to_product(Product.Names.AI_ANALYST)
         return False
 
     def get_free_messages(self):

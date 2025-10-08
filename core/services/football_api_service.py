@@ -5,12 +5,12 @@ import requests
 from django.utils import timezone as django_timezone
 
 from core.models import (
+    ApiSportModel,
     SportLeague,
     SportMatch,
-    Product,
-    ApiSportModel,
 )
 from core.services.sport_api_service import SportApiService
+from subscriptions.models import Product
 
 logger = logging.getLogger("cron")
 

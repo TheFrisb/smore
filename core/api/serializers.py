@@ -1,17 +1,17 @@
 from django.conf import settings
 from rest_framework import serializers
 
-from accounts.serializers import ProductSerializer
 from core.models import (
+    BetLine,
+    FrequentlyAskedQuestion,
+    Prediction,
+    SportCountry,
     SportLeague,
     SportMatch,
     SportTeam,
-    Prediction,
-    SportCountry,
-    FrequentlyAskedQuestion,
-    BetLine,
     Ticket,
 )
+from subscriptions.serializers import ProductSerializer
 
 
 class PredictionSerializer2(serializers.ModelSerializer):

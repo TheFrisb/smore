@@ -1,10 +1,10 @@
 from typing import Optional
 
 from langchain_core.tools import tool
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
-from ai_assistant.v2.types import SportTeamOutputModel, PlayerOutputModel
-from core.models import SportMatch, ApiSportModel
+from ai_assistant.v2.types import PlayerOutputModel, SportTeamOutputModel
+from core.models import ApiSportModel, SportMatch
 
 
 class MatchInjuryInput(BaseModel):

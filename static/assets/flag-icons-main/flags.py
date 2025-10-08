@@ -1,10 +1,10 @@
-import os
 import json
+import os
 
 flags_dir = os.path.join("flags", "1x1")
 
 files = []
-for (dirpath, dirnames, filenames) in os.walk(flags_dir):
+for dirpath, dirnames, filenames in os.walk(flags_dir):
     files.extend(filenames)
     break
 
@@ -15,7 +15,7 @@ flags = json.load(country_json)
 flags.sort(key=lambda x: x["name"])
 country_codes = [flag["code"] for flag in flags]
 
-with open("country.json", "w", encoding='utf8') as output:
+with open("country.json", "w", encoding="utf8") as output:
     json.dump(flags, output, indent=2, sort_keys=True, ensure_ascii=False)
 
 all_good = True

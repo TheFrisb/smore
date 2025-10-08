@@ -14,10 +14,10 @@ class FCMService:
 
     @staticmethod
     def validate_inputs(
-            topic: Optional[str],
-            title: str,
-            body: str,
-            token: Optional[str] = None,
+        topic: Optional[str],
+        title: str,
+        body: str,
+        token: Optional[str] = None,
     ) -> Optional[str]:
         """
         Validate notification input parameters.
@@ -36,13 +36,13 @@ class FCMService:
         return None
 
     def _build_message(
-            self,
-            title: str,
-            body: str,
-            data: Optional[Dict] = None,
-            topic: Optional[str] = None,
-            token: Optional[str] = None,
-            image_url: Optional[str] = None,
+        self,
+        title: str,
+        body: str,
+        data: Optional[Dict] = None,
+        topic: Optional[str] = None,
+        token: Optional[str] = None,
+        image_url: Optional[str] = None,
     ) -> messaging.Message:
         """
         Build an FCM message with notification and optional data payload.
@@ -66,13 +66,13 @@ class FCMService:
             raise ValueError("Either topic or token must be provided")
 
     def send_notification(
-            self,
-            title: str,
-            body: str,
-            data: Optional[Dict] = None,
-            topic: Optional[str] = None,
-            token: Optional[str] = None,
-            image_url: Optional[str] = None,
+        self,
+        title: str,
+        body: str,
+        data: Optional[Dict] = None,
+        topic: Optional[str] = None,
+        token: Optional[str] = None,
+        image_url: Optional[str] = None,
     ) -> dict:
         """
         Send a notification to a specific FCM topic or token with validation.
@@ -100,8 +100,8 @@ class FCMService:
             return {"status": "error", "message": f"Unexpected error: {str(e)}"}
 
     def send_silent_notification(
-            self,
-            additional_data: Optional[Dict] = None,
+        self,
+        additional_data: Optional[Dict] = None,
     ) -> dict:
         """
         Send a data-only message to the 'ALL' topic to trigger notification refetch

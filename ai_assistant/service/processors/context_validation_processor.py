@@ -46,8 +46,8 @@ class ContextValidationProcessor(BaseProcessor):
                 return
 
             if (
-                    prompt_type == PromptType.SINGLE_MATCH_PREDICTION
-                    and len(prompt_context.team_objs) < 2
+                prompt_type == PromptType.SINGLE_MATCH_PREDICTION
+                and len(prompt_context.team_objs) < 2
             ):
                 logger.info(
                     f"Not enough teams found in prompt context: {prompt_context}"

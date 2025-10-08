@@ -2,8 +2,9 @@ import json
 from datetime import datetime
 from time import sleep
 
-from core.models import Player, Product, ApiSportModel
+from core.models import ApiSportModel, Player
 from core.services.api.in_progress.BaseApiFootballService import BaseApiFootballService
+from subscriptions.models import Product
 
 
 class PlayerService(BaseApiFootballService):
@@ -20,7 +21,9 @@ class PlayerService(BaseApiFootballService):
 
         while current_page <= max_pages:
             sleep(0.5)
-            response = self.get_endpoint(endpoint=endpoint, query_params={"page": current_page})
+            response = self.get_endpoint(
+                endpoint=endpoint, query_params={"page": current_page}
+            )
             paging = response.get("paging", {})
             body = response.get("response", [])
 
@@ -56,7 +59,11 @@ class PlayerService(BaseApiFootballService):
                     first_name=data["firstname"],
                     last_name=data["lastname"],
                     age=data["age"],
-                    birth_date=datetime.strptime(birth_date_string, "%Y-%m-%d") if birth_date_string else None,
+                    birth_date=(
+                        datetime.strptime(birth_date_string, "%Y-%m-%d")
+                        if birth_date_string
+                        else None
+                    ),
                     birth_place=birth_place,
                     birth_country=birth_country,
                     nationality=data["nationality"],
@@ -64,5 +71,5 @@ class PlayerService(BaseApiFootballService):
                     weight=data["weight"],
                     number=data["number"],
                     position=data["position"],
-                    photo=None
+                    photo=None,
                 )
