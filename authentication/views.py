@@ -99,7 +99,7 @@ class RegisterUserView(APIView):
             password=make_password(data["password"]),
         )
 
-        logger.info(f"User {user.username} created.")
+        logger.info(f"[API Page] User {user.username} created.")
         return Response(status=HTTP_204_NO_CONTENT)
 
     def log_request_info(self, request):

@@ -105,7 +105,7 @@ class AggregatedUserSubscriptionSerializer(serializers.Serializer):
         end_date = max(sub.end_date for sub in active_subs)
 
         # Provider type: assume consistent; take from first (add validation if needed)
-        provider_type = first_sub.provider
+        provider_type = "STRIPE"
         return {
             "status": status,
             "frequency": frequency,

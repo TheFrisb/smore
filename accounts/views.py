@@ -94,7 +94,7 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
             last_name=form.cleaned_data["last_name"],
         )
 
-        logger.info(f"User {user.username} created.")
+        logger.info(f"[Form Page] User {user.username} created.")
 
         referral_code = request.session.get("referral_code", None)
         if referral_code:
