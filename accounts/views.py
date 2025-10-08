@@ -142,7 +142,10 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
         user_agent = request.headers.get("User-Agent", "unknown")
         logger.info("User Agent: %s", user_agent)
 
-        logger.info("Request Data: %s", request.data)
+        if request.method == "POST":
+            logger.info("Request POST Data: %s", dict(request.POST))
+        else:
+            logger.info("Request GET Data: %s", dict(request.GET))
 
     def create_user(self, form):
         """

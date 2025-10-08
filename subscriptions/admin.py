@@ -54,6 +54,7 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
     list_filter = ("provider", "is_active", "product_price__product")
     search_fields = (
         "user__email",
+        "user__username",
         "provider_subscription_id",
         "product_price__product__name",
     )
