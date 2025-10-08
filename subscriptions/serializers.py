@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from rest_framework import serializers
 
-from subscriptions.models import Product
+from subscriptions.models import Product, BillingProvider
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -105,7 +105,11 @@ class AggregatedUserSubscriptionSerializer(serializers.Serializer):
         end_date = max(sub.end_date for sub in active_subs)
 
         # Provider type: assume consistent; take from first (add validation if needed)
-        provider_type = "STRIPE"
+        provider_type = (
+            first_sub.provider
+            if first_sub.provider == BillingProvider.STRIPE
+            else "APPLE"
+        )
         return {
             "status": status,
             "frequency": frequency,
