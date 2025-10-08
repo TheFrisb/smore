@@ -4,9 +4,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from accounts.serializers import ProductSerializer
 from core.models import FrequentlyAskedQuestion, Prediction, Ticket
 from subscriptions.models import Product
+from subscriptions.serializers import ProductSerializer
 
 from .serializers import (
     FrequentlyAskedQuestionSerializer,

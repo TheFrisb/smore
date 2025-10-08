@@ -1,7 +1,7 @@
 from django.contrib.admin import SimpleListFilter
 from django.db.models import Q
 
-from subscriptions.models import UserSubscription, BillingProvider
+from subscriptions.models import BillingProvider
 
 
 class UserSubscriptionTypeFilter(SimpleListFilter):

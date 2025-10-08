@@ -5,17 +5,15 @@ from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from stripe import Price
 
 from ai_assistant.models import Message
 from ai_assistant.utils import AIUsagePolicy
 from ai_assistant.v2.ai_service import AiService
 from subscriptions.models import (
-    UserSubscription,
-    Product,
-    BillingProvider,
-    ProductPrice,
     BillingInterval,
+    BillingProvider,
+    Product,
+    ProductPrice,
 )
 
 logger = logging.getLogger(__name__)
@@ -122,16 +120,17 @@ class GetSentMessagesCount(APIView):
         can_send = serializers.BooleanField()
 
     def get(self, request):
-        if not request.user.is_authenticated:
+        if not self.request.user.is_authenticated:
+            print("NO")
             data = {"count": 0, "can_send": False}
             serializer = self.OutputSerializer(data=data)
             serializer.is_valid(raise_exception=True)
             return Response(serializer.data)
 
         count = Message.objects.filter(
-            user=request.user, direction=Message.Direction.OUTBOUND
+            user=self.request.user, direction=Message.Direction.OUTBOUND
         ).count()
-        can_send, _ = AIUsagePolicy.can_use_ai(request.user)
+        can_send, _ = AIUsagePolicy.can_use_ai(self.request.user)
 
         data = {"count": count, "can_send": can_send}
         serializer = self.OutputSerializer(data=data)

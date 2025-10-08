@@ -1,7 +1,9 @@
 import logging
 
 from django.utils import timezone
-from rest_framework import serializers
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import serializers, status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_200_OK,
@@ -17,8 +19,11 @@ from accounts.models import (
     PurchasedTickets,
     User,
 )
+from backend import settings
 from payments.mobile.permissions import RevenuecatTokenPermission
 from payments.mobile.services import verify_transaction
+from payments.services.revenuecat.base_revenuecat_service import BaseRevenuecatService
+from subscriptions.models import BillingProvider, UserSubscription
 
 logger = logging.getLogger(__name__)
 
@@ -164,62 +169,61 @@ class ConsumeConsumableView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-class SubscriptionWebhookView(APIView):
-    authentication_classes = []
-    permission_classes = [RevenuecatTokenPermission]
+@csrf_exempt
+@api_view(["POST"])
+def subscription_webhook_view(request):
+    auth_header = request.META.get("HTTP_AUTHORIZATION", "")
 
-    class InputSerializer(serializers.Serializer):
-        id = serializers.CharField(required=True)
-        app_user_id = serializers.CharField(required=True)
-        entitlement_ids = serializers.ListField(
-            child=serializers.CharField(), required=True
-        )
-        original_transaction_id = serializers.CharField(required=True)
-        type = serializers.CharField(required=True)
-
-    def post(self, request, *args, **kwargs):
-        logger.info("Received subscription webhook: %s", request.data)
-        # event_data = request.data.get("event", {})
-        # serializer = self.InputSerializer(data=event_data)
-        # serializer.is_valid(raise_exception=True)
-        #
-        # if serializer.validated_data["type"] == "EXPIRATION":
-        #     self._deactivate_subscription(serializer.validated_data["app_user_id"])
-        # else:
-        #     products = self._get_products_from_entitlements(
-        #         serializer.validated_data["entitlement_ids"]
-        #     )
-
+    if not auth_header.startswith("Bearer "):
         return Response(
-            status=HTTP_200_OK,
-            data={"detail": "Subscription webhook processed successfully"},
+            {"detail": "Invalid token header. No credentials provided."},
+            status=status.HTTP_401_UNAUTHORIZED,
         )
 
-    # def _get_products_from_entitlements(self, entitlement_ids):
-    #     product_names = []
-    #     for entitlement_id in entitlement_ids:
-    #         logger.info("Processing entitlement_id: %s", entitlement_id)
-    #         if not entitlement_id.startswith("monthly_", "yearly_"):
-    #             continue
-    #
-    #         product_name = entitlement_id.split("_", 1)[1].upper().replace("_", " ")
-    #         product_names.append(product_name)
-    #
-    #     logger.info("Extracted product names from entitlements: %s", product_names)
-    #     return Product.objects.filter(name__in=product_names)
-    #
-    # def get_user_subscriptions(self, app_user_id):
-    #     try:
-    #         return UserSubscription.objects.get(
-    #             user_id=int(app_user_id),
-    #             provider_type=UserSubscription.ProviderType.REVENUECAT,
-    #         )
-    #     except UserSubscription.DoesNotExist:
-    #         logger.error("User subscription not found for app_user_id: %s", app_user_id)
-    #         raise UnprocessableEntity()
-    #
-    # def _deactivate_subscription(self, app_user_id):
-    #     logger.info("Deactivating subscription for app_user_id: %s", app_user_id)
-    #     user_subscription = self.get_user_subscriptions(app_user_id)
-    #     user_subscription.status = UserSubscription.Status.INACTIVE
-    #     user_subscription.save()
+    token = auth_header.split(" ")[1]
+
+    if token != settings.REVENUECAT_TOKEN:
+        return Response(
+            {"detail": "Invalid token."},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    service = BaseRevenuecatService()
+
+    event_data = request.data["event"]
+    event_type = event_data["type"]
+    app_user_id = event_data["app_user_id"]
+    external_product_id = event_data["product_id"]
+
+    user = service.get_user(subscription_data=event_data)
+    product_price = service.get_product_price(external_product_id)
+    purchased_at, expiration_date = service.get_start_and_end_datetimes_from_ms(
+        subscription_data=event_data
+    )
+    subscription_id = service.construct_external_id(user, external_product_id)
+
+    if event_type == "INITIAL_PURCHASE":
+        UserSubscription.objects.create(
+            user=user,
+            product_price=product_price,
+            provider=BillingProvider.REVENUECAT,
+            start_date=purchased_at,
+            end_date=expiration_date,
+            provider_subscription_id=subscription_id,
+            is_active=True,
+        )
+
+    elif event_type == "RENEWAL":
+        UserSubscription.objects.filter(
+            user=user,
+            provider=BillingProvider.REVENUECAT,
+            provider_subscription_id=subscription_id,
+        ).update(end_date=expiration_date, is_active=True)
+
+    elif event_type == "EXPIRATION":
+        UserSubscription.objects.filter(
+            provider=BillingProvider.REVENUECAT,
+            provider_subscription_id=subscription_id,
+        ).update(is_active=False)
+
+    return Response(status=HTTP_204_NO_CONTENT)

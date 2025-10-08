@@ -9,8 +9,8 @@ from core.models import (
     SportLeague,
     SportMatch,
 )
-from subscriptions.models import Product
 from core.services.sport_api_service import SportApiService
+from subscriptions.models import Product
 
 logger = logging.getLogger("cron")
 

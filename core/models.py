@@ -11,7 +11,6 @@ from solo.models import SingletonModel
 from core.utils import BaseInternalModel
 from subscriptions.models import Product
 
-
 # Create your models here.
 
 

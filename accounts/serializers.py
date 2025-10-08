@@ -7,9 +7,8 @@ from accounts.models import (
     User,
     WithdrawalRequest,
 )
-from core.models import Prediction, OldProduct, Ticket
+from core.models import Prediction, Ticket
 from subscriptions.serializers import (
-    ProductSerializer,
     AggregatedUserSubscriptionSerializer,
 )
 

@@ -21,7 +21,7 @@ from facebook.services.facebook_pixel import FacebookPixel
 from payments.services.stripe.stripe_checkout_service import (
     StripeCheckoutService,
 )
-from subscriptions.models import UserSubscription, Product
+from subscriptions.models import Product, UserSubscription
 
 logger = logging.getLogger(__name__)
 

@@ -40,7 +40,6 @@ class ProductPriceAdmin(admin.ModelAdmin):
     list_filter = ("provider", "currency", "interval", "product")
     search_fields = ("provider_price_id", "product__name")
     ordering = ("product__name", "provider")
-    autocomplete_fields = ("product",)
 
 
 @admin.register(UserSubscription)

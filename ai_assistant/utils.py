@@ -1,5 +1,4 @@
 from typing import Tuple
-from django.conf import settings
 
 from accounts.models import User
 from ai_assistant.models import Message

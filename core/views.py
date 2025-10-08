@@ -1,6 +1,5 @@
 import logging
 from collections import defaultdict
-from itertools import groupby
 
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
