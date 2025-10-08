@@ -1,7 +1,11 @@
 from django.utils import timezone
 
 from core.models import Prediction, Ticket
-from notifications.models import NotificationRequest, NotificationTopic
+from notifications.models import (
+    NotificationRequest,
+    NotificationTopic,
+    UserNotification,
+)
 from notifications.services.fcm_service import FCMService
 from subscriptions.models import Product
 
@@ -206,8 +210,14 @@ class PredictionNotificationService:
         }
         return emoji_map.get(product_name, "🎯")  # Default emoji if not found
 
-    def mark_notifications_as_not_important(self, product_name: Product.Names):
+    def mark_notifications_as_not_important(
+        self, product_name: Product.Names, max_start_time
+    ):
         topic = self.get_topic(product_name)
-        NotificationRequest.objects.filter(topic=topic, is_important=True).update(
-            is_important=False
-        )
+        NotificationRequest.objects.filter(
+            topic=topic, is_important=True, created_at__lt=max_start_time
+        ).update(is_important=False)
+
+        UserNotification.objects.filter(
+            topic=topic, is_important=True, created_at__lt=max_start_time
+        ).update(is_important=False)
