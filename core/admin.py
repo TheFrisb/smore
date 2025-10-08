@@ -112,7 +112,7 @@ class SportLeagueAdmin(admin.ModelAdmin):
 
 @admin.register(SportTeam)
 class SportTeamAdmin(admin.ModelAdmin):
-    search_fields = ["name", "league__name"]
+    search_fields = ["name"]
     list_display = ["name", "product", "type"]
 
 
