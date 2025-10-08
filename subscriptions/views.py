@@ -113,7 +113,17 @@ class PlansView(TemplateView):
         ):
             prices_query = prices_query.filter(version=2)
         else:
-            prices_query = prices_query.filter(version=1)
+            subquery = ProductPrice.objects.filter(
+                version=1,
+                product_id=OuterRef("product_id"),
+                currency=OuterRef("currency"),
+                provider=OuterRef("provider"),
+                interval=OuterRef("interval"),
+                interval_count=OuterRef("interval_count"),
+            )
+            prices_query = prices_query.filter(
+                Q(version=1) | (Q(version=2) & ~Exists(subquery))
+            )
 
         return (
             Product.objects.all()
