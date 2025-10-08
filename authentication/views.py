@@ -89,6 +89,8 @@ class RegisterUserView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
+        self.log_request_info(request)
+
         user = User.objects.create(
             username=data["username"],
             first_name=data["first_name"],
@@ -98,8 +100,15 @@ class RegisterUserView(APIView):
         )
 
         logger.info(f"User {user.username} created.")
-
         return Response(status=HTTP_204_NO_CONTENT)
+
+    def log_request_info(self, request):
+        logger.info("Request Headers: %s", dict(request.headers))
+
+        user_agent = request.headers.get("User-Agent", "unknown")
+        logger.info("User Agent: %s", user_agent)
+
+        logger.info("Request Data: %s", request.data)
 
 
 class PasswordResetView(APIView):

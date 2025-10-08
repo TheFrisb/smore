@@ -113,6 +113,8 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
             request.session.pop("referral_code", None)
             logger.info(f"User {user.username} registered successfully.")
 
+            self.log_request_info(request)
+
             try:
                 fb_pixel = FacebookPixel(request)
                 fb_pixel.complete_registration()
@@ -133,6 +135,14 @@ class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
             )
 
         return self.render_to_response({"form": form})
+
+    def log_request_info(self, request):
+        logger.info("Request Headers: %s", dict(request.headers))
+
+        user_agent = request.headers.get("User-Agent", "unknown")
+        logger.info("User Agent: %s", user_agent)
+
+        logger.info("Request Data: %s", request.data)
 
     def create_user(self, form):
         """
