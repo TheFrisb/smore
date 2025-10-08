@@ -39,11 +39,11 @@ class Command(BaseCommand):
 
         period_end = original_sub.current_period_end
 
-        item1 = original_sub.items.data[0]  # Keep in original
-        item2 = original_sub.items.data[1]  # Move to new
+        item1 = original_sub["items"]["data"][0]
+        item2 = original_sub["items"]["data"][1]
 
-        item2_id = item2.id
-        price_id2 = item2.price.id
+        item2_id = item2["id"]
+        price_id2 = item2["price"]["id"]
         quantity2 = item2.quantity or 1  # Handle if None/default
 
         try:
