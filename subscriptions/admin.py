@@ -22,7 +22,6 @@ class ProductPriceInline(admin.TabularInline):
 class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
-    ordering = ("name",)
     inlines = (ProductPriceInline,)
 
 
