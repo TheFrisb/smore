@@ -153,7 +153,6 @@ class ApiSportModel(BaseInternalModel):
         NHL = "NHL", _("NHL")
         TEMP_FIX = "TEMP_FIX", _("Temporary Fix")
 
-    product = models.ForeignKey(OldProduct, on_delete=models.DO_NOTHING)
     new_product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
@@ -181,7 +180,6 @@ class SportCountry(BaseInternalModel):
 
 
 class SportLeague(ApiSportModel):
-    product = models.ForeignKey(OldProduct, on_delete=models.DO_NOTHING)
     new_product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
@@ -209,7 +207,6 @@ class SportLeague(ApiSportModel):
 
 
 class SportTeam(ApiSportModel):
-    product = models.ForeignKey(OldProduct, on_delete=models.DO_NOTHING)
     new_product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
@@ -258,7 +255,6 @@ class SportMatch(ApiSportModel):
         FINISHED = "FINISHED", _("Finished")
 
     status = models.CharField(max_length=12, choices=Status.choices, db_index=True)
-    product = models.ForeignKey(OldProduct, on_delete=models.DO_NOTHING)
     new_product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
@@ -303,7 +299,6 @@ class Prediction(BaseInternalModel):
         PRIVATE = "PRIVATE", "Private"
         ADMIN = "ADMIN", "Admin Only"
 
-    product = models.ForeignKey(OldProduct, on_delete=models.DO_NOTHING)
     new_product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
@@ -391,7 +386,6 @@ class Ticket(BaseInternalModel):
         PRIVATE = "PRIVATE", "Private"
         ADMIN = "ADMIN", "Admin Only"
 
-    product = models.ForeignKey(OldProduct, on_delete=models.DO_NOTHING)
     new_product = models.ForeignKey(
         "subscriptions.Product", on_delete=models.SET_NULL, null=True
     )
