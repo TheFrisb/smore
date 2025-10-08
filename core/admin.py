@@ -24,7 +24,6 @@ from core.models import (
     SportTeam,
     TeamStanding,
     Ticket,
-    OldProduct,
 )
 from subscriptions.models import Product
 
@@ -259,4 +258,3 @@ admin.site.register(SportCountry)
 admin.site.register(PurchasedPredictions)
 admin.site.register(PurchasedTickets)
 admin.site.register(TeamStanding)
-admin.site.register(OldProduct)
