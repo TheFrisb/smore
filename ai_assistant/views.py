@@ -121,7 +121,6 @@ class GetSentMessagesCount(APIView):
 
     def get(self, request):
         if not self.request.user.is_authenticated:
-            print("NO")
             data = {"count": 0, "can_send": False}
             serializer = self.OutputSerializer(data=data)
             serializer.is_valid(raise_exception=True)
