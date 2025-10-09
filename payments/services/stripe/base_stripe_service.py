@@ -36,6 +36,14 @@ class BaseStripeService:
 
         return customer
 
+    def delete_stripe_customer(self, user: User):
+        if not user.stripe_customer_id:
+            raise ValueError(f"User: {user.id} does not have a Stripe customer ID.")
+
+        self.stripe_client.Customer.delete(user.stripe_customer_id)
+
+        logger.info(f"Stripe customer with ID: {user.stripe_customer_id} deleted.")
+
     def get_stripe_subscription_by_id(self, subscription_id: str):
         logger.info(f"Fetching Stripe subscription with ID: {subscription_id}")
         subscription = self.stripe_client.Subscription.retrieve(subscription_id)

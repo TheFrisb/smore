@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load static util_tags i18n %}
+{% load static util_tags i18n honeypot %}
 {% block content %}
     <section
             class="min-h-screen bg-gradient-to-b from-primary-800 to-primary-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -37,7 +37,7 @@
                                 <div>
                                     {% for field, errors in form.errors.items %}
                                         {% for error in errors %}
-                                            <p class="text-primary-200">• {{ error }}</p>
+                                            <p class="text-primary-200">• {{ field|capfirst }}: {{ error }}</p>
                                         {% endfor %}
                                     {% endfor %}
                                 </div>
@@ -199,6 +199,12 @@
                                 <a class="text-secondary-500 hover:text-secondary-400"
                                    href="{% url 'core:privacy_policy' %}">{% trans "Privacy Policy" %}</a></label>
                         </div>
+                        {% render_honeypot_field %}
+
+                        <div class="w-full recaptcha-wrapper">
+                            {{ form.recaptcha }}
+                        </div>
+
 
                         <button type="submit" id="registerButton"
                                 class="formSubmitButton group relative w-full flex items-center justify-center py-3 px-4 bg-secondary-600 text-white rounded-lg hover:bg-secondary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-500/50 focus:ring-offset-2 focus:ring-offset-primary-800">
@@ -255,4 +261,19 @@
             </div>
         </div>
     </section>
+<script>
+  function rescaleCaptcha() {
+    var captcha = document.querySelector('.g-recaptcha');
+    if (captcha) {
+      var wrapper = captcha.parentElement;
+      var scale = wrapper.offsetWidth / 304;  // 304px is default reCAPTCHA width
+      captcha.style.transform = 'scale(' + scale + ')';
+      wrapper.style.height = (78 * scale) + 'px';  // 78px is default reCAPTCHA height; adjust dynamically to fit scaled content
+    }
+  }
+
+  window.addEventListener('resize', rescaleCaptcha);
+  document.addEventListener('DOMContentLoaded', rescaleCaptcha);
+</script>
+
 {% endblock content %}

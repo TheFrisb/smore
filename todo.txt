@@ -1,14 +1,21 @@
-1. Stripe Payments
--- Migrate oldProduct data to new product
--- Migrate existing subscriptions
-Total: 1:30 hrs
+2. Add app updater
+3. Improve application
+-- Add dio timeouts
+-- Add other API timeouts, i.e. RevenueCat, FireBase
+-- Ensure app initializes smooth
+-- Improve logs
 
 
-3. Protect Backend API, return null/empty strings where applicable
-
-4. Render plan discount
--- Add plan discount functionality
-
-5. Istroija tiketo so ne se rede kak so treba
-----
 2. Fix AI count
+3. Protect backend API models with v2 endpoints, and ensure application works with it
+
+4. Total odds can shift further to right
+
+6. Handle application state changes:
+-- Ensure subscription or customer info revenue cat updates, trigger refresh
+-- Ensure topics are subscribed and unsubscribed properly
+-- Ensure user is refreshed on app resume
+-- Ensure notifications are refreshed (inject provider with setter to UserProvider)
+-------------------------------
+7. Render plan discount
+8. Fix History ticket rendering
