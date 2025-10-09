@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "django_filters",
     "django_crontab",
     "model_utils",
+    "honeypot",
+    "django_recaptcha",
     # Local apps
     "accounts",
     "core",
@@ -86,6 +88,7 @@ if DEBUG:
     INSTALLED_APPS += ["debug_toolbar"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
     INTERNAL_IPS = config("DJANGO_INTERNAL_IPS", cast=Csv())
+    SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
 
 # Cors Configuration
 # CORS_ALLOWED_ORIGINS = config("DJANGO_CORS_ALLOWED_ORIGINS", cast=Csv())
@@ -362,3 +365,11 @@ APPLE_SIGN_IN_KEY_PATH = Path(config("APPLE_SIGN_IN_KEY_PATH"))
 # Firebase Admin SDK Initialization
 cred = credentials.Certificate(config("FIREBASE_ADMIN_SDK_CREDENTIALS_PATH"))
 firebase_admin.initialize_app(cred)
+
+
+RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_SECRET_KEY")
+RECAPTCHA_REQUIRED_SCORE = 0.5
+
+HONEYPOT_FIELD_NAME = "phone_number"
+HONEYPOT_RESPONDER = "core.views.honeypot_view_function"

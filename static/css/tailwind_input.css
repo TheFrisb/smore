@@ -154,6 +154,7 @@ div.g_id_signin > div > div > div {
 .planCard.active .checkInput {
     @apply bg-secondary-400;
 }
+
 .planCard.active .checkInput--icon {
     @apply block;
 }
@@ -169,6 +170,16 @@ div.g_id_signin > div > div > div {
     @apply hidden;
 }
 
-.planCard--owned .currentPlanDisclaimer{
+.planCard--owned .currentPlanDisclaimer {
     @apply !block;
+}
+
+
+.recaptcha-wrapper {
+    width: 100%; /* Makes wrapper full-width */
+    overflow: hidden; /* Prevents overflow from scaling */
+}
+
+.recaptcha-wrapper .g-recaptcha {
+    transform-origin: 0 0; /* Scales from top-left */
 }

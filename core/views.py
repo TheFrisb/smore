@@ -753,3 +753,12 @@ class VerifyEmailView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = _("Verify your email")
         return context
+
+
+def honeypot_view_function(request, fieldname):
+
+    logger.error(
+        f"Honeypot detected on path: {request.path} for ip_address: {request.META["REMOTE_ADDR"]}"
+    )
+
+    return redirect("core:home")

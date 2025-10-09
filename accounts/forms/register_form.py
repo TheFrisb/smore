@@ -3,6 +3,8 @@ import logging
 from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV3, ReCaptchaV2Checkbox
 
 from accounts.models import User
 
@@ -36,6 +38,16 @@ class RegisterForm(forms.ModelForm):
             attrs={"placeholder": "Confirm Password", "class": "form-control"}
         ),
         required=True,
+    )
+
+    recaptcha = ReCaptchaField(
+        widget=ReCaptchaV2Checkbox(
+            attrs={
+                "data-theme": "dark",
+                "data-size": "normal",
+            }
+        ),
+        error_messages={"required": "Please solve the reCaptcha puzzle"},
     )
 
     class Meta:

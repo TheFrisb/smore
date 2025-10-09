@@ -11,12 +11,14 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q, Sum
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView, ListView, RedirectView, TemplateView
 from google.auth.transport import requests
 from google.oauth2 import id_token
+from honeypot.decorators import check_honeypot
 
 from accounts.forms.login_form import LoginForm
 from accounts.forms.register_form import RegisterForm
@@ -71,6 +73,7 @@ class LogoutUserView(LogoutView):
         return context
 
 
+@method_decorator(check_honeypot, name="post")
 class RegisterUserView(RedirectAuthenticatedUserMixin, TemplateView):
     def __init__(self):
         super().__init__()
