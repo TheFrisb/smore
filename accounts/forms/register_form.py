@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django_recaptcha.fields import ReCaptchaField
-from django_recaptcha.widgets import ReCaptchaV3, ReCaptchaV2Checkbox
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
 from accounts.models import User
 

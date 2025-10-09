@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from rest_framework import serializers
 
-from subscriptions.models import Product, BillingProvider
+from subscriptions.models import BillingProvider, Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
