@@ -109,7 +109,9 @@ class PlansView(TemplateView):
 
         if (
             not self.request.user.is_authenticated
-            or self.request.user.created_at > v1_threshold_datetime
+            or not UserSubscription.objects.filter(
+                user=self.request.user, start_date__lt=v1_threshold_datetime
+            ).exists()
         ):
             prices_query = prices_query.filter(version=2)
         else:
