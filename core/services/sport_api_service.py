@@ -145,13 +145,13 @@ class SportApiService:
         """
         Get the league object based on sport type and external ID.
         """
-        try:
-            league = SportLeague.objects.get(type=sport_type, external_id=external_id)
-            return league
-        except SportLeague.DoesNotExist:
-            logger.error(
-                f"League with external ID: {external_id} for sport: {sport_type} not found."
-            )
+
+        league_obj = SportLeague.objects.filter(
+            type=sport_type, external_id=external_id
+        ).first()
+
+        if not league_obj:
+            logger.error(f"League {external_id} not found")
             return None
 
     def populate_matches_for_league(

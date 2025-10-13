@@ -99,12 +99,12 @@ class FootballApiService(SportApiService):
 
         logger.info(f"Processing fixture with ID: {fixture.get('id')}")
 
-        try:
-            league_obj = SportLeague.objects.get(
-                external_id=league_id,
-                product__name=Product.Names.SOCCER,
-            )
-        except SportLeague.DoesNotExist:
+        league_obj = SportLeague.objects.filter(
+            external_id=league_id,
+            product__name=Product.Names.SOCCER,
+        ).first()
+
+        if not league_obj:
             logger.error(f"League {league_id} not found")
             return None
 
