@@ -154,6 +154,8 @@ class SportApiService:
             logger.error(f"League {external_id} not found")
             return None
 
+        return league_obj
+
     def populate_matches_for_league(
         self, start_year=2020, end_year=2025, league_external_id=78, callback=None
     ) -> None:
