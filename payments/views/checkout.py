@@ -36,12 +36,13 @@ class CreateSubscriptionCheckoutUrl(APIView):
         serializer.is_valid(raise_exception=True)
 
         product_price = serializer.validated_data["product_price"]
-        enable_free_trial = UserSubscription.objects.filter(
+        has_had_subscription = UserSubscription.objects.filter(
             user=self.request.user,
             product_price__product=product_price.product,
             provider=BillingProvider.STRIPE,
         ).exists()
 
+        enable_free_trial = not has_had_subscription
         logger.info(
             f"User: {self.request.user.id} has free trial for checkout: {enable_free_trial}"
         )
