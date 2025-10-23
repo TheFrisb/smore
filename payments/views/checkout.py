@@ -42,6 +42,10 @@ class CreateSubscriptionCheckoutUrl(APIView):
             provider=BillingProvider.STRIPE,
         ).exists()
 
+        logger.info(
+            f"User: {self.request.user.id} has free trial for checkout: {enable_free_trial}"
+        )
+
         checkout_session = self.service.create_subscription_checkout_session(
             user=request.user,
             price_id=product_price.provider_price_id,
