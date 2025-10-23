@@ -12,6 +12,7 @@ from subscriptions.models import (
     PriceCoupon,
     ProductPrice,
     UserSubscription,
+    Product,
 )
 
 logger = logging.getLogger(__name__)
@@ -35,10 +36,17 @@ class CreateSubscriptionCheckoutUrl(APIView):
         serializer.is_valid(raise_exception=True)
 
         product_price = serializer.validated_data["product_price"]
+        enable_free_trial = UserSubscription.objects.filter(
+            user=self.request.user,
+            product_price__product=product_price.product,
+            provider=BillingProvider.STRIPE,
+        ).exists()
+
         checkout_session = self.service.create_subscription_checkout_session(
             user=request.user,
             price_id=product_price.provider_price_id,
             coupon=self._get_coupon_if_needed(),
+            enable_free_trial=enable_free_trial,
         )
 
         self._send_fb_event(product_price.product, checkout_session.amount_total)

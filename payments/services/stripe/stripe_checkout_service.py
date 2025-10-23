@@ -24,9 +24,13 @@ class StripePortalSessionFlow(Enum):
 class StripeCheckoutService(BaseStripeService):
 
     def create_subscription_checkout_session(
-        self, user: User | AbstractBaseUser, price_id: str, coupon: PriceCoupon
+        self,
+        user: User | AbstractBaseUser,
+        price_id: str,
+        coupon: PriceCoupon,
+        enable_free_trial: bool,
     ) -> Session:
-        metadata = {}
+        subscription_data = {"trial_period_days": 3} if enable_free_trial else {}
         checkout_session = self.stripe_client.checkout.Session.create(
             success_url=f"{settings.BASE_URL}{reverse('payments:payment_success')}",
             cancel_url=f"{settings.BASE_URL}{reverse('subscriptions:plans')}",
@@ -34,7 +38,7 @@ class StripeCheckoutService(BaseStripeService):
             customer=user.stripe_customer_id,
             line_items=self.get_subscription_line_items([price_id]),
             consent_collection={"terms_of_service": "required"},
-            subscription_data={"metadata": metadata} if metadata else None,
+            subscription_data=subscription_data if subscription_data else None,
             discounts=[{"coupon": coupon.provider_coupon_id}] if coupon else None,
         )
 

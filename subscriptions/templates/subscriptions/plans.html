@@ -3,7 +3,7 @@
 {% block content %}
     <input type="hidden" id="availableProductIds" value="{{ available_product_ids|join:',' }}">
     <input type="hidden" id="ownedPriceIds" value="{{ owned_price_ids|join:',' }}">
-        <input type="hidden" id="ownedProductIds" value="{{ owned_product_ids|join:',' }}">
+    <input type="hidden" id="ownedProductIds" value="{{ owned_product_ids|join:',' }}">
 
 
     <section class="py-10 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
@@ -25,7 +25,8 @@
             <div class="rounded-full bg-[#0D151E] grid grid-cols-3 border border-gray-600">
                 {% for product in available_products %}
                     <div class="managePlanProductTabButton px-4 py-4 rounded-full {% if forloop.first %}active{% endif %} cursor-pointer"
-                         data-product-id="{{ product.id }}">
+                         data-product-id="{{ product.id }}"
+                         data-has-free-trial="{% if product.id not in purchased_product_ids %}true{% else %}false{% endif %}">
                         <p class="text-white text-center">{{ product.name }}</p>
                     </div>
                 {% endfor %}
@@ -33,7 +34,8 @@
 
             {% for product in available_products %}
                 <div class="toggleableProductContent {% if forloop.first %}active{% endif %}"
-                     data-product-id="{{ product.id }}">
+                     data-product-id="{{ product.id }}"
+                >
                     <div class="flex items-start justify-start flex-col gap-2 mb-6">
                         {% for benefit in product.benefits %}
                             <div class="flex items-center justify-start gap-2">
@@ -58,7 +60,12 @@
                                         <div class="w-6 h-6 rounded-full border border-white checkInput flex items-center justify-center">
                                             {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-white hidden checkInput--icon" %}
                                         </div>
-                                        <p class="font-bold text-white">{{ price|duration_label }} {% trans "access" %}</p>
+                                        <div class="flex items-start justify-center flex-col">
+                                            <p class="font-bold text-white">{{ price|duration_label }} {% trans "access" %}</p>
+                                            {% if product.id not in purchased_product_ids %}
+                                                <p class="text-gray-400 text-sm">Free 3-day trial</p>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                     <div class="flex flex-col items-end justify-center text-end">
                                         <p class="text-xl font-bold text-secondary-400">
@@ -86,7 +93,9 @@
                     disabled>
                 <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 <div class=" flex items-center">
-                    <span class="text-lg">{{ button_text }}</span>
+
+                    <span class="text-lg buttonText font-bold checkoutButton__noFreeTrialText {% if available_products.first.id not in purchased_product_ids %}hidden{% endif %}">{{ button_text }}</span>
+                    <span class="text-xl buttonText font-bold checkoutButton__FreeTrialText {% if available_products.first.id in purchased_product_ids %}hidden{% endif %}">{% trans 'Try 3 days FREE' %}</span>
                     {% svg_icon icon_name='arrowRight' css_classes='w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300 arrowRightIcon' %}
                     {% svg_icon icon_name='spinner' css_classes='w-6 h-6 text-gray-200 animate-spin fill-secondary-400 absolute right-4 buttonSpinnerIcon hidden' %}
                 </div>

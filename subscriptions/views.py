@@ -26,6 +26,7 @@ class PlansView(TemplateView):
         context["user_subscriptions"] = user_subscriptions
         context["owned_price_ids"] = self._get_owned_price_ids(user_subscriptions)
         context["owned_product_ids"] = self._get_owned_product_ids(user_subscriptions)
+        context["purchased_product_ids"] = self.get_purchased_product_ids()
         context["button_text"] = self._get_button_text()
         return context
 
@@ -132,3 +133,20 @@ class PlansView(TemplateView):
             .order_by("order")
             .prefetch_related(models.Prefetch("prices", queryset=prices_query))
         )
+
+    def get_purchased_product_ids(self):
+        owned_product_ids = []
+
+        user_subscriptions = UserSubscription.objects.filter(
+            user=self.request.user, provider=BillingProvider.STRIPE
+        ).prefetch_related("product_price", "product_price__product")
+
+        if not user_subscriptions:
+            return owned_product_ids
+
+        for subscription in user_subscriptions:
+            product = subscription.product_price.product
+            if product.id not in owned_product_ids:
+                owned_product_ids.append(product.id)
+
+        return owned_product_ids
