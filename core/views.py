@@ -533,7 +533,6 @@ class UpcomingMatchesView(TemplateView):
             Ticket.objects.filter(
                 visibility__in=self._get_visibility_filter(),
                 status=Ticket.Status.PENDING,
-                starts_at__date__gte=timezone.now().date(),
             )
             .prefetch_related(
                 "bet_lines",
