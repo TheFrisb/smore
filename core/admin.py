@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from adminsortable2.admin import SortableAdminMixin
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.postgres.lookups import Unaccent
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Min, Q, Value
@@ -25,6 +25,8 @@ from core.models import (
     TeamStanding,
     Ticket,
 )
+from core.services.basketball_api_service import BasketballApiService
+from core.services.football_api_service import FootballApiService
 from subscriptions.models import Product
 
 logger = logging.getLogger(__name__)
@@ -135,6 +137,71 @@ class SportMatchAdmin(admin.ModelAdmin):
     readonly_fields = ["home_team", "away_team", "league"]
 
     ordering = ["-kickoff_datetime"]
+    actions = ["refresh_football_matches", "refresh_basketball_matches"]
+
+    def get_urls(self):
+        from django.urls import path
+
+        urls = super().get_urls()
+        custom_urls = [
+            path(
+                "refresh-football/",
+                self.admin_site.admin_view(self.refresh_football_view),
+                name="refresh-football",
+            ),
+            path(
+                "refresh-basketball/",
+                self.admin_site.admin_view(self.refresh_basketball_view),
+                name="refresh-basketball",
+            ),
+        ]
+        return custom_urls + urls
+
+    def changelist_view(self, request, extra_context=None):
+        """Inject custom buttons into the admin changelist page."""
+        extra_context = extra_context or {}
+        extra_context["custom_buttons"] = [
+            {
+                "label": "⚽ Refresh Football Matches",
+                "url": "refresh-football/",
+                "class": "button",
+            },
+            {
+                "label": "🏀 Refresh Basketball Matches",
+                "url": "refresh-basketball/",
+                "class": "button",
+            },
+        ]
+        return super().changelist_view(request, extra_context=extra_context)
+
+    # ---------------------------
+    #   Button action handlers
+    # ---------------------------
+    def refresh_football_view(self, request):
+        start_time = timezone.now()
+        end_time = start_time + timedelta(days=1)
+        FootballApiService().populate_matches(start_time, end_time)
+        self.message_user(
+            request,
+            f"✅ Football matches refreshed for {start_time.date()}–{end_time.date()}",
+            level=messages.SUCCESS,
+        )
+        from django.shortcuts import redirect
+
+        return redirect("..")
+
+    def refresh_basketball_view(self, request):
+        start_time = timezone.now()
+        end_time = start_time + timedelta(days=1)
+        BasketballApiService().populate_matches(start_time, end_time)
+        self.message_user(
+            request,
+            f"🏀 Basketball matches refreshed for {start_time.date()}–{end_time.date()}",
+            level=messages.SUCCESS,
+        )
+        from django.shortcuts import redirect
+
+        return redirect("..")
 
     def get_search_results(self, request, queryset, search_term):
         # Only apply custom trigram logic when our JS autocomplete ‘term’ param is present
