@@ -179,9 +179,9 @@ class PredictionNotificationService:
         if single_pick_count == 0 and ticket_count == 0:
             intro = "No single picks or parlays have been prepared for today."
         elif single_pick_count == 0:
-            intro = f"We have {ticket_count} {parlay_label} and no single picks prepared for today."
+            intro = f"We have {ticket_count} {parlay_label} prepared for today."
         elif ticket_count == 0:
-            intro = f"We have {single_pick_count} {single_label} and no parlays prepared for today."
+            intro = f"We have {single_pick_count} {single_label} prepared for today."
         else:
             intro = f"We have {single_pick_count} {single_label} and {ticket_count} {parlay_label} prepared for today."
 
