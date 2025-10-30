@@ -373,3 +373,5 @@ RECAPTCHA_REQUIRED_SCORE = 0.5
 
 HONEYPOT_FIELD_NAME = "phone_number"
 HONEYPOT_RESPONDER = "core.views.honeypot_view_function"
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30

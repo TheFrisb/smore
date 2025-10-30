@@ -19,6 +19,7 @@ import initSportToggler from "./sportToggler";
 import { initLoadMorePredictionsButton } from "./history/loadMoreButton";
 import { initStakeButtons } from "./stakeModal";
 import { initPlanPage } from "./plans/planPage";
+import { initSetTimezone } from "./timezone/initSetTimezone";
 
 document.addEventListener("DOMContentLoaded", () => {
   Aos.init();
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSportToggler();
   initStakeButtons();
 
+  initSetTimezone();
   const container = document.querySelector("#aiAssistantRelativeContainer");
   const aiAssistant = document.querySelector("#aiAssistantIcon");
 

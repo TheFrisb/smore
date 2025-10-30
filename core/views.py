@@ -1,6 +1,7 @@
 import logging
 from collections import defaultdict
 
+import pytz
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -614,23 +615,24 @@ class UpcomingMatchesView(TemplateView):
                     {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
                 )
 
-        # Group by date
+        # Get user's timezone from session (default to UTC)
+        user_tz_name = self.request.session.get("user_timezone", "UTC")
+        user_tz = pytz.timezone(user_tz_name)
+        # Group by local date
         grouped_by_date = defaultdict(list)
         for item in all_objects:
-            date = item["datetime"].date()
-            grouped_by_date[date].append(item)
-
-        # Sort each group by datetime
+            utc_dt = item["datetime"]  # Assumes this is timezone-aware (UTC)
+            local_dt = utc_dt.astimezone(user_tz)
+            local_date = local_dt.date()
+            grouped_by_date[local_date].append(item)
+        # Sort each group: tickets first, then by datetime
         for date, items in grouped_by_date.items():
-            # Sort by type (ticket comes first) and then by datetime
             grouped_by_date[date] = sorted(
                 items, key=lambda x: (x["type"] != "ticket", x["datetime"])
             )
-
         # Create a sorted list of (date, items) for the template
         sorted_dates = sorted(grouped_by_date.keys())
         grouped_items = [(date, grouped_by_date[date]) for date in sorted_dates]
-
         return grouped_items
 
     def get_purchased_ids(self):

@@ -5,6 +5,7 @@ from core.api.views import (
     HistoryAPIView,
     ProductsListView,
     UpcomingAPIView,
+    set_timezone,
 )
 
 app_name = "core_api"
@@ -25,4 +26,5 @@ urlpatterns = [
         UpcomingAPIView.as_view(),
         name="upcoming-predictions-tickets",
     ),
+    path("set-timezone/", set_timezone, name="set_timezone"),
 ]

@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 from django_filters import rest_framework as filters
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -7,7 +9,7 @@ from rest_framework.views import APIView
 from core.models import FrequentlyAskedQuestion, Prediction, Ticket
 from subscriptions.models import Product
 from subscriptions.serializers import ProductSerializer
-
+import pytz
 from .serializers import (
     FrequentlyAskedQuestionSerializer,
     PredictionHistorySerializer,
@@ -243,3 +245,12 @@ class UpcomingAPIView(APIView):
         combined.sort(key=lambda x: (x["object_type"] != "ticket", x["datetime"]))
 
         return Response(combined)
+
+
+@require_POST
+def set_timezone(request):
+    tz_name = request.POST.get("timezone")
+    if tz_name in pytz.all_timezones:
+        request.session["user_timezone"] = tz_name
+        return HttpResponse("OK")
+    return HttpResponse("Invalid timezone", status=400)
