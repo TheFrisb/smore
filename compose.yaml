@@ -20,3 +20,8 @@ services:
 volumes:
   smore_postgres_data_volume:
   smore_redis_data_volume:
+
+
+networks:
+  smore_network:
+    external: true

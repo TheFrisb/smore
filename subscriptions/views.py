@@ -137,6 +137,9 @@ class PlansView(TemplateView):
     def get_purchased_product_ids(self):
         owned_product_ids = []
 
+        if not self.request.user.is_authenticated:
+            return owned_product_ids
+
         user_subscriptions = UserSubscription.objects.filter(
             user=self.request.user, provider=BillingProvider.STRIPE
         ).prefetch_related("product_price", "product_price__product")
