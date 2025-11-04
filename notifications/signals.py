@@ -32,7 +32,13 @@ def handle_notification_request(sender, instance, created, **kwargs):
     Otherwise, send to the topic and create UserNotifications for all users with FCM tokens.
     """
     if not created:
-        return
+        UserNotification.objects.filter(request=instance).update(
+            title=instance.title,
+            message=instance.message,
+            topic=instance.topic,
+            icon=instance.icon,
+            is_important=instance.is_important,
+        )
 
     fcm_service = FCMService()
     # serialized_data = NotificationRequestSerializer(instance).data
