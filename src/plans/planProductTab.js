@@ -3,7 +3,7 @@ import { clearSelectedProductId } from "./checkout";
 function initPlanProductTab() {
   const tabs = document.querySelectorAll(".managePlanProductTabButton");
   const toggleableContents = document.querySelectorAll(
-    ".toggleableProductContent"
+    ".toggleableProductContent",
   );
 
   const checkoutButton = document.getElementById("checkoutButton");
@@ -24,33 +24,45 @@ function initPlanProductTab() {
 
   function activateTab(tab) {
     const productId = tab.getAttribute("data-product-id");
-    const isFreeTrialEnabled = tab.getAttribute("data-has-free-trial") === "true";
-    console.log(isFreeTrialEnabled);
+    const isFreeTrialEnabled =
+      tab.getAttribute("data-has-free-trial") === "true";
 
     const tabToActivate = document.querySelector(
-      `.managePlanProductTabButton[data-product-id="${productId}"]`
+      `.managePlanProductTabButton[data-product-id="${productId}"]`,
     );
 
     const contentToActivate = document.querySelector(
-      `.toggleableProductContent[data-product-id="${productId}"]`
+      `.toggleableProductContent[data-product-id="${productId}"]`,
     );
 
     removeActiveClassFromAllTabs();
 
+    clearSelectedProductId();
     if (tabToActivate && contentToActivate) {
       tabToActivate.classList.add("active");
       contentToActivate.classList.add("active");
 
-      if (isFreeTrialEnabled) {
-        document.querySelector(".checkoutButton__noFreeTrialText").classList.add("hidden");
-        document.querySelector(".checkoutButton__FreeTrialText").classList.remove("hidden");
-
-      } else {
-        document.querySelector(".checkoutButton__FreeTrialText").classList.add("hidden");
-        document.querySelector(".checkoutButton__noFreeTrialText").classList.remove("hidden");
+      const ownedProductCard =
+        contentToActivate.querySelector(".planCard--owned");
+      if (ownedProductCard) {
+        ownedProductCard.classList.add("active");
       }
 
-      clearSelectedProductId();
+      if (isFreeTrialEnabled) {
+        document
+          .querySelector(".checkoutButton__noFreeTrialText")
+          .classList.add("hidden");
+        document
+          .querySelector(".checkoutButton__FreeTrialText")
+          .classList.remove("hidden");
+      } else {
+        document
+          .querySelector(".checkoutButton__FreeTrialText")
+          .classList.add("hidden");
+        document
+          .querySelector(".checkoutButton__noFreeTrialText")
+          .classList.remove("hidden");
+      }
     }
   }
 

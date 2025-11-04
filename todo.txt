@@ -1,21 +1,11 @@
-2. Add app updater
-3. Improve application
--- Add dio timeouts
--- Add other API timeouts, i.e. RevenueCat, FireBase
--- Ensure app initializes smooth
--- Improve logs
-
-
-2. Fix AI count
-3. Protect backend API models with v2 endpoints, and ensure application works with it
-
-4. Total odds can shift further to right
-
-6. Handle application state changes:
--- Ensure subscription or customer info revenue cat updates, trigger refresh
--- Ensure topics are subscribed and unsubscribed properly
--- Ensure user is refreshed on app resume
--- Ensure notifications are refreshed (inject provider with setter to UserProvider)
--------------------------------
-7. Render plan discount
-8. Fix History ticket rendering
+--------------
+1. Show plan discount
+2. Show plan discounted price if applicable
+3. Fix bet lines on web & application
+4. Make application font size fixed
+--------------
+1. Fix AI count
+2. Migrate app to v2 protected api endpoints
+3. Total odds can shift further to right
+--------------
+1. Fix history tickets on web not being rendered correctly

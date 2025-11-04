@@ -47,7 +47,13 @@
 
                     <div class="flex flex-col gap-4">
                         {% for price in product.prices.all %}
-                            <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600 relative {% if price.id in owned_price_ids %}planCard--owned{% endif %}"
+                            <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600 relative
+                                 {% if price.id in owned_price_ids %}
+                                 planCard--owned
+                                 {% if forloop.parentloop.first %}
+                                 active
+                                 {% endif %}
+                                 {% endif %}"
                                  data-product-id="{{ price.product.id }}"
                                  data-price-id="{{ price.id }}">
                                 <div class="flex items-center justify-between gap-2">
