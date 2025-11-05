@@ -89,7 +89,7 @@ def send_soccer_daily_picks_notification():
     return _send_daily_picks_notification(
         Product.Names.SOCCER,
         title,
-        delay_minutes=30,  # Changed from 1 second to 30 minutes for consistency
+        delay_minutes=30,
     )
 
 

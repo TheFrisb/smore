@@ -149,26 +149,55 @@ class PredictionNotificationService:
         lines = []
 
         # Get all predictions for today for this product
-        predictions = Prediction.objects.filter(
-            created_at__date=today,
-            status=Prediction.Status.PENDING,
-            product__name=product_name,
-        ).select_related(
-            "match", "match__home_team", "match__away_team", "match__league", "product"
-        )
+        if product_name == Product.Names.SOCCER:
+            predictions = Prediction.objects.filter(
+                match__kickoff_datetime__date=today,
+                status=Prediction.Status.PENDING,
+                product__name=product_name,
+            ).select_related(
+                "match",
+                "match__home_team",
+                "match__away_team",
+                "match__league",
+                "product",
+            )
 
-        # Get all tickets for today for this product
-        tickets = Ticket.objects.filter(
-            created_at__date=today,
-            status=Ticket.Status.PENDING,
-            product__name=product_name,
-        ).prefetch_related(
-            "bet_lines",
-            "bet_lines__match",
-            "bet_lines__match__home_team",
-            "bet_lines__match__away_team",
-            "bet_lines__match__league",
-        )
+            # Get all tickets for today for this product
+            tickets = Ticket.objects.filter(
+                starts_at__date=today,
+                status=Ticket.Status.PENDING,
+                product__name=product_name,
+            ).prefetch_related(
+                "bet_lines",
+                "bet_lines__match",
+                "bet_lines__match__home_team",
+                "bet_lines__match__away_team",
+                "bet_lines__match__league",
+            )
+        else:
+            predictions = Prediction.objects.filter(
+                created_at__date=today,
+                status=Prediction.Status.PENDING,
+                product__name=product_name,
+            ).select_related(
+                "match",
+                "match__home_team",
+                "match__away_team",
+                "match__league",
+                "product",
+            )
+
+            tickets = Ticket.objects.filter(
+                created_at__date=today,
+                status=Ticket.Status.PENDING,
+                product__name=product_name,
+            ).prefetch_related(
+                "bet_lines",
+                "bet_lines__match",
+                "bet_lines__match__home_team",
+                "bet_lines__match__away_team",
+                "bet_lines__match__league",
+            )
 
         single_pick_count = predictions.count()
         ticket_count = tickets.count()
