@@ -1,8 +1,3 @@
 2. Fix history tickets on web not being rendered correctly
-3. Fix bet line rendering on web
 --------------
 1. Migrate app to v2 protected api endpoints
-
-
-
-1. Show plan discounted price

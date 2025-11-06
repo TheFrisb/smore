@@ -642,6 +642,10 @@ video {
   bottom: -0.25rem;
 }
 
+.-top-2 {
+  top: -0.5rem;
+}
+
 .-top-3 {
   top: -0.75rem;
 }
@@ -760,14 +764,6 @@ video {
 
 .top-full {
   top: 100%;
-}
-
-.top-2 {
-  top: 0.5rem;
-}
-
-.-top-2 {
-  top: -0.5rem;
 }
 
 .z-10 {
@@ -1410,17 +1406,6 @@ video {
   animation: spin 1s linear infinite;
 }
 
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-.animate-ping {
-  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
 .cursor-not-allowed {
   cursor: not-allowed;
 }
@@ -1994,47 +1979,17 @@ video {
   background-color: rgb(3 105 161 / 0.2);
 }
 
+.bg-secondary-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(7 89 133 / var(--tw-bg-opacity, 1));
+}
+
 .bg-transparent {
   background-color: transparent;
 }
 
 .bg-yellow-500\/10 {
   background-color: rgb(234 179 8 / 0.1);
-}
-
-.bg-green-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 101 52 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-950 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(5 46 22 / var(--tw-bg-opacity, 1));
-}
-
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
-}
-
-.bg-secondary-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(7 89 133 / var(--tw-bg-opacity, 1));
-}
-
-.bg-secondary-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 230 254 / var(--tw-bg-opacity, 1));
-}
-
-.bg-secondary-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(54 191 250 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-10 {
@@ -2355,6 +2310,11 @@ video {
   padding: 2rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -2448,11 +2408,6 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.px-1 {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
 }
 
 .pb-10 {
@@ -3171,6 +3126,10 @@ div.g_id_signin > div > div > div {
 
 .toggleableProductContent {
   display: none;
+}
+
+.betLines.no-connect-line::before {
+  background: none;
 }
 
 .toggleableProductContent.active {

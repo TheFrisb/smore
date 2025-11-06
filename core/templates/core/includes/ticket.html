@@ -28,7 +28,9 @@
     <div class="relative mt-6">
         {% if ticket.product.id in allowed_products or ticket.id in purchased_ids or has_daily_offer %}
             {% for bet_line in ticket.bet_lines.all %}
-                <div class="relative betLines {% if not bet_line.same_as_previous or bet_line.same_as_next %}betLines--{{ bet_line.status|lower }}{% endif %}">
+                <div class="relative betLines
+                       {% if bet_line.should_break_line %}no-connect-line{% endif %}
+                        {% if not bet_line.same_as_previous or bet_line.same_as_next %}betLines--{{ bet_line.status|lower }}{% endif %}">
                     <!-- If the previous match was the same as the current match, but the next match is different, do not add betLines--{{ bet_line.status|lower }}-->
                     <div class="flex items-start space-x-2 py-3">
                         <div class="relative z-10">

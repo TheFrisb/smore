@@ -595,21 +595,47 @@ class UpcomingMatchesView(TemplateView):
 
         if sport_tickets:
             for ticket in sport_tickets:
-                # Process bet lines for match grouping
                 bet_lines = list(ticket.bet_lines.all())
+
+                # --- NEW: Step 1: Count Picks per Match ---
+                match_counts = defaultdict(int)
+                for bet_line in bet_lines:
+                    match_counts[bet_line.match_id] += 1
+
+                # --- Existing and NEW: Step 2: Set Flags ---
                 for i, bet_line in enumerate(bet_lines):
-                    # Add grouping flags to bet line instance
+                    # Existing flags
                     bet_line.same_as_previous = False
                     bet_line.same_as_next = False
 
-                    if i > 0 and bet_lines[i - 1].match == bet_line.match:
+                    if (
+                        i > 0 and bet_lines[i - 1].match_id == bet_line.match_id
+                    ):  # Use match_id for comparison
                         bet_line.same_as_previous = True
 
-                    if (
-                        i < len(bet_lines) - 1
-                        and bet_lines[i + 1].match == bet_line.match
-                    ):
-                        bet_line.same_as_next = True
+                    # Check if this is not the last item
+                    if i < len(bet_lines) - 1:
+                        next_bet_line = bet_lines[i + 1]
+
+                        if next_bet_line.match_id == bet_line.match_id:
+                            bet_line.same_as_next = True
+
+                        # --- NEW: Step 3: Calculate should_break_line ---
+
+                        # Check if current and next are single picks
+                        current_is_single_pick = match_counts[bet_line.match_id] == 1
+                        next_is_single_pick = match_counts[next_bet_line.match_id] == 1
+
+                        # Flutter's CONNECT logic: nextIsSameMatch OR (current_is_single_pick AND next_is_single_pick)
+                        should_connect = bet_line.same_as_next or (
+                            current_is_single_pick and next_is_single_pick
+                        )
+
+                        # The line should break if it SHOULD NOT connect
+                        bet_line.should_break_line = not should_connect
+                    else:
+                        # The absolute last bet line always breaks (handled by CSS :last-child, but good to set here)
+                        bet_line.should_break_line = True
 
                 all_objects.append(
                     {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}

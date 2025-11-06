@@ -124,7 +124,9 @@ div.g_id_signin > div > div > div {
 .toggleableProductContent {
     @apply hidden;
 }
-
+.betLines.no-connect-line::before {
+    background: none;
+}
 .toggleableProductContent.active {
     @apply block;
 }
