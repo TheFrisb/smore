@@ -35,6 +35,10 @@ class StripeSubscriptionService(BaseStripeService):
             stripe_subscription
         )
 
+        has_active_subscription = UserSubscription.objects.filter(
+            is_active=True
+        ).exists()
+
         user_subscription = UserSubscription.objects.create(
             user=user,
             product_price=product_price,
@@ -43,6 +47,7 @@ class StripeSubscriptionService(BaseStripeService):
             is_active=True,
             start_date=start_datetime,
             end_date=end_datetime,
+            is_discounted=has_active_subscription,
         )
 
         return user_subscription

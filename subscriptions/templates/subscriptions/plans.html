@@ -24,10 +24,20 @@
             </div>
             <div class="rounded-full bg-[#0D151E] grid grid-cols-3 border border-gray-600">
                 {% for product in available_products %}
-                    <div class="managePlanProductTabButton px-4 py-4 rounded-full {% if forloop.first %}active{% endif %} cursor-pointer"
+                    <div class="managePlanProductTabButton px-4 py-4 rounded-full {% if forloop.first %}active{% endif %} cursor-pointer relative"
                          data-product-id="{{ product.id }}"
                          data-has-free-trial="{% if product.id not in purchased_product_ids %}true{% else %}false{% endif %}">
                         <p class="text-white text-center">{{ product.name }}</p>
+
+                        {% if product.id in owned_product_ids %}
+                            <div class="absolute -top-2 right-0 bg-secondary-800  flex items-center justify-center rounded-2xl px-1 py-0.5">
+                                <p class="text-xs text-white">Active Plan</p>
+                            </div>
+                        {% elif owned_product_ids and product.id not in owned_product_ids %}
+                            <div class="absolute -top-2 right-0 bg-green-600  flex items-center justify-center rounded-2xl px-1 py-0.5">
+                                <p class="text-xs text-white">-20%</p>
+                            </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
@@ -74,9 +84,29 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end justify-center text-end">
-                                        <p class="text-xl font-bold text-secondary-400">
-                                            {{ price.currency }}{{ price.amount }}
-                                        </p>
+                                        {% if price.product in owned_discounted_product %}
+                                            <div class="flex items-end justify-center gap-1">
+                                                <p class="text-xs line-through font-bold text-gray-400">
+                                                    {{ price.currency }}{{ price.amount }}
+                                                </p>
+                                                <p class="text-xl font-bold text-secondary-400">
+                                                    {{ price.currency }}{{ price.discounted_price|floatformat:2 }}
+                                                </p>
+                                            </div>
+                                        {% elif first_active_product and price.product != first_active_product %}
+                                            <div class="flex items-end justify-center gap-1">
+                                                <p class="text-xs line-through font-bold text-gray-400">
+                                                    {{ price.currency }}{{ price.amount }}
+                                                </p>
+                                                <p class="text-xl font-bold text-secondary-400">
+                                                    {{ price.currency }}{{ price.discounted_price|floatformat:2 }}
+                                                </p>
+                                            </div>
+                                        {% else %}
+                                            <p class="text-xl font-bold text-secondary-400">
+                                                {{ price.currency }}{{ price.amount }}
+                                            </p>
+                                        {% endif %}
                                         <p class="text-sm text-secondary-400">{{ price|price_interval }}</p>
                                     </div>
                                 </div>

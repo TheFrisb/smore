@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -60,6 +62,13 @@ class ProductPrice(BaseInternalModel):
     interval_count = models.PositiveIntegerField(default=1)
     version = models.IntegerField(default=1)
 
+    @property
+    def discounted_price(self):
+        """
+        Get the price with -20% discount.
+        """
+        return self.amount * Decimal(0.8)
+
     class Meta:
         unique_together = ("provider", "provider_price_id")
 
@@ -86,6 +95,7 @@ class UserSubscription(BaseInternalModel):
     is_active = models.BooleanField(default=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    is_discounted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Subscription of {self.user.email} to {self.product_price.product.name}"

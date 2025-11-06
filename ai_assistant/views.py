@@ -112,8 +112,7 @@ class SendMessageToAiView(APIView):
 
 
 class GetSentMessagesCount(APIView):
-    permission_classes = []
-    authentication_classes = []
+    permission_classes = [IsAuthenticated]
 
     class OutputSerializer(serializers.Serializer):
         count = serializers.IntegerField()

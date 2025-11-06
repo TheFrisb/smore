@@ -1,14 +1,8 @@
-1. Fix history tickets on web not being rendered correctly
-
-
-
-1. Fix bet lines on web & application
-2. Make application font size fixed
-3. Fix AI count
-4. Total odds can shift further to right
---------------
-1. Show plan discounted price
-2. Notifications factor in if added from previous day
+2. Fix history tickets on web not being rendered correctly
+3. Fix bet line rendering on web
 --------------
 1. Migrate app to v2 protected api endpoints
-2. Send custom header from mobile apps
+
+
+
+1. Show plan discounted price

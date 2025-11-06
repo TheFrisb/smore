@@ -16,16 +16,26 @@ class PlansView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_subscriptions = self._get_user_subscriptions()
+        active_user_subscriptions = self._get_user_subscriptions()
 
         context["page_title"] = _("Plans")
         context["available_products"] = self._get_products_with_benefits()
         context["available_product_ids"] = [
             product.id for product in context["available_products"]
         ]
-        context["user_subscriptions"] = user_subscriptions
-        context["owned_price_ids"] = self._get_owned_price_ids(user_subscriptions)
-        context["owned_product_ids"] = self._get_owned_product_ids(user_subscriptions)
+        context["user_subscriptions"] = active_user_subscriptions
+        context["first_active_product"] = self._get_first_active_product(
+            active_user_subscriptions
+        )
+        context["owned_discounted_product"] = self._get_owned_discounted_products(
+            active_user_subscriptions
+        )
+        context["owned_price_ids"] = self._get_owned_price_ids(
+            active_user_subscriptions
+        )
+        context["owned_product_ids"] = self._get_owned_product_ids(
+            active_user_subscriptions
+        )
         context["purchased_product_ids"] = self.get_purchased_product_ids()
         context["button_text"] = self._get_button_text()
         return context
@@ -40,6 +50,27 @@ class PlansView(TemplateView):
             "product_price",
             "product_price__product",
         )
+
+    def _get_first_active_product(
+        self, user_subscriptions: QuerySet[UserSubscription, UserSubscription]
+    ):
+        if not self.request.user.is_authenticated or not user_subscriptions:
+            return None
+
+        return sorted(user_subscriptions, key=lambda instance: instance.created_at)[
+            0
+        ].product_price.product
+
+    def _get_owned_discounted_products(
+        self, user_subscriptions: QuerySet[UserSubscription, UserSubscription]
+    ):
+        products = []
+
+        for subscription in user_subscriptions:
+            if subscription.is_discounted:
+                products.append(subscription.product_price.product)
+
+        return products
 
     def _get_owned_price_ids(
         self, user_subscriptions: QuerySet[UserSubscription, UserSubscription]

@@ -90,7 +90,6 @@ class UserAdmin(UserAdmin):
         "available_balance",
         "direct_referrals",
         "indirect_referrals",
-        "stripe_customer_id",
         "provider",
         "google_sub",
     ]
