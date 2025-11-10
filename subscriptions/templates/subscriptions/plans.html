@@ -4,7 +4,7 @@
     <input type="hidden" id="availableProductIds" value="{{ available_product_ids|join:',' }}">
     <input type="hidden" id="ownedPriceIds" value="{{ owned_price_ids|join:',' }}">
     <input type="hidden" id="ownedProductIds" value="{{ owned_product_ids|join:',' }}">
-
+    <input type="hidden" id="purchasedProductIds" value="{{ purchased_product_ids|join:',' }}">
 
     <section class="py-10 bg-gradient-to-b from-primary-800 to-primary-900 relative overflow-hidden min-h-screen">
         <div class="absolute inset-0 bg-squares-pattern opacity-5 pointer-events-none"></div>
@@ -57,57 +57,62 @@
 
                     <div class="flex flex-col gap-4">
                         {% for price in product.prices.all %}
-                            <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600 relative
+                            <div class="relative planCardContainer">
+                                {% if price.id in owned_price_ids %}
+                                    <div class="absolute -top-3 right-3 bg-green-600 px-4 py-1 rounded-lg z-20">
+                                        <p class="text-white text-xs">Current plan</p>
+                                    </div>
+                                {% endif %}
+                                <div class="planCard p-4 rounded-lg bg-[#2b3a4b] border border-gray-600
                                  {% if price.id in owned_price_ids %}
                                  planCard--owned
                                  {% if forloop.parentloop.first %}
                                  active
                                  {% endif %}
                                  {% endif %}"
-                                 data-product-id="{{ price.product.id }}"
-                                 data-price-id="{{ price.id }}">
-                                <div class="flex items-center justify-between gap-2">
+                                     data-price-amount="{{ price.amount }}"
+                                     data-product-id="{{ price.product.id }}"
+                                     data-price-id="{{ price.id }}">
+                                    <div class="flex items-center justify-between gap-2">
 
-                                    <div class="absolute -top-3 right-3 bg-green-600 px-4 py-1 rounded-lg currentPlanDisclaimer">
-                                        <p class="text-white text-xs">Current plan</p>
-                                    </div>
 
-                                    <div class="flex items-center gap-3 text-start">
-                                        <div class="w-6 h-6 rounded-full border border-white checkInput flex items-center justify-center">
-                                            {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-white hidden checkInput--icon" %}
+                                        <div class="flex items-center gap-3 text-start">
+                                            <div class="w-6 h-6 rounded-full border border-white checkInput flex items-center justify-center">
+                                                {% svg_icon icon_name="checkIcon" css_classes="w-4 h-4 text-white hidden checkInput--icon" %}
+                                            </div>
+                                            <div class="flex items-start justify-center flex-col">
+                                                <p class="font-bold text-white">{{ price|duration_label }} {% trans "access" %}</p>
+                                                {% if product.id not in purchased_product_ids %}
+                                                    <p class="text-gray-400 text-sm">Free 3-day trial</p>
+                                                {% endif %}
+                                            </div>
                                         </div>
-                                        <div class="flex items-start justify-center flex-col">
-                                            <p class="font-bold text-white">{{ price|duration_label }} {% trans "access" %}</p>
-                                            {% if product.id not in purchased_product_ids %}
-                                                <p class="text-gray-400 text-sm">Free 3-day trial</p>
+                                        <div class="flex flex-col items-end justify-center text-end">
+                                            {% if price.product in owned_discounted_product %}
+                                                <div class="flex items-end justify-center gap-1">
+                                                    <p class="text-xs line-through font-bold text-gray-400">
+                                                        {{ price.currency }}{{ price.amount }}
+                                                    </p>
+                                                    <p class="text-xl font-bold text-secondary-400">
+                                                        {{ price.currency }}{{ price.discounted_price|floatformat:2 }}
+                                                    </p>
+                                                </div>
+                                            {% elif first_active_product and price.product != first_active_product %}
+                                                <div class="flex items-end justify-center gap-1">
+                                                    <p class="text-xs line-through font-bold text-gray-400">
+                                                        {{ price.currency }}{{ price.amount }}
+                                                    </p>
+                                                    <p class="text-xl font-bold text-secondary-400">
+                                                        {{ price.currency }}{{ price.discounted_price|floatformat:2 }}
+                                                    </p>
+                                                </div>
+                                            {% else %}
+                                                <p class="text-xl font-bold text-secondary-400">
+                                                    {{ price.currency }}{{ price.amount }}
+                                                </p>
                                             {% endif %}
+                                            <p class="text-sm text-secondary-400">{{ price|price_interval }}</p>
                                         </div>
-                                    </div>
-                                    <div class="flex flex-col items-end justify-center text-end">
-                                        {% if price.product in owned_discounted_product %}
-                                            <div class="flex items-end justify-center gap-1">
-                                                <p class="text-xs line-through font-bold text-gray-400">
-                                                    {{ price.currency }}{{ price.amount }}
-                                                </p>
-                                                <p class="text-xl font-bold text-secondary-400">
-                                                    {{ price.currency }}{{ price.discounted_price|floatformat:2 }}
-                                                </p>
-                                            </div>
-                                        {% elif first_active_product and price.product != first_active_product %}
-                                            <div class="flex items-end justify-center gap-1">
-                                                <p class="text-xs line-through font-bold text-gray-400">
-                                                    {{ price.currency }}{{ price.amount }}
-                                                </p>
-                                                <p class="text-xl font-bold text-secondary-400">
-                                                    {{ price.currency }}{{ price.discounted_price|floatformat:2 }}
-                                                </p>
-                                            </div>
-                                        {% else %}
-                                            <p class="text-xl font-bold text-secondary-400">
-                                                {{ price.currency }}{{ price.amount }}
-                                            </p>
-                                        {% endif %}
-                                        <p class="text-sm text-secondary-400">{{ price|price_interval }}</p>
                                     </div>
                                 </div>
                             </div>

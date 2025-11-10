@@ -145,12 +145,12 @@ div.g_id_signin > div > div > div {
 }
 
 /* Plan Cards Hover Effects */
-.planCard {
+.planCardContainer {
     @apply transition-all duration-300 ease-in-out;
     @apply hover:bg-[#3a4b5c] hover:border-secondary-500/30;
     @apply hover:shadow-lg hover:shadow-secondary-500/10;
     @apply hover:scale-[1.02] hover:-translate-y-1;
-    @apply cursor-pointer;
+    @apply cursor-pointer rounded-lg;
 }
 
 .planCard.active .checkInput {
@@ -161,21 +161,16 @@ div.g_id_signin > div > div > div {
     @apply block;
 }
 
+.planCard--owned {
+    @apply opacity-50 z-10 cursor-not-allowed;
+}
+
 /* Checkout Summary Hover Effects */
 .checkoutSummarySection {
     @apply transition-all duration-300 ease-in-out;
     @apply hover:border-secondary-500/40 hover:shadow-xl hover:shadow-secondary-500/10;
     @apply hover:scale-[1.01];
 }
-
-.currentPlanDisclaimer {
-    @apply hidden;
-}
-
-.planCard--owned .currentPlanDisclaimer {
-    @apply !block;
-}
-
 
 .recaptcha-wrapper {
     width: 100%; /* Makes wrapper full-width */

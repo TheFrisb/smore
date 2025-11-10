@@ -183,4 +183,6 @@ class PlansView(TemplateView):
             if product.id not in owned_product_ids:
                 owned_product_ids.append(product.id)
 
+            print(owned_product_ids, "aa")
+
         return owned_product_ids

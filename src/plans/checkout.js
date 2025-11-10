@@ -23,6 +23,8 @@ function initCheckoutJs() {
 
   planCards.forEach((card) => {
     card.addEventListener("click", () => {
+      if (card.classList.contains("planCard--owned")) return;
+
       const priceId = card.dataset.priceId;
 
       if (selectedPriceId === priceId) {
@@ -183,6 +185,7 @@ function updatePlanCards() {
     }
   });
 }
+
 function getListOfOwnedProductPriceIds() {
   const ownedProductPriceIdsInput = document.getElementById("ownedPriceIds");
   if (!ownedProductPriceIdsInput) return [];
@@ -196,15 +199,88 @@ function getListOfOwnedProductIds() {
 
   return ownedProductIdsInput.value.split(",");
 }
+
+function getListOfPurchasedProductIds() {
+  const purchasedProductIdsInput = document.getElementById(
+    "purchasedProductIds",
+  );
+  if (!purchasedProductIdsInput) return [];
+
+  return purchasedProductIdsInput.value.split(",");
+}
+
 function updateButtonState() {
   checkoutButton.disabled =
     selectedPriceId === null || ownedProductPriceIds.includes(selectedPriceId);
+
+  const newButtonText = getCheckoutButtonText(
+    selectedPriceId,
+    ownedProductIds,
+    getListOfPurchasedProductIds(),
+  );
+
+  const buttonTextElements = checkoutButton.querySelectorAll(".buttonText");
+  buttonTextElements.forEach((el) => (el.textContent = newButtonText));
 }
 
 function clearSelectedProductId() {
   selectedPriceId = null;
   updatePlanCards();
   updateButtonState();
+}
+
+function getCheckoutButtonText(
+  selectedPriceId,
+  ownedProductIds,
+  purchasedProductIds,
+) {
+  if (!selectedPriceId) {
+    return "Select a Plan";
+  }
+
+  const selectedPlanCard = document.querySelector(
+    `.planCard[data-price-id="${selectedPriceId}"]`,
+  );
+
+  if (!selectedPlanCard) {
+    return "Subscribe Now";
+  }
+
+  const selectedProductId = selectedPlanCard.dataset.productId;
+
+  const isFirstPurchaseOfProduct =
+    !purchasedProductIds.includes(selectedProductId);
+
+  if (isFirstPurchaseOfProduct) {
+    return "Try 3 days FREE";
+  }
+
+  if (ownedProductIds.includes(selectedProductId)) {
+    const ownedPriceCard = document.querySelector(
+      `.planCard[data-product-id="${CSS.escape(selectedProductId)}"].planCard--owned`,
+    );
+
+    if (
+      !ownedPriceCard ||
+      !ownedPriceCard.dataset.priceAmount ||
+      !selectedPlanCard.dataset.priceAmount
+    ) {
+      return "Update Plan";
+    }
+
+    const ownedAmount = parseFloat(ownedPriceCard.dataset.priceAmount);
+    const selectedAmount = parseFloat(selectedPlanCard.dataset.priceAmount);
+
+    if (selectedAmount > ownedAmount) {
+      return "Upgrade";
+    } else if (selectedAmount < ownedAmount) {
+      return "Downgrade";
+    } else {
+      return "Update Plan";
+    }
+  }
+
+  return "Subscribe Now";
 }
 
 export { initCheckoutJs, clearSelectedProductId };
