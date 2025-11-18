@@ -60,8 +60,12 @@ class HomeView(TemplateView):
 
 
 class HistoryView(TemplateView):
-    template_name = "core/pages/history.html"
-    paginate_by = 20
+    paginate_by = 1
+
+    def get_template_names(self):
+        if self.request.htmx:
+            return ["core/includes/history_list.html"]
+        return ["core/pages/history.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -166,16 +170,12 @@ class HistoryView(TemplateView):
         return predictions, tickets
 
     def _get_product_filter(self):
-        """
-        Get the filter from the request.
-        """
-        return self.request.GET.get("filter", None)
+        val = self.request.GET.get("filter")
+        return val if val else None
 
     def _get_object_filter(self):
-        """
-        Get the filter for the object.
-        """
-        return self.request.GET.get("obj", None)
+        val = self.request.GET.get("obj")
+        return val if val else None
 
     def _get_predictions(self, filter):
         """

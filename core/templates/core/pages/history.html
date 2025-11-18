@@ -2,9 +2,10 @@
 {% load util_tags i18n %}
 {% block content %}
     <section class="py-24 bg-gradient-to-b from-primary-800 to-primary-900 relative ">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-5"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0MjVBIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCIpLz48L3N2Zz4=')] opacity-5"></div>
         <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
         <div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
+
         <div class="container mx-auto px-4">
             <div class="text-center mb-8">
                 <h2 class="text-4xl font-bold text-white mb-16">{% trans "History" %}</h2>
@@ -13,37 +14,10 @@
             <div class="mx-auto flex flex-col md:flex-row items-center justify-center gap-6 max-w-6xl mb-8">
                 {% include 'core/includes/filters/sport_object_dropdown.html' %}
             </div>
-            <div class="grid gap-8 mt-8 max-w-6xl mx-auto" id="predictionsContainer">
-                {% for item in object_list %}
-                    {% if item.type == 'prediction' %}
-                        {% with prediction=item.object %}
-                            {% include 'core/includes/prediction.html' with prediction=prediction %}
-                        {% endwith %}
-                    {% elif item.type == 'ticket' %}
-                        {% with ticket=item.object %}
-                            {% include 'core/includes/ticket.html' with ticket=ticket %}
-                        {% endwith %}
-                    {% endif %}
-                {% endfor %}
-            </div>
-            {% if page_obj.has_next %}
-                <div class="mt-12 text-center">
-                    <button id="loadMorePredictionsButton" data-next-page="2"
-                            data-query-url="{% url 'core_api:paginated-predictions-history' %}{% querystring %}"
 
-                            class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30">
-                        <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                        <div class="relative flex items-center"><span class="text-lg">{% trans "Load More" %}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                 class="lucide lucide-chevron-down w-5 h-5 ml-2 transform group-hover:translate-y-0.5 transition-transform duration-300">
-                                <path d="m6 9 6 6 6-6"></path>
-                            </svg>
-                        </div>
-                    </button>
-                </div>
-            {% endif %}
+            <div class="grid gap-8 mt-8 max-w-6xl mx-auto" id="predictionsContainer">
+                {% include 'core/includes/history_list.html' %}
+            </div>
         </div>
     </section>
 {% endblock content %}

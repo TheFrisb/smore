@@ -261,15 +261,6 @@ async function sendMessage() {
 
 function initAiAssistant() {
   if (!messagesContainer || !input || !sendButton) {
-    // log not found elements
-    console.error("AI Assistant elements not found in the DOM.");
-    // log the IDs of the elements that were not found
-    console.error("Missing elements:", {
-      messagesContainer: !!messagesContainer,
-      input: !!input,
-      sendButton: !!sendButton,
-    });
-
     return;
   }
 

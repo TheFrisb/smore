@@ -1,0 +1,47 @@
+{% load i18n %}
+
+{# 1. Loop through the objects #}
+{% for item in object_list %}
+    {% if item.type == 'prediction' %}
+        {% with prediction=item.object %}
+            {% include 'core/includes/prediction.html' with prediction=prediction %}
+        {% endwith %}
+    {% elif item.type == 'ticket' %}
+        {% with ticket=item.object %}
+            {% include 'core/includes/ticket.html' with ticket=ticket %}
+        {% endwith %}
+    {% endif %}
+{% endfor %}
+
+{# 2. The Load More Button (Only renders if there is a next page) #}
+{% if page_obj.has_next %}
+    <div class="col-span-full text-center mt-12">
+        <button hx-get="{% url 'core:history' %}?page={{ page_obj.next_page_number }}&filter={{ request.GET.filter|default:'' }}&obj={{ request.GET.obj|default:'' }}"
+                hx-trigger="click"
+                hx-target="this"
+                hx-swap="outerHTML"
+                class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30 w-48">
+
+            <div class="absolute inset-0 bg-gradient-to-r from-secondary-400 to-secondary-300 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+
+            <div class="load-text relative flex items-center transition-opacity duration-200">
+                <span class="text-lg">{% trans "Load More" %}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide lucide-chevron-down w-5 h-5 ml-2 transform group-hover:translate-y-0.5 transition-transform duration-300">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
+            </div>
+
+            <div class="htmx-indicator absolute inset-0 flex items-center justify-center">
+                <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+        </button>
+    </div>
+{% endif %}

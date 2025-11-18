@@ -124,9 +124,11 @@ div.g_id_signin > div > div > div {
 .toggleableProductContent {
     @apply hidden;
 }
+
 .betLines.no-connect-line::before {
     background: none;
 }
+
 .toggleableProductContent.active {
     @apply block;
 }
@@ -179,4 +181,14 @@ div.g_id_signin > div > div > div {
 
 .recaptcha-wrapper .g-recaptcha {
     transform-origin: 0 0; /* Scales from top-left */
+}
+
+.htmx-request .load-text {
+    opacity: 0;
+}
+
+/* Prevent double clicking */
+.htmx-request {
+    pointer-events: none;
+    cursor: wait;
 }

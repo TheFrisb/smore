@@ -1,3 +1,2 @@
-2. Fix history tickets on web not being rendered correctly
---------------
 1. Migrate app to v2 protected api endpoints
+2. Fix history tickets on web not being rendered correctly

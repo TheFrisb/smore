@@ -22,7 +22,7 @@
     <meta name="facebook-domain-verification" content="gpcyjlvkmipam0lpu176mfepx55jx0"/>
     <title>Smore - {{ page_title }}</title>
     <link rel="preload" href="{% static 'js/core_v54.bundle.js' %}" as="script">
-    <link rel="stylesheet" href="{% static 'css/tailwind_output_v54.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tailwind_output_v55.css' %}">
     <link rel="stylesheet" href="{% static 'css/notyf.css' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
@@ -57,11 +57,13 @@
                    src="https://www.facebook.com/tr?id=480381268269305&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
+    <script src="{% static 'js/htmx/htmx.min.js' %}"></script>
 
     {% block extrahead %}{% endblock extrahead %}
 
 </head>
 <body class="min-h-screen bg-primary-950">
+{% csrf_token %}
 {% include 'core/includes/header.html' %}
 <main class="pt-20">
 
@@ -78,5 +80,10 @@
 
 <script src="{% static 'js/core_v54.bundle.js' %}"></script>
 {% block scripts %}{% endblock scripts %}
+<script>
+  document.body.addEventListener('htmx:configRequest', (event) => {
+    event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+  })
+</script>
 </body>
 </html>

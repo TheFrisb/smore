@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "model_utils",
     "honeypot",
     "django_recaptcha",
+    "django_htmx",
     # Local apps
     "accounts",
     "core",
@@ -79,6 +80,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
     "core.middleware.GeoIpSwitzerlandDetector",
     "core.middleware.ErrorLoggingMiddleware",
     # "core.middleware.EmailVerificationMiddleware"
@@ -159,7 +161,6 @@ if DEBUG:
     DEFAULT_AUTHENTICATION_CLASSES.append(
         "rest_framework.authentication.BasicAuthentication"
     )
-
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": DEFAULT_AUTHENTICATION_CLASSES,
@@ -365,7 +366,6 @@ APPLE_SIGN_IN_KEY_PATH = Path(config("APPLE_SIGN_IN_KEY_PATH"))
 # Firebase Admin SDK Initialization
 cred = credentials.Certificate(config("FIREBASE_ADMIN_SDK_CREDENTIALS_PATH"))
 firebase_admin.initialize_app(cred)
-
 
 RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_SECRET_KEY")
