@@ -60,7 +60,7 @@ class HomeView(TemplateView):
 
 
 class HistoryView(TemplateView):
-    paginate_by = 1
+    paginate_by = 20
 
     def get_template_names(self):
         if self.request.htmx:
