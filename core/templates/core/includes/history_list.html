@@ -15,10 +15,11 @@
 
 {# 2. The Load More Button (Only renders if there is a next page) #}
 {% if page_obj.has_next %}
-    <div class="col-span-full text-center mt-12">
+    <div id="load-more-target" class="col-span-full text-center mt-12">
+
         <button hx-get="{% url 'core:history' %}?page={{ page_obj.next_page_number }}&filter={{ request.GET.filter|default:'' }}&obj={{ request.GET.obj|default:'' }}"
                 hx-trigger="click"
-                hx-target="this"
+                hx-target="#load-more-target"
                 hx-swap="outerHTML"
                 class="group relative inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-gradient-to-r from-secondary-600 to-secondary-500 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-secondary-600/30 w-48">
 
