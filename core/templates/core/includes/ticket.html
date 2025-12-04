@@ -27,7 +27,7 @@
 
     <div class="relative mt-6">
         {% if ticket.product.id in allowed_products or ticket.id in purchased_ids or has_daily_offer %}
-            {% for bet_line in ticket.bet_lines.all %}
+            {% for bet_line in ticket.sorted_bet_lines %}
                 <div class="relative betLines
                        {% if bet_line.should_break_line %}no-connect-line{% endif %}
                         {% if not bet_line.same_as_previous or bet_line.same_as_next %}betLines--{{ bet_line.status|lower }}{% endif %}">

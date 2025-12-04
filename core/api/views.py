@@ -18,6 +18,13 @@ from .serializers import (
 )
 
 
+def sort_ticket_bet_lines(ticket_data_list):
+    for ticket in ticket_data_list:
+        bet_lines = ticket.get("bet_lines", [])
+        if bet_lines:
+            bet_lines.sort(key=lambda x: x["match"]["id"])
+
+
 class PredictionPagination(PageNumberPagination):
     page_size = 20  # Number of predictions per page
     page_size_query_param = "page_size"
@@ -149,6 +156,9 @@ class HistoryAPIView(APIView):
         prediction_data = PredictionHistorySerializer(predictions, many=True).data
         ticket_data = TicketHistorySerializer(tickets, many=True).data
 
+        # --- Sort bet lines within tickets ---
+        sort_ticket_bet_lines(ticket_data)
+
         # Combine and sort
         combined = []
         for p in prediction_data:
@@ -227,6 +237,9 @@ class UpcomingAPIView(APIView):
         # Serialize data
         prediction_data = PredictionSerializer(predictions, many=True).data
         ticket_data = TicketHistorySerializer(tickets, many=True).data
+
+        # --- Sort bet lines within tickets ---
+        sort_ticket_bet_lines(ticket_data)
 
         # Combine and add metadata for sorting
         combined = []

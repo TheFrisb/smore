@@ -63,14 +63,14 @@ class HistoryView(TemplateView):
     paginate_by = 20
 
     def get_template_names(self):
-        if self.request.htmx:
+        if getattr(self.request, "htmx", False):
             return ["core/includes/history_list.html"]
         return ["core/pages/history.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Get combined and sorted objects
+        # Get combined and sorted objects (now with improved rendering logic)
         combined_objects = self._get_combined_objects()
 
         # Paginate results
@@ -85,7 +85,7 @@ class HistoryView(TemplateView):
                 ).first(),
                 "filter_object": self._get_object_filter(),
                 "pick_of_the_day": PickOfTheDay.get_solo(),
-                "page_title": _("Historical Results"),  # Updated title
+                "page_title": _("Historical Results"),
                 "allowed_products": self.get_allowed_products(),
                 "purchased_ids": self.get_purchased_ids(),
                 "products": Product.objects.filter(
@@ -104,11 +104,17 @@ class HistoryView(TemplateView):
         return context
 
     def _get_combined_objects(self):
-        """Combine and sort predictions/tickets like the API"""
+        """
+        Combine and sort predictions/tickets.
+        Now includes the specific rendering logic (break lines, match grouping)
+        from UpcomingMatchesView.
+        """
         predictions, tickets = self._get_filtered_querysets()
 
         # Create unified object list
         combined = []
+
+        # Process Predictions
         for pred in predictions:
             combined.append(
                 {
@@ -118,27 +124,59 @@ class HistoryView(TemplateView):
                 }
             )
 
+        # Process Tickets (Applying UpcomingMatchesView logic here)
         for ticket in tickets:
-            bet_lines = list(ticket.bet_lines.all())
+            # Step 1: Sort bet_lines by match_id to ensure grouping
+            bet_lines = sorted(list(ticket.bet_lines.all()), key=lambda x: x.match_id)
+
+            # Step 2: Count Picks per Match
+            match_counts = defaultdict(int)
+            for bet_line in bet_lines:
+                match_counts[bet_line.match_id] += 1
+
+            # Step 3: Set Flags (Same as Previous/Next, Should Break Line)
             for i, bet_line in enumerate(bet_lines):
-                # Add grouping flags to bet line instance
+                # Reset flags
                 bet_line.same_as_previous = False
                 bet_line.same_as_next = False
 
-                if i > 0 and bet_lines[i - 1].match == bet_line.match:
+                # Check Previous
+                if i > 0 and bet_lines[i - 1].match_id == bet_line.match_id:
                     bet_line.same_as_previous = True
 
-                if i < len(bet_lines) - 1 and bet_lines[i + 1].match == bet_line.match:
-                    bet_line.same_as_next = True
+                # Check Next
+                if i < len(bet_lines) - 1:
+                    next_bet_line = bet_lines[i + 1]
+
+                    if next_bet_line.match_id == bet_line.match_id:
+                        bet_line.same_as_next = True
+
+                    # Calculate should_break_line logic
+                    current_is_single_pick = match_counts[bet_line.match_id] == 1
+                    next_is_single_pick = match_counts[next_bet_line.match_id] == 1
+
+                    # Connect logic: nextIsSameMatch OR (current_is_single AND next_is_single)
+                    should_connect = bet_line.same_as_next or (
+                        current_is_single_pick and next_is_single_pick
+                    )
+
+                    bet_line.should_break_line = not should_connect
+                else:
+                    # Last item always breaks
+                    bet_line.should_break_line = True
+
+            # Attach the sorted list to the ticket object
+            ticket.sorted_bet_lines = bet_lines
+
             combined.append(
                 {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
             )
 
-        # Sort descending like the API
+        # Sort descending by date (Standard history view behavior)
         return sorted(combined, key=lambda x: x["datetime"], reverse=True)
 
     def _get_filtered_querysets(self):
-        """Replicate API's filtering logic"""
+        """Replicate API's filtering logic with optimized queries"""
         product_filter = self._get_product_filter()
         obj_filter = self._get_object_filter()
 
@@ -177,83 +215,8 @@ class HistoryView(TemplateView):
         val = self.request.GET.get("obj")
         return val if val else None
 
-    def _get_predictions(self, filter):
-        """
-        Get the predictions based on the filter.
-        """
-        predictions = (
-            Prediction.objects.filter(
-                visibility=Prediction.Visibility.PUBLIC,
-                status__in=[
-                    Prediction.Status.WON,
-                    Prediction.Status.LOST,
-                ],
-            )
-            .select_related(
-                "match",
-                "match__home_team",
-                "match__away_team",
-                "match__league",
-                "product",
-            )
-            .order_by("match__kickoff_datetime")
-        )
-
-        if filter:
-            predictions = predictions.filter(product__name=filter)
-
-        return predictions
-
-    def _get_tickets(self, filter):
-        """
-        Get the tickets based on the filter.
-        """
-        sport_tickets = (
-            Ticket.objects.filter(
-                visibility=Ticket.Visibility.PUBLIC,
-                status__in=[Ticket.Status.WON, Ticket.Status.LOST],
-            )
-            .prefetch_related(
-                "bet_lines",
-                "bet_lines__match",
-                "bet_lines__match__home_team",
-                "bet_lines__match__away_team",
-                "bet_lines__match__league",
-            )
-            .order_by("starts_at")
-        )
-
-        if filter:
-            sport_tickets = sport_tickets.filter(product__name=filter)
-
-        """
-            Loop over all tickets and their bet lines.
-            If a bet line has the same match as the next bet line, add has_same_next=True,
-            If a bet line has the same match as the previous bet line, add has_same_previous=True.
-        """
-
-        for ticket in sport_tickets:
-            for i, bet_line in enumerate(ticket.bet_lines.all()):
-                if i < len(ticket.bet_lines.all()) - 1:
-                    next_bet_line = ticket.bet_lines.all()[i + 1]
-                    if bet_line.match == next_bet_line.match:
-                        bet_line.has_same_next = True
-                    else:
-                        bet_line.has_same_next = False
-
-                if i > 0:
-                    previous_bet_line = ticket.bet_lines.all()[i - 1]
-                    if bet_line.match == previous_bet_line.match:
-                        bet_line.has_same_previous = True
-                    else:
-                        bet_line.has_same_previous = False
-
-        return sport_tickets
-
     def get_purchased_ids(self):
-        """
-        Get IDs of purchased predictions for the current user.
-        """
+        """Get IDs of purchased predictions for the current user."""
         if not self.request.user.is_authenticated:
             return []
 
@@ -268,10 +231,7 @@ class HistoryView(TemplateView):
         return list(sport_tickets) + list(purchased_predictions)
 
     def get_allowed_products(self):
-        """
-        Get product IDs the user has access to.
-        """
-
+        """Get product IDs the user has access to."""
         return Product.objects.all().values_list("id", flat=True)
 
 
@@ -595,7 +555,11 @@ class UpcomingMatchesView(TemplateView):
 
         if sport_tickets:
             for ticket in sport_tickets:
-                bet_lines = list(ticket.bet_lines.all())
+                # FIX: Sort bet_lines by match_id (or kickoff) first.
+                # This ensures lines for the same match sit next to each other in the list.
+                bet_lines = sorted(
+                    list(ticket.bet_lines.all()), key=lambda x: x.match_id
+                )
 
                 # --- NEW: Step 1: Count Picks per Match ---
                 match_counts = defaultdict(int)
@@ -636,6 +600,10 @@ class UpcomingMatchesView(TemplateView):
                     else:
                         # The absolute last bet line always breaks (handled by CSS :last-child, but good to set here)
                         bet_line.should_break_line = True
+
+                # FIX: Attach the sorted list to the ticket object so the template uses the correct order.
+                # In your template, change the loop to: {% for bet_line in ticket.sorted_bet_lines %}
+                ticket.sorted_bet_lines = bet_lines
 
                 all_objects.append(
                     {"object": ticket, "type": "ticket", "datetime": ticket.starts_at}
