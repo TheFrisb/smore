@@ -69,6 +69,7 @@ class SportMatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = SportMatch
         fields = (
+            "id",
             "league",
             "home_team",
             "away_team",
